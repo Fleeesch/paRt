@@ -10,6 +10,7 @@ An unspectacular Reaper theme that focusses on functionality and compatibility. 
 [size=+1]Key Features Overview[/size]
 [list]
 [*]8 Zoom Levels: 100%, 125%, 150%, 175%, 200%, 225%, 250%, 300%
+[*]Dark and Light theme
 [*]Compatible with a variety of display generations
 [*]Compact and persistent Layout
 [*]More of data on less screenspace
