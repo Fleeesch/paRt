@@ -1,0 +1,50 @@
+name: Create Release
+
+# - - - - - - - - - - - - - - - - - - -
+#   Conditions
+# - - - - - - - - - - - - - - - - - - -
+on:
+  push:
+    # only allow verion tags
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  
+  # - - - - - - - - - - - - - - - - - - -
+  #   Create the Release
+  # - - - - - - - - - - - - - - - - - - -
+  create_release:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      
+      #checkout code
+      - uses: actions/checkout@v2
+      
+      # get tag
+      - name: Get Tag
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      
+      # grant writing rights to release make script
+      - name: Grant execute permission to release script
+        run: chmod +x make_release_github.sh
+      
+      # build release
+      - name: Create Release Binaries
+        run: ./make_release_github.sh
+      
+      # create release on github
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: paRt - ${{ env.RELEASE_VERSION }}
+          files: |
+            rel/current/bin/*
+          body_path: rel/current/changelog/changelog.md
+          token: ${{ secrets.GITHUB_TOKEN }}

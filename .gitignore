@@ -1,0 +1,32 @@
+# Local Backup Folders
+/.bu
+*/.bu
+
+# File Types
+
+*.rpp-bak
+*.flac
+*.reapeaks
+
+# Reaper folder
+
+/reaper/*
+!/reaper/ColorThemes/
+/reaper/ColorThemes/*
+
+# Release folders
+
+/rel/**/bin/
+/rel/current/
+
+# Reserved for local development machine
+
+#move_to_local_daw.sh
+/src/build/
+
+# Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
+*gitignore*
+!.gitignore
+
+# flac file render folder
+**/rnd/flac/

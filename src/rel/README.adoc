@@ -1,0 +1,17 @@
+# paRt - Source - Release
+
+The text files contain meta-data used for creating the current release.
+
+[IMPORTANT]
+This is the central point of reference for version-releases, everything will be read from here
+
+[IMPORTANT]
+Make sure you leave a leading space in the changelog file, or the last line will be ignored
+
+## Files
+
+[cols="0%,100%"]
+|===
+|changelog | changes for the current release, each new line represents a change
+|version | current release tag (make sure it follows the **"v1.x.x"** format, it has to contain a **"v"**)
+|===

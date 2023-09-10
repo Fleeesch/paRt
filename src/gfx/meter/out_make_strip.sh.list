@@ -1,0 +1,22 @@
+CreateButtonSet_1_FixedSize "" "" "Meter Clip V" "meter_clip_v"
+CreateButtonSet_1_FixedSize "" "" "Meter Clip H" "meter_clip_h"
+
+CreateButtonSet_1_FixedSize "" "" "Meter Peak V" "meter_strip_v"
+CreateButtonSet_1_FixedSize "" "" "Meter Peak H" "meter_strip_h"
+
+CreateButtonSet_1_FixedSize "" "" "Meter RMS V" "meter_strip_v_rms"
+CreateButtonSet_1_FixedSize "" "" "Meter RMS V 2" "meter_clip_v_rms2"
+CreateButtonSet_1_FixedSize "" "" "Meter RMS H" "meter_strip_h_rms"
+
+
+CreateButtonSet_1_FixedSize "" "" "Meter Mute" "meter_mute" "Meter Top Frame"
+CreateButtonSet_1_FixedSize "" "" "Meter Mute Folder" "meter_foldermute" "Meter Top Frame"
+CreateButtonSet_1_FixedSize "" "" "Meter Automute" "meter_automute" "Meter Top Frame"
+CreateButtonSet_1_FixedSize "" "" "Meter Solo Dim" "meter_solodim" "Meter Top Frame"
+CreateButtonSet_1_FixedSize "" "" "Meter Solo" "meter_unsolo" "Meter Top Frame"
+
+#CreateDummy "" "tcp_vu"
+#Copy "tcp_vu" "mcp_vu"
+#Copy "tcp_vu" "mcp_master_vu"
+#Copy "tcp_vu" "meter_bg_h"
+#Copy "tcp_vu" "meter_bg_v"

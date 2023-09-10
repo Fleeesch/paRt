@@ -1,0 +1,18 @@
+# paRt - Source - GFX - Label
+
+Name label graphics.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets |Label graphics, ready to be rendered |ats/[dark/light]
+|src_frame |Pink Frames |ats/common
+|===
+
+## Depdency-Tree
+
+* src_assets
+* src_frame

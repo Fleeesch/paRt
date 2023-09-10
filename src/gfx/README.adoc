@@ -1,0 +1,68 @@
+# paRt - Source - Gfx
+
+Contains all the assets and the shell-script tools used to create usuable sprite-sheets.
+
+## Affinity Project Structures
+
+The source graphics are created using Affinity Designer. In order to reduce manual labor, the *afdesign* files are often nested, meaning the contents of one *afdesign* file are used in another one. Affinity designer allows a file to be split into separate *Artboards*, when placing an *afdesign* into another, one can pick a specific Artboard to be used.
+
+Affinity Designer is quite stubborn when confronted with path changes, so an initial openining of an *afdesign* file placed in a new path will likely result in a ressource-not-found Error. One has to use trial-and-error methods to see if Affinity Designer is capable of finding the original links to the source asseets files.
+
+The dependencies of each *afdesign* file is listed within the sub-directories *README.adoc* file, under the section *_Depdency-Tree_*. The trees can be read like that:
+
+****
+* file a
+** file a.b -> depends on file a
+*** file a.c -> depends on file a.b -> *last file in the dependency chain, can be rendered*
+* file b -> *no dependencies, can be rendered*
+* file c -> ...
+****
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|Folder | Contents
+
+|background | Background graphics for the mcp, tcp and envelope sections
+|envcp | Envelope lane exclusive assets
+|fader | Linear fader tips and background graphics
+|folder | Clickable folder graphics for the tcp and mcp section
+|generic | Generic assets, media explorer assets, I/O window assets, VST faders and knobs
+|gui | universal gui elements, scroll-sprite-sheet, monitor button
+|item | item background, icons, volume knob
+|knob | knob graphics for tcp, mcp and fx insert sections
+|label | name labels, fx embed background
+|meter | VU meter graphics
+|midi | all the assets related to the piano roll and midi-inline-editor
+|toolbar | toolbar asets and the tools to create them from the default Reaper assets
+|track | assets for the track mcp and tcp sections, mainly buttons. Contains most of the assets for the FX/Send inserts.
+|transport | assets from the transport section (buttons, backgrounds)
+|===
+
+## Sub-Folders
+
+[cols="0%,100%"]
+|===
+|Folder | Contents
+
+|ats | Contains the assets in form of single sprites, organized with the pattern */{theme}/{size}/{element}.png*
+|out | Graphics created using the sprite-sheet maker. *Will not be cleared automatically*, just delete the folder before rendering.
+|===
+
+
+## Scripts
+
+[cols="0%,100%"]
+|===
+|make_all_sprites.sh | Creates all the sprite-sheets from the existing assets. *Takes a huge amount of time, use with caution.*
+|spritesheet_maker.sh | Function-Container for creating sprite-sheets. Called by shell scripts in the sub-directories using commmand-line arugments.
+|===
+
+## Spritesheet-Maker
+
+Every sub-directory has at least one file-pair consisting of a *"..._make.sh"* and a *"..._make.sh.list"* file.
+
+The *".sh"* file goes through the *".sh.list"* file line by line, calling functions of the *spritesheet_maker.sh* using a bunch of command-line arguments. Since there many variations of sprite-sheets with individual needs, this allows one to dynamically create spirte-sheets using overlays, shortcuts, or whatever additional functionality that comes to mind. As long as the function exists within the *spritesheet_maker.sh*, it can be addressed with a line in a *".sh.list"* file. Commenting out lines using a *"#"* works, too.
+
+NOTE: The creation of the sprite-sheets requires some time, and very often only a selection of the sprite-sheets are required to be created. Spreading everything across multiple script files speeds up the developement process. Having only one *.sh* and *.sh.list* file pair will work, too.

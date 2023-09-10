@@ -1,0 +1,24 @@
+# paRt - Source - GFX - Envcp
+
+Envcp button graphics.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets_button |Colors and shading for buttons |
+|src_buttons |Button graphics, ready to be rendererd |ats/[dark/light]
+|src_frame |Pink frame graphics |ats/common
+|src_overlay |Hover and shadow overlay graphics |ats/common
+|src_symbols |Symbols, text used for buttons
+|===
+
+## Depdency-Tree
+
+* src_symbols
+** src_assets_button
+*** src_background
+* src_frame
+* src_overlay

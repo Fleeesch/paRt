@@ -1,0 +1,17 @@
+Greetings,
+
+bought myself some new technology. Apparently, they’re still adding more pixels to displays, so I needed something that works with the old and the new. Bit the bullet and created a theme from scratch. Wouldn’t recommend it, you people better go catch some fresh air.
+
+I wanted to make sure that this theme can be used by others, so I tried incorporating all the theme-affecting settings that come with Reaper from the get-go. Nonetheless, this theme heavily reflects my subjective view on what a theme should look like, which, of course, isn’t ideal for everyone.
+
+Since I needed something to take some usuable screenshots with, here’s a project that I’ve made exclusively for this theme:
+
+[b][url=https://github.com/Fleeesch/paRt/tree/main/test/example%20project]Example Project[/url][/b]
+[url=https://fleeesch.github.io/res/part/audio/test/part_example-project_82_Dub_Sum.mp3]listen[/url]
+
+Language is german, so it’s all Kraut Klöße Suppennudeln in there.
+
+Feel free to post any bugs you’ve found. It’s gonna take me some time to respond, but I’m glad to help.
+
+[i]Thanks to [b]lampshade[/b] and [b]Janne83[/b], your themes served me well over the years!
+And of course, everyone here that's contributing.[/i]

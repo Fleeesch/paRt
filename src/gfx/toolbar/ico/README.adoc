@@ -1,0 +1,22 @@
+# paRt - Source - GFX - Toolbar - Ico
+
+Contains all the icons in their original form and processed to be used by the new themes.
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|dark |Rendered icon sprite-sheets for the dark-theme
+|light |Rendered icon sprite-sheets for the light-theme
+|original |Contains the original Reaper icons, separated in V3 and V6 icons
+|===
+
+NOTE: The original *toolbar_add.png* icon seems to have a render-failure, some instances came with a white background without transparency. This has been fixed manually for this set of original icons.
+
+## Scripts
+
+[cols="0%,100%"]
+|===
+|make_icons.sh|Creates rendered icons that for the dark and light themes. V3 icons follow a pattern of *bright-bright-dark*, same goes for many V6 icons. The only exception are on-state V6 icons, those follow the inverted pattern *dark-dark-bright*. Always calls *sort_v6_files.sh* before creating the icon assets.
+|sort_v6_files.sh|Sorts the files in the */original* folder, separating them into v3 and v6 icons. Before the sorting process all icons will be treaded as a union, so merging the folders the folders manually won't be necessary.
+|===

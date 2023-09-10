@@ -1,0 +1,36 @@
+# paRt - Source
+
+Contains all the elements to create fully functional theme files.
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|build |previously built assets, can be deleted. Kept mainly to prevent recreation of unchanged assets, speeding up the theme-creation process.
+|doc |documentation that helps with the building process. Mainly pre-cacalculated sizes. **Used mainly as assistance, numbers might not reflect actually used dimensions.**
+|font |fonts used for the theme.
+|gfx |all the rendered asset bitmaps and source graphic-design-projects used for the creation of the assets. Also contains the tools required to create sprite-sheets and layered graphics.
+|rel |release meta-data, used for publishing (current version, changelog)
+|scripts |scripts associated with the theme, extending their functionality
+|thm |ReaperTheme related files. For creating the system-color-related ReaperTheme files dynamically through concatenation. Also contains tools for dynamic formatting.
+|wlt |WALTER related files. Contains the basic rtconfig.txt as well as many additional files that form a complete WALTER theme file through concatentation.
+|zip |contains created ReaperThemeZip files (will be completely renewed during the theme creation process)
+|===
+
+## Shell-Scripts
+
+[cols="0%,100%"]
+|===
+|changelog_set.sh | 
+Opens a copy of the current changelog file in your operating systems default text editor. You can make your edits, save and close, and then accept the input prompt in the script to update the changelog file.
+|copy_reaperthemezip.sh | 
+Copies created *ReaperThemeZip* files to the reaper instance *ColorThemes* folder
+|themes_make_and_copy.sh | 
+Combination of *themes_make.sh* and *copy_reaperthemezip.sh*, reducing those action to one call
+|themes_make.sh | 
+Creates all the themes using the exising assets. Asks if previous assets shall be deleted. Doing so will delay the process, but absolutely assure to include only the recent assets
+|unpack_themes.sh | 
+Will extract the contents of the main *ReaperThemeZip* files into the reaper *ColorThemes* folder. Works only if there are no ReaperThemeZip files in the ColorThemes folder in the first place. Allows a more direct and faster way of experimenting with the assets.
+|version_set.sh | 
+Simple prompt that allows the user to change the contents of the *version* file. *Input an integer*, since the script will automatically add the *"v"* to the tag. Input nothing will leave the current version unchanged.
+|===

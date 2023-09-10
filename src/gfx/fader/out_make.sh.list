@@ -1,0 +1,18 @@
+CreateButtonSet_1 "" "Vol V" "mcp_volthumb" "Frame Vol V"
+CreateButtonSet_1 "" "Vol V Master" "mcp_master_volthumb" "Frame Vol V"
+CreateButtonSet_1 "" "Pan V" "mcp_panthumb_vert" "Frame Pan V"
+CreateButtonSet_1 "" "Width V" "mcp_widththumb_vert" "Frame Pan V"
+CreateButtonSet_1 "" "Envcp V" "envcp_fader_vert" "Frame Pan V"
+
+CreateButtonSet_1 "" "Pan H" "mcp_panthumb" "Frame Pan H"
+CreateButtonSet_1 "" "Width H" "mcp_widththumb" "Frame Pan H"
+CreateButtonSet_1 "" "Envcp H" "envcp_fader" "Frame Pan H"
+
+CreateButtonSet_1 "" "Vol BG V" "mcp_volbg" "Frame Vol BG V"
+CreateButtonSet_1 "" "Pan BG V" "mcp_panbg_vert" "Frame Pan BG V"
+CreateButtonSet_1 "" "Width BG V" "mcp_widthbg_vert" "Frame Pan BG V"
+CreateButtonSet_1 "" "Env BG V" "envcp_faderbg_vert" "Frame Pan BG V"
+
+CreateButtonSet_1 "" "Pan BG H" "mcp_panbg" "Frame Pan BG H"
+CreateButtonSet_1 "" "Width BG H" "mcp_widthbg" "Frame Pan BG H"
+CreateButtonSet_1 "" "Env BG H" "envcp_faderbg" "Frame Pan BG H"

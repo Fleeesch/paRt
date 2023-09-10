@@ -1,0 +1,11 @@
+# paRt - Stock
+
+Stock files, globally used files for publishing, etc.
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|logo |logo graphics files
+|splash |Reaper splash image graphics files
+|===

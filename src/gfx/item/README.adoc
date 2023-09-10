@@ -1,0 +1,34 @@
+# paRt - Source - GFX - Item
+
+Item related graphics.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets_item_bg |Item backgrounds, ready to be rendered |ats/[dark/light]
+|src_assets_item_button |Item button assets, contains colors, borders and overlays |
+|src_buttons |Item buttons, ready to be rendered |ats/[dark/light]
+|src_frame |Pink Frames |ats/common
+|src_knob_frame |Volume knob frame |ats/common
+|src_knob_stack.afdesign |Volume knob sprite-sheet, ready to be rendered |ats/[dark/light]
+|src_knob_stack.png |KnobMan rendered volume knob spritessheet |
+|src_knob_vol.knob |KnobMan source file for volume knob |
+|src_overlay |Overlay graphics, hover & click |ats/common
+|src_symbol | Symbols, letters used in the button graphics |
+|===
+
+## Depdency-Tree
+
+* src_symbol
+** src_assets_item_button
+*** src_buttons
+** src_knob_stack.png
+*** src_knob_stack.afdesign
+* src_assets_item_bg
+* src_frame
+* src_knob_frame
+* src_knob_vol.knob
+* src_overlay

@@ -1,0 +1,31 @@
+# paRt - creating a release
+Guide to publishing a new version without effing things up
+
+## Notes
+
+This process has various depdencies. It might be a good idea to switch to *WSL* when you're on a *Windows machine* to handle everything described in here.
+
+The *make.sh* file should take care of the whole process. If there are any issues, this list should be helpful.
+
+## Step by Step guide
+
+### 1. Switch to the *dev* branch
+Make sure you're in the *dev* branch. This crucial, don't mess it up.
+
+### 2. Update local meta files
+In the *src* folder, you update the *version* and *changelog* files to represent the current state of the project. The *changlog* requires a blank leading line to prevent missing the change thanks to ingenious programming.
+
+### 3. Make the Themes
+Trigger the *themes_make.sh*, the local meta files data will be embedded into the theme files. That way the files will have a definitve anchor to detect their time of creation.
+
+### 4. Make a local release
+Create a local release usig *make_release_local.sh* in the root folder in order to create changelog files and to get a snapshot of the local release. The binaries won't be uploaded to GitHub, but they can be used for a local backup or simply to double check if anything went wrong.
+
+### 5. Push to GitHub
+If everything looks fine, push the new release to GitHub using *update_github.sh*. The first step will involve merging the *dev* branch with the staging *branch*. Here you can check if the upload to GitHub went fine, just in case there are changes to the *.gitignore* file or anything else has been changed. After that, you will be asked if you want to push to the *main* branch.
+
+[WARNING]
+Pushing to the *main* branch will trigger a release creation using the current version. Make sure everything is alright, or else things might get messy und you'll have to clean things up manually.
+
+### 5. Update the ReaPack repository
+Use the *update_reapack.sh* script to update the files of your local ReaPack Repository. Data will be pushed to the *staging* branch first in order to check if the created meta files are ok, then you will have the option to merge the *staging* branch with the *main* branch.

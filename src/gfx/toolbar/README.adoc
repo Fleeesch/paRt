@@ -1,0 +1,45 @@
+# paRt - Source - GFX - Toolbar
+
+All the toolbar icons used in Reaper.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets |Assets used in the button graphics |
+|src_buttons |Blank toolbar background sprites, ready to be rendered |ats/[dark/light]
+|src_frame |Pink Frames |ats/common
+|src_overlay |Overlay graphics for hover & click |ats/common
+|src_shadow |Shadows that will be embedded in the rendered sprite-sheets |ats/common
+|===
+
+## Depdency-Tree
+
+* src_assets
+** src_buttons
+* src_frame
+* src_overlay
+* src_shadow
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|ats |Assets without icons for creating toolbar buttons
+|ico |Contains prepared icons used for the final bitmap output
+|out |Output files usuable for the final themes
+|===
+
+## Toolbar Icon Creation Process
+
+Toolbar icons in Reaper can be separated into _'normal'_ icons and icons introduced in Reaper V6. For the sake of keeping things short conventional icons are called *_'V3'_* icons here.
+
+V3 Icons::
+V3 toolbar icons simply use a combination of the *'toolbar_blank.png'* with a toolbar icon layered over it. Reaper does this automatically. Those third sprite in the sheet is used for the activate toggle state, if there is any.
+
+V6 Icons::
+Toolbar Icons introduced in Reaper V6 are icons that either come as a single instance for oneshot click actions or as a pair of two sprite-sheets with the filename endings *"..._off.png"* or *"..._on.png"*, representing their states. There's a list of V6 icons in the *"ico/sort_v6_files.sh.list"* file discovered through reverse engineering.
+
+NOTE: V6 Toolbar Icons won't be automatically merged with the *"toolbar_blank.png"* sprite-sheet during runtime, meaning by default their background will be transparent. The *out_make.sh* in the toolbar folder will take care of adding the background to those images so that they become indistinguishable from conventional toolbar icons.

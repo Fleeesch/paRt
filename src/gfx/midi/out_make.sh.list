@@ -1,0 +1,29 @@
+CreateButtonSet_3 "" "Arm Off" "table_recarm_off" "Hover" "Click"
+CreateButtonSet_3 "" "Arm On" "table_recarm_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Mute Off" "table_mute_off" "Hover" "Click"
+CreateButtonSet_3 "" "Mute On" "table_mute_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Solo Off" "table_solo_off" "Hover" "Click"
+CreateButtonSet_3 "" "Solo On" "table_solo_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Remove Off" "table_remove_off" "Hover" "Click"
+CreateButtonSet_3 "" "Remove On" "table_remove_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Expand Off" "table_expand_off" "Hover" "Click" 
+CreateButtonSet_3 "" "Expand On" "table_expand_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Sub Expand Off" "table_sub_expand_off" "Hover" "Click"
+CreateButtonSet_3 "" "Sub Expand On" "table_sub_expand_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Edit Off" "table_target_off" "Hover" "Click"
+CreateButtonSet_3 "" "Edit Half" "table_target_invalid" "Hover" "Click"
+CreateButtonSet_3 "" "Edit On" "table_target_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Visible Off" "table_visible_off" "Hover" "Click"
+CreateButtonSet_3 "" "Visible Half" "table_visible_partial" "Hover" "Click"
+CreateButtonSet_3 "" "Visible On" "table_visible_on" "Hover" "Click"
+
+CreateButtonSet_3 "" "Lock Off" "table_locked_off" "Hover" "Click"
+CreateButtonSet_3 "" "Lock Half" "table_locked_partial" "Hover" "Click"
+CreateButtonSet_3 "" "Lock On" "table_locked_on" "Hover" "Click"

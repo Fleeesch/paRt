@@ -1,0 +1,61 @@
+CreateButtonSet_3_ExtMixer "" "Slot" "Slot Hover" "Slot Click" "mcp_fxlist_empty" "" "" "Slot Frame A" "Slot Frame B"
+CreateButtonSet_3_ExtMixer "" "Slot Mst" "Slot Mst Hover" "Slot Mst Click" "mcp_master_fxlist_empty" "" "" "Slot Frame A" "Slot Frame B"
+CreateButtonSet_3_ExtMixer "" "Slot Tcp" "Slot Hover Tcp" "Slot Click Tcp" "tcp_fxparm_empty" "" "" "Slot Frame Tcp A" "Slot Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Insert" "Insert" "Insert" "mcp_fxlist_norm" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Insert" "Insert" "Insert" "mcp_master_fxlist_norm" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+CreateButtonSet_3_ExtMixer "" "Insert" "Insert" "Insert" "tcp_fxparm_fx_norm" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Insert Byp" "Insert Byp" "Insert Byp" "mcp_fxlist_byp" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Insert Byp" "Insert Byp" "Insert Byp" "mcp_master_fxlist_byp" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+CreateButtonSet_3_ExtMixer "" "Insert Byp" "Insert Byp" "Insert Byp" "tcp_fxparm_fx_byp" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Insert Off" "Insert Off" "Insert Off" "mcp_fxlist_off" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Insert Off" "Insert Off" "Insert Off" "mcp_master_fxlist_off" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+CreateButtonSet_3_ExtMixer "" "Insert Off" "Insert Off" "Insert Off" "tcp_fxparm_fx_off" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Midi Out" "Midi Out" "Midi Out" "mcp_sendlist_midihw" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Midi Out" "Midi Out" "Midi Out" "tcp_sendlist_midihw" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Send" "Send" "Send" "mcp_sendlist_norm" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Send" "Send" "Send" "mcp_master_sendlist_norm" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+CreateButtonSet_3_ExtMixer "" "Send" "Send" "Send" "tcp_sendlist_norm" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Send Mute" "Send Mute" "Send Mute" "mcp_sendlist_mute" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Send Mute" "Send Mute" "Send Mute" "mcp_master_sendlist_mute" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+CreateButtonSet_3_ExtMixer "" "Send Mute" "Send Mute" "Send Mute" "tcp_sendlist_mute" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+#CreateButtonSet_3_ExtMixer "" "Sendlist BG" "Sendlist BG" "Sendlist BG" "mcp_sendlist_bg" "Insert Hover" "Insert Click" "Insert Frame A" "Insert Frame B"
+#CreateButtonSet_3_ExtMixer "" "Sendlist BG" "Sendlist BG" "Sendlist BG" "mcp_master_sendlist_bg" "Insert Hover" "Insert Click" "Insert Frame Mst A" "Insert Frame Mst B"
+#CreateButtonSet_3_ExtMixer "" "Sendlist BG" "Sendlist BG" "Sendlist BG" "tcp_sendlist_bg" "Insert Hover" "Insert Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+Copy "mcp_fxlist_empty" "mcp_sendlist_empty"
+Copy "mcp_fxlist_empty" "tcp_sendlist_empty"
+Copy "mcp_fxlist_empty" "mcp_master_sendlist_empty"
+Copy "mcp_fxlist_empty" "tcp_master_sendlist_empty"
+
+CreateButtonSet_1 "" "Sendlist BG" "mcp_sendlist_bg" "Frame List"
+Copy "mcp_sendlist_bg" "tcp_sendlist_bg"
+Copy "mcp_sendlist_bg" "tcp_fxlist_bg"
+
+CreateButtonSet_1 "" "List BG" "mcp_fxlist_bg" "Frame List"
+Copy "mcp_fxlist_bg" "mcp_master_fxlist_bg"
+Copy "mcp_fxlist_bg" "mcp_sendlist_bg"
+Copy "mcp_fxlist_bg" "mcp_fxparm_bg"
+Copy "mcp_fxlist_bg" "mcp_master_sendlist_bg"
+Copy "mcp_fxlist_bg" "mcp_master_fxparm_bg"
+
+CreateButtonSet_3_ExtMixer "" "Parameter" "Parameter" "Parameter" "mcp_fxparm_norm" "Insert Parm Hover" "Insert Parm Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Parameter" "Parameter" "Parameter" "tcp_fxparm_norm" "Insert Parm Hover" "Insert Parm Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Parameter Bypassed" "Parameter Bypassed" "Parameter Bypassed" "mcp_fxparm_byp" "Insert Parm Hover" "Insert Parm Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Parameter Bypassed" "Parameter Bypassed" "Parameter Bypassed" "tcp_fxparm_byp" "Insert Parm Hover" "Insert Parm Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_3_ExtMixer "" "Parameter Off" "Parameter Off" "Parameter Off" "mcp_fxparm_off" "Insert Parm Hover" "Insert Parm Click" "Insert Frame A" "Insert Frame B"
+CreateButtonSet_3_ExtMixer "" "Parameter Off" "Parameter Off" "Parameter Off" "tcp_fxparm_off" "Insert Parm Hover" "Insert Parm Click" "Insert Frame Tcp A" "Insert Frame Tcp B"
+
+CreateButtonSet_1 "" "Mixer" "mcp_extmixbg" "Frame Mixer A" "Frame Mixer B"
+CreateButtonSet_1 "" "Mixer Sel" "mcp_extmixbgsel" "Frame Mixer A" "Frame Mixer B"
+CreateButtonSet_1 "" "Mixer" "mcp_mainextmixbg" "Frame Mixer Mst A" "Frame Mixer Mst B"
+CreateButtonSet_1 "" "Mixer Sel" "mcp_mainextmixbgsel" "Frame Mixer Mst A" "Frame Mixer Mst B"
+CreateButtonSet_1 "" "Mixer" "tcp_fxparm_bg" "Frame Mixer Tcp"

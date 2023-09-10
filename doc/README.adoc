@@ -1,0 +1,12 @@
+# paRt - Documentation
+
+User manual and inpdeth showcasing graphics.
+
+## Folders
+
+[cols="0%,100%"]
+|===
+|howto |Guides, development-related
+|manual |The user manual and its dependencies.
+|showcase |Sources for creating demonstrating and explaining rendered bitmaps.
+|===

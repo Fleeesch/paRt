@@ -1,0 +1,39 @@
+# paRt - Source - GFX - Track
+
+Track related graphics. All the buttons required for the MCP and TCP section. Backgrounds are excluded.   
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets_button |Background and shading assets used in the button graphics |
+|src_assets_extmixer_inserts |ExtMixer background and shading assets |
+|src_assets_extmixer_meter |ExtMixer send meter graphics |
+|src_assets_extmixer |ExtMixer graphics, ready to be rendered |ats/[dark/light]
+|src_buttons_env |Envelope buttons, ready to be rendered |ats/[dark/light]
+|src_buttons_fx |FX buttons, ready to be rendered |ats/[dark/light]
+|src_buttons_io |IO button, ready to be rendered |ats/[dark/light]
+|src_buttons_master |Master menu button, ready to be rendered |ats/[dark/light]
+|src_buttons_rec |Record buttons, ready to be rendered |ats/[dark/light]
+|src_frame |Pink Frames |ats/common
+|src_overlay |Overlay graphics for click & hover, shadow overlay graphics |ats/common
+|src_symbols |Symbols, letters used in the buttons |
+|===
+
+## Depdency-Tree
+
+* src_frame
+* src_overlay
+
+* src_assets_extmixer_inserts
+** src_assets_extmixer_meter
+*** src_assets_extmixer
+* src_symbols
+** src_assets_button
+*** src_buttons_env
+*** src_buttons_fx
+*** src_buttons_io
+*** src_buttons_master
+*** src_buttons_rec

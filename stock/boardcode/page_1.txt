@@ -1,0 +1,67 @@
+[center]
+[img]https://fleeesch.github.io/res/part/img/presenter/part_presenter_preview.png[/img]
+[url=https://fleeesch.github.io/res/part/img/presenter/part_presenter_fhd.png][img]https://fleeesch.github.io/res/part/img/button/button_presenter_fhd.png[/img][/url][url=https://fleeesch.github.io/res/part/img/presenter/part_presenter_qhd.png][img]https://fleeesch.github.io/res/part/img/button/button_presenter_qhd.png[/img][/url][url=https://fleeesch.github.io/res/part/img/presenter/part_presenter_uhd.png][img]https://fleeesch.github.io/res/part/img/button/button_presenter_uhd.png[/img][/url]
+[/center]
+
+[size=+2][b]paRt[/b] - [b]p[/b]lain [b]a[/b]dapting [b]R[/b]eaper [b]t[/b]heme[/size]
+
+An unspectacular Reaper theme that focusses on functionality. Works with new stuff, works with old stuff, won’t catch fire.
+
+[size=+1]Key Features Overview[/size]
+[list]
+[*]8 Zoom Levels: 100%, 125%, 150%, 175%, 200%, 225%, 250%, 300%
+[*]Compatible with a variety of display generations
+[*]Compact and persistent Layout
+[*]More of data on less screenspace
+[*]Monochromatic design for enhanced Accessibility
+[*]Crisp Integer Scaling Borders
+[*]Completely Open-Source
+[/list]
+
+[size=+1]Installation[/size]
+
+You can access the Theme using ReaPack by importing my Repository:
+
+[b]https://raw.githubusercontent.com/Fleeesch/ReaPack-Fleeesch/master/index.xml[/b]
+
+Alterantively, you can also download releases and additional files manually on the GitHub release page:
+
+[b][url=https://github.com/Fleeesch/paRt/releases]https://github.com/Fleeesch/paRt/releases[/url][/b]
+
+[size=+1]Features In-Depth Look[/size]
+
+[url=https://fleeesch.github.io/res/part/img/indepth/indepth_themes.png][img]https://fleeesch.github.io/res/part/img/button/button_themes.png[/img][/url][url=https://fleeesch.github.io/res/part/img/indepth/indepth_monochromatic.png][img]https://fleeesch.github.io/res/part/img/button/button_monochromatic.png[/img][/url]
+[url=https://fleeesch.github.io/res/part/img/indepth/indepth_zoom_level.png][img]https://fleeesch.github.io/res/part/img/button/button_zoom_level.png[/img][/url][url=https://fleeesch.github.io/res/part/img/indepth/indepth_grid_layout.png][img]https://fleeesch.github.io/res/part/img/button/button_grid_layout.png[/img][/url]
+[url=https://fleeesch.github.io/res/part/img/indepth/indepth_track_layouts.png][img]https://fleeesch.github.io/res/part/img/button/button_track_layouts.png[/img][/url][url=https://fleeesch.github.io/res/part/img/indepth/indepth_folders.png][img]https://fleeesch.github.io/res/part/img/button/button_folders.png[/img][/url]
+[url=https://fleeesch.github.io/res/part/img/indepth/indepth_track_function.png][img]https://fleeesch.github.io/res/part/img/button/button_functional.png[/img][/url][url=https://fleeesch.github.io/res/part/img/indepth/indepth_piano_roll.png][img]https://fleeesch.github.io/res/part/img/button/button_piano_roll.png[/img][/url]
+[i]Click the buttons to learn more[/i]
+
+[size=+1]User Guide[/size]
+
+User customization happens through Reaper’s default Theme Adjuster.
+There’s a user guide available to help you understand its settings:
+
+[b][url=https://github.com/Fleeesch/paRt/blob/main/doc/userguide/part_userguide.adoc]paRt User Guide[/url][/b]
+
+[size=+1]Scripts[/size]
+
+When installing the theme using ReaPack, you will automatically get some ReaScripts available in Action List. Those are not generally related to this theme, they simply allow you to save and restore snapshots of the Theme Adjuster. That way to you can swich between different settings on the fly.
+
+[size=+1]Open Source[/size]
+
+All the assets are available in the Github Repository:
+
+[b][url]https://github.com/Fleeesch/paRt[/url][/b]
+
+The theme creation process is very complicated, but if someone intends to make changes, this repository should contain all the required assets to do so.
+
+[size=+1]Limitations[/size]
+
+[b]One Track Layout[/b]
+There are no custom Track Layouts. Reaper’s internal Track Layout system is used for DPI-related settings. Having special layouts for something like separator tracks highly conflicts with the goal of the theme to have full track functionality, all the time.
+
+[b]Dark Mode on Windows[/b]
+Windows operating systems won’t offer dark mode for Win32 apps like Reaper, so the default dark theme looks janky because it uses windows OS GUI-elements. As a workaround, there’s an alternative dark theme that maintains the bright color scheme of floating windows.
+
+[b]Scaling of Non-Walther-Elements[/b]
+Some elements, like the buttons of media items, don’t support DPI-dependent assets. There’s only one bitmap for everything. As a compromise, paRt uses high-resolution bitmaps that are downsized using Reaper’s inernal scaling algorithms.

@@ -1,0 +1,3 @@
+CreateButtonSet_1 "" "Send Meter" "mcp_sendlist_meter" "Meter Frame Mcp"
+CreateButtonSet_1 "" "Send Meter Tcp" "tcp_sendlist_meter" "Meter Frame Tcp"
+Copy "mcp_sendlist_meter" "mcp_master_sendlist_meter"

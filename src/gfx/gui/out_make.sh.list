@@ -1,0 +1,16 @@
+CreateButtonSet_1_FixedSize "" "" "Scrollbar" "scrollbar"
+CreateButtonSet_1_FixedSize "" "" "Scrollbar" "scrollbar_2"
+CreateButtonSet_1_FixedSize "" "" "Scrollbar 2" "scrollbar_3"
+
+CreateButtonSet_1_FixedSize "" "" "Tab Down" "tab_down" "Frame Tab"
+CreateButtonSet_1_FixedSize "" "" "Tab Down On" "tab_down_sel" "Frame Tab"
+CreateButtonSet_1_FixedSize "" "" "Tab Up" "tab_up" "Frame Tab"
+CreateButtonSet_1_FixedSize "" "" "Tab Up On" "tab_up_sel" "Frame Tab"
+
+CreateButtonSet_3 "" "Normal" "monitor_fx_off" "Mon Hover" "Mon Click"
+CreateButtonSet_3 "" "On" "monitor_fx_on" "Mon Hover" "Mon Click"
+CreateButtonSet_3 "" "Off" "monitor_fx_byp" "Mon Hover" "Mon Click"
+
+CreateButtonSet_3 "" "Bypass" "monitor_fx_byp_off" "Mon Byp Hover" "Mon Byp Click"
+CreateButtonSet_3 "" "Bypass On" "monitor_fx_byp_on" "Mon Byp Hover" "Mon Byp Click"
+CreateButtonSet_3 "" "Bypass Off" "monitor_fx_byp_byp" "Mon Byp Hover" "Mon Byp Click"

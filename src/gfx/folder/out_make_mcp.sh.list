@@ -1,0 +1,5 @@
+CreateButtonSet_3 "" "Mcp Folder Closed" "mcp_fcomp_tiny" "Mcp Hover" "Mcp Click" "Frame Mcp A" "Frame Mcp B"
+CreateButtonSet_3 "" "Mcp Folder Open" "mcp_fcomp_off" "Mcp Hover" "Mcp Click" "Frame Mcp A" "Frame Mcp B"
+CreateButtonSet_3 "" "Mcp Folder Last" "mcp_folder_last" "Mcp Hover" "Mcp Click" "Frame Mcp A" "Frame Mcp B"
+
+Copy "mcp_fcomp_off" "mcp_folder_on"

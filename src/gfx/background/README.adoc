@@ -1,0 +1,22 @@
+# paRt - Source - GFX - Background
+
+Tcp, Mcp and Envcp background graphics.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets |Colors and symbols |
+|src_background_icon |TCP and MCP Icon Backgrounds |ats/[dark/light]
+|src_background |TCP, MCP, ENVCP Backgrounds |ats/[dark/light]
+|src_frame |Pink Frames |ats/common
+|===
+
+## Depdency-Tree
+
+* src_assets
+** src_background_icon
+** src_background
+* src_frame

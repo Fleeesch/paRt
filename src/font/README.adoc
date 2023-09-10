@@ -1,0 +1,4 @@
+# paRt - Source - Font
+
+The theme uses the Carlito-Font.
+All the fonts contained in this folder will always be included in the relaese dependency packages.

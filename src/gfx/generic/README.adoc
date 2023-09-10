@@ -1,0 +1,34 @@
+# paRt - Source - GFX - Generic
+
+Folder button graphics. TCP and MCP are treaded quite differently in Reaper.
+
+## Files
+
+[cols="0%,100%,100%"]
+|===
+|File |Contains |Output Folder
+
+|src_assets_button |Background and shading graphics for the buttons |
+|src_assets_knob_generic | Background graphics for generic knobs |ats/[dark/light]
+|src_buttons |Button graphics, ready to be rendered |ats/[dark/light]
+|src_fader |Fader graphics, ready to be rendered |ats/[dark/light]
+|src_frame_fader |Pink frames for fader graphics |ats/common
+|src_frame_knob |Pink frames for knob graphics |ats/common
+|src_frame |Pink frames for buttons |ats/common
+|src_overlay |Overlay graphics for button hover & click |ats/common
+|src_shadow |Shadows embedded in the output sprite-sheet |ats/common
+|src_symbol |Symbols and graphics used in the button graphics |
+|===
+
+## Depdency-Tree
+
+* src_symbol
+** src_assets_button
+*** src_buttons
+* src_assets_knob_generic
+* src_fader
+* src_frame_fader
+* src_frame_knob
+* src_frame
+* src_overlay
+* src_shadow
