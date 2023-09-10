@@ -5,7 +5,7 @@
 
 [size=+2][b]paRt[/b] - [b]p[/b]lain [b]a[/b]dapting [b]R[/b]eaper [b]t[/b]heme[/size]
 
-An unspectacular Reaper theme that focusses on functionality. Works with new stuff, works with old stuff, won’t catch fire.
+An unspectacular Reaper theme that focusses on functionality and compatibility. Works with new stuff, works with old stuff, won’t catch fire.
 
 [size=+1]Key Features Overview[/size]
 [list]
@@ -28,6 +28,13 @@ Alterantively, you can also download releases and additional files manually on t
 
 [b][url=https://github.com/Fleeesch/paRt/releases]https://github.com/Fleeesch/paRt/releases[/url][/b]
 
+
+[size=+1]Font[/size]
+
+The theme uses the [url=https://fonts.google.com/specimen/Carlito][b]Carlito Font[/b][/url], so in order to ensure that text is readable, please install the [b]Carlito-Regular.ttf[/b] on your system.
+There’s a [b]part_files.zip[/b] in your [b]ColorThemes[/b] folder containing the font when installed using ReaPack, alternatively you can get the *.zip from the GitHub releases page.
+
+
 [size=+1]Features In-Depth Look[/size]
 
 [url=https://fleeesch.github.io/res/part/img/indepth/indepth_themes.png][img]https://fleeesch.github.io/res/part/img/button/button_themes.png[/img][/url][url=https://fleeesch.github.io/res/part/img/indepth/indepth_monochromatic.png][img]https://fleeesch.github.io/res/part/img/button/button_monochromatic.png[/img][/url]
@@ -47,13 +54,15 @@ There’s a user guide available to help you understand its settings:
 
 When installing the theme using ReaPack, you will automatically get some ReaScripts available in Action List. Those are not generally related to this theme, they simply allow you to save and restore snapshots of the Theme Adjuster. That way to you can swich between different settings on the fly.
 
+
 [size=+1]Open Source[/size]
 
 All the assets are available in the Github Repository:
 
 [b][url]https://github.com/Fleeesch/paRt[/url][/b]
 
-The theme creation process is very complicated, but if someone intends to make changes, this repository should contain all the required assets to do so.
+The theme creation process is very complicated, but if someone intends to make changes, this repository should contain all the required assets to do so. Graphics are created using Affiniy V2 Designer, ImageMagick and tons of Bash scripts.
+
 
 [size=+1]Limitations[/size]
 
@@ -64,4 +73,7 @@ There are no custom Track Layouts. Reaper’s internal Track Layout system is us
 Windows operating systems won’t offer dark mode for Win32 apps like Reaper, so the default dark theme looks janky because it uses windows OS GUI-elements. As a workaround, there’s an alternative dark theme that maintains the bright color scheme of floating windows.
 
 [b]Scaling of Non-Walther-Elements[/b]
-Some elements, like the buttons of media items, don’t support DPI-dependent assets. There’s only one bitmap for everything. As a compromise, paRt uses high-resolution bitmaps that are downsized using Reaper’s inernal scaling algorithms.
+Some elements, like the buttons of media items, don’t support DPI-dependent assets. There’s only one bitmap for everything. As a compromise, paRt uses high-resolution bitmaps that are downsized using Reaper’s inernal scaling algorithms. If this is bugging you, you can try one of the Split-Theme-Files from GitHub releases page.
+
+[b]The theme looks bad on my system[/b]
+I only have a Windows machine I’m working on right now, and not enough time to create more complex setup. So I can’t really test the output on MacOS. Feel free to upload screenshots, if the problem is simple enough I might be able to fix it intuitively.
