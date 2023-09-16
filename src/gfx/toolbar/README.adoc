@@ -15,7 +15,7 @@ All the toolbar icons used in Reaper.
 |src_shadow |Shadows that will be embedded in the rendered sprite-sheets |ats/common
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets
 ** src_buttons

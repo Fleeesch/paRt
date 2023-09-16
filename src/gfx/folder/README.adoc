@@ -14,7 +14,7 @@ Folder button graphics. TCP and MCP are treaded quite differently in Reaper.
 |src_overlay |Hover and Click overlay graphics |ats/common
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets_mcp
 * src_assets_mcp

@@ -20,7 +20,7 @@ Piano-Roll and MIDI Inline-Editor related graphics.
 |src_symbols |Piano-Roll table symbols, letters |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_symbols
 ** src_assets_button

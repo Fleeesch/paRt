@@ -15,7 +15,7 @@ Envcp button graphics.
 |src_symbols |Symbols, text used for buttons
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_symbols
 ** src_assets_button
