@@ -202,6 +202,8 @@ peaksedges 0
         set pad.mcp.b [5 6 7 8 10 11 12 15] ;[5 6 7 8 10 12 15 17]
         set pad.mcp.fader_max_h [20 25 30 35 40 45 50 60] ;[20 25 30 35 40 50 60 70]
     
+        set mcp.min_height [45 36 30 26 23 20 18 15]    
+
     ;---------------------------------------
     ;   Section:  Master MCP
     
@@ -1527,6 +1529,16 @@ macro drawMcp scale idx
         
         ; height
         set ext_h + * unit.1{idx} 30 * - ext_top_height 1 / h 150
+        
+        ; rescaling when sends or parameters are not grouped
+        set rescale 0
+        
+        set rescale mcp_wantextmix&2 1
+        set rescale mcp_wantextmix&4 1
+        
+        set rescale_factor / - h mcp.min_height{idx} h
+        
+        set ext_h ?rescale + * ext_h rescale_factor mcp.min_height{idx}        
 
         ; draw
         set mcp.extmixer.mode ext_fixed

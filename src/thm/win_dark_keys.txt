@@ -51,10 +51,10 @@ midi_selbg
 midi_selbg_drawmode
 midi_selpitch1
 midi_selpitch2
-midi_trackbg_outer1
-midi_trackbg_outer2
 midi_trackbg1
 midi_trackbg2
+midi_trackbg_outer1
+midi_trackbg_outer2
 midieditorlist_bg
 midieditorlist_bg2
 midieditorlist_fg
