@@ -12,7 +12,7 @@ Name label graphics.
 |src_frame |Pink Frames |ats/common
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets
 * src_frame

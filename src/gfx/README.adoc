@@ -8,7 +8,7 @@ The source graphics are created using Affinity Designer. In order to reduce manu
 
 Affinity Designer is quite stubborn when confronted with path changes, so an initial openining of an *afdesign* file placed in a new path will likely result in a ressource-not-found Error. One has to use trial-and-error methods to see if Affinity Designer is capable of finding the original links to the source asseets files.
 
-The dependencies of each *afdesign* file is listed within the sub-directories *README.adoc* file, under the section *_Depdency-Tree_*. The trees can be read like that:
+The dependencies of each *afdesign* file is listed within the sub-directories *README.adoc* file, under the section *_Dependency-Tree_*. The trees can be read like that:
 
 ****
 * file a

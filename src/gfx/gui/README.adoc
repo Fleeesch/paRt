@@ -17,7 +17,7 @@ Gui graphics, used globally in Reaper.
 |src_scroll |Scroll sprite-sheets, ready to be rendered |ats/[dark/light]
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets_monitor
 ** src_monitor

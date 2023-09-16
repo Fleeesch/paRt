@@ -22,7 +22,7 @@ Track related graphics. All the buttons required for the MCP and TCP section. Ba
 |src_symbols |Symbols, letters used in the buttons |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_frame
 * src_overlay

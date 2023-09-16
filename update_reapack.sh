@@ -117,25 +117,25 @@ if [ "$update_package" -eq "1" ]; then
     # :::::::::::::::
     #   Git Magic
 
-    git_msg="Version Update $REL_TAG_V"
-
+    git_msg="paRt Version Update $REL_TAG_V"
+    
     # -- Push --
     git add .
     git commit -m "$git_msg"
     git push --force
-
+    
     # push to main, publish release ?
     while true; do
-
+        
         echo -
         read -p 'Merge staging into main, publishing the release? [y] ' yn
         echo -
-
+        
         case $yn in
         [Yy]*)
             git checkout --force master
             git pull
-
+            
             # --- Merge ---
             git merge --no-verify --no-edit staging
 

@@ -1,5 +1,5 @@
 -- @description paRt helper script
--- @version 1.0
+-- @version 1.0.1
 -- @author Fleeesch
 -- @noindex NoIndex: true
 
