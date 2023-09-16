@@ -1,5 +1,5 @@
 -- @description paRt helper script
--- @version 1.0
+-- @version 1.0.1
 -- @author Fleeesch
 -- @noindex NoIndex: true
 
@@ -15,17 +15,17 @@ SECTION = "fleeesch_part"
 function toggleAutoSave()
     
     is_new_value, filename, sectionID, cmdID, mode, resolution, val, contextstr = reaper.get_action_context()
-
+    
     state = reaper.GetToggleCommandState(cmdID)
-
+    
     state_set = 1
     
     if state > 0 then
         state_set = 0
     end
-
+    
     reaper.SetToggleCommandState(sectionID, tonumber(cmdID), state_set)
-
+    
     if state_set > 0 then
         reaper.SetExtState(SECTION, "autosave", "1", true)
     else

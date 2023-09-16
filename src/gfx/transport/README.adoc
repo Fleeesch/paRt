@@ -18,7 +18,7 @@ Transport related graphics. Includes buttons and background graphics.
 |src_symbols |Symbols, letters used in the button graphics |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_frame
 * src_overlay

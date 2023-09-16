@@ -3,7 +3,9 @@
 :toclevels: 100
 :sectnums:
 :sectnumlevels: 100
-:gitrelease: https://www.google.de
+:gitrepo: https://raw.githubusercontent.com/Fleeesch/ReaPack-Fleeesch/master/index.xml
+:gitrelease: https://github.com/Fleeesch/paRt/releases
+
 
 == About
 
@@ -19,10 +21,10 @@ Zoom levels::
 * One theme file containing all assets
 * optional separate theme files containing assets for only one specific zoom level
 
-Skins::
+Color Schemes::
 
 * Dark
-* Dark with alternative Colors for Windows compatibility
+* Dark with alternative Color Scheme for Windows
 * Light
 
 Customizability::
@@ -37,35 +39,46 @@ Scripts::
 
 * Store and recall up to 8 different Theme Adjuster settings.
 
-=== Versions
+=== Theme File Versions
 
-Each skin of paRt is a separate package containing a full set of theme assets. There are different versions of paRt mainly for more specific use cases.
+Each **.ReaperThemeZip* color theme of paRt is a separate package containing a full set of theme assets. There are different versions of paRt mainly for more specific use cases.
 
-==== Default version / Full Version
+==== Default Theme Files
 
-Contains 8 assets required for covering their respective zoom level. The theme works on multiple displays with different DPI settings, *but has some scaling issues with certain zoom levels that aren't 100%, 150% or 200%.*
+Contains 8 asset-sets of one color scheme required for covering their respective zoom level. The theme works on multiple displays with different DPI settings.
 
-==== Single Size Version
+==== Split Theme Files
 
-For each skin you can download separate theme files that contain only one asset of a certain zoom level. There are certain quirks that come with a multi-dpi themes that are difficult to fix, so if any bugs occur at your desired DPI level you might want to try one of the split theme files.
+Single-zoom-factor version of a color theme of paRt. +
 
-*Also, the size of the themes is drastically reduced, resulting in much faster loading times for Reaper.*
+Contains only one asset of a color theme set covering exactly one specific zoom level. There are some minor tweaks that result in more clarity when using them (item buttons are sharper, for example). 
 
-=== Skins / Colors
+The size of split themes is drastically reduced, resulting in faster loading times.
 
-There are 3 skins available:
+[NOTE]
+Split versions aren't part of the ReaPack Content and need to be downloaded separately from the GitHub releases page
+
+[NOTE]
+You can use split theme files to overwrite the DPI drawing level, but it might result in some conflicts when your OS scaling differs
+
+
+=== Color Schemes
+
+There are 3 color schemes available:
 
 ==== Dark
 
-Default skin.
+Default color scheme.
 
-==== Dark - Windows
+==== Dark (Windows)
 
-A variation of the Dark skin that compensates for Windows lack of Dark Mode support for Win32 Apps (that includes Reaper). The floating windows that allow theming come with a light background and their interactive elements are mostly in a lighter shade.
+A variation of the Dark color schemes that compensates for Windows lack of Dark Mode support for Win32 Apps (that includes Reaper).
+
+The floating windows that allow theming come with a light background and their interactive elements are mostly in a lighter shade, allowing them to better blend with Windows GUI elements.
 
 ==== Light
 
-Light skin for those who prefer to work in a brighter environment.
+Brighter variation of the default dark color schemes.
 
 == Installation
 
@@ -73,18 +86,20 @@ Light skin for those who prefer to work in a brighter environment.
 
 If you want to get paRt by using Reapers unofficial package manager add this url to your repository list:
 
-https://www.google.de
+{gitrepo}
+
 
 Reapack will download the most recent ReaperThemeZip files of all skins. The theme variation
 
 === Manually downloaded Github-Release
 
-You can download each version of paRt individually {gitrelease}[from the Github-repository release page].
+You can download each version of paRt individually from the {gitrelease}[Github-repository release page].
 
-Unpack the archive and move the included *.ReaperThemeZip file to the ColorThemes folder of your Reaper installation.
+Unpack the archive and move the included **.ReaperThemeZip* file to the ColorThemes folder of your Reaper installation.
 
-The location of the ColorThemes folder varies depending on your Operating System. If you want to know where it is, open Reaper and unter the top menu register 'Options' you will find the option to 'Show REAPER ressource path in explorer/finder'.
+The location of the ColorThemes folder varies depending on your Operating System. If you want to know where it is, open Reaper and unter the top menu register 'Options' you will find the option to *'Show REAPER ressource path in explorer/finder'*.
 
+[NOTE]
 On a portable install of Reaper the ColorThemes folder will be located in the program folder of Reaper.
 
 === Fonts
@@ -94,15 +109,18 @@ paRt uses the Carlito font, an opensource font under the GNU license. The font i
 The installation of the font varies depending on the Operating System you use.
 
 Windows::
-Right click the .tff file and choose 'Install Font'.
+Right click the *.tff* file and choose *'Install Font'*.
 MacOS::
-Double-click on the .tff in finder and click Install in the font preview that opens.
+Double-click on the *.tff* in finder and click Install in the font preview that opens.
 Linux::
-Double-click on the .tff file and open the font viewer. There should be an Install button in the top right corner. Click that one. Optionally compile a new kernel.
+Double-click on the *.tff* file and open the font viewer. There should be an Install button in the top right corner. Click that one. Optionally compile a new kernel.
 
 === Scripts
 
-Scripts are automatically installed and integrated when downloading paRt using Reapack. If you manually install the scripts from a GitHub release page, integrate them like any other script in Reaper. *Keep the folder structure intact, the scripts depent on a library file.*
+Scripts are automatically installed and integrated when downloading paRt using Reapack. If you manually install the scripts from a GitHub release page, integrate them like any other script in Reaper.
+
+[WARNING]
+Keep the folder structure intact, the scripts are depending on a library file
 
 == Configuration
 
@@ -114,7 +132,7 @@ image:res/theme-adj/theme-adj_window.png[]
 
 ==== MCP Width / Layout
 
-//image:res/theme-adj/theme-adj_mcp_width.png[]
+image:res/theme-adj/theme-adj_mcp_width.png[]
 
 Changes the layout of the MCP. The layouts are arranged by width, so the first layout is a thin meter strip while the last layout gives you the largest meter. All tracks share the same layout all the time.
 
@@ -125,18 +143,22 @@ Changes the layout of the MCP. The layouts are arranged by width, so the first l
 
 ==== MCP All-Faders Mode
 
-//image:res/theme-adj/theme-adj_mcp_fadermode.png[]
+image:res/theme-adj/theme-adj_mcp_fadermode.png[]
 
 Alternates between the conventional volume fader and pan knob configuration and an all-vertical-faders layout. The all-fader layout is helpful if you're working with control surfaces and prefer to use the motorized faders exclusively. That way you don't have to translate the linear motion of a motorized fader to pan knob and vice versa.
 
 Depending on the value you can have this layout set exclusively for the Master MCP track or just the ordinary tracks.
 
-[%autowidth,frame=none, grid=all]
+[%autowidth, cols="^.^,.^,^.^",frame=none, grid=none]
 |===
-|Value |Layout |
+^|Value ^|Layout |
 
-|0 |Conventional fader / knob combination layout for all tracks |image:res/settings/track_faders_off.png[]
-|1,2,3 |All-Faders layout for... +
+|0 |Conventional fader / +
+knob layout for all tracks |image:res/settings/track_faders_off.png[]
+|1 +
+2 +
+3 +
+|All-Faders layout for... +
 *1 -* ordinary tracks +
 *2 -* master track +
 *3 -* all tracks |image:res/settings/track_faders_on.png[]
@@ -144,16 +166,20 @@ Depending on the value you can have this layout set exclusively for the Master M
 
 ==== MCP Faders Horizontal
 
-//image:res/theme-adj/theme-adj_mcp_faders_horz.png[]
+image:res/theme-adj/theme-adj_mcp_faders_horz.png[]
 
 This arranges the pan/width faders in a horizontal way. The setting gets only applied for tracks that have the All-Faders layout applied to them. The first MCP layout (channel strip) ignores this setting since there's just not enough space available.
 
-[%autowidth,frame=none, grid=all]
-|===
-|Value |Layout |
 
-|0 |Horizontal layout is not applied |image:res/settings/track_faders_on.png[]
-|1,2,3 |Horizontal layout for... +
+[%autowidth, cols="^.^,.^,^.^",frame=none, grid=none]
+|===
+^|Value |Layout |
+
+|0 |Horizontal layout +
+is not applied |image:res/settings/track_faders_on.png[]
+|1 +
+2 +
+3|Horizontal layout for... +
 *1 -* ordinary tracks +
 *2 -* master track +
 *3 -* all tracks |image:res/settings/track_faders_horz.png[]
@@ -161,8 +187,8 @@ This arranges the pan/width faders in a horizontal way. The setting gets only ap
 
 ==== MCP Fader Split / MCP Master Fader Split
 
-//image:res/theme-adj/theme-adj_mcp_faders_split.png[]
-//image:res/theme-adj/theme-adj_mcp_faders_mst_split.png[]
+image:res/theme-adj/theme-adj_mcp_faders_split.png[]
+image:res/theme-adj/theme-adj_mcp_faders_mst_split.png[]
 
 This setting is only used when an All-Faders layout is applied without the horizontal layout.
 
@@ -178,7 +204,7 @@ Be aware that the faders are converted to knobs if there's not enough space.
 
 ==== MCP Sidebar on FX Embed
 
-//image:res/theme-adj/theme-adj_mcp_sidebar_embed.png[]
+image:res/theme-adj/theme-adj_mcp_sidebar_embed.png[]
 
 Dynamically creates a sidebar layout for the MCP tracks if there is an embedded FX available on the track.
 
@@ -191,33 +217,37 @@ image:res/settings/track_sidebar_embed.png[]
 
 ==== MCP FX Panel / MCP Master FX Panel
 
-//image:res/theme-adj/theme-adj_mcp_fx.png[]
-//image:res/theme-adj/theme-adj_mcp_mst_fx.png[]
+image:res/theme-adj/theme-adj_mcp_fx.png[]
+image:res/theme-adj/theme-adj_mcp_mst_fx.png[]
 
 Changes the size, positioning and behaviour of the MCP FX Panel. The Master track is excluded from this setting
 
-[cols="1,1,2,3", frame=none, grid=all]
-|===
-4+|Value
+[NOTE]
+When setting a fixed height using values 1-99, small heights are only possible by activating send and parameter grouping in the mixer settings
 
-|0 |1 - 99 |100-199 |200
-|No FX Panel |Fixed height FX Panel. The height is dynamically calculated and depends on the mixer height. |FX Panel as sidebar with fixed width.
- |Normal FX Panel that can be dynamically resized per track using drag-and-drop.
+[%autowidth, cols="^.^,^.^,^.^,^.^",frame=none, grid=none]
+|===
+4+|Value Range
+
+|0 |1 - 99 |100 - 199 |200
+|No FX Panel |Fixed height FX Panel | Sidebar FX Panel |Classic FX Panel +
+(Adjustable per Track)
 |image:res/settings/track_fx_hidden.png[] |image:res/settings/track_fx_fixed.png[] |image:res/settings/track_fx_sidebar.png[] |image:res/settings/track_fx_free.png[]
 |===
 
 ==== TCP Layout
 
-//image:res/theme-adj/theme-adj_tcp_trim.png[]
+image:res/theme-adj/theme-adj_tcp_trim.png[]
 
 Adjustment for trimming the layout of the TCP. This is useful if you work with a static setup where the mixer is always visible and you want to maximize the arrangement-area.
 
-[%autowidth,frame=none, grid=all]
+[%autowidth, cols="^.^,.^,^.^",frame=none, grid=none]
 |===
 |Value |Layout |
 
 |0 |Show all elements of the TCP tracks all the time. |image:res/settings/track_tcp_trim_off.png[]
-|1,2
+|1 +
+2
 |Hide most of the TCP elements... +
 *1 -* if the mixer is visible +
 *2 -* all the time

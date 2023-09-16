@@ -1,6 +1,6 @@
 @provides
-  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.-.Windows.ReaperThemeZip
-  paRt - Dark (Windows).ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.ReaperThemeZip
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.ReaperThemeZip
+  paRt - Dark (Windows).ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.-.Windows.ReaperThemeZip
   paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Light.ReaperThemeZip
   paRt - additional Files.zip https://github.com/Fleeesch/paRt/releases/download/v$version/part_files.zip
   [script main]paRt Scripts/*.lua

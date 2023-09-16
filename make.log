@@ -1196,3 +1196,20 @@ Updating Changelog - Done
 Making local Release
 Making local Release - Done
 Pushing Release to Github
+<<<<<<< HEAD
+=======
+
+------------------------------------------------
+Starting at Sat, Sep 16, 2023 5:13:54 PM
+------------------------------------------------
+
+Setting Version
+Setting Version - Done
+Updating Changelog
+Updating Changelog - Done
+Making Theme Files
+Making Theme Files - Done
+Making local Release
+Making local Release - Done
+Pushing Release to Github
+>>>>>>> dev

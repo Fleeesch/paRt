@@ -13,7 +13,7 @@ Fader knob and background graphics.
 |src_symbols |Letters, symbols used in the assets |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_symbols
 ** src_assets

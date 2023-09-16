@@ -1,3 +1,18 @@
 @about
-  plain adapting Reaper theme,
-  an unspectacular theme that prioritizes functionality
+# **p**lain **a**dapting **R**eaper **t**heme
+An unspectacular theme made for Reaper that focusses on functionality and compatibility.
+
+### Key Features
+
+* 8 Zoom Levels: 100%, 125%, 150%, 175%, 200%, 225%, 250%, 300%
+* Dark and Light theme
+* Compatible with a variety of display generations
+* Compact and persistent Layout
+* More of data on less screenspace
+* Monochromatic design for enhanced Accessibility
+* Crisp Integer Scaling Borders
+* Completely Open-Source
+
+### Split Theme Files
+
+If you're encountering compatibility issues, you can try the split theme files. Those are individual themes that contain only one specific zoom levels, you can get them from the [GitHub Releases page](https://github.com/Fleeesch/paRt/releases)

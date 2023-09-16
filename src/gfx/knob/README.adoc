@@ -28,7 +28,7 @@ Knob stacks, sprite-sheets used for displaying knob values.
 |stack_stroke_tcp_mask_{size}.png |TCP knob visibility mask (used for line and stroke character) |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets_bg
 * src_frame

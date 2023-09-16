@@ -13,7 +13,7 @@ VU Meter graphics.
 |src_frame |Pink/Yellow frames |ats/common
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_assets
 * src_assets_meter

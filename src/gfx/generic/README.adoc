@@ -20,7 +20,7 @@ Folder button graphics. TCP and MCP are treaded quite differently in Reaper.
 |src_symbol |Symbols and graphics used in the button graphics |
 |===
 
-## Depdency-Tree
+## Dependency-Tree
 
 * src_symbol
 ** src_assets_button

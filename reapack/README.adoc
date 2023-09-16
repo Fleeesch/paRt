@@ -3,7 +3,7 @@
 ReaPack related meta-data, used for constructing the *.theme* file.
 
 [WARNING]
-Do not use leading spaces in the files, reapack-index is pretty picky when it comes to the tag formatting
+Do not use leading spaces in the files, reapack-index is pretty picky when it comes to the tag formatting. Also, blocks of text need to have an indentation of exactly 2 spaces.
 
 ## Files
 
