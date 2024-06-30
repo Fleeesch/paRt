@@ -78,7 +78,7 @@ for theme in "${themes[@]}"; do
     mkdir -p "out"
 
     # output file
-    output_file="out/paRt_$theme.ReaperTheme"
+    output_file="out/part_${theme}_unpacked.ReaperTheme"
     output_content="[color theme]\n$colors\n\n"
     output_content+="[REAPER]\n"
 

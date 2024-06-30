@@ -80,6 +80,9 @@ print_header_text "=============================="
 print_header_text " paRt Release Building Tool"
 print_header_text "=============================="
 echo ""
+echo -e "-u     unattended run"
+echo -e "-g     create release for GitHub Actions VM"
+echo ""
 
 #   Recreate Assets
 # -------------------------------
@@ -146,7 +149,7 @@ while true; do
         mkdir -p "./rel/$version/reapack"
 
         # add binaries
-        rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./src/build/"/ "./rel/$version/bin"
+        rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./src/build/" "./rel/$version/bin/"
 
         print_done
 
