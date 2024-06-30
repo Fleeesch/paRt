@@ -19,11 +19,6 @@
 /rel/**/bin/
 /rel/current/
 
-# Reserved for local development machine
-
-#move_to_local_daw.sh
-/src/build/
-
 # Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
 *gitignore*
 !.gitignore
