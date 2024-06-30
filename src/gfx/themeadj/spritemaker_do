@@ -1,0 +1,53 @@
+--clear-output-folder
+
+# table
+--out table_visible                         --images visible                -tint themeadj_table_icon 
+--out table_mixer_hide                      --images mixer_hide             -tint themeadj_table_icon 
+--out table_padding                         --images padding                -tint themeadj_table_icon 
+--out table_fader_size                      --images fader_size             -tint themeadj_table_icon 
+--out table_mcp_pan_layout_top              --images panmode_top            -tint themeadj_table_icon 
+--out table_mcp_pan_layout_strip            --images panmode_strip          -tint themeadj_table_icon 
+--out table_mcp_pan_layout_bottom           --images panmode_bottom         -tint themeadj_table_icon 
+--out table_mcp_fader_layout_knob           --images fadermode_knob         -tint themeadj_table_icon 
+--out table_mcp_fader_layout_vert           --images fadermode_vert         -tint themeadj_table_icon 
+--out table_mcp_fader_layout_horz           --images fadermode_spread       -tint themeadj_table_icon 
+--out table_tcp_fader_layout_inline         --images fadermode_horz         -tint themeadj_table_icon 
+--out table_tcp_fader_layout_separate       --images fadermode_stacked      -tint themeadj_table_icon 
+--out table_tcp_fader_layout_explode        --images fadermode_spread       -tint themeadj_table_icon 
+
+
+# track
+--out track_mute                                    --images fill -tint color_yellow mute               -tint button_symbol_on                                                          border -tint button_border
+--out track_solo                                    --images fill -tint color_blue solo                 -tint button_symbol_on                                                          border -tint button_border
+--out track_env                                     --images fill -tint color_gray env                  -tint button_symbol_on                                                          border -tint button_border
+--out track_fx                                      --images fill -tint button_bg_off fx                -tint button_symbol_off                                                         border -tint button_border
+--out track_infx                                    --images fill -tint button_bg_off fx_in             -tint button_symbol_off                                                         border -tint button_border
+--out track_phase                                   --images fill -tint button_bg_off phase             -tint button_symbol_off                                                         border -tint button_border
+--out track_input                                   --images fill -tint color_red recinput              -tint button_symbol_on                                                          border -tint button_border
+--out track_recarm                                  --images fill -tint color_red recarm                -tint button_symbol_on                                                          border -tint button_border
+--out track_recmode     --mask-template inner       --images fill -tint button_bg_off recmode -mask     -tint button_symbol_off                                                         border -tint button_border
+--out track_monitor                                 --images fill -tint button_bg_off monitor           -tint button_symbol_off                                                         border -tint button_border
+--out track_mono                                    --images fill -tint button_bg_off mono              -tint button_symbol_off                                                         border -tint button_border
+--out track_io          --mask-template inner       --images fill -tint button_bg_off io_1 -mask        -tint color_cyan io_0 -mask -tint color_yellow io_2 -mask -tint color_red       border -tint button_border
+
+# envcp
+--out envcp_hide        --images fill -tint button_bg_off       envcp_hide      -tint button_symbol_off         border -tint button_border
+--out envcp_bypass      --images fill -tint button_bg_off       envcp_byp       -tint button_symbol_off         border -tint button_border
+--out envcp_mod         --images fill -tint color_blue          envcp_mod       -tint button_symbol_on          border -tint button_border
+--out envcp_arm         --images fill -tint color_red           recarm          -tint button_symbol_on          border -tint button_border
+--out envcp_learn       --images fill -tint color_blue          envcp_learn     -tint button_symbol_on          border -tint button_border
+
+# transport
+--out transport_rewind      --images fill -tint transport_button_bg_off     transport_forward -flip-h   -tint button_symbol_off     border -tint button_border
+--out transport_forward     --images fill -tint transport_button_bg_off     transport_forward           -tint button_symbol_off     border -tint button_border
+--out transport_stop        --images fill -tint transport_button_bg_off     transport_stop              -tint button_symbol_off     border -tint button_border
+--out transport_pause       --images fill -tint transport_button_bg_off     transport_pause             -tint button_symbol_off     border -tint button_border
+--out transport_play        --images fill -tint transport_button_bg_off     transport_play              -tint button_symbol_off     border -tint button_border
+--out transport_record      --images fill -tint color_red                   transport_rec               -tint button_symbol_on      border -tint button_border
+--out transport_repeat      --images fill -tint transport_button_bg_off     transport_repeat            -tint button_symbol_off     border -tint button_border
+--out transport_env         --images fill -tint transport_button_bg_off     transport_env               -tint button_symbol_off     border -tint button_border
+--out transport_bpm         --images fill -tint transport_status_bg         transport_bpm               -tint button_symbol_off
+--out transport_status      --images fill -tint transport_selection_bg      transport_status            -tint button_symbol_off
+--out transport_selection   --images fill -tint transport_selection_bg      transport_selection         -tint button_symbol_off
+
+--copy-files

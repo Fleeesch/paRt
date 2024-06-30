@@ -1,0 +1,30 @@
+--clear-output-folder
+
+#       MCP Icons
+# --------------------------------------
+
+# interactive
+--out mcp_fcomp_off         --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  arrow   -tint folder_symbol
+--out mcp_fcomp_tiny        --spritesheet --button --frame frame_overlay -fit   --rotate 270    --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  arrow   -tint folder_symbol
+
+# static
+--out mcp_folder_on         --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  folder  -tint folder_symbol
+--out mcp_folder_last       --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  last    -tint folder_symbol -alpha 0.5
+
+#       TCP Icons
+# --------------------------------------
+
+# compact
+--out track_fcomp_off       --spritesheet --button --frame frame_overlay -fit   --rotate 270    --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  arrow       -tint folder_symbol
+--out track_fcomp_small     --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  arrow       -tint folder_symbol -rotate 315
+--out track_fcomp_tiny      --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  arrow       -tint folder_symbol
+
+# mode
+--out track_folder_off      --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  plus        -tint folder_symbol -alpha 0.15     -frame 0 0     plus     -frame 1 2   -tint folder_symbol
+--out track_folder_on       --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  minus       -tint folder_symbol -alpha 0.5      -frame 0 0     minus    -frame 1 2   -tint folder_symbol
+--out track_folder_last     --spritesheet --button --frame frame_overlay -fit                   --images overlay -tint overlay_hover -frame 1 1 overlay -tint overlay_click -frame 2 2  last_tcp    -tint folder_symbol -alpha 0.5      -frame 0 0     last_tcp -frame 1 2   -tint folder_symbol
+
+#       Copy Action
+# --------------------------------------
+
+--copy-files

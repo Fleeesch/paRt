@@ -1,9 +1,0 @@
-CreateButtonSet_1 "" "Generic Vol Thumb V" "gen_volthumb_vert" "Frame Gen Thumb V"
-CreateButtonSet_1 "" "Generic Vol Thumb H" "gen_volthumb_horz" "Frame Gen Thumb H"
-CreateButtonSet_1 "" "Generic Pan Thumb V" "gen_panthumb_vert" "Frame Gen Thumb V Pan"
-CreateButtonSet_1 "" "Generic Pan Thumb H" "gen_panthumb_horz" "Frame Gen Thumb H Pan"
-
-CreateButtonSet_1 "" "Generic Vol BG V" "gen_volbg_vert" "Frame Gen Vol BG V"
-CreateButtonSet_1 "" "Generic Vol BG H" "gen_volbg_horz" "Frame Gen Vol BG H"
-CreateButtonSet_1 "" "Generic Vol BG V" "gen_panbg_vert" "Frame Gen Vol BG V"
-CreateButtonSet_1 "" "Generic Vol BG H" "gen_panbg_horz" "Frame Gen Vol BG H"

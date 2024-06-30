@@ -1,0 +1,41 @@
+--clear-output-folder
+
+#       Background
+# --------------------------------------
+
+# fader bg
+--out mcp_volbg --frame frame_fader_bg  --images fader_bg   -tint fader_bg
+--copy mcp_volbg mcp_panbg mcp_panbg_vert mcp_widthbg mcp_widthbg_vert
+--copy mcp_volbg tcp_volbg tcp_volbg_vert tcp_panbg tcp_panbg_vert tcp_widthbg tcp_panbg_vert
+--copy mcp_volbg envcp_faderbg envcp_faderbg_vert
+
+# frame
+--out track_custom_fader_frame      --frame frame_bg_fill   --images bg_border  -tint fader_border
+
+#       Thumbs
+# --------------------------------------
+
+# mcp 
+--out mcp_volthumb                              --images frame/frame_thumb_l        thumb_l_fill   -tint fader_knob_bg thumb_l_line    -tint fader_knob_line   thumb_l_border    -tint fader_knob_border
+--out mcp_panthumb_vert                         --images frame/frame_thumb          thumb_fill     -tint fader_knob_bg_pan thumb_line  -tint fader_knob_line   thumb_border      -tint fader_knob_border
+#--out mcp_panthumb          --rotate 270        --images frame/frame_thumb -flip-v         thumb_fill     -tint fader_knob_bg_pan thumb_line  -tint fader_knob_line   thumb_border      -tint fader_knob_border
+--out mcp_widththumb_vert                       --images frame/frame_thumb          thumb_fill     -tint fader_knob_bg_wid thumb_line  -tint fader_knob_line   thumb_border      -tint fader_knob_border
+#--out mcp_widththumb        --rotate 270        --images frame/frame_thumb -flip-v          thumb_fill     -tint fader_knob_bg_wid thumb_line  -tint fader_knob_line   thumb_border      -tint fader_knob_border
+
+# tcp
+--out tcp_volthumb          --rotate 270        --images frame/frame_thumb_slim -flip-v     thumb_slim_fill     -tint fader_knob_bg        thumb_slim_line -tint fader_knob_line       thumb_slim_border      -tint fader_knob_border
+--out tcp_panthumb          --rotate 270        --images frame/frame_thumb_slim -flip-v     thumb_slim_fill     -tint fader_knob_bg_pan    thumb_slim_line -tint fader_knob_line       thumb_slim_border      -tint fader_knob_border
+--out tcp_widththumb        --rotate 270        --images frame/frame_thumb_slim -flip-v     thumb_slim_fill     -tint fader_knob_bg_wid    thumb_slim_line -tint fader_knob_line       thumb_slim_border      -tint fader_knob_border
+
+# mcp horizontal faders
+--copy tcp_panthumb     mcp_panthumb
+--copy tcp_widththumb   mcp_widththumb
+
+# envcp
+--out envcp_fader_vert                          --images frame/frame_thumb_slim             thumb_slim_fill     -tint fader_knob_bg_envcp  thumb_slim_line -tint fader_knob_line       thumb_slim_border      -tint fader_knob_border
+--out envcp_fader          --rotate 270         --images frame/frame_thumb_slim  -flip-v    thumb_slim_fill     -tint fader_knob_bg_envcp  thumb_slim_line -tint fader_knob_line       thumb_slim_border      -tint fader_knob_border
+
+#       Copy Action
+# --------------------------------------
+
+--copy-files

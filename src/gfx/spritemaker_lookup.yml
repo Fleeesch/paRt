@@ -1,0 +1,228 @@
+settings:
+  copy_dev_on: False
+  copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/paRt_Dark_Win"
+  copy_source_folder: ["out/dark", 0]
+
+variables:
+  alpha_hover: 0.9
+  alpha_meter_unit: 0.1
+  alpha_item_button_bg: 1 
+universal:
+  mod:
+    border_alpha: [0.8,0,0]
+    hover: [1.3,0.85,0]
+    click: [1.5,0.85,0]  
+  rgb:
+
+    # main colors
+    color_cyan: [84, 185, 147]
+    color_blue: [100, 167, 196]
+    color_red: [181, 66, 66]
+    color_yellow: [208, 171, 92]
+    color_violet: [123, 94, 187]
+    color_gray: [157,157,157]
+    color_green: [108,185,84]
+
+    # theme adjuster
+    themeadj_table_icon: [255,255,255,0.8]
+
+    # toolbar
+    toolbar_button_bg_off: [30,30,30]
+    toolbar_button_symbol_off: [225,225,225,0.9]
+    toolbar_button_symbol_on: [0,0,0,0.8]
+    toolbar_button_border: [0,0,0,0.5]
+    toolbar_animation_fill: [255,255,255,0.5]
+    toolbar_animation_border: [255,255,255,1]
+
+    # lane
+    lane_toggle_border: [0,0,0,0.9]
+    lane_toggle_bg_off: [100,100,100,1]
+    lane_arrow_bg: [140,140,140,1]
+    lane_arrow_border: [0,0,0,0.9]
+    lane_menu_symbol: [125,125,125,1]
+    lane_menu_bg: [75,75,75,1]
+
+    # gui
+    gui_bg: [50,50,50]
+    gui_tab_off: [100,100,100]
+    gui_scrollbar_bg: [40,40,40]
+    gui_scrollbar_bar: [70,70,70]
+    gui_scrollbar_symbols: [100,100,100]
+    gui_scrollbar_window_bg: [200,200,200]
+    gui_scrollbar_window_bar: [155,155,155]
+    gui_scrollbar_window_symbols: [135,135,135]
+    
+    # generic button
+    generic_button_bg_off: [125,125,125,1]
+    generic_button_bg_on: [84, 185, 147]
+    generic_button_bg_partial: [140,140,140,0.8]
+    generic_button_symbol_off: [255,255,255,0.9]
+    generic_button_symbol_on: [0, 0, 0,0.8]
+    generic_button_symbol_partial: [255,255,255,0.6]
+    generic_button_border: [0, 0, 0,0.3]
+    
+    # generic fader
+    generic_fader_bg: [125,125,125,0.75]
+    generic_fader_border: [0,0,0,0.5]
+    generic_fader_thumb_bg: [200,200,200,0.9]
+    generic_fader_thumb_border: [0,0,0,0.5]
+    generic_fader_thumb_line: [0,0,0,0.5]
+
+    # generic knob
+    generic_knob_bg: [125,125,125,0.75]
+    generic_knob_border: [0,0,0,0.5]
+
+    # folder buttons
+    folder_symbol: [255,255,255,0.5]
+
+    # transport
+    transport_bg: [55,55,55]
+    transport_button_bg_off: [35,35,35]
+    transport_status_bg: [30,30,30]
+    transport_status_bg_error: [100,30,30]
+    transport_selection_bg: [30,30,30]
+    transport_bank_button_off: [75,75,75]
+    transport_rate_knob_bg: [100,100,100,1]
+    transport_rate_knob_line: [255,255,255,1]
+    transport_rate_knob_line_border: [0,0,0,0.25]
+    transport_rate_fader_bg: [60,60,60,1]
+    transport_rate_fader_knob: [175,175,175,0.65]
+  
+    # buttons
+    button_bg_off: [50, 50, 50]
+    button_border: [0,0,0,0.8]
+    
+    # button label
+    button_label_bg: [0,0,0,0.2]
+    button_label_text: [255,255,255,0.5]
+
+    # button symbol
+    button_symbol_off: [199,199,199,0.9]
+    button_symbol_on: [0,0,0,0.8]
+    button_io_off: [255, 255, 255, 0.1]
+
+    # overlay
+    overlay_hover: [255,255,255,0.1]
+    overlay_click: [255,255,255,0.25]
+    overlay_fxbyp_hover: [255,255,255,0.25]
+    overlay_fxbyp_click: [255,255,255,0.5]    
+
+    # midi inline scrollbar
+    midi_inline_scrollbar_bg: [0,0,0,0.5]
+    midi_inline_scrollbar_thumb: [0,0,0,0.5]
+
+    # items
+    item_bg: [0,0,0,0]
+    item_bg_select: [0,0,0,0]
+    item_border: [0,0,0,0.25]
+    item_border_select: [255,255,255,0.9]
+    item_border_select_corners: [255,255,255,0.9]
+    item_button_bg_off: [50,50,50,1]
+    item_button_bg_on: [200,200,200,1]
+    item_button_symbol_off: [180,180,180,1]
+    item_button_symbol_on: [20,20,20,1]
+    item_seldot_bg: [255,255,255,1]
+    item_seldot_border: [0,0,0,0.5]
+    item_volknob_bg: [0,0,0,0.2]
+    item_volknob_layer_1: [255,255,255,0.5]
+    item_volknob_layer_2: [255,255,255,1]
+    item_volknob_border: [0,0,0,0.25]
+
+    # inserts
+    insert_bg: [37,37,37]
+    insert_bg_select: [50,50,50]
+    insert_border: [0,0,0,0.5]
+    insert_divider: [255,255,255,0.05]
+    insert_slot_empty: [255,255,255,0.00]
+    insert_slot_empty_hover: [255,255,255,0.1]
+    insert_slot_empty_click: [255,255,255,0.2]
+    insert_slot: [84,185,147]
+
+    # sends
+    insert_send_meter: [0,0,0,0.25]
+    insert_send_bg: [0,0,0,0.5]
+    insert_send_knob_border: [0,0,0,0.5]
+    insert_send_knob_0: [0,0,0,0.2]
+    insert_send_knob_1: [0,0,0,0.7]
+    insert_send_knob_2: [255,255,255,0.8]
+    insert_fx_bg: [0,0,0,0.5]
+    
+    # fx parm
+    insert_slot_fxparm_knob_bg: [0,0,0,0.25]
+    insert_slot_fxparm: [24, 45, 37]
+
+    # embed
+    insert_embed_label_bg: [0,0,0,0.5]
+
+    # track icon
+    track_icon_bg: [47,47,47]
+    track_icon_bg_select: [60,60,60]
+    track_icon_border: [0,0,0,0.3]
+
+    # knobs
+    knob_bg: [31,31,31]
+    knob_border: [0,0,0,0.8]
+    knob_line: [199,199,199]
+    knob_line_pan: [84,185,147]
+    knob_line_wid: [100,167,196]
+    knob_line_border: [0,0,0,0.5]
+
+    # meter
+    meter_bg: [44,44,44]
+    meter_border: [0,0,0,0.75]
+
+    # vu
+    vu_normal: [55,171,111, 0.5]
+    vu_normal_clip: [55,171,111, 1]
+    vu_rec_hot: [182,81,81, 0.5]
+    vu_rec_clip: [182,81,81, 1]
+    vu_readout_clip: [118,50,50]
+    vu_rms: [100, 167, 196, 0.5]
+    vu_rms_clip: [100, 167, 196, 1]
+    vu_rms_alt: [123, 94, 187, 0.5]
+    vu_rms_alt_clip: [123, 94, 187, 1]
+
+    #index
+    track_index_bg: [0,0,0,0.1]
+
+    # faders
+    fader_bg: [31,31,31]
+    fader_border: [0,0,0,0.5]
+    fader_knob_bg: [162,162,162,0.75]
+    fader_knob_bg_pan: [71,146,118,0.75]
+    fader_knob_bg_wid: [83,133,155,0.75]
+    fader_knob_bg_envcp: [130,130,130,0.75]
+    fader_knob_border: [0,0,0,0.6]
+    fader_knob_line: [0,0,0,0.3]
+
+    # text
+    readout_bg: [0,0,0,0.5]
+
+    # envcp
+    envcp_tailicon: [255,255,255,0.5]
+
+    # borders
+    border_bg: [0,0,0,0.5]
+    border_label: [0,0,0,0.5]
+    border_selmarker: [0,0,0,0.9]
+    border_colorbar: [0,0,0,0.8]
+
+    # separator
+    separator: [0,0,0,0.25]
+
+    
+dark:
+  mod:
+    placeholder: [0]
+  rgb:
+    placeholder: [0]
+dimmed:
+  mod:
+    placeholder: [0]
+  rgb:
+    placeholder: [0]
+light:
+  mod:
+    placeholder: [0]
+  rgb:
+    placeholder: [0]

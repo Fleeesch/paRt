@@ -1,0 +1,3 @@
+imagefolder_dark=part_dark
+imagefolder_dimmed=part_dimmed
+imagefolder_light=part_light
