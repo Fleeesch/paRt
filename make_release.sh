@@ -76,9 +76,9 @@ while getopts ":gu" opt; do
     esac
 done
 
-print_header_text "======================================================"
-print_header_text "       paRt Release Building Tool"
-print_header_text "======================================================"
+print_header_text "=============================="
+print_header_text " paRt Release Building Tool"
+print_header_text "=============================="
 echo ""
 
 #   Recreate Assets
@@ -97,9 +97,9 @@ if [ "$unattended" = false ]; then
     esac
 
     if [ "$recreate_assets" = true ]; then
-        cd src
+        cd "./src"
         source make_themes.sh
-        cd ..
+        cd "$ORG_DIR"
     fi
 
 fi
@@ -137,16 +137,16 @@ while true; do
 
         # clear release folder
         version=$(<./src/rel/version)
-        rm -rf "rel/current" >/dev/null 2>&1
-        rm -rf "rel/$version" >/dev/null 2>&1
+        rm -rf "./rel/current" >/dev/null 2>&1
+        rm -rf "./rel/$version" >/dev/null 2>&1
 
         # create release folders
-        mkdir -p "rel/$version/bin"
-        mkdir -p "rel/$version/changelog"
-        mkdir -p "rel/$version/reapack"
+        mkdir -p "./rel/$version/bin"
+        mkdir -p "./rel/$version/changelog"
+        mkdir -p "./rel/$version/reapack"
 
         # add binaries
-        rsync -aq --include="*.ReaperThemeZip" --exclude="*" "src/build/"/ "rel/$version/bin"
+        rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./src/build/"/ "./rel/$version/bin"
 
         print_done
 
@@ -155,10 +155,10 @@ while true; do
 
         print_process_start "Creating Changelog"
 
-        changelog_file_in="src/rel/changelog"
+        changelog_file_in="./src/rel/changelog"
 
         # Reapack
-        changelog_file_out="rel/$version/changelog/changelog_reapack.txt"
+        changelog_file_out="./rel/$version/changelog/changelog_reapack.txt"
 
         echo "@changelog" >"$changelog_file_out"
         while IFS= read -r line; do
@@ -166,7 +166,7 @@ while true; do
         done <"$changelog_file_in"
 
         # Markdown
-        changelog_file_out="rel/$version/changelog/changelog.md"
+        changelog_file_out="./rel/$version/changelog/changelog.md"
 
         echo "**$version - Changelog**" >"$changelog_file_out"
         while IFS= read -r line; do
@@ -174,7 +174,7 @@ while true; do
         done <"$changelog_file_in"
 
         # Boardcode
-        changelog_file_out="rel/$version/changelog/changelog_bb.txt"
+        changelog_file_out="./rel/$version/changelog/changelog_bb.txt"
 
         echo "[code]" >"$changelog_file_out"
         echo "[b]Changelog - $version[/b]" >>"$changelog_file_out"
@@ -190,9 +190,9 @@ while true; do
 
         print_process_start "Creating ReaPack Data"
 
-        changelog_file="rel/$version/changelog/changelog_reapack.txt"
+        changelog_file="./rel/$version/changelog/changelog_reapack.txt"
         reapack_file_in="reapack/reapack_info"
-        reapack_file_out="rel/$version/reapack/part.theme"
+        reapack_file_out="./rel/$version/reapack/part.theme"
 
         cat "$reapack_file_in" >"$reapack_file_out"
         echo "" >>"$reapack_file_out"
@@ -205,7 +205,12 @@ while true; do
 
         print_process_start "Copying ReaScript Files"
 
-        rsync -aq --exclude="\.*" --exclude="conf/*" "src/scripts/" "rel/$version/reapack/"
+        rsync -aq --exclude="\.*" --exclude="conf/*" "./src/scripts/" "./rel/$version/reapack/"
+
+        cd "./src/scripts"
+        zip_file="$ORG_DIR/rel/$version/bin/paRt - Theme Adjuster.zip"
+        zip -qrFS "$zip_file" .
+        cd "$ORG_DIR"
 
         print_done
 
@@ -213,7 +218,7 @@ while true; do
         # ------------------------------
 
         if [ "$github" = true ]; then
-            mv "rel/$version" "rel/current" >/dev/null 2>&1
+            mv "./rel/$version" "./rel/current" >/dev/null 2>&1
         fi
 
     fi
