@@ -282,13 +282,13 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
     rsync -aq --ignore-existing "$walter_source_file" "$target_dir"
 
     # theme file
-    theme_source_file="$script_themefile_folder/out/part_"$theme".ReaperTheme"
+    theme_source_file="$script_themefile_folder/out/part_"$theme"_unpacked.ReaperTheme"
     target_dir="./build"
 
     rsync -aq --ignore-existing "$theme_source_file" "$target_dir"
 
     if [ "$copy_reaperthemefiles" = true ]; then
-        rsync -aq "$theme_source_file" "$reaper_theme_folder/part_"$theme".ReaperTheme"
+        rsync -aq "$theme_source_file" "$reaper_theme_folder/part_"$theme"_unpacked.ReaperTheme"
         rsync -aq "$target_dir/$folder" "$reaper_theme_folder/"
     fi
 
@@ -309,9 +309,9 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
     theme=${themes[$i]}
 
     source_folder="./$(get_theme_folder $theme)"
-    source_themefile="./paRt_"$theme".ReaperTheme"
+    source_themefile="./part_"$theme"_unpacked.ReaperTheme"
 
-    zip_file="paRt - $(capitalize "$theme").ReaperThemeZip"
+    zip_file="part_$theme.ReaperThemeZip"
 
     zip -qrFS "$zip_file" "$source_folder" "$source_themefile"
 
