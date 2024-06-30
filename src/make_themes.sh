@@ -86,9 +86,9 @@ script_themefile_create="create_theme.sh"
 #   Introduction
 # --------------------------------------------
 
-print_header_line " - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-print_header_line "       paRt Theme Creation Utility"
-print_header_line " - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+print_header_line "==============================="
+print_header_line "  paRt Theme Creation Utility"
+print_header_line "==============================="
 
 # check for unattended mode
 unattended=false
