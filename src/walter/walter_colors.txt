@@ -1,0 +1,77 @@
+Colors dark
+
+set THEME_color_tcp_empty_space             [50 50 50]
+set THEME_color_mcp_empty_space             [50 50 50]
+set THEME_color_track_bg                    [69 69 69]
+set THEME_color_track_label_bg              [38 38 38]
+set THEME_color_track_label_text            [140 140 140]
+set THEME_color_envcp_bg                    THEME_color_track_bg
+set THEME_color_envcp_label_bg              THEME_color_track_label_bg
+set THEME_color_envcp_label_text            THEME_color_track_label_text
+set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_meter_text                  [125 125 125 0]
+set THEME_color_meter_shadow                [1 1 1 0]
+set THEME_color_meter_readout               [255 255 255]
+set THEME_color_meter_readout_clipped       [255 0 0]
+set THEME_color_button_text_off             [199 199 199]
+set THEME_color_button_text_on              [10 10 10]
+set THEME_color_button_bg_off               [50 50 50]
+set THEME_color_readout_font                [142 142 142]
+set THEME_color_red                         [181 66 66]
+
+EndColors
+
+Colors dimmed
+
+set THEME_color_tcp_empty_space             [50 50 50]
+set THEME_color_mcp_empty_space             [50 50 50]
+set THEME_color_track_bg                    [69 69 69]
+set THEME_color_track_label_bg              [38 38 38]
+set THEME_color_track_label_text            [140 140 140]
+set THEME_color_envcp_bg                    THEME_color_track_bg
+set THEME_color_envcp_label_bg              THEME_color_track_label_bg
+set THEME_color_envcp_label_text            THEME_color_track_label_text
+set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_meter_text                  [125 125 125 0]
+set THEME_color_meter_shadow                [1 1 1 0]
+set THEME_color_meter_readout               [255 255 255]
+set THEME_color_meter_readout_clipped       [255 0 0]
+set THEME_color_button_text_off             [199 199 199]
+set THEME_color_button_text_on              [10 10 10]
+set THEME_color_button_bg_off               [50 50 50]
+set THEME_color_readout_font                [142 142 142]
+set THEME_color_red                         [181 66 66]
+
+EndColors
+
+Colors light
+
+set THEME_color_tcp_empty_space             [50 50 50]
+set THEME_color_mcp_empty_space             [50 50 50]
+set THEME_color_track_bg                    [69 69 69]
+set THEME_color_track_label_bg              [38 38 38]
+set THEME_color_track_label_text            [140 140 140]
+set THEME_color_envcp_bg                    THEME_color_track_bg
+set THEME_color_envcp_label_bg              THEME_color_track_label_bg
+set THEME_color_envcp_label_text            THEME_color_track_label_text
+set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
+set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_meter_text                  [125 125 125 0]
+set THEME_color_meter_shadow                [1 1 1 0]
+set THEME_color_meter_readout               [255 255 255]
+set THEME_color_meter_readout_clipped       [255 0 0]
+set THEME_color_button_text_off             [199 199 199]
+set THEME_color_button_text_on              [10 10 10]
+set THEME_color_button_bg_off               [50 50 50]
+set THEME_color_readout_font                [142 142 142]
+set THEME_color_red                         [181 66 66]
+
+EndColors

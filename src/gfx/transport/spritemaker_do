@@ -1,0 +1,96 @@
+--clear-output-folder
+
+#       Dummies
+# --------------------------------------
+
+--dummy --out transport_group_bg transport_edit_bg transport_bpm_bg transport_bpm
+
+#       Buttons
+# --------------------------------------
+
+--out transport_previous        --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       back        -tint button_symbol_off     border -tint button_border
+--out transport_next            --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       forward     -tint button_symbol_off     border -tint button_border
+--out transport_home            --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       start       -tint button_symbol_off     border -tint button_border
+--out transport_end             --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       end         -tint button_symbol_off     border -tint button_border
+--out transport_stop            --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       stop        -tint button_symbol_off     border -tint button_border
+--out transport_pause           --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       pause       -tint button_symbol_off     border -tint button_border
+--out transport_pause_on        --spritesheet --button --frame frame -fit      --images fill    -tint color_cyan                    pause       -tint button_symbol_on      border -tint button_border
+--out transport_play            --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       play        -tint button_symbol_off     border -tint button_border
+--out transport_play_on         --spritesheet --button --frame frame -fit      --images fill    -tint color_cyan                    play        -tint button_symbol_on      border -tint button_border
+--out transport_play_sync       --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       play_sync   -tint button_symbol_off     border -tint button_border
+--out transport_play_sync_on    --spritesheet --button --frame frame -fit      --images fill    -tint color_cyan                    play_sync   -tint button_symbol_on      border -tint button_border
+--out transport_repeat_off      --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       repeat      -tint button_symbol_off     border -tint button_border
+--out transport_repeat_on       --spritesheet --button --frame frame -fit      --images fill    -tint color_cyan                    repeat      -tint button_symbol_on      border -tint button_border
+
+--out transport_record          --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       rec         -tint button_symbol_off     border -tint button_border
+--out transport_record_on       --spritesheet --button --frame frame -fit      --images fill    -tint color_red                     rec         -tint button_symbol_on      border -tint button_border
+--out transport_record_loop     --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       rec_time    -tint button_symbol_off     border -tint button_border
+--out transport_record_loop_on  --spritesheet --button --frame frame -fit      --images fill    -tint color_red                     rec_time    -tint button_symbol_on      border -tint button_border
+--out transport_record_item     --spritesheet --button --frame frame -fit      --images fill    -tint transport_button_bg_off       rec_item    -tint button_symbol_off     border -tint button_border
+--out transport_record_item_on  --spritesheet --button --frame frame -fit      --images fill    -tint color_red                     rec_item    -tint button_symbol_on      border -tint button_border
+
+#       Bank Buttons
+# --------------------------------------
+
+# off
+--out transport_custom_bank_1_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_1    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_2_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_2    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_3_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_3    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_4_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_4    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_5_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_5    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_6_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_6    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_7_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_7    -tint button_symbol_off   bank_border -tint button_border
+--out transport_custom_bank_8_off   --spritesheet --button  --frame frame_bank -fit         --images bank_bg    -tint transport_bank_button_off      bank_8    -tint button_symbol_off   bank_border -tint button_border
+
+# on
+--out transport_custom_bank_1_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_1    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_2_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_2    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_3_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_3    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_4_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_4    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_5_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_5    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_6_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_6    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_7_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_7    -tint button_symbol_on    bank_border -tint button_border
+--out transport_custom_bank_8_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_8    -tint button_symbol_on    bank_border -tint button_border
+
+# logo
+--out transport_custom_bank_part                            --frame frame_bank_part -fit    --images bank_part    -tint color_cyan
+
+#       Automation Override
+# --------------------------------------
+
+--out global_off                --spritesheet --button --frame frame_w -fit     --images fill_w -tint transport_button_bg_off   env_icon        -tint button_symbol_off     border_w -tint button_border
+--out global_bypass             --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_blue                env_bypass      -tint button_symbol_on      border_w -tint button_border
+--out global_trim               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_gray                env_trim        -tint button_symbol_on      border_w -tint button_border
+--out global_read               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_green               env_read        -tint button_symbol_on      border_w -tint button_border
+--out global_latch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_latch       -tint button_symbol_on      border_w -tint button_border
+--out global_preview            --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_preview     -tint button_symbol_on      border_w -tint button_border
+--out global_touch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_violet              env_touch       -tint button_symbol_on      border_w -tint button_border
+--out global_write              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_red                 env_write       -tint button_symbol_on      border_w -tint button_border
+
+#       Playrate
+# --------------------------------------
+
+# knob
+--out transport_knob_bg_large transport_knob_bg_small   --frame frame_rate_knob --images rate_knob_bg -tint transport_rate_knob_bg
+
+# fader
+--out transport_playspeedbg         --frame frame_rate_fader        --images rate_fader_bg     -tint transport_rate_fader_bg
+--out transport_playspeedthumb      --frame frame_rate_fader_knob   --images rate_fader_knob   -tint transport_rate_fader_knob
+
+#       Status
+# --------------------------------------
+
+--out transport_status_bg       --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg           
+--out transport_status_bg_err   --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg_error     
+
+#       Section
+# --------------------------------------
+
+--out transport_group_bg        --frame frame_custom    --images custom_fill    -tint transport_selection_bg
+
+#       Stage
+# --------------------------------------
+
+--out transport_bg                  --fill gui_bg
+
+--copy-files

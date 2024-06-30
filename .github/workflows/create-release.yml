@@ -36,7 +36,7 @@ jobs:
       
       # build release
       - name: Create Release Binaries
-        run: ./make_release_github.sh
+        run: ./make_release.sh -ug
       
       # create release on github
       - name: Create Release

@@ -1,0 +1,100 @@
+--clear-output-folder
+
+#       Dummies
+# --------------------------------------
+
+--dummy --out item_loop
+
+#       Generic
+# --------------------------------------
+
+# Background
+--out item_bg                   --single-level 100      --frame frame_itembg            --images bg -tint item_bg          itembg_border       -tint item_border
+--out item_bg_sel               --single-level 100      --frame frame_itembg_large      --images bg -tint item_bg_select   itembg_corners      -tint item_border_select_corners    itembg_border -tint item_border_select
+
+# Selection Dot
+--out item_seldot               --single-level 100      --images seldot -tint item_seldot_bg
+
+#       MIDI Inline
+# --------------------------------------
+
+# Buttons
+--out midi_inline_close                                                     --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off    inline_remove           -tint item_button_symbol_off            border -tint item_border
+--out midi_inline_ccwithitems_off           --crop-template inline_pointer  --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off    inline_circle           -tint item_button_symbol_off  -crop     border -tint item_border
+--out midi_inline_noteview_rect                                             --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green           inline_shape_rect       -tint item_button_symbol_on             border -tint item_border
+--out midi_inline_noteview_diamond                                          --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green           inline_shape_diamond    -tint item_button_symbol_on             border -tint item_border
+--out midi_inline_noteview_triangle                                         --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green           inline_shape_pointer    -tint item_button_symbol_on             border -tint item_border
+--out midi_inline_scroll                                                    --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off    inline_scroll           -tint item_button_symbol_off            border -tint item_border
+--out midi_inline_ccwithitems_on            --crop-template inline_pointer  --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue            inline_circle           -tint item_button_symbol_on   -crop     border -tint item_border
+--out midi_inline_fold_none                                                 --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off    inline_filter           -tint item_button_symbol_off            border -tint item_border
+--out midi_inline_fold_unnamed              --crop-template inline_filter   --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue            inline_filter_l         -tint item_button_symbol_on   -crop     border -tint item_border
+--out midi_inline_fold_unused_unnamed                                       --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue            inline_filter           -tint item_button_symbol_on             border -tint item_border
+--out midi_inline_fold_custom_view                                          --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue            inline_dunno            -tint item_button_symbol_on             border -tint item_border
+
+# Scrollbar
+--out midi_inline_scrollbar                 --fill midi_inline_scrollbar_bg 10 10
+--out midi_inline_scrollthumb               --fill midi_inline_scrollbar_thumb 10 10
+
+#       MIDI Inline - HDPI
+# --------------------------------------
+
+# Buttons
+--out midi_inline_close_hidpi                                               --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_remove           -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_ccwithitems_off_hidpi     --crop-template inline_pointer  --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_circle           -tint item_button_symbol_off  -crop      border -tint item_border
+--out midi_inline_noteview_rect_hidpi                                       --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_shape_rect       -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_noteview_diamond_hidpi                                    --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_shape_diamond    -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_noteview_triangle_hidpi                                   --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_shape_pointer    -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_scroll_hidpi                                              --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_scroll           -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_ccwithitems_on_hidpi      --crop-template inline_pointer  --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_on    inline_circle           -tint item_button_symbol_on   -crop      border -tint item_border
+--out midi_inline_fold_none_hidpi                                           --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off   inline_filter           -tint item_button_symbol_off             border -tint item_border
+--out midi_inline_fold_unnamed_hidpi        --crop-template inline_filter   --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_on    inline_filter_l         -tint item_button_symbol_on   -crop      border -tint item_border
+--out midi_inline_fold_unused_unnamed_hidpi                                 --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_on    inline_filter           -tint item_button_symbol_on              border -tint item_border
+--out midi_inline_fold_custom_view_hidpi                                    --single-level 200  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_on    inline_dunno            -tint item_button_symbol_on              border -tint item_border
+
+#       Item Buttons
+# --------------------------------------
+
+# Off State
+--out item_mute_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute      -tint item_button_symbol_off      border -tint item_border
+--out item_env_off          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env       -tint item_button_symbol_off      border -tint item_border
+--out item_fx_off           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx        -tint item_button_symbol_off      border -tint item_border
+--out item_group            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group     -tint item_button_symbol_off      border -tint item_border
+--out item_lock_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock      -tint item_button_symbol_off      border -tint item_border
+--out item_note_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes     -tint item_button_symbol_off      border -tint item_border
+--out item_pooled           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool      -tint item_button_symbol_off      border -tint item_border
+--out item_props            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
+
+# On State
+--out item_mute_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           mute      -tint item_button_symbol_on       border -tint item_border
+--out item_env_on           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
+--out item_fx_on            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
+--out item_group_sel        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border
+--out item_lock_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock      -tint item_button_symbol_on       border -tint item_border
+--out item_note_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes     -tint item_button_symbol_on       border -tint item_border
+--out item_pooled_on        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool      -tint item_button_symbol_on       border -tint item_border
+--out item_props_on         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info      -tint item_button_symbol_on       border -tint item_border
+
+#       Item Buttons - HDPI
+# --------------------------------------
+
+# Off State
+--out item_mute_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute      -tint item_button_symbol_off      border -tint item_border
+--out item_env_off_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env       -tint item_button_symbol_off      border -tint item_border
+--out item_fx_off_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx        -tint item_button_symbol_off      border -tint item_border
+--out item_group_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group     -tint item_button_symbol_off      border -tint item_border
+--out item_lock_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock      -tint item_button_symbol_off      border -tint item_border
+--out item_note_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes     -tint item_button_symbol_off      border -tint item_border
+--out item_pooled_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool      -tint item_button_symbol_off      border -tint item_border
+--out item_props_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
+
+# On State
+--out item_mute_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           mute      -tint item_button_symbol_on       border -tint item_border
+--out item_env_on_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
+--out item_fx_on_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
+--out item_group_sel_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border
+--out item_lock_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock      -tint item_button_symbol_on       border -tint item_border
+--out item_note_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes     -tint item_button_symbol_on       border -tint item_border
+--out item_pooled_on_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool      -tint item_button_symbol_on       border -tint item_border
+--out item_props_on_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info      -tint item_button_symbol_on       border -tint item_border
+
+--copy-files

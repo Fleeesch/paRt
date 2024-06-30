@@ -1,8 +1,0 @@
-CreateButtonSet_3 "" "IO 0-0-0" "track_io_dis" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 1-0-0" "track_io" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 0-1-0" "track_io_s_dis" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 0-0-1" "track_io_r_dis" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 1-1-0" "track_io_s" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 0-1-1" "track_io_s_r_dis" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 1-0-1" "track_io_r" "Hover" "Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "IO 1-1-1" "track_io_s_r" "Hover" "Click" "Frame A" "Frame B"

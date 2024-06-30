@@ -1,7 +1,0 @@
-CreateButtonSet_3 "" "Trim" "track_env" "L Hover" "L Click" "Frame Flipped A" "Frame Flipped B"
-CreateButtonSet_3 "" "Read" "track_env_read" "L Hover" "L Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "Latch" "track_env_latch" "L Hover" "L Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "Preview" "track_env_preview" "L Hover" "L Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "Touch" "track_env_touch" "L Hover" "L Click" "Frame A" "Frame B"
-CreateButtonSet_3 "" "Write" "track_env_write" "L Hover" "L Click" "Frame A" "Frame B"
-Copy "track_env_preview" "mcp_env_preview"

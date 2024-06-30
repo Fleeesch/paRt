@@ -1,0 +1,37 @@
+@about
+  # **p**lain **a**dapting **R**eaper **t**heme
+A Reaper theme focussing on functionality.
+
+  ### Key Features
+  
+  * Assets for 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * 3 Theme Variations covering Dark, Medium and Light brightness levels
+  * Highly configurable through the provided Custom Theme Adjuster
+  * Compact and functional for large projects with high track counts
+  
+  ### Split Theme Files
+  
+  If you're encountering compatibility issues, you can try the split theme files. Those are individual themes that contain only one specific zoom level. You can get them from the [GitHub Releases page](https://github.com/Fleeesch/paRt/releases)
+@author
+  Fleeesch
+@description
+  paRt
+@link
+  https://github.com/Fleeesch/paRt
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Light.ReaperThemeZip
+  [script]paRt/*
+  [script main]paRt/paRt - Theme Adjuster.lua
+  [script main]paRt/paRt - Restart Theme Adjuster.lua
+  [script main]paRt/paRt - Load Bank 1.lua
+  [script main]paRt/paRt - Load Bank 2.lua
+  [script main]paRt/paRt - Load Bank 3.lua
+  [script main]paRt/paRt - Load Bank 4.lua
+  [script main]paRt/paRt - Load Bank 5.lua
+  [script main]paRt/paRt - Load Bank 6.lua
+  [script main]paRt/paRt - Load Bank 7.lua
+  [script main]paRt/paRt - Load Bank 8.lua
+@screenshot
+  https://fleeesch.github.io/res/part/img/presenter/part_presenter_fhd.png

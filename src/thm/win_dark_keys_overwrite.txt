@@ -1,3 +1,0 @@
-midi_inline_trackbg1
-midi_inline_trackbg2
-

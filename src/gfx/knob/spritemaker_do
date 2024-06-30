@@ -1,0 +1,54 @@
+--clear-output-folder
+
+#       Custom
+# --------------------------------------
+
+# knob border
+--out track_custom_knob_border        --images knob_border      -tint knob_border
+--out track_custom_knob_l_border      --images knob_l_border    -tint knob_border
+
+#       Background
+# --------------------------------------
+
+# mcp
+--out mcp_vol_knob_large        mcp_vol_knob_small      --images    knob_l_bg     -tint knob_bg
+--out mcp_pan_knob_large        mcp_pan_knob_small      --images    knob_l_bg     -tint knob_bg
+--out mcp_width_knob_large      mcp_width_knob_small    --images    knob_l_bg     -tint knob_bg
+
+# tcp
+--out tcp_vol_knob_large        tcp_vol_knob_small      --images    knob_bg       -tint knob_bg
+--out tcp_pan_knob_large        tcp_pan_knob_small      --images    knob_bg       -tint knob_bg
+--out tcp_width_knob_large      tcp_width_knob_small    --images    knob_bg       -tint knob_bg
+
+# envcp
+--out envcp_knob_large          envcp_knob_small        --images    knob_bg       -tint knob_bg
+
+#       Stack
+# --------------------------------------
+
+# transport
+--out knob_stack    knob_stack_1    knob_stack_2       --images stack_trans_line_border -tint transport_rate_knob_line_border     stack_trans_line -tint transport_rate_knob_line
+
+# mcp
+--out mcp_vol_knob_stack        --mask-template stack_mcp_mask_inner --images    stack_mcp_line_border          -mask -tint knob_line_border      stack_mcp_line       -tint knob_line
+--out mcp_pan_knob_stack        --mask-template stack_mcp_mask_inner --images    stack_mcp_stroke_border        -mask -tint knob_line_border      stack_mcp_stroke     -tint knob_line_pan
+--out mcp_wid_knob_stack        --mask-template stack_mcp_mask_inner --images    stack_mcp_stroke_border        -mask -tint knob_line_border      stack_mcp_stroke     -tint knob_line_wid
+
+# tcp
+--out tcp_vol_knob_stack        --mask-template stack_tcp_mask_inner --images    stack_tcp_line_border          -mask -tint knob_line_border      stack_tcp_line       -tint knob_line
+--out tcp_pan_knob_stack        --mask-template stack_tcp_mask_inner --images    stack_tcp_stroke_border        -mask -tint knob_line_border      stack_tcp_stroke     -tint knob_line_pan
+--out tcp_wid_knob_stack        --mask-template stack_tcp_mask_inner --images    stack_tcp_stroke_border        -mask -tint knob_line_border      stack_tcp_stroke     -tint knob_line_wid
+
+# envcp
+--out envcp_knob_stack          --mask-template stack_tcp_mask_inner --images    stack_tcp_stroke_lin_border    -mask -tint knob_line_border      stack_tcp_stroke_lin -tint knob_line
+
+# insert slots
+--out mcp_send_knob_stack       --images stack_mcp_send_bg      -tint insert_send_knob_0        stack_mcp_send_a        -tint insert_send_knob_1    stack_mcp_send_b    -tint insert_send_knob_2    stack_mcp_send_border   -tint insert_send_knob_border
+--out mcp_fxparm_knob_stack     --images stack_mcp_fx_bg        -tint insert_fx_bg              stack_mcp_fx_stroke     -tint color_cyan            stack_mcp_fx_dot    -colorize color_cyan      
+
+# item volume knob
+--out item_volknob_stack            --single-level 100      --images stack_item_bg -tint item_volknob_bg          stack_item_fill_a -tint item_volknob_layer_1        stack_item_fill_b -tint item_volknob_layer_2      stack_item_border -tint item_volknob_border
+--out item_volknob_stack_hidpi      --single-level 200      --images stack_item_bg -tint item_volknob_bg          stack_item_fill_a -tint item_volknob_layer_1        stack_item_fill_b -tint item_volknob_layer_2      stack_item_border -tint item_volknob_border
+
+
+--copy-files

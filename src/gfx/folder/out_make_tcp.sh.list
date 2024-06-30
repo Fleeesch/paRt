@@ -1,7 +1,0 @@
-CreateButtonSet_3_Selective "" "Tcp Folder Open" "Tcp Folder Open" "Tcp Folder Open" "track_fcomp_off" "Tcp Hover" "Tcp Click" "Frame Tcp Folder A" "Frame Tcp Folder B"
-CreateButtonSet_3_Selective "" "Tcp Folder Small" "Tcp Folder Small" "Tcp Folder Small" "track_fcomp_small" "Tcp Hover" "Tcp Click" "Frame Tcp Folder A" "Frame Tcp Folder B"
-CreateButtonSet_3_Selective "" "Tcp Folder Tiny" "Tcp Folder Tiny" "Tcp Folder Tiny" "track_fcomp_tiny" "Tcp Hover" "Tcp Click" "Frame Tcp Folder A" "Frame Tcp Folder B"
-
-CreateButtonSet_3_Selective "" "Tcp Folder Last" "Tcp Folder Last" "Tcp Folder Last" "track_folder_last" "Tcp Hover" "Tcp Click" "Frame Tcp A" "Frame Tcp B"
-CreateButtonSet_3_Selective "" "Tcp Empty" "Tcp Folder Last" "Tcp Folder Last" "track_folder_off" "Tcp Hover" "Tcp Click" "Frame Tcp A" "Frame Tcp B"
-Copy "track_folder_off" "track_folder_on"
