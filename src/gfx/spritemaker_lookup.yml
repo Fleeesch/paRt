@@ -37,6 +37,13 @@ universal:
 
     # theme adjuster
     themeadj_table_icon: [255, 255, 255, 0.8]
+    themeadj_button_bg_off: [0, 0, 0, 0.7]
+    themeadj_button_fg_off: [255, 255, 255, 0.7]
+    themeadj_button_fg_on: [0, 0, 0, 0.7]
+    themeadj_color_gray: [157, 157, 157, 0.7]
+    themeadj_color_red: [181, 66, 66, 0.7]
+    themeadj_color_yellow: [208, 171, 92, 0.7]
+    themeadj_color_blue: [100, 167, 196, 0.7]
 
     # toolbar
     toolbar_button_bg_off: [26, 26, 26]
@@ -95,6 +102,8 @@ universal:
     transport_status_bg_error: [53, 23, 23]
     transport_selection_bg: [29, 29, 29]
     transport_bank_button_off: [26, 26, 26]
+    transport_bank_logo: [255,255,255,0.75]
+    transport_bank_menu: [255,255,255,0.5]
     transport_rate_knob_bg: [84, 84, 84]
     transport_rate_knob_line: [245, 245, 245]
     transport_rate_knob_line_border: [0, 0, 0, 0]
@@ -112,7 +121,7 @@ universal:
     # button symbol
     button_symbol_off: [210, 210, 210, 0.9]
     button_symbol_on: [0, 0, 0, 0.8]
-    button_io_off: [0,0,0, 0.1]
+    button_io_off: [0, 0, 0, 0.1]
 
     # midi inline scrollbar
     midi_inline_scrollbar_bg: [255, 255, 255, 0.5]
@@ -124,6 +133,7 @@ universal:
     item_bg_border: [0, 0, 0]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
+    item_border: [0,0,0,0.5]
     item_button_bg_off: [79, 79, 79]
     item_button_bg_on: [200, 200, 200]
     item_button_symbol_off: [180, 180, 180]
@@ -149,7 +159,7 @@ universal:
     insert_send_knob_border: [0, 0, 0, 0.5]
     insert_send_knob_0: [208, 171, 92]
     insert_send_knob_1: [0, 0, 0]
-    insert_send_knob_2: [220,220,220]
+    insert_send_knob_2: [220, 220, 220]
 
     # fx parameter
     insert_slot_fxparm: [68, 85, 78]
@@ -298,6 +308,8 @@ dimmed:
     transport_status_bg_error: [101, 73, 73]
     transport_selection_bg: [79, 79, 79]
     transport_bank_button_off: [76, 76, 76]
+    transport_bank_logo: [255,255,255,0.75]
+    transport_bank_menu: [255,255,255,0.5]
     transport_rate_knob_bg: [116, 116, 116]
     transport_rate_knob_line: [245, 245, 245]
     transport_rate_knob_line_border: [0, 0, 0, 0]
@@ -494,6 +506,8 @@ light:
     transport_status_bg_error: [207, 153, 153]
     transport_selection_bg: [190, 190, 190]
     transport_bank_button_off: [136, 136, 136]
+    transport_bank_logo: [0,0,0,0.75]
+    transport_bank_menu: [0,0,0,0.5]
     transport_rate_knob_bg: [144, 144, 144]
     transport_rate_knob_line: [58, 58, 58]
     transport_rate_fader_bg: [144, 144, 144]
@@ -543,8 +557,8 @@ light:
     insert_send_meter: [0, 0, 0, 0.1]
     insert_send_knob_border: [0, 0, 0, 0.5]
     insert_send_knob_0: [241, 208, 138]
-    insert_send_knob_1: [0, 0, 0,0.8]
-    insert_send_knob_2: [255,255,255]
+    insert_send_knob_1: [0, 0, 0, 0.8]
+    insert_send_knob_2: [255, 255, 255]
 
     # fx parameter
     insert_slot_fxparm: [100, 110, 105]

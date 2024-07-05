@@ -1,4 +1,4 @@
--- @version 
+-- @version 1.0.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -388,7 +388,7 @@ local slider_w = 130
 -- Elements
 -- ------------------------------
 
-Part.Gui.Macros.drawGroupBox("Elements", group_x + 0, group_y, 185, 380)
+Part.Gui.Macros.drawGroupBox("Elements", group_x + 0, group_y, 185, 400)
 Part.Gui.Macros.lastGroup():setTint("arrangement")
 
 -- visibility matrix
@@ -417,11 +417,16 @@ Part.Gui.Macros.drawVisibilityMatrix(matrix_data, visibility_data, Part.Paramete
 -- bank switching buttons
 Part.Cursor.incCursor(0, 10)
 Part.Cursor.stackCursor()
-Part.Gui.Macros.drawSliderGroup(false, Part.Parameter.Map.par_trans_settings_theme_macros, false, 50, "Bank Buttons",
+Part.Gui.Macros.drawButtonToggleGroup(false, Part.Parameter.Map.par_trans_settings_theme_menu, 50, "Menu Button", "Show",
+    80)
+Part.Cursor.destackCursor()
+Part.Gui.Macros.nextLine()
+Part.Cursor.stackCursor()
+Part.Gui.Macros.drawSliderGroup(false, Part.Parameter.Map.par_trans_settings_theme_bank, false, 50, "Bank Buttons",
     60)
 Part.Gui.Macros.nextInline()
 Part.Cursor.setCursorSize(20)
-Part.Layout.Text.Text:new(nil, "", Part.Parameter.Map.par_trans_settings_theme_macros)
+Part.Layout.Text.Text:new(nil, "", Part.Parameter.Map.par_trans_settings_theme_bank)
 Part.Draw.Elements.lastElement():parameterMonitor(1)
 Part.Cursor.destackCursor()
 Part.Gui.Macros.nextLine()
@@ -491,7 +496,7 @@ Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_trans_element_adj_s
 label_w = 90
 
 Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-Part.Gui.Macros.drawGroupBox("Time Elements", group_x, Part.Cursor.getCursorY(), 240, 105)
+Part.Gui.Macros.drawGroupBox("Time Elements", group_x, Part.Cursor.getCursorY(), 240, 125)
 Part.Gui.Macros.lastGroup():setTint("arrangement")
 
 Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_trans_element_adj_bpm_tap, 50, "Tap Button", "Show",

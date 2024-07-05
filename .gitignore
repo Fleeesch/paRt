@@ -24,3 +24,8 @@
 
 # flac file render folder
 **/rnd/flac/
+
+# exclude individual assets from build folder
+/src/build/*.ReaperThemeZip
+/src/build/*.zip
+!/src/build/

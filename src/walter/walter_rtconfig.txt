@@ -1,5 +1,3 @@
-
-
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -588,7 +586,7 @@
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 par_colors_track_track_index_tone_tcp                                                           \
                         par_tcp_track_label_index_vis==1                                                                                                                                    \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.5  par_colors_track_track_label_select_tone   \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp         par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.1  par_colors_track_track_bg_select_tone
 
                 ; track mcp index
                 set VAL_Color_Track_Index_MCP                                                                                                                                                   \
@@ -596,7 +594,7 @@
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text      + -127.5 * 0.255    par_colors_track_track_index_tone_mcp                                                       \
                         par_mcp_track_settings_label_index==1                                                                                                                                   \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp          par_colors_track_track_label_select_tone     \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.5    par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.1    par_colors_track_track_bg_select_tone
 
                 ; envcp bg
                 set VAL_Color_Envcp_Bg                                                                                                          \
@@ -612,16 +610,18 @@
 
 
                 ; envcp label text
-                set VAL_Color_Envcp_Label_Text                                                                                                                                  \
-                    !env_selected                                                                                                                                               \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                            \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Label_Text                                                                                                                                                  \
+                    !env_selected                                                                                                                                                               \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                                            \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone * 0.5 par_colors_track_track_label_select_tone
 
                 ; envcp readout
-                set VAL_Color_Envcp_Readout                                                                                                                                         \
-                    !env_selected                                                                                                                                                   \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                             \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Readout                                                                                                                                                     \
+                    !env_selected                                                                                                                                                               \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                                         \
+                        par_tcp_envcp_label_readout_placement!=2                                                                                                                                \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.5 par_colors_track_track_label_select_tone      \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone         
 
                 ;   ::: Highlights :::
 
@@ -753,6 +753,7 @@
         macro MAC_DrawTransport_Setup SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; custom elements
+            custom WALTER_ELEMENT##.custom.themeadj     "" "_RS6cc1a19365fa0f5b0b1ad6d3d9018dc41f087917"    ""      "transport_custom_part_menu"
             custom WALTER_ELEMENT##.custom.bank_0       "" "_RS5ec6b0de2cf6300ec9658d65a17084bc7fd2664b"    ""      "transport_custom_bank_1_off"
             custom WALTER_ELEMENT##.custom.bank_1       "" "_RSfe1f33421e15d187e9477275688c3a0014dd0058"    ""      "transport_custom_bank_2_off"
             custom WALTER_ELEMENT##.custom.bank_2       "" "_RSeedb490eeeb50844c14d7cb2a53e0ceb8310ff79"    ""      "transport_custom_bank_3_off"
@@ -798,14 +799,16 @@
             ; element hiding flag
             set VAL_trans_hide_buttons 0
 
+            ; paRt shortcuts
+            set VAL_trans_show_part_section + par_trans_settings_theme_bank par_trans_settings_theme_menu
+                
             ; bank buttons section width
-            set VAL_trans_w_bank_section                                        \
-                ?par_trans_settings_theme_macros                                \
-                    + + VAL_Button_Trans{0} VAL_Pad{0}                          \
-                    + * 2 VAL_Pad{0} +                                          \
-                        * - par_trans_settings_theme_macros 1 VAL_Pad{0}        \
-                        * par_trans_settings_theme_macros VAL_Button_Trans{1}   \
-                    0
+            set VAL_trans_w_bank_section                                                                        \
+                !VAL_trans_show_part_section{0}                                                                 \
+                    0                                                                                           \
+                    + + VAL_Button_Trans{0} VAL_Pad{0}                                                          \
+                        + * VAL_Button_Trans{1} + par_trans_settings_theme_bank par_trans_settings_theme_menu   \
+                        * VAL_Pad{0} - + par_trans_settings_theme_bank par_trans_settings_theme_menu 1          
 
             ; right edge padding
             set VAL_trans_x_rightmost_padding - VAL_trans_w{0} - VAL_trans_x_rightmost{0} VAL_trans_w_bank_section{0}
@@ -929,9 +932,9 @@
                 set VAL_trans_timepad * SCALE 10
 
                 ; section offset
-                set CUR_x                                           \
-                    ?VAL_trans_button_count{0}                      \
-                        !VAL_trans_button_section_count{0}          \
+                set CUR_x                                               \
+                    ?VAL_trans_button_count{0}                          \
+                        !VAL_trans_button_section_count{0}              \
                             + CUR_x{0} VAL_trans_spacing_section_x{0}
 
                 ; bpm visibility
@@ -1276,13 +1279,13 @@
 
                 ; background
                 set WALTER_ELEMENT##.custom.bank_bg                                 \
-                    par_trans_settings_theme_macros>0                               \
+                    ?VAL_trans_show_part_section{0}                                 \
                         [CUR_x CUR_y VAL_trans_w_bank_section{0} CUR_h 1 0 1 0]     \
                         0
 
                 ; logo
                 set WALTER_ELEMENT##.custom.bank_logo                       \
-                    par_trans_settings_theme_macros>0                       \
+                    ?VAL_trans_show_part_section{0}                         \
                         [CUR_x CUR_y VAL_Button_Trans{0} CUR_h 1 0 1 0]     \
                         0
 
@@ -1303,6 +1306,14 @@
                 MAC_DrawTransport_BankButtons_SingleButton  SCALE WALTER_ELEMENT PARAMETER_SECTION  7 "6" 8
                 MAC_DrawTransport_BankButtons_SingleButton  SCALE WALTER_ELEMENT PARAMETER_SECTION  8 "7" 9
 
+                ; theme adjuster icon
+                set WALTER_ELEMENT##.custom.themeadj        \
+                    ?par_trans_settings_theme_menu          \
+                        [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]   \
+                        0
+
+                front WALTER_ELEMENT##.custom.themeadj
+
             endmacro
 
             ;   #### Draw : Transport : Bank Buttons : Single Button
@@ -1312,13 +1323,13 @@
 
                     ; off button
                     set WALTER_ELEMENT##.custom.bank_##INDEX        \
-                        par_trans_settings_theme_macros>=THRESHOLD  \
+                        par_trans_settings_theme_bank>=THRESHOLD  \
                             par_bank_selected!=BANK_INDEX           \
                                 [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]
 
                     ; on button
                     set WALTER_ELEMENT##.custom.bank_##INDEX##_on   \
-                        par_trans_settings_theme_macros>=THRESHOLD  \
+                        par_trans_settings_theme_bank>=THRESHOLD  \
                             par_bank_selected==BANK_INDEX           \
                                 [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]
 
@@ -1327,7 +1338,9 @@
                     front WALTER_ELEMENT##.custom.bank_##INDEX##_on
 
                     ; increment x position
-                    set CUR_x + CUR_x{0} + CUR_w{0} VAL_Pad{0}
+                    set CUR_x                                       \
+                        par_trans_settings_theme_bank>=THRESHOLD    \
+                            + CUR_x{0} + CUR_w{0} VAL_Pad{0}
 
                 endmacro
 
@@ -5555,6 +5568,7 @@
         ; envcp
         envcp_min_height 17
 
+    ;LAYOUT_BLOCK
     ;   ## DPI translation
     ; -----------------------------------------------------------------
 
@@ -5621,3 +5635,4 @@
         GlobalLayout '200'
         GlobalLayout '225'
         GlobalLayout '250'
+;LAYOUT_BLOCK_END

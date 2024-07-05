@@ -70,9 +70,10 @@ org_path=$(pwd)
 
 # theme list
 themes=("dark" "dimmed" "light")
+zoom_levels=(100 125 150 175 200 225 250)
 
 release_folder="release"
-
+version=$(<./$release_folder/version)
 
 # reaper developement folder
 reaper_theme_folder="$(pwd)/../reaper/ColorThemes"
@@ -267,9 +268,10 @@ find ./gfx -type d -name "out" | while read -r out_dir; do
 
         # theme adjuster moves icons to script folder
         if echo "$out_dir" | grep -q "/themeadj/"; then
-            target_dir="$themeadj_icon_path/$theme"
-            mkdir -p "$target_dir"
-            rsync -aq --ignore-existing "$source_dir"/ "$target_dir"
+            target_dir="$themeadj_icon_path"
+            mkdir -p "$target_dir/$theme"
+            rsync -aq --include="table_*" --exclude="*" --ignore-existing "$source_dir"/ "$target_dir/$theme"
+            rsync -aq --exclude="table_*" --ignore-existing "$source_dir"/ "$target_dir"
             continue
         fi
 
@@ -337,8 +339,8 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
     source_folder="./$(get_theme_folder $theme)"
     source_themefile="./part_"$theme"_unpacked.ReaperTheme"
 
+    # create ReaperThemeZip
     zip_file="part_$theme.ReaperThemeZip"
-
     zip -9 -qrFS "$zip_file" "$source_folder" "$source_themefile"
 
     if [ "$copy_reaperthemezip" = true ]; then

@@ -39,7 +39,7 @@ function print_done() {
 }
 
 # prompt line
-print_prompt_line() {
+function print_prompt_line() {
     echo -e "${COLOR_YELLOW}$1${COLOR_RESET} (y) "
 }
 
@@ -204,6 +204,7 @@ if [ "$local_release" = true ]; then
     cat "$reapack_file_in" >>"$reapack_file_out"
     echo "" >>"$reapack_file_out"
     cat "$changelog_file" >>"$reapack_file_out"
+
 
     print_done
 

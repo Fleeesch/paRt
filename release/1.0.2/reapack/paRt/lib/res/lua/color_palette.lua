@@ -1,4 +1,4 @@
--- @version 
+-- @version 1.0.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -23,7 +23,8 @@ color.color_base = {
     --  Paths
     -- ------------------
     path = {
-        icon = "dark"
+        icon = "",
+        icon_table = "dark"
     },
 
     --  Main Colors
@@ -293,7 +294,8 @@ color.color_dimmed = {
     --  Paths
     -- ------------------
     path = {
-        icon = "dimmed"
+        icon = "",
+        icon_table = "dimmed"
     },
 
     --  Main Colors
@@ -556,7 +558,8 @@ color.color_light = {
     --  Paths
     -- ------------------
     path = {
-        icon = "light"
+        icon = "",
+        icon_table = "light"
     },
 
     --  Main Colors
@@ -830,6 +833,7 @@ end
 
 function color.updateImageSet()
     color.image_set = color.color_palette.path.icon
+    color.image_set_table = color.color_palette.path.icon_table
 end
 
 --  Palette Merge

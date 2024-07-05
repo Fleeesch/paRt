@@ -1,4 +1,4 @@
--- @version 
+-- @version 1.0.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -580,7 +580,7 @@ function map_macros.drawMcpLayoutConfiguration(row_data, parameter)
     local base_y = Part.Cursor.getCursorY()
 
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set .. "/"
+    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
     local images = {
         { image = map_macros.icons.table.mcp_pan_layout_top },
         { image = map_macros.icons.table.mcp_pan_layout_strip },
@@ -653,7 +653,7 @@ function map_macros.drawMcpPanConfiguration(row_data)
     local base_y = Part.Cursor.getCursorY()
 
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set .. "/"
+    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
     local images = {
         { image = map_macros.icons.table.mcp_fader_layout_knob },
         { image = map_macros.icons.table.mcp_fader_layout_vert },
@@ -755,7 +755,7 @@ end
 
 function map_macros.drawTcpFaderLayoutConfiguration(parameter)
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set .. "/"
+    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
     local layouts = {
         { value = 0, image = map_macros.icons.table.tcp_fader_layout_inline },
         { value = 1, image = map_macros.icons.table.tcp_fader_layout_separate },
@@ -801,7 +801,7 @@ end
 -- --------------------------------------------------
 
 function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set .. "/"
+    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
 
     -- default dimensions
     if label_w == nil then label_w = 50 end
@@ -897,6 +897,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
                                          parameter_separator)
     -- image path
     local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set .. "/"
+    local icon_path_theme = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
 
     Part.Cursor.stackCursor()
     Part.Cursor.stackCursor()
@@ -938,7 +939,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
         Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
 
         -- image
-        Part.Layout.Image.Image:new(nil, icon_path .. icon, true, nil,
+        Part.Layout.Image.Image:new(nil, icon_path_theme .. icon, true, nil,
             map_macros.icon_alpha)
         Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
         empty_space_y = math.max(empty_space_y, Part.Cursor.getCursorY() - Part.Cursor.getCursorPadY())

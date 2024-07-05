@@ -1,4 +1,4 @@
--- @version 
+-- @version 1.0.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -110,8 +110,10 @@ par.par_colors_track_track_colorbar_intensity = { Part.Parameter.Group.Parameter
 par.par_trans_settings_extrapad_x = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_settings_extrapad_x") }
 par.par_trans_settings_extrapad_y = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_settings_extrapad_y") }
 
-par.par_trans_settings_theme_macros = Part.Parameter.Theme.ThemeParameter:new(nil, "par_trans_settings_theme_macros")
-par.par_trans_settings_theme_macros:storeInSettings()
+par.par_trans_settings_theme_menu = Part.Parameter.Theme.ThemeParameter:new(nil, "par_trans_settings_theme_menu")
+par.par_trans_settings_theme_menu:storeInSettings()
+par.par_trans_settings_theme_bank = Part.Parameter.Theme.ThemeParameter:new(nil, "par_trans_settings_theme_bank")
+par.par_trans_settings_theme_bank:storeInSettings()
 
 -- visibility
 par.par_trans_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_vis") }
