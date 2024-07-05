@@ -16,8 +16,7 @@
 
 # Release folders
 
-/rel/**/bin/
-/rel/current/
+/release
 
 # Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
 *gitignore*
