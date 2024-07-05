@@ -25,28 +25,27 @@ capitalize() {
 
 # header line
 print_header_line() {
-echo -e "${COLOR_CYAN}$1${COLOR_RESET}"
+    echo -e "${COLOR_CYAN}$1${COLOR_RESET}"
 }
-
 
 # info line
 print_info_line() {
-echo -e "${COLOR_ORANGE}$1${COLOR_RESET}"
+    echo -e "${COLOR_ORANGE}$1${COLOR_RESET}"
 }
 
 # prompt line
 print_prompt_line() {
-echo -e "${COLOR_YELLOW}$1${COLOR_RESET} (y) "
+    echo -e "${COLOR_YELLOW}$1${COLOR_RESET} (y) "
 }
 
 # starting line
 print_starting_line() {
-echo -en "${COLOR_RESET}$1..."
+    echo -en "${COLOR_RESET}$1..."
 }
 
 # done
 print_done() {
-echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+    echo -e "${COLOR_GREEN}done${COLOR_RESET}"
 }
 
 #   Function : Get Theme Folder
@@ -67,8 +66,13 @@ get_theme_folder() {
 #   Preparation
 # --------------------------------------------
 
+org_path=$(pwd)
+
 # theme list
 themes=("dark" "dimmed" "light")
+
+release_folder="release"
+
 
 # reaper developement folder
 reaper_theme_folder="$(pwd)/../reaper/ColorThemes"
@@ -78,10 +82,14 @@ script_version_set="version_set.sh"
 script_changelog_set="changelog_set.sh"
 
 script_walter_folder="$(pwd)/walter"
-script_walter_create="create_walter.sh"
+script_walter_create="create_walter.sh -p"
 
 script_themefile_folder="$(pwd)/theme"
 script_themefile_create="create_theme.sh"
+
+script_lua_folder="$(pwd)/scripts/themeadj/"
+themeadj_icon_path="$script_lua_folder/lib/res/icon"
+script_lua_add_tags="add_lua_tags.sh"
 
 #   Introduction
 # --------------------------------------------
@@ -162,7 +170,7 @@ fi
 # version and changleog
 if [ "$unattended" = false ]; then
 
-    cd rel
+    cd "./$release_folder"
 
     echo ""
     source $script_version_set
@@ -175,7 +183,7 @@ if [ "$unattended" = false ]; then
     print_header_line "------------------------------------"
     print_header_line ""
 
-    cd ..
+    cd "$org_path"
 fi
 
 #   Rebuilding of Assets
@@ -185,8 +193,13 @@ if [ "$rebuild_assets" = true ]; then
 
     print_info_line "Rebuilding all assets..."
 
-    original_dir=$(pwd)
     base_dir="./gfx"
+
+    cd "$base_dir/toolbar/ats/ico"
+
+    source make_icons.sh
+
+    cd "$org_path"
 
     for dir in "$base_dir"/*/; do
         if [ -f "$dir/spritemaker_do.sh" ]; then
@@ -194,7 +207,7 @@ if [ "$rebuild_assets" = true ]; then
             echo ""
         fi
     done
-    cd "$original_dir"    
+    cd "$org_path"
 fi
 
 #   Walter / Theme Files
@@ -203,14 +216,21 @@ fi
 # walter file
 cd $script_walter_folder
 source $script_walter_create
-cd ..
+cd "$org_path"
 
 echo ""
 
 # theme file
 cd $script_themefile_folder
 source $script_themefile_create
-cd ..
+cd "$org_path"
+
+#   Reascript Files
+# --------------------------------------------
+
+cd $script_lua_folder
+source $script_lua_add_tags
+cd $org_path
 
 #   Pre-Cleaning
 # --------------------------------------------
@@ -220,6 +240,7 @@ if [ "$clear_build_folder" = true ]; then
     echo ""
     print_starting_line "Clearing build folder"
     rm -rf "build"
+    rm -rf $themeadj_icon_path
     print_done
 fi
 
@@ -232,11 +253,6 @@ print_info_line "Copying assets..."
 # iterate gfx output folders
 find ./gfx -type d -name "out" | while read -r out_dir; do
 
-    # skip theme adjuster folder
-    if echo "$out_dir" | grep -q "/themeadj/"; then
-        continue
-    fi
-
     print_starting_line "\tCollecting assets from $out_dir"
 
     # iterate themes
@@ -248,6 +264,14 @@ find ./gfx -type d -name "out" | while read -r out_dir; do
         folder=$(get_theme_folder $theme)
         source_dir="$out_dir/$theme"
         target_dir="./build/$folder"
+
+        # theme adjuster moves icons to script folder
+        if echo "$out_dir" | grep -q "/themeadj/"; then
+            target_dir="$themeadj_icon_path/$theme"
+            mkdir -p "$target_dir"
+            rsync -aq --ignore-existing "$source_dir"/ "$target_dir"
+            continue
+        fi
 
         # create target folder
         mkdir -p "$target_dir"
@@ -288,6 +312,8 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
     rsync -aq --ignore-existing "$theme_source_file" "$target_dir"
 
     if [ "$copy_reaperthemefiles" = true ]; then
+        rm -rf "$reaper_theme_folder/$folder"
+        rm -rf "$reaper_theme_folder/part_"$theme"_unpacked.ReaperTheme"
         rsync -aq "$theme_source_file" "$reaper_theme_folder/part_"$theme"_unpacked.ReaperTheme"
         rsync -aq "$target_dir/$folder" "$reaper_theme_folder/"
     fi
@@ -313,9 +339,10 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
 
     zip_file="part_$theme.ReaperThemeZip"
 
-    zip -qrFS "$zip_file" "$source_folder" "$source_themefile"
+    zip -9 -qrFS "$zip_file" "$source_folder" "$source_themefile"
 
     if [ "$copy_reaperthemezip" = true ]; then
+        rm -rf "$reaper_theme_folder/$zip_file"
         rsync -aq "$zip_file" "$reaper_theme_folder/$zip_file"
     fi
 

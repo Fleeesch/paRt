@@ -30,14 +30,14 @@
 
 # rms strip
 --out meter_strip_v_rms     --single-level 100      --images                                            \
-                        meter_0_m           -tint   meter_rms               -alpha $alpha_meter_unit    \
-                        meter_1_m           -tint   meter_rms                                           \
-                        meter_2_m           -tint   meter_rms_clip          -alpha $alpha_meter_unit    \
-                        meter_3_m           -tint   meter_rms_clip                                      \
-                        meter_4_m           -tint   meter_rms_alt           -alpha $alpha_meter_unit    \
-                        meter_5_m           -tint   meter_rms_alt                                       \
-                        meter_6_m           -tint   meter_rms_alt_clip      -alpha $alpha_meter_unit    \
-                        meter_7_m           -tint   meter_rms_alt_clip
+                        meter_0_m           -tint   vu_rms               -alpha $alpha_meter_unit       \
+                        meter_1_m           -tint   vu_rms                                              \
+                        meter_2_m           -tint   vu_rms_clip          -alpha $alpha_meter_unit       \
+                        meter_3_m           -tint   vu_rms_clip                                         \
+                        meter_4_m           -tint   vu_rms_alt           -alpha $alpha_meter_unit       \
+                        meter_5_m           -tint   vu_rms_alt                                          \
+                        meter_6_m           -tint   vu_rms_alt_clip      -alpha $alpha_meter_unit       \
+                        meter_7_m           -tint   vu_rms_alt_clip
 
 # horizontal copies
 --copy  meter_strip_v       meter_strip_h           --rotate 270

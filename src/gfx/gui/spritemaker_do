@@ -4,13 +4,13 @@
 # --------------------------------------
 
 # main tab
---out monitor_fx_byp        --spritesheet --button --images mon_fill        -tint button_bg_off     mon_text            -tint button_symbol_off     mon_border      -tint button_border
---out monitor_fx_off        --spritesheet --button --images mon_fill        -tint color_gray        mon_text            -tint button_symbol_on      mon_border      -tint button_border
+--out monitor_fx_byp        --spritesheet --button --images mon_fill        -tint color_gray        mon_text            -tint button_symbol_on      mon_border      -tint button_border
+--out monitor_fx_off        --spritesheet --button --images mon_fill        -tint button_bg_off     mon_text            -tint button_symbol_off     mon_border      -tint button_border
 --out monitor_fx_on         --spritesheet --button --images mon_fill        -tint color_cyan        mon_text            -tint button_symbol_on      mon_border      -tint button_border
 
 # bypass
---out monitor_fx_byp_byp    --spritesheet --button --images mon_fx_fill     -tint button_bg_off     mon_fx_bypassed     -tint button_symbol_off     mon_fx_border   -tint button_border
---out monitor_fx_byp_off    --spritesheet --button --images mon_fx_fill     -tint color_gray        mon_fx_on           -tint button_symbol_on      mon_fx_border   -tint button_border
+--out monitor_fx_byp_byp    --spritesheet --button --images mon_fx_fill     -tint color_gray        mon_fx_bypassed     -tint button_symbol_on      mon_fx_border   -tint button_border
+--out monitor_fx_byp_off    --spritesheet --button --images mon_fx_fill     -tint button_bg_off     mon_fx_on           -tint button_symbol_off     mon_fx_border   -tint button_border
 --out monitor_fx_byp_on     --spritesheet --button --images mon_fx_fill     -tint color_cyan        mon_fx_on           -tint button_symbol_on      mon_fx_border   -tint button_border
 
 #       Tab

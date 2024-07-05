@@ -6,13 +6,25 @@ settings:
 variables:
   alpha_hover: 0.9
   alpha_meter_unit: 0.1
-  alpha_item_button_bg: 1 
+  alpha_item_button_bg: 1
+
+#   Universal Color Palette
+# ----------------------------------------------
 universal:
   mod:
-    border_alpha: [0.8,0,0]
-    hover: [1.3,0.85,0]
-    click: [1.5,0.85,0]  
+    border_alpha: [0.8, 0, 0]
+    hover: [1.3, 0.85, 0]
+    click: [1.5, 0.85, 0]
   rgb:
+    frame_pink: [255, 0, 255]
+
+    # overlay
+    overlay_hover: [255, 255, 255, 0.1]
+    overlay_click: [255, 255, 255, 0.25]
+    overlay_folder_hover: [255, 255, 255, 0.1]
+    overlay_folder_click: [255, 255, 255, 0.25]
+    overlay_fxbyp_hover: [255, 255, 255, 0.25]
+    overlay_fxbyp_click: [255, 255, 255, 0.5]
 
     # main colors
     color_cyan: [84, 185, 147]
@@ -20,209 +32,580 @@ universal:
     color_red: [181, 66, 66]
     color_yellow: [208, 171, 92]
     color_violet: [123, 94, 187]
-    color_gray: [157,157,157]
-    color_green: [108,185,84]
+    color_gray: [157, 157, 157]
+    color_green: [108, 185, 84]
 
     # theme adjuster
-    themeadj_table_icon: [255,255,255,0.8]
+    themeadj_table_icon: [255, 255, 255, 0.8]
 
     # toolbar
-    toolbar_button_bg_off: [30,30,30]
-    toolbar_button_symbol_off: [225,225,225,0.9]
-    toolbar_button_symbol_on: [0,0,0,0.8]
-    toolbar_button_border: [0,0,0,0.5]
-    toolbar_animation_fill: [255,255,255,0.5]
-    toolbar_animation_border: [255,255,255,1]
+    toolbar_button_bg_off: [26, 26, 26]
+    toolbar_button_symbol_off: [210, 210, 210, 0.95]
+    toolbar_button_symbol_on: [0, 0, 0, 0.8]
+    toolbar_button_border: [0, 0, 0, 0.5]
+    toolbar_animation_fill: [255, 255, 255, 0.5]
+    toolbar_animation_border: [255, 255, 255]
 
     # lane
-    lane_toggle_border: [0,0,0,0.9]
-    lane_toggle_bg_off: [100,100,100,1]
-    lane_arrow_bg: [140,140,140,1]
-    lane_arrow_border: [0,0,0,0.9]
-    lane_menu_symbol: [125,125,125,1]
-    lane_menu_bg: [75,75,75,1]
+    lane_toggle_border: [0, 0, 0, 0.8]
+    lane_toggle_bg_off: [90, 90, 90]
+    lane_arrow_bg: [90, 90, 90]
+    lane_arrow_border: [0, 0, 0, 0.8]
+    lane_menu_symbol: [125, 125, 125]
+    lane_menu_bg: [70, 70, 70]
 
     # gui
-    gui_bg: [50,50,50]
-    gui_tab_off: [100,100,100]
-    gui_scrollbar_bg: [40,40,40]
-    gui_scrollbar_bar: [70,70,70]
-    gui_scrollbar_symbols: [100,100,100]
-    gui_scrollbar_window_bg: [200,200,200]
-    gui_scrollbar_window_bar: [155,155,155]
-    gui_scrollbar_window_symbols: [135,135,135]
-    
+    gui_bg: [50, 50, 50]
+    gui_tab_off: [29, 29, 29]
+    gui_scrollbar_bg: [41, 41, 41]
+    gui_scrollbar_bar: [67, 67, 67]
+    gui_scrollbar_symbols: [75, 75, 75]
+    gui_scrollbar_window_bg: [110, 110, 110]
+    gui_scrollbar_window_bar: [194, 194, 194]
+    gui_scrollbar_window_symbols: [205, 205, 205]
+
     # generic button
-    generic_button_bg_off: [125,125,125,1]
-    generic_button_bg_on: [84, 185, 147]
-    generic_button_bg_partial: [140,140,140,0.8]
-    generic_button_symbol_off: [255,255,255,0.9]
-    generic_button_symbol_on: [0, 0, 0,0.8]
-    generic_button_symbol_partial: [255,255,255,0.6]
-    generic_button_border: [0, 0, 0,0.3]
-    
+    generic_button_bg_off: [102, 102, 102]
+    generic_button_bg_on: [40, 40, 40]
+    generic_button_bg_partial: [131, 131, 131]
+    generic_button_symbol_off: [210, 210, 210, 0.9]
+    generic_button_symbol_on: [0, 0, 0, 0.8]
+    generic_button_symbol_partial: [193, 193, 193]
+    generic_button_border: [0, 0, 0, 0.5]
+
     # generic fader
-    generic_fader_bg: [125,125,125,0.75]
-    generic_fader_border: [0,0,0,0.5]
-    generic_fader_thumb_bg: [200,200,200,0.9]
-    generic_fader_thumb_border: [0,0,0,0.5]
-    generic_fader_thumb_line: [0,0,0,0.5]
+    generic_fader_bg: [110, 110, 110]
+    generic_fader_border: [0, 0, 0, 0.5]
+    generic_fader_thumb_bg: [206, 206, 206, 0.75]
+    generic_fader_thumb_border: [0, 0, 0, 0.7]
+    generic_fader_thumb_line: [0, 0, 0, 0.3]
 
     # generic knob
-    generic_knob_bg: [125,125,125,0.75]
-    generic_knob_border: [0,0,0,0.5]
+    generic_knob_bg: [125, 125, 125]
+    generic_knob_border: [0, 0, 0, 0.5]
 
     # folder buttons
-    folder_symbol: [255,255,255,0.5]
+    folder_symbol: [255, 255, 255, 0.3]
 
     # transport
-    transport_bg: [55,55,55]
-    transport_button_bg_off: [35,35,35]
-    transport_status_bg: [30,30,30]
-    transport_status_bg_error: [100,30,30]
-    transport_selection_bg: [30,30,30]
-    transport_bank_button_off: [75,75,75]
-    transport_rate_knob_bg: [100,100,100,1]
-    transport_rate_knob_line: [255,255,255,1]
-    transport_rate_knob_line_border: [0,0,0,0.25]
-    transport_rate_fader_bg: [60,60,60,1]
-    transport_rate_fader_knob: [175,175,175,0.65]
-  
+    transport_bg: [50, 50, 50]
+    transport_fg: [220, 220, 220]
+    transport_button_bg_off: [26, 26, 26]
+    transport_status_bg: [29, 29, 29]
+    transport_status_bg_error: [53, 23, 23]
+    transport_selection_bg: [29, 29, 29]
+    transport_bank_button_off: [26, 26, 26]
+    transport_rate_knob_bg: [84, 84, 84]
+    transport_rate_knob_line: [245, 245, 245]
+    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_fader_bg: [84, 84, 84]
+    transport_rate_fader_knob: [231, 231, 231]
+
     # buttons
     button_bg_off: [50, 50, 50]
-    button_border: [0,0,0,0.8]
-    
+    button_border: [0, 0, 0, 0.8]
+
     # button label
-    button_label_bg: [0,0,0,0.2]
-    button_label_text: [255,255,255,0.5]
+    button_label_bg: [0, 0, 0, 0.2]
+    button_label_text: [255, 255, 255, 0.5]
 
     # button symbol
-    button_symbol_off: [199,199,199,0.9]
-    button_symbol_on: [0,0,0,0.8]
-    button_io_off: [255, 255, 255, 0.1]
-
-    # overlay
-    overlay_hover: [255,255,255,0.1]
-    overlay_click: [255,255,255,0.25]
-    overlay_fxbyp_hover: [255,255,255,0.25]
-    overlay_fxbyp_click: [255,255,255,0.5]    
+    button_symbol_off: [210, 210, 210, 0.9]
+    button_symbol_on: [0, 0, 0, 0.8]
+    button_io_off: [0,0,0, 0.1]
 
     # midi inline scrollbar
-    midi_inline_scrollbar_bg: [0,0,0,0.5]
-    midi_inline_scrollbar_thumb: [0,0,0,0.5]
+    midi_inline_scrollbar_bg: [255, 255, 255, 0.5]
+    midi_inline_scrollbar_thumb: [255, 255, 255, 0.5]
 
     # items
-    item_bg: [0,0,0,0]
-    item_bg_select: [0,0,0,0]
-    item_border: [0,0,0,0.25]
-    item_border_select: [255,255,255,0.9]
-    item_border_select_corners: [255,255,255,0.9]
-    item_button_bg_off: [50,50,50,1]
-    item_button_bg_on: [200,200,200,1]
-    item_button_symbol_off: [180,180,180,1]
-    item_button_symbol_on: [20,20,20,1]
-    item_seldot_bg: [255,255,255,1]
-    item_seldot_border: [0,0,0,0.5]
-    item_volknob_bg: [0,0,0,0.2]
-    item_volknob_layer_1: [255,255,255,0.5]
-    item_volknob_layer_2: [255,255,255,1]
-    item_volknob_border: [0,0,0,0.25]
+    item_bg: [154, 154, 154, 0.6]
+    item_bg_select: [255, 255, 255, 0.6]
+    item_bg_border: [0, 0, 0]
+    item_bg_border_select: [255, 255, 255]
+    item_bg_border_select_corners: [255, 255, 255, 0]
+    item_button_bg_off: [79, 79, 79]
+    item_button_bg_on: [200, 200, 200]
+    item_button_symbol_off: [180, 180, 180]
+    item_button_symbol_on: [20, 20, 20]
+    item_seldot_bg: [255, 255, 255]
+    item_seldot_border: [0, 0, 0, 0]
+    item_volknob_bg: [0, 0, 0, 0.5]
+    item_volknob_layer_1: [255, 255, 255, 0.5]
+    item_volknob_layer_2: [255, 255, 255]
+    item_volknob_border: [0, 0, 0, 0.25]
 
     # inserts
-    insert_bg: [37,37,37]
-    insert_bg_select: [50,50,50]
-    insert_border: [0,0,0,0.5]
-    insert_divider: [255,255,255,0.05]
-    insert_slot_empty: [255,255,255,0.00]
-    insert_slot_empty_hover: [255,255,255,0.1]
-    insert_slot_empty_click: [255,255,255,0.2]
-    insert_slot: [84,185,147]
+    insert_bg: [46, 46, 46]
+    insert_bg_select: [56, 56, 56]
+    insert_border: [0, 0, 0, 0.4]
+    insert_divider: [255, 255, 255, 0.05]
+    insert_slot_empty: [255, 255, 255, 0]
+    insert_slot_empty_hover: [255, 255, 255, 0.1]
+    insert_slot_empty_click: [255, 255, 255, 0.2]
 
     # sends
-    insert_send_meter: [0,0,0,0.25]
-    insert_send_bg: [0,0,0,0.5]
-    insert_send_knob_border: [0,0,0,0.5]
-    insert_send_knob_0: [0,0,0,0.2]
-    insert_send_knob_1: [0,0,0,0.7]
-    insert_send_knob_2: [255,255,255,0.8]
-    insert_fx_bg: [0,0,0,0.5]
-    
-    # fx parm
-    insert_slot_fxparm_knob_bg: [0,0,0,0.25]
-    insert_slot_fxparm: [24, 45, 37]
+    insert_send_meter: [0, 0, 0, 0.2]
+    insert_send_knob_border: [0, 0, 0, 0.5]
+    insert_send_knob_0: [208, 171, 92]
+    insert_send_knob_1: [0, 0, 0]
+    insert_send_knob_2: [220,220,220]
+
+    # fx parameter
+    insert_slot_fxparm: [68, 85, 78]
+    insert_fxparm_bg: [0, 0, 0, 0.25]
+    insert_fxparm_border: [0, 0, 0, 0.5]
 
     # embed
-    insert_embed_label_bg: [0,0,0,0.5]
+    insert_embed_label_bg: [0, 0, 0, 0.5]
 
     # track icon
-    track_icon_bg: [47,47,47]
-    track_icon_bg_select: [60,60,60]
-    track_icon_border: [0,0,0,0.3]
+    track_icon_bg: [60, 60, 60]
+    track_icon_bg_select: [70, 70, 70]
+    track_icon_border: [0, 0, 0, 0.3]
 
     # knobs
-    knob_bg: [31,31,31]
-    knob_border: [0,0,0,0.8]
-    knob_line: [199,199,199]
-    knob_line_pan: [84,185,147]
-    knob_line_wid: [100,167,196]
-    knob_line_border: [0,0,0,0.5]
+    knob_bg: [31, 31, 31]
+    knob_border: [0, 0, 0, 0.8]
+    knob_line: [194, 194, 194]
+    knob_line_pan: [134, 205, 178]
+    knob_line_wid: [111, 173, 200]
+    knob_line_border: [0, 0, 0, 0.5]
 
     # meter
-    meter_bg: [44,44,44]
-    meter_border: [0,0,0,0.75]
+    meter_bg: [44, 44, 44]
+    meter_border: [0, 0, 0, 0.5]
 
     # vu
-    vu_normal: [55,171,111, 0.5]
-    vu_normal_clip: [55,171,111, 1]
-    vu_rec_hot: [182,81,81, 0.5]
-    vu_rec_clip: [182,81,81, 1]
-    vu_readout_clip: [118,50,50]
-    vu_rms: [100, 167, 196, 0.5]
-    vu_rms_clip: [100, 167, 196, 1]
-    vu_rms_alt: [123, 94, 187, 0.5]
-    vu_rms_alt_clip: [123, 94, 187, 1]
+    vu_normal: [55, 171, 111]
+    vu_normal_clip: [70, 245, 150]
+    vu_rec: [182, 81, 81]
+    vu_rec_clip: [238, 141, 141]
+    vu_readout_clip: [118, 50, 50]
+    vu_rms: [100, 167, 196]
+    vu_rms_clip: [171, 207, 223]
+    vu_rms_alt: [208, 171, 92]
+    vu_rms_alt_clip: [230, 210, 167]
 
     #index
-    track_index_bg: [0,0,0,0.1]
+    track_index_bg: [0, 0, 0, 0.1]
 
     # faders
-    fader_bg: [31,31,31]
-    fader_border: [0,0,0,0.5]
-    fader_knob_bg: [162,162,162,0.75]
-    fader_knob_bg_pan: [71,146,118,0.75]
-    fader_knob_bg_wid: [83,133,155,0.75]
-    fader_knob_bg_envcp: [130,130,130,0.75]
-    fader_knob_border: [0,0,0,0.6]
-    fader_knob_line: [0,0,0,0.3]
+    fader_bg: [31, 31, 31]
+    fader_border: [0, 0, 0, 0.5]
+    fader_knob_bg: [183, 183, 183, 0.75]
+    fader_knob_bg_pan: [149, 212, 188, 0.75]
+    fader_knob_bg_wid: [160, 201, 219, 0.75]
+    fader_knob_bg_envcp: [150, 150, 150, 0.75]
+    fader_knob_border: [0, 0, 0, 0.7]
+    fader_knob_line: [0, 0, 0, 0.3]
 
     # text
-    readout_bg: [0,0,0,0.5]
+    readout_bg: [0, 0, 0, 0.5]
 
     # envcp
-    envcp_tailicon: [255,255,255,0.5]
+    envcp_tailicon: [255, 255, 255, 0.5]
 
     # borders
-    border_bg: [0,0,0,0.5]
-    border_label: [0,0,0,0.5]
-    border_selmarker: [0,0,0,0.9]
-    border_colorbar: [0,0,0,0.8]
+    border_bg: [0, 0, 0, 0.5]
+    border_label: [0, 0, 0, 0.6]
+    border_selmarker: [0, 0, 0, 0.7]
+    border_colorbar: [0, 0, 0, 0.7]
 
     # separator
-    separator: [0,0,0,0.25]
+    separator: [0, 0, 0, 0.25]
 
-    
+#   Dark Theme
+# ----------------------------------------------
 dark:
   mod:
     placeholder: [0]
   rgb:
     placeholder: [0]
+
+#   Dimmed Theme
+# ----------------------------------------------
 dimmed:
   mod:
     placeholder: [0]
   rgb:
-    placeholder: [0]
+    # main colors
+    color_cyan: [131, 204, 177]
+    color_blue: [138, 192, 216]
+    color_red: [222, 123, 123]
+    color_yellow: [226, 195, 129]
+    color_violet: [158, 137, 205]
+    color_gray: [176, 176, 176]
+    color_green: [158, 210, 141]
+
+    # theme adjuster
+    themeadj_table_icon: [255, 255, 255, 0.8]
+
+    # toolbar
+    toolbar_button_bg_off: [76, 76, 76]
+    toolbar_button_symbol_off: [220, 220, 220, 0.9]
+    toolbar_button_symbol_on: [0, 0, 0, 0.8]
+    toolbar_button_border: [0, 0, 0, 0.5]
+    toolbar_animation_fill: [255, 255, 255, 0.5]
+    toolbar_animation_border: [255, 255, 255]
+
+    # lane
+    lane_toggle_border: [0, 0, 0, 0.5]
+    lane_toggle_bg_off: [90, 90, 90]
+    lane_arrow_bg: [179, 179, 179]
+    lane_arrow_border: [0, 0, 0, 0.5]
+    lane_menu_symbol: [179, 179, 179]
+    lane_menu_bg: [103, 103, 103]
+
+    # gui
+    gui_bg: [102, 102, 102]
+    gui_tab_off: [67, 67, 67]
+    gui_scrollbar_bg: [79, 79, 79]
+    gui_scrollbar_bar: [127, 127, 127]
+    gui_scrollbar_symbols: [135, 135, 135]
+    gui_scrollbar_window_bg: [144, 144, 144]
+    gui_scrollbar_window_bar: [111, 111, 111]
+    gui_scrollbar_window_symbols: [100, 100, 100]
+
+    # generic button
+    generic_button_bg_off: [134, 134, 134]
+    generic_button_bg_on: [131, 204, 177]
+    generic_button_bg_partial: [185, 185, 185]
+    generic_button_symbol_off: [240, 240, 240, 0.9]
+    generic_button_symbol_on: [0, 0, 0, 0.8]
+    generic_button_symbol_partial: [227, 227, 227]
+    generic_button_border: [0, 0, 0, 0.5]
+
+    # generic fader
+    generic_fader_bg: [116, 116, 116]
+    generic_fader_border: [0, 0, 0, 0.5]
+    generic_fader_thumb_bg: [229, 229, 229, 0.75]
+    generic_fader_thumb_border: [0, 0, 0, 0.7]
+    generic_fader_thumb_line: [0, 0, 0, 0.3]
+
+    # generic knob
+    generic_knob_bg: [140, 140, 140]
+    generic_knob_border: [0, 0, 0, 0.5]
+
+    # folder buttons
+    folder_symbol: [255, 255, 255, 0.5]
+
+    # transport
+    transport_bg: [102, 102, 102]
+    transport_fg: [220, 220, 220]
+    transport_button_bg_off: [76, 76, 76]
+    transport_status_bg: [79, 79, 79]
+    transport_status_bg_error: [101, 73, 73]
+    transport_selection_bg: [79, 79, 79]
+    transport_bank_button_off: [76, 76, 76]
+    transport_rate_knob_bg: [116, 116, 116]
+    transport_rate_knob_line: [245, 245, 245]
+    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_fader_bg: [116, 116, 116]
+    transport_rate_fader_knob: [245, 245, 245]
+
+    # buttons
+    button_bg_off: [72, 72, 72]
+    button_border: [0, 0, 0, 0.6]
+
+    # button label
+    button_label_bg: [0, 0, 0, 0.3]
+    button_label_text: [195, 195, 195]
+
+    # button symbol
+    button_symbol_off: [237, 237, 237, 0.9]
+    button_symbol_on: [0, 0, 0, 0.8]
+    button_io_off: [0, 0, 0, 0.1]
+
+    # midi inline scrollbar
+    midi_inline_scrollbar_bg: [0, 0, 0, 0.5]
+    midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
+
+    # items
+    item_bg: [165, 165, 165, 0.6]
+    item_bg_select: [229, 229, 229, 0.7]
+    item_bg_border: [0, 0, 0]
+    item_bg_border_select: [255, 255, 255]
+    item_bg_border_select_corners: [255, 255, 255, 0]
+    item_button_bg_off: [118, 118, 118]
+    item_button_bg_on: [200, 200, 200]
+    item_button_symbol_off: [200, 200, 200]
+    item_button_symbol_on: [20, 20, 20]
+    item_seldot_bg: [255, 255, 255]
+    item_seldot_border: [0, 0, 0, 0]
+    item_volknob_bg: [0, 0, 0, 0.5]
+    item_volknob_layer_1: [255, 255, 255, 0.5]
+    item_volknob_layer_2: [255, 255, 255]
+    item_volknob_border: [0, 0, 0, 0.25]
+
+    # inserts
+    insert_bg: [73, 73, 73]
+    insert_bg_select: [85, 85, 85]
+    insert_border: [0, 0, 0, 0.3]
+    insert_divider: [255, 255, 255, 0.05]
+
+    # sends
+    insert_send_meter: [0, 0, 0, 0.15]
+    insert_send_knob_border: [0, 0, 0, 0.5]
+    insert_send_knob_0: [226, 195, 129]
+    insert_send_knob_1: [0, 0, 0, 0.9]
+    insert_send_knob_2: [235, 235, 235]
+
+    # fx parameter
+    insert_slot_fxparm: [0, 0, 0, 0.5]
+    insert_fxparm_bg: [0, 0, 0, 0.25]
+    insert_fxparm_border: [0, 0, 0, 0.5]
+
+    # embed
+    insert_embed_label_bg: [0, 0, 0, 0.3]
+
+    # track icon
+    track_icon_bg: [87, 87, 87]
+    track_icon_bg_select: [100, 100, 100]
+    track_icon_border: [0, 0, 0, 0.4]
+
+    # knobs
+    knob_bg: [75, 75, 75]
+    knob_border: [0, 0, 0, 0.8]
+    knob_line: [226, 226, 226]
+    knob_line_pan: [144, 210, 185]
+    knob_line_wid: [147, 193, 214]
+    knob_line_border: [0, 0, 0, 0.5]
+
+    # meter
+    meter_bg: [63, 63, 63]
+    meter_border: [0, 0, 0, 0.4]
+
+    # vu
+    vu_normal: [55, 171, 111]
+    vu_normal_clip: [137, 217, 175]
+    vu_rec: [182, 81, 81]
+    vu_rec_clip: [214, 122, 122]
+    vu_readout_clip: [142, 60, 60]
+    vu_rms: [100, 167, 196]
+    vu_rms_clip: [184, 215, 228]
+    vu_rms_alt: [208, 171, 92]
+    vu_rms_alt_clip: [232, 215, 177]
+
+    #index
+    track_index_bg: [0, 0, 0, 0.1]
+
+    # faders
+    fader_bg: [75, 75, 75]
+    fader_border: [0, 0, 0, 0.5]
+    fader_knob_bg: [209, 209, 209, 0.75]
+    fader_knob_bg_pan: [172, 231, 209, 0.75]
+    fader_knob_bg_wid: [175, 214, 231, 0.75]
+    fader_knob_bg_envcp: [195, 195, 195, 0.75]
+    fader_knob_border: [0, 0, 0, 0.7]
+    fader_knob_line: [0, 0, 0, 0.3]
+
+    # text
+    readout_bg: [0, 0, 0, 0.3]
+
+    # envcp
+    envcp_tailicon: [0, 0, 0, 0.8]
+
+    # borders
+    border_bg: [0, 0, 0, 0.6]
+    border_label: [0, 0, 0, 0.3]
+    border_selmarker: [0, 0, 0, 0.6]
+    border_colorbar: [0, 0, 0, 0.6]
+
+    # separator
+    separator: [0, 0, 0, 0.25]
+
+#   Light Theme
+# ----------------------------------------------
 light:
   mod:
     placeholder: [0]
   rgb:
+    # overlay
+    overlay_hover: [255, 255, 255, 0.05]
+    overlay_click: [255, 255, 255, 0.15]
+    overlay_folder_hover: [0, 0, 0, 0.1]
+    overlay_folder_click: [0, 0, 0, 0.25]
+
+    # main colors
+    color_cyan: [138, 231, 196]
+    color_blue: [149, 195, 215]
+    color_red: [231, 136, 136]
+    color_yellow: [241, 208, 138]
+    color_violet: [177, 160, 215]
+    color_gray: [185, 185, 185]
+    color_green: [173, 216, 160]
+
+    # theme adjuster
+    themeadj_table_icon: [0, 0, 0, 0.8]
+
+    # toolbar
+    toolbar_button_bg_off: [140, 140, 140]
+    toolbar_button_symbol_off: [255, 255, 255, 0.95]
+    toolbar_button_symbol_on: [0, 0, 0, 0.95]
+    toolbar_button_border: [0, 0, 0, 0.3]
+
+    # lane
+    lane_toggle_border: [0, 0, 0, 0.5]
+    lane_toggle_bg_off: [0, 0, 0, 0.5]
+    lane_arrow_bg: [0, 0, 0, 0.5]
+    lane_arrow_border: [0, 0, 0, 0.5]
+    lane_menu_symbol: [0, 0, 0, 0.5]
+    lane_menu_bg: [0, 0, 0, 0.1]
+
+    # gui
+    gui_bg: [208, 208, 208]
+    gui_tab_off: [147, 147, 147]
+    gui_scrollbar_bg: [200, 200, 200]
+    gui_scrollbar_bar: [175, 175, 175]
+    gui_scrollbar_symbols: [160, 160, 160]
+    gui_scrollbar_window_bg: [210, 210, 210]
+    gui_scrollbar_window_bar: [180, 180, 180]
+    gui_scrollbar_window_symbols: [170, 170, 170]
+
+    # generic button
+    generic_button_bg_off: [169, 169, 169]
+    generic_button_bg_on: [138, 231, 196]
+    generic_button_bg_partial: [199, 199, 199]
+    generic_button_symbol_off: [255, 255, 255, 0.9]
+    generic_button_symbol_on: [0, 0, 0, 0.8]
+    generic_button_symbol_partial: [255, 255, 255, 0.8]
+    generic_button_border: [0, 0, 0, 0.3]
+
+    # generic fader
+    generic_fader_bg: [169, 169, 169]
+    generic_fader_border: [0, 0, 0, 0.4]
+    generic_fader_thumb_bg: [245, 245, 245, 0.9]
+    generic_fader_thumb_border: [0, 0, 0, 0.6]
+    generic_fader_thumb_line: [0, 0, 0, 0.5]
+
+    # generic knob
+    generic_knob_bg: [185, 185, 185]
+    generic_knob_border: [0, 0, 0, 0.4]
+
+    # folder buttons
+    folder_symbol: [0, 0, 0, 0.4]
+
+    # transport
+    transport_bg: [208, 208, 208]
+    transport_fg: [0, 0, 0]
+    transport_button_bg_off: [136, 136, 136]
+    transport_status_bg: [190, 190, 190]
+    transport_status_bg_error: [207, 153, 153]
+    transport_selection_bg: [190, 190, 190]
+    transport_bank_button_off: [136, 136, 136]
+    transport_rate_knob_bg: [144, 144, 144]
+    transport_rate_knob_line: [58, 58, 58]
+    transport_rate_fader_bg: [144, 144, 144]
+    transport_rate_fader_knob: [58, 58, 58]
+
+    # buttons
+    button_bg_off: [135, 135, 135]
+    button_border: [0, 0, 0, 0.5]
+
+    # button label
+    button_label_bg: [0, 0, 0, 0.2]
+    button_label_text: [0, 0, 0, 0.65]
+
+    # button symbol
+    button_symbol_off: [255, 255, 255, 0.95]
+    button_symbol_on: [0, 0, 0, 0.8]
+    button_io_off: [0, 0, 0, 0.2]
+
+    # midi inline scrollbar
+    midi_inline_scrollbar_bg: [0, 0, 0, 0.5]
+    midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
+
+    # items
+    item_bg: [19, 191, 191, 0.8]
+    item_bg_select: [255, 255, 255, 0.65]
+    item_bg_border: [125, 125, 125]
+    item_bg_border_select: [0, 0, 0]
+    item_bg_border_select_corners: [255, 255, 255, 0]
+    item_border: [0, 0, 0, 0.4]
+    item_button_bg_off: [118, 118, 118]
+    item_button_bg_on: [200, 200, 200]
+    item_button_symbol_off: [240, 240, 240, 0.9]
+    item_button_symbol_on: [0, 0, 0, 0.8]
+    item_seldot_bg: [0, 0, 0]
+    item_volknob_bg: [0, 0, 0, 0.2]
+    item_volknob_layer_1: [0, 0, 0, 0.8]
+    item_volknob_layer_2: [255, 255, 255]
+    item_volknob_border: [0, 0, 0, 0.25]
+
+    # inserts
+    insert_bg: [162, 162, 162]
+    insert_bg_select: [175, 175, 175]
+    insert_border: [0, 0, 0, 0.25]
+    insert_divider: [0, 0, 0, 0.05]
+
+    # sends
+    insert_send_meter: [0, 0, 0, 0.1]
+    insert_send_knob_border: [0, 0, 0, 0.5]
+    insert_send_knob_0: [241, 208, 138]
+    insert_send_knob_1: [0, 0, 0,0.8]
+    insert_send_knob_2: [255,255,255]
+
+    # fx parameter
+    insert_slot_fxparm: [100, 110, 105]
+
+    # embed
+    insert_embed_label_bg: [0, 0, 0, 0.2]
+
+    # track icon
+    track_icon_bg: [208, 208, 208]
+    track_icon_bg_select: [218, 218, 218]
+    track_icon_border: [0, 0, 0, 0.3]
+
+    # knobs
+    knob_bg: [130, 130, 130]
+    knob_border: [0, 0, 0, 0.5]
+    knob_line: [255, 255, 255]
+    knob_line_pan: [175, 219, 202]
+    knob_line_wid: [198, 220, 230]
+    knob_line_border: [0, 0, 0, 0.4]
+
+    # meter
+    meter_bg: [89, 89, 89]
+    meter_border: [0, 0, 0, 0.5]
+
+    # vu
+    vu_normal: [114, 210, 160]
+    vu_normal_clip: [164, 236, 199]
+    vu_rec: [205, 104, 104]
+    vu_rec_clip: [237, 154, 154]
+    vu_readout_clip: [186, 89, 89]
+    vu_rms: [128, 196, 226]
+    vu_rms_clip: [185, 223, 239]
+    vu_rms_alt: [241, 208, 138]
+    vu_rms_alt_clip: [249, 235, 206]
+
+    #index
+    track_index_bg: [255, 255, 255, 0.2]
+
+    # faders
+    fader_bg: [116, 116, 116]
+    fader_border: [0, 0, 0, 0.4]
+    fader_knob_bg: [255, 255, 255, 0.75]
+    fader_knob_bg_pan: [203, 255, 235, 0.75]
+    fader_knob_bg_wid: [216, 240, 251, 0.75]
+    fader_knob_bg_envcp: [230, 230, 230, 0.75]
+    fader_knob_border: [0, 0, 0, 0.5]
+    fader_knob_line: [0, 0, 0, 0.3]
+
+    # text
+    readout_bg: [0, 0, 0, 0.1]
+
+    # envcp
+    envcp_tailicon: [0, 0, 0, 0.4]
+
+    # borders
+    border_bg: [0, 0, 0, 0.3]
+    border_label: [0, 0, 0, 0.25]
+    border_selmarker: [0, 0, 0, 0.5]
+    border_colorbar: [0, 0, 0, 0.5]
+
+    # separator
+    separator: [0, 0, 0, 0.2]
+
     placeholder: [0]

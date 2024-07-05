@@ -9,14 +9,14 @@ set THEME_color_envcp_bg                    THEME_color_track_bg
 set THEME_color_envcp_label_bg              THEME_color_track_label_bg
 set THEME_color_envcp_label_text            THEME_color_track_label_text
 set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_colorbar_offset             [0 0 0 0]
+set THEME_color_icon_bg                     [60 60 60 0 70 70 70 0]
+set THEME_color_master_icon_bg              [35 35 35 0 45 45 45 0]
 set THEME_color_meter_text                  [125 125 125 0]
 set THEME_color_meter_shadow                [1 1 1 0]
 set THEME_color_meter_readout               [255 255 255]
 set THEME_color_meter_readout_clipped       [255 0 0]
-set THEME_color_button_text_off             [199 199 199]
+set THEME_color_button_text_off             [195 195 195]
 set THEME_color_button_text_on              [10 10 10]
 set THEME_color_button_bg_off               [50 50 50]
 set THEME_color_readout_font                [142 142 142]
@@ -26,52 +26,52 @@ EndColors
 
 Colors dimmed
 
-set THEME_color_tcp_empty_space             [50 50 50]
-set THEME_color_mcp_empty_space             [50 50 50]
-set THEME_color_track_bg                    [69 69 69]
-set THEME_color_track_label_bg              [38 38 38]
-set THEME_color_track_label_text            [140 140 140]
+set THEME_color_tcp_empty_space             [102 102 102]
+set THEME_color_mcp_empty_space             [102 102 102]
+set THEME_color_track_bg                    [137 137 137]
+set THEME_color_track_label_bg              [92 92 92]
+set THEME_color_track_label_text            [194 194 194]
 set THEME_color_envcp_bg                    THEME_color_track_bg
 set THEME_color_envcp_label_bg              THEME_color_track_label_bg
 set THEME_color_envcp_label_text            THEME_color_track_label_text
-set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_select_bar                  [55 55 55 0 220 220 220 0]
+set THEME_color_colorbar_offset             [25 25 25 0]
+set THEME_color_icon_bg                     [87 87 87 0 100 100 100 0]
+set THEME_color_master_icon_bg              [50 50 50 0 65 65 65 0]
 set THEME_color_meter_text                  [125 125 125 0]
 set THEME_color_meter_shadow                [1 1 1 0]
 set THEME_color_meter_readout               [255 255 255]
 set THEME_color_meter_readout_clipped       [255 0 0]
-set THEME_color_button_text_off             [199 199 199]
+set THEME_color_button_text_off             [218 218 218]
 set THEME_color_button_text_on              [10 10 10]
-set THEME_color_button_bg_off               [50 50 50]
-set THEME_color_readout_font                [142 142 142]
-set THEME_color_red                         [181 66 66]
+set THEME_color_button_bg_off               [72 72 72]
+set THEME_color_readout_font                [195 195 195]
+set THEME_color_red                         [222 123 123]
 
 EndColors
 
 Colors light
 
-set THEME_color_tcp_empty_space             [50 50 50]
-set THEME_color_mcp_empty_space             [50 50 50]
-set THEME_color_track_bg                    [69 69 69]
-set THEME_color_track_label_bg              [38 38 38]
-set THEME_color_track_label_text            [140 140 140]
+set THEME_color_tcp_empty_space             [208 208 208]
+set THEME_color_mcp_empty_space             [208 208 208]
+set THEME_color_track_bg                    [208 208 208]
+set THEME_color_track_label_bg              [211 211 211]
+set THEME_color_track_label_text            [50 50 50]
 set THEME_color_envcp_bg                    THEME_color_track_bg
 set THEME_color_envcp_label_bg              THEME_color_track_label_bg
 set THEME_color_envcp_label_text            THEME_color_track_label_text
-set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_select_bar                  [107 107 107 0 255 255 255 0]
+set THEME_color_colorbar_offset             [50 50 50 0]
+set THEME_color_icon_bg                     [208 208 208 0 208 208 208 0]
+set THEME_color_master_icon_bg              [135 135 135 0 150 150 150 0]
 set THEME_color_meter_text                  [125 125 125 0]
 set THEME_color_meter_shadow                [1 1 1 0]
 set THEME_color_meter_readout               [255 255 255]
 set THEME_color_meter_readout_clipped       [255 0 0]
-set THEME_color_button_text_off             [199 199 199]
-set THEME_color_button_text_on              [10 10 10]
-set THEME_color_button_bg_off               [50 50 50]
-set THEME_color_readout_font                [142 142 142]
-set THEME_color_red                         [181 66 66]
+set THEME_color_button_text_off             [255 255 255]
+set THEME_color_button_text_on              [1 1 1]
+set THEME_color_button_bg_off               [104 104 104]
+set THEME_color_readout_font                [1 1 1]
+set THEME_color_red                         [231 136 136]
 
 EndColors

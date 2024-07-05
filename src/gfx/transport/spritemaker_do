@@ -53,7 +53,7 @@
 --out transport_custom_bank_8_on                            --frame frame_bank -fit         --images bank_bg    -tint color_cyan                     bank_8    -tint button_symbol_on    bank_border -tint button_border
 
 # logo
---out transport_custom_bank_part                            --frame frame_bank_part -fit    --images bank_part    -tint color_cyan
+--out transport_custom_bank_part                            --frame frame_bank_part -fit    --images bank_part    -tint transport_fg
 
 #       Automation Override
 # --------------------------------------

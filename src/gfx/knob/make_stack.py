@@ -6,7 +6,7 @@ import os
 
 zoom_levels = ("100","125","150","175","200","225","250")
 
-TEMP_FILE = "test"
+TEMP_FILE = "temp"
 
 KNOB_DEGREE = 270
 SPRITE_COUNT = 128 
@@ -51,8 +51,8 @@ KNOB_LOOKUP_MCP = {
     "border": {
         "100": 1,
         "125": 1,
-        "150": 2,
-        "175": 2,
+        "150": 1,
+        "175": 1,
         "200": 2,
         "225": 2,
         "250": 3,
@@ -91,8 +91,8 @@ KNOB_LOOKUP_TCP = {
     "border": {
         "100": 1,
         "125": 1,
-        "150": 2,
-        "175": 2,
+        "150": 1,
+        "175": 1,
         "200": 2,
         "225": 2,
         "250": 3,
@@ -104,8 +104,8 @@ KNOB_LOOKUP_TCP = {
 
 KNOB_LOOKUP_SEND_MCP = {
     "dimensions": {
-        "100": 20,
-        "125": 20,
+        "100": 21,
+        "125": 21,
         "150": 24,
         "175": 28,
         "200": 32,
@@ -127,8 +127,8 @@ KNOB_LOOKUP_SEND_MCP = {
     "border": {
         "100": 1,
         "125": 1,
-        "150": 2,
-        "175": 2,
+        "150": 1,
+        "175": 1,
         "200": 2,
         "225": 2,
         "250": 3,
@@ -149,8 +149,8 @@ KNOB_LOOKUP_SEND_MCP = {
 
 KNOB_LOOKUP_FX_MCP = {
     "dimensions": {
-        "100": 20,
-        "125": 20,
+        "100": 21,
+        "125": 21,
         "150": 24,
         "175": 28,
         "200": 32,
@@ -161,34 +161,34 @@ KNOB_LOOKUP_FX_MCP = {
         "100": 0.25
     },
     "line_sizes": {
-        "100": 4,
-        "125": 6,
-        "150": 6,
-        "175": 8,
-        "200": 8,
-        "225": 10,
-        "250": 12,
+        "100": 3,
+        "125": 3,
+        "150": 3,
+        "175": 3,
+        "200": 5,
+        "225": 5,
+        "250": 7,
     },
     "border": {
         "100": 1,
         "125": 1,
-        "150": 2,
-        "175": 2,
+        "150": 1,
+        "175": 1,
         "200": 2,
         "225": 2,
         "250": 3,
     },
     "radius": {
-        "100": 1,
+        "100": 0.85,
     },
     "offset": { 
-        "100": [0,0],
-        "125": [0,0],
-        "150": [0,0],
-        "175": [0,0],
-        "200": [0,0],
-        "225": [0,0],
-        "250": [0,0]
+        "100": [1,1],
+        "125": [1,1],
+        "150": [1,1],
+        "175": [1,1],
+        "200": [1,1],
+        "225": [1,1],
+        "250": [1,1]
     }
 }
 
@@ -242,8 +242,8 @@ KNOB_LOOKUP_TRANSPORT = {
     "border": {
         "100": 1,
         "125": 1,
-        "150": 2,
-        "175": 2,
+        "150": 1,
+        "175": 1,
         "200": 2,
         "225": 2,
         "250": 3,
@@ -306,7 +306,7 @@ class classKnob:
     #   Add Sprite
     # ----------------------------------------
     def add_sprite(self):
-        self.sprite.append(cairo.SVGSurface("temp", self.size,self.size))
+        self.sprite.append(cairo.SVGSurface(TEMP_FILE, self.size,self.size))
         self.current_sprite = self.sprite[len(self.sprite)-1]
 
     #   Draw Sprite
@@ -323,7 +323,7 @@ class classKnob:
 
         total_height = self.size * len(self.sprite)
 
-        spritesheet = cairo.SVGSurface("temp", self.size, total_height)
+        spritesheet = cairo.SVGSurface(TEMP_FILE, self.size, total_height)
         context = cairo.Context(spritesheet)
 
         for index, surface in enumerate(self.sprite):
@@ -414,15 +414,15 @@ class classKnob:
             thickness_abs = get_lookup_data(self.lookup["line_sizes"],self.scale)
         
         if is_border:
-            context.set_line_width(thickness_abs * border_size * 2)
+            context.set_line_width(thickness_abs + border_size * 2)
         else:
             context.set_line_width(thickness_abs)
             
         radius_abs = (self.size / 2) * radius - thickness_abs / 2 - border_size
         
         if is_border:  
-            angle_start -= 2 * border_size
-            angle_end += 2 * border_size
+            angle_start -= border_size * 0.05
+            angle_end += border_size * 0.05
 
         start_radians = math.radians(angle_start)
         end_radians = math.radians(angle_end)
@@ -638,7 +638,8 @@ def draw_sprite_fill(sprite_count:int, index:int,zoom:str, knob:classKnob,lookup
     if "radius_multiplier" in data:
         radius *= data["radius_multiplier"]
 
-    knob.draw_fill(radius,include_border)
+    #knob.draw_fill(radius,include_border)
+    knob.draw_fill(radius,False)
 
 
 # --------------------------------------------------
@@ -740,6 +741,7 @@ def create_spritesheet(lookup:dict, filename:str,data:dict):
 #   Main Process
 # ----------------------------------------
 
+# main knob stacks
 data_inner = { "type": KNOBTYPE_FILL, "is_border": True }
 data_volume = { "type": KNOBTYPE_LINE }
 data_volume_border = { "type": KNOBTYPE_LINE, "is_border": True }
@@ -776,6 +778,7 @@ create_spritesheet(KNOB_LOOKUP_TCP,"./ats/stack_tcp_dot_border", data_width_dot_
 create_spritesheet(KNOB_LOOKUP_TCP,"./ats/stack_tcp_stroke_lin_border", data_envcp_border)
 create_spritesheet(KNOB_LOOKUP_TCP,"./ats/stack_tcp_stroke_lin", data_envcp)
 
+# insert sends
 data_send_a = {
     "type": KNOBTYPE_PIE,
     "iterations": 2,
@@ -799,19 +802,16 @@ create_spritesheet(KNOB_LOOKUP_SEND_MCP,"./ats/stack_mcp_send_b", data_send_b)
 create_spritesheet(KNOB_LOOKUP_SEND_MCP,"./ats/stack_mcp_send_bg", data_send_bg)
 create_spritesheet(KNOB_LOOKUP_SEND_MCP,"./ats/stack_mcp_send_border", data_send_border)
 
-data_fx_bg = { "type": KNOBTYPE_FILL, "is_border": True }
-data_fx_stroke = { "type": KNOBTYPE_STROKE_LINEAR }
+# insert fx
+data_fx_value = {"type": KNOBTYPE_PIE}
+data_fx_bg = {"type": KNOBTYPE_FILL}
+data_fx_border = {"type": KNOBTYPE_BORDER}
 
-data_fx_dot = {
-    "type": KNOBTYPE_FILL,
-    "radius_multiplier": 0.3,
-    "tone_curve": [0,1]
-}
-
-create_spritesheet(KNOB_LOOKUP_FX_MCP,"./ats/stack_mcp_fx_stroke", data_fx_stroke)
-create_spritesheet(KNOB_LOOKUP_FX_MCP,"./ats/stack_mcp_fx_dot", data_fx_dot)
+create_spritesheet(KNOB_LOOKUP_FX_MCP,"./ats/stack_mcp_fx_value", data_fx_value)
+create_spritesheet(KNOB_LOOKUP_FX_MCP,"./ats/stack_mcp_fx_border", data_fx_border)
 create_spritesheet(KNOB_LOOKUP_FX_MCP,"./ats/stack_mcp_fx_bg", data_fx_bg)
 
+# item volume
 data_itemvol_a = {
     "type": KNOBTYPE_PIE,
     "iterations": 2,

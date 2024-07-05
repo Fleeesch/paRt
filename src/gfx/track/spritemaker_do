@@ -76,9 +76,9 @@
 --out track_env_write                           --spritesheet --button --frame frame -fit -flip-h -flip-v  --images bg -tint color_red          env_write       -tint button_symbol_on   border -tint button_border
 
 # track fx button
---out track_fx_empty                    --spritesheet --button --frame frame -fit --images bg       -tint button_bg_off     fx  -tint button_symbol_off     border -tint button_border
---out track_fx_norm                     --spritesheet --button --frame frame -fit --images bg       -tint color_cyan        fx  -tint button_symbol_on      border -tint button_border
---out track_fx_dis                      --spritesheet --button --frame frame -fit --images bg       -tint color_gray        fx  -tint button_symbol_on      border -tint button_border
+--out track_fx_empty                            --spritesheet --button --frame frame -fit --images bg       -tint button_bg_off     fx  -tint button_symbol_off     border -tint button_border
+--out track_fx_norm                             --spritesheet --button --frame frame -fit --images bg       -tint color_cyan        fx  -tint button_symbol_on      border -tint button_border
+--out track_fx_dis                              --spritesheet --button --frame frame -fit --images bg       -tint color_gray        fx  -tint button_symbol_on      border -tint button_border
 
 --out mcp_fx_in_norm    track_fx_in_norm      --spritesheet --button --frame frame -fit --images bg       -tint color_cyan          fx_in  -tint button_symbol_on       border -tint button_border
 --out mcp_fx_in_empty   track_fx_in_empty     --spritesheet --button --frame frame -fit --images bg       -tint button_bg_off       fx_in  -tint button_symbol_off      border -tint button_border
@@ -130,23 +130,23 @@
 --out mcp_fxlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot -tint insert_slot_empty -frame 0 0 ins_slot -tint insert_slot_empty_hover -frame 1 1 ins_slot -tint insert_slot_empty_click -frame 2 2
 
 # fx insert slot
---out mcp_fxlist_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
+--out mcp_fxlist_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
 --out mcp_fxlist_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_cyan
---out mcp_fxlist_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
---out tcp_fxparm_fx_byp     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
+--out mcp_fxlist_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
+--out tcp_fxparm_fx_byp     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
 --out tcp_fxparm_fx_norm    --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_cyan
---out tcp_fxparm_fx_off     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
+--out tcp_fxparm_fx_off     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
 
 # midi hardware
 --out mcp_sendlist_midihw tcp_sendlist_midihw   --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_blue
 
 # parameter slot
---out mcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
+--out mcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
 --out mcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint insert_slot_fxparm
---out mcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
---out tcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
+--out mcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
+--out tcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
 --out tcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint insert_slot_fxparm
---out tcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
+--out tcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
 
 # send slot
 --out mcp_sendlist_mute     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
