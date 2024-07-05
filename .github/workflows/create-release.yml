@@ -45,6 +45,6 @@ jobs:
         with:
           name: paRt - ${{ env.RELEASE_VERSION }}
           files: |
-            rel/current/bin/*
+            release/current/bin/*
           body_path: rel/current/changelog/changelog.md
           token: ${{ secrets.GITHUB_TOKEN }}
