@@ -20,7 +20,7 @@ COLOR_RESET='\033[0m'
 release_folder="release"
 
 # version
-version=$(<../../../$release_folder/version)
+version=$(<../../$release_folder/version)
 
 # reapack tags
 header_text="-- @version $version

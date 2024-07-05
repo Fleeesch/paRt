@@ -57,6 +57,9 @@ release_folder="release"
 # date stamp
 date_stamp=$(date +"%Y-%m-%d %H:%M:%S")
 
+# zoom levels
+zoom_levels=(100 125 150 175 200 225 250)
+
 # version number from file
 version=$(<../$release_folder/version)
 
@@ -181,4 +184,32 @@ for theme in "${themes[@]}"; do
 
     echo -e "${COLOR_GREEN}done${COLOR_RESET}"
 
+    # file containing different layout configurations
+    file_layouts="walter_rtconfig_layout.txt"
+
+    # --> optional  split file creation, currently disabled
+
+    # # create split files
+    # for level in "${zoom_levels[@]}"; do
+
+    #     # strip layout section
+    #     mkdir -p "out/$theme/$level"
+    #     output_file_split="out/$theme/$level/rtconfig.txt"
+    #     sed '/;LAYOUT_BLOCK/,/;LAYOUT_BLOCK_END/d' "$output_file" > "$output_file_split"
+
+    #     # header
+    #     echo ";   ## Layout - Split File - $level"  >> "$output_file_split"
+    #     echo "; -----------------------------------------------------------------"  >> "$output_file_split"
+
+    #     # append custom layout section
+    #     start_pattern="; LAYOUT_BLOCK_${level}"
+    #     end_pattern="; LAYOUT_BLOCK_${level}_END"
+    #     section=$(sed -n "/${start_pattern}/,/${end_pattern}/p" "$file_layouts")
+    #     echo "$section" >> "$output_file_split"
+
+    #     sed -i -e "/${start_pattern}/d" -e "/${end_pattern}/d" "$output_file_split"
+
+    # done
+
 done
+

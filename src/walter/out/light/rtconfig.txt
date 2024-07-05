@@ -3,10 +3,8 @@
 ;
 ;       Theme: light
 ;       Version: 1.0.2
-;       Date: 2024-07-05 12:01:01
+;       Date: 2024-07-05 19:38:50
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
-
-
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
@@ -17,8 +15,8 @@ define_parameter part_version 'paRt Theme v1.0.2' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 583 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 595 0 1000
@@ -187,16 +185,16 @@ define_parameter par_tcp_track_element_vis_mixer 'TCP - Track - Element Visibili
 define_parameter par_tcp_track_fader_pan_size 'TCP - Track - Faders Pan Size' 0 0 1000
 define_parameter par_tcp_track_fader_pan_size_scale 'TCP - Track - Faders Pan Size Scaling' 0 0 1
 define_parameter par_tcp_track_fader_pan_vis 'TCP - Track - Faders Pan Visibility' 1 0 1
-define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 1 0 1
-define_parameter par_tcp_track_fader_placement 'TCP - Track - Faders Placement' 0 0 2
-define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 172 0 1000
+define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 0 0 1
+define_parameter par_tcp_track_fader_placement 'TCP - Track - Faders Placement' 1 0 2
+define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 388 0 1000
 define_parameter par_tcp_track_fader_vol_size_scale 'TCP - Track - Faders Volume Size Scaling' 1 0 1
 define_parameter par_tcp_track_fader_vol_vis 'TCP - Track - Faders Volume Visibility' 1 0 1
-define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 0 0 1
 define_parameter par_tcp_track_fader_wid_size 'TCP - Track - Faders Width Size' 0 0 1000
 define_parameter par_tcp_track_fader_wid_size_scale 'TCP - Track - Faders Width Size Scaling' 0 0 1
 define_parameter par_tcp_track_fader_wid_vis 'TCP - Track - Faders Width Visibility' 1 0 1
-define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 0 0 1
 define_parameter par_tcp_track_insert_mode 'TCP - Track - Inserts Mode' 1 0 2
 define_parameter par_tcp_track_insert_size 'TCP - Track - Inserts Size' 171 0 1000
 define_parameter par_tcp_track_insert_size_scale 'TCP - Track - Inserts Size Scaling' 0 0 1
@@ -224,7 +222,8 @@ define_parameter par_trans_playrate_mode 'Transport - Playrate Display Mode' 2 0
 define_parameter par_trans_playrate_size 'Transport - Playrate Fader Size' 419 0 1000
 define_parameter par_trans_settings_extrapad_x 'Transport - Settings Extra Padding X' 0 0 1000
 define_parameter par_trans_settings_extrapad_y 'Transport - Settings Extra Padding Y' 56 0 1000
-define_parameter par_trans_settings_theme_macros 'Transport - Settings Theme Macros' 4 0 8
+define_parameter par_trans_settings_theme_bank 'Transport - Settings Theme Bank' 2 0 8
+define_parameter par_trans_settings_theme_menu 'Transport - Settings Theme Menu' 1 0 1
 define_parameter paRt_end 'paRt end' 0 0 1
 
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
@@ -839,7 +838,7 @@ set THEME_color_red                         [231 136 136]
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 par_colors_track_track_index_tone_tcp                                                           \
                         par_tcp_track_label_index_vis==1                                                                                                                                    \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.5  par_colors_track_track_label_select_tone   \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp         par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.1  par_colors_track_track_bg_select_tone
 
                 ; track mcp index
                 set VAL_Color_Track_Index_MCP                                                                                                                                                   \
@@ -847,7 +846,7 @@ set THEME_color_red                         [231 136 136]
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text      + -127.5 * 0.255    par_colors_track_track_index_tone_mcp                                                       \
                         par_mcp_track_settings_label_index==1                                                                                                                                   \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp          par_colors_track_track_label_select_tone     \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.5    par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.1    par_colors_track_track_bg_select_tone
 
                 ; envcp bg
                 set VAL_Color_Envcp_Bg                                                                                                          \
@@ -863,16 +862,18 @@ set THEME_color_red                         [231 136 136]
 
 
                 ; envcp label text
-                set VAL_Color_Envcp_Label_Text                                                                                                                                  \
-                    !env_selected                                                                                                                                               \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                            \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Label_Text                                                                                                                                                  \
+                    !env_selected                                                                                                                                                               \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                                            \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone * 0.5 par_colors_track_track_label_select_tone
 
                 ; envcp readout
-                set VAL_Color_Envcp_Readout                                                                                                                                         \
-                    !env_selected                                                                                                                                                   \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                             \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Readout                                                                                                                                                     \
+                    !env_selected                                                                                                                                                               \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                                         \
+                        par_tcp_envcp_label_readout_placement!=2                                                                                                                                \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.5 par_colors_track_track_label_select_tone      \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone         
 
                 ;   ::: Highlights :::
 
@@ -1004,6 +1005,7 @@ set THEME_color_red                         [231 136 136]
         macro MAC_DrawTransport_Setup SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; custom elements
+            custom WALTER_ELEMENT##.custom.themeadj     "" "_RS6cc1a19365fa0f5b0b1ad6d3d9018dc41f087917"    ""      "transport_custom_part_menu"
             custom WALTER_ELEMENT##.custom.bank_0       "" "_RS5ec6b0de2cf6300ec9658d65a17084bc7fd2664b"    ""      "transport_custom_bank_1_off"
             custom WALTER_ELEMENT##.custom.bank_1       "" "_RSfe1f33421e15d187e9477275688c3a0014dd0058"    ""      "transport_custom_bank_2_off"
             custom WALTER_ELEMENT##.custom.bank_2       "" "_RSeedb490eeeb50844c14d7cb2a53e0ceb8310ff79"    ""      "transport_custom_bank_3_off"
@@ -1049,14 +1051,16 @@ set THEME_color_red                         [231 136 136]
             ; element hiding flag
             set VAL_trans_hide_buttons 0
 
+            ; paRt shortcuts
+            set VAL_trans_show_part_section + par_trans_settings_theme_bank par_trans_settings_theme_menu
+                
             ; bank buttons section width
-            set VAL_trans_w_bank_section                                        \
-                ?par_trans_settings_theme_macros                                \
-                    + + VAL_Button_Trans{0} VAL_Pad{0}                          \
-                    + * 2 VAL_Pad{0} +                                          \
-                        * - par_trans_settings_theme_macros 1 VAL_Pad{0}        \
-                        * par_trans_settings_theme_macros VAL_Button_Trans{1}   \
-                    0
+            set VAL_trans_w_bank_section                                                                        \
+                !VAL_trans_show_part_section{0}                                                                 \
+                    0                                                                                           \
+                    + + VAL_Button_Trans{0} VAL_Pad{0}                                                          \
+                        + * VAL_Button_Trans{1} + par_trans_settings_theme_bank par_trans_settings_theme_menu   \
+                        * VAL_Pad{0} - + par_trans_settings_theme_bank par_trans_settings_theme_menu 1          
 
             ; right edge padding
             set VAL_trans_x_rightmost_padding - VAL_trans_w{0} - VAL_trans_x_rightmost{0} VAL_trans_w_bank_section{0}
@@ -1180,9 +1184,9 @@ set THEME_color_red                         [231 136 136]
                 set VAL_trans_timepad * SCALE 10
 
                 ; section offset
-                set CUR_x                                           \
-                    ?VAL_trans_button_count{0}                      \
-                        !VAL_trans_button_section_count{0}          \
+                set CUR_x                                               \
+                    ?VAL_trans_button_count{0}                          \
+                        !VAL_trans_button_section_count{0}              \
                             + CUR_x{0} VAL_trans_spacing_section_x{0}
 
                 ; bpm visibility
@@ -1527,13 +1531,13 @@ set THEME_color_red                         [231 136 136]
 
                 ; background
                 set WALTER_ELEMENT##.custom.bank_bg                                 \
-                    par_trans_settings_theme_macros>0                               \
+                    ?VAL_trans_show_part_section{0}                                 \
                         [CUR_x CUR_y VAL_trans_w_bank_section{0} CUR_h 1 0 1 0]     \
                         0
 
                 ; logo
                 set WALTER_ELEMENT##.custom.bank_logo                       \
-                    par_trans_settings_theme_macros>0                       \
+                    ?VAL_trans_show_part_section{0}                         \
                         [CUR_x CUR_y VAL_Button_Trans{0} CUR_h 1 0 1 0]     \
                         0
 
@@ -1554,6 +1558,14 @@ set THEME_color_red                         [231 136 136]
                 MAC_DrawTransport_BankButtons_SingleButton  SCALE WALTER_ELEMENT PARAMETER_SECTION  7 "6" 8
                 MAC_DrawTransport_BankButtons_SingleButton  SCALE WALTER_ELEMENT PARAMETER_SECTION  8 "7" 9
 
+                ; theme adjuster icon
+                set WALTER_ELEMENT##.custom.themeadj        \
+                    ?par_trans_settings_theme_menu          \
+                        [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]   \
+                        0
+
+                front WALTER_ELEMENT##.custom.themeadj
+
             endmacro
 
             ;   #### Draw : Transport : Bank Buttons : Single Button
@@ -1563,13 +1575,13 @@ set THEME_color_red                         [231 136 136]
 
                     ; off button
                     set WALTER_ELEMENT##.custom.bank_##INDEX        \
-                        par_trans_settings_theme_macros>=THRESHOLD  \
+                        par_trans_settings_theme_bank>=THRESHOLD  \
                             par_bank_selected!=BANK_INDEX           \
                                 [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]
 
                     ; on button
                     set WALTER_ELEMENT##.custom.bank_##INDEX##_on   \
-                        par_trans_settings_theme_macros>=THRESHOLD  \
+                        par_trans_settings_theme_bank>=THRESHOLD  \
                             par_bank_selected==BANK_INDEX           \
                                 [CUR_x CUR_y CUR_w CUR_h 1 0 1 0]
 
@@ -1578,7 +1590,9 @@ set THEME_color_red                         [231 136 136]
                     front WALTER_ELEMENT##.custom.bank_##INDEX##_on
 
                     ; increment x position
-                    set CUR_x + CUR_x{0} + CUR_w{0} VAL_Pad{0}
+                    set CUR_x                                       \
+                        par_trans_settings_theme_bank>=THRESHOLD    \
+                            + CUR_x{0} + CUR_w{0} VAL_Pad{0}
 
                 endmacro
 
@@ -5806,6 +5820,7 @@ set THEME_color_red                         [231 136 136]
         ; envcp
         envcp_min_height 17
 
+    ;LAYOUT_BLOCK
     ;   ## DPI translation
     ; -----------------------------------------------------------------
 
@@ -5872,3 +5887,4 @@ set THEME_color_red                         [231 136 136]
         GlobalLayout '200'
         GlobalLayout '225'
         GlobalLayout '250'
+;LAYOUT_BLOCK_END

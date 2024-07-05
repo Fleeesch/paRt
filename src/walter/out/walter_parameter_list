@@ -3,8 +3,8 @@ define_parameter part_version 'paRt Theme v1.0.2' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 583 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 595 0 1000
@@ -173,16 +173,16 @@ define_parameter par_tcp_track_element_vis_mixer 'TCP - Track - Element Visibili
 define_parameter par_tcp_track_fader_pan_size 'TCP - Track - Faders Pan Size' 0 0 1000
 define_parameter par_tcp_track_fader_pan_size_scale 'TCP - Track - Faders Pan Size Scaling' 0 0 1
 define_parameter par_tcp_track_fader_pan_vis 'TCP - Track - Faders Pan Visibility' 1 0 1
-define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 1 0 1
-define_parameter par_tcp_track_fader_placement 'TCP - Track - Faders Placement' 0 0 2
-define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 172 0 1000
+define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 0 0 1
+define_parameter par_tcp_track_fader_placement 'TCP - Track - Faders Placement' 1 0 2
+define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 388 0 1000
 define_parameter par_tcp_track_fader_vol_size_scale 'TCP - Track - Faders Volume Size Scaling' 1 0 1
 define_parameter par_tcp_track_fader_vol_vis 'TCP - Track - Faders Volume Visibility' 1 0 1
-define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 0 0 1
 define_parameter par_tcp_track_fader_wid_size 'TCP - Track - Faders Width Size' 0 0 1000
 define_parameter par_tcp_track_fader_wid_size_scale 'TCP - Track - Faders Width Size Scaling' 0 0 1
 define_parameter par_tcp_track_fader_wid_vis 'TCP - Track - Faders Width Visibility' 1 0 1
-define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 0 0 1
 define_parameter par_tcp_track_insert_mode 'TCP - Track - Inserts Mode' 1 0 2
 define_parameter par_tcp_track_insert_size 'TCP - Track - Inserts Size' 171 0 1000
 define_parameter par_tcp_track_insert_size_scale 'TCP - Track - Inserts Size Scaling' 0 0 1
@@ -210,5 +210,6 @@ define_parameter par_trans_playrate_mode 'Transport - Playrate Display Mode' 2 0
 define_parameter par_trans_playrate_size 'Transport - Playrate Fader Size' 419 0 1000
 define_parameter par_trans_settings_extrapad_x 'Transport - Settings Extra Padding X' 0 0 1000
 define_parameter par_trans_settings_extrapad_y 'Transport - Settings Extra Padding Y' 56 0 1000
-define_parameter par_trans_settings_theme_macros 'Transport - Settings Theme Macros' 4 0 8
+define_parameter par_trans_settings_theme_bank 'Transport - Settings Theme Bank' 2 0 8
+define_parameter par_trans_settings_theme_menu 'Transport - Settings Theme Menu' 1 0 1
 define_parameter paRt_end 'paRt end' 0 0 1

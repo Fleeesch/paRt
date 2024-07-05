@@ -1,4 +1,4 @@
--- @version 
+-- @version 1.0.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -763,8 +763,9 @@ function layout.Image.Image:new(o, file, hdpi, scale, alpha)
     -- transparency
     o.alpha = alpha or 1
 
-    -- use hdpi assets
-    o.use_hdpi_assets = hdpi or false
+    -- [!] don't use hdpi assets (works, image count is way too high)
+    --o.use_hdpi_assets = hdpi or false
+    o.use_hdpi_assets = false
 
     -- hdpi levels
     o.levels = { 100, 125, 150, 175, 200, 225, 250 }
@@ -917,15 +918,14 @@ function layout.Image.Image:draw()
         Part.Cursor.setCursor(x, y, w, h)
 
         -- calculate image size
-        local size = Part.Functions.rescale(self.scale * 100) / 100
-
+        local size = Part.Global.scale / 2
 
         -- get image dimensions
         local img_w, img_h = gfx.getimgdim(self.handle)
 
         -- Part.Functions.rescale( dimensions
-        img_w = Part.Functions.rescale(img_w)
-        img_h = Part.Functions.rescale(img_h)
+        img_w = img_w * size
+        img_h = img_h * size
 
         -- justify left
         if self.justHorz == 0 then

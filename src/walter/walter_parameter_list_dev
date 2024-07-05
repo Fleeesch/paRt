@@ -73,7 +73,8 @@ part_version 1.0.2
 
     trans_settings_extrapad_x                   'Transport - Settings Extra Padding X'                  DEF_trans_settings_extrapad_x                   0           VAL_PAR_RANGE
     trans_settings_extrapad_y                   'Transport - Settings Extra Padding Y'                  DEF_trans_settings_extrapad_y                   0           VAL_PAR_RANGE
-    trans_settings_theme_macros                 'Transport - Settings Theme Macros'                     DEF_trans_settings_theme_macros                 0           8
+    trans_settings_theme_bank                   'Transport - Settings Theme Bank'                       DEF_trans_settings_theme_bank                   0           8
+    trans_settings_theme_menu                   'Transport - Settings Theme Menu'                       DEF_trans_settings_theme_menu                   0           1
 
 ; ::: Element Visibility
 
