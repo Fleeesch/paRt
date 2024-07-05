@@ -1,231 +1,233 @@
-; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+; ::::::::::::::::::::::: THEME_HEADER :::::::::::::::::::::::::::::
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: 1.2
-;       Date: 2024-06-30 18:31:56
-; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;       Version: 1.0.2
+;       Date: 2024-07-05 12:01:01
+; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
-;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ programmatically created Block ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
-adjuster_script "part_theme-adjuster.lua"
-define_parameter part_version 'paRt Theme v1.56' 0 0 0
+
+;THEMEBUILDER_INSERT_PARAMETERS
+;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+
+adjuster_script "paRt - Theme Adjuster.lua"
+define_parameter part_version 'paRt Theme v1.0.2' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
-define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 50 0 100
-define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 50 0 100
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 50 0 100
-define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 50 0 100
-define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 50 0 100
-define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 50 0 100
-define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 50 0 100
-define_parameter par_colors_track_folder_foldertrack_tone 'Colors - Track - Folder Track Tone' 50 0 100
-define_parameter par_colors_track_folder_foldertree_tint 'Colors - Track - Folder Tree Tint' 50 0 100
-define_parameter par_colors_track_folder_foldertree_tone 'Colors - Track - Folder Tree Tone' 50 0 100
-define_parameter par_colors_track_meter_text_alpha_bottom 'Colors - Track - Meter Text Alpha Botom' 100 0 100
-define_parameter par_colors_track_meter_text_alpha_lit 'Colors - Track - Meter Text Alpha Lit' 50 0 100
-define_parameter par_colors_track_meter_text_alpha_readout 'Colors - Track - Meter Text Alpha Readout' 50 0 100
-define_parameter par_colors_track_meter_text_alpha_top 'Colors - Track - Meter Text Alpha Top' 100 0 100
-define_parameter par_colors_track_meter_text_alpha_unlit 'Colors - Track - Meter Text Alpha Unlit' 50 0 100
-define_parameter par_colors_track_meter_text_shadow_lit 'Colors - Track - Meter Text Shadow Top' 50 0 100
-define_parameter par_colors_track_meter_text_shadow_unlit 'Colors - Track - Meter Text Shadow Bottom' 50 0 100
-define_parameter par_colors_track_meter_text_tint_readout_clip 'Colors - Track - Meter Text Tint Readout Clip' 50 0 100
-define_parameter par_colors_track_meter_text_tone_lit 'Colors - Track - Meter Text Tone Lit' 50 0 100
-define_parameter par_colors_track_meter_text_tone_readout 'Colors - Track - Meter Text Tone Readout' 50 0 100
-define_parameter par_colors_track_meter_text_tone_readout_clip 'Colors - Track - Meter Text Tone Readout Clip' 50 0 100
-define_parameter par_colors_track_meter_text_tone_unlit 'Colors - Track - Meter Text Tone Unlit' 50 0 100
-define_parameter par_colors_track_track_bg_select_tint 'Colors - Track - Track Background Selection Tint' 50 0 100
-define_parameter par_colors_track_track_bg_select_tone 'Colors - Track - Track Background Selection Tone' 50 0 100
-define_parameter par_colors_track_track_bg_tint 'Colors - Track - Track Background Select' 50 0 100
-define_parameter par_colors_track_track_bg_tone 'Colors - Track - Track Background Tone' 50 0 100
-define_parameter par_colors_track_track_colorbar_intensity 'Colors - Track - Track Colorbar Intensity' 50 0 100
-define_parameter par_colors_track_track_index_tone_mcp 'Colors - Track - Track Label Index Tone MCP' 50 0 100
-define_parameter par_colors_track_track_index_tone_tcp 'Colors - Track - Track Label Index Tone TCP' 50 0 100
-define_parameter par_colors_track_track_label_bg_tint 'Colors - Track - Track Label Background Tint' 50 0 100
-define_parameter par_colors_track_track_label_bg_tone 'Colors - Track - Track Label Background Tone' 50 0 100
-define_parameter par_colors_track_track_label_select_tint 'Colors - Track - Track Label Selection Tint' 50 0 100
-define_parameter par_colors_track_track_label_select_tone 'Colors - Track - Track Label Selection Tone' 50 0 100
-define_parameter par_colors_track_track_label_text_tone 'Colors - Track - Track Label Text Tone' 50 0 100
-define_parameter par_mcp_gen_element_adj_separator 'MCP - Track - Element Adjustments Separator' 0 0 20
-define_parameter par_mcp_gen_element_adj_separator_line 'MCP - Track - Element Adjustments Separator Line' 0 0 1
-define_parameter par_mcp_gen_element_adj_spacing_fader_x 'MCP - Track - Element Adjustments Spacing Fader X' 0 0 20
-define_parameter par_mcp_gen_element_adj_spacing_fader_y 'MCP - Track - Element Adjustments Spacing Fader Y' 0 0 20 
-define_parameter par_mcp_gen_element_adj_spacing_section_x 'MCP - Track - Element Adjustments Spacing Section X' 0 0 20
-define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 0 0 20
-define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 0 0 20
-define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 0 0 20
+define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
+define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
+define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
+define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
+define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 583 0 1000
+define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 595 0 1000
+define_parameter par_colors_track_folder_foldertrack_tone 'Colors - Track - Folder Track Tone' 546 0 1000
+define_parameter par_colors_track_folder_foldertree_tint 'Colors - Track - Folder Tree Tint' 500 0 1000
+define_parameter par_colors_track_folder_foldertree_tone 'Colors - Track - Folder Tree Tone' 500 0 1000
+define_parameter par_colors_track_meter_text_alpha_bottom 'Colors - Track - Meter Text Alpha Botom' 520 0 1000
+define_parameter par_colors_track_meter_text_alpha_lit 'Colors - Track - Meter Text Alpha Lit' 690 0 1000
+define_parameter par_colors_track_meter_text_alpha_readout 'Colors - Track - Meter Text Alpha Readout' 1000 0 1000
+define_parameter par_colors_track_meter_text_alpha_readout_clip 'Colors - Track - Meter Text Alpha Readout Clip' 1000 0 1000
+define_parameter par_colors_track_meter_text_alpha_top 'Colors - Track - Meter Text Alpha Top' 1000 0 1000
+define_parameter par_colors_track_meter_text_alpha_unlit 'Colors - Track - Meter Text Alpha Unlit' 390 0 1000
+define_parameter par_colors_track_meter_text_shadow_lit 'Colors - Track - Meter Text Shadow Top' 0 0 1000
+define_parameter par_colors_track_meter_text_shadow_unlit 'Colors - Track - Meter Text Shadow Bottom' 0 0 1000
+define_parameter par_colors_track_meter_text_tone_lit 'Colors - Track - Meter Text Tone Lit' 0 0 1000
+define_parameter par_colors_track_meter_text_tone_readout 'Colors - Track - Meter Text Tone Readout' 1000 0 1000
+define_parameter par_colors_track_meter_text_tone_readout_clip 'Colors - Track - Meter Text Tone Readout Clip' 0 0 1000
+define_parameter par_colors_track_meter_text_tone_unlit 'Colors - Track - Meter Text Tone Unlit' 1000 0 1000
+define_parameter par_colors_track_track_bg_select_tint 'Colors - Track - Track Background Selection Tint' 0 0 1000
+define_parameter par_colors_track_track_bg_select_tone 'Colors - Track - Track Background Selection Tone' 330 0 1000
+define_parameter par_colors_track_track_bg_tint 'Colors - Track - Track Background Select' 0 0 1000
+define_parameter par_colors_track_track_bg_tone 'Colors - Track - Track Background Tone' 500 0 1000
+define_parameter par_colors_track_track_colorbar_intensity 'Colors - Track - Track Colorbar Intensity' 260 0 1000
+define_parameter par_colors_track_track_index_tone_mcp 'Colors - Track - Track Label Index Tone MCP' 410 0 1000
+define_parameter par_colors_track_track_index_tone_tcp 'Colors - Track - Track Label Index Tone TCP' 320 0 1000
+define_parameter par_colors_track_track_label_bg_tint 'Colors - Track - Track Label Background Tint' 0 0 1000
+define_parameter par_colors_track_track_label_bg_tone 'Colors - Track - Track Label Background Tone' 500 0 1000
+define_parameter par_colors_track_track_label_select_tint 'Colors - Track - Track Label Selection Tint' 0 0 1000
+define_parameter par_colors_track_track_label_select_tone 'Colors - Track - Track Label Selection Tone' 310 0 1000
+define_parameter par_colors_track_track_label_text_tone 'Colors - Track - Track Label Text Tone' 610 0 1000
+define_parameter par_mcp_gen_element_adj_separator 'MCP - Track - Element Adjustments Separator' 135 0 1000
+define_parameter par_mcp_gen_element_adj_separator_line 'MCP - Track - Element Adjustments Separator Line' 1 0 1
+define_parameter par_mcp_gen_element_adj_spacing_fader_x 'MCP - Track - Element Adjustments Spacing Fader X' 0 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_fader_y 'MCP - Track - Element Adjustments Spacing Fader Y' 0 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_section_x 'MCP - Track - Element Adjustments Spacing Section X' 0 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 193 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 0 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 0 0 1000
 define_parameter par_mcp_gen_folder_grid 'MCP - General - Folder Grid' 0 0 1
-define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 0 0 1
+define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 1 0 1
 define_parameter par_mcp_gen_folder_icon_last 'MCP - General - Folder Icon Last' 0 0 1
-define_parameter par_mcp_gen_folder_indent 'MCP - General - Folder Indent' 0 0 50
-define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padding Last' 0 0 100
-define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 0 0 100
-define_parameter par_mcp_gen_highlight_color 'MCP - General - Highlight Color Bar' 0 0 100
-define_parameter par_mcp_gen_highlight_selection 'MCP - General - Highlight Selection Bar' 0 0 100
+define_parameter par_mcp_gen_folder_indent 'MCP - General - Folder Indent' 0 0 1000
+define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padding Last' 161 0 1000
+define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 160 0 1000
+define_parameter par_mcp_gen_highlight_color 'MCP - General - Highlight Color Bar' 354 0 1000
+define_parameter par_mcp_gen_highlight_selection 'MCP - General - Highlight Selection Bar' 54 0 1000
 define_parameter par_mcp_gen_settings_multirow 'MCP - General - Settings MultiRow' 0 0 1
 define_parameter par_mcp_gen_settings_multirow_compact 'MCP - General - Settings MultiRow Compact' 0 0 1
 define_parameter par_mcp_gen_settings_trackicons 'MCP - General - Settings Track Icons' 0 0 1
-define_parameter par_mcp_master_element_separator 'MCP - Master - Element Separator' 0 0 100000
-define_parameter par_mcp_master_element_vis 'MCP - Master - Element Visibility' 0 0 100000
-define_parameter par_mcp_master_element_width 'MCP - Master - Element Width' 0 0 1
+define_parameter par_mcp_master_element_separator 'MCP - Master - Element Separator' 4 0 1000000
+define_parameter par_mcp_master_element_vis 'MCP - Master - Element Visibility' 126 0 1000000
+define_parameter par_mcp_master_element_width 'MCP - Master - Element Width' 1 0 1
 define_parameter par_mcp_master_fader_layout 'MCP - Master - Faders Layout' 0 0 10
-define_parameter par_mcp_master_fader_pan_height 'MCP - Master - Faders Pan Height' 0 0 100
+define_parameter par_mcp_master_fader_pan_height 'MCP - Master - Faders Pan Height' 0 0 1000
 define_parameter par_mcp_master_fader_pan_height_scale 'MCP - Master - Faders Pan Height Scale' 0 0 1
-define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 0 0 10
-define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 0 0 10
-define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 0 0 10
-define_parameter par_mcp_master_fader_pan_width 'MCP - Master - Faders Pan Width' 0 0 100
-define_parameter par_mcp_master_fader_wid_always 'MCP - Master - Faders Always Show Width' 0 0 1 
-define_parameter par_mcp_master_insert_mode 'MCP - Master - Inserts Mode' 0 0 2
+define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 2 0 10
+define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 2 0 10
+define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 2 0 10
+define_parameter par_mcp_master_fader_pan_width 'MCP - Master - Faders Pan Width' 459 0 1000
+define_parameter par_mcp_master_fader_wid_always 'MCP - Master - Faders Always Show Width' 1 0 1
+define_parameter par_mcp_master_insert_mode 'MCP - Master - Inserts Mode' 2 0 2
 define_parameter par_mcp_master_insert_pad 'MCP - Master - Inserts Padding' 0 0 2
-define_parameter par_mcp_master_insert_size 'MCP - Master - Inserts Size' 0 0 100
+define_parameter par_mcp_master_insert_size 'MCP - Master - Inserts Size' 93 0 1000
 define_parameter par_mcp_master_insert_size_scale 'MCP - Master - Inserts Size Scale' 0 0 1
-define_parameter par_mcp_master_meter_channeldiv 'MCP - Master - Meter Channel Division' 0 0 100
-define_parameter par_mcp_master_meter_channeldiv_rms 'MCP - Master - Meter Channel Division RMS' 0 0 100
-define_parameter par_mcp_master_meter_padding 'MCP - Master - Meter Padding' 0 0 2
-define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 0 0 2
-define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 0 0 100
-define_parameter par_mcp_master_meter_size_scale 'MCP - Master - Meter Size Scale' 0 0 1
-define_parameter par_mcp_master_meter_vol_readout 'MCP - Master - Meter Volume Readout' 0 0 2
-define_parameter par_mcp_master_meter_vu_db 'MCP - Master - Meter VU dB' 0 0 1
-define_parameter par_mcp_master_meter_vu_readout 'MCP - Master - Meter VU Readout' 0 0 1
-define_parameter par_mcp_master_settings_extrapad 'MCP - Master - Settigns Extra Padding' 0 0 100
-define_parameter par_mcp_master_settings_label_size 'MCP - Master - Settigns Label Size' 0 0 100
-define_parameter par_mcp_track_element_input_size 'MCP - Track - Element Input Size' 0 0 100
-define_parameter par_mcp_track_element_separator 'MCP - Track - Element Separator' 0 0 100000
-define_parameter par_mcp_track_element_vis 'MCP - Track - Element Visibility' 0 0 100000
-define_parameter par_mcp_track_element_width 'MCP - Track - Element Width' 0 0 1
-define_parameter par_mcp_track_fader_layout 'MCP - Track - Faders Layout' 0 0 10
-define_parameter par_mcp_track_fader_pan_height 'MCP - Track - Faders Pan Height' 0 0 100
+define_parameter par_mcp_master_meter_channeldiv 'MCP - Master - Meter Channel Division' 0 0 1000
+define_parameter par_mcp_master_meter_channeldiv_rms 'MCP - Master - Meter Channel Division RMS' 0 0 1000
+define_parameter par_mcp_master_meter_padding 'MCP - Master - Meter Padding' 2 0 2
+define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 1 0 2
+define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 789 0 1000
+define_parameter par_mcp_master_meter_size_scale 'MCP - Master - Meter Size Scale' 1 0 1
+define_parameter par_mcp_master_meter_vol_readout 'MCP - Master - Meter Volume Readout' 1 0 2
+define_parameter par_mcp_master_meter_vu_db 'MCP - Master - Meter VU dB' 1 0 1
+define_parameter par_mcp_master_meter_vu_readout 'MCP - Master - Meter VU Readout' 1 0 1
+define_parameter par_mcp_master_settings_extrapad 'MCP - Master - Settigns Extra Padding' 85 0 1000
+define_parameter par_mcp_master_settings_label_size 'MCP - Master - Settigns Label Size' 0 0 1000
+define_parameter par_mcp_track_element_input_size 'MCP - Track - Element Input Size' 0 0 1000
+define_parameter par_mcp_track_element_separator 'MCP - Track - Element Separator' 80 0 1000000
+define_parameter par_mcp_track_element_vis 'MCP - Track - Element Visibility' 4094 0 1000000
+define_parameter par_mcp_track_element_width 'MCP - Track - Element Width' 1 0 1
+define_parameter par_mcp_track_fader_layout 'MCP - Track - Faders Layout' 0 0 1000
+define_parameter par_mcp_track_fader_pan_height 'MCP - Track - Faders Pan Height' 0 0 1000
 define_parameter par_mcp_track_fader_pan_height_scale 'MCP - Track - Faders Pan Height Scale' 0 0 1
-define_parameter par_mcp_track_fader_pan_mode_dual 'MCP - Track - Faders Pan Mode Dual' 0 0 10
-define_parameter par_mcp_track_fader_pan_mode_mono 'MCP - Track - Faders Pan Mode Mono' 0 0 10
-define_parameter par_mcp_track_fader_pan_mode_stereo 'MCP - Track - Faders Pan Mode Stereo' 0 0 10
-define_parameter par_mcp_track_fader_pan_width 'MCP - Track - Faders Pan Width' 0 0 100
-define_parameter par_mcp_track_fader_wid_always 'MCP - Track - Faders Always Show Width' 0 0 1 
-define_parameter par_mcp_track_insert_mode 'MCP - Track - Inserts Mode' 0 0 3
+define_parameter par_mcp_track_fader_pan_mode_dual 'MCP - Track - Faders Pan Mode Dual' 2 0 1000
+define_parameter par_mcp_track_fader_pan_mode_mono 'MCP - Track - Faders Pan Mode Mono' 0 0 1000
+define_parameter par_mcp_track_fader_pan_mode_stereo 'MCP - Track - Faders Pan Mode Stereo' 0 0 1000
+define_parameter par_mcp_track_fader_pan_width 'MCP - Track - Faders Pan Width' 0 0 1000
+define_parameter par_mcp_track_fader_wid_always 'MCP - Track - Faders Always Show Width' 0 0 1
+define_parameter par_mcp_track_insert_mode 'MCP - Track - Inserts Mode' 1 0 3
 define_parameter par_mcp_track_insert_pad 'MCP - Track - Inserts Padding' 0 0 2
-define_parameter par_mcp_track_insert_size 'MCP - Track - Inserts Size' 0 0 100
-define_parameter par_mcp_track_insert_size_embed 'MCP - Track - Inserts Size Embed' 0 0 100
-define_parameter par_mcp_track_insert_size_scale 'MCP - Track - Inserts Size Scale' 0 0 1
-define_parameter par_mcp_track_meter_channeldiv 'MCP - Track - Meter Channel Division' 0 0 100
-define_parameter par_mcp_track_meter_expand 'MCP - Track - Meter Expansion' 0 0 100
+define_parameter par_mcp_track_insert_size 'MCP - Track - Inserts Size' 209 0 1000
+define_parameter par_mcp_track_insert_size_embed 'MCP - Track - Inserts Size Embed' 412 0 1000
+define_parameter par_mcp_track_insert_size_scale 'MCP - Track - Inserts Size Scale' 1 0 1
+define_parameter par_mcp_track_meter_channeldiv 'MCP - Track - Meter Channel Division' 0 0 1000
+define_parameter par_mcp_track_meter_expand 'MCP - Track - Meter Expansion' 0 0 1000
 define_parameter par_mcp_track_meter_expand_mode 'MCP - Track - Meter Expansion Mode' 0 0 1
 define_parameter par_mcp_track_meter_expand_threshold 'MCP - Track - Meter Expansion Threshold' 2 2 36
 define_parameter par_mcp_track_meter_padding 'MCP - Track - Meter Padding' 0 0 2
-define_parameter par_mcp_track_meter_pos 'MCP - Track - Meter Position' 0 0 2
-define_parameter par_mcp_track_meter_size 'MCP - Track - Meter Size' 0 0 100
+define_parameter par_mcp_track_meter_pos 'MCP - Track - Meter Position' 2 0 2
+define_parameter par_mcp_track_meter_size 'MCP - Track - Meter Size' 0 0 1000
 define_parameter par_mcp_track_meter_size_scale 'MCP - Track - Meter Size Scale' 0 0 1
-define_parameter par_mcp_track_meter_vol_readout 'MCP - Track - Meter Volume Readout' 0 0 2
-define_parameter par_mcp_track_meter_vu_db 'MCP - Track - Meter VU dB' 0 0 1
-define_parameter par_mcp_track_meter_vu_readout 'MCP - Track - Meter VU Readout' 0 0 1
-define_parameter par_mcp_track_settings_extrapad 'MCP - Track - Settings Extra Padding' 0 0 50
-define_parameter par_mcp_track_settings_label_index 'MCP - Track - Settings Label Index Position' 0 0 2
-define_parameter par_mcp_track_settings_label_size 'MCP - Track - Settings Label Size' 0 0 100
+define_parameter par_mcp_track_meter_vol_readout 'MCP - Track - Meter Volume Readout' 2 0 2
+define_parameter par_mcp_track_meter_vu_db 'MCP - Track - Meter VU dB' 1 0 1
+define_parameter par_mcp_track_meter_vu_readout 'MCP - Track - Meter VU Readout' 1 0 1
+define_parameter par_mcp_track_settings_extrapad 'MCP - Track - Settings Extra Padding' 71 0 1000
+define_parameter par_mcp_track_settings_label_index 'MCP - Track - Settings Label Index Position' 2 0 2
+define_parameter par_mcp_track_settings_label_size 'MCP - Track - Settings Label Size' 0 0 1000
 define_parameter par_mcp_track_settings_label_vertical 'MCP - Track - Settings Label Vertical' 0 0 1
-define_parameter par_tcp_envcp_element_separator 'TCP - ENVCP - Element Separator' 0 0 1000000
-define_parameter par_tcp_envcp_element_vis 'TCP - ENVCP - Element Visibility' 0 0 1000000
-define_parameter par_tcp_envcp_label_readout_placement 'TCP - ENVCP - Label Readout Placement' 0 0 2
-define_parameter par_tcp_envcp_label_readout_size 'TCP - ENVCP - Label Readout Separator Size' 0 0 100
-define_parameter par_tcp_envcp_label_readout_size_scale 'TCP - ENVCP - Label Readout Separator Size Scale' 0 0 1
-define_parameter par_tcp_envcp_label_size 'TCP - ENVCP - Label Size' 0 0 100
-define_parameter par_tcp_envcp_settings_indent 'TCP - ENVCP - Settings Indentation' 0 0 100
-define_parameter par_tcp_envcp_settings_lane_display 'TCP - ENVCP - Settings Lane Display' 0 0 2
-define_parameter par_tcp_envcp_settings_symbol 'TCP - ENVCP - Settings Symbol' 0 0 1
+define_parameter par_tcp_envcp_element_separator 'TCP - ENVCP - Element Separator' 8 0 1000000
+define_parameter par_tcp_envcp_element_vis 'TCP - ENVCP - Element Visibility' 62 0 1000000
+define_parameter par_tcp_envcp_label_readout_placement 'TCP - ENVCP - Label Readout Placement' 2 0 2
+define_parameter par_tcp_envcp_label_readout_size 'TCP - ENVCP - Label Readout Separator Size' 481 0 1000
+define_parameter par_tcp_envcp_label_readout_size_scale 'TCP - ENVCP - Label Readout Separator Size Scale' 1 0 1
+define_parameter par_tcp_envcp_label_size 'TCP - ENVCP - Label Size' 264 0 1000
+define_parameter par_tcp_envcp_settings_indent 'TCP - ENVCP - Settings Indentation' 0 0 1000
+define_parameter par_tcp_envcp_settings_lane_display 'TCP - ENVCP - Settings Lane Display' 1 0 2
+define_parameter par_tcp_envcp_settings_symbol 'TCP - ENVCP - Settings Symbol' 1 0 1
 define_parameter par_tcp_envcp_value_lane 'TCP - ENVCP - Value Display Lane' 0 0 1
-define_parameter par_tcp_envcp_value_mode 'TCP - ENVCP - Value Display Mode' 0 0 3
-define_parameter par_tcp_envcp_value_scale 'TCP - ENVCP - Value Size Scaling' 0 0 1
-define_parameter par_tcp_envcp_value_size 'TCP - ENVCP - Value Size' 0 0 100
+define_parameter par_tcp_envcp_value_mode 'TCP - ENVCP - Value Display Mode' 3 0 3
+define_parameter par_tcp_envcp_value_scale 'TCP - ENVCP - Value Size Scaling' 1 0 1
+define_parameter par_tcp_envcp_value_size 'TCP - ENVCP - Value Size' 217 0 1000
 define_parameter par_tcp_envcp_value_vertical 'TCP - ENVCP - Value Display Vertical' 0 0 1
-define_parameter par_tcp_gen_element_adj_separator 'TCP - General - Element Adjustment Separator Size' 0 0 20
-define_parameter par_tcp_gen_element_adj_separator_line 'TCP - General - Element Adjustment Separator Line' 0 0 1
+define_parameter par_tcp_gen_element_adj_separator 'TCP - General - Element Adjustment Separator Size' 343 0 1000
+define_parameter par_tcp_gen_element_adj_separator_line 'TCP - General - Element Adjustment Separator Line' 1 0 1
 define_parameter par_tcp_gen_element_adj_show_fx 'TCP - General - Element Adjustment Show FX' 0 0 1
 define_parameter par_tcp_gen_element_adj_show_sends 'TCP - General - Element Adjustment Show Sends' 0 0 1
-define_parameter par_tcp_gen_element_adj_spacing_section_x 'TCP - General - Element Adjustment Spacing Section X' 0 0 20
-define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Element Adjustment Spacing Section Y' 0 0 20
-define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 20
-define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 20
-define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 20
-define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 0 0 1
+define_parameter par_tcp_gen_element_adj_spacing_section_x 'TCP - General - Element Adjustment Spacing Section X' 237 0 1000
+define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Element Adjustment Spacing Section Y' 171 0 1000
+define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 1000
+define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 1000
+define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 1000
+define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 1
 define_parameter par_tcp_gen_folder_icon_grid 'TCP - General - Folder Grid' 0 0 1
 define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 1
-define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 0 0 100
-define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 0 0 100
-define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 0 0 100
-define_parameter par_tcp_master_element_adj_size_env 'TCP - Master - Element Adjustment Envelope Size' 0 0 1
+define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 330 0 1000
+define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 447 0 1000
+define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 130 0 1000
+define_parameter par_tcp_master_element_adj_size_env 'TCP - Master - Element Adjustment Envelope Size' 1 0 1
 define_parameter par_tcp_master_element_adj_size_fx 'TCP - Master - Element Adjustment FX Size' 0 0 1
-define_parameter par_tcp_master_element_separator 'TCP - Master - Element Separator' 0 0 1000000
-define_parameter par_tcp_master_element_vis 'TCP - Master - Element Visibility Flags' 0 0 1000000
-define_parameter par_tcp_master_fader_pan_size 'TCP - Master - Faders Pan Size' 0 0 100
-define_parameter par_tcp_master_fader_pan_size_scale 'TCP - Master - Faders Pan Size Scaling' 0 0 1
-define_parameter par_tcp_master_fader_pan_vis 'TCP - Master - Faders Pan Visibility' 0 0 1
-define_parameter par_tcp_master_fader_placement 'TCP - Master - Faders Placement' 0 0 2
-define_parameter par_tcp_master_fader_vol_size 'TCP - Master - Faders Volume Size' 0 0 100
-define_parameter par_tcp_master_fader_vol_size_scale 'TCP - Master - Faders Volume Size Scaling' 0 0 1
-define_parameter par_tcp_master_fader_vol_vis 'TCP - Master - Faders Volume Visibility' 0 0 1
-define_parameter par_tcp_master_fader_wid_size 'TCP - Master - Faders Width Size' 0 0 100
-define_parameter par_tcp_master_fader_wid_size_scale 'TCP - Master - Faders Width Size Scaling' 0 0 1
-define_parameter par_tcp_master_fader_wid_vis 'TCP - Master - Faders Width Visibility' 0 0 1
-define_parameter par_tcp_master_insert_mode 'TCP - Master - Inserts Mode' 0 0 2
-define_parameter par_tcp_master_insert_size 'TCP - Master - Inserts Size' 0 0 100
+define_parameter par_tcp_master_element_separator 'TCP - Master - Element Separator' 42 0 1000000
+define_parameter par_tcp_master_element_vis 'TCP - Master - Element Visibility Flags' 126 0 1000000
+define_parameter par_tcp_master_fader_pan_size 'TCP - Master - Faders Pan Size' 578 0 1000
+define_parameter par_tcp_master_fader_pan_size_scale 'TCP - Master - Faders Pan Size Scaling' 1 0 1
+define_parameter par_tcp_master_fader_pan_vis 'TCP - Master - Faders Pan Visibility' 1 0 1
+define_parameter par_tcp_master_fader_placement 'TCP - Master - Faders Placement' 2 0 2
+define_parameter par_tcp_master_fader_vol_size 'TCP - Master - Faders Volume Size' 581 0 1000
+define_parameter par_tcp_master_fader_vol_size_scale 'TCP - Master - Faders Volume Size Scaling' 1 0 1
+define_parameter par_tcp_master_fader_vol_vis 'TCP - Master - Faders Volume Visibility' 1 0 1
+define_parameter par_tcp_master_fader_wid_size 'TCP - Master - Faders Width Size' 574 0 1000
+define_parameter par_tcp_master_fader_wid_size_scale 'TCP - Master - Faders Width Size Scaling' 1 0 1
+define_parameter par_tcp_master_fader_wid_vis 'TCP - Master - Faders Width Visibility' 1 0 1
+define_parameter par_tcp_master_insert_mode 'TCP - Master - Inserts Mode' 2 0 2
+define_parameter par_tcp_master_insert_size 'TCP - Master - Inserts Size' 211 0 1000
 define_parameter par_tcp_master_insert_size_scale 'TCP - Master - Inserts Size Scaling' 0 0 1
-define_parameter par_tcp_master_meter_channeldiv 'TCP - Master - Meter Channel Division' 0 0 100
-define_parameter par_tcp_master_meter_mode 'TCP - Master - Mode' 0 0 1
-define_parameter par_tcp_master_meter_size 'TCP - Master - Meter Size' 0 0 100
+define_parameter par_tcp_master_meter_channeldiv 'TCP - Master - Meter Channel Division' 0 0 1000
+define_parameter par_tcp_master_meter_size 'TCP - Master - Meter Size' 169 0 1000
 define_parameter par_tcp_master_meter_size_scale 'TCP - Master - Meter Size Scaling' 0 0 1
-define_parameter par_tcp_master_meter_vol_readout 'TCP - Master - Meter Volume Readout' 0 0 1
-define_parameter par_tcp_master_meter_vu_db 'TCP - Master - Meter VU dB' 0 0 1
+define_parameter par_tcp_master_meter_vol_readout 'TCP - Master - Meter Volume Readout' 1 0 1
+define_parameter par_tcp_master_meter_vu_db 'TCP - Master - Meter VU dB' 1 0 1
 define_parameter par_tcp_master_meter_vu_readout 'TCP - Master - Meter VU Readout' 0 0 1
-define_parameter par_tcp_track_element_adj_label_size 'TCP - Track - Element Adjustment Label Size' 0 0 100
+define_parameter par_tcp_track_element_adj_label_size 'TCP - Track - Element Adjustment Label Size' 0 0 1000
 define_parameter par_tcp_track_element_adj_size_env 'TCP - Track - Element Adjustment Envelope Size' 0 0 1
-define_parameter par_tcp_track_element_adj_size_input 'TCP - Track - Element Adjustment Input Size' 0 0 50
-define_parameter par_tcp_track_element_separator 'TCP - Track - Element Separator' 0 0 1000000
-define_parameter par_tcp_track_element_vis 'TCP - Track - Element Visibility' 0 0 1000000
-define_parameter par_tcp_track_element_vis_mixer 'TCP - Track - Element Visibility Mixer' 0 0 1000000
-define_parameter par_tcp_track_fader_pan_size 'TCP - Track - Faders Pan Size' 0 0 100
+define_parameter par_tcp_track_element_adj_size_input 'TCP - Track - Element Adjustment Input Size' 407 0 1000
+define_parameter par_tcp_track_element_separator 'TCP - Track - Element Separator' 650 0 1000000
+define_parameter par_tcp_track_element_vis 'TCP - Track - Element Visibility' 4094 0 1000000
+define_parameter par_tcp_track_element_vis_mixer 'TCP - Track - Element Visibility Mixer' 3784 0 1000000
+define_parameter par_tcp_track_fader_pan_size 'TCP - Track - Faders Pan Size' 0 0 1000
 define_parameter par_tcp_track_fader_pan_size_scale 'TCP - Track - Faders Pan Size Scaling' 0 0 1
-define_parameter par_tcp_track_fader_pan_vis 'TCP - Track - Faders Pan Visibility' 0 0 1
-define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 0 0 1
+define_parameter par_tcp_track_fader_pan_vis 'TCP - Track - Faders Pan Visibility' 1 0 1
+define_parameter par_tcp_track_fader_pan_vis_mixer 'TCP - Track - Faders Pan Mixer Visibility' 1 0 1
 define_parameter par_tcp_track_fader_placement 'TCP - Track - Faders Placement' 0 0 2
-define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 0 0 100
-define_parameter par_tcp_track_fader_vol_size_scale 'TCP - Track - Faders Volume Size Scaling' 0 0 1
-define_parameter par_tcp_track_fader_vol_vis 'TCP - Track - Faders Volume Visibility' 0 0 1
-define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 0 0 1
-define_parameter par_tcp_track_fader_wid_size 'TCP - Track - Faders Width Size' 0 0 100
+define_parameter par_tcp_track_fader_vol_size 'TCP - Track - Faders Volume Size' 172 0 1000
+define_parameter par_tcp_track_fader_vol_size_scale 'TCP - Track - Faders Volume Size Scaling' 1 0 1
+define_parameter par_tcp_track_fader_vol_vis 'TCP - Track - Faders Volume Visibility' 1 0 1
+define_parameter par_tcp_track_fader_vol_vis_mixer 'TCP - Track - Faders Volume Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_fader_wid_size 'TCP - Track - Faders Width Size' 0 0 1000
 define_parameter par_tcp_track_fader_wid_size_scale 'TCP - Track - Faders Width Size Scaling' 0 0 1
-define_parameter par_tcp_track_fader_wid_vis 'TCP - Track - Faders Width Visibility' 0 0 1
-define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 0 0 1
-define_parameter par_tcp_track_insert_mode 'TCP - Track - Inserts Mode' 0 0 2
-define_parameter par_tcp_track_insert_size 'TCP - Track - Inserts Size' 0 0 100
+define_parameter par_tcp_track_fader_wid_vis 'TCP - Track - Faders Width Visibility' 1 0 1
+define_parameter par_tcp_track_fader_wid_vis_mixer 'TCP - Track - Faders Width Mixer Visibility' 1 0 1
+define_parameter par_tcp_track_insert_mode 'TCP - Track - Inserts Mode' 1 0 2
+define_parameter par_tcp_track_insert_size 'TCP - Track - Inserts Size' 171 0 1000
 define_parameter par_tcp_track_insert_size_scale 'TCP - Track - Inserts Size Scaling' 0 0 1
-define_parameter par_tcp_track_label_index_vis 'TCP - Track - Index Vsibility' 0 0 2
-define_parameter par_tcp_track_label_size 'TCP - Track - Size' 0 0 100
-define_parameter par_tcp_track_meter_channeldiv 'TCP - Track - Meter Channel Division' 0 0 100
-define_parameter par_tcp_track_meter_mode 'TCP - Track - Mode' 0 0 1
-define_parameter par_tcp_track_meter_size 'TCP - Track - Meter Size' 0 0 100
+define_parameter par_tcp_track_label_index_vis 'TCP - Track - Index Vsibility' 2 0 2
+define_parameter par_tcp_track_label_size 'TCP - Track - Size' 168 0 1000
+define_parameter par_tcp_track_meter_channeldiv 'TCP - Track - Meter Channel Division' 0 0 1000
+define_parameter par_tcp_track_meter_mode 'TCP - Track - Mode' 1 0 1
+define_parameter par_tcp_track_meter_size 'TCP - Track - Meter Size' 30 0 1000
 define_parameter par_tcp_track_meter_size_scale 'TCP - Track - Meter Size Scaling' 0 0 1
 define_parameter par_tcp_track_meter_vol_readout 'TCP - Track - Meter Volume Readout' 0 0 1
 define_parameter par_tcp_track_meter_vu_db 'TCP - Track - Meter VU dB' 0 0 1
 define_parameter par_tcp_track_meter_vu_readout 'TCP - Track - Meter VU Readout' 0 0 1
-define_parameter par_trans_element_adj_bpm_tap 'Transport - Element Adjustments BPM Tap' 0 0 1
-define_parameter par_trans_element_adj_selection_size 'Transport - Element Adjustments Selection Size' 0 0 100
+define_parameter par_trans_element_adj_bpm_tap 'Transport - Element Adjustments BPM Tap' 1 0 1
+define_parameter par_trans_element_adj_selection_size 'Transport - Element Adjustments Selection Size' 186 0 1000
 define_parameter par_trans_element_adj_selection_size_scale 'Transport - Element Adjustments Selection Size Scale' 0 0 1
-define_parameter par_trans_element_adj_separator_size 'Transport - Element Adjustments Separator Size' 0 0 20
-define_parameter par_trans_element_adj_spacing_section_x 'Transport - Element Adjustments Spacing Section X' 0 0 20
-define_parameter par_trans_element_adj_spacing_time_x 'Transport - Element Adjustments Spacing Time X' 0 0 20
-define_parameter par_trans_element_adj_spacing_x 'Transport - Element Adjustments Spacing X' 0 0 20
-define_parameter par_trans_element_adj_status_size 'Transport - Element Adjustments Status Size' 0 0 100
+define_parameter par_trans_element_adj_separator_size 'Transport - Element Adjustments Separator Size' 393 0 1000
+define_parameter par_trans_element_adj_spacing_section_x 'Transport - Element Adjustments Spacing Section X' 491 0 1000
+define_parameter par_trans_element_adj_spacing_time_x 'Transport - Element Adjustments Spacing Time X' 164 0 1000
+define_parameter par_trans_element_adj_spacing_x 'Transport - Element Adjustments Spacing X' 0 0 1000
+define_parameter par_trans_element_adj_status_size 'Transport - Element Adjustments Status Size' 295 0 1000
 define_parameter par_trans_element_adj_status_size_scale 'Transport - Element Adjustments Status Size Scale' 0 0 1
-define_parameter par_trans_element_separator 'Transport - Element Separator' 0 0 10000000
-define_parameter par_trans_element_vis 'Transport - Element Visibility' 0 0 10000000
-define_parameter par_trans_playrate_mode 'Transport - Playrate Display Mode' 0 0 2
-define_parameter par_trans_playrate_size 'Transport - Playrate Fader Size' 0 0 100
-define_parameter par_trans_settings_extrapad_x 'Transport - Settings Extra Padding X' 0 0 100
-define_parameter par_trans_settings_extrapad_y 'Transport - Settings Extra Padding Y' 0 0 100
-define_parameter par_trans_settings_theme_macros 'Transport - Settings Theme Macros' 0 0 8
+define_parameter par_trans_element_separator 'Transport - Element Separator' 196 0 1000000
+define_parameter par_trans_element_vis 'Transport - Element Visibility' 4094 0 1000000
+define_parameter par_trans_playrate_mode 'Transport - Playrate Display Mode' 2 0 2
+define_parameter par_trans_playrate_size 'Transport - Playrate Fader Size' 419 0 1000
+define_parameter par_trans_settings_extrapad_x 'Transport - Settings Extra Padding X' 0 0 1000
+define_parameter par_trans_settings_extrapad_y 'Transport - Settings Extra Padding Y' 56 0 1000
+define_parameter par_trans_settings_theme_macros 'Transport - Settings Theme Macros' 4 0 8
 define_parameter paRt_end 'paRt end' 0 0 1
 
-;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ End of programmatically created Block ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 ; ====================================================================================================================================
 ;   # TOOLS
@@ -357,6 +359,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
             macro MAC_SetupValues      SCALE
 
+                set VAL_Fader_Scale 0.001
+
                 ; base unit
                 set VAL_Unit            \
                     SCALE>2         3   \
@@ -378,21 +382,21 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 ; average button
                 set VAL_Button                  \
                     SCALE>=2.5      [45 35]     \
-                    SCALE>=2.25     [22 18]     \
+                    SCALE>=2.25     [41 32]     \
                     SCALE>=2        [36 28]     \
-                    SCALE>=1.75     [32 24]     \
+                    SCALE>=1.75     [32 25]     \
                     SCALE>=1.5      [27 21]     \
-                    SCALE>=1.25     [22 18]     \
+                    SCALE>=1.25     [23 18]     \
                                     [18 14]
 
                 ; transport button
-                set VAL_Button_Trans            \
-                    SCALE>=2.5      [85 45 51]  \
-                    SCALE>=2.25     [76 40 51]  \
-                    SCALE>=2        [68 36 51]  \
-                    SCALE>=1.75     [60 32 51]  \
-                    SCALE>=1.5      [51 27 51]  \
-                    SCALE>=1.25     [42 22 51]  \
+                set VAL_Button_Trans                \
+                    SCALE>=2.5      [85 45 127]     \
+                    SCALE>=2.25     [77 41 115]     \
+                    SCALE>=2        [68 36 102]     \
+                    SCALE>=1.75     [60 32 90]      \
+                    SCALE>=1.5      [51 27 76]      \
+                    SCALE>=1.25     [43 23 64]      \
                                     [34 18 51]
 
                 ; folder button / icon
@@ -408,11 +412,11 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 ; large knob
                 set VAL_Knob                \
                     SCALE>=2.5      45      \
-                    SCALE>=2.25     40      \
+                    SCALE>=2.25     41      \
                     SCALE>=2        36      \
                     SCALE>=1.75     32      \
                     SCALE>=1.5      27      \
-                    SCALE>=1.25     22      \
+                    SCALE>=1.25     23      \
                                     18
 
                 ; small knob
@@ -420,7 +424,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     SCALE>=2.5      35      \
                     SCALE>=2.25     32      \
                     SCALE>=2        28      \
-                    SCALE>=1.75     24      \
+                    SCALE>=1.75     25      \
                     SCALE>=1.5      21      \
                     SCALE>=1.25     18      \
                                     14
@@ -445,45 +449,39 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     SCALE>=1.25     18      \
                                     14
 
-                ; tcp minimal height
-                set VAL_tcp_h               \
-                    SCALE>=2.5      45      \
-                    SCALE>=2.25     40      \
-                    SCALE>=2        36      \
-                    SCALE>=1.75     32      \
-                    SCALE>=1.5      27      \
-                    SCALE>=1.25     22      \
-                                    17
+                ; tcp minimal height / y position offset for buttons
+                set VAL_tcp_h                   \
+                    SCALE>=2.5      [40 1]      \
+                    SCALE>=2.25     [36 1]      \
+                    SCALE>=2        [34 1]      \
+                    SCALE>=1.75     [30 1]      \
+                    SCALE>=1.5      [25 1]      \
+                    SCALE>=1.25     [21 1]      \
+                                    [17 1]
 
                 ; envcp minimal height
-                set VAL_Envcp_h             \
-                    SCALE>=2.5      38      \
-                    SCALE>=2.25     34      \
-                    SCALE>=2        30      \
-                    SCALE>=1.75     26      \
-                    SCALE>=1.5      22      \
-                    SCALE>=1.25     19      \
-                                    17
-
+                set VAL_Envcp_h VAL_tcp_h
+                    
                 ; separator icon thickness
-                set VAL_Separator           \
-                    SCALE>=2.5      24      \
-                    SCALE>=2.25     20      \
-                    SCALE>=2        16      \
-                    SCALE>=1.75     14      \
-                    SCALE>=1.5      12      \
-                    SCALE>=1.25     4       \
+                set VAL_Separator       \
+                    SCALE>=2.5      5   \
+                    SCALE>=2.25     4   \
+                    SCALE>=2        4   \
+                    SCALE>=1.75     3   \
+                    SCALE>=1.5      3   \
+                    SCALE>=1.25     2   \
                                     2
 
-                ; insert slot height
-                set VAL_insert_slot             \
-                    SCALE>=2.5      [40 50]     \
-                    SCALE>=2.25     [36 50]     \
-                    SCALE>=2        [32 50]     \
-                    SCALE>=1.75     [28 50]     \
-                    SCALE>=1.5      [24 50]     \
-                    SCALE>=1.25     [20 50]     \
-                                    [16 50]
+                ; insert slot
+                ; [height - - - tcp_w_min tcp_w_max mcp_w_min mcp_w_max]
+                set VAL_insert_slot         \
+                    SCALE>=2.5      42      \
+                    SCALE>=2.25     38      \
+                    SCALE>=2        34      \
+                    SCALE>=1.75     31      \
+                    SCALE>=1.5      26      \
+                    SCALE>=1.25     21      \
+                                    16
 
                 ; track index number count
                 set VAL_index_letters       \
@@ -496,75 +494,89 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
                 ; label margins
                 set VAL_Margin_Label                \
-                    SCALE>=2.5      [24 24 24 24]   \
-                    SCALE>=2.25     [20 20 20 20]   \
-                    SCALE>=2        [16 16 16 16]   \
-                    SCALE>=1.75     [14 14 14 14]   \
-                    SCALE>=1.5      [4 2 4 2]       \
-                    SCALE>=1.25     [4 2 4 2]       \
-                                    [4 2 4 3]
+                    SCALE>=2.5      [10 4 10 5]     \
+                    SCALE>=2.25     [9 3 9 4]       \
+                    SCALE>=2        [8 3 8 4]       \
+                    SCALE>=1.75     [7 2 7 3]       \
+                    SCALE>=1.5      [6 2 6 3]       \
+                    SCALE>=1.25     [5 1 5 2]       \
+                                    [4 1 4 2]
+
+                ; vertical label margins
+                set VAL_Margin_Label_vertical       \
+                    SCALE>=2.5      [5 10 5 10]     \
+                    SCALE>=2.25     [5 9 5 9]       \
+                    SCALE>=2        [4 8 4 8]       \
+                    SCALE>=1.75     [4 7 4 7]       \
+                    SCALE>=1.5      [3 6 3 6]       \
+                    SCALE>=1.25     [2 5 2 5]       \
+                                    [2 4 2 4]              
 
                 ; transport time section label margins
                 set VAL_Margin_Label_Trans_Time     \
-                    SCALE>=2.5      [24 24 24 24]   \
-                    SCALE>=2.25     [20 20 20 20]   \
-                    SCALE>=2        [16 16 16 16]   \
-                    SCALE>=1.75     [14 14 14 14]   \
-                    SCALE>=1.5      [4 2 4 2]       \
-                    SCALE>=1.25     [4 2 4 2]       \
-                                    [0 0 0 0]
+                    SCALE>=2.5      [10 5 10 5]     \
+                    SCALE>=2.25     [9 4 9 4]       \
+                    SCALE>=2        [8 4 8 4]       \
+                    SCALE>=1.75     [7 3 7 3]       \
+                    SCALE>=1.5      [6 3 6 3]       \
+                    SCALE>=1.25     [5 2 5 2]       \
+                                    [4 2 4 2]
 
                 ; transport status margins
                 set VAL_Margin_Label_Trans_Status   \
-                    SCALE>=2.5      [24 24 24 24]   \
-                    SCALE>=2.25     [20 20 20 20]   \
-                    SCALE>=2        [16 16 16 16]   \
-                    SCALE>=1.75     [14 14 14 14]   \
-                    SCALE>=1.5      [4 2 4 2]       \
-                    SCALE>=1.25     [4 2 4 2]       \
-                                    [0 0 0 0]
+                    SCALE>=2.5      [10 5 10 5]     \
+                    SCALE>=2.25     [9 4 9 4]       \
+                    SCALE>=2        [8 4 8 4]       \
+                    SCALE>=1.75     [7 3 7 3]       \
+                    SCALE>=1.5      [6 3 6 3]       \
+                    SCALE>=1.25     [5 2 5 2]       \
+                                    [4 2 4 2]
 
                 ; transport selection margins
                 set VAL_Margin_Label_Trans_Selection    \
-                    SCALE>=2.5      [24 24 24 24]       \
-                    SCALE>=2.25     [20 20 20 20]       \
-                    SCALE>=2        [16 16 16 16]       \
-                    SCALE>=1.75     [14 14 14 14]       \
-                    SCALE>=1.5      [4 2 4 2]           \
-                    SCALE>=1.25     [4 2 4 2]           \
+                    SCALE>=2.5      [20 0 20 0]         \
+                    SCALE>=2.25     [18 0 18 0]         \
+                    SCALE>=2        [16 0 16 0]         \
+                    SCALE>=1.75     [14 0 14 0]         \
+                    SCALE>=1.5      [12 0 12 0]         \
+                    SCALE>=1.25     [10 0 10 0]         \
                                     [8 0 8 0]
 
                 ; record input margins
-                set VAL_Margin_RecInput             \
-                    SCALE>=2.5      [8 1 2 1]       \
-                    SCALE>=2.25     [8 1 2 1]       \
-                    SCALE>=2        [8 1 2 1]       \
-                    SCALE>=1.75     [8 1 2 1]       \
-                    SCALE>=1.5      [8 1 2 1]       \
-                    SCALE>=1.25     [8 1 2 1]       \
+                set VAL_Margin_RecInput         \
+                    SCALE>=2.5      [20 2 2 2]  \
+                    SCALE>=2.25     [18 2 2 2]  \
+                    SCALE>=2        [16 2 2 2]  \
+                    SCALE>=1.75     [14 1 1 1]  \
+                    SCALE>=1.5      [12 1 1 1]  \
+                    SCALE>=1.25     [10 1 1 1]  \
                                     [8 1 2 1]
 
                 ; fader size
                 ; --> scalar 0-1 = mcp fader, scalar 2-3 = tcp fader
                 set VAL_Fader                       \
-                    SCALE>=2.5      [14 2 10 2]     \
-                    SCALE>=2.25     [14 2 10 2]     \
-                    SCALE>=2        [14 2 10 2]     \
-                    SCALE>=1.75     [14 2 10 2]     \
-                    SCALE>=1.5      [14 2 10 2]     \
-                    SCALE>=1.25     [14 2 10 2]     \
+                    SCALE>=2.5      [35 5 25 5]     \
+                    SCALE>=2.25     [33 4 24 4]     \
+                    SCALE>=2        [28 4 20 4]     \
+                    SCALE>=1.75     [26 3 19 3]     \
+                    SCALE>=1.5      [21 3 15 3]     \
+                    SCALE>=1.25     [19 2 14 2]     \
                                     [14 2 10 2]
 
-                ; envcp indent symbol
-                set VAL_Envcp_Symbol                \
-                    SCALE>=2.5          [18 14]     \
-                    SCALE>=2.25         [18 14]     \
-                    SCALE>=2            [18 14]     \
-                    SCALE>=1.75         [18 14]     \
-                    SCALE>=1.5          [18 14]     \
-                    SCALE>=1.25         [18 14]     \
-                                        [18 14]
+                ; average button
+                set VAL_Button                  \
+                    SCALE>=2.5      [45 35]     \
+                    SCALE>=2.25     [41 32]     \
+                    SCALE>=2        [36 28]     \
+                    SCALE>=1.75     [32 25]     \
+                    SCALE>=1.5      [27 21]     \
+                    SCALE>=1.25     [23 18]     \
+                                    [18 14]
 
+                ; envcp indent symbol
+                set VAL_Envcp_Symbol VAL_Button
+
+                ; font - large
                 set VAL_Font_Large      \
                     SCALE>=2.5      7   \
                     SCALE>=2.25     6   \
@@ -573,6 +585,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     SCALE>=1.5      3   \
                     SCALE>=1.25     2   \
                                     1
+                
+                ; font - small
                 set VAL_Font_Small      \
                     SCALE>=2.5      14  \
                     SCALE>=2.25     13  \
@@ -581,6 +595,16 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     SCALE>=1.5      10  \
                     SCALE>=1.25     9   \
                                     8
+
+                ; font - small
+                set VAL_fxlist_scrollbar       \
+                    SCALE>=2.5      [10 5]     \
+                    SCALE>=2.25     [8 4]      \
+                    SCALE>=2        [8 4]      \
+                    SCALE>=1.75     [6 2]      \
+                    SCALE>=1.5      [6 2]      \
+                    SCALE>=1.25     [6 2]      \
+                                    [4 2]
 
                 ; negations and multiplications
                 set VAL_Border_Neg          - 0     VAL_Border
@@ -596,12 +620,12 @@ define_parameter paRt_end 'paRt end' 0 0 1
             macro MAC_Setup_Values_Tcp   SCALE
 
                 ; spacing
-                set VAL_tcp_spacing_x           + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_spacing_x
-                set VAL_tcp_spacing_x_fader     + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_spacing_x_fader
-                set VAL_tcp_spacing_y_fader     + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_spacing_y_fader
-                set VAL_tcp_spacing_section_x   + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_spacing_section_x
-                set VAL_tcp_spacing_section_y   + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_spacing_section_y
-                set VAL_tcp_spacing_separator   + VAL_Pad{0} * SCALE par_tcp_gen_element_adj_separator
+                set VAL_tcp_spacing_x           + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x
+                set VAL_tcp_spacing_x_fader     + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x_fader
+                set VAL_tcp_spacing_y_fader     + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_y_fader
+                set VAL_tcp_spacing_section_x   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_x
+                set VAL_tcp_spacing_section_y   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_y
+                set VAL_tcp_spacing_separator   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_separator
 
                 ; height detection
                 set VAL_tcp_h_level     \
@@ -613,7 +637,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_tcp_vol_readout_w   * SCALE 30
 
                 ; minimal width values
-                set VAL_tcp_insert_min_w    * SCALE 20
+                set VAL_tcp_inserts_min_w   * SCALE 20
                 set VAL_tcp_meter_min_w     * SCALE 6
                 set VAL_tcp_fader_min_w     * SCALE 10
                 set VAL_tcp_label_min_w     * SCALE 50
@@ -627,13 +651,13 @@ define_parameter paRt_end 'paRt end' 0 0 1
             macro MAC_Setup_Values_Mcp SCALE
 
                 ; spacing
-                set VAL_mcp_spacing_x           + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_x
-                set VAL_mcp_spacing_y           + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_y
-                set VAL_mcp_spacing_fader_x     + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_fader_x
-                set VAL_mcp_spacing_fader_y     + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_fader_y
-                set VAL_mcp_spacing_section_x   + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_section_x
-                set VAL_mcp_spacing_section_y   + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_spacing_section_y
-                set VAL_mcp_spacing_separator   + VAL_Pad{0} * SCALE par_mcp_gen_element_adj_separator
+                set VAL_mcp_spacing_x           + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_x
+                set VAL_mcp_spacing_y           + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_y
+                set VAL_mcp_spacing_fader_x     + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_x
+                set VAL_mcp_spacing_fader_y     + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_y
+                set VAL_mcp_spacing_section_x   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_x
+                set VAL_mcp_spacing_section_y   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_y
+                set VAL_mcp_spacing_separator   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_separator
 
                 ; minimal height values
                 set VAL_mcp_inserts_min_h   * SCALE 30
@@ -649,7 +673,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_mcp_vol_h_min_show  + VAL_Knob{0} VAL_Pad{0}
 
                 ; minimal fader height for forced knob layout
-                set VAL_mcp_vol_h_min_knob  + VAL_mcp_vol_h_min_show{0} * SCALE 24
+                set VAL_mcp_vol_h_min_knob  + VAL_mcp_vol_h_min_show{0} * SCALE 24                
 
             endmacro
 
@@ -660,33 +684,31 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
                 ;   ::: Theme Specific Colors :::
 
+;THEMEBUILDER_INSERT_COLORS
+;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
-set THEME_color_tcp_empty_space             [50 50 50]
-set THEME_color_mcp_empty_space             [50 50 50]
-set THEME_color_track_bg                    [69 69 69]
-set THEME_color_track_label_bg              [38 38 38]
-set THEME_color_track_label_text            [140 140 140]
+set THEME_color_tcp_empty_space             [208 208 208]
+set THEME_color_mcp_empty_space             [208 208 208]
+set THEME_color_track_bg                    [208 208 208]
+set THEME_color_track_label_bg              [211 211 211]
+set THEME_color_track_label_text            [50 50 50]
 set THEME_color_envcp_bg                    THEME_color_track_bg
 set THEME_color_envcp_label_bg              THEME_color_track_label_bg
 set THEME_color_envcp_label_text            THEME_color_track_label_text
-set THEME_color_select_bar                  [26 26 26 0 200 200 200 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_icon_bg                     [47 47 47 0 70 70 70 0]
-set THEME_color_master_icon_bg              [35 35 35 0 70 70 70 0]
+set THEME_color_select_bar                  [107 107 107 0 255 255 255 0]
+set THEME_color_colorbar_offset             [50 50 50 0]
+set THEME_color_icon_bg                     [208 208 208 0 208 208 208 0]
+set THEME_color_master_icon_bg              [135 135 135 0 150 150 150 0]
 set THEME_color_meter_text                  [125 125 125 0]
 set THEME_color_meter_shadow                [1 1 1 0]
 set THEME_color_meter_readout               [255 255 255]
 set THEME_color_meter_readout_clipped       [255 0 0]
-set THEME_color_button_text_off             [199 199 199]
-set THEME_color_button_text_on              [10 10 10]
-set THEME_color_button_bg_off               [50 50 50]
-set THEME_color_readout_font                [142 142 142]
-set THEME_color_red                         [181 66 66]
-
-                set THEME_color_recinput_bg         \
-                    !recarm                         \
-                        THEME_color_button_bg_off   \
-                        THEME_color_red
+set THEME_color_button_text_off             [255 255 255]
+set THEME_color_button_text_on              [1 1 1]
+set THEME_color_button_bg_off               [104 104 104]
+set THEME_color_readout_font                [1 1 1]
+set THEME_color_red                         [231 136 136]
+;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
                 ;   ::: Folder Tree Analysis :::
 
@@ -695,42 +717,42 @@ set THEME_color_red                         [181 66 66]
                 ;   ::: Tint Factors :::
 
                 ; track bg
-                set VAL_color_track_bg_tint_factor                                                              \
-                    !track_selected                                                                             \
-                        * 0.005 par_colors_track_track_bg_tint                                                  \
-                        * 0.005 + par_colors_track_track_bg_tint * 0.5 par_colors_track_track_bg_select_tint
+                set VAL_color_track_bg_tint_factor                                                          \
+                    !track_selected                                                                         \
+                        * 0.0005 par_colors_track_track_bg_tint                                             \
+                        * 0.0005 + par_colors_track_track_bg_tint  par_colors_track_track_bg_select_tint
 
                 ; track bg folder modulation
-                set VAL_color_track_bg_tint_factor                                                                  \
-                    folderstate>0                                                                                   \
-                        + VAL_color_track_bg_tint_factor{0} + -1 * 0.02 par_colors_track_folder_foldertrack_tint
+                set VAL_color_track_bg_tint_factor                                                                      \
+                    folderstate>0                                                                                       \
+                        + VAL_color_track_bg_tint_factor{0} + -0.5 * 0.001 par_colors_track_folder_foldertrack_tint
 
                 ; track bg folder tree modulation
                 set VAL_color_track_bg_tint_factor                                                                                                                      \
                     ?maxfolderdepth                                                                                                                                     \
-                        par_colors_track_folder_foldertree_tint==50                                                                                                     \
+                        par_colors_track_folder_foldertree_tint==500                                                                                                    \
                             .                                                                                                                                           \
-                        par_colors_track_folder_foldertree_tint<50                                                                                                      \
-                            * VAL_color_track_bg_tint_factor{0} - 1 * VAL_folder_depth_factor{0}            * 0.02 - 50     par_colors_track_folder_foldertree_tint     \
-                            * VAL_color_track_bg_tint_factor{0} - 1 * - 1 VAL_folder_depth_factor{0} + -1   * 0.02          par_colors_track_folder_foldertree_tint
+                        par_colors_track_folder_foldertree_tint<500                                                                                                     \
+                            * VAL_color_track_bg_tint_factor{0} - 1 * VAL_folder_depth_factor{0}            * 0.002 - 500    par_colors_track_folder_foldertree_tint    \
+                            * VAL_color_track_bg_tint_factor{0} - 1 * - 1 VAL_folder_depth_factor{0} + -1   * 0.002          par_colors_track_folder_foldertree_tint
 
                 ; track label bg
-                set VAL_color_track_label_bg_tint_factor                                                            \
-                    !track_selected                                                                                 \
-                        * 0.005      par_colors_track_track_label_bg_tint                                           \
-                        * 0.005 +    par_colors_track_track_label_bg_tint par_colors_track_track_label_select_tint
+                set VAL_color_track_label_bg_tint_factor                                                                \
+                    !track_selected                                                                                     \
+                        * 0.0005      par_colors_track_track_label_bg_tint                                              \
+                        * 0.0005 +    par_colors_track_track_label_bg_tint par_colors_track_track_label_select_tint
 
                 ; envcp bg
-                set VAL_color_envcp_bg_tint_factor                                                          \
-                    !env_selected                                                                           \
-                        * 0.005      par_colors_track_envcp_bg_tint                                         \
-                        * 0.005 +    par_colors_track_envcp_bg_tint par_colors_track_track_bg_select_tint
+                set VAL_color_envcp_bg_tint_factor                                                              \
+                    !env_selected                                                                               \
+                        * 0.0005      par_colors_track_envcp_bg_tint                                            \
+                        * 0.0005 +    par_colors_track_envcp_bg_tint par_colors_track_track_bg_select_tint
 
                 ; envcp label bg
-                set VAL_color_envcp_label_bg_tint_factor                                                            \
-                    !env_selected                                                                                   \
-                        * 0.005      par_colors_track_envcp_label_bg_tint                                           \
-                        * 0.005 +    par_colors_track_envcp_label_bg_tint par_colors_track_track_label_select_tint
+                set VAL_color_envcp_label_bg_tint_factor                                                                \
+                    !env_selected                                                                                       \
+                        * 0.0005      par_colors_track_envcp_label_bg_tint                                              \
+                        * 0.0005 +    par_colors_track_envcp_label_bg_tint par_colors_track_track_label_select_tint
 
                 ;   ::: Tint Factor Limiting :::
 
@@ -779,85 +801,85 @@ set THEME_color_red                         [181 66 66]
                 ;   ::: Tone Adjustments :::
 
                 ; track bg
-                set VAL_Color_Track_Bg                                                                                                      \
-                    !track_selected                                                                                                         \
-                        * VAL_Color_Track_Bg + 0.75 * 0.005     par_colors_track_track_bg_tone                                              \
-                        * VAL_Color_Track_Bg + 0.75 * 0.005 +   par_colors_track_track_bg_tone * 2 par_colors_track_track_bg_select_tone
+                set VAL_Color_Track_Bg                                                                                                          \
+                    !track_selected                                                                                                             \
+                        + VAL_Color_Track_Bg + -62.5 * 0.125     par_colors_track_track_bg_tone                                                 \
+                        + VAL_Color_Track_Bg + -62.5 * 0.125 +   par_colors_track_track_bg_tone * 0.5 par_colors_track_track_bg_select_tone
 
                 ; track bg folder state modulation
                 set VAL_Color_Track_Bg                                                                      \
                     folderstate>0                                                                           \
-                        par_colors_track_folder_foldertrack_tone!=50                                        \
-                            * VAL_Color_Track_BG + 0.75 * 0.005 par_colors_track_folder_foldertrack_tone
+                        par_colors_track_folder_foldertrack_tone!=500                                       \
+                            + VAL_Color_Track_BG + -62.5 * 0.125 par_colors_track_folder_foldertrack_tone
 
                 ; track bg folder tree modulation
-                set VAL_Color_Track_Bg                                                                                                                  \
-                    ?maxfolderdepth                                                                                                                     \
-                        par_colors_track_folder_foldertree_tone==50                                                                                     \
-                            .                                                                                                                           \
-                        par_colors_track_folder_foldertree_tone<50                                                                                      \
-                            * VAL_Color_Track_Bg - 1 * VAL_folder_depth_factor{0}           * 0.01 - 50     par_colors_track_folder_foldertree_tone     \
-                            * VAL_Color_Track_Bg - 1 * - 1 VAL_folder_depth_factor{0} + -1  + 0.5 * 0.01    par_colors_track_folder_foldertree_tone
+                set VAL_Color_Track_Bg                                                                                                                                  \
+                    ?maxfolderdepth                                                                                                                                     \
+                        par_colors_track_folder_foldertree_tone==500                                                                                                    \
+                            .                                                                                                                                           \
+                        par_colors_track_folder_foldertree_tone<500                                                                                                     \
+                            * VAL_Color_Track_Bg - 1 * VAL_folder_depth_factor{0}           * VAL_Fader_Scale{0} - 500      par_colors_track_folder_foldertree_tone     \
+                            * VAL_Color_Track_Bg - 1 * - 1 VAL_folder_depth_factor{0} + -1  + 0.5 * VAL_Fader_Scale{0}      par_colors_track_folder_foldertree_tone
 
                 ; track label bg
-                set VAL_Color_Track_Label_Bg                                                                                                            \
-                    !track_selected                                                                                                                     \
-                        * VAL_Color_Track_Label_Bg + 0.5 * 0.01       par_colors_track_track_label_bg_tone                                              \
-                        * VAL_Color_Track_Label_Bg + 0.5 * 0.01 +     par_colors_track_track_label_bg_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Track_Label_Bg                                                                                                                        \
+                    !track_selected                                                                                                                                 \
+                        + VAL_Color_Track_Label_Bg + -62.5 * 0.125       par_colors_track_track_label_bg_tone                                                       \
+                        + VAL_Color_Track_Label_Bg + -62.5 * 0.125 +     par_colors_track_track_label_bg_tone * 0.5 par_colors_track_track_label_select_tone
 
                 ; track label text
-                set VAL_Color_Track_Label_Text                                                                                                                          \
-                    !track_selected                                                                                                                                     \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text * 0.02   par_colors_track_track_label_text_tone                                              \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text * 0.02 + par_colors_track_track_label_text_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Track_Label_Text                                                                                                                                          \
+                    !track_selected                                                                                                                                                     \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255   par_colors_track_track_label_text_tone                                                    \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 + par_colors_track_track_label_text_tone * 0.5 par_colors_track_track_label_select_tone
 
                 ; track tcp index
-                set VAL_Color_Track_Index_TCP                                                                                                                                       \
-                    !track_selected                                                                                                                                                 \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text      * 0.02 par_colors_track_track_index_tone_tcp                                                        \
-                        par_tcp_track_label_index_vis==1                                                                                                                            \
-                            + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text  * 0.02 + par_colors_track_track_index_tone_tcp  * 0.25  par_colors_track_track_label_select_tone    \
-                            + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text  * 0.02 + par_colors_track_track_index_tone_tcp          par_colors_track_track_bg_select_tone
+                set VAL_Color_Track_Index_TCP                                                                                                                                               \
+                    !track_selected                                                                                                                                                         \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 par_colors_track_track_index_tone_tcp                                                           \
+                        par_tcp_track_label_index_vis==1                                                                                                                                    \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.5  par_colors_track_track_label_select_tone   \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp         par_colors_track_track_bg_select_tone
 
                 ; track mcp index
-                set VAL_Color_Track_Index_MCP                                                                                                                                           \
-                    !track_selected                                                                                                                                                     \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text      * 0.02      par_colors_track_track_index_tone_mcp                                                       \
-                        par_mcp_track_settings_label_index==1                                                                                                                           \
-                            + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text  * 0.02 +    par_colors_track_track_index_tone_mcp           par_colors_track_track_label_select_tone    \
-                            + [1 1 1 0 0 0 0 0] * THEME_color_track_label_text  * 0.02 +    par_colors_track_track_index_tone_mcp * 0.25    par_colors_track_track_bg_select_tone
+                set VAL_Color_Track_Index_MCP                                                                                                                                                   \
+                    !track_selected                                                                                                                                                             \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text      + -127.5 * 0.255    par_colors_track_track_index_tone_mcp                                                       \
+                        par_mcp_track_settings_label_index==1                                                                                                                                   \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp          par_colors_track_track_label_select_tone     \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.5    par_colors_track_track_bg_select_tone
 
                 ; envcp bg
-                set VAL_Color_Envcp_Bg                                                                                                  \
-                    !env_selected                                                                                                       \
-                        * VAL_Color_Envcp_Bg + 0.75 * 0.005     par_colors_track_envcp_bg_tone                                          \
-                        * VAL_Color_Envcp_Bg + 0.75 * 0.005 +   par_colors_track_envcp_bg_tone par_colors_track_track_bg_select_tone
+                set VAL_Color_Envcp_Bg                                                                                                          \
+                    !env_selected                                                                                                               \
+                        + VAL_Color_Envcp_Bg + -62.5 * 0.125     par_colors_track_envcp_bg_tone                                                 \
+                        + VAL_Color_Envcp_Bg + -62.5 * 0.125 +   par_colors_track_envcp_bg_tone * 0.5 par_colors_track_track_bg_select_tone
 
                 ; envcp label bg
                 set VAL_Color_Envcp_Label_Bg                                                                                                            \
                     !env_selected                                                                                                                       \
-                        * VAL_Color_Envcp_Label_Bg + 0.75 * 0.005       par_colors_track_envcp_label_bg_tone                                            \
-                        * VAL_Color_Envcp_Label_Bg + 0.75 * 0.005 +     par_colors_track_envcp_label_bg_tone par_colors_track_track_label_select_tone
+                        + VAL_Color_Envcp_Label_Bg + -62.5 * 0.125       par_colors_track_envcp_label_bg_tone                                           \
+                        + VAL_Color_Envcp_Label_Bg + -62.5 * 0.125 +     par_colors_track_envcp_label_bg_tone par_colors_track_track_label_select_tone
 
 
                 ; envcp label text
-                set VAL_Color_Envcp_Label_Text                                                                                                                          \
-                    !env_selected                                                                                                                                       \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_envcp_label_text * 0.02   par_colors_track_envcp_label_text_tone                                              \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_envcp_label_text * 0.02 + par_colors_track_envcp_label_text_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Label_Text                                                                                                                                  \
+                    !env_selected                                                                                                                                               \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                            \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone par_colors_track_track_label_select_tone
 
                 ; envcp readout
-                set VAL_Color_Envcp_Readout                                                                                                                                 \
-                    !env_selected                                                                                                                                           \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_envcp_label_text * 0.02   par_colors_track_envcp_label_readout_tone                                               \
-                        + [1 1 1 0 0 0 0 0] * THEME_color_envcp_label_text * 0.02 + par_colors_track_envcp_label_readout_tone par_colors_track_track_label_select_tone
+                set VAL_Color_Envcp_Readout                                                                                                                                         \
+                    !env_selected                                                                                                                                                   \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                             \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone par_colors_track_track_label_select_tone
 
                 ;   ::: Highlights :::
 
                 ; adjustable intensity
-                set VAL_colorbar_tint_plus * 0.003  par_colors_track_track_colorbar_intensity
-                set VAL_colorbar_tone_plus * 0.003  par_colors_track_track_colorbar_intensity
-                set VAL_colorbar_tone_lift * 0.25   par_colors_track_track_colorbar_intensity
+                set VAL_colorbar_tint_plus * 0.0003  par_colors_track_track_colorbar_intensity
+                set VAL_colorbar_tone_plus * 0.0003  par_colors_track_track_colorbar_intensity
+                set VAL_colorbar_tone_lift * 0.025   par_colors_track_track_colorbar_intensity
 
                 ; increment base tint factor
                 set VAL_colorbar_tint_factor_off    + VAL_colorbar_tint_plus 0.7
@@ -880,8 +902,8 @@ set THEME_color_red                         [181 66 66]
                 MAC_Math_Interpolate     VAL_color_track_bg_base   VAL_color_track_bg_tinted     VAL_colobar_tint_factor_env    VAL_colorbar_env
 
                 ; final colorbar values
-                set VAL_colorbar_on     + [VAL_colorbar_tone_lift VAL_colorbar_tone_lift VAL_colorbar_tone_lift] * VAL_colorbar_tcp + VAL_colorbar_tone_plus 0.9
-                set VAL_colorbar_off    + [VAL_colorbar_tone_lift VAL_colorbar_tone_lift VAL_colorbar_tone_lift] * VAL_colorbar_tcp + VAL_colorbar_tone_plus 0.5
+                set VAL_colorbar_on     + [THEME_color_colorbar_offset{0} THEME_color_colorbar_offset{1} THEME_color_colorbar_offset{2} 0] + [VAL_colorbar_tone_lift VAL_colorbar_tone_lift VAL_colorbar_tone_lift] * VAL_colorbar_tcp + VAL_colorbar_tone_plus 0.9
+                set VAL_colorbar_off    + [THEME_color_colorbar_offset{0} THEME_color_colorbar_offset{1} THEME_color_colorbar_offset{2} 0] + [VAL_colorbar_tone_lift VAL_colorbar_tone_lift VAL_colorbar_tone_lift] * VAL_colorbar_tcp + VAL_colorbar_tone_plus 0.5
 
                 ; color bar (track)
                 set VAL_color_colorbar      \
@@ -910,9 +932,9 @@ set THEME_color_red                         [181 66 66]
                 ;   ::: Icons :::
 
                 ; icon bg
-                set VAL_color_envcp_iconbg                                                      \
-                    ?env_selected                                                               \
-                        [THEME_color_icon_bg{4} THEME_color_icon_bg{5} THEME_color_icon_bg{6}]  \
+                set VAL_color_envcp_iconbg                                                          \
+                    ?env_selected                                                                   \
+                        [THEME_color_icon_bg{4} THEME_color_icon_bg{5} THEME_color_icon_bg{6}]      \
                         [THEME_color_icon_bg{0} THEME_color_icon_bg{1} THEME_color_icon_bg{2}]
 
                 ; master icon background
@@ -924,36 +946,34 @@ set THEME_color_red                         [181 66 66]
                 ;   ::: Meter :::
 
                 ; tone
-                set VAL_Color_Meter_Text_Lit            + [1 1 1 0] * THEME_color_meter_text * 0.02 par_colors_track_meter_text_tone_lit
-                set VAL_Color_Meter_Text_Unlit          + [1 1 1 0] * THEME_color_meter_text * 0.02 par_colors_track_meter_text_tone_unlit
+                set VAL_Color_Meter_Text_Lit            + [1 1 1 0] + THEME_color_meter_text + -127.5 * 0.255 par_colors_track_meter_text_tone_lit
+                set VAL_Color_Meter_Text_Unlit          + [1 1 1 0] + THEME_color_meter_text + -127.5 * 0.255 par_colors_track_meter_text_tone_unlit
 
-                ; readout clip tint
-                set VAL_Color_readout_clip_tint_factor * 0.01 par_colors_track_meter_text_tint_readout_clip
-                MAC_Math_Interpolate        THEME_color_meter_readout   THEME_color_meter_readout_clipped   VAL_Color_readout_clip_tint_factor  VAL_Color_Meter_Text_Readout_Clip
 
                 ; readout colors
-                set VAL_Color_Meter_Text_Readout        * THEME_color_meter_readout             * 0.01 par_colors_track_meter_text_tone_readout
-                set VAL_Color_Meter_Text_Readout_Clip   * VAL_Color_Meter_Text_Readout_Clip     * 0.01 par_colors_track_meter_text_tone_readout_clip
+                set VAL_Color_Meter_Text_Readout        * THEME_color_meter_readout             * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout
+                set VAL_Color_Meter_Text_Readout_Clip   * THEME_color_meter_readout_clipped     * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout_clip
 
                 ; alpha
-                set VAL_Color_Meter_Alpha_Lit_Top       + 1 * * 0.01    par_colors_track_meter_text_alpha_top       * 2.55 par_colors_track_meter_text_alpha_lit
-                set VAL_Color_Meter_Alpha_Unlit_Top     + 1 * * 0.01    par_colors_track_meter_text_alpha_top       * 2.55 par_colors_track_meter_text_alpha_unlit
-                set VAL_Color_Meter_Alpha_Lit_Bottom    + 1 * * 0.01    par_colors_track_meter_text_alpha_bottom    * 2.55 par_colors_track_meter_text_alpha_lit
-                set VAL_Color_Meter_Alpha_Unlit_Bottom  + 1 * * 0.01    par_colors_track_meter_text_alpha_bottom    * 2.55 par_colors_track_meter_text_alpha_unlit
-                set VAL_Color_Meter_Alpha_Readout       + 1 * 2.55      par_colors_track_meter_text_alpha_readout
+                set VAL_Color_Meter_Alpha_Lit_Top       + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_top       * 0.255 par_colors_track_meter_text_alpha_lit
+                set VAL_Color_Meter_Alpha_Unlit_Top     + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_top       * 0.255 par_colors_track_meter_text_alpha_unlit
+                set VAL_Color_Meter_Alpha_Lit_Bottom    + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_bottom    * 0.255 par_colors_track_meter_text_alpha_lit
+                set VAL_Color_Meter_Alpha_Unlit_Bottom  + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_bottom    * 0.255 par_colors_track_meter_text_alpha_unlit
+                set VAL_Color_Meter_Alpha_Readout       + 1 * 0.255                   par_colors_track_meter_text_alpha_readout
+                set VAL_Color_Meter_Alpha_Readout_Clip  + 1 * 0.255                   par_colors_track_meter_text_alpha_readout_clip
 
                 ; shadow
-                set VAL_Color_Meter_Shadow_Lit_Top      + 1 * * 0.01 par_colors_track_meter_text_alpha_top      * 2.55 par_colors_track_meter_text_shadow_lit
-                set VAL_Color_Meter_Shadow_Unlit_Top    + 1 * * 0.01 par_colors_track_meter_text_alpha_top      * 2.55 par_colors_track_meter_text_shadow_unlit
-                set VAL_Color_Meter_Shadow_Lit_Bottom   + 1 * * 0.01 par_colors_track_meter_text_alpha_bottom   * 2.55 par_colors_track_meter_text_shadow_lit
-                set VAL_Color_Meter_Shadow_Unlit_Bottom + 1 * * 0.01 par_colors_track_meter_text_alpha_bottom   * 2.55 par_colors_track_meter_text_shadow_unlit
+                set VAL_Color_Meter_Shadow_Lit_Top      + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_top      * 0.255 par_colors_track_meter_text_shadow_lit
+                set VAL_Color_Meter_Shadow_Unlit_Top    + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_top      * 0.255 par_colors_track_meter_text_shadow_unlit
+                set VAL_Color_Meter_Shadow_Lit_Bottom   + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_bottom   * 0.255 par_colors_track_meter_text_shadow_lit
+                set VAL_Color_Meter_Shadow_Unlit_Bottom + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_bottom   * 0.255 par_colors_track_meter_text_shadow_unlit
 
                 ; meter lookup values
                 set VAL_meter_lit_top           [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_Lit_Top       0 0 0 VAL_Color_Meter_Shadow_Lit_Top]
                 set VAL_meter_lit_bottom        [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_Lit_Bottom    0 0 0 VAL_Color_Meter_Shadow_Lit_Bottom]
                 set VAL_meter_unlit_top         [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit_Top     0 0 0 VAL_Color_Meter_Shadow_Unlit_Bottom]
                 set VAL_meter_unlit_bottom      [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit_Bottom  0 0 0 VAL_Color_Meter_Shadow_Unlit_Bottom]
-                set VAL_meter_readout           [VAL_Color_Meter_Text_Readout{0}    VAL_Color_Meter_Text_Readout{1} VAL_Color_Meter_Text_Readout{2} VAL_Color_Meter_Alpha_Readout       VAL_Color_Meter_Text_Readout_Clip{0} VAL_Color_Meter_Text_Readout_Clip{1} VAL_Color_Meter_Text_Readout_Clip{2} VAL_Color_Meter_Alpha_Readout]
+                set VAL_meter_readout           [VAL_Color_Meter_Text_Readout{0}    VAL_Color_Meter_Text_Readout{1} VAL_Color_Meter_Text_Readout{2} VAL_Color_Meter_Alpha_Readout{0}    VAL_Color_Meter_Text_Readout_Clip{0} VAL_Color_Meter_Text_Readout_Clip{1} VAL_Color_Meter_Text_Readout_Clip{2} VAL_Color_Meter_Alpha_Readout_Clip{0}]
 
             endmacro
 
@@ -984,14 +1004,14 @@ set THEME_color_red                         [181 66 66]
         macro MAC_DrawTransport_Setup SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; custom elements
-            custom WALTER_ELEMENT##.custom.bank_0       "" "_RS2c91a971d2bf85ecafd0efaf77363df6f731205d"    ""      "transport_custom_bank_1_off"
-            custom WALTER_ELEMENT##.custom.bank_1       "" "_RSc043dcd177669da6a9a4266e99990f0aee866e71"    ""      "transport_custom_bank_2_off"
-            custom WALTER_ELEMENT##.custom.bank_2       "" "_RS0bd17eabbc3e1ccd86a6c108d0844c6663be3dbd"    ""      "transport_custom_bank_3_off"
-            custom WALTER_ELEMENT##.custom.bank_3       "" "_RSeae090c8cf3daffda4364fed0a9a0c5214d257fd"    ""      "transport_custom_bank_4_off"
-            custom WALTER_ELEMENT##.custom.bank_4       "" "_RSfbe6d484414eca2da48a652094177639290ffdd6"    ""      "transport_custom_bank_5_off"
-            custom WALTER_ELEMENT##.custom.bank_5       "" "_RS8f42ebdffe94a4d492447d77228fb29814f38b39"    ""      "transport_custom_bank_6_off"
-            custom WALTER_ELEMENT##.custom.bank_6       "" "_RSa640c6e5eae8a45b69b8dc2f8a750c19712871e8"    ""      "transport_custom_bank_7_off"
-            custom WALTER_ELEMENT##.custom.bank_7       "" "_RSb48f6969ba104c941fd8ec29aaacadcba64618f6"    ""      "transport_custom_bank_8_off"
+            custom WALTER_ELEMENT##.custom.bank_0       "" "_RS5ec6b0de2cf6300ec9658d65a17084bc7fd2664b"    ""      "transport_custom_bank_1_off"
+            custom WALTER_ELEMENT##.custom.bank_1       "" "_RSfe1f33421e15d187e9477275688c3a0014dd0058"    ""      "transport_custom_bank_2_off"
+            custom WALTER_ELEMENT##.custom.bank_2       "" "_RSeedb490eeeb50844c14d7cb2a53e0ceb8310ff79"    ""      "transport_custom_bank_3_off"
+            custom WALTER_ELEMENT##.custom.bank_3       "" "_RSe796c2366e5ce1c3ad67e2550144cf678a8c958e"    ""      "transport_custom_bank_4_off"
+            custom WALTER_ELEMENT##.custom.bank_4       "" "_RS98afe25766eaacc423ca3043e99d9274094880eb"    ""      "transport_custom_bank_5_off"
+            custom WALTER_ELEMENT##.custom.bank_5       "" "_RS626f30c953f61e76ac530fc00d675cb12c875ad0"    ""      "transport_custom_bank_6_off"
+            custom WALTER_ELEMENT##.custom.bank_6       "" "_RSab500c3c7adf7d1d514d28ba63b513ec20db5820"    ""      "transport_custom_bank_7_off"
+            custom WALTER_ELEMENT##.custom.bank_7       "" "_RSb8071798d8eae6232100e3d1a56cb5ce8123895f"    ""      "transport_custom_bank_8_off"
             custom WALTER_ELEMENT##.custom.bank_0_on    "" ""                                               ""      "transport_custom_bank_1_on"
             custom WALTER_ELEMENT##.custom.bank_1_on    "" ""                                               ""      "transport_custom_bank_2_on"
             custom WALTER_ELEMENT##.custom.bank_2_on    "" ""                                               ""      "transport_custom_bank_3_on"
@@ -1008,14 +1028,14 @@ set THEME_color_red                         [181 66 66]
             set VAL_trans_w 600
 
             ; extra padding
-            set VAL_trans_extrapad_x * SCALE par_##PARAMETER_SECTION##_settings_extrapad_x
-            set VAL_trans_extrapad_y * SCALE par_##PARAMETER_SECTION##_settings_extrapad_y
+            set VAL_trans_extrapad_x * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_x
+            set VAL_trans_extrapad_y * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_y
 
             ; spacing
-            set VAL_trans_spacing_x                 + VAL_Pad{0} * SCALE par_##PARAMETER_SECTION##_element_adj_spacing_x
-            set VAL_trans_spacing_time_x            + VAL_Pad{0} * SCALE par_##PARAMETER_SECTION##_element_adj_spacing_time_x
-            set VAL_trans_spacing_section_x         + VAL_Pad{0} * SCALE par_##PARAMETER_SECTION##_element_adj_spacing_section_x
-            set VAL_trans_spacing_separator         + VAL_Pad{0} * SCALE par_##PARAMETER_SECTION##_element_adj_separator_size
+            set VAL_trans_spacing_x                 + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_x
+            set VAL_trans_spacing_time_x            + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_time_x
+            set VAL_trans_spacing_section_x         + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_spacing_section_x
+            set VAL_trans_spacing_separator         + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_separator_size
 
             ; top position
             set VAL_trans_y_top + VAL_pad VAL_trans_extrapad_y{0}
@@ -1107,13 +1127,9 @@ set THEME_color_red                         [181 66 66]
 
             macro MAC_DrawTransport_Buttons_SingleButton SCALE INDEX WALTER_ELEMENT PARAMETER_SECTION ELEMENT
 
-                ; section offset
-                set CUR_x                                   \
-                    ?VAL_trans_button_count{0}              \
-                        + CUR_x{0} VAL_trans_spacing_x{0}
 
                 ; hiding logic
-                set CUR_x_target + CUR_x{0} CUR_w{0}
+                set CUR_x_target + CUR_x{0} + CUR_w{0} VAL_trans_spacing_x{0}
 
                 set VAL_trans_hide_buttons                  \
                     CUR_x_target{0}>VAL_trans_hide_x{0}     \
@@ -1126,6 +1142,11 @@ set THEME_color_red                         [181 66 66]
                         par_##PARAMETER_SECTION##_element_vis&INDEX     \
                             1                                           \
                             0
+
+                ; button offset
+                set CUR_x                                   \
+                    ?VAL_trans_show_##ELEMENT##{0}          \
+                        + CUR_x{0} VAL_trans_spacing_x{0}
 
                 ; [DRAW] Button
                 set DRAW_trans_##ELEMENT                    \
@@ -1196,15 +1217,15 @@ set THEME_color_red                         [181 66 66]
                 set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 80
 
                ; playrate fader size
-                set CUR_w_rate_fader                                    \
-                    ?VAL_trans_show_playrate{0}                         \
-                        par_trans_playrate_mode==0                      \
-                            0                                           \
-                        par_trans_playrate_mode==1                      \
-                            VAL_button_trans{1}                         \
-                        par_trans_playrate_mode==2                      \
-                            * SCALE + 20 par_trans_playrate_size        \
-                            0                                           \
+                set CUR_w_rate_fader                                        \
+                    ?VAL_trans_show_playrate{0}                             \
+                        par_trans_playrate_mode==0                          \
+                            0                                               \
+                        par_trans_playrate_mode==1                          \
+                            VAL_button_trans{1}                             \
+                        par_trans_playrate_mode==2                          \
+                            * SCALE + 20 * 0.2 par_trans_playrate_size      \
+                            0                                               \
                         0
 
                 ; total width
@@ -1353,10 +1374,10 @@ set THEME_color_red                         [181 66 66]
             ; width
             set VAL_remaining_w - w + CUR_x VAL_trans_x_rightmost_padding
 
-            set CUR_w                                                                       \
-                ?par_trans_element_adj_status_size_scale                                    \
-                    * VAL_remaining_w{0}    * 0.01      par_trans_element_adj_status_size   \
-                    * SCALE                 * 3 + 20    par_trans_element_adj_status_size
+            set CUR_w                                                                                       \
+                ?par_trans_element_adj_status_size_scale                                                    \
+                    * VAL_remaining_w{0}    * VAL_Fader_Scale{0}      par_trans_element_adj_status_size     \
+                    * SCALE                 * 3 + 20  * 0.15  par_trans_element_adj_status_size
 
             ; hiding logic
             set CUR_x_target + CUR_x_target{0} CUR_w{0}
@@ -1395,10 +1416,10 @@ set THEME_color_red                         [181 66 66]
             ; width
             set VAL_remaining_w - w + CUR_x{0} VAL_trans_x_rightmost_padding{0}
 
-            set CUR_w                                                                           \
-                ?par_trans_element_adj_selection_size_scale                                     \
-                    * VAL_remaining_w{0}    * 0.01      par_trans_element_adj_selection_size    \
-                    * SCALE                 * 3 + 50    par_trans_element_adj_selection_size
+            set CUR_w                                                                                       \
+                ?par_trans_element_adj_selection_size_scale                                                 \
+                    * VAL_remaining_w{0}    * VAL_Fader_Scale{0}      par_trans_element_adj_selection_size  \
+                    * SCALE                 * 3 + 75  * 0.175  par_trans_element_adj_selection_size
 
             ; hiding logic
             set CUR_x_target + CUR_x{0} CUR_w{0}
@@ -1603,31 +1624,33 @@ set THEME_color_red                         [181 66 66]
 
             ; track
             clear mcp.*
-            MAC_DrawMcp_Setup_Track     SCALE   "mcp"   "track"
-            MAC_DrawMcp_Label_Track     SCALE   "mcp"   "track"
-            MAC_DrawMcp_Inserts         SCALE   "mcp"   "track"
-            MAC_DrawMcp_Buttons_Track   SCALE   "mcp"   "track"
-            MAC_DrawMcp_Meter_Top       SCALE   "mcp"   "track"
-            MAC_DrawMcp_Faders_Top	    SCALE   "mcp"   "track"
-            MAC_DrawMcp_Meter_Bottom    SCALE   "mcp"   "track"
-            MAC_DrawMcp_Faders_Bottom   SCALE   "mcp"   "track"
-            MAC_DrawMcp_Size            SCALE   "mcp"   "track"
-            MAC_DrawMcp_Folder          SCALE   "mcp"   "track"
-            MAC_DrawMcp_Font_Track      SCALE   "mcp"   "track"
+            MAC_DrawMcp_Setup_Track             SCALE   "mcp"   "track"
+            MAC_DrawMcp_Label_Track             SCALE   "mcp"   "track"
+            MAC_DrawMcp_Inserts                 SCALE   "mcp"   "track"
+            MAC_DrawMcp_Buttons_Track           SCALE   "mcp"   "track"
+            MAC_DrawMcp_Meter_Top               SCALE   "mcp"   "track"
+            MAC_DrawMcp_Faders_Top	            SCALE   "mcp"   "track"
+            MAC_DrawMcp_Meter_Bottom            SCALE   "mcp"   "track"
+            MAC_DrawMcp_Meter_Format_Track      SCALE   "mcp"   "track"
+            MAC_DrawMcp_Faders_Bottom           SCALE   "mcp"   "track"
+            MAC_DrawMcp_Size                    SCALE   "mcp"   "track"
+            MAC_DrawMcp_Folder                  SCALE   "mcp"   "track"
+            MAC_DrawMcp_Font_Track              SCALE   "mcp"   "track"
 
             ; master
             clear master.mcp.*
-            MAC_DrawMcp_Setup_Master        SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Label_Master        SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Inserts             SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_PostInsert_Master   SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Buttons_Master      SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Meter_Top           SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Faders_Top	        SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Meter_Bottom        SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Faders_Bottom       SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Size                SCALE   "master.mcp"   "master"
-            MAC_DrawMcp_Font_Master         SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Setup_Master            SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Label_Master            SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Inserts                 SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_PostInsert_Master       SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Buttons_Master          SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Meter_Top               SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Faders_Top	            SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Meter_Bottom            SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Meter_Format_Master     SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Faders_Bottom           SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Size                    SCALE   "master.mcp"   "master"
+            MAC_DrawMcp_Font_Master             SCALE   "master.mcp"   "master"
 
         endmacro
 
@@ -1651,10 +1674,6 @@ set THEME_color_red                         [181 66 66]
                 custom WALTER_ELEMENT##.custom.readout_bg       "" "" "" "meter_custom_readout_bg_vert"
                 custom WALTER_ELEMENT##.custom.index_bg         "" "" "" "track_custom_idx_bg"
                 custom WALTER_ELEMENT##.custom.env_icon         "" "" "" "track_custom_env_icon"
-
-
-                ; readout color
-                set WALTER_ELEMENT##.volume.label.color [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
 
                 ; hide flag
                 set VAL_mcp_hide_rest 0
@@ -1691,10 +1710,10 @@ set THEME_color_red                         [181 66 66]
                         VAL_mcp_precalc_w_buttons{0}
 
                 ; top fader width extension
-                set VAL_mcp_precalc_w_faders_top                                                                                \
-                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0                                                            \
-                        0                                                                                                       \
-                        + + * 2 VAL_Knob{0} VAL_mcp_spacing_fader_x{0} * SCALE par_mcp_##PARAMETER_SECTION##_fader_pan_width
+                set VAL_mcp_precalc_w_faders_top                                                                                        \
+                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0                                                                    \
+                        0                                                                                                               \
+                        + + * 2 VAL_Knob{0} VAL_mcp_spacing_fader_x{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_fader_pan_width
 
                 set VAL_mcp_precalc_w_faders_top_full                       \
                     par_mcp_##PARAMETER_SECTION##_fader_layout{0}==0        \
@@ -1767,12 +1786,12 @@ set THEME_color_red                         [181 66 66]
                             0
 
                     ; width extra padding
-                    set VAL_mcp_padding + VAL_unit{0} * SCALE par_mcp_track_settings_extrapad{0}
+                    set VAL_mcp_padding + VAL_unit{0} * SCALE * 0.03 par_mcp_track_settings_extrapad{0}
 
                     ; left x offset
-                    set VAL_mcp_x_offset_folder                                 \
-                        folderstate>0                                           \
-                            * SCALE par_mcp_gen_folder_pad_folder_parent        \
+                    set VAL_mcp_x_offset_folder                                     \
+                        folderstate>0                                               \
+                            * SCALE * 0.03 par_mcp_gen_folder_pad_folder_parent     \
                             0
 
                     set VAL_mcp_x_offset                                        \
@@ -1781,9 +1800,9 @@ set THEME_color_red                         [181 66 66]
                             VAL_mcp_padding{0}
 
                     ; width right extension
-                    set VAL_mcp_x_extension_folder                      \
-                        folderstate<0                                   \
-                            * SCALE par_mcp_gen_folder_pad_folder_last  \
+                    set VAL_mcp_x_extension_folder                              \
+                        folderstate<0                                           \
+                            * SCALE * 0.03 par_mcp_gen_folder_pad_folder_last   \
                             0
 
                     set VAL_mcp_x_extension                                     \
@@ -1792,14 +1811,14 @@ set THEME_color_red                         [181 66 66]
                             VAL_mcp_padding{0}
 
                     ; inserts sidebar width
-                    set VAL_mcp_precalc_w_sidebar                                                                                                       \
-                        !VAL_mcp_use_sidebar{0}                                                                                                         \
-                            0                                                                                                                           \
-                            par_mcp_##PARAMETER_SECTION##_insert_mode{0}==2                                                                             \
-                                * SCALE * 2     par_mcp_##PARAMETER_SECTION##_insert_size_embed                                                         \
-                                !mcp_fxembed                                                                                                            \
-                                    * SCALE * 2     par_mcp_##PARAMETER_SECTION##_insert_size                                                           \
-                                    * SCALE + * 2   par_mcp_##PARAMETER_SECTION##_insert_size_embed     * 2 par_mcp_##PARAMETER_SECTION##_insert_size
+                    set VAL_mcp_precalc_w_sidebar                                                                                                                   \
+                        !VAL_mcp_use_sidebar{0}                                                                                                                     \
+                            0                                                                                                                                       \
+                            par_mcp_##PARAMETER_SECTION##_insert_mode{0}==2                                                                                         \
+                                * SCALE + 20 * 0.3    par_mcp_##PARAMETER_SECTION##_insert_size_embed                                                               \
+                                !mcp_fxembed                                                                                                                        \
+                                    * SCALE + 20    * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size                                                               \
+                                    * SCALE + 20 +  * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size_embed     * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size
 
                     ; size calculations
                     MAC_DrawMcp_Setup_Size SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -1820,8 +1839,8 @@ set THEME_color_red                         [181 66 66]
                             VAL_Button_Folder{0}        \
                             0
 
-                    set VAL_mcp_y_offset        + VAL_mcp_genFolderOffset{0} * folderdepth      * SCALE par_mcp_gen_folder_indent
-                    set VAL_mcp_y_offset_max    + VAL_mcp_genFolderOffset{0} * maxfolderdepth   * SCALE par_mcp_gen_folder_indent
+                    set VAL_mcp_y_offset        + VAL_mcp_genFolderOffset{0} * folderdepth      * SCALE * 0.02 par_mcp_gen_folder_indent
+                    set VAL_mcp_y_offset_max    + VAL_mcp_genFolderOffset{0} * maxfolderdepth   * SCALE * 0.02 par_mcp_gen_folder_indent
 
                     ; indent background
                     set CUR_y - VAL_mcp_h{0} VAL_mcp_y_offset{0}
@@ -1856,8 +1875,8 @@ set THEME_color_red                         [181 66 66]
                             0
 
                     ; width extra padding
-                    set VAL_mcp_padding                                         \
-                        + VAL_unit{0} * SCALE par_mcp_master_settings_extrapad
+                    set VAL_mcp_padding                                                 \
+                        + VAL_unit{0} * SCALE * 0.03 par_mcp_master_settings_extrapad
 
                     ; left x offset
                     set VAL_mcp_x_offset + VAL_mcp_padding{0} VAL_Border{0}
@@ -1867,10 +1886,10 @@ set THEME_color_red                         [181 66 66]
                     set VAL_mcp_x_extension VAL_mcp_padding{0}
 
                     ; inserts full sidebar width
-                    set VAL_mcp_precalc_w_sidebar                                                                   \
-                        !VAL_mcp_use_sidebar{0}                                                                     \
-                            0                                                                                       \
-                            + VAL_mcp_spacing_section_x{0} * SCALE * 2 par_mcp_##PARAMETER_SECTION##_insert_size
+                    set VAL_mcp_precalc_w_sidebar                                                                           \
+                        !VAL_mcp_use_sidebar{0}                                                                             \
+                            0                                                                                               \
+                            + VAL_mcp_spacing_section_x{0} * SCALE + 30 * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size
 
                     ; size calculations
                     MAC_DrawMcp_Setup_Size SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -1953,7 +1972,7 @@ set THEME_color_red                         [181 66 66]
             macro MAC_DrawMcp_Setup_Meter SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; width
-                set VAL_mcp_meter_bottom_w_precalc + VAL_Button{0} * SCALE par_mcp_##PARAMETER_SECTION##_meter_size
+                set VAL_mcp_meter_bottom_w_precalc + VAL_Button{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_meter_size
 
                 ; width expansion
                 set VAL_channels                                                    \
@@ -2037,9 +2056,9 @@ set THEME_color_red                         [181 66 66]
             macro MAC_DrawMcp_Label_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; selection marker height
-                set CUR_h_selection                                     \
-                    ?par_mcp_gen_highlight_selection                    \
-                        * SCALE + 2 par_mcp_gen_highlight_selection     \
+                set CUR_h_selection                                             \
+                    ?par_mcp_gen_highlight_selection                            \
+                        * SCALE + 3 * 0.02 par_mcp_gen_highlight_selection      \
                         0
 
                 ; initial y position
@@ -2054,9 +2073,9 @@ set THEME_color_red                         [181 66 66]
                 macro MAC_DrawMcp_Label_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                     ; color marker height
-                    set CUR_h_color                                         \
-                        ?par_mcp_gen_highlight_color                        \
-                            * SCALE + 2 par_mcp_gen_highlight_color         \
+                    set CUR_h_color                                             \
+                        ?par_mcp_gen_highlight_color                            \
+                            * SCALE + 3 * 0.02  par_mcp_gen_highlight_color     \
                             0
 
                     ; [SHARED] Open
@@ -2072,8 +2091,8 @@ set THEME_color_red                         [181 66 66]
 
                     set CUR_h                                                                                   \
                         !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                  \
-                            + CUR_h_min{0} * SCALE      par_mcp_##PARAMETER_SECTION##_settings_label_size       \
-                            + CUR_h_min{0} * SCALE * 2  par_mcp_##PARAMETER_SECTION##_settings_label_size
+                            + CUR_h_min{0} * SCALE * 0.05   par_mcp_##PARAMETER_SECTION##_settings_label_size   \
+                            + CUR_h_min{0} * SCALE * 0.25  par_mcp_##PARAMETER_SECTION##_settings_label_size
 
                     ; label background
                     set CUR_y - CUR_y{0} CUR_h{0}
@@ -2192,7 +2211,7 @@ set THEME_color_red                         [181 66 66]
 
                     ; label height
                     set CUR_h_min * SCALE 18
-                    set CUR_h + CUR_h_min{0} * SCALE par_mcp_##PARAMETER_SECTION##_settings_label_size
+                    set CUR_h + CUR_h_min{0} * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_settings_label_size
 
                     set CUR_h                       \
                         CUR_h{0}<CUR_h_min{0}       \
@@ -2271,12 +2290,12 @@ set THEME_color_red                         [181 66 66]
             ; height
             set VAL_remaining_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y_inserts{0} - VAL_mcp_h{0} VAL_mcp_y_post_label{0}
 
-            set CUR_h                                                                                                                               \
-                !VAL_mcp_show_inserts{0}                                                                                                            \
-                    0                                                                                                                               \
-                ?par_mcp_##PARAMETER_SECTION##_insert_size_scale                                                                                    \
-                    + VAL_mcp_inserts_min_h{0} * - VAL_remaining_h{0} VAL_mcp_inserts_min_h{0}  * 0.01  par_mcp_##PARAMETER_SECTION##_insert_size   \
-                    + VAL_mcp_inserts_min_h{0} * SCALE                                          * 2     par_mcp_##PARAMETER_SECTION##_insert_size
+            set CUR_h                                                                                                                                               \
+                !VAL_mcp_show_inserts{0}                                                                                                                            \
+                    0                                                                                                                                               \
+                ?par_mcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                    \
+                    + VAL_mcp_inserts_min_h{0} * - VAL_remaining_h{0} VAL_mcp_inserts_min_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_insert_size   \
+                    + VAL_mcp_inserts_min_h{0} * SCALE                                          * 0.4                   par_mcp_##PARAMETER_SECTION##_insert_size
 
             ; width
             set CUR_w                               \
@@ -2342,11 +2361,11 @@ set THEME_color_red                         [181 66 66]
                             CUR_y{0}
 
                 ; height
-                set CUR_h_recinput                                                                          \
-                    par_mcp_##PARAMETER_SECTION##_element_vis&2                                             \
-                        par_mcp_##PARAMETER_SECTION##_element_width==1                                      \
-                            VAL_Button{1}                                                                   \
-                            + VAL_Button{1} * SCALE + 40 par_mcp_##PARAMETER_SECTION##_element_input_size   \
+                set CUR_h_recinput                                                                                  \
+                    par_mcp_##PARAMETER_SECTION##_element_vis&2                                                     \
+                        par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
+                            VAL_Button{1}                                                                           \
+                            + VAL_Button{1} * SCALE + 20 * 0.2 par_mcp_##PARAMETER_SECTION##_element_input_size    \
                         0
 
                 ; hiding logic
@@ -2935,21 +2954,23 @@ set THEME_color_red                         [181 66 66]
             ; height
             set VAL_mcp_meter_top_remaining_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y{0} - VAL_mcp_h{0} VAL_mcp_y_post_label{0}
 
-            set CUR_h                                                                                                                                               \
-                ?VAL_mcp_show_meter_top{0}                                                                                                                          \
-                    ?par_mcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                 \
-                        + VAL_mcp_meter_min_h{0} * - VAL_mcp_meter_top_remaining_h{0} VAL_mcp_meter_min_h{0}    * 0.01  par_mcp_##PARAMETER_SECTION##_meter_size    \
-                        + VAL_mcp_meter_min_h{0} * SCALE                                                        * 2     par_mcp_##PARAMETER_SECTION##_meter_size    \
+            set CUR_h                                                                                                                                                               \
+                ?VAL_mcp_show_meter_top{0}                                                                                                                                          \
+                    ?par_mcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                                 \
+                        + VAL_mcp_meter_min_h{0} * - VAL_mcp_meter_top_remaining_h{0} VAL_mcp_meter_min_h{0}    * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_meter_size    \
+                        + VAL_mcp_meter_min_h{0} * SCALE                                                        * 0.3                   par_mcp_##PARAMETER_SECTION##_meter_size    \
                     0
 
             ; padding correction
-            set CUR_y                           \
-                ?VAL_mcp_meter_padding{0}       \
-                    + CUR_y{0} VAL_Border{0}
+            set CUR_y                               \
+                ?VAL_mcp_show_meter_top{0}          \
+                    ?VAL_mcp_meter_padding{0}       \
+                        + CUR_y{0} VAL_Border{0}
 
-            set CUR_h                           \
-                ?VAL_mcp_meter_padding{0}       \
-                    - CUR_h{0} VAL_Border_2{0}
+            set CUR_h                               \
+                ?VAL_mcp_show_meter_top{0}          \
+                    ?VAL_mcp_meter_padding{0}       \
+                        - CUR_h{0} VAL_Border_2{0}
 
             ; empty button section offset (force border overlap)
             set CUR_y                                                   \
@@ -3002,10 +3023,6 @@ set THEME_color_red                         [181 66 66]
             set WALTER_ELEMENT##.meter.scale.color.unlit.bottom     ?par_mcp_##PARAMETER_SECTION##_meter_vu_db          VAL_meter_unlit_bottom
             set WALTER_ELEMENT##.meter.readout.color                ?par_mcp_##PARAMETER_SECTION##_meter_vu_readout     VAL_meter_readout
 
-            ; meter channel division
-            set CUR_chan_div * SCALE par_mcp_##PARAMETER_SECTION##_meter_channeldiv
-            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
-
             ; increment y position
             set CUR_y                           \
                 ?VAL_mcp_show_meter_top{0}      \
@@ -3050,6 +3067,29 @@ set THEME_color_red                         [181 66 66]
                     + CUR_y{0} VAL_mcp_spacing_section_y{0}             \
                     par_mcp_##PARAMETER_SECTION##_element_vis{0}==0     \
                         + CUR_y{0} VAL_mcp_spacing_section_y{0}
+
+        endmacro
+
+    ;   ## Draw : MCP : Meter : Format : Track
+    ; -----------------------------------------------------------------
+
+        macro MAC_DrawMcp_Meter_Format_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
+
+            ; meter channel division
+            set CUR_chan_div * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
+            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+
+        endmacro
+
+    ;   ## Draw : MCP : Meter : Format : Master
+    ; -----------------------------------------------------------------
+
+        macro MAC_DrawMcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
+            
+            ; meter channel division
+            set CUR_chan_div * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
+            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+            set WALTER_ELEMENT##.meter.vu.rmsdiv [CUR_chan_div{0} 0]
 
         endmacro
 
@@ -3144,7 +3184,7 @@ set THEME_color_red                         [181 66 66]
 
             ; section minimal height
             set CUR_h_section_min_vert      VAL_mcp_fader_min_h{0}
-            set CUR_h_section_min_horz      + VAL_mcp_spacing_fader_y{0} * 2 CUR_h{2}
+            set CUR_h_section_min_horz      + VAL_mcp_spacing_fader_y{0} * 2 VAL_Fader{2}
 
             set CUR_h_section_min CUR_h{0}
 
@@ -3159,11 +3199,11 @@ set THEME_color_red                         [181 66 66]
                         CUR_h_section_min_horz{0}
 
             ; section actual height
-            set CUR_h_section                                                                                                                                       \
-                ?VAL_mcp_show_faders_top{0}                                                                                                                         \
-                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                           \
-                        + CUR_h_section_min{0} * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * 0.01  par_mcp_##PARAMETER_SECTION##_fader_pan_height      \
-                        + CUR_h_section_min{0} * SCALE                                                  * 2     par_mcp_##PARAMETER_SECTION##_fader_pan_height      \
+            set CUR_h_section                                                                                                                                                       \
+                ?VAL_mcp_show_faders_top{0}                                                                                                                                         \
+                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                           \
+                        + CUR_h_section_min{0} * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * VAL_Fader_Scale{0}  par_mcp_##PARAMETER_SECTION##_fader_pan_height        \
+                        + CUR_h_section_min{0} * SCALE                                                  * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height                   \
                     0
 
             ; hiding logic
@@ -3443,10 +3483,10 @@ set THEME_color_red                         [181 66 66]
                         VAL_mcp_fader_min_h_2{0}                        \
                     VAL_mcp_fader_min_h_2{0}
 
-            set CUR_h_section                                                                                                   \
-                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                           \
-                    + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * 0.01  par_mcp_##PARAMETER_SECTION##_fader_pan_height  \
-                    + CUR_h_section_min{0} * SCALE                      * 2     par_mcp_##PARAMETER_SECTION##_fader_pan_height
+            set CUR_h_section                                                                                                                   \
+                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                           \
+                    + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_fader_pan_height  \
+                    + CUR_h_section_min{0} * SCALE                      * 2                     par_mcp_##PARAMETER_SECTION##_fader_pan_height
 
             set CUR_y_post_pan + CUR_y{0} + CUR_h_section{0} * 2 VAL_mcp_spacing_fader_y{0}
 
@@ -3751,7 +3791,7 @@ set THEME_color_red                         [181 66 66]
             macro MAC_DrawMcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; inserts
-                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Large VAL_insert_slot{0} 50 100 1 0 0 0]
+                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Large VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxlist.margin
@@ -3759,11 +3799,13 @@ set THEME_color_red                         [181 66 66]
                 set WALTER_ELEMENT##.fxparm.margin      WALTER_ELEMENT##.fxlist.margin
 
                 ; volume readout
+                set WALTER_ELEMENT##.volume.label.color [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
                 set WALTER_ELEMENT##.volume.label.font VAL_Font_Small
-                set WALTER_ELEMENT##.volume.label.margin                                                        \
-                    par_mcp_##PARAMETER_SECTION##_meter_vol_readout==2                                          \
-                        [VAL_Margin_Label{1} VAL_Margin_Label{0} VAL_Margin_Label{3} VAL_Margin_Label{2} 0]     \
+                set WALTER_ELEMENT##.volume.label.margin                                                                                            \
+                    par_mcp_##PARAMETER_SECTION##_meter_vol_readout==2                                                                              \
+                        [VAL_Margin_Label_vertical{0} VAL_Margin_Label_vertical{1} VAL_Margin_Label_vertical{2} VAL_Margin_Label_vertical{3} 0]     \
                         [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0.5]
+
 
             endmacro
 
@@ -3777,21 +3819,21 @@ set THEME_color_red                         [181 66 66]
 
                 ; track label
                 set WALTER_ELEMENT##.label.font VAL_Font_Large
-                set WALTER_ELEMENT##.label.margin                                                               \
-                    !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                      \
-                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0]     \
-                        [VAL_Margin_Label{1} VAL_Margin_Label{0} VAL_Margin_Label{3} VAL_Margin_Label{2} 0]
+                set WALTER_ELEMENT##.label.margin                                                                                                   \
+                    !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                                                          \
+                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0]                                         \
+                        [VAL_Margin_Label_vertical{0} VAL_Margin_Label_vertical{1} VAL_Margin_Label_vertical{2} VAL_Margin_Label_vertical{3} 0]
 
                 set WALTER_ELEMENT##.label.color    [VAL_Color_Track_Label_Text{0}  VAL_Color_Track_Label_Text{1}   VAL_Color_Track_Label_Text{2}]
 
                 ; track index
                 set WALTER_ELEMENT##.trackidx.font VAL_Font_Large
-                set WALTER_ELEMENT##.trackidx.margin                                                            \
-                    par_mcp_##PARAMETER_SECTION##_settings_label_index==2                                       \
-                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0.5]   \
-                    !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                      \
-                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0]     \
-                        [VAL_Margin_Label{1} VAL_Margin_Label{0} VAL_Margin_Label{3} VAL_Margin_Label{2} 0]
+                set WALTER_ELEMENT##.trackidx.margin                                                                                                \
+                    par_mcp_##PARAMETER_SECTION##_settings_label_index==2                                                                           \
+                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0.5]                                       \
+                    !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                                                          \
+                        [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0]                                         \
+                        [VAL_Margin_Label_vertical{0} VAL_Margin_Label_vertical{1} VAL_Margin_Label_vertical{2} VAL_Margin_Label_vertical{3} 0]
 
                 set WALTER_ELEMENT##.trackidx.margin                            \
                     ?par_mcp_##PARAMETER_SECTION##_settings_label_index==2      \
@@ -3834,33 +3876,35 @@ set THEME_color_red                         [181 66 66]
 
             ; tcp
             clear tcp.*
-            MAC_DrawTcp_Setup_Track         SCALE "tcp" "track"
-            MAC_DrawTcp_Meter_Track         SCALE "tcp" "track"
-            MAC_DrawTcp_Inserts             SCALE "tcp" "track"
-            MAC_DrawTcp_Faders              SCALE "tcp" "track"
-            MAC_DrawTcp_Buttons_Track       SCALE "tcp" "track"
-            MAC_DrawTcp_Label               SCALE "tcp" "track"
-            MAC_DrawTcp_EmbedFx             SCALE "tcp" "track"
-            MAC_DrawTcp_Folder              SCALE "tcp" "track"
-            MAC_DrawTcp_Font_Track          SCALE "tcp" "track"
+            MAC_DrawTcp_Setup_Track             SCALE "tcp" "track"
+            MAC_DrawTcp_Meter_Track             SCALE "tcp" "track"
+            MAC_DrawTcp_Meter_Format_Track      SCALE "tcp" "track"
+            MAC_DrawTcp_Inserts                 SCALE "tcp" "track"
+            MAC_DrawTcp_Faders                  SCALE "tcp" "track"
+            MAC_DrawTcp_Buttons_Track           SCALE "tcp" "track"
+            MAC_DrawTcp_Label                   SCALE "tcp" "track"
+            MAC_DrawTcp_EmbedFx                 SCALE "tcp" "track"
+            MAC_DrawTcp_Folder                  SCALE "tcp" "track"
+            MAC_DrawTcp_Font_Track              SCALE "tcp" "track"
 
             ; envcp
             clear envcp.*
-            MAC_DrawEnvcp_Setup             SCALE "envcp" "envcp"
-            MAC_DrawEnvcp_Fader             SCALE "envcp" "envcp"
-            MAC_DrawEnvcp_Buttons           SCALE "envcp" "envcp"
-            MAC_DrawEnvcp_Label             SCALE "envcp" "envcp"
-            MAC_DrawEnvcp_Font              SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Setup                 SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Fader                 SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Buttons               SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Label                 SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Font                  SCALE "envcp" "envcp"
 
             ; master
             clear master.tcp.*
-            MAC_DrawTcp_Setup_Master        SCALE "master.tcp" "master"
-            MAC_DrawTcp_Inserts             SCALE "master.tcp" "master"
-            MAC_DrawTcp_Faders              SCALE "master.tcp" "master"
-            MAC_DrawTcp_Buttons_Master      SCALE "master.tcp" "master"
-            MAC_DrawTcp_Meter_Master        SCALE "master.tcp" "master"
-            MAC_DrawTcp_EmbedFx             SCALE "master.tcp" "master"
-            MAC_DrawTcp_Font_Master         SCALE "master.tcp" "master"
+            MAC_DrawTcp_Setup_Master            SCALE "master.tcp" "master"
+            MAC_DrawTcp_Inserts                 SCALE "master.tcp" "master"
+            MAC_DrawTcp_Faders                  SCALE "master.tcp" "master"
+            MAC_DrawTcp_Buttons_Master          SCALE "master.tcp" "master"
+            MAC_DrawTcp_Meter_Master            SCALE "master.tcp" "master"
+            MAC_DrawTcp_Meter_Format_Master     SCALE "master.tcp" "master"
+            MAC_DrawTcp_EmbedFx                 SCALE "master.tcp" "master"
+            MAC_DrawTcp_Font_Master             SCALE "master.tcp" "master"
 
 
         endmacro
@@ -3885,9 +3929,6 @@ set THEME_color_red                         [181 66 66]
                 custom WALTER_ELEMENT##.custom.wid_knob_frame       "" "" "" "track_custom_knob_border"
                 custom WALTER_ELEMENT##.custom.env_icon             "" "" "" "track_custom_env_icon"
 
-                ; readout color
-                set WALTER_ELEMENT##.volume.label.color [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
-
                 ; size
                 set WALTER_ELEMENT##.size [400 200]
 
@@ -3907,8 +3948,8 @@ set THEME_color_red                         [181 66 66]
                     custom WALTER_ELEMENT##.custom.recinput_on      "" "" "" "track_custom_recinput_r_on"
 
                     ; label size
-                    set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 2 par_tcp_##PARAMETER_SECTION##_label_size
-
+                    set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
+                    
                     ; top position
                     set VAL_tcp_y_top 0
 
@@ -3936,16 +3977,17 @@ set THEME_color_red                         [181 66 66]
                                 par_tcp_gen_folder_icon_collapse    \
                                 par_tcp_gen_folder_icon_mode
 
-                    set VAL_tcp_x_offset                + VAL_tcp_x_offset_folder{0} * folderdepth  	* SCALE     par_tcp_gen_folder_indent
-                    set VAL_tcp_x_offset_max_precomp    + VAL_tcp_x_offset_folder{0} * maxfolderdepth   * SCALE     par_tcp_gen_folder_indent
+                    set VAL_tcp_x_offset                + VAL_tcp_x_offset_folder{0} * folderdepth  	* SCALE     * 0.02 par_tcp_gen_folder_indent
+                    set VAL_tcp_x_offset_max_precomp    + VAL_tcp_x_offset_folder{0} * maxfolderdepth   * SCALE     * 0.02 par_tcp_gen_folder_indent
 
                     ; compact width
-                    set VAL_compact_w + VAL_tcp_x_offset_max_precomp{0} * SCALE 100
+                    set VAL_compact_w + VAL_tcp_x_offset_max_precomp{0} * SCALE 120
                     set VAL_tcp_compact         \
                         w<VAL_compact_w{0}      \
                             1                   \
                             0
 
+                    ; indentation x offset
                     set VAL_tcp_x_offset                \
                         ?VAL_tcp_compact{0}             \
                             VAL_tcp_x_offset_folder{0}
@@ -3996,7 +4038,7 @@ set THEME_color_red                         [181 66 66]
                     custom WALTER_ELEMENT##.custom.readout_bg       "" "" "" "meter_custom_readout_bg_horz_flip"
 
                     ; label size
-                    set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 2 par_tcp_##PARAMETER_SECTION##_meter_size
+                    set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_meter_size
 
                     ; top position
                     set VAL_tcp_y_top VAL_Border{0}
@@ -4006,10 +4048,11 @@ set THEME_color_red                         [181 66 66]
 
                     ; indent offset
                     set VAL_tcp_x_offset 0
-                    set VAL_tcp_x_offset_max_precomp 0
+                    set VAL_tcp_x_offset_max_precomp    0
+                    set VAL_tcp_x_offset_max            0
 
                     ; compact width
-                    set VAL_compact_w * SCALE 100
+                    set VAL_compact_w * SCALE 120
                     set VAL_tcp_compact         \
                         w<VAL_compact_w{0}      \
                             1                   \
@@ -4071,9 +4114,9 @@ set THEME_color_red                         [181 66 66]
                         macro MAC_DrawTcp_Setup_Highlight_Selection SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                             ; width
-                            set CUR_w                                               \
-                                ?par_tcp_gen_highlight_selection                    \
-                                    * SCALE + 2 par_tcp_gen_highlight_selection     \
+                            set CUR_w                                                   \
+                                ?par_tcp_gen_highlight_selection                        \
+                                    * SCALE + 3 * 0.02 par_tcp_gen_highlight_selection  \
                                     0
 
                             set CUR_x - CUR_x{0} CUR_w{0}
@@ -4088,9 +4131,9 @@ set THEME_color_red                         [181 66 66]
 
                         macro MAC_DrawTcp_Setup_Highlight_Color SCALE WALTER_ELEMENT PARAMETER_SECTION
 
-                            set CUR_w                                           \
-                                ?par_tcp_gen_highlight_color                    \
-                                    * SCALE + 2 par_tcp_gen_highlight_color     \
+                            set CUR_w                                               \
+                                ?par_tcp_gen_highlight_color                        \
+                                    * SCALE + 3 * 0.02 par_tcp_gen_highlight_color  \
                                     0
 
                             set CUR_x                                           \
@@ -4180,7 +4223,7 @@ set THEME_color_red                         [181 66 66]
             set CUR_y                                                                                   \
                 par_tcp_##PARAMETER_SECTION##_fader_placement{0}!=0                                     \
                     + VAL_tcp_y_top{0}  +   VAL_Button{1}   + VAL_Pad{0} VAL_tcp_spacing_section_y{0}   \
-                    + VAL_tcp_y_top{0}      VAL_Unit{0}
+                    + VAL_tcp_y_top{0}  VAL_tcp_h{1}
 
             ; height
             set CUR_h VAL_Button{1}
@@ -4267,13 +4310,13 @@ set THEME_color_red                         [181 66 66]
                     ; size
                     set VAL_remaining_w - VAL_tcp_available_space{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
 
-                    set CUR_w                                                                                                                                               \
-                        ?VAL_tcp_show_##PAR_NAME##{0}                                                                                                                       \
-                            ?VAL_tcp_##PAR_NAME##_knob{0}                                                                                                                   \
-                                VAL_Knob_s{0}                                                                                                                               \
-                            !par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size_scale                                                                                    \
-                                + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                                       par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size   \
-                                + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * 0.01  par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size
+                    set CUR_w                                                                                                                                                               \
+                        ?VAL_tcp_show_##PAR_NAME##{0}                                                                                                                                       \
+                            ?VAL_tcp_##PAR_NAME##_knob{0}                                                                                                                                   \
+                                VAL_Knob_s{0}                                                                                                                                               \
+                            !par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size_scale                                                                                                    \
+                                + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                               * 0.2                        par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size   \
+                                + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size
 
                     ; x position
                     set CUR_x_target                                            \
@@ -4378,11 +4421,11 @@ set THEME_color_red                         [181 66 66]
                     ; width
                     set VAL_tcp_meter_remaining_w - VAL_tcp_available_space{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
 
-                    set CUR_w                                                                                                                                           \
-                        ?VAL_tcp_show_meter{0}                                                                                                                          \
-                            !par_tcp_##PARAMETER_SECTION##_meter_size_scale                                                                                             \
-                                + VAL_tcp_meter_min_w{0}    * SCALE + 2                                             * 2     par_tcp_##PARAMETER_SECTION##_meter_size    \
-                                + VAL_tcp_meter_min_w{0}    * - VAL_tcp_meter_remaining_w{0} VAL_tcp_meter_min_w{0} * 0.01  par_tcp_##PARAMETER_SECTION##_meter_size    \
+                    set CUR_w                                                                                                                                                           \
+                        ?VAL_tcp_show_meter{0}                                                                                                                                          \
+                            !par_tcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                             \
+                                + VAL_tcp_meter_min_w{0}    * SCALE + 1                                             * 0.3                   par_tcp_##PARAMETER_SECTION##_meter_size    \
+                                + VAL_tcp_meter_min_w{0}    * - VAL_tcp_meter_remaining_w{0} VAL_tcp_meter_min_w{0} * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_meter_size    \
                             0
 
                     ; readout visibility
@@ -4540,14 +4583,33 @@ set THEME_color_red                         [181 66 66]
                 set WALTER_ELEMENT##.meter.scale.color.unlit.bottom     ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db VAL_meter_unlit_bottom
                 set WALTER_ELEMENT##.meter.readout.color                ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_readout VAL_meter_readout
 
-                ; meter channel division
-                set CUR_chan_div * SCALE par_tcp_##PARAMETER_SECTION##_meter_channeldiv
-                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
-
                 ; z order
                 front WALTER_ELEMENT##.custom.meter_frame
                 front WALTER_ELEMENT##.meter
                 front WALTER_ELEMENT##.volume.label
+
+            endmacro
+
+        ;   ### Draw : TCP : Meter : Format : Track
+        ; -----------------------------------------------------------------
+
+            macro MAC_DrawTcp_Meter_Format_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
+
+                ; meter channel division
+                set CUR_chan_div * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
+                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+
+            endmacro
+
+        ;   ### Draw : TCP : Meter : Format : Master
+        ; -----------------------------------------------------------------
+
+            macro MAC_DrawTcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
+                
+                ; meter channel division
+                set CUR_chan_div * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
+                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+                set WALTER_ELEMENT##.meter.vu.rmsdiv [CUR_chan_div{0} 0]
 
             endmacro
 
@@ -4578,10 +4640,10 @@ set THEME_color_red                         [181 66 66]
 
             ; width
             set VAL_remaining_w - VAL_tcp_available_space{0} + VAL_tcp_spacing_section_x{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
-            set CUR_w                                                                                                                                   \
-                !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                        \
-                    + VAL_tcp_insert_min_w{0} * SCALE + 10                                      * 4     par_tcp_##PARAMETER_SECTION##_insert_size       \
-                    + VAL_tcp_insert_min_w{0} * - VAL_remaining_w{0} VAL_tcp_insert_min_w{0}    * 0.01  par_tcp_##PARAMETER_SECTION##_insert_size       \
+            set CUR_w                                                                                                                                               \
+                !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                    \
+                    + VAL_tcp_inserts_min_w{0} * SCALE + 10                                      * 0.3                par_tcp_##PARAMETER_SECTION##_insert_size     \
+                    + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}      par_tcp_##PARAMETER_SECTION##_insert_size     \
 
             ; x position
             set CUR_x                                                       \
@@ -4644,7 +4706,7 @@ set THEME_color_red                         [181 66 66]
 
                 ; preparation
                 set CUR_x                   - VAL_tcp_x_start_button{0} VAL_tcp_spacing_section_x{0}
-                set CUR_y                   + VAL_tcp_y_top{0} VAL_Unit{0}
+                set CUR_y                   + VAL_tcp_y_top{0} VAL_tcp_h{1}
                 set VAL_tcp_x_end_buttons   CUR_x{0}
                 set CUR_w                   VAL_Button{0}
                 set CUR_h                   VAL_Button{1}
@@ -4763,7 +4825,7 @@ set THEME_color_red                         [181 66 66]
                     ; [BUTTON] Record Input
                     set VAL_tcp_button_group_count 0
 
-                    set CUR_w + CUR_w{0} * SCALE + 20 * 2 par_tcp_##PARAMETER_SECTION##_element_adj_size_input
+                    set CUR_w + CUR_w{0} * SCALE + 20 * 0.2 par_tcp_##PARAMETER_SECTION##_element_adj_size_input
                     MAC_DrawTcp_Buttons_SingleButton_Track SCALE 2048 WALTER_ELEMENT PARAMETER_SECTION "recinput"
 
                     set CUR_w_recin_bg                      \
@@ -4985,8 +5047,6 @@ set THEME_color_red                         [181 66 66]
                                         0                                                                                                   \
                                     0
 
-                            ;par_tcp_gen_element_adj_separator_lin
-
                             ; [DRAW] Separator Marker
                             custom WALTER_ELEMENT##.custom.separator##INDEX "" "" "" "track_custom_separator"
                             set WALTER_ELEMENT##.custom.separator##INDEX##                                                      \
@@ -5175,14 +5235,19 @@ set THEME_color_red                         [181 66 66]
             macro MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} 50 100 1 0 0 0]
-                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_inserts_min_w{0} 0 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]                
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxparm.margin
+                
                 ; volume readout
-                set WALTER_ELEMENT##.volume.label.margin [VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} 0.5]
+                set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
+                set WALTER_ELEMENT##.volume.label.margin    [VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} 0.5]
+
+                ; fx embed
+                set WWALTER_ELEMENT##.fxembedheader.color WALTER_ELEMENT##.volume.label.color
 
             endmacro
 
@@ -5249,17 +5314,17 @@ set THEME_color_red                         [181 66 66]
                     0
 
             ; compact width
-            set VAL_envcp_compact_w + tcp_iconsize + VAL_tcp_x_offset_max_precomp * SCALE 100
+            set VAL_envcp_compact_w + tcp_iconsize + VAL_tcp_x_offset_max_precomp * SCALE 120
             set VAL_tcp_compact             \
                 w<VAL_envcp_compact_w{0}    \
                     1                       \
                     0
 
             ; envcp indentation
-            set VAL_envcp_indent                                                                    \
-                !par_tcp_envcp_settings_symbol                                                      \
-                    * SCALE par_tcp_##PARAMETER_SECTION##_settings_indent                           \
-                    + * SCALE par_tcp_##PARAMETER_SECTION##_settings_indent VAL_Envcp_Symbol{0}
+            set VAL_envcp_indent                                                                                \
+                !par_tcp_envcp_settings_symbol                                                                  \
+                    * SCALE         * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent                        \
+                    + * SCALE       * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent VAL_Envcp_Symbol{0}
 
             ; x offset
             set VAL_envcp_x_offset                              \
@@ -5345,7 +5410,7 @@ set THEME_color_red                         [181 66 66]
             set VAL_envcp_x_leftmost + VAL_envcp_x_offset{0} VAL_Pad{0}
 
             ; dynamic hiding points
-            set VAL_envcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 2 par_tcp_##PARAMETER_SECTION##_label_size
+            set VAL_envcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
 
             set VAL_tcp_hide_x_buttons                                                              \
                 -                                                                                   \
@@ -5408,7 +5473,7 @@ set THEME_color_red                         [181 66 66]
             ; y position
             set CUR_y                                               \
                 par_tcp_##PARAMETER_SECTION##_value_mode!=2         \
-                    VAL_Border{0}                                   \
+                    VAL_Envcp_h{1}                                  \
                     + VAL_Envcp_h{0} VAL_tcp_spacing_section_y{0}
 
             ; height
@@ -5442,16 +5507,16 @@ set THEME_color_red                         [181 66 66]
                             0
 
             ; width
-            set CUR_w                                                                                                                                               \
-                ?par_tcp_##PARAMETER_SECTION##_value_vertical                                                                                                       \
-                    VAL_Knob_s{0}                                                                                                                                   \
-                ?VAL_envcp_lanedisplay{0}                                                                                                                           \
-                    - tcp_iconsize * 3 VAL_Pad{0}                                                                                                                   \
-                ?VAL_envcp_fader_knob{0}                                                                                                                            \
-                    VAL_Knob_s{0}                                                                                                                                   \
-                !par_tcp_##PARAMETER_SECTION##_value_scale                                                                                                          \
-                    + VAL_tcp_fader_min_w{0} + VAL_Knob{0}                                              * 2 * SCALE     par_tcp_##PARAMETER_SECTION##_value_size    \
-                    + VAL_tcp_fader_min_w{0} * - VAL_envcp_available_space{0} VAL_tcp_fader_min_w{0}    * 0.01          par_tcp_##PARAMETER_SECTION##_value_size
+            set CUR_w                                                                                                                                                               \
+                ?par_tcp_##PARAMETER_SECTION##_value_vertical                                                                                                                       \
+                    VAL_Knob_s{0}                                                                                                                                                   \
+                ?VAL_envcp_lanedisplay{0}                                                                                                                                           \
+                    - tcp_iconsize * 3 VAL_Pad{0}                                                                                                                                   \
+                ?VAL_envcp_fader_knob{0}                                                                                                                                            \
+                    VAL_Knob_s{0}                                                                                                                                                   \
+                !par_tcp_##PARAMETER_SECTION##_value_scale                                                                                                                          \
+                    + VAL_tcp_fader_min_w{0} + VAL_Knob{0}                                              * 0.2 * SCALE                 par_tcp_##PARAMETER_SECTION##_value_size      \
+                    + VAL_tcp_fader_min_w{0} * - VAL_envcp_available_space{0} VAL_tcp_fader_min_w{0}    * VAL_Fader_Scale{0}        par_tcp_##PARAMETER_SECTION##_value_size
 
             ; target x position
             set CUR_x_target                                                                    \
@@ -5531,7 +5596,7 @@ set THEME_color_red                         [181 66 66]
 
             ; preparation
             set CUR_x - VAL_envcp_x_start_button{0} VAL_tcp_spacing_section_x{0}
-    	    set CUR_y VAL_Unit{0}
+    	    set CUR_y VAL_Envcp_h{1}
             set CUR_w VAL_Button{0}
             set CUR_h VAL_Button{1}
 
@@ -5596,7 +5661,7 @@ set THEME_color_red                         [181 66 66]
 
             ; preparations
             set CUR_x VAL_envcp_x_leftmost{0}
-            set CUR_y VAL_Unit{0}
+            set CUR_y VAL_Envcp_h{1}
             set CUR_w - VAL_tcp_x_end_buttons{0} CUR_x{0}
             set CUR_h VAL_Button{1}
             set VAL_readout_margin * SCALE 10
@@ -5605,10 +5670,10 @@ set THEME_color_red                         [181 66 66]
             set CUR_w_abs - w - WALTER_ELEMENT##.size{0} CUR_w{0}
 
             ; readout width
-            set CUR_w_readout                                                                       \
-                ?par_tcp_##PARAMETER_SECTION##_label_readout_size_scale                             \
-                    * CUR_w_abs{0}  * 0.008     par_tcp_##PARAMETER_SECTION##_label_readout_size    \
-                    * 2             * SCALE     par_tcp_##PARAMETER_SECTION##_label_readout_size
+            set CUR_w_readout                                                                                   \
+                ?par_tcp_##PARAMETER_SECTION##_label_readout_size_scale                                         \
+                    * CUR_w_abs{0}  * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_label_readout_size    \
+                    * 2             * SCALE * 0.2           par_tcp_##PARAMETER_SECTION##_label_readout_size
 
             ; readout absolute width
             set CUR_w_readout_abs - w - WALTER_ELEMENT##.size{0} CUR_w_readout{0}
@@ -5720,7 +5785,7 @@ set THEME_color_red                         [181 66 66]
         transport_showborders 0
         no_meter_reclbl 1
         tcp_vupeakwidth 1
-        tinttcp 1536
+        tinttcp 298
         mcp_mastervupeakheight 1
         peaksedges 0
 

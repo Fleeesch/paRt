@@ -17,21 +17,52 @@ COLOR_WHITE='\033[0;37m'
 COLOR_ORANGE='\033[0;33m'
 COLOR_RESET='\033[0m'
 
+#   Function : Remove Header Block
+# --------------------------------------------
+
+remove_header_block() {
+    sed -e '/THEME_HEADER/,/THEME_HEADER_CLOSE/d' "$1"
+}
+
+
+#   Function : Remove Theme Block
+# --------------------------------------------
+remove_theme_blocks() {
+    sed -e '/THEME_BLOCK/,/THEME_BLOCK_CLOSE/d' "$1"
+}
+
+
+#   Cleanup WALTER file
+# --------------------------------------------
+
+# Main script starts here
+walter_file="walter_rtconfig.txt"
+
+# Remove Blocks
+remove_header_block "$walter_file" > "temp_0.txt"
+remove_theme_blocks temp_0.txt > "temp_1.txt"
+
+# Clean up temporary files
+cat "temp_1.txt" > "$walter_file"
+rm temp_0.txt temp_1.txt
+
 #   Title
 # --------------------------------------------
 
 # title
 title="paRt WALTER file"
 
+release_folder="release"
+
 # date stamp
 date_stamp=$(date +"%Y-%m-%d %H:%M:%S")
 
 # version number from file
-version=$(<../rel/version)
+version=$(<../$release_folder/version)
 
 # header title part a
 header_content_start="\
-; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+; ::::::::::::::::::::::: THEME_HEADER :::::::::::::::::::::::::::::
 ;       $title
 ;
 "
@@ -40,12 +71,12 @@ header_content_start="\
 header_content_end="\
 ;       Version: $version
 ;       Date: $date_stamp
-; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 "
 
 # dynamic code block hints
-hint_start=";~ ~ ~ ~ ~ ~ ~ ~ ~ ~ programmatically created Block ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ \n"
-hint_end="\n;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ End of programmatically created Block ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ "
+hint_start=";~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ \n"
+hint_end="\n;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ "
 
 #   Ressources
 # --------------------------------------------
@@ -56,7 +87,7 @@ themes=("dark" "dimmed" "light")
 # source files
 file_colors="walter_colors.txt"
 file_walter="walter_rtconfig.txt"
-file_parameter_list="out/walter_parameter_list.txt"
+file_parameter_list="out/walter_parameter_list"
 
 placeholder_colors="THEMEBUILDER_INSERT_COLORS"
 placeholder_parameters="THEMEBUILDER_INSERT_PARAMETERS"
@@ -88,7 +119,7 @@ filter_colors() {
 replace_placeholders() {
     local content="$1"
     local placeholder="$2"
-    local replacement="$3"
+    local replacement="$placeholder\n$3"
 
     echo "$content" | awk -v placeholder="$placeholder" -v replacement="$replacement" '
         { gsub(placeholder, replacement) }
@@ -102,7 +133,14 @@ mkdir -p out
 #   Create Parameter List
 # --------------------------------------------
 
-source ./create_walter_parameter_list.sh
+# requires the -p tag
+for arg in "$@"; do
+    if [ "$arg" == "-p" ]; then
+        source ./create_walter_parameter_list.sh
+        break
+    fi
+done
+
 
 #   Create WALTER files for themes
 # --------------------------------------------
@@ -117,6 +155,7 @@ for theme in "${themes[@]}"; do
 
     # get color block
     colors=$(filter_colors "$file_colors" "$theme")
+    colors="$hint_start$(echo "$colors" | awk '{gsub(/[\/&]/,"\\\\&",$0); print}')$hint_end"
 
     # create theme output folder
     mkdir -p "out/$theme"
@@ -130,7 +169,7 @@ for theme in "${themes[@]}"; do
 
     # replace placeholders with dynamically read content
     output_content=$(cat "$file_walter")
-    output_content=$(replace_placeholders "$output_content" "$placeholder_colors" "$(echo "$colors" | awk '{gsub(/[\/&]/,"\\\\&",$0); print}')")
+    output_content=$(replace_placeholders "$output_content" "$placeholder_colors" "$colors")
     output_content=$(replace_placeholders "$output_content" "$placeholder_parameters" "$parameter_list")
 
     # add header comment

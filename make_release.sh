@@ -57,9 +57,7 @@ original_dir=$(pwd)
 
 dir_src="src"
 
-# creation-flags
-create_assets=0
-create_themefiles=0
+release_folder="release"
 
 # check for unattended mode
 github=false
@@ -80,30 +78,24 @@ print_header_text "=============================="
 print_header_text " paRt Release Building Tool"
 print_header_text "=============================="
 echo ""
-echo -e "-u     unattended run"
-echo -e "-g     create release for GitHub Actions VM"
+echo -e "${COLOR_MAGENTA}-u     unattended run"${COLOR_RESET}
+echo -e "${COLOR_MAGENTA}-g     create release for GitHub Actions VM"${COLOR_RESET}
 echo ""
 
-#   Recreate Assets
+#   Recreate Theme
 # -------------------------------
 
-recreate_assets=false
+recreate_themes=false
 if [ "$unattended" = false ]; then
 
-    print_prompt_line "Recreate Assets?"
+    print_prompt_line "Recreate Themes?"
     read -n 1 choice
     echo ""
 
     case "$choice" in
-    y | Y) recreate_assets=true ;;
-    *) recreate_assets=false ;;
+    y | Y) recreate_themes=true ;;
+    *) recreate_themes=false ;;
     esac
-
-    if [ "$recreate_assets" = true ]; then
-        cd "./src"
-        source make_themes.sh
-        cd "$ORG_DIR"
-    fi
 
 fi
 
@@ -111,195 +103,142 @@ fi
 #   Release Creation
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-while true; do
+#   Local Release
+# -------------------------------
 
-    #   Local Release
-    # -------------------------------
+local_release=true
 
-    local_release=true
+if [ "$unattended" = false ]; then
 
-    if [ "$unattended" = false ]; then
+    print_prompt_line "Create local Release?"
+    read -n 1 choice
+    echo ""
 
-        print_prompt_line "Create local Release?"
-        read -n 1 choice
-        echo ""
+    case "$choice" in
+    y | Y) local_release=true ;;
+    *) local_release=false ;;
+    esac
 
-        case "$choice" in
-        y | Y) local_release=true ;;
-        *) local_release=false ;;
-        esac
+fi
 
+# theme recreation
+if [ "$recreate_themes" = true ]; then
+    cd "./src"
+    source make_themes.sh
+    cd "$ORG_DIR"
+fi
+
+if [ "$local_release" = true ]; then
+
+    #   Binaries
+    # ------------------------------
+
+    print_process_start "Creating Theme Binaries"
+
+    # clear release folder
+    version=$(<./src/$release_folder/version)
+    rm -rf "./$release_folder/current" >/dev/null 2>&1
+    rm -rf "./$release_folder/$version" >/dev/null 2>&1
+
+    # create release folders
+    mkdir -p "./$release_folder/$version/bin"
+    mkdir -p "./$release_folder/$version/changelog"
+    mkdir -p "./$release_folder/$version/reapack"
+
+    # add binaries
+    rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./src/build/" "./$release_folder/$version/bin/"
+
+    # manual installation folder
+    mkdir -p "./$release_folder/$version/bin/manual/ColorThemes"
+    mkdir -p "./$release_folder/$version/bin/manual/Scripts/Fleeesch/Themes/paRt"
+
+    rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./$release_folder/$version/bin/" "./$release_folder/$version/bin/manual/ColorThemes"
+
+    print_done
+
+    #   Changelog
+    # ------------------------------
+
+    print_process_start "Creating Changelog"
+
+    changelog_file_in="./src/$release_folder/changelog"
+
+    # Reapack
+    changelog_file_out="./$release_folder/$version/changelog/changelog_reapack.txt"
+
+    echo "@changelog" >"$changelog_file_out"
+    while IFS= read -r line; do
+        echo "  $line" >>"$changelog_file_out"
+    done <"$changelog_file_in"
+
+    # Markdown
+    changelog_file_out="./$release_folder/$version/changelog/changelog.md"
+
+    echo "**$version - Changelog**" >"$changelog_file_out"
+    while IFS= read -r line; do
+        echo "- $line" >>"$changelog_file_out"
+    done <"$changelog_file_in"
+
+    # Boardcode
+    changelog_file_out="./$release_folder/$version/changelog/changelog_bb.txt"
+
+    echo "[code]" >"$changelog_file_out"
+    echo "[b]Changelog - $version[/b]" >>"$changelog_file_out"
+    while IFS= read -r line; do
+        echo "- $line" >>"$changelog_file_out"
+    done <"$changelog_file_in"
+    echo "[/code]" >>"$changelog_file_out"
+
+    print_done
+
+    #   Reapack Package File
+    # ------------------------------
+
+    print_process_start "Creating ReaPack Data"
+
+    changelog_file="./$release_folder/$version/changelog/changelog_reapack.txt"
+    reapack_file_in="reapack/reapack_info"
+    reapack_file_out="./$release_folder/$version/reapack/part.theme"
+
+    echo "@version $version" >"$reapack_file_out"
+    cat "$reapack_file_in" >>"$reapack_file_out"
+    echo "" >>"$reapack_file_out"
+    cat "$changelog_file" >>"$reapack_file_out"
+
+    print_done
+
+    #   Theme Adjuster Files
+    # ------------------------------
+
+    print_process_start "Copying ReaScript Files"
+
+    rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
+    rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"
+
+    print_done
+
+
+    #   Manual-Installation Release
+    # --------------------------------
+
+    print_process_start "Creating Manual-Installation"
+
+    zip_file="$ORG_DIR/$release_folder/$version/bin/part_manual_install_v$version.zip"
+
+    cd "$ORG_DIR/$release_folder/$version/bin/manual/"
+    zip -9 -qrFS "$zip_file" .
+
+    cd "$ORG_DIR"
+
+    rm -rf "./$release_folder/$version/bin/manual" >/dev/null 2>&1
+
+    print_done
+
+    #   Github Rename
+    # ------------------------------
+
+    if [ "$github" = true ]; then
+        mv "./$release_folder/$version" "./$release_folder/current" >/dev/null 2>&1
     fi
 
-    if [ "$local_release" = true ]; then
-
-        #   Binaries
-        # ------------------------------
-
-        print_process_start "Creating Theme Binaries"
-
-        # clear release folder
-        version=$(<./src/rel/version)
-        rm -rf "./rel/current" >/dev/null 2>&1
-        rm -rf "./rel/$version" >/dev/null 2>&1
-
-        # create release folders
-        mkdir -p "./rel/$version/bin"
-        mkdir -p "./rel/$version/changelog"
-        mkdir -p "./rel/$version/reapack"
-
-        # add binaries
-        rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./src/build/" "./rel/$version/bin/"
-
-        print_done
-
-        #   Changelog
-        # ------------------------------
-
-        print_process_start "Creating Changelog"
-
-        changelog_file_in="./src/rel/changelog"
-
-        # Reapack
-        changelog_file_out="./rel/$version/changelog/changelog_reapack.txt"
-
-        echo "@changelog" >"$changelog_file_out"
-        while IFS= read -r line; do
-            echo "  $line" >>"$changelog_file_out"
-        done <"$changelog_file_in"
-
-        # Markdown
-        changelog_file_out="./rel/$version/changelog/changelog.md"
-
-        echo "**$version - Changelog**" >"$changelog_file_out"
-        while IFS= read -r line; do
-            echo "- $line" >>"$changelog_file_out"
-        done <"$changelog_file_in"
-
-        # Boardcode
-        changelog_file_out="./rel/$version/changelog/changelog_bb.txt"
-
-        echo "[code]" >"$changelog_file_out"
-        echo "[b]Changelog - $version[/b]" >>"$changelog_file_out"
-        while IFS= read -r line; do
-            echo "- $line" >>"$changelog_file_out"
-        done <"$changelog_file_in"
-        echo "[/code]" >>"$changelog_file_out"
-
-        print_done
-
-        #   Reapack Theme File
-        # ------------------------------
-
-        print_process_start "Creating ReaPack Data"
-
-        changelog_file="./rel/$version/changelog/changelog_reapack.txt"
-        reapack_file_in="reapack/reapack_info"
-        reapack_file_out="./rel/$version/reapack/part.theme"
-
-        cat "$reapack_file_in" >"$reapack_file_out"
-        echo "" >>"$reapack_file_out"
-        cat "$changelog_file" >>"$reapack_file_out"
-
-        print_done
-
-        #   Theme Adjuster Files
-        # ------------------------------
-
-        print_process_start "Copying ReaScript Files"
-
-        rsync -aq --exclude="\.*" --exclude="conf/*" "./src/scripts/" "./rel/$version/reapack/"
-
-        cd "./src/scripts"
-        zip_file="$ORG_DIR/rel/$version/bin/paRt - Theme Adjuster.zip"
-        zip -qrFS "$zip_file" .
-        cd "$ORG_DIR"
-
-        print_done
-
-        #   Github Rename
-        # ------------------------------
-
-        if [ "$github" = true ]; then
-            mv "./rel/$version" "./rel/current" >/dev/null 2>&1
-        fi
-
-    fi
-
-    break
-
-    #     # ask for theme file creation
-    #     print_prompt_line 'Make a local Release? [y] ' yn
-
-    #     # raise asset-creation-flag
-    #     case $yn in
-    #     [Yy]*)
-
-    #         # return to original working directory
-    #         cd $original_dir
-
-    #         # make source and release
-
-    #         # > > > > > > > > > > > > > > > > > > > > >
-    #         #   Uploading to Github
-    #         # > > > > > > > > > > > > > > > > > > > > >
-    #         while true; do
-
-    #             # ask for theme file creation
-    #             echo -
-    #             read -p 'Push Release to Github? [y] ' yn
-
-    #             # raise asset-creation-flag
-    #             case $yn in
-    #             [Yy]*)
-
-    #                 # return to original working directory
-    #                 cd $original_dir
-
-    #                 # make source and release
-    #                 StoreStep "Pushing Release to Github"
-    #                 ./update_github.sh
-    #                 StoreStep "Pushing Release to Github - Done"
-
-    #                 # > > > > > > > > > > > > > > > > > > > > >
-    #                 #   Update ReaPack
-    #                 # > > > > > > > > > > > > > > > > > > > > >
-    #                 while true; do
-
-    #                     # ask for theme file creation
-    #                     echo -
-    #                     read -p 'Update ReaPack Index? [y] ' yn
-
-    #                     # raise asset-creation-flag
-    #                     case $yn in
-    #                     [Yy]*)
-
-    #                         # return to original working directory
-    #                         cd $original_dir
-
-    #                         # make source and release
-    #                         StoreStep "Updating Reapack Repository"
-    #                         ./update_reapack.sh
-    #                         StoreStep "Updating Reapack Repository - Done"
-
-    #                         break
-    #                         ;;
-    #                     *) break ;;
-    #                     esac
-    #                 done
-
-    #                 break
-    #                 ;;
-    #             *) break ;;
-    #             esac
-    #         done
-
-    #         break
-    #         ;;
-    #     *) break ;;
-    #     esac
-done
-
-# echo -
-# echo Done. Press any key to exit...
-# read -p ""
+fi

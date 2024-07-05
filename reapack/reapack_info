@@ -1,3 +1,10 @@
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Light.ReaperThemeZip
+  [script]paRt/conf
+  [script]paRt/lib
+  [script main]paRt/*.lua
 @about
   # **p**lain **a**dapting **R**eaper **t**heme
 A Reaper theme focussing on functionality.
@@ -18,20 +25,5 @@ A Reaper theme focussing on functionality.
   paRt
 @link
   https://github.com/Fleeesch/paRt
-@provides
-  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dark.ReaperThemeZip
-  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Dimmed.ReaperThemeZip
-  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/paRt.-.Light.ReaperThemeZip
-  [script]paRt/*
-  [script main]paRt/paRt - Theme Adjuster.lua
-  [script main]paRt/paRt - Restart Theme Adjuster.lua
-  [script main]paRt/paRt - Load Bank 1.lua
-  [script main]paRt/paRt - Load Bank 2.lua
-  [script main]paRt/paRt - Load Bank 3.lua
-  [script main]paRt/paRt - Load Bank 4.lua
-  [script main]paRt/paRt - Load Bank 5.lua
-  [script main]paRt/paRt - Load Bank 6.lua
-  [script main]paRt/paRt - Load Bank 7.lua
-  [script main]paRt/paRt - Load Bank 8.lua
 @screenshot
   https://fleeesch.github.io/res/part/img/presenter/part_presenter_fhd.png
