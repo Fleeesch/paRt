@@ -1,0 +1,125 @@
+--clear-output-folder
+
+--copy-toolbar-icons
+
+#       Animations
+# --------------------------------------
+
+--out animation_toolbar_highlight           --crop animation/animation_pulse_inner      --images animation/animation_pulse_fill -tint toolbar_animation_border
+--out animation_toolbar_armed                                                           --images animation/animation_pulse_fill -tint toolbar_animation_fill
+
+#       Blank Button
+# --------------------------------------
+
+# blank button
+--out toolbar_blank --spritesheet --button --toolbar --frame frame -fit --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+
+#       Exceptions
+# --------------------------------------
+
+# Midi Step
+--out toolbar_midi_step                    --spritesheet   --button --toolbar  --toolbar-icon toolbar_midi_step                    --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+
+#       Oneshot - Neutral
+# --------------------------------------
+
+--out toolbar_audio_waveform_properties   --spritesheet   --button            --toolbar-icon toolbar_audio_waveform_properties    --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_ex_insert_open              --spritesheet   --button            --toolbar-icon toolbar_ex_insert_open               --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_load                        --spritesheet   --button            --toolbar-icon toolbar_load                         --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_new                         --spritesheet   --button            --toolbar-icon toolbar_new                          --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_projprop                    --spritesheet   --button            --toolbar-icon toolbar_projprop                     --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_redo                        --spritesheet   --button            --toolbar-icon toolbar_redo                         --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_save                        --spritesheet   --button            --toolbar-icon toolbar_save                         --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_undo                        --spritesheet   --button            --toolbar-icon toolbar_undo                         --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_revert                      --spritesheet   --button            --toolbar-icon toolbar_revert                       --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_add                         --spritesheet   --button            --toolbar-icon toolbar_add                          --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+--out toolbar_delete                      --spritesheet   --button            --toolbar-icon toolbar_delete                       --images bg -tint toolbar_button_bg_off border -tint toolbar_button_border
+
+#       Toggle - Off
+# --------------------------------------
+
+--out toolbar_dock_off                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_dock_off                             --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_envitem_off                             --spritesheet   --button --toolbar      --toolbar-icon toolbar_envitem_off                          --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_autoplay_off                         --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_autoplay_off                      --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_pitch_detect_off                     --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_pitch_detect_off                  --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_preserve_pitch_tempo_matching_off    --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_preserve_pitch_tempo_matching_off --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_properties_for_current_media_off     --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_properties_for_current_media_off  --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_start_on_bar_off                     --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_start_on_bar_off                  --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_filter_off                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_filter_off                           --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_grid_off                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_grid_off                             --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_group_off                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_group_off                            --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_lock_off                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_lock_off                             --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_metro_off                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_metro_off                            --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_all_off                            --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_all_off                         --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_itemsel_off                        --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_itemsel_off                     --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_tracksel_off                       --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_tracksel_off                    --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_quant_off                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_quant_off                            --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_relsnap_off                             --spritesheet   --button --toolbar      --toolbar-icon toolbar_relsnap_off                          --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ripple_off                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_ripple_off                           --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_snap_off                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_snap_off                             --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_xfade_off                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_xfade_off                            --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_razor_off                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_razor_off                            --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+--out toolbar_marquee_cursor_selection_off            --spritesheet   --button --toolbar      --toolbar-icon toolbar_marquee_cursor_selection_off         --images bg -tint toolbar_button_bg_off -frame 0 1 bg -tint color_cyan -frame 2 2 border -tint toolbar_button_border
+
+#       Toggle - On
+# --------------------------------------
+
+--out toolbar_dock_on                                 --spritesheet   --button --toolbar      --toolbar-icon toolbar_dock_on                              --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_envitem_on                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_envitem_on                           --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_autoplay_on                          --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_autoplay_on                       --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_pitch_detect_on                      --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_pitch_detect_on                   --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_preserve_pitch_tempo_matching_on     --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_preserve_pitch_tempo_matching_on  --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_properties_for_current_media_on      --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_properties_for_current_media_on   --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ex_start_on_bar_on                      --spritesheet   --button --toolbar      --toolbar-icon toolbar_ex_start_on_bar_on                   --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_filter_on                               --spritesheet   --button --toolbar      --toolbar-icon toolbar_filter_on                            --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_grid_on                                 --spritesheet   --button --toolbar      --toolbar-icon toolbar_grid_on                              --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_group_on                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_group_on                             --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_lock_on                                 --spritesheet   --button --toolbar      --toolbar-icon toolbar_lock_on                              --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_metro_on                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_metro_on                             --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_all_on                             --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_all_on                          --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_itemsel_on                         --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_itemsel_on                      --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_midi_tracksel_on                        --spritesheet   --button --toolbar      --toolbar-icon toolbar_midi_tracksel_on                     --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_quant_on                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_quant_on                             --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_relsnap_on                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_relsnap_on                           --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ripple_one                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_ripple_one                           --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_ripple_all                              --spritesheet   --button --toolbar      --toolbar-icon toolbar_ripple_all                           --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_snap_on                                 --spritesheet   --button --toolbar      --toolbar-icon toolbar_snap_on                              --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_xfade_on                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_xfade_on                             --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_razor_on                                --spritesheet   --button --toolbar      --toolbar-icon toolbar_razor_on                             --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+--out toolbar_marquee_cursor_selection_on             --spritesheet   --button --toolbar      --toolbar-icon toolbar_marquee_cursor_selection_on          --images bg -tint color_cyan -frame 0 1 bg -tint toolbar_button_bg_off -frame 2 2 border -tint toolbar_button_border
+
+#       Joined
+# --------------------------------------
+
+# Left
+--out toolbar_midi_events_mode_normal_rectangle        --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_events_mode_normal_rectangle    --images bg_l -tint toolbar_button_bg_off -frame 0 1 bg_l -tint color_cyan -frame 2 2 border_l -tint toolbar_button_border
+--out toolbar_midi_mode_piano_roll                     --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_mode_piano_roll                 --images bg_l -tint toolbar_button_bg_off -frame 0 1 bg_l -tint color_cyan -frame 2 2 border_l -tint toolbar_button_border
+
+# Middle
+--out toolbar_midi_events_mode_drum_triangle           --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_events_mode_drum_triangle       --images bg_m -tint toolbar_button_bg_off -frame 0 1 bg_m -tint color_cyan -frame 2 2 border_m -tint toolbar_button_border
+--out toolbar_midi_mode_named_notes                    --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_mode_named_notes                --images bg_m -tint toolbar_button_bg_off -frame 0 1 bg_m -tint color_cyan -frame 2 2 border_m -tint toolbar_button_border
+--out toolbar_midi_mode_event_list                     --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_mode_event_list                 --images bg_m -tint toolbar_button_bg_off -frame 0 1 bg_m -tint color_cyan -frame 2 2 border_m -tint toolbar_button_border
+
+# Right
+--out toolbar_midi_events_mode_drum_diamond            --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_events_mode_drum_diamond        --images bg_r -tint toolbar_button_bg_off -frame 0 1 bg_r -tint color_cyan -frame 2 2 border_r -tint toolbar_button_border
+--out toolbar_midi_mode_musical_notation               --spritesheet  --button --toolbar      --toolbar-icon toolbar_midi_mode_musical_notation           --images bg_r -tint toolbar_button_bg_off -frame 0 1 bg_r -tint color_cyan -frame 2 2 border_r -tint toolbar_button_border
+
+# Left - Off
+--out toolbar_ex_tempo_match_off                        --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_off                   --images bg_l -tint toolbar_button_bg_off -frame 0 1 bg_l -tint color_cyan -frame 2 2 border_l -tint toolbar_button_border
+
+# Middle - Off
+--out toolbar_ex_tempo_match_double_off                 --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_double_off            --images bg_m -tint toolbar_button_bg_off -frame 0 1 bg_m -tint color_cyan -frame 2 2 border_m -tint toolbar_button_border
+
+# Right - Off
+--out toolbar_ex_tempo_match_half_off                   --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_half_off              --images bg_r -tint toolbar_button_bg_off -frame 0 1 bg_r -tint color_cyan -frame 2 2 border_r -tint toolbar_button_border
+
+# Left - On
+--out toolbar_ex_tempo_match_on                         --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_on                    --images bg_l -tint color_cyan -frame 0 1 bg_l -tint toolbar_button_bg_off -frame 2 2 border_l -tint toolbar_button_border
+
+# Middle - On
+--out toolbar_ex_tempo_match_double_on                  --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_double_on             --images bg_m -tint color_cyan -frame 0 1 bg_m -tint toolbar_button_bg_off -frame 2 2 border_m -tint toolbar_button_border
+
+# Right - On
+--out toolbar_ex_tempo_match_half_on                    --spritesheet  --button --toolbar      --toolbar-icon toolbar_ex_tempo_match_half_on               --images bg_r -tint color_cyan -frame 0 1 bg_r -tint toolbar_button_bg_off -frame 2 2 border_r -tint toolbar_button_border
+
+--copy-files

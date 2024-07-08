@@ -1,0 +1,25 @@
+--clear-output-folder
+
+#       Buttons
+# --------------------------------------
+
+--out lane_solo_off                         --spritesheet --button --images button_l_fill   -tint lane_toggle_bg_off        button_l_border    -tint lane_toggle_border
+--out lane_solo_on                          --spritesheet --button --images button_l_fill   -tint color_cyan                button_l_border    -tint lane_toggle_border
+--out lane_solo_off_indicator               --spritesheet --button --images button_fill     -tint lane_toggle_bg_off        button_border      -tint lane_toggle_border
+--out lane_solo_on_indicator                --spritesheet --button --images button_fill     -tint color_cyan                button_border      -tint lane_toggle_border
+
+#       Arrows
+# --------------------------------------
+
+--out lane_solo_up                          --spritesheet --button --images arrow_fill -tint lane_arrow_bg      arrow_border -tint lane_arrow_border
+--out lane_solo_down    --flip-vertical     --spritesheet --button --images arrow_fill -tint lane_arrow_bg      arrow_border -tint lane_arrow_border
+
+#       Mode
+# --------------------------------------
+
+--out fixed_lanes_hidden                    --spritesheet --button --images lane_overlay -tint lane_menu_bg     lane_hidden     -tint lane_menu_symbol
+--out fixed_lanes_one                       --spritesheet --button --images lane_overlay -tint lane_menu_bg     lane_one        -tint lane_menu_symbol
+--out fixed_lanes_small                     --spritesheet --button --images lane_overlay -tint lane_menu_bg     lane_multi      -tint lane_menu_symbol
+--out fixed_lanes_big                       --spritesheet --button --images lane_overlay -tint lane_menu_bg     lane_multi_l    -tint lane_menu_symbol
+
+--copy-files

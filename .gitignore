@@ -16,13 +16,7 @@
 
 # Release folders
 
-/rel/**/bin/
-/rel/current/
-
-# Reserved for local development machine
-
-#move_to_local_daw.sh
-/src/build/
+/release/*
 
 # Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
 *gitignore*
@@ -30,3 +24,8 @@
 
 # flac file render folder
 **/rnd/flac/
+
+# exclude assets from build folder
+/src/build/*
+!/src/build/*.ReaperTheme
+!/src/build/*.ReaperThemeZip

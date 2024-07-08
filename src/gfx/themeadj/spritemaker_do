@@ -1,0 +1,53 @@
+--clear-output-folder
+
+# table
+--out table_visible                             --single-level 200  --images visible                                                -tint themeadj_table_icon
+--out table_mixer_hide                          --single-level 200  --images mixer_hide                                             -tint themeadj_table_icon
+--out table_padding                             --single-level 200  --images padding                                                -tint themeadj_table_icon
+--out table_fader_size                          --single-level 200  --images fader_size                                             -tint themeadj_table_icon
+--out table_mcp_pan_layout_top                  --single-level 200  --images panmode_top                                            -tint themeadj_table_icon
+--out table_mcp_pan_layout_strip                --single-level 200  --images panmode_strip                                          -tint themeadj_table_icon
+--out table_mcp_pan_layout_bottom               --single-level 200  --images panmode_bottom                                         -tint themeadj_table_icon
+--out table_mcp_fader_layout_knob               --single-level 200  --images fadermode_knob                                         -tint themeadj_table_icon
+--out table_mcp_fader_layout_vert               --single-level 200  --images fadermode_vert                                         -tint themeadj_table_icon
+--out table_mcp_fader_layout_horz               --single-level 200  --images fadermode_spread                                       -tint themeadj_table_icon
+--out table_tcp_fader_layout_inline             --single-level 200  --images fadermode_horz                                         -tint themeadj_table_icon
+--out table_tcp_fader_layout_separate           --single-level 200  --images fadermode_stacked                                      -tint themeadj_table_icon
+--out table_tcp_fader_layout_explode            --single-level 200  --images fadermode_spread                                       -tint themeadj_table_icon
+
+
+# track
+--out track_mute                                --single-level 200  --images fill -tint themeadj_color_yellow mute                  -tint button_symbol_on
+--out track_solo                                --single-level 200  --images fill -tint themeadj_color_blue solo                    -tint button_symbol_on
+--out track_env                                 --single-level 200  --images fill -tint themeadj_color_gray env                     -tint button_symbol_on
+--out track_fx                                  --single-level 200  --images fill -tint themeadj_button_bg_off fx                   -tint button_symbol_off
+--out track_infx                                --single-level 200  --images fill -tint themeadj_button_bg_off fx_in                -tint button_symbol_off
+--out track_phase                               --single-level 200  --images fill -tint themeadj_button_bg_off phase                -tint button_symbol_off
+--out track_input                               --single-level 200  --images fill -tint themeadj_color_red recinput                 -tint button_symbol_on
+--out track_recarm                              --single-level 200  --images fill -tint themeadj_color_red recarm                   -tint button_symbol_on
+--out track_recmode     --mask-template inner   --single-level 200  --images fill -tint themeadj_button_bg_off recmode -mask        -tint button_symbol_off
+--out track_monitor                             --single-level 200  --images fill -tint themeadj_button_bg_off monitor              -tint button_symbol_off
+--out track_mono                                --single-level 200  --images fill -tint themeadj_button_bg_off mono                 -tint button_symbol_off
+--out track_io          --mask-template inner   --single-level 200  --images fill -tint themeadj_button_bg_off io_1 -mask           -tint color_cyan io_0 -mask -tint themeadj_color_yellow io_2 -mask -tint themeadj_color_red
+
+# envcp
+--out envcp_hide                                --single-level 200  --images fill -tint themeadj_button_bg_off       envcp_hide     -tint button_symbol_off
+--out envcp_bypass                              --single-level 200  --images fill -tint themeadj_button_bg_off       envcp_byp      -tint button_symbol_off
+--out envcp_mod                                 --single-level 200  --images fill -tint themeadj_color_blue          envcp_mod      -tint button_symbol_on
+--out envcp_arm                                 --single-level 200  --images fill -tint themeadj_color_red           recarm         -tint button_symbol_on
+--out envcp_learn                               --single-level 200  --images fill -tint themeadj_color_blue          envcp_learn    -tint button_symbol_on
+
+# transport
+--out transport_rewind                          --single-level 200  --images fill -tint themeadj_button_bg_off     transport_forward -flip-h    -tint button_symbol_off
+--out transport_forward                         --single-level 200  --images fill -tint themeadj_button_bg_off     transport_forward            -tint button_symbol_off
+--out transport_stop                            --single-level 200  --images fill -tint themeadj_button_bg_off     transport_stop               -tint button_symbol_off
+--out transport_pause                           --single-level 200  --images fill -tint themeadj_button_bg_off     transport_pause              -tint button_symbol_off
+--out transport_play                            --single-level 200  --images fill -tint themeadj_button_bg_off     transport_play               -tint button_symbol_off
+--out transport_record                          --single-level 200  --images fill -tint themeadj_color_red         transport_rec                -tint button_symbol_on
+--out transport_repeat                          --single-level 200  --images fill -tint themeadj_button_bg_off     transport_repeat             -tint button_symbol_off
+--out transport_env                             --single-level 200  --images fill -tint themeadj_button_bg_off     transport_env                -tint button_symbol_off
+--out transport_bpm                             --single-level 200  --images fill -tint themeadj_button_bg_off     transport_bpm                -tint button_symbol_off
+--out transport_status                          --single-level 200  --images fill -tint themeadj_button_bg_off     transport_status             -tint button_symbol_off
+--out transport_selection                       --single-level 200  --images fill -tint themeadj_button_bg_off     transport_selection          -tint button_symbol_off
+
+--copy-files

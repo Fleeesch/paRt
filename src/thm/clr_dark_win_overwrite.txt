@@ -1,3 +1,0 @@
-[color theme]
-midi_inline_trackbg1=12369084
-midi_inline_trackbg2=11382189

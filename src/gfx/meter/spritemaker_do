@@ -1,0 +1,64 @@
+--clear-output-folder
+
+#       Background
+# --------------------------------------
+
+# bg
+--out meter_bg_v meter_bg_h meter_bg_mcp meter_bg_tcp    --images bg -tint meter_bg
+
+# border
+--out meter_custom_border  --frame frame    --images border -tint meter_border
+
+# readout
+--out meter_custom_readout_bg_vert                      --frame frame --images readout_bg -tint readout_bg
+--out meter_custom_readout_bg_horz      --rotate 270    --frame frame --images readout_bg -tint readout_bg
+--out meter_custom_readout_bg_horz_flip --rotate 90     --frame frame --images readout_bg -tint readout_bg
+
+#       Strip
+# --------------------------------------
+
+# meter strip
+--out meter_strip_v     --single-level 100      --images                                                \
+                        meter_0_m           -tint   vu_normal               -alpha $alpha_meter_unit    \
+                        meter_1_m           -tint   vu_normal                                           \
+                        meter_2_m           -tint   vu_normal_clip          -alpha $alpha_meter_unit    \
+                        meter_3_m           -tint   vu_normal_clip                                      \
+                        meter_4_m           -tint   vu_rec                  -alpha $alpha_meter_unit    \
+                        meter_5_m           -tint   vu_rec                                              \
+                        meter_6_m           -tint   vu_rec_clip             -alpha $alpha_meter_unit    \
+                        meter_7_m           -tint   vu_rec_clip
+
+# rms strip
+--out meter_strip_v_rms     --single-level 100      --images                                            \
+                        meter_0_m           -tint   vu_rms               -alpha $alpha_meter_unit       \
+                        meter_1_m           -tint   vu_rms                                              \
+                        meter_2_m           -tint   vu_rms_clip          -alpha $alpha_meter_unit       \
+                        meter_3_m           -tint   vu_rms_clip                                         \
+                        meter_4_m           -tint   vu_rms_alt           -alpha $alpha_meter_unit       \
+                        meter_5_m           -tint   vu_rms_alt                                          \
+                        meter_6_m           -tint   vu_rms_alt_clip      -alpha $alpha_meter_unit       \
+                        meter_7_m           -tint   vu_rms_alt_clip
+
+# horizontal copies
+--copy  meter_strip_v       meter_strip_h           --rotate 270
+--copy  meter_strip_v_rms   meter_strip_h_rms       --rotate 270
+
+#       Clip
+# --------------------------------------
+
+# clip
+--out   meter_clip_v        --images            clip_on -tint color_red
+--copy  meter_clip_v        --rotate 270        meter_clip_h
+--copy  meter_clip_v        meter_clip_v_rms    meter_clip_v_rms2
+--copy  meter_clip_h        meter_clip_h_rms
+
+#       Status
+# --------------------------------------
+
+--out   meter_automute      --images  infobar -tint color_yellow
+--out   meter_mute          --images  infobar -tint color_yellow
+--out   meter_foldermute    --images  infobar -tint color_yellow -alpha 0.5
+--out   meter_unsolo        --images  infobar -tint color_blue
+--out   meter_solodim       --images  infobar -tint color_blue -alpha 0.75
+
+--copy-files

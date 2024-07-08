@@ -1,5 +1,0 @@
-CreateButtonSet_1 "" "Meter BG" "meter_bg_tcp" "Meter BG Frame"
-CreateButtonSet_1 "" "Meter BG Mcp" "meter_bg_mcp" "Meter BG Frame"
-
-CreateButtonSet_1 "" "Volume Label" "mcp_vol_label" "Meter BG Frame"
-Copy "mcp_vol_label" "tcp_vol_label"

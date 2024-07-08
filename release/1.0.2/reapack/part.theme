@@ -1,0 +1,42 @@
+@version 1.0.2
+@author Fleeesch
+@description paRt
+@links https://github.com/Fleeesch/paRt
+@screenshots https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+
+  ## Features
+  * 3 Theme files covering different brightness levels
+  * Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Covers all Reaper V7 elements
+  * Custom Theme Adjuster
+  * 200+ parameters for customization
+  * synchronization of all parmeters accross paRt theme files through the Theme Adjuster
+  * Parameter bank support for changing settings on the fly
+  * Save and load parameter settings to setting files
+@changelog
+  inclusion of a custom Theme Adjuster
+  complete rewrite of WALTER code
+  complete reacreation of all assets
+  inclusion of Dimmed Theme
+  inclusion of Reaper V7 assets
+  inclusion of missing track elements (record mode, record input, input fx, etc.)
+  replacement of many default Reaper assets with custom WALTER elements
+  addition of selection marker and color bar for tracks
+  addition of envelope artificial track lane
+  addition of manual install in releases
+  rewrite of documentation
+  removal of Windows Dark Theme Hack
+  removal of overlay graphics
+  removal of 300% zoom factor
+  removal of Split-Theme-File package

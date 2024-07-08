@@ -1,0 +1,16 @@
+@changelog
+  inclusion of a custom Theme Adjuster
+  complete rewrite of WALTER code
+  complete reacreation of all assets
+  inclusion of Dimmed Theme
+  inclusion of Reaper V7 assets
+  inclusion of missing track elements (record mode, record input, input fx, etc.)
+  replacement of many default Reaper assets with custom WALTER elements
+  addition of selection marker and color bar for tracks
+  addition of envelope artificial track lane
+  addition of manual install in releases
+  rewrite of documentation
+  removal of Windows Dark Theme Hack
+  removal of overlay graphics
+  removal of 300% zoom factor
+  removal of Split-Theme-File package

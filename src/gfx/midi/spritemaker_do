@@ -1,0 +1,40 @@
+--clear-output-folder
+
+#       Off State
+# --------------------------------------
+
+--out table_locked_off          --spritesheet --button --images bg -tint generic_button_bg_off      lock        -tint generic_button_symbol_off
+--out table_target_off          --spritesheet --button --images bg -tint generic_button_bg_off      cursor      -tint generic_button_symbol_off
+--out table_visible_off         --spritesheet --button --images bg -tint generic_button_bg_off      visible     -tint generic_button_symbol_off
+--out table_mute_off            --spritesheet --button --images bg -tint generic_button_bg_off      mute        -tint generic_button_symbol_off
+--out table_solo_off            --spritesheet --button --images bg -tint generic_button_bg_off      solo        -tint generic_button_symbol_off
+--out table_recarm_off          --spritesheet --button --images bg -tint generic_button_bg_off      arm         -tint generic_button_symbol_off
+--out table_remove_off          --spritesheet --button --images bg -tint generic_button_bg_off      remove      -tint generic_button_symbol_off
+
+#       On State
+# --------------------------------------
+
+--out table_locked_on           --spritesheet --button --images bg -tint color_violet               lock        -tint generic_button_symbol_on
+--out table_target_on           --spritesheet --button --images bg -tint generic_button_bg_on       cursor      -tint generic_button_symbol_on
+--out table_visible_on          --spritesheet --button --images bg -tint generic_button_bg_on       visible     -tint generic_button_symbol_on
+--out table_mute_on             --spritesheet --button --images bg -tint color_yellow               mute        -tint generic_button_symbol_on
+--out table_solo_on             --spritesheet --button --images bg -tint color_blue                 solo        -tint generic_button_symbol_on
+--out table_recarm_on           --spritesheet --button --images bg -tint color_red                  arm         -tint generic_button_symbol_on
+--out table_remove_on           --spritesheet --button --images bg -tint generic_button_bg_on       remove      -tint generic_button_symbol_on
+
+#       Partial State
+# --------------------------------------
+
+--out table_target_partial      --spritesheet --button --images bg -tint generic_button_bg_partial  cursor      -tint generic_button_symbol_partial
+--out table_locked_partial      --spritesheet --button --images bg -tint generic_button_bg_partial  lock        -tint generic_button_symbol_partial
+--out table_visible_partial     --spritesheet --button --images bg -tint generic_button_bg_partial  visible     -tint generic_button_symbol_partial
+
+#       Table Elements
+# --------------------------------------
+
+--out table_expand_off                          --spritesheet --button --images expand          -tint icon_on
+--out table_expand_on           --rotate 270    --spritesheet --button --images expand          -tint icon_on
+--out table_sub_expand_off                      --spritesheet --button --images expand_sub      -tint icon_on
+--out table_sub_expand_on       --rotate 270    --spritesheet --button --images expand_sub      -tint icon_on
+
+--copy-files
