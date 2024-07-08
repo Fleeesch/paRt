@@ -32,6 +32,8 @@ var.globals.ext_section = "Fleeesch - paRt Theme Adjuster"
 -- default window title
 var.globals.win_title = "paRt Theme Adjuster"
 
+-- availability of the js_extension
+var.js_extension_available = false
 
 -- last used theme adjuster (for detecting theme changes)
 var.globals.last_theme_file = reaper.GetLastColorThemeFile()

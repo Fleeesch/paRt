@@ -4,10 +4,10 @@
 # --------------------------------------
 
 # bg
---out meter_bg_v meter_bg_h  --images bg -tint meter_bg
+--out meter_bg_v meter_bg_h meter_bg_mcp meter_bg_tcp    --images bg -tint meter_bg
 
 # border
---out meter_custom_border  --frame frame --images border -tint meter_border
+--out meter_custom_border  --frame frame    --images border -tint meter_border
 
 # readout
 --out meter_custom_readout_bg_vert                      --frame frame --images readout_bg -tint readout_bg
@@ -47,8 +47,10 @@
 # --------------------------------------
 
 # clip
---out   meter_clip_v        --images        clip_on -tint color_red
---copy  meter_clip_v        --rotate 270    meter_clip_h
+--out   meter_clip_v        --images            clip_on -tint color_red
+--copy  meter_clip_v        --rotate 270        meter_clip_h
+--copy  meter_clip_v        meter_clip_v_rms    meter_clip_v_rms2
+--copy  meter_clip_h        meter_clip_h_rms
 
 #       Status
 # --------------------------------------

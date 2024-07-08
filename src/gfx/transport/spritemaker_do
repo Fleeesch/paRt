@@ -56,19 +56,19 @@
 --out transport_custom_bank_part                            --frame frame_bank_part -fit    --images bank_part  -tint transport_bank_logo
 
 # menu button
---out transport_custom_part_menu   --spritesheet --button  --mask-template bank_bg --frame frame_bank -fit          --images bank_bg    -tint transport_bank_button_off         menu -mask -tint button_symbol_off  bank_border -tint button_border
+--out transport_custom_part_menu   --spritesheet --button  --frame frame_bank -fit          --images bank_bg    -tint transport_bank_button_off         menu -tint button_symbol_off  bank_border -tint button_border
 
 #       Automation Override
 # --------------------------------------
 
---out global_off                --spritesheet --button --frame frame_w -fit     --images fill_w -tint transport_button_bg_off   env_icon        -tint button_symbol_off     border_w -tint button_border
---out global_bypass             --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_blue                env_bypass      -tint button_symbol_on      border_w -tint button_border
---out global_trim               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_gray                env_trim        -tint button_symbol_on      border_w -tint button_border
---out global_read               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_green               env_read        -tint button_symbol_on      border_w -tint button_border
---out global_latch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_latch       -tint button_symbol_on      border_w -tint button_border
---out global_preview            --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_preview     -tint button_symbol_on      border_w -tint button_border
---out global_touch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_violet              env_touch       -tint button_symbol_on      border_w -tint button_border
---out global_write              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_red                 env_write       -tint button_symbol_on      border_w -tint button_border
+--out global_off                --spritesheet --button --frame frame_w -fit     --images fill_w -tint transport_button_bg_off   env_icon            -tint button_symbol_off                                                     border_w -tint button_border
+--out global_bypass             --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_blue                env_icon_offset     -tint button_symbol_on          env_bypass      -tint button_symbol_on      border_w -tint button_border
+--out global_trim               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_gray                env_icon_offset     -tint button_symbol_on          env_trim        -tint button_symbol_on      border_w -tint button_border
+--out global_read               --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_green               env_icon_offset     -tint button_symbol_on          env_read        -tint button_symbol_on      border_w -tint button_border
+--out global_latch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_icon_offset     -tint button_symbol_on          env_latch       -tint button_symbol_on      border_w -tint button_border
+--out global_preview            --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_yellow              env_icon_offset     -tint button_symbol_on          env_preview     -tint button_symbol_on      border_w -tint button_border
+--out global_touch              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_violet              env_icon_offset     -tint button_symbol_on          env_touch       -tint button_symbol_on      border_w -tint button_border
+--out global_write              --spritesheet --button --frame frame_w -fit     --images fill_w -tint color_red                 env_icon_offset     -tint button_symbol_on          env_write       -tint button_symbol_on      border_w -tint button_border
 
 #       Playrate
 # --------------------------------------

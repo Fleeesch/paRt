@@ -55,10 +55,10 @@ part_version 1.0.2
     colors_track_meter_text_tone_readout_clip   'Colors - Track - Meter Text Tone Readout Clip'         DEF_colors_track_meter_text_tone_readout_clip   0           VAL_PAR_RANGE
     colors_track_meter_text_tone_lit            'Colors - Track - Meter Text Tone Lit'                  DEF_colors_track_meter_text_tone_lit            0           VAL_PAR_RANGE
     colors_track_meter_text_tone_unlit          'Colors - Track - Meter Text Tone Unlit'                DEF_colors_track_meter_text_tone_unlit          0           VAL_PAR_RANGE
+    colors_track_meter_text_alpha_track         'Colors - Track - Meter Text Alpha Track'               DEF_colors_track_meter_text_alpha_track         0           VAL_PAR_RANGE
+    colors_track_meter_text_alpha_master        'Colors - Track - Meter Text Alpha Master'              DEF_colors_track_meter_text_alpha_master        0           VAL_PAR_RANGE
     colors_track_meter_text_alpha_lit           'Colors - Track - Meter Text Alpha Lit'                 DEF_colors_track_meter_text_alpha_lit           0           VAL_PAR_RANGE
     colors_track_meter_text_alpha_unlit         'Colors - Track - Meter Text Alpha Unlit'               DEF_colors_track_meter_text_alpha_unlit         0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_top           'Colors - Track - Meter Text Alpha Top'                 DEF_colors_track_meter_text_alpha_top           0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_bottom        'Colors - Track - Meter Text Alpha Botom'               DEF_colors_track_meter_text_alpha_bottom        0           VAL_PAR_RANGE
     colors_track_meter_text_alpha_readout       'Colors - Track - Meter Text Alpha Readout'             DEF_colors_track_meter_text_alpha_readout       0           VAL_PAR_RANGE
     colors_track_meter_text_alpha_readout_clip  'Colors - Track - Meter Text Alpha Readout Clip'        DEF_colors_track_meter_text_alpha_readout_clip  0           VAL_PAR_RANGE
     colors_track_meter_text_shadow_lit          'Colors - Track - Meter Text Shadow Top'                DEF_colors_track_meter_text_shadow_lit          0           VAL_PAR_RANGE

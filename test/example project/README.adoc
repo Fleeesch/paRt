@@ -1,5 +1,0 @@
-# paRt - Example Project
-
-This is an example project used for demonstrating the themes capabilities, containing a large amount of tracks and most of the elements Reaper provides from the get-go. It also acts as a source for screenshots.
-
-The project should be able to run out of the box on a fresh install of Reaper. The missing plugins are provided in the *effects* folder and should load automatically when opening the project.

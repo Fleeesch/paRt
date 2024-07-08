@@ -3,8 +3,6 @@
 -- @description paRt Theme Adjuster
 -- @noIndex
 
-
-
 -- paRt table
 if Part == nil then
     Part = {}
@@ -19,7 +17,7 @@ Part.Parameter = require("lib.res.lua.parameter")
 Part.Parameter.Lookup.importThemeParameters()
 
 -- global variables and lookup lists
-local var = require("lib.res.lua.var") 
+local var = require("lib.res.lua.var")
 Part.Global = var.globals
 Part.List = var.list
 
@@ -27,7 +25,8 @@ Part.List = var.list
 -- -----------------------------
 
 -- initialize bank handler with bank selection parameter
-Part.Bank.Handler = Part.Bank.Handler.BankHandler:new(nil, Part.Parameter.Theme.ThemeParameter:new(nil, "par_bank_selected", false,true))
+Part.Bank.Handler = Part.Bank.Handler.BankHandler:new(nil,
+    Part.Parameter.Theme.ThemeParameter:new(nil, "par_bank_selected", false, true))
 
 -- global bank slot
 Part.Bank.Slot.BankSlot:new(nil, true, "G", "bank_0", 1)
@@ -37,8 +36,12 @@ for i = 1, Part.Global.bank_count do
     Part.Bank.Slot.BankSlot:new(nil, false, tostring(i), "bank_" .. tostring(i), i + 1)
 end
 
+--      Bank Initialization End
+-- -----------------------------
+
 -- ramining lua files
 Part.Gui = require("lib.res.lua.gui")
+Part.Gui.Hint.Lookup = require("lib.res.lua.gui_hints")
 Part.Message = require("lib.res.lua.message")
 Part.Cursor = require("lib.res.lua.cursor")
 Part.Color = require("lib.res.lua.color")
@@ -51,3 +54,9 @@ Part.Control.Bank = require("lib.res.lua.control_bank")
 Part.Version = require("lib.res.lua.version")
 Part.Parameter.Map = require("lib.res.lua.parameter_map")
 Part.Macro = require("lib.res.lua.macro")
+
+--      Check if JS Extension is available
+-- -----------------------------------------
+
+local status, err = pcall(function() reaper.JS_Mouse_GetCursor() end)
+Part.Global.js_extension_available = status

@@ -107,6 +107,29 @@ map_macros.last_group = nil
 
 map_macros.icon_path_root = "lib/res/icon"
 
+map_macros.parameter_labels = {}
+
+-- Function : Track Parameter Label
+-- --------------------------------------------------
+
+function map_macros.trackParameterLabel(element)
+    table.insert(map_macros.parameter_labels, element)
+end
+
+-- --------------------------------------------------
+
+function map_macros.getLastParameterLabel(history_index)
+    if #map_macros.parameter_labels == 0 then
+        return nil
+    end
+
+    if history_index == nil then
+        history_index = 0
+    end
+
+    local index = math.max(1, #map_macros.parameter_labels - history_index)
+    return map_macros.parameter_labels[index]
+end
 
 -- Function : Reset Cursor
 -- --------------------------------------------------
@@ -309,6 +332,8 @@ function map_macros.drawHeader(header_text, w)
     text:centerHorz()
     text:setFontFlags("b")
 
+    map_macros.trackParameterLabel(text)
+
     Part.Cursor.destackCursor()
 end
 
@@ -333,6 +358,7 @@ function map_macros.drawButtonToggleGroup(has_bank, parameter, button_w, label, 
         Part.Cursor.setCursorSize(label_w, nil)
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
+        map_macros.trackParameterLabel(text)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
@@ -377,6 +403,7 @@ function map_macros.drawButtonSelectionGroup(has_bank, parameter, is_toggle, sel
         Part.Cursor.setCursorSize(label_w, nil)
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
+        map_macros.trackParameterLabel(text)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
@@ -430,6 +457,7 @@ function map_macros.drawKnobGroupWithDisplay(has_bank, parameter, knob_is_bi, la
         Part.Cursor.setCursorSize(label_w, nil)
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
+        map_macros.trackParameterLabel(text)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
@@ -534,6 +562,7 @@ function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, sl
         Part.Cursor.setCursorSize(label_w, nil)
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
+        map_macros.trackParameterLabel(text)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
@@ -628,7 +657,8 @@ function map_macros.drawMcpLayoutConfiguration(row_data, parameter)
         -- image
         Part.Cursor.setCursorSize(table_w, map_macros.table_icon_h)
         Part.Cursor.incCursor(5, 0)
-        Part.Layout.Image.Image:new(nil, icon_path .. images[idx].image, true, nil, map_macros.icon_alpha)
+        local image = Part.Layout.Image.Image:new(nil, icon_path .. images[idx].image, true, nil, map_macros.icon_alpha)
+        map_macros.trackParameterLabel(image)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
         -- marker
@@ -696,7 +726,8 @@ function map_macros.drawMcpPanConfiguration(row_data)
         table.insert(label_column, Part.Layout.Label.Label:new(nil))
 
         -- header image
-        Part.Layout.Image.Image:new(nil, icon_path .. column.image, true, nil, map_macros.icon_alpha)
+        local image = Part.Layout.Image.Image:new(nil, icon_path .. column.image, true, nil, map_macros.icon_alpha)
+        map_macros.trackParameterLabel(image)
 
         -- increment cursor
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
@@ -787,8 +818,9 @@ function map_macros.drawTcpFaderLayoutConfiguration(parameter)
 
         -- image
         Part.Cursor.setCursorSize(40, map_macros.table_icon_h)
-        Part.Layout.Image.Image:new(nil, icon_path .. layout.image, true, nil, map_macros.icon_alpha)
+        local image = Part.Layout.Image.Image:new(nil, icon_path .. layout.image, true, nil, map_macros.icon_alpha)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+        map_macros.trackParameterLabel(image)
     end
 
     Part.Cursor.destackCursor()
@@ -823,22 +855,24 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
     end
 
     -- visibility header image
-    Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.visbility, true, nil,
+    local image = Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.visbility, true, nil,
         map_macros.icon_alpha)
-
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility, image, false)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
     -- mixer-hide header image
     if has_mixer then
-        Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.mixer_hide, true, nil,
+        local image = Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.mixer_hide, true, nil,
             map_macros.icon_alpha)
+            Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer, image, false)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
     -- fader size header image
     Part.Cursor.setCursorSize(slider_w)
-    Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.fader_size, true, nil,
+    local image = Part.Layout.Image.Image:new(nil, icon_path .. map_macros.icons.table.fader_size, true, nil,
         map_macros.icon_alpha)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.fader_size, image, false)
 
     Part.Cursor.destackCursor()
     map_macros.nextLine()
@@ -939,10 +973,12 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
         Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
 
         -- image
-        Part.Layout.Image.Image:new(nil, icon_path_theme .. icon, true, nil,
+        local image = Part.Layout.Image.Image:new(nil, icon_path_theme .. icon, true, nil,
             map_macros.icon_alpha)
         Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
         empty_space_y = math.max(empty_space_y, Part.Cursor.getCursorY() - Part.Cursor.getCursorPadY())
+        
+        map_macros.trackParameterLabel(image)
 
         Part.Cursor.destackCursor()
 
@@ -953,16 +989,19 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
     -- visibility header column
     if parameter_visibility ~= nil then
         drawTableHeader(parameter_visibility, map_macros.icons.table.visbility)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility, map_macros.getLastParameterLabel(), false)
     end
 
     -- mixer-hide header column
     if parameter_mixer ~= nil then
         drawTableHeader(parameter_mixer, map_macros.icons.table.mixer_hide)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer, map_macros.getLastParameterLabel(), false)
     end
 
     -- separator column
     if parameter_separator ~= nil then
         drawTableHeader(parameter_separator, map_macros.icons.table.separator)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_separator, map_macros.getLastParameterLabel(), false)
     end
 
     -- update corner shader

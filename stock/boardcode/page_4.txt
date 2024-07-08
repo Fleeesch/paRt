@@ -1,1 +1,17 @@
-[i]Placeholder[/i]
+[size=+2]Screenshots - Zoom Factors[/size]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_100.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_100.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_125.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_125.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_150.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_150.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_175.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_175.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_200.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_200.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_225.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_225.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/dpi/part_dpi_250.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_dpi_250.png[/img][/url]
+
+[size=-1]Screenshots taken from paRt v.1.0.2[/size]

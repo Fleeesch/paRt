@@ -28,7 +28,7 @@ Part.Gui.Theme.checkCurrentTheme()
 Part.Gui.Macros = require("lib.res.lua.map_macros")
 require("lib.res.lua.map")
 
-Part.Version.setVersion("2.57")
+Part.Version.setVersion("1.00")
 
 
 

@@ -230,6 +230,7 @@ cd "$org_path"
 # --------------------------------------------
 
 cd $script_lua_folder
+cd ".."
 source $script_lua_add_tags
 cd $org_path
 

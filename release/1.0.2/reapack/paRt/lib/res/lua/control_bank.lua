@@ -600,18 +600,12 @@ function control.Select.ButtonBankSelect:new(o, handler, text, bank)
     o.color_select_fg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.off_fg)
     o.color_select_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
     o.color_select_fg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.on_fg)
-    o.color_copy_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.red)
+    o.color_copy_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.off_bg)
     o.color_copy_fg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.off_fg)
-    o.color_copy_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.red)
+    o.color_copy_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.on_bg)
     o.color_copy_fg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.on_fg)
-    o.color_copy_bg_src = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.red)
-    o.color_copy_fg_src = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.on_fg)
-
-    -- adjust copy brightness
-    for i = 1, 3 do
-        o.color_copy_bg_src[i] = math.min(o.color_copy_bg_src[i] + 100, 255)
-        o.color_copy_bg_off[i] = math.min(o.color_copy_bg_off[i] * 0.5, 255)
-    end
+    o.color_copy_bg_src = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.src_bg)
+    o.color_copy_fg_src = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.bank_bar.button.copy.src_fg)
 
     o:colorsDefault()
 
