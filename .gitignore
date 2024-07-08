@@ -16,7 +16,7 @@
 
 # Release folders
 
-/release
+/release/*
 
 # Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
 *gitignore*
@@ -25,7 +25,7 @@
 # flac file render folder
 **/rnd/flac/
 
-# exclude individual assets from build folder
-/src/build/*.ReaperThemeZip
-/src/build/*.zip
-!/src/build/
+# exclude assets from build folder
+/src/build/*
+!/src/build/*.ReaperTheme
+!/src/build/*.ReaperThemeZip
