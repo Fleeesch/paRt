@@ -14,10 +14,10 @@
 --out gen_volbg_horz gen_panbg_horz --rotate 90 --frame frame_fader_bg -rotate 90 -flip-v   --images    fader_bg_fill  -tint generic_fader_bg      fader_bg_border -tint generic_fader_border
 
 # thumb
---out gen_volthumb_vert                     --images    fader_thumb_l_fill     -tint generic_fader_thumb_bg    fader_thumb_l_line  -tint generic_fader_thumb_line      fader_thumb_l_border  -tint generic_fader_thumb_border        frame/frame_fader_l
---out gen_panthumb_vert                     --images    fader_thumb_fill       -tint generic_fader_thumb_bg    fader_thumb_line    -tint generic_fader_thumb_line      fader_thumb_border    -tint generic_fader_thumb_border        frame/frame_fader
---out gen_volthumb_horz     --rotate 270    --images    fader_thumb_l_fill     -tint generic_fader_thumb_bg    fader_thumb_l_line  -tint generic_fader_thumb_line      fader_thumb_l_border  -tint generic_fader_thumb_border        frame/frame_fader_l
---out gen_panthumb_horz     --rotate 270    --images    fader_thumb_fill       -tint generic_fader_thumb_bg    fader_thumb_line    -tint generic_fader_thumb_line      fader_thumb_border    -tint generic_fader_thumb_border        frame/frame_fader
+--out gen_volthumb_vert                     --images    fader_thumb_l_fill      -tint generic_fader_thumb_bg    fader_thumb_l_line  -tint generic_fader_thumb_line      fader_thumb_l_border  -tint generic_fader_thumb_border        frame/frame_fader_l
+--out gen_panthumb_vert                     --images    fader_thumb_fill        -tint generic_fader_thumb_bg    fader_thumb_line    -tint generic_fader_thumb_line      fader_thumb_border    -tint generic_fader_thumb_border        frame/frame_fader
+--out gen_volthumb_horz     --rotate 270    --images    fader_thumb_l_fill      -flip-v -tint generic_fader_thumb_bg    fader_thumb_l_line  -flip-v -tint generic_fader_thumb_line      fader_thumb_l_border  -flip-v -tint generic_fader_thumb_border        frame/frame_fader_l
+--out gen_panthumb_horz     --rotate 270    --images    fader_thumb_fill        -flip-v -tint generic_fader_thumb_bg    fader_thumb_line    -flip-v -tint generic_fader_thumb_line      fader_thumb_border    -flip-v -tint generic_fader_thumb_border        frame/frame_fader     -flip-v 
 
 #       Buttons - Large
 # --------------------------------------

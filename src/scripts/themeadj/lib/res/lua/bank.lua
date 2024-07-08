@@ -118,27 +118,20 @@ function bank.Functions.loadParameterFile(force, target_file_name)
     -- assume theme hasn't changed
     local same_theme = true
 
-    if not manual_load then
-        -- get last theme
-        local filepath = Part.Global.config_dir .. "/last_theme.partmap"
-        local file = io.open(filepath, "r")
-
-        if file then
-            local content = file:read("*all")
-            file:close()
-        end
-
-        -- check if theme has changed
-        same_theme = Part.Functions.extractFileName(reaper.GetLastColorThemeFile()) == content
-    end
     -- either force or act on theme change
     if force or not same_theme then
-        -- open file
+        
         local file = io.open(file_name, "r")
+        
+        -- if previous parameters aren't available load the default file
+        if not file then
+            file = io.open(Part.Global.config_dir .. "/defaults.partmap", "r")
+        end
 
         if file then
             -- read file content
             local content = file:read("*all")
+
             file:close()
 
             -- try loading file content into table
@@ -331,8 +324,6 @@ function bank.Handler.BankHandler:resetCurrentBank()
             val2:reset()
         end
     end
-
-
 end
 
 --  Bank Handler : Init
@@ -384,7 +375,6 @@ function bank.Handler.BankHandler:update(force)
             -- load bank of parameter set
             val:loadBank(self.bank_selected:getIndex())
         end
-        
     end
 
     -- store current bank as last selected
@@ -455,7 +445,7 @@ function bank.ParameterSet.BankParameterSet:loadBank(idx)
     if self.parameter ~= nil then
         --self.parameter:setValue()
     end
-    
+
     for key, val in pairs(self.parameter_group) do
         -- load bank parameter of group
         val:loadParameter(idx)

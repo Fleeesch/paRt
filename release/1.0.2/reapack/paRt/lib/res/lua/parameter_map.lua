@@ -73,6 +73,10 @@ par.par_colors_track_folder_foldertree_tint = { Part.Parameter.Group.ParameterGr
     "par_colors_track_folder_foldertree_tint") }
 
 -- meter
+par.par_colors_track_meter_text_alpha_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_colors_track_meter_text_alpha_unlit") }
+par.par_colors_track_meter_text_alpha_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_colors_track_meter_text_alpha_lit") }
 par.par_colors_track_meter_text_tone_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_colors_track_meter_text_tone_unlit") }
 par.par_colors_track_meter_text_tone_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
@@ -81,14 +85,10 @@ par.par_colors_track_meter_text_tone_readout = { Part.Parameter.Group.ParameterG
     "par_colors_track_meter_text_tone_readout") }
 par.par_colors_track_meter_text_tone_readout_clip = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_colors_track_meter_text_tone_readout_clip") }
-par.par_colors_track_meter_text_alpha_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_unlit") }
-par.par_colors_track_meter_text_alpha_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_lit") }
-par.par_colors_track_meter_text_alpha_top = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_top") }
-par.par_colors_track_meter_text_alpha_bottom = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_bottom") }
+par.par_colors_track_meter_text_alpha_track = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_colors_track_meter_text_alpha_track") }
+par.par_colors_track_meter_text_alpha_master = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_colors_track_meter_text_alpha_master") }
 par.par_colors_track_meter_text_alpha_readout = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_colors_track_meter_text_alpha_readout") }
 par.par_colors_track_meter_text_alpha_readout_clip = { Part.Parameter.Group.ParameterGroup:new(nil,

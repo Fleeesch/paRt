@@ -6,7 +6,7 @@ import os
 
 zoom_levels = ("100","125","150","175","200","225","250")
 
-TEMP_FILE = "test"
+TEMP_FILE = "temp"
 
 TARGET_DIR = "./ats/animation"
 
@@ -77,7 +77,7 @@ class classAnimation:
     #   Add Sprite
     # ----------------------------------------
     def add_sprite(self):
-        self.sprite.append(cairo.SVGSurface("temp", self.size,self.size))
+        self.sprite.append(cairo.SVGSurface(TEMP_FILE, self.size,self.size))
         self.current_sprite = self.sprite[len(self.sprite)-1]
 
     #   Draw Sprite
@@ -90,7 +90,7 @@ class classAnimation:
 
         total_height = self.size * len(self.sprite)
 
-        spritesheet = cairo.SVGSurface("temp", self.size, total_height)
+        spritesheet = cairo.SVGSurface(TEMP_FILE, self.size, total_height)
         context = cairo.Context(spritesheet)
 
         for index, surface in enumerate(self.sprite):

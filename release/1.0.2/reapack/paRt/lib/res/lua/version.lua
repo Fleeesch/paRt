@@ -11,8 +11,11 @@ local version = {}
 --  Variables
 -- -------------------------------------------
 
-version.version_theme = ""
+-- internal version of adjuster script (for version handling)
 version.version_adjuster = ""
+
+-- paRt version
+version.version_theme = ""
 version.version_theme_is_dev = false
 
 

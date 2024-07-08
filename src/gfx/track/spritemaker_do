@@ -123,8 +123,8 @@
 --out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg   --frame frame_section --images bg_section -tint insert_divider
 
 # embed fx
---out tcp_fxembed_header_bg_v     --frame frame -fit --images bg_r -tint insert_embed_label_bg
---out tcp_fxembed_header_bg_h     --frame frame -fit --images bg_b -tint insert_embed_label_bg
+--out tcp_fxembed_header_bg_v     --frame frame -fit --images bg_r -tint button_label_bg
+--out tcp_fxembed_header_bg_h     --frame frame -fit --images bg_b -tint button_label_bg
 
 # empty slots
 --out mcp_fxlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot -tint insert_slot_empty -frame 0 0 ins_slot -tint insert_slot_empty_hover -frame 1 1 ins_slot -tint insert_slot_empty_click -frame 2 2

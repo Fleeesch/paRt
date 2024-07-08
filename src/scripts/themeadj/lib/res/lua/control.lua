@@ -1022,7 +1022,7 @@ function control.Slider.Slider:prepare()
     self.knob_leftmost = self.draw_x + self.draw_k2
     self.knob_rightmost = self.draw_x + self.draw_w - self.draw_k2
     self.knob_space = self.knob_rightmost - self.knob_leftmost
-    
+
     local def_val = self.parameter:defaultValueToFloat(true)
     self.draw_def_slot_x = math.floor(Part.Functions.map(def_val, 0, 1, self.knob_leftmost, self.knob_rightmost) + 0.5)
 end
@@ -1415,7 +1415,7 @@ end
 -- -------------------------------------------
 control.Hint.Hint = control.Control:new()
 
-function control.Hint.Hint:new(o, text, linked_element, use_cursor)
+function control.Hint.Hint:new(o, text, linked_element, is_parameter_hint, use_cursor)
     o = o or control.Control:new(o, nil, true)
 
     setmetatable(o, self)
@@ -1459,6 +1459,9 @@ function control.Hint.Hint:new(o, text, linked_element, use_cursor)
     -- optional symbol
     o.draw_symbol = false
 
+    -- alpha level
+    o.alpha = 1
+
     o.symbol_rotation = 1.5708
 
     -- default colors
@@ -1475,6 +1478,11 @@ function control.Hint.Hint:new(o, text, linked_element, use_cursor)
     table.insert(Part.List.control, o)
     table.insert(Part.List.control_hint, o)
 
+    if is_parameter_hint then
+        o.pad = 0
+        o.draw_symbol = true
+    end
+
     return o
 end
 
@@ -1483,14 +1491,6 @@ end
 
 function control.Hint.Hint:setPadding(pad)
     self.pad = math.max(pad, 0)
-end
-
---  Control : Hint : Prameter Hint
--- -------------------------------------------
-
-function control.Hint.Hint:parameterHint()
-    self:setPadding(0)
-    self.draw_symbol = true
 end
 
 --  Control : Hint : Calculate Display factor
@@ -1515,7 +1515,7 @@ function control.Hint.Hint:prepare()
     self.draw_link_w = Part.Functions.rescale(self.linked_element.dim_w)
     self.draw_link_h = Part.Functions.rescale(self.linked_element.dim_h)
 
-    self.draw_symbol_size = Part.Functions.rescale(Part.Draw.Sprites.hint_corner_size)
+    self.draw_symbol_size = Part.Functions.rescale(2)
 end
 
 --  Control : Hint : Draw
@@ -1580,11 +1580,7 @@ function control.Hint.Hint:draw()
 
     -- symbol
     if self.draw_symbol then
-        gfx.a = 1
-        gfx.x = x + w - self.draw_symbol_size
-        gfx.y = y
-
-        gfx.blit(Part.Draw.Sprites.cornerHint(), 1, self.symbol_rotation)
+        Part.Draw.Graphics.drawRectangle(x - self.draw_symbol_size, y, self.draw_symbol_size, h, Part.Color.Lookup.color_palette.hint.symbol)
     end
 
     -- custom overlay drawing

@@ -32,7 +32,7 @@ draw.Sprites.knob_size = 16
 
 -- corner dimensions
 draw.Sprites.rescale_corner_size = 14
-draw.Sprites.hint_corner_size = 8
+draw.Sprites.hint_corner_size = 7
 
 -- knob slots
 draw.Sprites.slot_knob_line = draw.Sprites.getNextFreeImageSlot()
@@ -47,8 +47,8 @@ draw.Sprites.slot_corner_hint_alt = draw.Sprites.getNextFreeImageSlot()
 
 -- colors
 draw.Sprites.color_rescale = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.corner_triangle)
-draw.Sprites.color_hint = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
-draw.Sprites.color_hint_alt = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.hint.symbol_alt)
+draw.Sprites.color_hint = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.red)
+draw.Sprites.color_hint_alt = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
 
 
 
@@ -83,8 +83,7 @@ function draw.Sprites.createCornerAssets()
     gfx.dest = dest
 
     Part.Color.setColor(draw.Sprites.color_hint, true)
-    gfx.triangle(0, 0, size - 1, 0, 0, size - 1)
-    gfx.line(0, size, size, 0, 1)
+    gfx.triangle(0, 0, size-1, 0, 0, size-1)
 
     gfx.dest = last_dest
 end
@@ -134,7 +133,7 @@ function draw.Sprites.createKnobValueAssets()
         -- differentiate betwenn <0 and >0
         if rotation > -range2 then
             -- border lines
-    gfx.arc(size2, size2 + y, r_inner, rotation + offset, -range2, true)
+            gfx.arc(size2, size2 + y, r_inner, rotation + offset, -range2, true)
             --gfx.arc(size2, size2 + y, r_inner - 8, rotation + offset, -range2, true)
 
             -- filler lines

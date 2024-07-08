@@ -1,16 +1,27 @@
 [size=+2]Screenshots - Resolutions[/size]
 
-Screenshots taken at specific resolutions with either the Dark or Light theme. Open them in your browser in fullscreen mode to get an approximation of what the theme might look like on your monitor.
+[b]Full HD / 1080 p[/b]
 
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_800x600_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_800x600_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_800x600_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_800x600_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1024x768_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1024x768_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1024x768_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1024x768_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1280x1024_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1280x1024_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1280x1024_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1280x1024_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1360x768_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1360x768_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1360x768_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1360x768_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1400x900_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1400x900_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1400x900_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1400x900_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1600x900_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1600x900_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1600x900_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1600x900_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1680x1050_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1680x1050_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1680x1050_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1680x1050_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1920x1080_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1920x1080_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_1920x1080_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_1920x1080_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_2560x1440_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_2560x1440_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_2560x1440_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_2560x1440_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_3840x2160_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_3840x2160_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_3840x2160_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_3840x2160_light.png[/img][/url]
-[url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_5120x2880_dark.png][img]https://fleeesch.github.io/res/part/img/button/button_res_5120x2880_dark.png[/img][/url][url=https://fleeesch.github.io/res/part/img/screenshot_resolution/screenshot_5120x2880_light.png][img]https://fleeesch.github.io/res/part/img/button/button_res_5120x2880_light.png[/img][/url]
-[i]Click a button to open a screenshot[/i]
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dark.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dimmed.png[/img][/url] 
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_light.png[/img][/url]
+
+[b]QHD / 2K[/b]
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dark.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dimmed.png[/img][/url] 
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_light.png[/img][/url]
+
+[b]UHD / 4K[/b]
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dark.png[/img][/url]
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dimmed.png[/img][/url] 
+
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_light.png[/img][/url]
+
+[size=-1]Screenshots taken from paRt v.1.0.2[/size]

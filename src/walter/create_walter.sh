@@ -185,7 +185,7 @@ for theme in "${themes[@]}"; do
     echo -e "${COLOR_GREEN}done${COLOR_RESET}"
 
     # file containing different layout configurations
-    file_layouts="walter_rtconfig_layout.txt"
+    #file_layouts="walter_rtconfig_split.txt"
 
     # --> optional  split file creation, currently disabled
 

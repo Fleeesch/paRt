@@ -134,7 +134,7 @@
 
                 ; base unit
                 set VAL_Unit            \
-                    SCALE>2         3   \
+                    SCALE>2         2   \
                     SCALE>1         2   \
                                     1
 
@@ -146,7 +146,7 @@
 
                 ; border
                 set VAL_Border          \
-                    SCALE>=2.5      3   \
+                    SCALE>=2.5      2   \
                     SCALE>=2        2   \
                                     1
 
@@ -222,10 +222,10 @@
 
                 ; tcp minimal height / y position offset for buttons
                 set VAL_tcp_h                   \
-                    SCALE>=2.5      [40 1]      \
-                    SCALE>=2.25     [36 1]      \
-                    SCALE>=2        [34 1]      \
-                    SCALE>=1.75     [30 1]      \
+                    SCALE>=2.5      [40 2]      \
+                    SCALE>=2.25     [36 2]      \
+                    SCALE>=2        [34 2]      \
+                    SCALE>=1.75     [28 1]      \
                     SCALE>=1.5      [25 1]      \
                     SCALE>=1.25     [21 1]      \
                                     [17 1]
@@ -244,7 +244,6 @@
                                     2
 
                 ; insert slot
-                ; [height - - - tcp_w_min tcp_w_max mcp_w_min mcp_w_max]
                 set VAL_insert_slot         \
                     SCALE>=2.5      42      \
                     SCALE>=2.25     38      \
@@ -295,13 +294,13 @@
 
                 ; transport status margins
                 set VAL_Margin_Label_Trans_Status   \
-                    SCALE>=2.5      [10 5 10 5]     \
-                    SCALE>=2.25     [9 4 9 4]       \
-                    SCALE>=2        [8 4 8 4]       \
-                    SCALE>=1.75     [7 3 7 3]       \
-                    SCALE>=1.5      [6 3 6 3]       \
-                    SCALE>=1.25     [5 2 5 2]       \
-                                    [4 2 4 2]
+                    SCALE>=2.5      [10 0 10 0]     \
+                    SCALE>=2.25     [9 0 9 0]       \
+                    SCALE>=2        [8 0 8 0]       \
+                    SCALE>=1.75     [7 0 7 0]       \
+                    SCALE>=1.5      [6 0 6 0]       \
+                    SCALE>=1.25     [5 0 5 0]       \
+                                    [4 0 4 0]
 
                 ; transport selection margins
                 set VAL_Margin_Label_Trans_Selection    \
@@ -580,6 +579,8 @@
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255   par_colors_track_track_label_text_tone                                                    \
                         + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 + par_colors_track_track_label_text_tone * 0.5 par_colors_track_track_label_select_tone
 
+                MAC_Math_Min VAL_Color_Track_Label_Text 1
+
                 ; track tcp index
                 set VAL_Color_Track_Index_TCP                                                                                                                                               \
                     !track_selected                                                                                                                                                         \
@@ -588,6 +589,8 @@
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.5  par_colors_track_track_label_select_tone   \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.1  par_colors_track_track_bg_select_tone
 
+                MAC_Math_Min VAL_Color_Track_Index_TCP 1
+
                 ; track mcp index
                 set VAL_Color_Track_Index_MCP                                                                                                                                                   \
                     !track_selected                                                                                                                                                             \
@@ -595,6 +598,8 @@
                         par_mcp_track_settings_label_index==1                                                                                                                                   \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp          par_colors_track_track_label_select_tone     \
                             + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.1    par_colors_track_track_bg_select_tone
+
+                MAC_Math_Min VAL_Color_Track_Index_MCP 1
 
                 ; envcp bg
                 set VAL_Color_Envcp_Bg                                                                                                          \
@@ -622,6 +627,8 @@
                         par_tcp_envcp_label_readout_placement!=2                                                                                                                                \
                             + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.5 par_colors_track_track_label_select_tone      \
                             + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone         
+
+                MAC_Math_Min VAL_Color_Envcp_Readout 1
 
                 ;   ::: Highlights :::
 
@@ -701,27 +708,33 @@
 
                 ; readout colors
                 set VAL_Color_Meter_Text_Readout        * THEME_color_meter_readout             * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout
-                set VAL_Color_Meter_Text_Readout_Clip   * THEME_color_meter_readout_clipped     * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout_clip
+                set VAL_Color_Meter_Text_Readout_Clip   * THEME_color_meter_readout             * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout_clip
 
-                ; alpha
-                set VAL_Color_Meter_Alpha_Lit_Top       + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_top       * 0.255 par_colors_track_meter_text_alpha_lit
-                set VAL_Color_Meter_Alpha_Unlit_Top     + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_top       * 0.255 par_colors_track_meter_text_alpha_unlit
-                set VAL_Color_Meter_Alpha_Lit_Bottom    + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_bottom    * 0.255 par_colors_track_meter_text_alpha_lit
-                set VAL_Color_Meter_Alpha_Unlit_Bottom  + 1 * * VAL_Fader_Scale{0}    par_colors_track_meter_text_alpha_bottom    * 0.255 par_colors_track_meter_text_alpha_unlit
+                ; readout alpha
                 set VAL_Color_Meter_Alpha_Readout       + 1 * 0.255                   par_colors_track_meter_text_alpha_readout
                 set VAL_Color_Meter_Alpha_Readout_Clip  + 1 * 0.255                   par_colors_track_meter_text_alpha_readout_clip
 
+                ; track alpha
+                ; --> master alpha needs to be treaded differently (something's messed up with the linearity)
+                set VAL_Color_Meter_Alpha                                       \
+                    !trackidx                                                   \
+                        * 0.254 par_colors_track_meter_text_alpha_master        \
+                        * 0.254 par_colors_track_meter_text_alpha_track
+
+                set VAL_Color_meter_Alpha_Lit           *   VAL_Color_Meter_Alpha{0}    *   VAL_Fader_Scale{0}      par_colors_track_meter_text_alpha_lit
+                set VAL_Color_meter_Alpha_Unlit         *   VAL_Color_Meter_Alpha{0}    *   VAL_Fader_Scale{0}      par_colors_track_meter_text_alpha_unlit
+                set VAL_Color_meter_Alpha_Lit       +   1   VAL_Color_meter_Alpha_Lit
+                set VAL_Color_meter_Alpha_Unlit     +   1   VAL_Color_meter_Alpha_Unlit
+                
                 ; shadow
-                set VAL_Color_Meter_Shadow_Lit_Top      + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_top      * 0.255 par_colors_track_meter_text_shadow_lit
-                set VAL_Color_Meter_Shadow_Unlit_Top    + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_top      * 0.255 par_colors_track_meter_text_shadow_unlit
-                set VAL_Color_Meter_Shadow_Lit_Bottom   + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_bottom   * 0.255 par_colors_track_meter_text_shadow_lit
-                set VAL_Color_Meter_Shadow_Unlit_Bottom + 0 * * VAL_Fader_Scale{0} par_colors_track_meter_text_alpha_bottom   * 0.255 par_colors_track_meter_text_shadow_unlit
+                set VAL_Color_Meter_Shadow_Lit      *   / VAL_Color_meter_Alpha_Lit{0}      255     *   0.255 par_colors_track_meter_text_shadow_lit
+                set VAL_Color_Meter_Shadow_Unlit    *   / VAL_Color_meter_Alpha_Unlit{0}    255     *   0.255 par_colors_track_meter_text_shadow_unlit
 
                 ; meter lookup values
-                set VAL_meter_lit_top           [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_Lit_Top       0 0 0 VAL_Color_Meter_Shadow_Lit_Top]
-                set VAL_meter_lit_bottom        [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_Lit_Bottom    0 0 0 VAL_Color_Meter_Shadow_Lit_Bottom]
-                set VAL_meter_unlit_top         [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit_Top     0 0 0 VAL_Color_Meter_Shadow_Unlit_Bottom]
-                set VAL_meter_unlit_bottom      [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit_Bottom  0 0 0 VAL_Color_Meter_Shadow_Unlit_Bottom]
+                set VAL_meter_lit_top           [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_meter_Alpha_Lit{0}        0 0 0 VAL_Color_Meter_Shadow_Lit{0}]
+                set VAL_meter_lit_bottom        [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_meter_Alpha_Lit{0}        0 0 0 VAL_Color_Meter_Shadow_Lit{0}]
+                set VAL_meter_unlit_top         [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit{0}      0 0 0 VAL_Color_Meter_Shadow_Unlit{0}]
+                set VAL_meter_unlit_bottom      [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_Unlit{0}      0 0 0 VAL_Color_Meter_Shadow_Unlit{0}]
                 set VAL_meter_readout           [VAL_Color_Meter_Text_Readout{0}    VAL_Color_Meter_Text_Readout{1} VAL_Color_Meter_Text_Readout{2} VAL_Color_Meter_Alpha_Readout{0}    VAL_Color_Meter_Text_Readout_Clip{0} VAL_Color_Meter_Text_Readout_Clip{1} VAL_Color_Meter_Text_Readout_Clip{2} VAL_Color_Meter_Alpha_Readout_Clip{0}]
 
             endmacro
@@ -963,10 +976,10 @@
                 set VAL_trans_show_bpm_tap  * VAL_trans_show_bpm{0} par_##PARAMETER_SECTION##_element_adj_bpm_tap
 
                 ; elements width
-                set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 32
-                set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     * SCALE 24
-                set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 24
-                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 80
+                set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 34
+                set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     * SCALE 34
+                set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 28
+                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 82
 
                ; playrate fader size
                 set CUR_w_rate_fader                                        \
@@ -1753,9 +1766,11 @@
                             1
 
                 ; additional width
-                set CUR_w_add                                                   \
-                    trackidx>0                                                  \
-                        * VAL_channels{0} * SCALE par_mcp_track_meter_expand    \
+                set CUR_w_add                                                               \
+                    trackidx>0                                                              \
+                        !par_mcp_track_meter_expand_mode                                    \
+                            * VAL_channels{0} * SCALE * 0.02 par_mcp_track_meter_expand     \
+                            * VAL_channels{0} * SCALE * 0.2 par_mcp_track_meter_expand      \
                         0
 
                 ; update mcp widith pre-calculation
@@ -4282,7 +4297,7 @@
 
                     ; preparations
                     set CUR_x   VAL_tcp_x_leftmost{0}
-                    set CUR_y   + VAL_tcp_y_top{0} VAL_Unit{0}
+                    set CUR_y   + VAL_tcp_y_top{0} VAL_tcp_h{1}
                     set CUR_w   - VAL_tcp_x_end_buttons{0} CUR_x{0}
                     set CUR_h   VAL_Button{1}
 
@@ -4825,6 +4840,10 @@
                                 ?VAL_tcp_show_separator##INDEX##{0}     \
                                     CUR_x_target{0}
 
+                            set VAL_tcp_x_end_buttons                   \
+                                ?VAL_tcp_show_separator##INDEX##{0}     \
+                                    CUR_x
+
                         endmacro
 
                 ;   ###### Draw : TCP : Buttons : SingleButton : Close
@@ -4877,7 +4896,7 @@
 
             ; preparations
             set CUR_x VAL_tcp_x_leftmost{0}
-            set CUR_y VAL_Unit{0}
+            set CUR_y + VAL_tcp_y_top VAL_tcp_h{1}
             set CUR_w - VAL_tcp_x_end_buttons{0} CUR_x{0}
             set CUR_h VAL_Button{1}
 
@@ -5122,7 +5141,7 @@
                     - WALTER_ELEMENT##.size{0} CUR_w{0}                 \
                     WALTER_ELEMENT##.size{0}
 
-            set CUR_h + WALTER_ELEMENT##.size{1} 1
+            set CUR_h + WALTER_ELEMENT##.size{1} VAL_Border
 
             ; [DRAW] icon background
             set WALTER_ELEMENT##.custom.iconlane                                \

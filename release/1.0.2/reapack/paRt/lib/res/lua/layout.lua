@@ -165,24 +165,28 @@ function layout.BankBar.BankBar:setupButtons()
 
     Part.Cursor.incCursor(Part.Cursor.getCursorW() + 10, 0)
 
-    -- save
+    -- save and load are only drawn when the JS_Extension is installed
     Part.Cursor.setCursorSize(40, self.button_size)
-    Part.Control.Bank.Save.ButtonBankSave:new(nil, self.handler, "Save")
+
+    if Part.Global.js_extension_available then
+        Part.Control.Bank.Save.ButtonBankSave:new(nil, self.handler, "Save")
+    end
 
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
-    -- load
+    if Part.Global.js_extension_available then
     Part.Control.Bank.Load.ButtonBankLoad:new(nil, self.handler, "Load")
+    end
 
     Part.Cursor.incCursor(Part.Cursor.getCursorW() + 10, 0)
 
     -- reset values button
-    Part.Control.Bank.Reset.ButtonBankReset:new(nil, self.handler, "Default Settings")
+    Part.Control.Bank.Reset.ButtonBankReset:new(nil, self.handler, "Default Config")
 
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
     -- reset values button
-    Part.Control.Bank.HardReset.ButtonBankResetHard:new(nil, self.handler, "Reset All")
+    Part.Control.Bank.HardReset.ButtonBankResetHard:new(nil, self.handler, "Hard Reset")
 end
 
 --  Bank Bar : Draw
