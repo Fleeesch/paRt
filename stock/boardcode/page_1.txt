@@ -1,8 +1,8 @@
-[center]
+[url=https://fleeesch.github.io/part/index.html][center]
 [img]https://fleeesch.github.io/part/res/gallery/banner.png[/img]
-[/center]
 
 [size=+2][b]paRt - plain adapting Reaper theme[/b][/size]
+[/center][/url]
 
 A custom Reaper theme with a heavy focus on functionality.
 

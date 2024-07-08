@@ -32,7 +32,7 @@ jobs:
       
       # grant writing rights to release make script
       - name: Grant execute permission to release script
-        run: chmod +x make_release_github.sh
+        run: chmod +x make_release.sh
       
       # build release
       - name: Create Release Binaries
