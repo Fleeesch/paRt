@@ -2,16 +2,18 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dark
-;       Version: 1.0.2
-;       Date: 2024-07-08 04:12:54
+;       Version: 1.0.3
+;       Date: 2024-07-09 12:54:59
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.0.2' 0 0 0
+define_parameter part_version 'paRt Theme v1.0.3' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -19,8 +21,8 @@ define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP La
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 583 0 1000
-define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 595 0 1000
-define_parameter par_colors_track_folder_foldertrack_tone 'Colors - Track - Folder Track Tone' 546 0 1000
+define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
+define_parameter par_colors_track_folder_foldertrack_tone 'Colors - Track - Folder Track Tone' 500 0 1000
 define_parameter par_colors_track_folder_foldertree_tint 'Colors - Track - Folder Tree Tint' 500 0 1000
 define_parameter par_colors_track_folder_foldertree_tone 'Colors - Track - Folder Tree Tone' 500 0 1000
 define_parameter par_colors_track_meter_text_alpha_lit 'Colors - Track - Meter Text Alpha Lit' 1000 0 1000
@@ -147,6 +149,7 @@ define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Elem
 define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 1000
+define_parameter par_tcp_gen_element_insert_slow_width 'TCP - General - Inserts - Slot Width' 0 0 1000
 define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 1
 define_parameter par_tcp_gen_folder_icon_grid 'TCP - General - Folder Grid' 0 0 1
 define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 1
@@ -640,6 +643,9 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_tcp_fader_min_w     * SCALE 10
                 set VAL_tcp_label_min_w     * SCALE 50
 
+                ; calculate slot size
+                set VAL_tcp_inserts_slot_w_min * SCALE + 14 * 0.08 par_tcp_gen_element_insert_slow_width
+                
 
             endmacro
 
@@ -5266,8 +5272,13 @@ set THEME_color_red                         [210 101 101]
 
             macro MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                ; insert slot width pre-calculation
+                set VAL_tcp_slot_w VAL_tcp_inserts_slot_w_min
+                set VAL_tcp_slow_w_max - WALTER_ELEMENT##.fxparm{w} * SCALE 10
+                MAC_Math_Max VAL_tcp_slot_w VAL_tcp_slow_w_max{0}
+
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_inserts_min_w{0} 0 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w{0} VAL_tcp_slot_w{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]                
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
