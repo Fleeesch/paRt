@@ -1,8 +1,7 @@
-[size=+2]Theme Adjuster[/size]
+[center][size=+2]Theme Adjuster[/size]
 
-[center]
 [img]https://fleeesch.github.io/part/res/gallery/theme_adj.png[/img]
-[size=-1]Screenshot taken from v1.0.2[/size]
+[size=-1]Screenshot taken from paRt v1.0.2[/size]
 [/center]
 
 As for v1.0.2, paRt now comes with a custom theme adjuster. While it still works without it, it is highly recommended to ensure that it has been properly installed. Every adjustment for paRt is intended to be made using the Adjuster.

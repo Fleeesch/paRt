@@ -1,3 +1,5 @@
+
+
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -412,6 +414,9 @@
                 set VAL_tcp_fader_min_w     * SCALE 10
                 set VAL_tcp_label_min_w     * SCALE 50
 
+                ; calculate slot size
+                set VAL_tcp_inserts_slot_w_min * SCALE + 14 * 0.08 par_tcp_gen_element_insert_slow_width
+                
 
             endmacro
 
@@ -5015,8 +5020,13 @@
 
             macro MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                ; insert slot width pre-calculation
+                set VAL_tcp_slot_w VAL_tcp_inserts_slot_w_min
+                set VAL_tcp_slow_w_max - WALTER_ELEMENT##.fxparm{w} * SCALE 10
+                MAC_Math_Max VAL_tcp_slot_w VAL_tcp_slow_w_max{0}
+
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_inserts_min_w{0} 0 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w{0} VAL_tcp_slot_w{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]                
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin

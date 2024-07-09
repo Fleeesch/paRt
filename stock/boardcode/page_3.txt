@@ -1,27 +1,15 @@
-[size=+2]Screenshots - Resolutions[/size]
+[center][size=+2]Screenshots - Resolutions[/size][/center]
 
 [b]Full HD / 1080 p[/b]
 
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dark.png[/img][/url]
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dimmed.png[/img][/url] 
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_light.png[/img][/url]
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dark.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_dimmed.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_light.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_fhd_light.png[/img][/url]
 
 [b]QHD / 2K[/b]
 
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dark.png[/img][/url]
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dimmed.png[/img][/url] 
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_light.png[/img][/url]
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dark.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_dimmed.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_qhd_light.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_qhd_light.png[/img][/url]
 
 [b]UHD / 4K[/b]
 
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dark.png[/img][/url]
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dimmed.png[/img][/url] 
-
-[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_lightpng][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_light.png[/img][/url]
+[url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dark.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dark.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_dimmed.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_dimmed.png[/img][/url] [url=https://fleeesch.github.io/part/res/gallery/resolution/part_uhd_light.png][img]https://fleeesch.github.io/part/res/gallery/thumb/thumb_res_uhd_light.png[/img][/url]
 
 [size=-1]Screenshots taken from paRt v.1.0.2[/size]
