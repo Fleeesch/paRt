@@ -28,6 +28,56 @@ file_colors="theme_colors.txt"
 file_font="theme_font.txt"
 file_img="theme_img_paths.txt"
 
+#   Function : Extract Theme Data
+# --------------------------------------------
+
+extract_theme_data() {
+    # Array of input files
+    input_tags=("dark" "dimmed" "light")
+
+    # Check if all files exist
+    for tag in "${input_tags[@]}"; do
+        input_file="part_${tag}_unpacked.ReaperTheme"
+        if [[ ! -f "$input_file" ]]; then
+            return 1
+        fi
+    done
+
+    # Output file
+    local color_file="theme_colors.txt"
+    local font_file="theme_font.txt"
+
+    # Clear the output file if it already exists
+    >"$color_file"
+
+    # Loop through each file
+    for tag in "${input_tags[@]}"; do
+
+        input_file="part_${tag}_unpacked.ReaperTheme"
+
+        # Extract [color theme] block
+        local color_theme
+        color_theme=$(sed -n '/^\[color theme\]/,/^\[/p' "$input_file" | sed '1d;$d')
+
+        # color file
+        {
+            echo "Colors $tag"
+            echo "$color_theme"
+            echo ""
+            echo "EndColors"
+            echo ""
+        } >>"$color_file"
+
+    done
+
+    input_file="part_${input_tags[0]}_unpacked.ReaperTheme"
+
+    local reaper_block
+    reaper_block=$(sed -n '/^\[REAPER\]/,/^\[/p' "$input_file" | sed '1d;$d' | grep -v '^ui_img=')
+
+    echo "$reaper_block">"$font_file"
+}
+
 #   Function : Capitalize
 # --------------------------------------------
 
@@ -56,10 +106,15 @@ filter_colors() {
     ' "$file"
 }
 
-# output folder must erxist
+# output folder must exist
 mkdir -p out
 
-#   Create WALTER files for themes
+#   Extract color data from existing Theme Files
+# -------------------------------------------------
+
+extract_theme_data
+
+#   Create Reaper Theme Files
 # --------------------------------------------
 
 echo -e "${COLOR_RESET}Generating Reaper Theme files...${COLOR_RESET}"
