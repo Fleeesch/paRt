@@ -1,6 +1,9 @@
-made mute-overlay colors more obvious
-toned down arrangement background in light theme
-corrected compact tab color value
-added TCP insert slot width adjustment to theme adjuster under TCP > General
-changed TCP inserts behaviour to target a fixed slot width
-fixed bug in Theme Adjuster when dealing with faulty last_theme file
+reduced text label clipping
+added missing WALTER constants
+added offset to drag-indicators indicators in TCP
+thinner scrollbar elements
+slimmer TCP folder buttons
+updated fader zero line colors
+updated send knob color pattern
+updated size-adjustment drag indicator with signal color
+darker mute overlay for light theme

@@ -155,10 +155,10 @@ universal:
 
     # sends
     insert_send_meter: [0, 0, 0, 0.2]
-    insert_send_knob_border: [0, 0, 0, 0.5]
-    insert_send_knob_0: [215, 178, 99]
-    insert_send_knob_1: [0, 0, 0]
-    insert_send_knob_2: [235, 235, 235]
+    insert_send_knob_border: [0, 0, 0, 0.75]
+    insert_send_knob_0: [0, 0, 0, 0.75]
+    insert_send_knob_1: [215, 178, 99]
+    insert_send_knob_2: [255,255,255]
 
     # fx parameter
     insert_slot_fxparm: [0, 0, 0, 0.25]
@@ -294,7 +294,7 @@ dimmed:
     generic_knob_border: [0, 0, 0, 0.5]
 
     # folder buttons
-    folder_symbol: [255, 255, 255, 0.4]
+    folder_symbol: [255, 255, 255, 0.5]
 
     # transport
     transport_bg: [82, 82, 82]
@@ -355,12 +355,12 @@ dimmed:
     # sends
     insert_send_meter: [0, 0, 0, 0.15]
     insert_send_knob_border: [0, 0, 0, 0.5]
-    insert_send_knob_0: [233, 199, 124]
-    insert_send_knob_1: [0, 0, 0, 0.9]
-    insert_send_knob_2: [235, 235, 235]
+    insert_send_knob_0: [0, 0, 0, 0.75]
+    insert_send_knob_1: [233, 199, 124]
+    insert_send_knob_2: [255, 255, 255]
 
     # fx parameter
-    insert_slot_fxparm: [0, 0, 0, 0.5]
+    insert_slot_fxparm: [0, 0, 0, 0.6]
     insert_fxparm_bg: [0, 0, 0, 0.2]
     insert_fxparm_border: [0, 0, 0, 0.5]
 
@@ -548,12 +548,12 @@ light:
     # sends
     insert_send_meter: [0, 0, 0, 0.1]
     insert_send_knob_border: [0, 0, 0, 0.5]
-    insert_send_knob_0: [241, 208, 138]
-    insert_send_knob_1: [0, 0, 0, 0.8]
+    insert_send_knob_0: [0, 0, 0, 0.7]
+    insert_send_knob_1: [241, 208, 138]
     insert_send_knob_2: [255, 255, 255]
 
     # fx parameter
-    insert_slot_fxparm: [0, 0, 0, 0.6]
+    insert_slot_fxparm: [0, 0, 0, 0.4]
     insert_fxparm_bg: [0, 0, 0, 0.2]
     insert_fxparm_border: [0, 0, 0, 0.5]
 

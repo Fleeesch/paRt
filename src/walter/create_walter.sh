@@ -32,18 +32,19 @@ remove_theme_blocks() {
 }
 
 
+
 #   Cleanup WALTER file
 # --------------------------------------------
 
 # Main script starts here
-walter_file="walter_rtconfig.txt"
+file_walter="rtconfig.txt"
 
 # Remove Blocks
-remove_header_block "$walter_file" > "temp_0.txt"
+remove_header_block "$file_walter" > "temp_0.txt"
 remove_theme_blocks temp_0.txt > "temp_1.txt"
 
 # Clean up temporary files
-cat "temp_1.txt" > "$walter_file"
+cat "temp_1.txt" > "$file_walter"
 rm temp_0.txt temp_1.txt
 
 #   Title
@@ -89,10 +90,11 @@ themes=("dark" "dimmed" "light")
 
 # source files
 file_colors="walter_colors.txt"
-file_walter="walter_rtconfig.txt"
+file_colors_zeroline="walter_colors_zeroline.txt"
 file_parameter_list="out/walter_parameter_list"
 
 placeholder_colors="THEMEBUILDER_INSERT_COLORS"
+placeholder_zeroline="THEMEBUILDER_INSERT_ZEROLINE"
 placeholder_parameters="THEMEBUILDER_INSERT_PARAMETERS"
 
 #   Function : Filter Color Blocks
@@ -160,6 +162,10 @@ for theme in "${themes[@]}"; do
     colors=$(filter_colors "$file_colors" "$theme")
     colors="$hint_start$(echo "$colors" | awk '{gsub(/[\/&]/,"\\\\&",$0); print}')$hint_end"
 
+    # get zero line color block
+    colors_zeroline=$(filter_colors "$file_colors_zeroline" "$theme")
+    colors_zeroline="$hint_start$(echo "$colors_zeroline" | awk '{gsub(/[\/&]/,"\\\\&",$0); print}')$hint_end"    
+
     # create theme output folder
     mkdir -p "out/$theme"
 
@@ -173,6 +179,7 @@ for theme in "${themes[@]}"; do
     # replace placeholders with dynamically read content
     output_content=$(cat "$file_walter")
     output_content=$(replace_placeholders "$output_content" "$placeholder_colors" "$colors")
+    output_content=$(replace_placeholders "$output_content" "$placeholder_zeroline" "$colors_zeroline")
     output_content=$(replace_placeholders "$output_content" "$placeholder_parameters" "$parameter_list")
 
     # add header comment
