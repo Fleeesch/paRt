@@ -1,0 +1,36 @@
+@version 1.0.4
+@author Fleeesch
+@description paRt
+@links https://github.com/Fleeesch/paRt
+@screenshots https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+
+  ## Features
+  * 3 Theme files covering different brightness levels
+  * Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Covers all Reaper V7 elements
+  * Custom Theme Adjuster
+  * 200+ parameters for customization
+  * synchronization of all parmeters accross paRt theme files through the Theme Adjuster
+  * Parameter bank support for changing settings on the fly
+  * Save and load parameter settings to setting files
+@changelog
+  reduced text label clipping
+  added missing WALTER constants
+  added offset to drag-indicators indicators in TCP
+  thinner scrollbar elements
+  slimmer TCP folder buttons
+  updated fader zero line colors
+  updated send knob color pattern
+  updated size-adjustment drag indicator with signal color
+  darker mute overlay for light theme
