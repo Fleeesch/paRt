@@ -1,3 +1,7 @@
+
+
+
+
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -416,7 +420,7 @@
                 set VAL_tcp_label_min_w     * SCALE 50
 
                 ; calculate slot size
-                set VAL_tcp_inserts_slot_w_min * SCALE + 14 * 0.08 par_tcp_gen_element_insert_slow_width
+                set VAL_tcp_inserts_slot_w_min * SCALE + 14 * 0.08 par_tcp_gen_insert_slot_width
                 
 
             endmacro
@@ -982,10 +986,10 @@
                 set VAL_trans_show_bpm_tap  * VAL_trans_show_bpm{0} par_##PARAMETER_SECTION##_element_adj_bpm_tap
 
                 ; elements width
-                set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 34
+                set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 64
                 set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     * SCALE 34
                 set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 28
-                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 82
+                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 84
 
                ; playrate fader size
                 set CUR_w_rate_fader                                        \
@@ -1374,14 +1378,14 @@
 
                 ; bpm edit
                 set WALTER_ELEMENT##.bpm.edit.font      VAL_Font_Large
-                set WALTER_ELEMENT##.bpm.edit.margin    [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3}]
+                set WALTER_ELEMENT##.bpm.edit.margin    [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3} 0.5]
 
                 ; time signature
                 set WALTER_ELEMENT##.curtimesig.font    VAL_Font_Large
 
                 ; playrate
                 set WALTER_ELEMENT##.rate.font          VAL_Font_Large
-                set WALTER_ELEMENT##.rate.margin        [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3}]
+                set WALTER_ELEMENT##.rate.margin        [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3} 0.5]
 
                 ; status
                 set WALTER_ELEMENT##.status.margin      [VAL_Margin_Label_Trans_Status{0} VAL_Margin_Label_Trans_Status{1} VAL_Margin_Label_Trans_Status{2} VAL_Margin_Label_Trans_Status{3}]
@@ -1603,12 +1607,6 @@
 
                     ; size calculations
                     MAC_DrawMcp_Setup_Size SCALE WALTER_ELEMENT PARAMETER_SECTION
-
-                    ; folder indentation
-                    set VAL_Mcp_FolderFeatures  \
-                        !maxfolderdepth         \
-                            0                   \
-                            1
 
                     ; folder features
                     set VAL_Mcp_FolderFeatures par_mcp_gen_folder_icon_folder
@@ -2831,9 +2829,9 @@
                     [VAL_mcp_vol_readout_x{0} CUR_y{0} VAL_mcp_vol_readout_w{0} VAL_mcp_vol_readout_h{0} 0 0 1 0]
 
             ; readout bg
-            set WALTER_ELEMENT##.custom.readout_bg                                  \
-                ?VAL_mcp_show_vol_readout{0}                                        \
-                    [CUR_x{0} CUR_y{0} CUR_w{0} VAL_mcp_vol_readout_h{0} 0 0 1 0]   \
+            set WALTER_ELEMENT##.custom.readout_bg                                                                      \
+                ?VAL_mcp_show_vol_readout{0}                                                                            \
+                    - + VAL_Border{0}@h [CUR_x{0} CUR_y{0} CUR_w{0} VAL_mcp_vol_readout_h{0} 0 0 1 0] VAL_Border{0}@y   \
                     0
 
             ; increment y position
@@ -3200,19 +3198,19 @@
                     0
 
             ; readout bg
-            set WALTER_ELEMENT##.custom.readout_bg                                          \
-                ?VAL_mcp_show_vol_readout{0}                                                \
-                    [CUR_x{0} CUR_readout_y{0} CUR_w{0} VAL_mcp_vol_readout_h{0} 0 0 0 0]
+            set WALTER_ELEMENT##.custom.readout_bg                                                                              \
+                ?VAL_mcp_show_vol_readout{0}                                                                                    \
+                    - + VAL_Border{0}@h [CUR_x{0} CUR_readout_y{0} CUR_w{0} VAL_mcp_vol_readout_h{0} 0 0 0 0] VAL_Border{0}@y
 
             ; increment x position
             set CUR_x                                                   \
                 ?VAL_mcp_show_meter_bottom{0}                           \
                     + CUR_x{0} + CUR_w{0} VAL_mcp_spacing_section_x{0}
 
-            front WALTER_ELEMENT##.custom.meter_frame
-            front WALTER_ELEMENT##.meter
             front WALTER_ELEMENT##.custom.readout_bg
             front WALTER_ELEMENT##.volume.label
+            front WALTER_ELEMENT##.meter
+            front WALTER_ELEMENT##.custom.meter_frame
 
 
 
@@ -5023,8 +5021,8 @@
 
                 ; insert slot width pre-calculation
                 set VAL_tcp_slot_w VAL_tcp_inserts_slot_w_min
-                set VAL_tcp_slow_w_max - WALTER_ELEMENT##.fxparm{w} * SCALE 10
-                MAC_Math_Max VAL_tcp_slot_w VAL_tcp_slow_w_max{0}
+                set VAL_tcp_slot_w_max - WALTER_ELEMENT##.fxparm{w} * SCALE 10
+                MAC_Math_Max VAL_tcp_slot_w VAL_tcp_slot_w_max{0}
 
                 ; inserts
                 set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w{0} VAL_tcp_slot_w{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
