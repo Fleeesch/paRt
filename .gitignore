@@ -14,9 +14,6 @@
 # local Reaper developement folder
 /reaper/
 
-# release binaries
-/release/bin/
-
 # example project
 part_example-project_rec_gitignore.rpp
 /test/**/rnd/
