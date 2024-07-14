@@ -17,3 +17,4 @@
 # example project
 part_example-project_rec_gitignore.rpp
 /test/**/rnd/
+/test/**/gitignore/
