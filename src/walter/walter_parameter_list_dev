@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.0.4
+part_version 1.0.5
 
     bank_selected 'Selected Bank' 2 2 9
 
@@ -133,7 +133,7 @@ part_version 1.0.4
     tcp_gen_element_adj_show_fx                 'TCP - General - Element Adjustment Show FX'            DEF_tcp_gen_element_adj_show_fx                 0           1
 
 ; ::: Inserts
-    tcp_gen_element_insert_slow_width           'TCP - General - Inserts - Slot Width'                  DEF_tcp_gen_insert_slot_width                   0           VAL_PAR_RANGE
+    tcp_gen_insert_slot_width                   'TCP - General - Inserts - Slot Width'                  DEF_tcp_gen_insert_slot_width                   0           VAL_PAR_RANGE
 
 ;   Track
 ; ----------------------------------------------

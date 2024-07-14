@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.0.4' 0 0 0
+define_parameter part_version 'paRt Theme v1.0.5' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -13,15 +13,15 @@ define_parameter par_colors_track_folder_foldertree_tint 'Colors - Track - Folde
 define_parameter par_colors_track_folder_foldertree_tone 'Colors - Track - Folder Tree Tone' 500 0 1000
 define_parameter par_colors_track_meter_text_alpha_lit 'Colors - Track - Meter Text Alpha Lit' 1000 0 1000
 define_parameter par_colors_track_meter_text_alpha_master 'Colors - Track - Meter Text Alpha Master' 1000 0 1000
-define_parameter par_colors_track_meter_text_alpha_readout 'Colors - Track - Meter Text Alpha Readout' 1000 0 1000
+define_parameter par_colors_track_meter_text_alpha_readout 'Colors - Track - Meter Text Alpha Readout' 700 0 1000
 define_parameter par_colors_track_meter_text_alpha_readout_clip 'Colors - Track - Meter Text Alpha Readout Clip' 1000 0 1000
-define_parameter par_colors_track_meter_text_alpha_track 'Colors - Track - Meter Text Alpha Track' 850 0 1000
-define_parameter par_colors_track_meter_text_alpha_unlit 'Colors - Track - Meter Text Alpha Unlit' 390 0 1000
-define_parameter par_colors_track_meter_text_shadow_lit 'Colors - Track - Meter Text Shadow Top' 1000 0 1000
+define_parameter par_colors_track_meter_text_alpha_track 'Colors - Track - Meter Text Alpha Track' 450 0 1000
+define_parameter par_colors_track_meter_text_alpha_unlit 'Colors - Track - Meter Text Alpha Unlit' 560 0 1000
+define_parameter par_colors_track_meter_text_shadow_lit 'Colors - Track - Meter Text Shadow Top' 0 0 1000
 define_parameter par_colors_track_meter_text_shadow_unlit 'Colors - Track - Meter Text Shadow Bottom' 0 0 1000
-define_parameter par_colors_track_meter_text_tone_lit 'Colors - Track - Meter Text Tone Lit' 1000 0 1000
-define_parameter par_colors_track_meter_text_tone_readout 'Colors - Track - Meter Text Tone Readout' 1000 0 1000
-define_parameter par_colors_track_meter_text_tone_readout_clip 'Colors - Track - Meter Text Tone Readout Clip' 0 0 1000
+define_parameter par_colors_track_meter_text_tone_lit 'Colors - Track - Meter Text Tone Lit' 0 0 1000
+define_parameter par_colors_track_meter_text_tone_readout 'Colors - Track - Meter Text Tone Readout' 720 0 1000
+define_parameter par_colors_track_meter_text_tone_readout_clip 'Colors - Track - Meter Text Tone Readout Clip' 1000 0 1000
 define_parameter par_colors_track_meter_text_tone_unlit 'Colors - Track - Meter Text Tone Unlit' 1000 0 1000
 define_parameter par_colors_track_track_bg_select_tint 'Colors - Track - Track Background Selection Tint' 0 0 1000
 define_parameter par_colors_track_track_bg_select_tone 'Colors - Track - Track Background Selection Tone' 330 0 1000
@@ -40,9 +40,9 @@ define_parameter par_mcp_gen_element_adj_separator_line 'MCP - Track - Element A
 define_parameter par_mcp_gen_element_adj_spacing_fader_x 'MCP - Track - Element Adjustments Spacing Fader X' 0 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_fader_y 'MCP - Track - Element Adjustments Spacing Fader Y' 0 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_section_x 'MCP - Track - Element Adjustments Spacing Section X' 0 0 1000
-define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 0 0 1000
-define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 0 0 1000
-define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 0 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 185 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 82 0 1000
+define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 31 0 1000
 define_parameter par_mcp_gen_folder_grid 'MCP - General - Folder Grid' 0 0 1
 define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 1 0 1
 define_parameter par_mcp_gen_folder_icon_last 'MCP - General - Folder Icon Last' 0 0 1
@@ -50,7 +50,7 @@ define_parameter par_mcp_gen_folder_indent 'MCP - General - Folder Indent' 0 0 1
 define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padding Last' 161 0 1000
 define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 160 0 1000
 define_parameter par_mcp_gen_highlight_color 'MCP - General - Highlight Color Bar' 354 0 1000
-define_parameter par_mcp_gen_highlight_selection 'MCP - General - Highlight Selection Bar' 54 0 1000
+define_parameter par_mcp_gen_highlight_selection 'MCP - General - Highlight Selection Bar' 77 0 1000
 define_parameter par_mcp_gen_settings_multirow 'MCP - General - Settings MultiRow' 0 0 1
 define_parameter par_mcp_gen_settings_multirow_compact 'MCP - General - Settings MultiRow Compact' 0 0 1
 define_parameter par_mcp_gen_settings_trackicons 'MCP - General - Settings Track Icons' 0 0 1
@@ -105,10 +105,10 @@ define_parameter par_mcp_track_meter_padding 'MCP - Track - Meter Padding' 0 0 2
 define_parameter par_mcp_track_meter_pos 'MCP - Track - Meter Position' 2 0 2
 define_parameter par_mcp_track_meter_size 'MCP - Track - Meter Size' 0 0 1000
 define_parameter par_mcp_track_meter_size_scale 'MCP - Track - Meter Size Scale' 0 0 1
-define_parameter par_mcp_track_meter_vol_readout 'MCP - Track - Meter Volume Readout' 1 0 2
+define_parameter par_mcp_track_meter_vol_readout 'MCP - Track - Meter Volume Readout' 2 0 2
 define_parameter par_mcp_track_meter_vu_db 'MCP - Track - Meter VU dB' 1 0 1
 define_parameter par_mcp_track_meter_vu_readout 'MCP - Track - Meter VU Readout' 1 0 1
-define_parameter par_mcp_track_settings_extrapad 'MCP - Track - Settings Extra Padding' 71 0 1000
+define_parameter par_mcp_track_settings_extrapad 'MCP - Track - Settings Extra Padding' 104 0 1000
 define_parameter par_mcp_track_settings_label_index 'MCP - Track - Settings Label Index Position' 2 0 2
 define_parameter par_mcp_track_settings_label_size 'MCP - Track - Settings Label Size' 0 0 1000
 define_parameter par_mcp_track_settings_label_vertical 'MCP - Track - Settings Label Vertical' 0 0 1
@@ -135,13 +135,13 @@ define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Elem
 define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 1000
-define_parameter par_tcp_gen_element_insert_slow_width 'TCP - General - Inserts - Slot Width' 0 0 1000
 define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 1
 define_parameter par_tcp_gen_folder_icon_grid 'TCP - General - Folder Grid' 0 0 1
 define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 1
 define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 330 0 1000
 define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 447 0 1000
-define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 130 0 1000
+define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 88 0 1000
+define_parameter par_tcp_gen_insert_slot_width 'TCP - General - Inserts - Slot Width' 355 0 1000
 define_parameter par_tcp_master_element_adj_size_env 'TCP - Master - Element Adjustment Envelope Size' 1 0 1
 define_parameter par_tcp_master_element_adj_size_fx 'TCP - Master - Element Adjustment FX Size' 0 0 1
 define_parameter par_tcp_master_element_separator 'TCP - Master - Element Separator' 42 0 1000000
@@ -167,7 +167,7 @@ define_parameter par_tcp_master_meter_vu_db 'TCP - Master - Meter VU dB' 1 0 1
 define_parameter par_tcp_master_meter_vu_readout 'TCP - Master - Meter VU Readout' 0 0 1
 define_parameter par_tcp_track_element_adj_label_size 'TCP - Track - Element Adjustment Label Size' 0 0 1000
 define_parameter par_tcp_track_element_adj_size_env 'TCP - Track - Element Adjustment Envelope Size' 0 0 1
-define_parameter par_tcp_track_element_adj_size_input 'TCP - Track - Element Adjustment Input Size' 407 0 1000
+define_parameter par_tcp_track_element_adj_size_input 'TCP - Track - Element Adjustment Input Size' 240 0 1000
 define_parameter par_tcp_track_element_separator 'TCP - Track - Element Separator' 650 0 1000000
 define_parameter par_tcp_track_element_vis 'TCP - Track - Element Visibility' 4094 0 1000000
 define_parameter par_tcp_track_element_vis_mixer 'TCP - Track - Element Visibility Mixer' 3784 0 1000000

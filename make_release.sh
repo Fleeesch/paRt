@@ -50,6 +50,16 @@ function print_prompt_line() {
 #   Introduction
 # -------------------------------
 
+# get arguments
+keep_open=true
+
+while getopts "c" opt; do
+    case $opt in
+    c) keep_open=false ;;
+    esac
+done
+
+# working dir
 ORG_DIR=$(pwd)
 
 # store original working directory
@@ -88,7 +98,7 @@ echo ""
 recreate_themes=false
 if [ "$unattended" = false ]; then
 
-    print_prompt_line "Recreate Themes?"
+    print_prompt_line "Rebuild Themefiles?"
     read -n 1 choice
     echo ""
 
@@ -205,7 +215,6 @@ if [ "$local_release" = true ]; then
     echo "" >>"$reapack_file_out"
     cat "$changelog_file" >>"$reapack_file_out"
 
-
     print_done
 
     #   Theme Adjuster Files
@@ -217,7 +226,6 @@ if [ "$local_release" = true ]; then
     rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"
 
     print_done
-
 
     #   Manual-Installation Release
     # --------------------------------
@@ -242,4 +250,10 @@ if [ "$local_release" = true ]; then
         mv "./$release_folder/$version" "./$release_folder/current" >/dev/null 2>&1
     fi
 
+fi
+
+# any key prompt
+if [[ "$keep_open" == true ]]; then
+    echo -e "\n${COLOR_GREEN}All done. ${COLOR_RESET}Press any key to exit..."
+    read -n 1
 fi

@@ -90,6 +90,7 @@ script_themefile_create="create_theme.sh"
 
 script_lua_folder="$(pwd)/scripts/themeadj/"
 themeadj_icon_path="$script_lua_folder/lib/res/icon"
+script_lua_copy_themeadj="copy_theme_adj.sh"
 script_lua_add_tags="add_lua_tags.sh"
 
 #   Introduction
@@ -118,12 +119,13 @@ rebuild_assets=false
 clear_build_folder=true
 copy_reaperthemefiles=false
 copy_reaperthemezip=true
+update_themeadj=false
 
 if [ "$unattended" = false ]; then
 
     echo ""
 
-    # clear build folder
+    # rebuild assets
     print_prompt_line "Rebuild all assets?"
     read -n 1 choice
     echo ""
@@ -133,15 +135,19 @@ if [ "$unattended" = false ]; then
     *) rebuild_assets=false ;;
     esac
 
-    # clear build folder
-    print_prompt_line "Clear Build Folder?"
-    read -n 1 choice
-    echo ""
+    if [ "$rebuild_assets" == false ]; then
+        # clear build folder
+        print_prompt_line "Clear Build Folder?"
+        read -n 1 choice
+        echo ""
 
-    case "$choice" in
-    y | Y) clear_build_folder=true ;;
-    *) clear_build_folder=false ;;
-    esac
+        case "$choice" in
+        y | Y) clear_build_folder=true ;;
+        *) clear_build_folder=false ;;
+        esac
+    else
+        clear_build_folder=true
+    fi
 
     # copy reaper theme files
     print_prompt_line "Copy ReaperTheme files?"
@@ -161,6 +167,16 @@ if [ "$unattended" = false ]; then
     case "$choice" in
     y | Y) copy_reaperthemezip=true ;;
     *) copy_reaperthemezip=false ;;
+    esac
+
+    # update theme adjuster
+    print_prompt_line "Grab Theme Adjuster from development folder?"
+    read -n 1 choice
+    echo ""
+
+    case "$choice" in
+    y | Y) update_themeadj=true ;;
+    *) update_themeadj=false ;;
     esac
 
 fi
@@ -228,6 +244,15 @@ cd "$org_path"
 
 #   Reascript Files
 # --------------------------------------------
+
+if [ "$update_themeadj" = true ]; then
+    cd $script_lua_folder
+    cd ".."
+
+    source $script_lua_copy_themeadj
+
+    cd $org_path
+fi
 
 cd $script_lua_folder
 cd ".."
