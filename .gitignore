@@ -3,29 +3,20 @@
 */.bu
 
 # File Types
-
 *.rpp-bak
 *.flac
 *.reapeaks
 
-# Reaper folder
-
-/reaper/*
-!/reaper/ColorThemes/
-/reaper/ColorThemes/*
-
-# Release folders
-
-/release/bin/*
-
-# Ignore everything that contains the "gitignore" word, excluding the gitignore file itself
-*gitignore*
-!.gitignore
-
-# flac file render folder
-**/rnd/flac/
-
-# exclude assets from build folder
+# limit build files to ReaperThemeZip
 /src/build/*
-!/src/build/*.ReaperTheme
 !/src/build/*.ReaperThemeZip
+
+# local Reaper developement folder
+/reaper/
+
+# release binaries
+/release/bin/
+
+# example project
+part_example-project_rec_gitignore.rpp
+/test/**/rnd/
