@@ -50,15 +50,6 @@ function print_prompt_line() {
 #   Introduction
 # -------------------------------
 
-# get arguments
-keep_open=true
-
-while getopts "c" opt; do
-    case $opt in
-    c) keep_open=false ;;
-    esac
-done
-
 # working dir
 ORG_DIR=$(pwd)
 
@@ -72,15 +63,12 @@ release_folder="release"
 # check for unattended mode
 github=false
 unattended=false
-
-while getopts ":gu" opt; do
+keep_open=true
+while getopts ":guc" opt; do
     case $opt in
-    g)
-        github=true
-        ;;
-    u)
-        unattended=true
-        ;;
+    g) github=true ;;
+    u) unattended=true ;;
+    c) keep_open=false ;;
     esac
 done
 
