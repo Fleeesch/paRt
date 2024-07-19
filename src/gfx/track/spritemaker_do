@@ -161,10 +161,10 @@
 # --------------------------------------
 
 # icon
---out mcp_iconbg                            --frame frame               --images bg_icon -tint gui_bg
---out mcp_iconbgsel                         --frame frame               --images bg_icon -tint gui_bg
---out tcp_iconbg        --flip-vertical     --frame frame -rotate 180   --images bg_icon -tint track_icon_bg           border_icon -tint track_icon_border
---out tcp_iconbgsel     --flip-vertical     --frame frame -rotate 180   --images bg_icon -tint track_icon_bg_select    border_icon -tint track_icon_border
+--out mcp_iconbg                            --frame frame                       --images bg_icon -tint gui_bg
+--out mcp_iconbgsel                         --frame frame                       --images bg_icon -tint gui_bg
+--out tcp_iconbg        --flip-vertical     --frame frame_slim -rotate 180      --images bg_icon -tint track_icon_bg           border_icon -tint track_icon_border
+--out tcp_iconbgsel     --flip-vertical     --frame frame_slim -rotate 180      --images bg_icon -tint track_icon_bg_select    border_icon -tint track_icon_border
 
 # frames
 --out track_custom_bg_frame             --frame frame --images border -tint border_bg

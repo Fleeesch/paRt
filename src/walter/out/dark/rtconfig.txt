@@ -2,20 +2,16 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dark
-;       Version: 1.0.5
-;       Date: 2024-07-14 16:40:37
+;       Version: 1.0.6
+;       Date: 2024-07-19 20:07:05
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
-
-
-
-
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.0.5' 0 0 0
+define_parameter part_version 'paRt Theme v1.0.6' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -503,24 +499,42 @@ define_parameter paRt_end 'paRt end' 0 0 1
                                         1
 
                 ; label margins
-                set VAL_Margin_Label                                    \
-                    SCALE>=2.5      [6 VAL_Border_Neg 6 VAL_Border]     \
-                    SCALE>=2.25     [5 VAL_Border_Neg 5 VAL_Border]     \
-                    SCALE>=2        [4 VAL_Border_Neg 4 VAL_Border]     \
-                    SCALE>=1.75     [4 VAL_Border_Neg 4 VAL_Border]     \
-                    SCALE>=1.5      [3 VAL_Border_Neg 3 VAL_Border]     \
-                    SCALE>=1.25     [3 VAL_Border_Neg 3 VAL_Border]     \
-                                    [2 VAL_Border_Neg 2 VAL_Border]
+                ; [MAC OS FIX]
+                set VAL_Margin_Label                                        \
+                    os_type==1                                              \
+                        SCALE>=2.5      [6 4 6 VAL_Border]                  \
+                        SCALE>=2.25     [5 4 5 VAL_Border]                  \
+                        SCALE>=2        [4 3 4 VAL_Border]                  \
+                        SCALE>=1.75     [4 5 4 VAL_Border]                  \
+                        SCALE>=1.5      [3 5 3 VAL_Border]                  \
+                        SCALE>=1.25     [3 4 3 VAL_Border]                  \
+                                        [3 2 3 VAL_Border]                  \
+                        SCALE>=2.5      [6 VAL_Border_Neg 6 VAL_Border]     \
+                        SCALE>=2.25     [5 VAL_Border_Neg 5 VAL_Border]     \
+                        SCALE>=2        [4 VAL_Border_Neg 4 VAL_Border]     \
+                        SCALE>=1.75     [4 VAL_Border_Neg 4 VAL_Border]     \
+                        SCALE>=1.5      [3 VAL_Border_Neg 3 VAL_Border]     \
+                        SCALE>=1.25     [3 VAL_Border_Neg 3 VAL_Border]     \
+                                        [3 VAL_Border_Neg 3 VAL_Border]     
 
                 ; vertical label margins
-                set VAL_Margin_Label_vertical       \
-                    SCALE>=2.5      [5 10 5 10]     \
-                    SCALE>=2.25     [5 9 5 9]       \
-                    SCALE>=2        [4 8 4 8]       \
-                    SCALE>=1.75     [4 7 4 7]       \
-                    SCALE>=1.5      [3 6 3 6]       \
-                    SCALE>=1.25     [2 5 2 5]       \
-                                    [2 4 2 4]              
+                ; [MAC OS FIX]
+                set VAL_Margin_Label_vertical           \
+                    os_type==1                          \
+                        SCALE>=2.5      [5 10 5 10]     \
+                        SCALE>=2.25     [5 9 5 9]       \
+                        SCALE>=2        [4 8 4 8]       \
+                        SCALE>=1.75     [2 7 2 7]       \
+                        SCALE>=1.5      [3 6 3 6]       \
+                        SCALE>=1.25     [2 5 2 5]       \
+                                        [0 4 0 4]       \
+                        SCALE>=2.5      [5 10 5 10]     \
+                        SCALE>=2.25     [5 9 5 9]       \
+                        SCALE>=2        [4 8 4 8]       \
+                        SCALE>=1.75     [4 7 4 7]       \
+                        SCALE>=1.5      [3 6 3 6]       \
+                        SCALE>=1.25     [2 5 2 5]       \
+                                        [2 4 2 4]
 
                 ; transport time section label margins
                 set VAL_Margin_Label_Trans_Time     \
@@ -553,14 +567,23 @@ define_parameter paRt_end 'paRt end' 0 0 1
                                     [8 0 8 0]
 
                 ; record input margins
-                set VAL_Margin_RecInput         \
-                    SCALE>=2.5      [20 2 2 2]  \
-                    SCALE>=2.25     [18 2 2 2]  \
-                    SCALE>=2        [16 2 2 2]  \
-                    SCALE>=1.75     [14 1 1 1]  \
-                    SCALE>=1.5      [12 1 1 1]  \
-                    SCALE>=1.25     [10 1 1 1]  \
-                                    [8 1 2 1]
+                ; [MAC OS FIX]
+                set VAL_Margin_RecInput             \
+                    os_type==1                      \
+                        SCALE>=2.5      [20 4 4 0]  \
+                        SCALE>=2.25     [18 4 3 0]  \
+                        SCALE>=2        [16 4 2 0]  \
+                        SCALE>=1.75     [14 4 1 0]  \
+                        SCALE>=1.5      [12 2 1 0]  \
+                        SCALE>=1.25     [10 4 1 0]  \
+                                        [8 4 2 0]   \
+                        SCALE>=2.5      [20 2 4 2]  \
+                        SCALE>=2.25     [18 2 3 2]  \
+                        SCALE>=2        [16 2 2 2]  \
+                        SCALE>=1.75     [14 1 1 1]  \
+                        SCALE>=1.5      [12 1 1 1]  \
+                        SCALE>=1.25     [10 1 1 1]  \
+                                        [8 1 2 1]
 
                 ; fader size
                 ; --> scalar 0-1 = mcp fader, scalar 2-3 = tcp fader
@@ -647,10 +670,6 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_tcp_meter_min_w     * SCALE 6
                 set VAL_tcp_fader_min_w     * SCALE 10
                 set VAL_tcp_label_min_w     * SCALE 50
-
-                ; calculate slot size
-                set VAL_tcp_inserts_slot_w_min * SCALE + 14 * 0.08 par_tcp_gen_insert_slot_width
-                
 
             endmacro
 
@@ -1138,7 +1157,7 @@ set THEME_color_red                         [210 101 101]
             set CUR_w VAL_Button_Trans{2}
 
             ; automation
-            set VAL_trans_button_group_count 0
+            set VAL_trans_button_group_count 0s
             MAC_DrawTransport_Buttons_SingleButton          SCALE 256 "trans" "trans" "automode"
             MAC_DrawTransport_Buttons_Separator             SCALE 256 "trans" "trans"
 
@@ -1240,8 +1259,8 @@ set THEME_color_red                         [210 101 101]
                 ; elements width
                 set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 64
                 set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     * SCALE 34
-                set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 28
-                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 84
+                set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 64
+                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 95
 
                ; playrate fader size
                 set CUR_w_rate_fader                                        \
@@ -4675,8 +4694,8 @@ set THEME_color_red                         [210 101 101]
             set VAL_remaining_w - VAL_tcp_available_space{0} + VAL_tcp_spacing_section_x{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
             set CUR_w                                                                                                                                               \
                 !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                    \
-                    + VAL_tcp_inserts_min_w{0} * SCALE + 10                                      * 0.3                par_tcp_##PARAMETER_SECTION##_insert_size     \
-                    + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}      par_tcp_##PARAMETER_SECTION##_insert_size     \
+                    + VAL_tcp_inserts_min_w{0} * SCALE + 10                                 * 0.3                   par_tcp_##PARAMETER_SECTION##_insert_size       \
+                    + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_insert_size       \
 
             ; x position
             set CUR_x                                                       \
@@ -5272,12 +5291,10 @@ set THEME_color_red                         [210 101 101]
             macro MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; insert slot width pre-calculation
-                set VAL_tcp_slot_w VAL_tcp_inserts_slot_w_min
-                set VAL_tcp_slot_w_max - WALTER_ELEMENT##.fxparm{w} * SCALE 10
-                MAC_Math_Max VAL_tcp_slot_w VAL_tcp_slot_w_max{0}
-
+                set VAL_tcp_slot_w_min * WALTER_ELEMENT##.fxparm{w} + 0.15 * 0.00035 par_tcp_gen_insert_slot_width
+                
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w{0} VAL_tcp_slot_w{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w_min{0} WALTER_ELEMENT##.fxparm{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]                
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
@@ -5819,7 +5836,6 @@ gen_vol_zeroline 40000000
 gen_pan_zeroline 40000000
 item_volknobfg 00000000 00000000 00000000
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
-
 
         ; general
         version 7
