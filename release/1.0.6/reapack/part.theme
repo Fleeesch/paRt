@@ -1,0 +1,34 @@
+@version 1.0.6
+@author Fleeesch
+@description paRt
+@links https://github.com/Fleeesch/paRt
+@screenshots https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+
+  ## Features
+  * 3 Theme files covering different brightness levels
+  * Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Covers all Reaper V7 elements
+  * Custom Theme Adjuster
+  * 200+ parameters for customization
+  * synchronization of all parmeters accross paRt theme files through the Theme Adjuster
+  * Parameter bank support for changing settings on the fly
+  * Save and load parameter settings to setting files
+@changelog
+  decreased brightness of dimmed theme > inserts > selected background
+  increased brightness of dimmed theme transport elements and toolbar buttons
+  fixed disappearing TCP icon lane frame
+  increased time signature field size
+  reworked TCP inserts slot width adjustment behaviour (uses fraction of inserts section width in order to avoid disappearing slots)
+  Mac OS: fixed font alignment in several elements
+  Mac OS: reduced front size of theme adjuster elements
