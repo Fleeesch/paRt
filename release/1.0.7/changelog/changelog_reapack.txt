@@ -1,0 +1,3 @@
+@changelog
+  removed highlights from Theme Adjuster hint messages
+  MacOS: fixed Theme Adjuster opening at the wrong size

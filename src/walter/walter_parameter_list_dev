@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.0.6
+part_version 1.0.7
 
     bank_selected 'Selected Bank' 2 2 9
 
