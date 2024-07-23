@@ -70,10 +70,11 @@ extract_theme_data() {
 
     done
 
+    # filter color block
     input_file="part_${input_tags[0]}_unpacked.ReaperTheme"
 
     local reaper_block
-    reaper_block=$(sed -n '/^\[REAPER\]/,/^\[/p' "$input_file" | sed '1d;$d' | grep -v '^ui_img=')
+    reaper_block=$(sed -n '/^\[REAPER\]/,/^\[/p' "$input_file" | sed '1d' | grep -v '^ui_img=')
 
     echo "$reaper_block">"$font_file"
 }
