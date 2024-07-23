@@ -1,2 +1,4 @@
-removed highlights from Theme Adjuster hint messages
-MacOS: fixed Theme Adjuster opening at the wrong size
+overhaul of media item colors in order to improve readability
+updated media item font
+removed custom color tint from media item peaks
+reduced size of media item volume knob

@@ -1,7 +1,11 @@
 settings:
-  copy_dev_on: False
-  copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/paRt_Dark_Win"
-  copy_source_folder: ["out/dark", 0]
+  copy_dev_on: True
+  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dark"
+  #copy_source_folder: ["out/dark", 0]
+  copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dimmed"
+  copy_source_folder: ["out/dimmed", 0]
+  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_light"
+  #copy_source_folder: ["out/light", 0]
 
 variables:
   alpha_hover: 0.9
@@ -127,13 +131,13 @@ universal:
     midi_inline_scrollbar_thumb: [255, 255, 255, 0.5]
 
     # items
-    item_bg: [154, 154, 154, 0.6]
-    item_bg_select: [218,218,218, 0.6]
-    item_bg_border: [0, 0, 0]
+    item_bg: [100,100,100,0.75]
+    item_bg_select: [125,125,125,0.75]
+    item_bg_border: [125,125,125,1]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.5]
-    item_button_bg_off: [79, 79, 79]
+    item_button_bg_off: [25,25,25]
     item_button_bg_on: [200, 200, 200]
     item_button_symbol_off: [180, 180, 180]
     item_button_symbol_on: [20, 20, 20]
@@ -142,7 +146,7 @@ universal:
     item_volknob_bg: [0, 0, 0, 0.5]
     item_volknob_layer_1: [255, 255, 255, 0.5]
     item_volknob_layer_2: [255, 255, 255]
-    item_volknob_border: [0, 0, 0, 0.25]
+    item_volknob_border: [0, 0, 0, 0.5]
 
     # inserts
     insert_bg: [46, 46, 46]
@@ -329,21 +333,21 @@ dimmed:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [165, 165, 165, 0.6]
-    item_bg_select: [209, 209, 209, 0.7]
+    item_bg: [125,125,125, 0.8]
+    item_bg_select: [150,150,150, 0.7]
     item_bg_border: [0, 0, 0]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.5]
-    item_button_bg_off: [118, 118, 118]
+    item_button_bg_off: [75, 75, 75]
     item_button_bg_on: [220, 220, 220]
     item_button_symbol_off: [220, 220, 220]
     item_button_symbol_on: [0, 0, 0, 0.8]
     item_seldot_bg: [255, 255, 255]
     item_seldot_border: [0, 0, 0, 0]
-    item_volknob_bg: [0, 0, 0, 0.5]
-    item_volknob_layer_1: [235, 235, 235, 0.5]
-    item_volknob_layer_2: [235, 235, 235]
+    item_volknob_bg: [50,50,50]
+    item_volknob_layer_1: [140,140,140]
+    item_volknob_layer_2: [255, 255, 255]
     item_volknob_border: [0, 0, 0, 0.5]
 
     # inserts
@@ -523,19 +527,19 @@ light:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [191, 191, 191, 0.8]
-    item_bg_select: [255, 255, 255, 0.65]
-    item_bg_border: [125, 125, 125]
+    item_bg: [240,240,240, 0.8]
+    item_bg_select: [255,255,255, 0.75]
+    item_bg_border: [150,150,150]
     item_bg_border_select: [0, 0, 0]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.4]
-    item_button_bg_off: [160, 160, 160]
+    item_button_bg_off: [140, 140, 140]
     item_button_bg_on: [220, 220, 220]
     item_button_symbol_off: [255, 255, 255, 0.8]
     item_button_symbol_on: [0, 0, 0, 0.8]
     item_seldot_bg: [0, 0, 0]
-    item_volknob_bg: [0, 0, 0, 0.2]
-    item_volknob_layer_1: [0, 0, 0, 0.8]
+    item_volknob_bg: [80, 80, 80]
+    item_volknob_layer_1: [190, 190, 190]
     item_volknob_layer_2: [255, 255, 255]
     item_volknob_border: [0, 0, 0, 0.4]
 
