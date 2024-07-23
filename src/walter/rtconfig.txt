@@ -5581,7 +5581,7 @@
         global_scale 1.0
         
         ; tinting
-        tinttcp 298
+        tinttcp 1980
         peaksedges 0
         
         ; warnings

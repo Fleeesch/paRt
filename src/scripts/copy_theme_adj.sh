@@ -19,28 +19,76 @@ COLOR_RESET='\033[0m'
 source_folder="../../reaper/Scripts/Fleeesch/Themes/paRt"
 target_folder="./themeadj"
 
+#   Direction
+# --------------------------------------------
+
+# check for unattended mode
+dir_to_dev_folder=false
+while getopts "p" opt; do
+    case $opt in
+    p)
+        dir_to_dev_folder=true
+        ;;
+    *) ;;
+    esac
+done
+
 #   Copy Process
 # --------------------------------------------
 
-echo -en "Copying Theme Adjuster from Reaper development folder..."
+if [ "$dir_to_dev_folder" == false ]; then
 
-# source has to be available
-if [ ! -d "$source_folder" ]; then
-    echo -e "${COLOR_RED}no Theme Adjuster found${COLOR_RESET}"
+    echo -en "Copying Theme Adjuster from Reaper development folder..."
+
+    # source has to be available
+    if [ ! -d "$source_folder" ]; then
+        echo -e "${COLOR_RED}no Theme Adjuster found${COLOR_RESET}"
+    else
+
+        # check if source folder is empty
+        if [ -z "$(ls -A "$source_folder")" ]; then
+            echo -e "${COLOR_RED}Source folder is empty${COLOR_RESET}"
+        else
+            # clear first
+            rm -rf "$target_folder"/*
+
+            # copy
+            rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
+            rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
+
+            echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+        fi
+
+    fi
+
 else
 
-    # check if source folder is empty
-    if [ -z "$(ls -A "$source_folder")" ]; then
-        echo -e "${COLOR_RED}Source folder is empty${COLOR_RESET}"
-    else
-        # clear first
-        rm -rf "$target_folder"/*
 
-        # copy
-        rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
-        rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
-        
-        echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+    echo -en "Updating theme adjuster in development folder..."
+
+    source_folder_bu="$source_folder"
+    source_folder="$target_folder"
+    target_folder="$source_folder_bu"
+
+    # source has to be available
+    if [ ! -d "$source_folder" ]; then
+        echo -e "${COLOR_RED}no Theme Adjuster found${COLOR_RESET}"
+    else
+
+        # check if source folder is empty
+        if [ -z "$(ls -A "$source_folder")" ]; then
+            echo -e "${COLOR_RED}Source folder is empty${COLOR_RESET}"
+        else
+            # clear first
+            rm -rf "$target_folder"/*
+
+            # copy
+            rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
+            rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
+
+            echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+        fi
+
     fi
 
 fi

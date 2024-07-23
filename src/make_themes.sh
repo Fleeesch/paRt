@@ -91,6 +91,7 @@ script_themefile_create="create_theme.sh"
 script_lua_folder="$(pwd)/scripts/themeadj/"
 themeadj_icon_path="$script_lua_folder/lib/res/icon"
 script_lua_copy_themeadj="copy_theme_adj.sh"
+script_lua_copy_themeadj_post="copy_theme_adj.sh -p"
 script_lua_add_tags="add_lua_tags.sh"
 
 #   Introduction
@@ -120,6 +121,7 @@ clear_build_folder=true
 copy_reaperthemefiles=false
 copy_reaperthemezip=true
 update_themeadj=false
+update_themeadj_post=false
 
 if [ "$unattended" = false ]; then
 
@@ -169,7 +171,7 @@ if [ "$unattended" = false ]; then
     *) copy_reaperthemezip=false ;;
     esac
 
-    # update theme adjuster
+    # get theme adjuster from development folder
     print_prompt_line "Grab Theme Adjuster from development folder?"
     read -n 1 choice
     echo ""
@@ -177,6 +179,16 @@ if [ "$unattended" = false ]; then
     case "$choice" in
     y | Y) update_themeadj=true ;;
     *) update_themeadj=false ;;
+    esac
+
+    # update theme adjuster in development folder
+    print_prompt_line "Update Theme Adjuster in development folder?"
+    read -n 1 choice
+    echo ""
+
+    case "$choice" in
+    y | Y) update_themeadj_post=true ;;
+    *) update_themeadj_post=false ;;
     esac
 
 fi
@@ -245,12 +257,11 @@ cd "$org_path"
 #   Reascript Files
 # --------------------------------------------
 
+# from dev folder
 if [ "$update_themeadj" = true ]; then
     cd $script_lua_folder
     cd ".."
-
     source $script_lua_copy_themeadj
-
     cd $org_path
 fi
 
@@ -258,6 +269,15 @@ cd $script_lua_folder
 cd ".."
 source $script_lua_add_tags
 cd $org_path
+
+# to dev folder
+if [ "$update_themeadj_post" = true ]; then
+    cd $script_lua_folder
+    cd ".."
+    source $script_lua_copy_themeadj_post
+    cd $org_path
+fi
+
 
 #   Pre-Cleaning
 # --------------------------------------------

@@ -166,7 +166,7 @@ if [ "$local_release" = true ]; then
 
     echo "@changelog" >"$changelog_file_out"
     while IFS= read -r line; do
-        echo "  $line" >>"$changelog_file_out"
+        echo "  - $line" >>"$changelog_file_out"
     done <"$changelog_file_in"
 
     # Markdown
