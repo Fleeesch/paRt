@@ -288,6 +288,20 @@
                         SCALE>=1.25     [3 VAL_Border_Neg 3 VAL_Border]     \
                                         [3 VAL_Border_Neg 3 VAL_Border]     
 
+                ; fx label margins
+                ; [MAC OS FIX]
+                set VAL_Margin_Label_FX                 \
+                    os_type!=1                          \
+                        VAL_Margin_Label                \
+                        SCALE>=2.5      [16 0 16 0]     \
+                        SCALE>=2.25     [14 0 14 0]     \
+                        SCALE>=2        [12 0 12 0]     \
+                        SCALE>=1.75     [11 0 11 0]     \
+                        SCALE>=1.5      [9 0 9 0]       \
+                        SCALE>=1.25     [8 0 8 0]       \
+                                        [6 0 6 0]     
+
+
                 ; vertical label margins
                 ; [MAC OS FIX]
                 set VAL_Margin_Label_vertical           \
@@ -3590,7 +3604,7 @@
 
                 ; inserts
                 set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Large VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
+                set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label_FX{0} VAL_Margin_Label_FX{1} VAL_Margin_Label_FX{2} VAL_Margin_Label_FX{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxlist.margin
                 set WALTER_ELEMENT##.fxparm.font        WALTER_ELEMENT##.fxlist.font
@@ -5039,11 +5053,12 @@
             macro MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; insert slot width pre-calculation
-                set VAL_tcp_slot_w_min * WALTER_ELEMENT##.fxparm{w} + 0.15 * 0.00035 par_tcp_gen_insert_slot_width
+                set VAL_tcp_slot_w_min * WALTER_ELEMENT##.fxparm{w} + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
+                set VAL_tcp_slot_w_max + WALTER_ELEMENT##.fxparm{w} 1
                 
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w_min{0} WALTER_ELEMENT##.fxparm{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]                
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w_min{0} VAL_tcp_slot_w_max{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label_FX{0} VAL_Margin_Label_FX{1} VAL_Margin_Label_FX{2} VAL_Margin_Label_FX{3}]                
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font

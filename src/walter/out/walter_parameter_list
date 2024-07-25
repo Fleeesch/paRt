@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.0.8' 0 0 0
+define_parameter part_version 'paRt Theme v1.0.9' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -141,7 +141,7 @@ define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 
 define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 330 0 1000
 define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 447 0 1000
 define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 88 0 1000
-define_parameter par_tcp_gen_insert_slot_width 'TCP - General - Inserts - Slot Width' 355 0 1000
+define_parameter par_tcp_gen_insert_slot_width 'TCP - General - Inserts - Slot Width' 500 0 1000
 define_parameter par_tcp_master_element_adj_size_env 'TCP - Master - Element Adjustment Envelope Size' 1 0 1
 define_parameter par_tcp_master_element_adj_size_fx 'TCP - Master - Element Adjustment FX Size' 0 0 1
 define_parameter par_tcp_master_element_separator 'TCP - Master - Element Separator' 42 0 1000000

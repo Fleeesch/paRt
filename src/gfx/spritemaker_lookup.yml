@@ -1,9 +1,9 @@
 settings:
-  copy_dev_on: True
+  copy_dev_on: False
   #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dark"
   #copy_source_folder: ["out/dark", 0]
-  copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dimmed"
-  copy_source_folder: ["out/dimmed", 0]
+  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dimmed"
+  #copy_source_folder: ["out/dimmed", 0]
   #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_light"
   #copy_source_folder: ["out/light", 0]
 
@@ -527,9 +527,9 @@ light:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [240,240,240, 0.8]
-    item_bg_select: [255,255,255, 0.75]
-    item_bg_border: [150,150,150]
+    item_bg: [240,240,240, 0.85]
+    item_bg_select: [255,255,255, 0.7]
+    item_bg_border: [175,175,175]
     item_bg_border_select: [0, 0, 0]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.4]
