@@ -2,8 +2,8 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dark
-;       Version: 1.0.9
-;       Date: 2024-07-25 15:51:11
+;       Version: 1.1.0
+;       Date: 2024-07-29 02:08:39
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
@@ -11,7 +11,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.0.9' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.0' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -468,7 +468,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
                 ; envcp minimal height
                 set VAL_Envcp_h VAL_tcp_h
-                    
+
                 ; separator icon thickness
                 set VAL_Separator       \
                     SCALE>=2.5      5   \
@@ -498,56 +498,34 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     ntracks>=10         2   \
                                         1
 
+                ; [MAC OS FIX]
                 ; label margins
-                ; [MAC OS FIX]
-                set VAL_Margin_Label                                        \
-                    os_type==1                                              \
-                        SCALE>=2.5      [6 4 6 VAL_Border]                  \
-                        SCALE>=2.25     [5 4 5 VAL_Border]                  \
-                        SCALE>=2        [4 3 4 VAL_Border]                  \
-                        SCALE>=1.75     [4 5 4 VAL_Border]                  \
-                        SCALE>=1.5      [3 5 3 VAL_Border]                  \
-                        SCALE>=1.25     [3 4 3 VAL_Border]                  \
-                                        [3 2 3 VAL_Border]                  \
-                        SCALE>=2.5      [6 VAL_Border_Neg 6 VAL_Border]     \
-                        SCALE>=2.25     [5 VAL_Border_Neg 5 VAL_Border]     \
-                        SCALE>=2        [4 VAL_Border_Neg 4 VAL_Border]     \
-                        SCALE>=1.75     [4 VAL_Border_Neg 4 VAL_Border]     \
-                        SCALE>=1.5      [3 VAL_Border_Neg 3 VAL_Border]     \
-                        SCALE>=1.25     [3 VAL_Border_Neg 3 VAL_Border]     \
-                                        [3 VAL_Border_Neg 3 VAL_Border]     
-
-                ; fx label margins
-                ; [MAC OS FIX]
-                set VAL_Margin_Label_FX                 \
-                    os_type!=1                          \
-                        VAL_Margin_Label                \
-                        SCALE>=2.5      [16 0 16 0]     \
-                        SCALE>=2.25     [14 0 14 0]     \
-                        SCALE>=2        [12 0 12 0]     \
-                        SCALE>=1.75     [11 0 11 0]     \
-                        SCALE>=1.5      [9 0 9 0]       \
-                        SCALE>=1.25     [8 0 8 0]       \
-                                        [6 0 6 0]     
+                set VAL_Margin_Label                            \
+                    os_type==1                                  \
+                        SCALE>=2.5      [16 4 16 VAL_Border]    \
+                        SCALE>=2.25     [14 4 14 VAL_Border]    \
+                        SCALE>=2        [12 3 12 VAL_Border]    \
+                        SCALE>=1.75     [11 5 11 VAL_Border]    \
+                        SCALE>=1.5      [9 5 9 VAL_Border]      \
+                        SCALE>=1.25     [8 4 8 VAL_Border]      \
+                                        [6 2 6 VAL_Border]      \
+                        SCALE>=2.5      [6 -4 6 VAL_Border]     \
+                        SCALE>=2.25     [5 -3 5 VAL_Border]     \
+                        SCALE>=2        [4 -2 4 VAL_Border]     \
+                        SCALE>=1.75     [4 -2 4 VAL_Border]     \
+                        SCALE>=1.5      [3 0 3 VAL_Border]      \
+                        SCALE>=1.25     [3 -1 3 VAL_Border]     \
+                                        [3 0 3 VAL_Border]
 
 
                 ; vertical label margins
-                ; [MAC OS FIX]
                 set VAL_Margin_Label_vertical           \
-                    os_type==1                          \
-                        SCALE>=2.5      [5 10 5 10]     \
-                        SCALE>=2.25     [5 9 5 9]       \
-                        SCALE>=2        [4 8 4 8]       \
-                        SCALE>=1.75     [2 7 2 7]       \
-                        SCALE>=1.5      [3 6 3 6]       \
-                        SCALE>=1.25     [2 5 2 5]       \
-                                        [0 4 0 4]       \
                         SCALE>=2.5      [5 10 5 10]     \
                         SCALE>=2.25     [5 9 5 9]       \
                         SCALE>=2        [4 8 4 8]       \
                         SCALE>=1.75     [4 7 4 7]       \
                         SCALE>=1.5      [3 6 3 6]       \
-                        SCALE>=1.25     [2 5 2 5]       \
+                        SCALE>=1.25     [3 5 3 5]       \
                                         [2 4 2 4]
 
                 ; transport time section label margins
@@ -580,27 +558,27 @@ define_parameter paRt_end 'paRt end' 0 0 1
                     SCALE>=1.25     [10 0 10 0]         \
                                     [8 0 8 0]
 
-                ; record input margins
                 ; [MAC OS FIX]
+                ; record input margins
                 set VAL_Margin_RecInput             \
                     os_type==1                      \
-                        SCALE>=2.5      [20 4 4 0]  \
-                        SCALE>=2.25     [18 4 3 0]  \
-                        SCALE>=2        [16 4 2 0]  \
-                        SCALE>=1.75     [14 4 1 0]  \
-                        SCALE>=1.5      [12 2 1 0]  \
-                        SCALE>=1.25     [10 4 1 0]  \
-                                        [8 4 2 0]   \
-                        SCALE>=2.5      [20 2 4 2]  \
-                        SCALE>=2.25     [18 2 3 2]  \
-                        SCALE>=2        [16 2 2 2]  \
-                        SCALE>=1.75     [14 1 1 1]  \
-                        SCALE>=1.5      [12 1 1 1]  \
-                        SCALE>=1.25     [10 1 1 1]  \
+                        SCALE>=2.5      [20 4 6 0]  \
+                        SCALE>=2.25     [18 4 4 0]  \
+                        SCALE>=2        [16 3 3 0]  \
+                        SCALE>=1.75     [14 5 2 0]  \
+                        SCALE>=1.5      [12 5 2 0]  \
+                        SCALE>=1.25     [10 4 2 0]  \
+                                        [8 2 2 0]   \
+                        SCALE>=2.5      [20 2 6 2]  \
+                        SCALE>=2.25     [18 2 4 2]  \
+                        SCALE>=2        [16 2 3 2]  \
+                        SCALE>=1.75     [14 1 2 1]  \
+                        SCALE>=1.5      [12 1 2 1]  \
+                        SCALE>=1.25     [10 1 2 1]  \
                                         [8 1 2 1]
 
                 ; fader size
-                ; --> scalar 0-1 = mcp fader, scalar 2-3 = tcp fader
+                ; [mcp_size mcp_offset tcp_size tcp_offset]
                 set VAL_Fader                       \
                     SCALE>=2.5      [35 5 25 5]     \
                     SCALE>=2.25     [33 4 24 4]     \
@@ -623,34 +601,44 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 ; envcp indent symbol
                 set VAL_Envcp_Symbol VAL_Button
 
-                ; font - large
-                set VAL_Font_Large      \
-                    SCALE>=2.5      7   \
-                    SCALE>=2.25     6   \
-                    SCALE>=2        5   \
-                    SCALE>=1.75     4   \
-                    SCALE>=1.5      3   \
-                    SCALE>=1.25     2   \
+                ; font
+                set VAL_Font_Label      \
+                    SCALE>=2.5      10  \
+                    SCALE>=2.25     9   \
+                    SCALE>=2        8   \
+                    SCALE>=1.75     6   \
+                    SCALE>=1.5      5   \
+                    SCALE>=1.25     4   \
                                     1
-                
-                ; font - small
-                set VAL_Font_Small      \
-                    SCALE>=2.5      14  \
-                    SCALE>=2.25     13  \
-                    SCALE>=2        12  \
-                    SCALE>=1.75     11  \
-                    SCALE>=1.5      10  \
-                    SCALE>=1.25     9   \
-                                    8
+
+                ; [MAC OS FIX]
+                ; font - fx
+                set VAL_Font_Label_Inserts      \
+                    os_type!=1                  \
+                        VAL_Font_Label          \
+                        SCALE>=2.5      10      \
+                        SCALE>=2.25     9       \
+                        SCALE>=2        8       \
+                        SCALE>=1.75     6       \
+                        SCALE>=1.5      5       \
+                        SCALE>=1.25     4       \
+                                        1
+
+                ; [MAC OS FIX]
+                ; larger font on MacOS
+                set VAL_Font_Label          \
+                    os_type==1              \
+                        + VAL_Font_Label 1
+
 
                 ; font - small
-                set VAL_fxlist_scrollbar       \
-                    SCALE>=2.5      [10 5]     \
-                    SCALE>=2.25     [8 4]      \
-                    SCALE>=2        [8 4]      \
-                    SCALE>=1.75     [6 2]      \
-                    SCALE>=1.5      [6 2]      \
-                    SCALE>=1.25     [6 2]      \
+                set VAL_fxlist_scrollbar        \
+                    SCALE>=2.5      [16 8]      \
+                    SCALE>=2.25     [10 5]      \
+                    SCALE>=2        [8 4]       \
+                    SCALE>=1.75     [6 2]       \
+                    SCALE>=1.5      [6 2]       \
+                    SCALE>=1.25     [6 2]       \
                                     [4 2]
 
 
@@ -715,7 +703,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_mcp_vol_h_min_show  + VAL_Knob{0} VAL_Pad{0}
 
                 ; minimal fader height for forced knob layout
-                set VAL_mcp_vol_h_min_knob  + VAL_mcp_vol_h_min_show{0} * SCALE 24                
+                set VAL_mcp_vol_h_min_knob  + VAL_mcp_vol_h_min_show{0} * SCALE 24
 
             endmacro
 
@@ -921,7 +909,7 @@ set THEME_color_red                         [210 101 101]
                         + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                                         \
                         par_tcp_envcp_label_readout_placement!=2                                                                                                                                \
                             + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.5 par_colors_track_track_label_select_tone      \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone         
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone
 
                 MAC_Math_Min VAL_Color_Envcp_Readout 1
 
@@ -1020,7 +1008,7 @@ set THEME_color_red                         [210 101 101]
                 set VAL_Color_meter_Alpha_Unlit         *   VAL_Color_Meter_Alpha{0}    *   VAL_Fader_Scale{0}      par_colors_track_meter_text_alpha_unlit
                 set VAL_Color_meter_Alpha_Lit       +   1   VAL_Color_meter_Alpha_Lit
                 set VAL_Color_meter_Alpha_Unlit     +   1   VAL_Color_meter_Alpha_Unlit
-                
+
                 ; shadow
                 set VAL_Color_Meter_Shadow_Lit      *   / VAL_Color_meter_Alpha_Lit{0}      255     *   0.255 par_colors_track_meter_text_shadow_lit
                 set VAL_Color_Meter_Shadow_Unlit    *   / VAL_Color_meter_Alpha_Unlit{0}    255     *   0.255 par_colors_track_meter_text_shadow_unlit
@@ -1109,14 +1097,14 @@ set THEME_color_red                         [210 101 101]
 
             ; paRt shortcuts
             set VAL_trans_show_part_section + par_trans_settings_theme_bank par_trans_settings_theme_menu
-                
+
             ; bank buttons section width
             set VAL_trans_w_bank_section                                                                        \
                 !VAL_trans_show_part_section{0}                                                                 \
                     0                                                                                           \
                     + + VAL_Button_Trans{0} VAL_Pad{0}                                                          \
                         + * VAL_Button_Trans{1} + par_trans_settings_theme_bank par_trans_settings_theme_menu   \
-                        * VAL_Pad{0} - + par_trans_settings_theme_bank par_trans_settings_theme_menu 1          
+                        * VAL_Pad{0} - + par_trans_settings_theme_bank par_trans_settings_theme_menu 1
 
             ; right edge padding
             set VAL_trans_x_rightmost_padding - VAL_trans_w{0} - VAL_trans_x_rightmost{0} VAL_trans_w_bank_section{0}
@@ -1658,18 +1646,18 @@ set THEME_color_red                         [210 101 101]
             macro MAC_DrawTransport_Font SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; bpm tap
-                set WALTER_ELEMENT##.bpm.tap.font       VAL_Font_Large
+                set WALTER_ELEMENT##.bpm.tap.font       VAL_Font_Label
                 set WALTER_ELEMENT##.bpm.tap.margin     [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3}]
 
                 ; bpm edit
-                set WALTER_ELEMENT##.bpm.edit.font      VAL_Font_Large
+                set WALTER_ELEMENT##.bpm.edit.font      VAL_Font_Label
                 set WALTER_ELEMENT##.bpm.edit.margin    [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3} 0.5]
 
                 ; time signature
-                set WALTER_ELEMENT##.curtimesig.font    VAL_Font_Large
+                set WALTER_ELEMENT##.curtimesig.font    VAL_Font_Label
 
                 ; playrate
-                set WALTER_ELEMENT##.rate.font          VAL_Font_Large
+                set WALTER_ELEMENT##.rate.font          VAL_Font_Label
                 set WALTER_ELEMENT##.rate.margin        [VAL_Margin_Label_Trans_Time{0} VAL_Margin_Label_Trans_Time{1} VAL_Margin_Label_Trans_Time{2} VAL_Margin_Label_Trans_Time{3} 0.5]
 
                 ; status
@@ -1677,7 +1665,7 @@ set THEME_color_red                         [210 101 101]
 
                 ; selection
                 set WALTER_ELEMENT##.sel.margin         [VAL_Margin_Label_Trans_Selection{0} VAL_Margin_Label_Trans_Selection{1} VAL_Margin_Label_Trans_Selection{2} VAL_Margin_Label_Trans_Selection{3}]
-                set WALTER_ELEMENT##.sel.font           VAL_Font_Large
+                set WALTER_ELEMENT##.sel.font           VAL_Font_Label
 
 
             endmacro
@@ -1751,7 +1739,7 @@ set THEME_color_red                         [210 101 101]
                 ; volume readout height
                 set VAL_mcp_vol_readout_h                                   \
                     par_mcp_##PARAMETER_SECTION##_meter_vol_readout{0}==1   \
-                        * SCALE 12                                          \
+                        * SCALE 14                                          \
                     par_mcp_##PARAMETER_SECTION##_meter_vol_readout{0}==2   \
                         * SCALE 30                                          \
                         0
@@ -1895,7 +1883,7 @@ set THEME_color_red                         [210 101 101]
 
                     ; folder features
                     set VAL_Mcp_FolderFeatures par_mcp_gen_folder_icon_folder
-                        
+
                     set VAL_mcp_genFolderOffset         \
                         ?VAL_Mcp_FolderFeatures{0}      \
                             VAL_Button_Folder{0}        \
@@ -3149,7 +3137,7 @@ set THEME_color_red                         [210 101 101]
     ; -----------------------------------------------------------------
 
         macro MAC_DrawMcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
-            
+
             ; meter channel division
             set CUR_chan_div * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
             set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
@@ -3855,8 +3843,8 @@ set THEME_color_red                         [210 101 101]
             macro MAC_DrawMcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; inserts
-                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Large VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label_FX{0} VAL_Margin_Label_FX{1} VAL_Margin_Label_FX{2} VAL_Margin_Label_FX{3}]
+                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxlist.margin
                 set WALTER_ELEMENT##.fxparm.font        WALTER_ELEMENT##.fxlist.font
@@ -3864,7 +3852,7 @@ set THEME_color_red                         [210 101 101]
 
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
-                set WALTER_ELEMENT##.volume.label.font VAL_Font_Small
+                set WALTER_ELEMENT##.volume.label.font VAL_Font_Label
                 set WALTER_ELEMENT##.volume.label.margin                                                                                            \
                     par_mcp_##PARAMETER_SECTION##_meter_vol_readout==2                                                                              \
                         [VAL_Margin_Label_vertical{0} VAL_Margin_Label_vertical{1} VAL_Margin_Label_vertical{2} VAL_Margin_Label_vertical{3} 0]     \
@@ -3882,7 +3870,7 @@ set THEME_color_red                         [210 101 101]
                 MAC_DrawMcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; track label
-                set WALTER_ELEMENT##.label.font VAL_Font_Large
+                set WALTER_ELEMENT##.label.font VAL_Font_Label
                 set WALTER_ELEMENT##.label.margin                                                                                                   \
                     !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                                                          \
                         [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0]                                         \
@@ -3891,7 +3879,7 @@ set THEME_color_red                         [210 101 101]
                 set WALTER_ELEMENT##.label.color    [VAL_Color_Track_Label_Text{0}  VAL_Color_Track_Label_Text{1}   VAL_Color_Track_Label_Text{2}]
 
                 ; track index
-                set WALTER_ELEMENT##.trackidx.font VAL_Font_Large
+                set WALTER_ELEMENT##.trackidx.font VAL_Font_Label
                 set WALTER_ELEMENT##.trackidx.margin                                                                                                \
                     par_mcp_##PARAMETER_SECTION##_settings_label_index==2                                                                           \
                         [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0.5]                                       \
@@ -3911,7 +3899,7 @@ set THEME_color_red                         [210 101 101]
                         THEME_color_button_text_on      \
                         THEME_color_button_text_off
 
-                set WALTER_ELEMENT##.recinput.font VAL_Font_Small
+                set WALTER_ELEMENT##.recinput.font VAL_Font_Label
                 set WALTER_ELEMENT##.recinput.margin                                                                            \
                     par_mcp_##PARAMETER_SECTION##_element_width==0                                                              \
                         [VAL_Margin_RecInput{2} VAL_Margin_RecInput{0} VAL_Margin_RecInput{3} VAL_Margin_RecInput{2} 1 0 0 0]   \
@@ -4013,7 +4001,7 @@ set THEME_color_red                         [210 101 101]
 
                     ; label size
                     set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
-                    
+
                     ; top position
                     set VAL_tcp_y_top 0
 
@@ -4048,7 +4036,7 @@ set THEME_color_red                         [210 101 101]
                         w<VAL_compact_w{0}      \
                             1                   \
                             0
-                    
+
                     ; indentation x offset
                     set VAL_tcp_x_offset                \
                         ?VAL_tcp_compact{0}             \
@@ -4671,7 +4659,7 @@ set THEME_color_red                         [210 101 101]
         ; -----------------------------------------------------------------
 
             macro MAC_DrawTcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
-                
+
                 ; meter channel division
                 set CUR_chan_div * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
                 set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
@@ -5307,15 +5295,15 @@ set THEME_color_red                         [210 101 101]
                 ; insert slot width pre-calculation
                 set VAL_tcp_slot_w_min * WALTER_ELEMENT##.fxparm{w} + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
                 set VAL_tcp_slot_w_max + WALTER_ELEMENT##.fxparm{w} 1
-                
+
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Large VAL_insert_slot{0} VAL_tcp_slot_w_min{0} VAL_tcp_slot_w_max{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label_FX{0} VAL_Margin_Label_FX{1} VAL_Margin_Label_FX{2} VAL_Margin_Label_FX{3}]                
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} VAL_tcp_slot_w_min{0} VAL_tcp_slot_w_max{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxparm.margin
-                
+
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
                 set WALTER_ELEMENT##.volume.label.margin    [VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} 0.5]
@@ -5334,11 +5322,11 @@ set THEME_color_red                         [210 101 101]
                 MAC_DrawTcp_Font_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; recinput
-                set WALTER_ELEMENT##.recinput.font      VAL_Font_Small
+                set WALTER_ELEMENT##.recinput.font      VAL_Font_Label
                 set WALTER_ELEMENT##.recinput.margin    [VAL_Margin_RecInput{0} VAL_Margin_RecInput{1} VAL_Margin_RecInput{2} VAL_Margin_RecInput{3} 1 0 0 0]
 
                 ; track index
-                set WALTER_ELEMENT##.trackidx.font VAL_Font_Large
+                set WALTER_ELEMENT##.trackidx.font VAL_Font_Label
                 set WALTER_ELEMENT##.trackidx.margin                                                \
                 par_tcp_##PARAMETER_SECTION##_label_index_vis==1                                    \
                     [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0.5 0 0 0]     \
@@ -5347,7 +5335,7 @@ set THEME_color_red                         [210 101 101]
                 set WALTER_ELEMENT##.trackidx.color [VAL_Color_Track_Index_TCP{0} VAL_Color_Track_Index_TCP{1} VAL_Color_Track_Index_TCP{2} . . . .]
 
                 ; name label
-                set WALTER_ELEMENT##.label.font VAL_Font_Large
+                set WALTER_ELEMENT##.label.font VAL_Font_Label
                 set WALTER_ELEMENT##.label.margin [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0 0 0 0]
                 set WALTER_ELEMENT##.label.color [VAL_Color_Track_Label_Text{0} VAL_Color_Track_Label_Text{1} VAL_Color_Track_Label_Text{2} . . . .]
 
@@ -5811,12 +5799,12 @@ set THEME_color_red                         [210 101 101]
         macro MAC_DrawEnvcp_Font SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; name label
-            set WALTER_ELEMENT##.label.font     VAL_Font_Large
+            set WALTER_ELEMENT##.label.font     VAL_Font_Label
             set WALTER_ELEMENT##.label.margin   [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0 0 0 0]
             set WALTER_ELEMENT##.label.color    [VAL_Color_Envcp_Label_Text{0}  VAL_Color_Envcp_Label_Text{1}   VAL_Color_Envcp_Label_Text{2}   . . . .]
 
             ; readout value
-            set WALTER_ELEMENT##.value.font     VAL_Font_Large
+            set WALTER_ELEMENT##.value.font     VAL_Font_Label
             set WALTER_ELEMENT##.value.margin   [VAL_readout_margin{0} 0 VAL_readout_margin{0} 0]
             set WALTER_ELEMENT##.value.color    [VAL_Color_Envcp_Readout{0}     VAL_Color_Envcp_Readout{1}      VAL_Color_Envcp_Readout{2}      . . . .]
 
@@ -5857,17 +5845,17 @@ item_volknobfg 00000000 00000000 00000000
         use_pngs 1
         use_overlays 0
         global_scale 1.0
-        
+
         ; tinting
         tinttcp 1980
         peaksedges 0
-        
+
         ; warnings
         warnings pedantic
 
         ; record label
         no_meter_reclbl 1
-        
+
         ; borders
         tcp_showborders 0
         mcp_showborders 0
@@ -5875,10 +5863,10 @@ item_volknobfg 00000000 00000000 00000000
 
         ; peak indicators
         tcp_vupeakwidth 2
-        
+
         mcp_vupeakheight 2
         mcp_mastervupeakheight 2
-        
+
         ; folder indentation
         tcp_folderindent 0
 
@@ -5893,12 +5881,12 @@ item_volknobfg 00000000 00000000 00000000
         tcp_master_voltext_flags 9
         mcp_voltext_flags 3
         mcp_master_voltext_flags 9
-        
+
         ; deprecated
         mcp_altmeterpos 0
 
-      
-        
+
+
     ;LAYOUT_BLOCK
     ;   ## DPI translation
     ; -----------------------------------------------------------------
@@ -5926,6 +5914,7 @@ item_volknobfg 00000000 00000000 00000000
 
         ; Layout : 100
         Layout '100' ''
+            MAC_Draw            1.0
         endLayout
 
         ; Layout : 125

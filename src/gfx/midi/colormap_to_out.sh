@@ -2,6 +2,7 @@
 
 themes=("dark" "dimmed" "light")
 
+echo
 echo -en "Copying Colormaps..."
 
 for theme in "${themes[@]}"; do
@@ -14,3 +15,4 @@ for theme in "${themes[@]}"; do
 done
 
 echo "done"
+echo
