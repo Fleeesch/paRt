@@ -7,6 +7,9 @@
 *.flac
 *.reapeaks
 
+# skip release binaries
+/rel/bin/
+
 # limit build files to ReaperThemeZip
 /src/build/*
 !/src/build/*.ReaperThemeZip
