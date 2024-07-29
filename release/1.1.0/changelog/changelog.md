@@ -1,0 +1,17 @@
+**1.1.0 - Changelog**
+- various minor color tweaks
+- white peaks for light theme
+- smaller Send-knobs
+- darker Tool-Window backgrounds on non-light themes
+- tweaked piano roll MIDI-note colors for higher contrast
+- more balanced saturation if item backgrounds
+- overhaul of fonts and font-management, size-adjustments
+- switched font face to Tahoma (Inlcuding Theme Adjuster)
+- bold item label font
+- added missing Theme colors (Piano Roll - Note Color from Track / Item)
+- Theme Adjuster: Higher refresh rate for color adjustment parameters
+- Theme Adjuster: Added missing parameter (Apply to Custom Colors)
+- Theme Adjuster: paRt version is now stored in partmap files
+- MacOS: Corrected margins of labels that were still off
+- MacOS: Added missing generic faders assets for MacOS dark theme
+- MacOS: Disabled custom theme colors for tool-windows

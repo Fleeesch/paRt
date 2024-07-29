@@ -1,0 +1,43 @@
+@version 1.1.0
+@author Fleeesch
+@description paRt
+@links https://github.com/Fleeesch/paRt
+@screenshots https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+
+  ## Features
+  * 3 Theme files covering different brightness levels
+  * Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Covers all Reaper V7 elements
+  * Custom Theme Adjuster
+  * 200+ parameters for customization
+  * synchronization of all parmeters accross paRt theme files through the Theme Adjuster
+  * Parameter bank support for changing settings on the fly
+  * Save and load parameter settings to setting files
+@changelog
+  - various minor color tweaks
+  - white peaks for light theme
+  - smaller Send-knobs
+  - darker Tool-Window backgrounds on non-light themes
+  - tweaked piano roll MIDI-note colors for higher contrast
+  - more balanced saturation if item backgrounds
+  - overhaul of fonts and font-management, size-adjustments
+  - switched font face to Tahoma (Inlcuding Theme Adjuster)
+  - bold item label font
+  - added missing Theme colors (Piano Roll - Note Color from Track / Item)
+  - Theme Adjuster: Higher refresh rate for color adjustment parameters
+  - Theme Adjuster: Added missing parameter (Apply to Custom Colors)
+  - Theme Adjuster: paRt version is now stored in partmap files
+  - MacOS: Corrected margins of labels that were still off
+  - MacOS: Added missing generic faders assets for MacOS dark theme
+  - MacOS: Disabled custom theme colors for tool-windows

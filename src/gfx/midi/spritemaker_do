@@ -36,5 +36,3 @@
 --out table_expand_on           --rotate 270    --spritesheet --button --images expand          -tint icon_on
 --out table_sub_expand_off                      --spritesheet --button --images expand_sub      -tint icon_on
 --out table_sub_expand_on       --rotate 270    --spritesheet --button --images expand_sub      -tint icon_on
-
---copy-files

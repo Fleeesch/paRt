@@ -1,11 +1,18 @@
 settings:
   copy_dev_on: False
-  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dark"
-  #copy_source_folder: ["out/dark", 0]
-  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dimmed"
-  #copy_source_folder: ["out/dimmed", 0]
-  #copy_theme_folder: "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_light"
-  #copy_source_folder: ["out/light", 0]
+  copy_dev_info:
+    - [
+        ["out/dark", 1],
+        "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dark",
+      ]
+    - [
+        ["out/dimmed", 1],
+        "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_dimmed",
+      ]
+    - [
+        ["out/light", 1],
+        "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/part_light",
+      ]
 
 variables:
   alpha_hover: 0.9
@@ -71,9 +78,9 @@ universal:
     gui_scrollbar_bg: [60, 60, 60]
     gui_scrollbar_bar: [90, 90, 90]
     gui_scrollbar_symbols: [100, 100, 100]
-    gui_scrollbar_window_bg: [177,177,177]
-    gui_scrollbar_window_bar: [134,134,134]
-    gui_scrollbar_window_symbols: [124,124,124]
+    gui_scrollbar_window_bg: [160, 160, 160]
+    gui_scrollbar_window_bar: [115, 115, 115]
+    gui_scrollbar_window_symbols: [105, 105, 105]
 
     # generic button
     generic_button_bg_off: [102, 101, 101]
@@ -85,14 +92,21 @@ universal:
     generic_button_border: [0, 0, 0, 0.5]
 
     # generic fader
-    generic_fader_bg: [153,153,153]
+    generic_fader_bg: [128, 128, 128]
     generic_fader_border: [0, 0, 0, 0.5]
-    generic_fader_thumb_bg: [205,205,205]
+    generic_fader_thumb_bg: [205, 205, 205]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
+    # generic fader - dark
+    generic_fader_dark_bg: [68, 68, 68]
+    generic_fader_dark_border: [0, 0, 0, 1]
+    generic_fader_dark_thumb_bg: [141, 141, 141]
+    generic_fader_dark_thumb_border: [0, 0, 0, 0.7]
+    generic_fader_dark_thumb_line: [0, 0, 0, 0]
+
     # generic knob
-    generic_knob_bg: [205,205,205]
+    generic_knob_bg: [205, 205, 205]
     generic_knob_border: [0, 0, 0, 0.5]
 
     # folder buttons
@@ -131,13 +145,13 @@ universal:
     midi_inline_scrollbar_thumb: [255, 255, 255, 0.5]
 
     # items
-    item_bg: [100,100,100,0.75]
-    item_bg_select: [125,125,125,0.75]
-    item_bg_border: [125,125,125,1]
+    item_bg: [125, 125, 125, 0.5]
+    item_bg_select: [175, 175, 175, 0.5]
+    item_bg_border: [150,150,150, 1]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.5]
-    item_button_bg_off: [25,25,25]
+    item_button_bg_off: [25, 25, 25]
     item_button_bg_on: [200, 200, 200]
     item_button_symbol_off: [180, 180, 180]
     item_button_symbol_on: [20, 20, 20]
@@ -162,7 +176,7 @@ universal:
     insert_send_knob_border: [0, 0, 0, 0.75]
     insert_send_knob_0: [0, 0, 0, 0.75]
     insert_send_knob_1: [215, 178, 99]
-    insert_send_knob_2: [255,255,255]
+    insert_send_knob_2: [255, 255, 255]
 
     # fx parameter
     insert_slot_fxparm: [0, 0, 0, 0.25]
@@ -270,12 +284,13 @@ dimmed:
     # gui
     gui_bg: [82, 82, 82]
     gui_tab_off: [53, 53, 53]
-    gui_scrollbar_bg: [82,82,82]
-    gui_scrollbar_bar: [107,107,107]
+    gui_scrollbar_bg: [82, 82, 82]
+    gui_scrollbar_bar: [107, 107, 107]
     gui_scrollbar_symbols: [125, 125, 125]
-    gui_scrollbar_window_bg: [199,199,199]
-    gui_scrollbar_window_bar: [159,159,159]
-    gui_scrollbar_window_symbols: [149,149,149]
+    gui_scrollbar_window_bg: [170, 170, 170]
+    gui_scrollbar_window_bar: [115, 115, 115]
+
+    gui_scrollbar_window_symbols: [105, 105, 105]
 
     # generic button
     generic_button_bg_off: [125, 125, 125]
@@ -287,7 +302,7 @@ dimmed:
     generic_button_border: [0, 0, 0, 0.5]
 
     # generic fader
-    generic_fader_bg: [173,173,173]
+    generic_fader_bg: [128, 128, 128]
     generic_fader_border: [0, 0, 0, 0.5]
     generic_fader_thumb_bg: [226, 226, 226]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
@@ -302,7 +317,7 @@ dimmed:
 
     # transport
     transport_bg: [82, 82, 82]
-    transport_button_bg_off: [64,64,64]
+    transport_button_bg_off: [64, 64, 64]
     transport_status_bg: [58, 58, 58]
     transport_status_bg_error: [81, 50, 50]
     transport_selection_bg: [58, 58, 58]
@@ -333,8 +348,8 @@ dimmed:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [125,125,125, 0.8]
-    item_bg_select: [150,150,150, 0.7]
+    item_bg: [150, 150, 150, 0.5]
+    item_bg_select: [225, 225, 225, 0.5]
     item_bg_border: [0, 0, 0]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
@@ -345,8 +360,8 @@ dimmed:
     item_button_symbol_on: [0, 0, 0, 0.8]
     item_seldot_bg: [255, 255, 255]
     item_seldot_border: [0, 0, 0, 0]
-    item_volknob_bg: [50,50,50]
-    item_volknob_layer_1: [140,140,140]
+    item_volknob_bg: [50, 50, 50]
+    item_volknob_layer_1: [140, 140, 140]
     item_volknob_layer_2: [255, 255, 255]
     item_volknob_border: [0, 0, 0, 0.5]
 
@@ -468,7 +483,7 @@ light:
     gui_scrollbar_bg: [208, 208, 208]
     gui_scrollbar_bar: [163, 163, 163]
     gui_scrollbar_symbols: [150, 150, 150]
-    gui_scrollbar_window_bg: [234,234,234]
+    gui_scrollbar_window_bg: [234, 234, 234]
     gui_scrollbar_window_bar: [189, 189, 189]
     gui_scrollbar_window_symbols: [175, 175, 175]
 
@@ -482,7 +497,7 @@ light:
     generic_button_border: [0, 0, 0, 0.3]
 
     # generic fader
-    generic_fader_bg: [205,205,205]
+    generic_fader_bg: [205, 205, 205]
     generic_fader_border: [0, 0, 0, 0.4]
     generic_fader_thumb_bg: [240, 240, 240]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
@@ -527,9 +542,9 @@ light:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [240,240,240, 0.85]
-    item_bg_select: [255,255,255, 0.7]
-    item_bg_border: [175,175,175]
+    item_bg: [180, 180, 180, 0.5]
+    item_bg_select: [255, 255, 255, 0.5]
+    item_bg_border: [175, 175, 175]
     item_bg_border_select: [0, 0, 0]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.4]

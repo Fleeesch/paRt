@@ -20,8 +20,8 @@ command_list = [
     "fill",
 ]
 
-default_copy_theme_folder = "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/paRt_Dark_Win"
-default_copy_source = ["out/dark", 0]
+
+default_copy_info = [[["out/dark", 0], "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/paRt_dark"]]
 default_copy_on = False
 
 spritemaker_file = "spritemaker_do"
@@ -301,8 +301,7 @@ def load_config_data():
     global color_palette
     global variables
     global settings
-    global default_copy_theme_folder
-    global default_copy_source
+    global default_copy_info
     global default_copy_on
 
     script_folder = os.path.dirname(os.path.abspath(__file__))
@@ -328,15 +327,9 @@ def load_config_data():
                     
                     settings = data["settings"]
 
-                    if "copy_theme_folder" in settings:
-                        default_copy_theme_folder = settings["copy_theme_folder"]
+                    if "copy_dev_info" in settings:
+                        default_copy_info = settings["copy_dev_info"]
                     
-                    if "copy_source_folder" in settings:
-                        if type(settings["copy_source_folder"]) == list:
-                            default_copy_source = settings["copy_source_folder"]
-                        else:
-                            default_copy_source = [settings["copy_source_folder"],0]
-
                     if "copy_dev_on" in settings and settings["copy_dev_on"] == True:
                         default_copy_on = True
 
@@ -1454,7 +1447,8 @@ def process_direct(args=""):
     # copy files using defaults
     if "copy-files" in args:
         if default_copy_on:
-            copy_files_to(default_copy_source[0],default_copy_source[1],default_copy_theme_folder)
+            for copy_info in default_copy_info:
+                copy_files_to(copy_info[0][0],copy_info[0][1],copy_info[1])
         return    
 
     # print arguments

@@ -1,5 +1,3 @@
---clear-output-folder
-
 #       Custom
 # --------------------------------------
 
@@ -50,5 +48,8 @@
 --out item_volknob_stack            --single-level 100      --images stack_item_bg -tint item_volknob_bg          stack_item_fill_a -tint item_volknob_layer_1        stack_item_fill_b -tint item_volknob_layer_2      stack_item_border -tint item_volknob_border
 --out item_volknob_stack_hidpi      --single-level 200      --images stack_item_bg -tint item_volknob_bg          stack_item_fill_a -tint item_volknob_layer_1        stack_item_fill_b -tint item_volknob_layer_2      stack_item_border -tint item_volknob_border
 
+# for size capture
+#--out item_volknob_stack            --single-level 100      --fill 0xFF0000
+#--out item_volknob_stack_hidpi      --single-level 200      --fill 0xFF0000
 
 --copy-files
