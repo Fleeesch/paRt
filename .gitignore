@@ -8,7 +8,7 @@
 *.reapeaks
 
 # skip release binaries
-/rel/bin/
+/rel/**/bin/
 
 # limit build files to ReaperThemeZip
 /src/build/*
