@@ -1,5 +1,5 @@
 settings:
-  copy_dev_on: False
+  copy_dev_on: True
   copy_dev_info:
     - [
         ["out/dark", 1],
@@ -92,7 +92,7 @@ universal:
     generic_button_border: [0, 0, 0, 0.5]
 
     # generic fader
-    generic_fader_bg: [128, 128, 128]
+    generic_fader_bg: [62,62,62,0.5]
     generic_fader_border: [0, 0, 0, 0.5]
     generic_fader_thumb_bg: [205, 205, 205]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
@@ -106,8 +106,8 @@ universal:
     generic_fader_dark_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [205, 205, 205]
-    generic_knob_border: [0, 0, 0, 0.5]
+    generic_knob_bg: [255,255,255,0.5]
+    generic_knob_border: [0, 0, 0, 0.7]
 
     # folder buttons
     folder_symbol: [255, 255, 255, 0.3]
@@ -145,9 +145,9 @@ universal:
     midi_inline_scrollbar_thumb: [255, 255, 255, 0.5]
 
     # items
-    item_bg: [125, 125, 125, 0.5]
-    item_bg_select: [175, 175, 175, 0.5]
-    item_bg_border: [150,150,150, 1]
+    item_bg: [125, 125, 125, 0.6]
+    item_bg_select: [200,200,200, 0.5]
+    item_bg_border: [50,50,50, 1]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.5]
@@ -302,15 +302,15 @@ dimmed:
     generic_button_border: [0, 0, 0, 0.5]
 
     # generic fader
-    generic_fader_bg: [128, 128, 128]
+    generic_fader_bg: [86,86,86,0.5]
     generic_fader_border: [0, 0, 0, 0.5]
     generic_fader_thumb_bg: [226, 226, 226]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [226, 226, 226]
-    generic_knob_border: [0, 0, 0, 0.5]
+    generic_knob_bg: [255,255,255,0.7]
+    generic_knob_border: [0, 0, 0, 0.6]
 
     # folder buttons
     folder_symbol: [255, 255, 255, 0.5]
@@ -348,7 +348,7 @@ dimmed:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [150, 150, 150, 0.5]
+    item_bg: [125, 125, 125, 0.6]
     item_bg_select: [225, 225, 225, 0.5]
     item_bg_border: [0, 0, 0]
     item_bg_border_select: [255, 255, 255]
@@ -497,15 +497,15 @@ light:
     generic_button_border: [0, 0, 0, 0.3]
 
     # generic fader
-    generic_fader_bg: [205, 205, 205]
+    generic_fader_bg: [148,148,148,0.5]
     generic_fader_border: [0, 0, 0, 0.4]
     generic_fader_thumb_bg: [240, 240, 240]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [240, 240, 240]
-    generic_knob_border: [0, 0, 0, 0.4]
+    generic_knob_bg: [211, 211, 211,0.5]
+    generic_knob_border: [0, 0, 0, 0.5]
 
     # folder buttons
     folder_symbol: [0, 0, 0, 0.3]
@@ -542,9 +542,9 @@ light:
     midi_inline_scrollbar_thumb: [0, 0, 0, 0.5]
 
     # items
-    item_bg: [180, 180, 180, 0.5]
+    item_bg: [180, 180, 180, 0.6]
     item_bg_select: [255, 255, 255, 0.5]
-    item_bg_border: [175, 175, 175]
+    item_bg_border: [150, 150, 150]
     item_bg_border_select: [0, 0, 0]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.4]
