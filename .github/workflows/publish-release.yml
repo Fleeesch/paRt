@@ -13,8 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get the latest draft release
-        id: get_release
+      - name: List all releases (debug)
+        id: list_releases
         uses: actions/github-script@v6
         with:
           script: |
@@ -22,19 +22,33 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
+            console.log('Releases:', releases);
+            return JSON.stringify(releases);
+
+      - name: Get the latest draft release
+        id: get_release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const releases = JSON.parse('${{ steps.list_releases.outputs.result }}');
+            console.log('Parsed Releases:', releases); // Added debug output
             const draftRelease = releases.find(release => release.draft);
             if (!draftRelease) {
+              console.log('No draft release found.'); // Added debug output
               throw new Error('No draft release found');
             }
             return draftRelease.id;
 
       - name: Publish the draft release
+        if: success()
         uses: actions/github-script@v6
         with:
           script: |
+            const releases = JSON.parse('${{ steps.list_releases.outputs.result }}');
+            const draftRelease = releases.find(release => release.draft);
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: ${{ steps.get_release.outputs.result }},
+              release_id: draftRelease.id,
               draft: false
             });
