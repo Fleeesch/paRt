@@ -8,6 +8,8 @@ on:
     # only allow verion tags
     tags:
       - 'v*'
+    branches:
+      - main
 
 permissions:
   contents: write
