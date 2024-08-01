@@ -8,7 +8,7 @@
 *.reapeaks
 
 # skip release binaries
-/rel/**/bin/
+/release/*/bin/
 
 # limit build files to ReaperThemeZip
 /src/build/*
@@ -19,5 +19,5 @@
 
 # example project
 part_example-project_rec_gitignore.rpp
-/test/**/rnd/
-/test/**/gitignore/
+test/**/rnd/
+test/**/gitignore/
