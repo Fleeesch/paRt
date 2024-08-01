@@ -1,6 +1,5 @@
-reverted to darkers borders for unselected items in dark theme
-darker piano roll event colors
-muted elements become darker instead of yellow overlay
-locked elements grey out instead of violet overlay
-minor color tweaking for item backgrounds
-transparent backgrounds for generic faders / knobs
+no alternating background colors (let Reaper handle shading)
+play-cursor uses alternative overlay blending across all themes
+tweaked take lane colors
+various minor color tweaks
+MacOS: fixed single-digit index bug

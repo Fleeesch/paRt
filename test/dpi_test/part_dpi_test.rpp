@@ -1,4 +1,4 @@
-<REAPER_PROJECT 0.1 "7.19/win64" 1722437189
+<REAPER_PROJECT 0.1 "7.19/win64" 1722499814
   <NOTES 0 2
   >
   RIPPLE 0
@@ -18,9 +18,9 @@
   VIDEO_CONFIG 0 0 256
   PANMODE 3
   PANLAWFLAGS 3
-  CURSOR 25
-  ZOOM 19.38066994678154 27 0
-  VZOOMEX 3 0
+  CURSOR 7
+  ZOOM 20.75208572806178 0 0
+  VZOOMEX 3 187
   USE_REC_CFG 0
   RECMODE 1
   SMPTESYNC 0 30 100 40 1000 300 0 0 1 0 0
@@ -66,8 +66,8 @@
   GLOBAL_AUTO -1
   TEMPO 120 4 4
   PLAYRATE 1 0 0.25 4
-  SELECTION 0 0
-  SELECTION2 0 0
+  SELECTION 6.5 27
+  SELECTION2 6.5 27
   MASTERAUTOMODE 0
   MASTERTRACKHEIGHT 0 0
   MASTERPEAKCOL 16576
@@ -264,7 +264,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -371,7 +371,7 @@
         IQAAAAUAAAAAAAAAAQAAAAAAAAAAAFlAAAAAAAAA8D+amZmZmZnpPwEIAAAAAQAAAAAAAAAAwHJAAAAAAAAA8D8AAAAAAAAAQAEIAAAAAQAAAAAAAAAAQI9AAAAAAAAA
         8D8AAAAAAAAAQAEBAAAAAQAAAAAAAAAAiLNAAAAAAAAA8D+amZmZmZnpPwEEAAAAAAAAAAAAAAAAAFlAAAAAAAAA8D8AAAAAAAAAQAEBAAAAAQAAAAAAAAAAAPA/AAAA
         AP0BAABcAQAAAgAAAA==
-        AAAQAAAA
+        AFByb2dyYW0gMQAQAAAA
       >
       FLOATPOS 1304 52 525 414
       FXID {3B7B1932-1BD3-4780-A56A-74D3F4FD436A}
@@ -500,7 +500,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -607,7 +607,7 @@
         IQAAAAUAAAAAAAAAAQAAAAAAAAAAAFlAAAAAAAAA8D+amZmZmZnpPwEIAAAAAQAAAAAAAAAAwHJAAAAAAAAA8D8AAAAAAAAAQAEIAAAAAQAAAAAAAAAAQI9AAAAAAAAA
         8D8AAAAAAAAAQAEBAAAAAQAAAAAAAAAAiLNAAAAAAAAA8D+amZmZmZnpPwEEAAAAAAAAAAAAAAAAAFlAAAAAAAAA8D8AAAAAAAAAQAEBAAAAAQAAAAAAAAAAAPA/AAAA
         AP0BAABcAQAAAgAAAA==
-        AAAQAAAA
+        AFByb2dyYW0gMQAQAAAA
       >
       FLOATPOS 1304 52 525 414
       FXID {998F0919-D4E2-48C5-917C-9F7F87E78B88}
@@ -736,7 +736,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -882,86 +882,86 @@
         HASDATA 1 960 QN
         CCINTERP 32
         POOLEDEVTS {42113CB9-0D3D-4DCF-A443-EDE0391EC7BE}
-        e 0 90 31 7f
-        e 600 d0 13 00
-        e 120 d0 16 00
-        e 120 d0 1f 00
-        e 120 d0 27 00
-        e 120 d0 33 00
-        e 120 d0 38 00
-        e 0 80 31 00
-        e 120 d0 3f 00
-        e 120 d0 47 00
-        e 0 90 34 7f
-        e 0 90 38 7f
-        e 120 d0 47 00
-        e 120 d0 42 00
-        e 120 d0 3f 00
-        e 120 d0 38 00
-        e 120 d0 33 00
-        e 120 d0 2e 00
-        e 120 d0 29 00
-        e 0 80 34 00
-        e 120 d0 24 00
-        e 120 d0 22 00
-        e 120 d0 24 00
-        e 120 d0 27 00
-        e 0 90 2f 7f
-        e 120 d0 29 00
-        e 120 d0 2c 00
-        e 0 80 38 00
-        e 120 d0 2e 00
-        e 120 d0 33 00
-        e 120 80 2f 00
-        e 120 d0 38 00
-        e 120 d0 3f 00
-        e 120 d0 42 00
-        e 0 90 35 7f
-        e 120 d0 4c 00
-        e 120 d0 4e 00
-        e 120 d0 56 00
-        e 120 d0 58 00
-        e 120 d0 51 00
-        e 360 d0 51 00
-        e 120 d0 4e 00
-        e 120 d0 4e 00
-        e 0 80 35 00
-        e 0 90 2e 7f
-        e 120 d0 47 00
-        e 120 d0 44 00
-        e 120 90 36 51
-        e 120 d0 42 00
-        e 0 80 2e 00
-        e 600 d0 42 00
-        e 120 d0 42 00
-        e 120 d0 42 00
-        e 360 d0 49 00
-        e 120 d0 4e 00
-        e 120 d0 53 00
-        e 120 90 3d 7f
-        e 120 80 36 00
-        e 120 d0 58 00
-        e 120 d0 5b 00
-        e 120 d0 5d 00
-        e 240 d0 5b 00
-        e 0 80 3d 00
-        e 120 d0 58 00
-        e 120 d0 56 00
-        e 0 90 32 7f
-        e 120 d0 53 00
-        e 120 d0 53 00
-        e 120 d0 51 00
-        e 120 d0 4e 00
-        e 120 d0 3f 00
-        e 120 d0 38 00
-        e 120 d0 27 00
-        e 0 80 32 00
-        e 120 d0 1d 00
-        e 120 d0 18 00
-        e 120 d0 11 00
-        e 120 d0 11 00
-        e 120 d0 11 00
-        e 120 d0 11 00
+        E 0 90 31 7f
+        E 600 d0 13 00
+        E 120 d0 16 00
+        E 120 d0 1f 00
+        E 120 d0 27 00
+        E 120 d0 33 00
+        E 120 d0 38 00
+        E 0 80 31 00
+        E 120 d0 3f 00
+        E 120 d0 47 00
+        E 0 90 34 7f
+        E 0 90 38 7f
+        E 120 d0 47 00
+        E 120 d0 42 00
+        E 120 d0 3f 00
+        E 120 d0 38 00
+        E 120 d0 33 00
+        E 120 d0 2e 00
+        E 120 d0 29 00
+        E 0 80 34 00
+        E 120 d0 24 00
+        E 120 d0 22 00
+        E 120 d0 24 00
+        E 120 d0 27 00
+        E 0 90 2f 7f
+        E 120 d0 29 00
+        E 120 d0 2c 00
+        E 0 80 38 00
+        E 120 d0 2e 00
+        E 120 d0 33 00
+        E 120 80 2f 00
+        E 120 d0 38 00
+        E 120 d0 3f 00
+        E 120 d0 42 00
+        E 0 90 35 7f
+        E 120 d0 4c 00
+        E 120 d0 4e 00
+        E 120 d0 56 00
+        E 120 d0 58 00
+        E 120 d0 51 00
+        E 360 d0 51 00
+        E 120 d0 4e 00
+        E 120 d0 4e 00
+        E 0 80 35 00
+        E 0 90 2e 7f
+        E 120 d0 47 00
+        E 120 d0 44 00
+        E 120 90 36 51
+        E 120 d0 42 00
+        E 0 80 2e 00
+        E 600 d0 42 00
+        E 120 d0 42 00
+        E 120 d0 42 00
+        E 360 d0 49 00
+        E 120 d0 4e 00
+        E 120 d0 53 00
+        E 120 90 3d 7f
+        E 120 80 36 00
+        E 120 d0 58 00
+        E 120 d0 5b 00
+        E 120 d0 5d 00
+        E 240 d0 5b 00
+        E 0 80 3d 00
+        E 120 d0 58 00
+        E 120 d0 56 00
+        E 0 90 32 7f
+        E 120 d0 53 00
+        E 120 d0 53 00
+        E 120 d0 51 00
+        E 120 d0 4e 00
+        E 120 d0 3f 00
+        E 120 d0 38 00
+        E 120 d0 27 00
+        E 0 80 32 00
+        E 120 d0 1d 00
+        E 120 d0 18 00
+        E 120 d0 11 00
+        E 120 d0 11 00
+        E 120 d0 11 00
+        E 120 d0 11 00
         E 120 b0 7b 00
         CCINTERP 32
         CHASE_CC_TAKEOFFS 1
@@ -976,7 +976,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 0 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 0 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -1209,11 +1209,11 @@
         VELLANE 11 67 0 0 1
         VELLANE 43 67 0 0 1
         VELLANE 130 67 0 0 1
-        CFGEDITVIEW 1310.28251 0.069118 61 12 0 -1 0 0 0 0.5
+        CFGEDITVIEW 0 0.051563 61 12 0 -1 0 0 0 0.5
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 1 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -1483,7 +1483,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -1569,7 +1569,7 @@
     BUSCOMP 0 0 0 0 0
     SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
     FIXEDLANES 9 0 0 0 0
-    SEL 1
+    SEL 0
     REC 0 0 1 0 0 0 0 0
     VU 2
     TRACKHEIGHT 0 0 0 0 0 0 0
@@ -1720,7 +1720,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -1962,7 +1962,7 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
     <ITEM
@@ -2032,6 +2032,40 @@
         FILE "Media\210922_86bpm_mix.mp3" 1
       >
     >
+    <ITEM
+      POSITION 25.5
+      SNAPOFFS 0
+      LENGTH 8
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {5AD75316-C1F4-4425-8D98-7C2885128B9A}
+      IID 25
+      NAME "08-perfect quantization-MIDI"
+      VOLPAN 1 0 1 -1
+      SOFFS 0 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {DC4F28E9-5EB5-4216-97B1-78E6517975B9}
+      <SOURCE MIDI
+        HASDATA 1 960 QN
+        CCINTERP 32
+        POOLEDEVTS {7ECE9A4D-554A-4997-ABBA-D18AE3C30D4B}
+        E 15360 b0 7b 00
+        CCINTERP 32
+        CHASE_CC_TAKEOFFS 1
+        GUID {5F274206-D082-4E16-AFDB-C27BB8CDB885}
+        IGNTEMPO 0 120 4 4
+        SRCCOLOR 42
+        VELLANE -1 67 0 0 1
+        VELLANE 11 67 0 0 1
+        VELLANE 43 67 0 0 1
+        VELLANE 130 67 0 0 1
+      >
+    >
   >
   <TRACK {5BE5D3F1-5CCA-449B-94A9-C29607F3B947}
     NAME Sends
@@ -2041,7 +2075,7 @@
     AUTOMODE 0
     PANLAWFLAGS 3
     VOLPAN 1 0 -1 -1 1
-    MUTESOLO 0 0 0
+    MUTESOLO 1 0 0
     IPHASE 0
     PLAYOFFS 0 1
     ISBUS 0 0
@@ -2103,9 +2137,35 @@
         KEYSNAP 0
         TRACKSEL 189
         EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
-        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 1207 325 2483 1102 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
+        CFGEDIT 1 1 0 1 1 1 1 1 1 1 1 0.125 536 496 1812 1273 0 0 0 5 0 0 0 0 0 0.5 0 0 1 64
       >
     >
+  >
+  <TRACK {664318A2-2806-4DBC-AF7E-948038400872}
+    NAME Lanes
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    SEL 1
+    REC 0 0 1 0 0 0 0 0
+    VU 2
+    TRACKHEIGHT 215 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {664318A2-2806-4DBC-AF7E-948038400872}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
   >
   <EXTENSIONS
   >

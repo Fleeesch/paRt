@@ -1,5 +1,5 @@
 settings:
-  copy_dev_on: True
+  copy_dev_on: False
   copy_dev_info:
     - [
         ["out/dark", 1],
@@ -99,7 +99,7 @@ universal:
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic fader - dark
-    generic_fader_dark_bg: [68, 68, 68]
+    generic_fader_dark_bg: [25,25,25,0.6]
     generic_fader_dark_border: [0, 0, 0, 1]
     generic_fader_dark_thumb_bg: [141, 141, 141]
     generic_fader_dark_thumb_border: [0, 0, 0, 0.7]
@@ -147,7 +147,7 @@ universal:
     # items
     item_bg: [125, 125, 125, 0.6]
     item_bg_select: [200,200,200, 0.5]
-    item_bg_border: [50,50,50, 1]
+    item_bg_border: [0,0,0, 1]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
     item_border: [0, 0, 0, 0.5]

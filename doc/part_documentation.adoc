@@ -141,3 +141,37 @@ Reaper provides via the `Screensets/Layouts` an option to implement different la
 ====
 It is better to leave Reaper's `Layouts` section  alone in order to not mess up Multi-DPI support of the theme.
 ====
+
+== Modifying paRt
+
+Since paRt is essentially just a collection of Reaper themes, it can be modified without any restrictions.
+
+=== Quick Guide
+
+1. Go to the ColorThemes folder of your Reaper instance
+2. Extract the paRt _ReaperThemeZip_ files
+3. *Optional:* Rename the paRt _ReaperThemeZip_ files into something unusuable (for example `nameOfTheThemefile.ReaperThemeZip.skip`)
+4. Modify the extracted theme files
+
+=== Detailed Guide
+
+1. Locate the theme files in the _ColorThemes_ folder of your Reaper instance. If you don't know where your _ColorThemes_ folder is located, look at the top men for the action `Options > Show REAPER ressource path in explorer/finder`. It will open the folder for you.
+2. paRt provides its themes via a _ReaperThemeZip_ file per theme. A _ReaperThemeZip_ file is just a zip file under a different name, you can tread it like any average zip archive. Each _ReaperThemeZip_ of paRt should have a _ReaperTheme_ file (named something like part_dark_unpacked.ReaperTheme) and a folder containing its data. Extract the contents of the theme file you want to modify in the ColorThemes folder.
+3. The extraced theme can be loaded like any other theme. You can now replace and delete images, tweak the colors using Reaper's integrated theme tweaker and modify the WALTER layout of the _rtconfig.txt_ (placed in the extracted theme folder).
+4. Rename the original ReaperThemeZip file into something like `nameOfTheThemefile.ReaperThemeZip.skip` in order to force Reaper and the paRt Theme Adjuster to ignore the original files.
+
+[discrete]
+==== Important
+
+- *Renaming or deleting the original files is optional, but recommended*
+- The Theme adjuster is looking for name patterns to identify the paRt theme files. Renaming the original ones by changing their extension will trick the Theme Adjuster and Reaper into ignoring those files.
+- Any ReaPack update of paRt will overwrite existing _ReaperThemeZip_ files, or create them if they don't exist. Meaning you'd have to eventually delete or rename them manually with each update.
+- Your modified files will not receive any updates
+
+[discrete]
+==== Notes
+
+Some good-to-know facts about theming:
+
+- The theme itself won't refresh automatically, you have to select another theme and then reselect the one you're working on right now. This can be easily automated by creating a _Custom Action_ in Reaper that switched to the next and the to the previous theme in one action.
+- Most of the assets are provided in for several zoom levels, found in their respective subfolders (125 = 1.25 zoom factor,...). There are lots of exceptions that don't use dpi-specific assets are only available once. An example would be the item backgrounds (item_bg.png, item_bg_sel.png).

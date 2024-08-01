@@ -270,6 +270,12 @@
                                         1
 
                 ; [MAC OS FIX]
+                ; MAC gets one more letter
+                set VAL_index_letters               \
+                    os_type==1                      \
+                        + VAL_index_letters{0} 1
+
+                ; [MAC OS FIX]
                 ; label margins
                 set VAL_Margin_Label                            \
                     os_type==1                                  \
@@ -333,13 +339,13 @@
                 ; record input margins
                 set VAL_Margin_RecInput             \
                     os_type==1                      \
-                        SCALE>=2.5      [20 4 6 0]  \
-                        SCALE>=2.25     [18 4 4 0]  \
-                        SCALE>=2        [16 3 3 0]  \
-                        SCALE>=1.75     [14 5 2 0]  \
-                        SCALE>=1.5      [12 5 2 0]  \
-                        SCALE>=1.25     [10 4 2 0]  \
-                                        [8 2 2 0]   \
+                        SCALE>=2.5      [20 0 6 0]  \
+                        SCALE>=2.25     [18 0 4 0]  \
+                        SCALE>=2        [16 0 3 0]  \
+                        SCALE>=1.75     [14 0 2 0]  \
+                        SCALE>=1.5      [12 0 2 0]  \
+                        SCALE>=1.25     [10 0 2 0]  \
+                                        [8 0 2 0]   \
                         SCALE>=2.5      [20 2 6 2]  \
                         SCALE>=2.25     [18 2 4 2]  \
                         SCALE>=2        [16 2 3 2]  \
