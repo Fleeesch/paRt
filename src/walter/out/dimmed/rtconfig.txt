@@ -2,8 +2,8 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dimmed
-;       Version: 1.1.2
-;       Date: 2024-08-01 12:51:24
+;       Version: 1.1.3
+;       Date: 2024-08-02 18:42:40
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
@@ -11,7 +11,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.1.2' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.3' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -3852,7 +3852,7 @@ set THEME_color_red                         [238 117 117]
                 set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
-                set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxlist.margin
+                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.fxparm.font        WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.fxparm.margin      WALTER_ELEMENT##.fxlist.margin
 
@@ -5308,7 +5308,7 @@ set THEME_color_red                         [238 117 117]
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font
-                set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxparm.margin
+                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
 
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]

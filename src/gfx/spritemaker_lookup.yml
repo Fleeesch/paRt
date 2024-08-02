@@ -47,14 +47,14 @@ universal:
     color_green: [135, 199, 115]
 
     # theme adjuster
-    themeadj_table_icon: [255, 255, 255, 0.8]
-    themeadj_button_bg_off: [0, 0, 0, 0.7]
-    themeadj_button_fg_off: [255, 255, 255, 0.7]
-    themeadj_button_fg_on: [0, 0, 0, 0.7]
-    themeadj_color_gray: [157, 157, 157, 0.7]
-    themeadj_color_red: [181, 66, 66, 0.7]
-    themeadj_color_yellow: [208, 171, 92, 0.7]
-    themeadj_color_blue: [100, 167, 196, 0.7]
+    themeadj_table_icon: [180, 180, 180]
+    themeadj_button_bg_off: [30, 30, 30]
+    themeadj_button_fg_off: [200, 200, 200]
+    themeadj_button_fg_on: [0, 0, 0]
+    themeadj_color_gray: [165, 165, 165]
+    themeadj_color_red: [160, 70, 70]
+    themeadj_color_yellow: [218, 181, 102]
+    themeadj_color_blue: [110, 177, 206]
 
     # toolbar
     toolbar_button_bg_off: [40, 40, 40]
@@ -263,7 +263,14 @@ dimmed:
     color_green: [163, 222, 145]
 
     # theme adjuster
-    themeadj_table_icon: [255, 255, 255, 0.8]
+    themeadj_table_icon: [220, 220, 220]
+    themeadj_button_bg_off: [60, 60, 60]
+    themeadj_button_fg_off: [255, 255, 255]
+    themeadj_button_fg_on: [0, 0, 0]
+    themeadj_color_gray: [175, 175, 175]
+    themeadj_color_red: [200, 80, 80]
+    themeadj_color_yellow: [228, 191, 122]
+    themeadj_color_blue: [110, 187, 226]
 
     # toolbar
     toolbar_button_bg_off: [64, 64, 64]
@@ -461,7 +468,14 @@ light:
     color_green: [173, 216, 160]
 
     # theme adjuster
-    themeadj_table_icon: [0, 0, 0, 0.8]
+    themeadj_table_icon: [60,60,60]
+    themeadj_button_bg_off: [80, 80, 80]
+    themeadj_button_fg_off: [255, 255, 255]
+    themeadj_button_fg_on: [0, 0, 0]
+    themeadj_color_gray: [160, 160, 160]
+    themeadj_color_red: [220, 96, 96]
+    themeadj_color_yellow: [238, 191, 102]
+    themeadj_color_blue: [120, 187, 226]
 
     # toolbar
     toolbar_button_bg_off: [148, 148, 148]

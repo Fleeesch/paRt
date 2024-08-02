@@ -47,6 +47,8 @@
 --out track_recarm_auto_on      --spritesheet --button --frame frame -fit --images bg -tint color_red           recauto     -tint button_symbol_on      border -tint button_border
 --out track_mono                --spritesheet --button --frame frame -fit --images bg -tint color_cyan          mono        -tint button_symbol_on      border -tint button_border
 
+--out tcp_solodefeat_on mcp_solodefeat_on    --crop-template solo --spritesheet --button --frame frame -fit --images bg -tint color_blue          shadow        -tint button_symbol_on -crop      border -tint button_border
+
 # track io button
 --out track_io_dis              --spritesheet --button --frame frame -fit --mask-template overlay --images bg -tint button_bg_off    io_parent -mask -tint button_io_off    io_send -mask -tint button_io_off  io_receive -mask -tint button_io_off   border -tint button_border
 --out track_io                  --spritesheet --button --frame frame -fit --mask-template overlay --images bg -tint button_bg_off    io_parent -mask -tint color_cyan       io_send -mask -tint button_io_off  io_receive -mask -tint button_io_off   border -tint button_border
