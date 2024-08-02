@@ -312,12 +312,8 @@ find ./gfx -type d -name "out" | while read -r out_dir; do
         source_dir="$out_dir/$theme"
         target_dir="./build/$folder"
 
-        # theme adjuster moves icons to script folder
+        # skip theme adjuster icons
         if echo "$out_dir" | grep -q "/themeadj/"; then
-            target_dir="$themeadj_icon_path"
-            mkdir -p "$target_dir/$theme"
-            rsync -aq --include="table_*" --exclude="*" --ignore-existing "$source_dir"/ "$target_dir/$theme"
-            rsync -aq --exclude="table_*" --ignore-existing "$source_dir"/ "$target_dir"
             continue
         fi
 
@@ -330,6 +326,9 @@ find ./gfx -type d -name "out" | while read -r out_dir; do
         fi
 
     done
+
+    # theme adjuster icons
+    rsync -aq "./gfx/themeadj/out_sheet/" "$themeadj_icon_path"
 
     print_done
 

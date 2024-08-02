@@ -3600,7 +3600,7 @@
                 set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
-                set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxlist.margin
+                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.fxparm.font        WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.fxparm.margin      WALTER_ELEMENT##.fxlist.margin
 
@@ -5056,7 +5056,7 @@
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font
-                set WALTER_ELEMENT##.sendlist.margin    WALTER_ELEMENT##.fxparm.margin
+                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
 
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]

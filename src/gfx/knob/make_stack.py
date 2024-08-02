@@ -221,13 +221,13 @@ KNOB_LOOKUP_ITEM = {
         "100": 0.93333
     },
     "offset": { 
-        "100": [0,-1],
-        "125": [0,-1],
-        "150": [0,-1],
-        "175": [0,-1],
-        "200": [0,-2],
-        "225": [0,-2],
-        "250": [0,-2]
+        "100": [0,0],
+        "125": [0,0],
+        "150": [0,0],
+        "175": [0,0],
+        "200": [0,0],
+        "225": [0,0],
+        "250": [0,0]
     }
 
 }
@@ -615,10 +615,10 @@ def draw_sprite_stroke_bi(sprite_count:int, index:int,zoom:str, knob:classKnob,l
 def draw_sprite_pie(sprite_count:int, index:int,zoom:str, knob:classKnob,lookup:dict,data:dict = {}):
 
     if not "angle_start" in data or data["angle_start"] is None:
-        data["angle_start"] = -90
+        data["angle_start"] = 90
 
     if not "angle" in data or data["angle"] is None:
-        data["angle"] = -90
+        data["angle"] = 90
 
     angle_step = 360 / (sprite_count - 1)
 
