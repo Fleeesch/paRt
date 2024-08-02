@@ -17,15 +17,20 @@ def printProgressEnd():
 # pixels trimmed of the top depending on the filename
 trim_values = {
     "100" : 20,
-    "125" : 30,
-    "150" : 40,
-    "175" : 50,
-    "200" : 60,
-    "225" : 700,
-    "250" : 800,
-    "fhd" : 20,
-    "qhd" : 300,
-    "uhd" : 400,
+    "125" : 25,
+    "150" : 30,
+    "175" : 34,
+    "200" : 39,
+    "225" : 44,
+    "250" : 49,
+    
+}
+
+# dpi values of resolution
+trim_values_resolution = {
+    "fhd" : 100,
+    "qhd" : 125,
+    "uhd" : 150,
 }
 
 #   Function : Change Alpha of Image
@@ -53,9 +58,21 @@ def trim_screenshots():
         # get trim value
         trim = 0
         
-        for lookup_name in trim_values:
+        pick_dpi = True
+
+        # try to find dpi of resolution
+        for lookup_name in trim_values_resolution:
             if lookup_name in file_name:
-                trim = int(trim_values[lookup_name])
+                dpi = str(trim_values_resolution[lookup_name])
+                if trim_values[dpi] is not None:
+                    trim =  trim_values[dpi]
+                    pick_dpi = False
+
+        # try to find dpi directly
+        if pick_dpi:
+            for lookup_name in trim_values:
+                if lookup_name in file_name:
+                    trim = int(trim_values[lookup_name])
         
         # crop screenshot
         left = 0
@@ -141,29 +158,32 @@ def create_web_thumb(sshot,out_name,FitScreenshot=True):
     # screenshot
     img_sshot = Image.open(sshot).convert("RGBA")
 
+    target_width = img_thumb_header_bg.width * 2
+    target_height = img_thumb_header_bg.height * 2
+
     # resize screenshot
     if FitScreenshot:
         aspect_ratio = img_sshot.height / img_sshot.width
-        new_width = img_thumb_header_bg.width
+        new_width = target_width
         new_height = int(new_width * aspect_ratio)
         img_sshot = img_sshot.resize((new_width, new_height), Image.LANCZOS)
         
     # crop screenshot
     left = 0
-    right = img_thumb_header_bg.width
+    right = target_width
     top = 0
-    bottom = img_thumb_header_bg.height
+    bottom = target_height
 
     if FitScreenshot:
         left = 0
-        right = min(img_sshot.width, img_thumb_header_bg.width)
-        top = max(img_sshot.height - img_thumb_header_bg.height, 0)
-        bottom = top + img_thumb_header_bg.height
+        right = min(img_sshot.width, target_width)
+        top = max(img_sshot.height - target_height, 0)
+        bottom = top + target_height
     
     img_sshot = img_sshot.crop((left, top, right, bottom))
     
     # combine sprites
-    sprite = Image.new('RGBA', img_thumb_header_bg.size)
+    sprite = Image.new('RGBA', (target_width,target_height))
     sprite.paste(img_sshot, (0, 0))
 
     # output
