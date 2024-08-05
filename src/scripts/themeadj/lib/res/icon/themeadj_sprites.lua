@@ -1,3 +1,7 @@
+-- @version 1.1.4
+-- @author Fleeesch
+-- @description paRt Theme Adjuster
+-- @noIndex
 return {
   dark = {
     [100] = {
