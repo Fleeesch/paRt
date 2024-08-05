@@ -1,3 +1,5 @@
+
+
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -613,28 +615,28 @@
                 ; track label text
                 set VAL_Color_Track_Label_Text                                                                                                                                          \
                     !track_selected                                                                                                                                                     \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255   par_colors_track_track_label_text_tone                                                    \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 + par_colors_track_track_label_text_tone * 0.5 par_colors_track_track_label_select_tone
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -255 * 0.512   par_colors_track_track_label_text_tone                                                      \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -255 * 0.512 + par_colors_track_track_label_text_tone * 0.25 par_colors_track_track_label_select_tone
 
                 MAC_Math_Min VAL_Color_Track_Label_Text 1
 
                 ; track tcp index
                 set VAL_Color_Track_Index_TCP                                                                                                                                               \
                     !track_selected                                                                                                                                                         \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -127.5 * 0.255 par_colors_track_track_index_tone_tcp                                                           \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text + -255 * 0.512 par_colors_track_track_index_tone_tcp                                                             \
                         par_tcp_track_label_index_vis==1                                                                                                                                    \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.5  par_colors_track_track_label_select_tone   \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 + par_colors_track_track_index_tone_tcp  * 0.1  par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -255 * 0.512 + par_colors_track_track_index_tone_tcp  * 0.1   par_colors_track_track_label_select_tone    \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -255 * 0.512 + par_colors_track_track_index_tone_tcp  * 0.15  par_colors_track_track_bg_select_tone
 
                 MAC_Math_Min VAL_Color_Track_Index_TCP 1
 
                 ; track mcp index
                 set VAL_Color_Track_Index_MCP                                                                                                                                                   \
                     !track_selected                                                                                                                                                             \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text      + -127.5 * 0.255    par_colors_track_track_index_tone_mcp                                                       \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text      + -255 * 0.512    par_colors_track_track_index_tone_mcp                                                         \
                         par_mcp_track_settings_label_index==1                                                                                                                                   \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp          par_colors_track_track_label_select_tone     \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -127.5 * 0.255 +  par_colors_track_track_index_tone_mcp * 0.1    par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -255 * 0.512 +  par_colors_track_track_index_tone_mcp * 0.1   par_colors_track_track_label_select_tone        \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_track_label_text  + -255 * 0.512 +  par_colors_track_track_index_tone_mcp * 0.15  par_colors_track_track_bg_select_tone
 
                 MAC_Math_Min VAL_Color_Track_Index_MCP 1
 
@@ -654,16 +656,16 @@
                 ; envcp label text
                 set VAL_Color_Envcp_Label_Text                                                                                                                                                  \
                     !env_selected                                                                                                                                                               \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_text_tone                                                            \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_text_tone * 0.5 par_colors_track_track_label_select_tone
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -255 * 0.512   par_colors_track_envcp_label_text_tone                                                              \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -255 * 0.512 + par_colors_track_envcp_label_text_tone * 0.15 par_colors_track_track_label_select_tone
 
                 ; envcp readout
                 set VAL_Color_Envcp_Readout                                                                                                                                                     \
                     !env_selected                                                                                                                                                               \
-                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255   par_colors_track_envcp_label_readout_tone                                                         \
+                        + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -255 * 0.512   par_colors_track_envcp_label_readout_tone                                                           \
                         par_tcp_envcp_label_readout_placement!=2                                                                                                                                \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.5 par_colors_track_track_label_select_tone      \
-                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -127.5 * 0.255 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -255 * 0.512 + par_colors_track_envcp_label_readout_tone * 0.15 par_colors_track_track_label_select_tone       \
+                            + [1 1 1 0 0 0 0 0] + THEME_color_envcp_label_text + -255 * 0.512 + par_colors_track_envcp_label_readout_tone * 0.1 par_colors_track_track_bg_select_tone
 
                 MAC_Math_Min VAL_Color_Envcp_Readout 1
 
@@ -1988,12 +1990,13 @@
                             - CUR_y{0} VAL_MCP_Label{0}
 
                     ; [DRAW] index bg
-                    set WALTER_ELEMENT##.custom.index_bg                            \
-                        par_mcp_##PARAMETER_SECTION##_settings_label_index==2       \
-                            [CUR_x{0} CUR_y{0} CUR_w{0} VAL_MCP_Label{0} 0 1 1 1]   \
-                            0
+                    ; Index Background is currently bypassed
+                    ;set WALTER_ELEMENT##.custom.index_bg                            \
+                    ;    par_mcp_##PARAMETER_SECTION##_settings_label_index==2       \
+                    ;        [CUR_x{0} CUR_y{0} CUR_w{0} VAL_MCP_Label{0} 0 1 1 1]   \
+                    ;        0
 
-                    front WALTER_ELEMENT##.custom.index_bg
+                    ;front WALTER_ELEMENT##.custom.index_bg
 
                     ; [DRAW] index
                     set WALTER_ELEMENT##.trackidx                                   \
