@@ -254,29 +254,7 @@ cd $script_themefile_folder
 source $script_themefile_create
 cd "$org_path"
 
-#   Reascript Files
-# --------------------------------------------
 
-# from dev folder
-if [ "$update_themeadj" = true ]; then
-    cd $script_lua_folder
-    cd ".."
-    source $script_lua_copy_themeadj
-    cd $org_path
-fi
-
-cd $script_lua_folder
-cd ".."
-source $script_lua_add_tags
-cd $org_path
-
-# to dev folder
-if [ "$update_themeadj_post" = true ]; then
-    cd $script_lua_folder
-    cd ".."
-    source $script_lua_copy_themeadj_post
-    cd $org_path
-fi
 
 
 #   Pre-Cleaning
@@ -333,6 +311,30 @@ find ./gfx -type d -name "out" | while read -r out_dir; do
     print_done
 
 done
+
+#   Reascript Files
+# --------------------------------------------
+
+# from dev folder
+if [ "$update_themeadj" = true ]; then
+    cd $script_lua_folder
+    cd ".."
+    source $script_lua_copy_themeadj
+    cd $org_path
+fi
+
+cd $script_lua_folder
+cd ".."
+source $script_lua_add_tags
+cd $org_path
+
+# to dev folder
+if [ "$update_themeadj_post" = true ]; then
+    cd $script_lua_folder
+    cd ".."
+    source $script_lua_copy_themeadj_post
+    cd $org_path
+fi
 
 #   Copy Theme / WALTER files
 # --------------------------------------------
@@ -398,3 +400,4 @@ done
 cd ..
 
 print_done
+
