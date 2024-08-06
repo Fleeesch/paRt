@@ -379,7 +379,7 @@ vu_gr_bgcol=2894892
 vu_gr_fgcol=13070475
 take_marker_sel=14277119
 mouseitem_color=11457137
-mouseitem_mode=163840
+mouseitem_mode=144129
 
 EndColors
 
@@ -763,7 +763,7 @@ group_63=12574094
 take_marker_sel=13882362
 region_lane_text=0
 mouseitem_color=12574094
-mouseitem_mode=163840
+mouseitem_mode=144129
 
 EndColors
 
@@ -1147,7 +1147,7 @@ group_63=13495196
 take_marker_sel=1447531
 region_lane_text=0
 mouseitem_color=4217362
-mouseitem_mode=163840
+mouseitem_mode=147456
 
 EndColors
 
