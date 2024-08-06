@@ -2,9 +2,11 @@
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: 1.1.4
-;       Date: 2024-08-05 14:47:36
+;       Version: 1.1.5
+;       Date: 2024-08-06 23:53:46
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
 
 
 
@@ -13,7 +15,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.1.4' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.5' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -57,9 +59,7 @@ define_parameter par_mcp_gen_element_adj_spacing_section_x 'MCP - Track - Elemen
 define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 185 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 82 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 31 0 1000
-define_parameter par_mcp_gen_folder_grid 'MCP - General - Folder Grid' 0 0 1
-define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 1 0 1
-define_parameter par_mcp_gen_folder_icon_last 'MCP - General - Folder Icon Last' 0 0 1
+define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 1 0 2
 define_parameter par_mcp_gen_folder_indent 'MCP - General - Folder Indent' 0 0 1000
 define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padding Last' 161 0 1000
 define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 160 0 1000
@@ -149,8 +149,7 @@ define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Elem
 define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 1000
-define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 1
-define_parameter par_tcp_gen_folder_icon_grid 'TCP - General - Folder Grid' 0 0 1
+define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 2
 define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 1
 define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 330 0 1000
 define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 447 0 1000
@@ -1825,6 +1824,8 @@ set THEME_color_red                         [234 154 154]
                     custom WALTER_ELEMENT##.custom.recinput_vert_on     "" "" "" "track_custom_recinput_vert_on"
                     custom WALTER_ELEMENT##.custom.label_recmode        "" "" "" "track_custom_label_recmode"
                     custom WALTER_ELEMENT##.custom.label_infx           "" "" "" "track_custom_label_fxin"
+                    custom WALTER_ELEMENT##.custom.folder_last          "" "" "" "track_custom_mcp_folder_last"
+                    custom WALTER_ELEMENT##.custom.folder_child         "" "" "" "track_custom_mcp_folder_child"
 
                     ; side trimming
                     set VAL_mcp_trim_left 0
@@ -3826,20 +3827,59 @@ set THEME_color_red                         [234 154 154]
 
             ; [DRAW] Folder Icon
             set WALTER_ELEMENT##.folder                                                         \
-                ?par_mcp_gen_folder_icon_folder{0}                                              \
+                ?par_mcp_gen_folder_icon_folder                                                 \
                     folderstate>0                                                               \
                         [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 1 0 1]
 
             ; last track x position
-            set CUR_x - VAL_mcp_w_full{0} + VAL_Button_Folder{0} VAL_mcp_x_extension_folder{0}
+            set CUR_x                                                                               \
+                folderstate<0                                                                       \
+                    par_mcp_gen_folder_icon_folder==1                                               \
+                        - VAL_mcp_w_full{0} + VAL_Button_Folder{0} VAL_mcp_x_extension_folder{0}    \
+                        - 0 VAL_Pad{0}                                                              \
+                folderstate==0                                                                      \
+                    par_mcp_gen_folder_icon_folder==2                                               \
+                        - 0 VAL_Pad{0}
+
+            ; folder icon width
+            set CUR_w                                                                                       \
+                folderstate<0                                                                               \
+                    par_mcp_gen_folder_icon_folder==1                                                       \
+                        * 0.6 VAL_Button_Folder{0}                                                          \
+                        - VAL_mcp_w_full{0} + VAL_mcp_x_extension_folder{0} * 0.3 VAL_Button_Folder{0}      \
+                folderstate==0                                                                              \
+                    par_mcp_gen_folder_icon_folder==2                                                       \
+                        + VAL_mcp_w_full{0} * 2 VAL_Pad{0}
+
+
+            ; folder icon height
+            set CUR_h * 0.5 VAL_Button_Folder{0}
 
             ; [DRAW] Last Track in Folder Icon
-            set WALTER_ELEMENT##.folder                                                         \
-                ?par_mcp_gen_folder_icon_folder{0}                                              \
-                    folderstate<0                                                               \
-                        [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 1 0 1]
+            set WALTER_ELEMENT##.folder                                                 \
+                par_mcp_gen_folder_icon_folder==1                                       \
+                    folderstate<0                                                       \
+                        + [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1] VAL_Pad{0}@y
 
+            ; [DRAW] Last Track in Folder Icon - Lines activateed
+            set WALTER_ELEMENT##.custom.folder_last                     \
+                par_mcp_gen_folder_icon_folder==2                       \
+                    folderstate<0                                       \
+                        [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]
+
+
+            ; [DRAW] Child Track
+            set WALTER_ELEMENT##.custom.folder_child                    \
+                par_mcp_gen_folder_icon_folder==2                       \
+                    folderstate==0                                      \
+                        [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]   \
+                        0                                               \
+                    0
+
+            ; update z order
             front WALTER_ELEMENT##.folder
+            front WALTER_ELEMENT##.custom.folder_last
+            front WALTER_ELEMENT##.custom.folder_child
 
         endmacro
 
@@ -4004,9 +4044,13 @@ set THEME_color_red                         [234 154 154]
                 macro MAC_DrawTcp_Setup_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                     ; custom elements
-                    custom WALTER_ELEMENT##.custom.readout_bg       "" "" "" "meter_custom_readout_bg_horz"
-                    custom WALTER_ELEMENT##.custom.recinput_off     "" "" "" "track_custom_recinput_r_off"
-                    custom WALTER_ELEMENT##.custom.recinput_on      "" "" "" "track_custom_recinput_r_on"
+                    custom WALTER_ELEMENT##.custom.readout_bg           "" "" "" "meter_custom_readout_bg_horz"
+                    custom WALTER_ELEMENT##.custom.recinput_off         "" "" "" "track_custom_recinput_r_off"
+                    custom WALTER_ELEMENT##.custom.recinput_on          "" "" "" "track_custom_recinput_r_on"
+                    custom WALTER_ELEMENT##.custom.folder_last          "" "" "" "track_custom_tcp_folder_last"
+                    custom WALTER_ELEMENT##.custom.folder_last_bold     "" "" "" "track_custom_tcp_folder_last_bold"
+                    custom WALTER_ELEMENT##.custom.folder_child         "" "" "" "track_custom_tcp_folder_child"
+
 
                     ; label size
                     set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
@@ -4028,13 +4072,17 @@ set THEME_color_red                         [234 154 154]
                             1
 
                     ; folder indent
-                    set VAL_tcp_x_offset_folder                     \
-                        !VAL_tcp_FolderFeatures{0}                  \
-                            0                                       \
-                            * VAL_Button_Folder{0}                  \
-                                +                                   \
-                                par_tcp_gen_folder_icon_collapse    \
-                                par_tcp_gen_folder_icon_mode
+                    set VAL_tcp_x_offset_folder 0
+
+                    set VAL_tcp_x_offset_folder                                 \
+                        ?VAL_tcp_FolderFeatures{0}                              \
+                            ?par_tcp_gen_folder_icon_collapse                   \
+                                + VAL_tcp_x_offset_folder VAL_Button_Folder{0}
+
+                    set VAL_tcp_x_offset_folder                                 \
+                        ?VAL_tcp_FolderFeatures{0}                              \
+                            ?par_tcp_gen_folder_icon_mode                       \
+                                + VAL_tcp_x_offset_folder VAL_Button_Folder{0}
 
                     set VAL_tcp_x_offset                + VAL_tcp_x_offset_folder{0} * folderdepth  	* SCALE     * 0.02 par_tcp_gen_folder_indent
                     set VAL_tcp_x_offset_max_precomp    + VAL_tcp_x_offset_folder{0} * maxfolderdepth   * SCALE     * 0.02 par_tcp_gen_folder_indent
@@ -5269,13 +5317,73 @@ set THEME_color_red                         [234 154 154]
             ; position setup
             set CUR_w   VAL_Button_Folder{0}
             set CUR_x   - VAL_tcp_x_offset{0} CUR_w{0}
-            set CUR_y   0
+            set CUR_y   - tcp.size{1} + VAL_Button_Folder{0} VAL_Pad{0}
 
             ; [DRAW] folder collapse button
             set WALTER_ELEMENT##.foldercomp                                                     \
                 ?par_tcp_gen_folder_icon_collapse                                               \
                     ?VAL_tcp_h_level{0}                                                         \
-                        [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 0 0 0]
+                        [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 1 0 1]
+
+            ; y position of line
+            set CUR_y_line                                      \
+                par_tcp_gen_folder_icon_collapse==2             \
+                    - 0 VAL_Pad{0}                              \
+                    + CUR_y VAL_Pad{0}
+
+            ; x position of line
+            set CUR_x_line                                  \
+                par_tcp_gen_folder_icon_collapse==2         \
+                    + CUR_x * 0.5 VAL_Button_Folder{0}      \
+                    + CUR_x * 0.4 VAL_Button_Folder{0}
+            
+            ; line width
+            set CUR_w_line                                  \
+                par_tcp_gen_folder_icon_collapse==1         \
+                    - CUR_w * 0.6 VAL_Button_Folder{0}      \
+                    - CUR_w * 0.5 VAL_Button_Folder{0}
+            
+            ; line height
+            set CUR_h_line                                          \
+                folderstate==0                                      \
+                    + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}       \
+                folderstate<0                                       \
+                    par_tcp_gen_folder_icon_collapse==2             \
+                        - tcp.size{1} * 0.5 VAL_Button_Folder{0}    \
+                        * 0.5 VAL_Button_Folder{0}                  \
+                    0
+
+            ; [DRAW] last track in folder marker
+            set WALTER_ELEMENT##.custom.folder_last_bold                                        \
+                par_tcp_gen_folder_icon_collapse==1                                             \
+                    ?VAL_tcp_h_level{0}                                                         \
+                        folderstate<0                                                           \
+                            [CUR_x_line{0} CUR_y_line{0} CUR_w_line{0} CUR_h_line{0} 0 1 0 1]   \
+                            0                                                                   \
+                        0                                                                       \
+                    0
+
+            ; [DRAW] last track in folder line
+            set WALTER_ELEMENT##.custom.folder_last                                             \
+                par_tcp_gen_folder_icon_collapse==2                                             \
+                    ?VAL_tcp_h_level{0}                                                         \
+                        folderstate<0                                                           \
+                            [CUR_x_line{0} CUR_y_line{0} CUR_w_line{0} CUR_h_line{0} 0 0 0 1]   \
+                            0                                                                   \
+                        0                                                                       \
+                    0
+
+            ; [DRAW] child track line
+            set WALTER_ELEMENT##.custom.folder_child                                                \
+                par_tcp_gen_folder_icon_collapse==2                                                 \
+                    ?VAL_tcp_h_level{0}                                                             \
+                        folderstate==0                                                              \
+                            folderdepth>0                                                           \
+                                [CUR_x_line{0} CUR_y_line{0} CUR_w_line{0} CUR_h_line{0} 0 0 0 1]   \
+                                0                                                                   \
+                            0                                                                       \
+                        0                                                                           \
+                    0
 
             ; mode icon offset
             set CUR_x                               \
@@ -5286,10 +5394,15 @@ set THEME_color_red                         [234 154 154]
             set WALTER_ELEMENT##.folder                                                         \
                 ?par_tcp_gen_folder_icon_mode                                                   \
                     ?VAL_tcp_h_level{0}                                                         \
-                        [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 0 0 0]
+                        [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 1 0 1]
 
+            ; update z order
             front WALTER_ELEMENT##.foldercomp
             front WALTER_ELEMENT##.folder
+            front WALTER_ELEMENT##.custom.folder_last
+            front WALTER_ELEMENT##.custom.folder_last_bold
+            front WALTER_ELEMENT##.custom.folder_child
+
 
         endmacro
 

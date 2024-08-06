@@ -1,7 +1,16 @@
 @author Fleeesch
 @description paRt
 @links https://github.com/Fleeesch/paRt
-@screenshots https://fleeesch.github.io/part/res/gallery/resolution/part_fhd_dimmed.png
+@screenshots
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
 @provides
   paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
   paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
@@ -9,6 +18,7 @@
   [script]paRt/conf/**/*
   [script]paRt/lib/**/*
   [script main]paRt/*.lua
+  [data]paRt/splash/*
 @about
   # paRt - plain adapting Reaper theme
   

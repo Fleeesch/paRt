@@ -149,8 +149,10 @@ if [ "$local_release" = true ]; then
     # manual installation folder
     mkdir -p "./$release_folder/$version/bin/manual/ColorThemes"
     mkdir -p "./$release_folder/$version/bin/manual/Scripts/Fleeesch/Themes/paRt"
+    mkdir -p "./$release_folder/$version/bin/manual/Data/paRt"
 
     rsync -aq --include="*.ReaperThemeZip" --exclude="*" "./$release_folder/$version/bin/" "./$release_folder/$version/bin/manual/ColorThemes"
+    rsync -aq --mkpath --include="*.png" --exclude="*" "$ORG_DIR/stock/splash/rnd/" "./$release_folder/$version/bin/manual/Data/paRt/splash"
 
     print_done
 
@@ -212,6 +214,11 @@ if [ "$local_release" = true ]; then
 
     rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
     rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"
+
+    #   Splash Images
+    # ------------------------------
+
+    rsync -aq --mkpath --include="*.png" --exclude="*" "$ORG_DIR/stock/splash/rnd/" "$ORG_DIR/$release_folder/$version/reapack/paRt/splash"
 
     print_done
 
