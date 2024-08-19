@@ -2,25 +2,21 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dimmed
-;       Version: 1.1.5
-;       Date: 2024-08-06 23:53:46
+;       Version: 1.1.6
+;       Date: 2024-08-19 21:21:25
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
-
-
-
-
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.1.5' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.6' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 198 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 450 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
@@ -3822,8 +3818,10 @@ set THEME_color_red                         [238 117 117]
         macro MAC_DrawMcp_Folder SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; position setup
-            set CUR_x + VAL_Pad{0} VAL_mcp_x_offset_folder{0}
-            set CUR_y - VAL_mcp_h{0} VAL_mcp_y_offset{0}
+            set CUR_x_rightmost     - VAL_mcp_w_full{0} VAL_mcp_x_extension_folder{0}
+            set CUR_x               - CUR_x_rightmost{0} VAL_Button_Folder{0}
+            set CUR_y               - VAL_mcp_h{0} VAL_mcp_y_offset{0}
+            
 
             ; [DRAW] Folder Icon
             set WALTER_ELEMENT##.folder                                                         \
@@ -3835,20 +3833,20 @@ set THEME_color_red                         [238 117 117]
             set CUR_x                                                                               \
                 folderstate<0                                                                       \
                     par_mcp_gen_folder_icon_folder==1                                               \
-                        - VAL_mcp_w_full{0} + VAL_Button_Folder{0} VAL_mcp_x_extension_folder{0}    \
+                        CUR_x                                                                       \
                         - 0 VAL_Pad{0}                                                              \
                 folderstate==0                                                                      \
                     par_mcp_gen_folder_icon_folder==2                                               \
                         - 0 VAL_Pad{0}
 
             ; folder icon width
-            set CUR_w                                                                                       \
-                folderstate<0                                                                               \
-                    par_mcp_gen_folder_icon_folder==1                                                       \
-                        * 0.6 VAL_Button_Folder{0}                                                          \
-                        - VAL_mcp_w_full{0} + VAL_mcp_x_extension_folder{0} * 0.3 VAL_Button_Folder{0}      \
-                folderstate==0                                                                              \
-                    par_mcp_gen_folder_icon_folder==2                                                       \
+            set CUR_w                                                   \
+                folderstate<0                                           \
+                    par_mcp_gen_folder_icon_folder==1                   \
+                        * 0.6 VAL_Button_Folder{0}                      \
+                        - CUR_x_rightmost * 0.3 VAL_Button_Folder{0}    \
+                folderstate==0                                          \
+                    par_mcp_gen_folder_icon_folder==2                   \
                         + VAL_mcp_w_full{0} * 2 VAL_Pad{0}
 
 
@@ -3868,12 +3866,24 @@ set THEME_color_red                         [238 117 117]
                         [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]
 
 
+            ; x-offset for nested folders
+            set CUR_x               \
+                folderstate>0       \
+                    - 0 VAL_Pad{0}
+
+            ; width for nested folders
+            set CUR_w                                               \
+                folderstate>0                                       \
+                    - CUR_x_rightmost{0} VAL_Button_Folder{0}
+
             ; [DRAW] Child Track
-            set WALTER_ELEMENT##.custom.folder_child                    \
-                par_mcp_gen_folder_icon_folder==2                       \
-                    folderstate==0                                      \
-                        [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]   \
-                        0                                               \
+            set WALTER_ELEMENT##.custom.folder_child                        \
+                par_mcp_gen_folder_icon_folder==2                           \
+                    folderdepth>0                                           \
+                        folderstate>=0                                      \
+                            [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]   \
+                            0                                               \
+                        0                                                   \
                     0
 
             ; update z order
@@ -5344,13 +5354,15 @@ set THEME_color_red                         [238 117 117]
                     - CUR_w * 0.5 VAL_Button_Folder{0}
             
             ; line height
-            set CUR_h_line                                          \
-                folderstate==0                                      \
-                    + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}       \
-                folderstate<0                                       \
-                    par_tcp_gen_folder_icon_collapse==2             \
-                        - tcp.size{1} * 0.5 VAL_Button_Folder{0}    \
-                        * 0.5 VAL_Button_Folder{0}                  \
+            set CUR_h_line                                              \
+                folderstate>0                                           \
+                    - WALTER_ELEMENT##.size{1} VAL_Button_Folder{0}     \
+                folderstate==0                                          \
+                    + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}           \
+                folderstate<0                                           \
+                    par_tcp_gen_folder_icon_collapse==2                 \
+                        - tcp.size{1} * 0.5 VAL_Button_Folder{0}        \
+                        * 0.5 VAL_Button_Folder{0}                      \
                     0
 
             ; [DRAW] last track in folder marker
@@ -5377,8 +5389,8 @@ set THEME_color_red                         [238 117 117]
             set WALTER_ELEMENT##.custom.folder_child                                                \
                 par_tcp_gen_folder_icon_collapse==2                                                 \
                     ?VAL_tcp_h_level{0}                                                             \
-                        folderstate==0                                                              \
-                            folderdepth>0                                                           \
+                        folderdepth>0                                                               \
+                            folderstate>=0                                                          \
                                 [CUR_x_line{0} CUR_y_line{0} CUR_w_line{0} CUR_h_line{0} 0 0 0 1]   \
                                 0                                                                   \
                             0                                                                       \
