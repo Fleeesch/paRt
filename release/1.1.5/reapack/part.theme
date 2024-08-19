@@ -1,17 +1,20 @@
 @version 1.1.5
 @author Fleeesch
 @description paRt
-@links https://github.com/Fleeesch/paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
 @screenshots
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
-  https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
 @provides
   paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
   paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
