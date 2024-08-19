@@ -1,7 +1,3 @@
-reworked folder-display assets
-added optional display of lines in track folder lanes in MCP & TCP
-reduced opacity of mouse position line
-added splash images in Data folder
-ReaPack: updated missing reapack screenshot
-Theme Adjuster: updated control hint messages
-Theme Adjuster: added option to toggle folder lines
+fixed bug where folder line would display on level 0 in mixer
+moved mixer folder collapse icon to the right side of track
+extended folder line for nested folders
