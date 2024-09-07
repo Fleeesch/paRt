@@ -42,6 +42,16 @@ OFFSET = {
     "250": 6
 }
 
+ROUND = {
+    "100": 2,
+    "125": 2,
+    "150": 3,
+    "175": 3,
+    "200": 4,
+    "225": 5,
+    "250": 6
+}
+
 # -------------------------------------------
 #       Remove Temp File
 # -------------------------------------------
@@ -112,6 +122,18 @@ class classAnimation:
 os.makedirs(TARGET_DIR, exist_ok=True)
 
 # -------------------------------------------
+#       Draw rounded Rectangle
+# -------------------------------------------
+
+def draw_rounded_rectangle(ctx, x, y, width, height, radius):
+    ctx.move_to(x + radius, y)
+    ctx.arc(x + width - radius, y + radius, radius, -0.5 * 3.14159, 0)
+    ctx.arc(x + width - radius, y + height - radius, radius, 0, 0.5 * 3.14159)
+    ctx.arc(x + radius, y + height - radius, radius, 0.5 * 3.14159, 3.14159)
+    ctx.arc(x + radius, y + radius, radius, 3.14159, 1.5 * 3.14159)
+    ctx.close_path()
+
+# -------------------------------------------
 #       Animation : Pulse Fill
 # -------------------------------------------
 
@@ -124,7 +146,7 @@ for zoom in zoom_levels:
     
     sprite_count_half = SPRITE_COUNT // 2
 
-    for i in range(0,SPRITE_COUNT):
+    for i in range(0, SPRITE_COUNT):
         spritesheet.add_sprite()
 
         context = cairo.Context(spritesheet.current_sprite)
@@ -133,19 +155,18 @@ for zoom in zoom_levels:
 
         box_offset = OFFSET[zoom]
         box_size = TOOLBAR_SIZE[zoom] - box_offset * 2
+        radius = ROUND[zoom]
 
-        context.rectangle(box_offset,box_offset, box_size,box_size)
+        draw_rounded_rectangle(context, box_offset, box_offset, box_size, box_size, radius)
 
         if i < sprite_count_half:
-            alpha = rescale(i,0,sprite_count_half,0,1)
+            alpha = rescale(i, 0, sprite_count_half, 0, 1)
         else:
-            alpha = rescale(i,sprite_count_half,SPRITE_COUNT,1,0)
+            alpha = rescale(i, sprite_count_half, SPRITE_COUNT, 1, 0)
 
-        context.set_source_rgba(1,1,1,alpha)
+        context.set_source_rgba(1, 1, 1, alpha)
 
         context.fill()
-
-        pass
 
     spritesheet.make_sheet(f"{TARGET_DIR}/animation_pulse_fill_{zoom}.png")
 
@@ -155,7 +176,7 @@ print("done")
 #       Animation : Pulse Inner
 # -------------------------------------------
 
-print(f"Creating Glow Animation...",end='',flush=True)
+print(f"Creating Glow Animation...", end='', flush=True)
 
 for zoom in zoom_levels:
 
@@ -163,7 +184,7 @@ for zoom in zoom_levels:
     
     sprite_count_half = SPRITE_COUNT // 2
 
-    for i in range(0,SPRITE_COUNT):
+    for i in range(0, SPRITE_COUNT):
         spritesheet.add_sprite()
 
         context = cairo.Context(spritesheet.current_sprite)
@@ -172,19 +193,18 @@ for zoom in zoom_levels:
         
         box_offset = OFFSET[zoom] + BORDER[zoom]
         box_size = TOOLBAR_SIZE[zoom] - box_offset * 2
+        radius = ROUND[zoom]
 
-        context.rectangle(box_offset,box_offset, box_size,box_size)
+        draw_rounded_rectangle(context, box_offset, box_offset, box_size, box_size, radius)
 
         if i < sprite_count_half:
-            alpha = rescale(i,0,sprite_count_half,0,1)
+            alpha = rescale(i, 0, sprite_count_half, 0, 1)
         else:
-            alpha = rescale(i,sprite_count_half,SPRITE_COUNT,1,0)
+            alpha = rescale(i, sprite_count_half, SPRITE_COUNT, 1, 0)
 
-        context.set_source_rgba(1,1,1,alpha)
+        context.set_source_rgba(1, 1, 1, alpha)
 
         context.fill()
-
-        pass
 
     spritesheet.make_sheet(f"{TARGET_DIR}/animation_pulse_inner_{zoom}.png")
 

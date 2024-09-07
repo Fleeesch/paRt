@@ -4,16 +4,16 @@
 # --------------------------------------
 
 # interactive
---out mcp_fcomp_off         --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  arrow   -tint folder_symbol
---out mcp_fcomp_tiny        --spritesheet --button --frame-make 1 1 0 0 -fit   --rotate 270    --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  arrow   -tint folder_symbol
+--out mcp_fcomp_off         --spritesheet --button --frame-make 1 1 0 0 -fit                    --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2     arrow       -tint folder_symbol
+--out mcp_fcomp_tiny        --spritesheet --button --frame-make 1 1 0 0 -fit   --rotate 270     --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2     arrow       -tint folder_symbol
 
 # static
---out mcp_folder_on         --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  folder         -tint folder_symbol
---out mcp_folder_last       --spritesheet --button --frame frame_last -fit                     --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  last_bold      -tint folder_symbol
+--out mcp_folder_on         --spritesheet --button --frame-make 1 1 0 0 -fit                    --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2     folder      -tint folder_symbol
+--out mcp_folder_last       --spritesheet --button --frame frame_last   -fit                    --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2     last_bold   -tint folder_symbol
 
 # custom
---out track_custom_mcp_folder_last     --frame frame_last -fit         --images last    -tint folder_symbol -alpha 0.75
---out track_custom_mcp_folder_child    --frame frame_child             --images child   -tint folder_symbol -alpha 0.75
+--out track_custom_mcp_folder_last                 --frame frame_last   -fit                    --images last    -tint folder_symbol -alpha 0.75
+--out track_custom_mcp_folder_child                --frame frame_child                          --images child   -tint folder_symbol -alpha 0.75
 
 #       TCP Icons
 # --------------------------------------
@@ -24,9 +24,9 @@
 --out track_fcomp_tiny      --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  arrow       -tint folder_symbol
 
 # mode
---out track_folder_off      --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  plus        -tint folder_symbol -alpha 0.15     -frame 0 0     plus     -frame 1 2   -tint folder_symbol
---out track_folder_on       --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  minus       -tint folder_symbol -alpha 0.5      -frame 0 0     minus    -frame 1 2   -tint folder_symbol
---out track_folder_last     --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  minus       -tint folder_symbol -alpha 0.15     -frame 0 0     minus -frame 1 2      -tint folder_symbol
+--out track_folder_off      --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  plus        -tint folder_symbol -alpha 0.15     -frame 0 0     plus    -frame 1 2   -tint folder_symbol
+--out track_folder_on       --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  minus       -tint folder_symbol -alpha 0.5      -frame 0 0     minus   -frame 1 2   -tint folder_symbol
+--out track_folder_last     --spritesheet --button --frame-make 1 1 0 0 -fit                   --images overlay -tint overlay_folder_hover -frame 1 1 overlay -tint overlay_folder_click -frame 2 2  minus       -tint folder_symbol -alpha 0.15     -frame 0 0     minus   -frame 1 2   -tint folder_symbol
 
 # custom
 --out track_custom_tcp_folder_last          --frame frame_last      --images last_tcp           -tint folder_symbol -alpha 0.75

@@ -31,11 +31,11 @@
 --out track_io          --mask-template inner   --images fill -tint themeadj_button_bg_off io_1 -mask           -tint color_cyan io_0 -mask -tint themeadj_color_yellow io_2 -mask -tint themeadj_color_red
 
 # envcp
---out envcp_hide                                --images fill -tint themeadj_button_bg_off       envcp_hide     -tint button_symbol_off
---out envcp_bypass                              --images fill -tint themeadj_button_bg_off       envcp_byp      -tint button_symbol_off
---out envcp_mod                                 --images fill -tint themeadj_color_blue          envcp_mod      -tint button_symbol_on
---out envcp_arm                                 --images fill -tint themeadj_color_red           recarm         -tint button_symbol_on
---out envcp_learn                               --images fill -tint themeadj_color_blue          envcp_learn    -tint button_symbol_on
+--out envcp_hide                                --images fill -tint themeadj_button_bg_off      envcp_hide     -tint button_symbol_off
+--out envcp_bypass                              --images fill -tint themeadj_button_bg_off      envcp_byp      -tint button_symbol_off
+--out envcp_mod                                 --images fill -tint themeadj_color_blue         envcp_mod      -tint button_symbol_on
+--out envcp_arm                                 --images fill -tint themeadj_color_red          recarm         -tint button_symbol_on
+--out envcp_learn                               --images fill -tint themeadj_color_blue         envcp_learn    -tint button_symbol_on
 
 # transport
 --out transport_rewind                          --images fill -tint themeadj_button_bg_off     transport_forward -flip-h    -tint button_symbol_off
