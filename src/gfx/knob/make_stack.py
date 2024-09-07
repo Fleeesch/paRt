@@ -449,7 +449,7 @@ class classKnob:
     #   Draw Pie
     # ----------------------------------------
 
-    def draw_pie(self,angle_start:int,angle_end:int,radius:float = 0.5):
+    def draw_pie(self,angle_start:int,angle_end:int,radius:float = 0.5, include_border:bool = False):
 
 
         context = cairo.Context(self.current_sprite)
@@ -459,7 +459,11 @@ class classKnob:
 
         context.set_line_width(0)
 
-        border_size = get_lookup_data(self.lookup["border"],self.scale)
+        if not include_border:
+            border_size = 0
+        else:        
+            border_size = get_lookup_data(self.lookup["border"],self.scale)
+
         radius = (self.size / 2) * radius - border_size
 
         start_radians = math.radians(angle_start)
@@ -622,7 +626,9 @@ def draw_sprite_pie(sprite_count:int, index:int,zoom:str, knob:classKnob,lookup:
 
     angle_step = 360 / (sprite_count - 1)
 
-    knob.draw_pie(data["angle_start"], data["angle"],get_lookup_data(lookup["radius"],zoom))
+    is_border = "is_border" in data and data["is_border"]
+
+    knob.draw_pie(data["angle_start"], data["angle"],get_lookup_data(lookup["radius"],zoom), is_border)
 
     data["angle"] += angle_step
 
@@ -793,7 +799,8 @@ data_send_a = {
     "iterations": 2,
     "sprite_start": 0,
     "sprite_end": 0.495,
-    "freeze_end": True
+    "freeze_end": True,
+    "is_border": True
 }
 
 data_send_b = {
@@ -801,6 +808,7 @@ data_send_b = {
     "iterations": 2,
     "sprite_start": 0.5,
     "sprite_end": 1,
+    "is_border": True
 }
 
 data_send_bg = { "type": KNOBTYPE_FILL, "iterations": 2 }
@@ -826,7 +834,7 @@ data_itemvol_a = {
     "iterations": 2,
     "sprite_start": 0,
     "sprite_end": 0.495,
-    "freeze_end": True
+    "freeze_end": True,
 }
 
 data_itemvol_b = {

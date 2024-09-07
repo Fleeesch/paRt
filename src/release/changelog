@@ -1,3 +1,11 @@
-fixed bug where folder line would display on level 0 in mixer
-moved mixer folder collapse icon to the right side of track
-extended folder line for nested folders
+minor color tuning
+rounded edges for interactive elements
+redesigned button assets with updated symbols and colors
+thinner separator lines
+added optional separator for input source button
+input source button in mixer is now part of the button section
+slimmer and rounder faders
+transparent fader caps
+round end cap for send slots
+updated marker and region colors for better text readability
+Theme Adjuster: fixed typos in control hints

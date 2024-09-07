@@ -2,21 +2,27 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dimmed
-;       Version: 1.1.6
-;       Date: 2024-08-19 21:21:25
+;       Version: 1.1.7
+;       Date: 2024-09-07 19:31:40
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
+
+
+
+
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.1.6' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.7' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
-define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
 define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
+define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 198 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 450 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
@@ -468,13 +474,13 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
                 ; separator icon thickness
                 set VAL_Separator       \
-                    SCALE>=2.5      5   \
-                    SCALE>=2.25     4   \
-                    SCALE>=2        4   \
-                    SCALE>=1.75     3   \
-                    SCALE>=1.5      3   \
-                    SCALE>=1.25     2   \
-                                    2
+                    SCALE>=2.5      3   \
+                    SCALE>=2.25     2   \
+                    SCALE>=2        2   \
+                    SCALE>=1.75     2   \
+                    SCALE>=1.5      2   \
+                    SCALE>=1.25     1   \
+                                    1
 
                 ; insert slot
                 set VAL_insert_slot         \
@@ -572,24 +578,24 @@ define_parameter paRt_end 'paRt end' 0 0 1
                         SCALE>=1.5      [12 0 2 0]  \
                         SCALE>=1.25     [10 0 2 0]  \
                                         [8 0 2 0]   \
-                        SCALE>=2.5      [20 2 6 2]  \
-                        SCALE>=2.25     [18 2 4 2]  \
-                        SCALE>=2        [16 2 3 2]  \
-                        SCALE>=1.75     [14 1 2 1]  \
-                        SCALE>=1.5      [12 1 2 1]  \
-                        SCALE>=1.25     [10 1 2 1]  \
-                                        [8 1 2 1]
+                        SCALE>=2.5      [20 1 6 2]  \
+                        SCALE>=2.25     [18 1 4 2]  \
+                        SCALE>=2        [16 1 3 2]  \
+                        SCALE>=1.75     [14 0 2 1]  \
+                        SCALE>=1.5      [12 0 2 1]  \
+                        SCALE>=1.25     [10 0 2 1]  \
+                                        [8 0 2 1]
 
                 ; fader size
                 ; [mcp_size mcp_offset tcp_size tcp_offset]
                 set VAL_Fader                       \
-                    SCALE>=2.5      [35 5 25 5]     \
-                    SCALE>=2.25     [33 4 24 4]     \
-                    SCALE>=2        [28 4 20 4]     \
-                    SCALE>=1.75     [26 3 19 3]     \
-                    SCALE>=1.5      [21 3 15 3]     \
-                    SCALE>=1.25     [19 2 14 2]     \
-                                    [14 2 10 2]
+                    SCALE>=2.5      [31 5 25 5]     \
+                    SCALE>=2.25     [29 4 22 4]     \
+                    SCALE>=2        [24 4 20 4]     \
+                    SCALE>=1.75     [22 3 18 3]     \
+                    SCALE>=1.5      [19 3 15 3]     \
+                    SCALE>=1.25     [17 2 13 2]     \
+                                    [12 2 10 2]
 
                 ; average button
                 set VAL_Button                  \
@@ -2238,15 +2244,6 @@ set THEME_color_red                         [238 117 117]
                         ?par_mcp_##PARAMETER_SECTION##_settings_label_index==2      \
                             - CUR_y{0} VAL_MCP_Label{0}
 
-                    ; [DRAW] index bg
-                    ; Index Background is currently bypassed
-                    ;set WALTER_ELEMENT##.custom.index_bg                            \
-                    ;    par_mcp_##PARAMETER_SECTION##_settings_label_index==2       \
-                    ;        [CUR_x{0} CUR_y{0} CUR_w{0} VAL_MCP_Label{0} 0 1 1 1]   \
-                    ;        0
-
-                    ;front WALTER_ELEMENT##.custom.index_bg
-
                     ; [DRAW] index
                     set WALTER_ELEMENT##.trackidx                                   \
                         ?par_mcp_##PARAMETER_SECTION##_settings_label_index==2      \
@@ -2278,7 +2275,7 @@ set THEME_color_red                         [238 117 117]
                     ; label position
                     set CUR_y - CUR_y{0} CUR_h{0}
                     set CUR_x   VAL_mcp_x_offset_folder{0}
-                    set CUR_w + VAL_mcp_w_label{0} * 2 VAL_Border{0}
+                    set CUR_w + VAL_mcp_w_label{0} VAL_Border{0}
 
                     ; [DRAW] background
                     MAC_Draw_Box    1 WALTER_ELEMENT "label_bg" VAL_color_master_icon{0} VAL_color_master_icon{1} VAL_color_master_icon{2}  CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 1 1
@@ -2395,8 +2392,9 @@ set THEME_color_red                         [238 117 117]
             ; increment / reset y position
             set CUR_y                                                               \
                 ?VAL_mcp_inserts_on_top{0}                                          \
-                    + CUR_y_inserts{0} CUR_h{0}                                     \
-                    0
+                    + CUR_y_inserts{0} + CUR_h{0} VAL_mcp_spacing_section_y{0}      \
+                    VAL_Pad{0}
+
 
         endmacro
 
@@ -2406,17 +2404,8 @@ set THEME_color_red                         [238 117 117]
         macro MAC_DrawMcp_Recinput SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; y position
-                set CUR_y_recinput          \
-                    CUR_y_next_button{0}
-
-                set CUR_y_recinput                                      \
-                    par_mcp_##PARAMETER_SECTION##_element_width==0      \
-                        ?VAL_mcp_inserts_on_top{0}                      \
-                            + CUR_y{0} VAL_mcp_spacing_section_y{0}     \
-                            + CUR_y{0} VAL_Pad{0}                       \
-                        ?VAL_mcp_inserts_on_top{0}                      \
-                            - CUR_y{0} VAL_Border{0}                    \
-                            CUR_y{0}
+                set CUR_y CUR_y_next_button{0}
+                
 
                 ; height
                 set CUR_h_recinput                                                                                  \
@@ -2427,14 +2416,14 @@ set THEME_color_red                         [238 117 117]
                         0
 
                 ; hiding logic
-                set CUR_y_hide + CUR_y_recinput{0} CUR_h_recinput{0}
+                set CUR_y_hide + CUR_y{0} CUR_h_recinput{0}
 
                 set VAL_mcp_hide_rest                               \
                     par_mcp_##PARAMETER_SECTION##_element_vis&2     \
                         CUR_y_hide{0}>VAL_mcp_y_labelHide{0}        \
                             1
 
-                ; record input
+                ; visibility
                 set VAL_mcp_show_recinput                           \
                     ?VAL_mcp_hide_rest{0}                           \
                         0                                           \
@@ -2442,11 +2431,14 @@ set THEME_color_red                         [238 117 117]
                         1                                           \
                         0
 
+                set VAL_mcp_button_group_count  +   VAL_mcp_button_group_count{0}   VAL_mcp_show_recinput
+                set VAL_mcp_button_count        +   VAL_mcp_button_count{0}         VAL_mcp_show_recinput
+
                 ; width
                 set CUR_W_recinput                                      \
                     ?VAL_mcp_show_recinput{0}                           \
                         par_mcp_##PARAMETER_SECTION##_element_width==1  \
-                            VAL_mcp_w_insert{0}                         \
+                            - VAL_mcp_w_insert{0} * 2 VAL_Pad{0}        \
                             VAL_Button{0}                               \
                         0
 
@@ -2454,53 +2446,52 @@ set THEME_color_red                         [238 117 117]
                 set CUR_x_recinput                               	        \
                     ?VAL_mcp_show_recinput{0}                               \
                         par_mcp_##PARAMETER_SECTION##_element_width==1      \
-                            VAL_mcp_x_insert{0}                             \
+                            + VAL_mcp_x_insert{0} VAL_Pad{0}                \
                             VAL_Mcp_x_button_start{0}                       \
                         0
 
-                ; [DRAW] Input
+                ; [DRAW] RecInput
                 set WALTER_ELEMENT##.recinput                                                               \
                     ?VAL_mcp_show_recinput{0}                                                               \
-                        [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
+                        [CUR_x_recinput{0} CUR_y{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]            \
                         0
-
-                set WALTER_ELEMENT##.recinput                                                               \
-                    ?VAL_mcp_show_recinput{0}                                                               \
-                        [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
-                        0
-
+                
+                ; [DRAW] RecInput Off Background
                 set WALTER_ELEMENT##.custom.recinput_off                                                            \
                     ?VAL_mcp_show_recinput{0}                                                                       \
                         !recarm                                                                                     \
                             par_mcp_##PARAMETER_SECTION##_element_width==1                                          \
-                                [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
+                                [CUR_x_recinput{0} CUR_y{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]            \
                                 0                                                                                   \
                             0                                                                                       \
                         0
-
+                
+                ; [DRAW] RecInput On Background
                 set WALTER_ELEMENT##.custom.recinput_on                                                             \
                     ?VAL_mcp_show_recinput{0}                                                                       \
                         ?recarm                                                                                     \
                             par_mcp_##PARAMETER_SECTION##_element_width==1                                          \
-                                [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
+                                [CUR_x_recinput{0} CUR_y{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]            \
                                 0                                                                                   \
                             0                                                                                       \
                         0
 
+                ; [DRAW] RecInput Off Background (Vertical)
                 set WALTER_ELEMENT##.custom.recinput_vert_off                                                       \
                     ?VAL_mcp_show_recinput{0}                                                                       \
                         !recarm                                                                                     \
                             par_mcp_##PARAMETER_SECTION##_element_width==0                                          \
-                                [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
+                                [CUR_x_recinput{0} CUR_y{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]            \
                                 0                                                                                   \
                             0                                                                                       \
                         0
 
+                ; [DRAW] RecInput On Background (Vertical)
                 set WALTER_ELEMENT##.custom.recinput_vert_on                                                        \
                     ?VAL_mcp_show_recinput{0}                                                                       \
                         ?recarm                                                                                     \
                             par_mcp_##PARAMETER_SECTION##_element_width==0                                          \
-                                [CUR_x_recinput{0} CUR_y_recinput{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]   \
+                                [CUR_x_recinput{0} CUR_y{0} CUR_w_recinput{0} CUR_h_recinput{0} 0 0 0 0]            \
                                 0                                                                                   \
                             0                                                                                       \
                         0
@@ -2513,15 +2504,15 @@ set THEME_color_red                         [238 117 117]
                 front WALTER_ELEMENT##.recinput
 
                 ; increment y position
-                set CUR_y                                                                       \
-                    ?VAL_mcp_show_recinput{0}                                                   \
-                        + CUR_y_recinput{0} +   CUR_h_recinput{0} VAL_mcp_spacing_section_y{0}  \
-                        ?par_mcp_##PARAMETER_SECTION##_element_vis                              \
-                            + CUR_y{0} VAL_mcp_spacing_section_y{0}
+                set CUR_y                                                               \
+                    ?VAL_mcp_show_recinput{0}                                           \
+                        + CUR_y{0} CUR_h_recinput{0}
+                        
+                set CUR_y_next_button                                                   \
+                    ?VAL_mcp_show_recinput{0}                                           \
+                        + CUR_y{0} VAL_mcp_spacing_y{0}
 
-                ; update button placement y position
-                set CUR_y_next_button CUR_y{0}
-
+                        
         endmacro
 
 
@@ -2588,14 +2579,21 @@ set THEME_color_red                         [238 117 117]
                     ; [BUTTON] Record Input
                     MAC_DrawMcp_Recinput SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; separator
+                    MAC_DrawMcp_Buttons_Separator SCALE 2 WALTER_ELEMENT PARAMETER_SECTION
+
                     ; [BUTTON] Record Mode
                     MAC_DrawMcp_Buttons_SingleButton SCALE 4 WALTER_ELEMENT PARAMETER_SECTION "recmode" 1
 
+                    ; label dimensions
+                    set VAL_label_offset * SCALE 4
+                    set VAL_label_w - CUR_w VAL_label_offset
+
                     ; record mode extension icon
-                    set WALTER_ELEMENT##.custom.label_recmode                                                                                                           \
-                        par_mcp_##PARAMETER_SECTION##_element_width==1                                                                                                  \
-                            ?VAL_mcp_show_button_recmode{0}                                                                                                             \
-                                + [WALTER_ELEMENT##.recmode{x} WALTER_ELEMENT##.recmode{y} CUR_w{0} CUR_h{0} 0 0 0 0] + VAL_mcp_spacing_x@w CUR_w@w
+                    set WALTER_ELEMENT##.custom.label_recmode                                                                                                                   \
+                        par_mcp_##PARAMETER_SECTION##_element_width==1                                                                                                          \
+                            ?VAL_mcp_show_button_recmode{0}                                                                                                                     \
+                                + [WALTER_ELEMENT##.recmode{x} WALTER_ELEMENT##.recmode{y} CUR_w{0} CUR_h{0} 0 0 0 0] + VAL_label_offset@x + VAL_mcp_spacing_x@w VAL_label_w@w
 
                     front WALTER_ELEMENT##.custom.label_recmode
                     front WALTER_ELEMENT##.recmode
@@ -2622,10 +2620,10 @@ set THEME_color_red                         [238 117 117]
                     MAC_DrawMcp_Buttons_SingleButton SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "fxin" 1
 
                     ; input fx extension icon
-                    set WALTER_ELEMENT##.custom.label_infx                                                                                                          \
-                        par_mcp_##PARAMETER_SECTION##_element_width==1                                                                                              \
-                            ?VAL_mcp_show_button_fxin{0}                                                                                                            \
-                                + [WALTER_ELEMENT##.fxin{x} WALTER_ELEMENT##.fxin{y} CUR_w{0} CUR_h{0} 0 0 0 0] + VAL_mcp_spacing_x@w CUR_w@w
+                    set WALTER_ELEMENT##.custom.label_infx                                                                                                                  \
+                        par_mcp_##PARAMETER_SECTION##_element_width==1                                                                                                      \
+                            ?VAL_mcp_show_button_fxin{0}                                                                                                                    \
+                                + [WALTER_ELEMENT##.fxin{x} WALTER_ELEMENT##.fxin{y} CUR_w{0} CUR_h{0} 0 0 0 0] + VAL_label_offset@x + VAL_mcp_spacing_x@w VAL_label_w@w
 
                     front WALTER_ELEMENT##.custom.label_infx
                     front WALTER_ELEMENT##.fxin
@@ -2947,7 +2945,7 @@ set THEME_color_red                         [238 117 117]
                                     0                                                   \
                                 0
 
-                        ; separator marker x position
+                        ; separator marker y position
                         set CUR_y_separator                                                                                     \
                             ?par_mcp_gen_element_adj_separator_line                                                             \
                                 ?VAL_mcp_show_separator##INDEX##{0}                                                             \
@@ -4942,6 +4940,9 @@ set THEME_color_red                         [238 117 117]
                             THEME_color_button_text_off
 
                     MAC_DrawTcp_Buttons_SingleButton_Track SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION "recmode"
+                    
+                    ; separator
+                    MAC_DrawTcp_Buttons_Separator SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION
 
                     ; [BUTTON] Record Input
                     set VAL_tcp_button_group_count 0
@@ -5964,10 +5965,10 @@ set THEME_color_red                         [238 117 117]
 ;THEMEBUILDER_INSERT_ZEROLINE
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
-tcp_vol_zeroline 30FFFFFF
-tcp_pan_zeroline 30FFFFFF
-mcp_vol_zeroline 30FFFFFF
-mcp_pan_zeroline 30FFFFFF
+tcp_vol_zeroline 60FFFFFF
+tcp_pan_zeroline 60FFFFFF
+mcp_vol_zeroline 60FFFFFF
+mcp_pan_zeroline 60FFFFFF
 trans_speed_zeroline A0000000
 gen_vol_zeroline 40000000
 gen_pan_zeroline 40000000

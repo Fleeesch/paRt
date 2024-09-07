@@ -1,5 +1,5 @@
 settings:
-  copy_dev_on: False
+  copy_dev_on: True
   copy_dev_info:
     - [
         ["out/dark", 1],
@@ -94,14 +94,14 @@ universal:
     # generic fader
     generic_fader_bg: [62,62,62,0.5]
     generic_fader_border: [0, 0, 0, 0.5]
-    generic_fader_thumb_bg: [205, 205, 205]
+    generic_fader_thumb_bg: [233, 233, 233,0.7]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic fader - dark
     generic_fader_dark_bg: [25,25,25,0.6]
     generic_fader_dark_border: [0, 0, 0, 1]
-    generic_fader_dark_thumb_bg: [141, 141, 141]
+    generic_fader_dark_thumb_bg: [180, 180, 180,0.7]
     generic_fader_dark_thumb_border: [0, 0, 0, 0.7]
     generic_fader_dark_thumb_line: [0, 0, 0, 0]
 
@@ -132,8 +132,8 @@ universal:
     button_border: [0, 0, 0, 0.8]
 
     # button label
-    button_label_bg: [0, 0, 0, 0.2]
-    button_label_text: [255, 255, 255, 0.5]
+    button_label_bg: [0, 0, 0, 0.3]
+    button_label_text: [255, 255, 255, 0.6]
 
     # button symbol
     button_symbol_off: [210, 210, 210, 0.9]
@@ -173,8 +173,8 @@ universal:
 
     # sends
     insert_send_meter: [0, 0, 0, 0.2]
-    insert_send_knob_border: [0, 0, 0, 0.75]
-    insert_send_knob_0: [0, 0, 0, 0.75]
+    insert_send_knob_border: [0, 0, 0, 0]
+    insert_send_knob_0: [20, 20, 20]
     insert_send_knob_1: [215, 178, 99]
     insert_send_knob_2: [255, 255, 255]
 
@@ -217,15 +217,15 @@ universal:
     # faders
     fader_bg: [41, 41, 41]
     fader_border: [0, 0, 0, 0.5]
-    fader_knob_bg: [151, 151, 151]
-    fader_knob_bg_pan: [113, 210, 174]
-    fader_knob_bg_wid: [116, 180, 208]
-    fader_knob_bg_envcp: [141, 141, 141]
-    fader_knob_border: [0, 0, 0, 0.7]
+    fader_knob_bg: [211,211,211,0.7]
+    fader_knob_bg_pan: [139, 255, 212,0.7]
+    fader_knob_bg_wid: [125, 215, 255,0.7]
+    fader_knob_bg_envcp: [200, 200, 200,0.7]
+    fader_knob_border: [0, 0, 0, 0.75]
     fader_knob_line: [0, 0, 0, 0]
 
     # text
-    readout_bg: [0, 0, 0, 0.2]
+    readout_bg: [0, 0, 0, 0.5]
 
     # envcp
     envcp_tailicon: [255, 255, 255, 0.4]
@@ -311,7 +311,7 @@ dimmed:
     # generic fader
     generic_fader_bg: [86,86,86,0.5]
     generic_fader_border: [0, 0, 0, 0.5]
-    generic_fader_thumb_bg: [226, 226, 226]
+    generic_fader_thumb_bg: [246, 246, 246,0.7]
     generic_fader_thumb_border: [0, 0, 0, 0.7]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
@@ -342,8 +342,8 @@ dimmed:
     button_border: [0, 0, 0, 0.7]
 
     # button label
-    button_label_bg: [0, 0, 0, 0.3]
-    button_label_text: [195, 195, 195]
+    button_label_bg: [0, 0, 0, 0.4]
+    button_label_text: [255, 255, 255, 0.6]
 
     # button symbol
     button_symbol_off: [220, 220, 220]
@@ -380,8 +380,8 @@ dimmed:
 
     # sends
     insert_send_meter: [0, 0, 0, 0.15]
-    insert_send_knob_border: [0, 0, 0, 0.5]
-    insert_send_knob_0: [0, 0, 0, 0.75]
+    insert_send_knob_border: [0, 0, 0, 0]
+    insert_send_knob_0: [30, 30, 30]
     insert_send_knob_1: [233, 199, 124]
     insert_send_knob_2: [255, 255, 255]
 
@@ -424,15 +424,15 @@ dimmed:
     # faders
     fader_bg: [75, 75, 75]
     fader_border: [0, 0, 0, 0.5]
-    fader_knob_bg: [187, 187, 187]
-    fader_knob_bg_pan: [142, 221, 191]
-    fader_knob_bg_wid: [130, 204, 237]
-    fader_knob_bg_envcp: [170, 170, 170]
+    fader_knob_bg: [206,206,206,0.7]
+    fader_knob_bg_pan: [113, 243, 194,0.7]
+    fader_knob_bg_wid: [128, 216, 255,0.7]
+    fader_knob_bg_envcp: [196, 196, 196, 0.7]
     fader_knob_border: [0, 0, 0, 0.7]
     fader_knob_line: [0, 0, 0, 0]
 
     # text
-    readout_bg: [0, 0, 0, 0.3]
+    readout_bg: [0, 0, 0, 0.4]
 
     # envcp
     envcp_tailicon: [0, 0, 0, 0.6]
@@ -502,7 +502,7 @@ light:
     gui_scrollbar_window_symbols: [175, 175, 175]
 
     # generic button
-    generic_button_bg_off: [169, 169, 169]
+    generic_button_bg_off: [175, 175, 175]
     generic_button_bg_on: [138, 231, 196]
     generic_button_bg_partial: [199, 199, 199]
     generic_button_symbol_off: [255, 255, 255]
@@ -513,8 +513,8 @@ light:
     # generic fader
     generic_fader_bg: [148,148,148,0.5]
     generic_fader_border: [0, 0, 0, 0.4]
-    generic_fader_thumb_bg: [240, 240, 240]
-    generic_fader_thumb_border: [0, 0, 0, 0.7]
+    generic_fader_thumb_bg: [255, 255, 255,0.7]
+    generic_fader_thumb_border: [0, 0, 0, 0.5]
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic knob
@@ -539,16 +539,16 @@ light:
     transport_rate_fader_knob: [89, 89, 89]
 
     # buttons
-    button_bg_off: [128, 128, 128]
+    button_bg_off: [160, 160, 160]
     button_border: [0, 0, 0, 0.5]
 
     # button label
-    button_label_bg: [0, 0, 0, 0.1]
+    button_label_bg: [0, 0, 0, 0.15]
     button_label_text: [0, 0, 0, 0.8]
 
     # button symbol
     button_symbol_off: [255, 255, 255, 0.95]
-    button_symbol_on: [0, 0, 0, 0.8]
+    button_symbol_on: [0, 0, 0, 0.7]
     button_io_off: [0, 0, 0, 0.2]
 
     # midi inline scrollbar
@@ -580,8 +580,8 @@ light:
 
     # sends
     insert_send_meter: [0, 0, 0, 0.1]
-    insert_send_knob_border: [0, 0, 0, 0.5]
-    insert_send_knob_0: [0, 0, 0, 0.7]
+    insert_send_knob_border: [0, 0, 0, 0]
+    insert_send_knob_0: [75, 75, 75]
     insert_send_knob_1: [241, 208, 138]
     insert_send_knob_2: [255, 255, 255]
 
@@ -622,17 +622,17 @@ light:
     track_index_bg: [0, 0, 0, 0.1]
 
     # faders
-    fader_bg: [139, 139, 139]
+    fader_bg: [170, 170, 170]
     fader_border: [0, 0, 0, 0.4]
-    fader_knob_bg: [220, 220, 220]
-    fader_knob_bg_pan: [176, 239, 215]
-    fader_knob_bg_wid: [155, 209, 223]
-    fader_knob_bg_envcp: [205, 205, 205]
+    fader_knob_bg: [227, 227, 227,0.7]
+    fader_knob_bg_pan: [149, 245, 209,0.7]
+    fader_knob_bg_wid: [151, 215, 244,0.7]
+    fader_knob_bg_envcp: [215, 215, 215,0.7]
     fader_knob_border: [0, 0, 0, 0.6]
     fader_knob_line: [0, 0, 0, 0]
 
     # text
-    readout_bg: [0, 0, 0, 0.1]
+    readout_bg: [0, 0, 0, 0.25]
 
     # envcp
     envcp_tailicon: [0, 0, 0, 0.4]

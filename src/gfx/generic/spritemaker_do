@@ -18,16 +18,16 @@
 --out gen_volbg_horz_dark gen_panbg_horz_dark --rotate 90 --frame frame_fader_bg -rotate 90 -flip-v   --images    fader_bg_fill  -tint generic_fader_dark_bg      fader_bg_border -tint generic_fader_dark_border
 
 # thumb
---out gen_volthumb_vert                     --images    fader_thumb_l_fill      -tint generic_fader_thumb_bg    fader_thumb_l_line  -tint generic_fader_thumb_line      fader_thumb_l_border  -tint generic_fader_thumb_border        frame/frame_fader_l
---out gen_panthumb_vert                     --images    fader_thumb_fill        -tint generic_fader_thumb_bg    fader_thumb_line    -tint generic_fader_thumb_line      fader_thumb_border    -tint generic_fader_thumb_border        frame/frame_fader
---out gen_volthumb_horz     --rotate 270    --images    fader_thumb_l_fill      -flip-v -tint generic_fader_thumb_bg    fader_thumb_l_line  -flip-v -tint generic_fader_thumb_line      fader_thumb_l_border  -flip-v -tint generic_fader_thumb_border        frame/frame_fader_l
---out gen_panthumb_horz     --rotate 270    --images    fader_thumb_fill        -flip-v -tint generic_fader_thumb_bg    fader_thumb_line    -flip-v -tint generic_fader_thumb_line      fader_thumb_border    -flip-v -tint generic_fader_thumb_border        frame/frame_fader     -flip-v 
+--out gen_volthumb_vert                     --images    fader_thumb_l_fill      -tint generic_fader_thumb_bg          fader_thumb_l_border  -tint generic_fader_thumb_border        frame/frame_fader_l
+--out gen_panthumb_vert                     --images    fader_thumb_fill        -tint generic_fader_thumb_bg          fader_thumb_border    -tint generic_fader_thumb_border        frame/frame_fader
+--out gen_volthumb_horz     --rotate 270    --images    fader_thumb_l_fill      -flip-v -tint generic_fader_thumb_bg          fader_thumb_l_border  -flip-v -tint generic_fader_thumb_border        frame/frame_fader_l
+--out gen_panthumb_horz     --rotate 270    --images    fader_thumb_fill        -flip-v -tint generic_fader_thumb_bg          fader_thumb_border    -flip-v -tint generic_fader_thumb_border        frame/frame_fader     -flip-v 
 
 # thumb -dark
---out gen_volthumb_vert_dark                     --images    fader_thumb_l_fill      -tint generic_fader_dark_thumb_bg    fader_thumb_l_line  -tint generic_fader_dark_thumb_line      fader_thumb_l_border  -tint generic_fader_dark_thumb_border        frame/frame_fader_l
---out gen_panthumb_vert_dark                     --images    fader_thumb_fill        -tint generic_fader_dark_thumb_bg    fader_thumb_line    -tint generic_fader_dark_thumb_line      fader_thumb_border    -tint generic_fader_dark_thumb_border        frame/frame_fader
---out gen_volthumb_horz_dark     --rotate 270    --images    fader_thumb_l_fill      -flip-v -tint generic_fader_dark_thumb_bg    fader_thumb_l_line  -flip-v -tint generic_fader_dark_thumb_line      fader_thumb_l_border  -flip-v -tint generic_fader_dark_thumb_border        frame/frame_fader_l
---out gen_panthumb_horz_dark     --rotate 270    --images    fader_thumb_fill        -flip-v -tint generic_fader_dark_thumb_bg    fader_thumb_line    -flip-v -tint generic_fader_dark_thumb_line      fader_thumb_border    -flip-v -tint generic_fader_dark_thumb_border        frame/frame_fader     -flip-v 
+--out gen_volthumb_vert_dark                     --images    fader_thumb_l_fill      -tint generic_fader_dark_thumb_bg          fader_thumb_l_border  -tint generic_fader_dark_thumb_border        frame/frame_fader_l
+--out gen_panthumb_vert_dark                     --images    fader_thumb_fill        -tint generic_fader_dark_thumb_bg          fader_thumb_border    -tint generic_fader_dark_thumb_border        frame/frame_fader
+--out gen_volthumb_horz_dark     --rotate 270    --images    fader_thumb_l_fill      -flip-v -tint generic_fader_dark_thumb_bg          fader_thumb_l_border  -flip-v -tint generic_fader_dark_thumb_border        frame/frame_fader_l
+--out gen_panthumb_horz_dark     --rotate 270    --images    fader_thumb_fill        -flip-v -tint generic_fader_dark_thumb_bg          fader_thumb_border    -flip-v -tint generic_fader_dark_thumb_border        frame/frame_fader     -flip-v 
 
 #       Buttons - Large
 # --------------------------------------
@@ -68,15 +68,17 @@
 --out gen_stereo        --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mono        -tint generic_button_symbol_off            border_small -tint generic_button_border
 --out gen_mute_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mute        -tint generic_button_symbol_off            border_small -tint generic_button_border
 --out gen_solo_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       solo        -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_phase_norm    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       phase       -tint generic_button_symbol_off            border_small -tint generic_button_border
 
 # on state
 --out gen_back_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  forward     -tint generic_button_symbol_on     -flip-h border_small -tint generic_button_border
 --out gen_forward_on    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  forward     -tint generic_button_symbol_on             border_small -tint generic_button_border
 --out gen_mute_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_yellow                mute        -tint generic_button_symbol_on             border_small -tint generic_button_border
 --out gen_solo_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_blue                  solo        -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_phase_inv     --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  phase       -tint generic_button_symbol_on             border_small -tint generic_button_border
 --out gen_midi_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  midi        -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_mono          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  mono        -tint generic_button_symbol_on             border_small -tint generic_button_border
+--out gen_mono          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  mono_on        -tint generic_button_symbol_on             border_small -tint generic_button_border
+
+# phase
+--out gen_phase_norm    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       phase       -tint generic_button_symbol_off -flip-v -alpha 0.25 phase       -tint generic_button_symbol_off            border_small -tint generic_button_border
+--out gen_phase_inv     --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  phase       -tint generic_button_symbol_on -flip-v   phase       -tint generic_button_symbol_on  -alpha 0.25           border_small -tint generic_button_border
 
 --copy-files
