@@ -10,9 +10,9 @@
 --out meter_custom_border  --frame frame    --images border -tint meter_border
 
 # readout
---out meter_custom_readout_bg_vert                      --frame frame --images readout_bg -tint readout_bg
---out meter_custom_readout_bg_horz      --rotate 270    --frame frame --images readout_bg -tint readout_bg
---out meter_custom_readout_bg_horz_flip --rotate 90     --frame frame --images readout_bg -tint readout_bg
+--out meter_custom_readout_bg_vert                      --frame frame_readout --images readout_bg -tint readout_bg
+--out meter_custom_readout_bg_horz      --rotate 270    --frame frame_readout --images readout_bg -tint readout_bg
+--out meter_custom_readout_bg_horz_flip --rotate 90     --frame frame_readout --images readout_bg -tint readout_bg
 
 #       Strip
 # --------------------------------------

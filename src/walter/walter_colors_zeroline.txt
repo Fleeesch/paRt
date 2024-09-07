@@ -1,9 +1,9 @@
 Colors dark
 
-tcp_vol_zeroline 30FFFFFF
-tcp_pan_zeroline 30FFFFFF
-mcp_vol_zeroline 30FFFFFF
-mcp_pan_zeroline 30FFFFFF
+tcp_vol_zeroline 60FFFFFF
+tcp_pan_zeroline 60FFFFFF
+mcp_vol_zeroline 60FFFFFF
+mcp_pan_zeroline 60FFFFFF
 trans_speed_zeroline A0000000
 gen_vol_zeroline 40000000
 gen_pan_zeroline 40000000
@@ -13,10 +13,10 @@ EndColors
 
 Colors dimmed
 
-tcp_vol_zeroline 30FFFFFF
-tcp_pan_zeroline 30FFFFFF
-mcp_vol_zeroline 30FFFFFF
-mcp_pan_zeroline 30FFFFFF
+tcp_vol_zeroline 60FFFFFF
+tcp_pan_zeroline 60FFFFFF
+mcp_vol_zeroline 60FFFFFF
+mcp_pan_zeroline 60FFFFFF
 trans_speed_zeroline A0000000
 gen_vol_zeroline 40000000
 gen_pan_zeroline 40000000
@@ -26,10 +26,10 @@ EndColors
 
 Colors light
 
-tcp_vol_zeroline 30000000
-tcp_pan_zeroline 30000000
-mcp_vol_zeroline 30000000
-mcp_pan_zeroline 30000000
+tcp_vol_zeroline 80000000
+tcp_pan_zeroline 80000000
+mcp_vol_zeroline 80000000
+mcp_pan_zeroline 80000000
 trans_speed_zeroline A0000000
 gen_vol_zeroline 40000000
 gen_pan_zeroline 40000000

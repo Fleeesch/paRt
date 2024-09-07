@@ -25,9 +25,9 @@
 # mixer scrollbar
 --out scrollbar --single-level 100                                                                                                                                                              \
                 --images scrollbar_bg   -tint gui_scrollbar_bg                                                                                                                                  \
-                scrollbar_bars          -tint gui_scrollbar_bar         scrollbar_bars_hover        -tint gui_scrollbar_bar             scrollbar_bars_click        -tint gui_scrollbar_bar     \
+                scrollbar_bars          -tint gui_scrollbar_bar         scrollbar_bars_hover        -tint gui_scrollbar_bar         scrollbar_bars_click        -tint gui_scrollbar_bar         \
                 scrollbar_bars_hover    -tint overlay_hover             scrollbar_bars_click        -tint overlay_click                                                                         \
-                scrollbar_symbols       -tint gui_scrollbar_symbols         scrollbar_symbols_hover     -tint gui_scrollbar_symbols             scrollbar_symbols_click     -tint gui_scrollbar_symbols     \
+                scrollbar_symbols       -tint gui_scrollbar_symbols     scrollbar_symbols_hover     -tint gui_scrollbar_symbols     scrollbar_symbols_click     -tint gui_scrollbar_symbols     \
                 scrollbar_symbols_hover -tint overlay_hover             scrollbar_symbols_click     -tint overlay_click                                                                         \
                 frame/frame_scrollbar
 
@@ -35,12 +35,12 @@
 --copy scrollbar scrollbar_2
 
 # window scrollbar
---out scrollbar_3 --single-level 100                                                                                                                                                                    \
-                --images scrollbar_bg   -tint gui_scrollbar_window_bg                                                                                                                                   \
-                scrollbar_bars          -tint gui_scrollbar_window_bar  scrollbar_bars_hover        -tint gui_scrollbar_window_bar      scrollbar_bars_click        -tint gui_scrollbar_window_bar      \
-                scrollbar_bars_hover    -tint overlay_hover scrollbar_bars_click                    -tint overlay_click                                                                                 \
-                scrollbar_symbols       -tint gui_scrollbar_window_symbols  scrollbar_symbols_hover     -tint gui_scrollbar_window_symbols      scrollbar_symbols_click     -tint gui_scrollbar_window_symbols      \
-                scrollbar_symbols_hover -tint overlay_hover  scrollbar_symbols_click                -tint overlay_click                                                                                 \
+--out scrollbar_3 --single-level 100                                                                                                                                                                            \
+                --images scrollbar_bg   -tint gui_scrollbar_window_bg                                                                                                                                           \
+                scrollbar_bars          -tint gui_scrollbar_window_bar  scrollbar_bars_hover            -tint gui_scrollbar_window_bar          scrollbar_bars_click        -tint gui_scrollbar_window_bar      \
+                scrollbar_bars_hover    -tint overlay_hover scrollbar_bars_click                        -tint overlay_click                                                                                     \
+                scrollbar_symbols       -tint gui_scrollbar_window_symbols  scrollbar_symbols_hover     -tint gui_scrollbar_window_symbols      scrollbar_symbols_click     -tint gui_scrollbar_window_symbols  \
+                scrollbar_symbols_hover -tint overlay_hover  scrollbar_symbols_click                    -tint overlay_click                                                                                     \
                 frame/frame_scrollbar            
 
 --copy-files

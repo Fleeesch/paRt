@@ -33,8 +33,8 @@
 --out midi_inline_fold_custom_view                                          --single-level 100  --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue            inline_dunno            -tint item_button_symbol_on             border -tint item_border
 
 # Scrollbar
---out midi_inline_scrollbar                 --fill midi_inline_scrollbar_bg 10 10
---out midi_inline_scrollthumb               --fill midi_inline_scrollbar_thumb 10 10
+--out midi_inline_scrollbar                 --fill midi_inline_scrollbar_bg     10 10
+--out midi_inline_scrollthumb               --fill midi_inline_scrollbar_thumb  10 10
 
 #       MIDI Inline - HDPI
 # --------------------------------------
