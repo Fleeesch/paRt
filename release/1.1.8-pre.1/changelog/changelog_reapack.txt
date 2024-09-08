@@ -1,0 +1,2 @@
+@changelog
+  - darker meter borders

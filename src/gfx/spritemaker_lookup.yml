@@ -198,7 +198,7 @@ universal:
 
     # meter
     meter_bg: [44, 44, 44]
-    meter_border: [0, 0, 0, 0.5]
+    meter_border: [0, 0, 0, 0.75]
 
     # vu
     vu_normal: [75, 197, 133]
@@ -405,7 +405,7 @@ dimmed:
 
     # meter
     meter_bg: [63, 63, 63]
-    meter_border: [0, 0, 0, 0.4]
+    meter_border: [0, 0, 0, 0.65]
 
     # vu
     vu_normal: [100, 205, 150]
@@ -605,7 +605,7 @@ light:
 
     # meter
     meter_bg: [93, 93, 93]
-    meter_border: [0, 0, 0, 0.5]
+    meter_border: [0, 0, 0, 0.60]
 
     # vu
     vu_normal: [141, 225, 181]
