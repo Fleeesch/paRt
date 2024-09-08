@@ -1,0 +1,2 @@
+@changelog
+  - fixed bug: faulty fader cap border offset at 225%, 250%
