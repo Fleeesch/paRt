@@ -2,8 +2,8 @@
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: v1.1.8-pre.2
-;       Date: 2024-09-08 23:00:15
+;       Version: 1.1.8-pre.2
+;       Date: 2024-09-08 23:15:13
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
@@ -17,7 +17,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme vv1.1.8-pre.2' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.8-pre.2' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
