@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme vv1.1.8-pre.2' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.8' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -28,8 +28,8 @@ define_parameter par_colors_track_track_bg_select_tone 'Colors - Track - Track B
 define_parameter par_colors_track_track_bg_tint 'Colors - Track - Track Background Select' 0 0 1000
 define_parameter par_colors_track_track_bg_tone 'Colors - Track - Track Background Tone' 500 0 1000
 define_parameter par_colors_track_track_colorbar_intensity 'Colors - Track - Track Colorbar Intensity' 260 0 1000
-define_parameter par_colors_track_track_index_tone_mcp 'Colors - Track - Track Label Index Tone MCP' 210 0 1000
-define_parameter par_colors_track_track_index_tone_tcp 'Colors - Track - Track Label Index Tone TCP' 360 0 1000
+define_parameter par_colors_track_track_index_tone_mcp 'Colors - Track - Track Label Index Tone MCP' 190 0 1000
+define_parameter par_colors_track_track_index_tone_tcp 'Colors - Track - Track Label Index Tone TCP' 470 0 1000
 define_parameter par_colors_track_track_label_bg_tint 'Colors - Track - Track Label Background Tint' 0 0 1000
 define_parameter par_colors_track_track_label_bg_tone 'Colors - Track - Track Label Background Tone' 484 0 1000
 define_parameter par_colors_track_track_label_select_tint 'Colors - Track - Track Label Selection Tint' 0 0 1000
@@ -43,7 +43,7 @@ define_parameter par_mcp_gen_element_adj_spacing_section_x 'MCP - Track - Elemen
 define_parameter par_mcp_gen_element_adj_spacing_section_y 'MCP - Track - Element Adjustments Spacing Section Y' 185 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_x 'MCP - Track - Element Adjustments Spacing X' 82 0 1000
 define_parameter par_mcp_gen_element_adj_spacing_y 'MCP - Track - Element Adjustments Spacing Y' 31 0 1000
-define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 1 0 2
+define_parameter par_mcp_gen_folder_icon_folder 'MCP - General - Folder Icon Parent' 2 0 2
 define_parameter par_mcp_gen_folder_indent 'MCP - General - Folder Indent' 0 0 1000
 define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padding Last' 161 0 1000
 define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 160 0 1000
@@ -133,7 +133,7 @@ define_parameter par_tcp_gen_element_adj_spacing_section_y 'TCP - General - Elem
 define_parameter par_tcp_gen_element_adj_spacing_x 'TCP - General - Element Adjustment Spacing X' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_x_fader 'TCP - General - Element Adjustment Spacing X Fader' 0 0 1000
 define_parameter par_tcp_gen_element_adj_spacing_y_fader 'TCP - General - Element Adjustment Spacing Y Fader' 0 0 1000
-define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 1 0 2
+define_parameter par_tcp_gen_folder_icon_collapse 'TCP - General - Folder Collapse' 2 0 2
 define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 1
 define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 330 0 1000
 define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 447 0 1000

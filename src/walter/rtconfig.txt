@@ -4,6 +4,8 @@
 
 
 
+
+
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -5396,23 +5398,27 @@
                     1                                           \
                     0
 
-            ; show in icon lane
-            set VAL_envcp_lanedisplay                                   \
-                ?VAL_envcp_use_icon_lane{0}                             \
-                    par_tcp_##PARAMETER_SECTION##_value_mode==3         \
-                        1                                               \
-                        0                                               \
-                    0
+            ; minimal width
+            set VAL_envcp_fader_min_w                               \
+                !par_tcp_##PARAMETER_SECTION##_value_vertical       \
+                    * SCALE 40                                      \
+                    * SCALE 25
 
-            ; force inline when there's no icon lane
-            set VAL_envcp_fader_inline                              \
-                !VAL_envcp_lanedisplay{0}                           \
+            ; show in icon lane
+            set VAL_envcp_lanedisplay                               \
+                ?VAL_envcp_use_icon_lane{0}                         \
                     par_tcp_##PARAMETER_SECTION##_value_mode==3     \
-                        1
+                        1                                           \
+                        0                                           \
+                    0
 
             ; visibility
             set VAL_envcp_show_fader                                \
                 !VAL_tcp_compact{0}                                 \
+                    par_tcp_##PARAMETER_SECTION##_value_mode==3     \
+                        tcp_iconsize>VAL_envcp_fader_min_w{0}       \
+                            1                                       \
+                            0                                       \
                     par_tcp_##PARAMETER_SECTION##_value_mode>0      \
                         1                                           \
                         0                                           \
