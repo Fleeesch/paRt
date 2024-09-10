@@ -55,7 +55,7 @@ KNOB_LOOKUP_MCP = {
         "175": 1,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
         "100": 1.0
@@ -77,7 +77,7 @@ KNOB_LOOKUP_TCP = {
         "100": 0.25
     },
     "line_range": {
-        "100": 0.9
+        "100": 0.9,
     },
     "line_sizes": {
         "100": 3,
@@ -95,7 +95,7 @@ KNOB_LOOKUP_TCP = {
         "175": 1,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
         "100": 1.0
@@ -131,7 +131,7 @@ KNOB_LOOKUP_SEND_MCP = {
         "175": 1,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
         "100": 0.85,
@@ -176,7 +176,7 @@ KNOB_LOOKUP_FX_MCP = {
         "175": 1,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
         "100": 0.85,
@@ -215,7 +215,7 @@ KNOB_LOOKUP_ITEM = {
         "175": 2,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
         "100": 0.93333
@@ -245,8 +245,17 @@ KNOB_LOOKUP_TRANSPORT = {
     "line_offset": {
         "100": 0.25
     },
+    "line_range": {
+        "100": 1
+    },
     "line_sizes": {
         "100": 1,
+        "125": 1,
+        "150": 2,
+        "175": 2,
+        "200": 3,
+        "225": 3,
+        "250": 3,
     },
     "border": {
         "100": 1,
@@ -255,10 +264,10 @@ KNOB_LOOKUP_TRANSPORT = {
         "175": 1,
         "200": 2,
         "225": 2,
-        "250": 3,
+        "250": 2,
     },
     "radius": {
-        "100": 0.75
+        "100": 0.8
     },
 
 }
@@ -854,8 +863,8 @@ create_spritesheet(KNOB_LOOKUP_ITEM,"./ats/stack_item_fill_b", data_itemvol_b)
 
 data_trans_inner = { "type": KNOBTYPE_FILL, "is_border": True }
 data_trans_border = { "type": KNOBTYPE_BORDER}
-data_trans_line = { "type": KNOBTYPE_STROKE }
-data_trans_line_border = { "type": KNOBTYPE_STROKE, "is_border": True }
+data_trans_line = { "type": KNOBTYPE_LINE }
+data_trans_line_border = { "type": KNOBTYPE_LINE, "is_border": True }
 
 create_spritesheet(KNOB_LOOKUP_TRANSPORT,"./ats/stack_trans_bg", data_trans_inner)
 create_spritesheet(KNOB_LOOKUP_TRANSPORT,"./ats/stack_trans_border", data_trans_border)

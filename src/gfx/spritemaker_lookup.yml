@@ -106,7 +106,7 @@ universal:
     generic_fader_dark_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [255,255,255,0.5]
+    generic_knob_bg: [210,210,210,0.75]
     generic_knob_border: [0, 0, 0, 0.7]
 
     # folder buttons
@@ -121,11 +121,11 @@ universal:
     transport_bank_button_off: [40, 40, 40]
     transport_bank_logo: [255, 255, 255, 0.75]
     transport_bank_menu: [255, 255, 255, 0.5]
-    transport_rate_knob_bg: [84, 84, 84]
-    transport_rate_knob_line: [245, 245, 245]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_bg: [180,180,180]
+    transport_rate_knob_line: [0,0,0]
+    transport_rate_knob_line_border: [0, 0, 0,0]
     transport_rate_fader_bg: [84, 84, 84]
-    transport_rate_fader_knob: [175, 175, 175]
+    transport_rate_fader_knob: [210,210,210]
 
     # buttons
     button_bg_off: [50, 50, 50]
@@ -316,7 +316,7 @@ dimmed:
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [255,255,255,0.7]
+    generic_knob_bg: [220,220,220,0.75]
     generic_knob_border: [0, 0, 0, 0.6]
 
     # folder buttons
@@ -331,11 +331,11 @@ dimmed:
     transport_bank_button_off: [58, 58, 58]
     transport_bank_logo: [255, 255, 255, 0.75]
     transport_bank_menu: [255, 255, 255, 0.5]
-    transport_rate_knob_bg: [116, 116, 116]
-    transport_rate_knob_line: [255, 255, 255]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_bg: [180, 180, 180]
+    transport_rate_knob_line: [0,0,0]
+    transport_rate_knob_line_border: [0, 0, 0,0]
     transport_rate_fader_bg: [116, 116, 116]
-    transport_rate_fader_knob: [199, 199, 199]
+    transport_rate_fader_knob: [220,220,220]
 
     # buttons
     button_bg_off: [72, 72, 72]
@@ -435,7 +435,7 @@ dimmed:
     readout_bg: [0, 0, 0, 0.4]
 
     # envcp
-    envcp_tailicon: [0, 0, 0, 0.6]
+    envcp_tailicon: [255, 255, 255, 0.4]
 
     # borders
     border_bg: [0, 0, 0, 0.7]
@@ -518,7 +518,7 @@ light:
     generic_fader_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [211, 211, 211,0.5]
+    generic_knob_bg: [230,230,230,0.75]
     generic_knob_border: [0, 0, 0, 0.5]
 
     # folder buttons
@@ -533,10 +533,11 @@ light:
     transport_bank_button_off: [148, 148, 148]
     transport_bank_logo: [0, 0, 0, 0.75]
     transport_bank_menu: [0, 0, 0, 0.5]
-    transport_rate_knob_bg: [144, 144, 144]
+    transport_rate_knob_bg: [220,220,220]
     transport_rate_knob_line: [0, 0, 0]
+    transport_rate_knob_line_border: [0, 0, 0,0]
     transport_rate_fader_bg: [144, 144, 144]
-    transport_rate_fader_knob: [89, 89, 89]
+    transport_rate_fader_knob: [240,240,240]
 
     # buttons
     button_bg_off: [160, 160, 160]

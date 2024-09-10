@@ -2,9 +2,11 @@
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: 1.1.8
-;       Date: 2024-09-10 10:33:44
+;       Version: 1.1.9
+;       Date: 2024-09-10 21:07:17
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
 
 
 
@@ -19,7 +21,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.1.8' 0 0 0
+define_parameter part_version 'paRt Theme v1.1.9' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
@@ -4004,6 +4006,7 @@ set THEME_color_red                         [234 154 154]
             MAC_DrawEnvcp_Fader                 SCALE "envcp" "envcp"
             MAC_DrawEnvcp_Buttons               SCALE "envcp" "envcp"
             MAC_DrawEnvcp_Label                 SCALE "envcp" "envcp"
+            MAC_DrawEnvcp_Folder                SCALE "envcp" "envcp"
             MAC_DrawEnvcp_Font                  SCALE "envcp" "envcp"
 
             ; master
@@ -5339,9 +5342,9 @@ set THEME_color_red                         [234 154 154]
                         [CUR_x{0} CUR_y{0} VAL_Button_Folder{0} VAL_Button_Folder{0} 0 1 0 1]
 
             ; y position of line
-            set CUR_y_line                                      \
-                par_tcp_gen_folder_icon_collapse==2             \
-                    - 0 VAL_Pad{0}                              \
+            set CUR_y_line                              \
+                par_tcp_gen_folder_icon_collapse==2     \
+                    - 0 * 2 VAL_Pad{0}                  \
                     + CUR_y VAL_Pad{0}
 
             ; x position of line
@@ -5505,6 +5508,7 @@ set THEME_color_red                         [234 154 154]
             custom WALTER_ELEMENT##.custom.iconlane_select      "" "" "" "tcp_iconbgsel"
             custom WALTER_ELEMENT##.custom.fader_frame          "" "" "" "track_custom_fader_frame"
             custom WALTER_ELEMENT##.custom.fader_knob_frame     "" "" "" "track_custom_knob_border"
+            custom WALTER_ELEMENT##.custom.folder_child         "" "" "" "track_custom_tcp_folder_child"
 
             ; height detection
             set VAL_Envcp_h_level   \
@@ -5933,6 +5937,52 @@ set THEME_color_red                         [234 154 154]
             front WALTER_ELEMENT##.value
 
         endmacro
+
+    ;   ## Draw : ENVCP : Folder
+    ; -----------------------------------------------------------------
+
+        macro MAC_DrawEnvcp_Folder SCALE WALTER_ELEMENT PARAMETER_SECTION
+
+            ; position setup
+            set CUR_w   VAL_Button_Folder{0}
+            set CUR_x   - VAL_tcp_x_offset{0} CUR_w{0}
+
+            ; y position of line
+            set CUR_y_line      - 0 * 2 VAL_Pad{0}
+                
+            ; x position of line
+            set CUR_x_line                                  \
+                par_tcp_gen_folder_icon_collapse==2         \
+                    + CUR_x * 0.5 VAL_Button_Folder{0}      \
+                    + CUR_x * 0.4 VAL_Button_Folder{0}
+            
+            ; line width
+            set CUR_w_line                                  \
+                par_tcp_gen_folder_icon_collapse==1         \
+                    - CUR_w * 0.6 VAL_Button_Folder{0}      \
+                    - CUR_w * 0.5 VAL_Button_Folder{0}
+            
+            ; line height
+            set CUR_h_line  + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}
+                
+            ; [DRAW] child track line
+            set WALTER_ELEMENT##.custom.folder_child                                                \
+                par_tcp_gen_folder_icon_collapse==2                                                 \
+                    ?VAL_tcp_h_level{0}                                                             \
+                        folderdepth>0                                                               \
+                            folderstate>=0                                                          \
+                                [CUR_x_line{0} CUR_y_line{0} CUR_w_line{0} CUR_h_line{0} 0 0 0 1]   \
+                                0                                                                   \
+                            0                                                                       \
+                        0                                                                           \
+                    0
+            
+            ; update z order
+            front WALTER_ELEMENT##.custom.folder_child
+
+
+        endmacro
+
 
     ;   ## Draw : ENVCP : Font
     ; -----------------------------------------------------------------
