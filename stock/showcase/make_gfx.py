@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 import os
 import shutil
 import re
@@ -44,6 +44,56 @@ def change_alpha(image, alpha_level):
     new_image = Image.merge('RGBA', (r, g, b, a))
     
     return new_image
+
+
+#   Function : Fill Image with Color
+# --------------------------------------------------
+
+def fill_image(img, color):
+    
+    # fill image with solid color
+    if color is not None:
+        color = color[:3]
+        color_img = Image.new("RGB", img.size, color)
+        color_img.putalpha(img.getchannel('A'))
+        return color_img
+
+    return img
+
+#   Function : Adjust Image Alpha
+# --------------------------------------------------
+
+def adjust_image_alpha(img, alpha):
+
+    r, g, b, a = img.split()
+    new_alpha = a.point(lambda i: i * alpha)
+    return Image.merge("RGBA", (r, g, b, new_alpha))
+
+#   Function : Add Drop Shadow to an Image
+# --------------------------------------------------
+
+def add_shadow(input_path, output_path, offset=(0, 4), shadow_color=(0, 0, 0, 200), blur_radius=4):
+    
+    # Load the original image
+    original = Image.open(input_path).convert("RGBA")
+    
+    # extended size
+    new_size = (original.width + abs(offset[0]) + blur_radius*4, 
+                original.height + abs(offset[1]) + blur_radius*4)
+
+    # shadow
+    shadow = Image.new("RGBA",new_size)
+    shadow.paste(original,(offset[0] + blur_radius*2,offset[1] + blur_radius*2),original)
+    shadow = shadow.filter(ImageFilter.GaussianBlur(blur_radius))
+    shadow = fill_image(shadow,shadow_color)
+    shadow = adjust_image_alpha(shadow,shadow_color[3] / 255)
+
+    # output image
+    output = Image.new("RGBA", new_size)
+    output.paste(shadow,(0,0),shadow)
+    output.paste(original,(blur_radius*2,blur_radius*2),original)
+
+    output.save(output_path, format="PNG")
 
 #   Function : Trim Screenshots
 # --------------------------------------------------
@@ -147,7 +197,48 @@ def create_board_thumb(sshot,out_name,label,FitScreenshot=True):
     if not os.path.exists(out_path):
         os.makedirs(out_path)
 
-    sprite.save(os.path.join(out_path, out_name))
+    out_filename = os.path.join(out_path, out_name)
+    sprite.save(out_filename)
+    add_shadow(out_filename,out_filename)
+
+#   Function : Create large Board Thumbnail
+# --------------------------------------------------
+
+def create_board_thumb_large(sshot,out_name):
+    
+    # resizing
+    img_sshot = Image.open(sshot).convert("RGBA")
+
+    aspect_ratio = img_sshot.height / img_sshot.width
+    new_width = 700
+    new_height = int(new_width * aspect_ratio)
+    img_sshot = img_sshot.resize((new_width, new_height), Image.LANCZOS)
+    
+    # rounded mask
+    size_factor = 10
+    mask = Image.new("L", (img_sshot.width*size_factor,img_sshot.height*size_factor), 0)
+    draw = ImageDraw.Draw(mask)
+    corner_radius = 5*size_factor
+    draw.rounded_rectangle([0, 0, mask.size[0], mask.size[1]], radius=corner_radius, fill=255)    
+    mask = mask.resize((img_sshot.width, img_sshot.height), Image.LANCZOS)
+
+    # setup sprite
+    sprite = Image.new('RGBA', img_sshot.size)
+    sprite.paste(img_sshot, (0, 0), mask)
+
+    # output
+    out_name = out_name.replace("part_","part_bb_")
+    
+    out_path = output_folder + "/bb"
+
+    if not os.path.exists(out_path):
+        os.makedirs(out_path)
+
+    out_filename = os.path.join(out_path, out_name)
+    
+    sprite.save(out_filename)
+
+    add_shadow(out_filename,out_filename)
 
 
 #   Function : Create Web Thumbnail
@@ -219,6 +310,9 @@ def create_graphics():
             create_board_thumb(f"{sshot_out_folder}/{file_name}",f"{file_name}",label,True)
             create_web_thumb(f"{sshot_out_folder}/{file_name}",f"{file_name}",True)
 
+            if "dimmed" in file_name and "res" in file_name and "fhd" in file_name:
+                create_board_thumb_large(f"{sshot_out_folder}/{file_name}","part_preview.png")
+
         # dpi images
         if "part_dpi" in file_name:
             label = "-"
@@ -229,6 +323,7 @@ def create_graphics():
             
             create_board_thumb(f"{sshot_out_folder}/{file_name}",f"{file_name}",label,False)
             create_web_thumb(f"{sshot_out_folder}/{file_name}",f"{file_name}",False)
+
 
 #   Main Process
 # --------------------------------------------------
@@ -293,4 +388,11 @@ img_thumb_border = change_alpha(img_thumb_border,border_alpha)
 # create all the graphics
 printProgressStart("Creating Graphics")
 create_graphics()
+
+# theme adjuster
+add_shadow("res/theme_adj.png","out/theme_adj.png")
+
+# logo
+add_shadow("res/banner_logo.png","out/banner_logo.png")
+
 printProgressEnd()
