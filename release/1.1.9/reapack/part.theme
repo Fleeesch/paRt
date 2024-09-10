@@ -1,0 +1,48 @@
+@version 1.1.9
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+
+  ## Features
+  * 3 Theme files covering different brightness levels
+  * Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Covers all Reaper V7 elements
+  * Custom Theme Adjuster
+  * 200+ parameters for customization
+  * synchronization of all parmeters accross paRt theme files through the Theme Adjuster
+  * Parameter bank support for changing settings on the fly
+  * Save and load parameter settings to setting files
+@changelog
+  - minor TCP folder line tweaks
+  - added folder line support for ENVCP lanes
+  - changed dimmed ENVCP symbol to a light one
+  - fixed barely readable ReaSamplOmatic5000 knobs
+  - reworked Playrate knob assets
+  - fixed Playrate fader knob offset at various zoom levels
+  - Theme Adjuster: minor color tweaks
+  - Theme Adjuster: slimmer faders

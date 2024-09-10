@@ -25,7 +25,7 @@
 # --------------------------------------
 
 # transport
---out knob_stack    knob_stack_1    knob_stack_2       --images stack_trans_line_border -tint transport_rate_knob_line_border     stack_trans_line -tint transport_rate_knob_line
+--out knob_stack       --mask-template stack_trans_bg --images stack_trans_line_border -mask -tint transport_rate_knob_line_border     stack_trans_line -mask -tint transport_rate_knob_line
 
 # mcp
 --out mcp_vol_knob_stack        --mask-template stack_mcp_mask_inner --images    stack_mcp_line_border          -mask -tint knob_line_border      stack_mcp_line       -tint knob_line
