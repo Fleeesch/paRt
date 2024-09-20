@@ -219,7 +219,7 @@ def print_done_str():
 
     GREEN = '\033[92m'
     END = '\033[0m'
-    print(f"{GREEN}{"done"}{END}")
+    print(f'{GREEN}{"done"}{END}')
 
 
 # ------------------------------------------------------------------
@@ -707,10 +707,10 @@ def apply_pink_frame(args, sprite_sheet, zoom):
 
         # paths
         frame_paths = [
-            f"{os.getcwd()}/ats/frame/{frame_args[0]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/ats/frame/{frame_args[0]["n"]}.png",
-            f"{os.getcwd()}/frame/{frame_args[0]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/frame/{frame_args[0]["n"]}.png",
+            f'{os.getcwd()}/ats/frame/{frame_args[0]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/ats/frame/{frame_args[0]["n"]}.png',
+            f'{os.getcwd()}/frame/{frame_args[0]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/frame/{frame_args[0]["n"]}.png',
         ]
 
         # add pink lines
@@ -765,17 +765,17 @@ def apply_pink_frame(args, sprite_sheet, zoom):
 
         # paths
         frame_a_paths = [
-            f"{os.getcwd()}/ats/frame/{frame_args[0]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/ats/frame/{frame_args[0]["n"]}.png",
-            f"{os.getcwd()}/ats/{frame_args[0]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/ats/{frame_args[0]["n"]}.png",
+            f'{os.getcwd()}/ats/frame/{frame_args[0]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/ats/frame/{frame_args[0]["n"]}.png',
+            f'{os.getcwd()}/ats/{frame_args[0]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/ats/{frame_args[0]["n"]}.png',
         ]
 
         frame_b_paths = [
-            f"{os.getcwd()}/ats/frame/{frame_args[1]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/ats/frame/{frame_args[1]["n"]}.png",
-            f"{os.getcwd()}/ats/{frame_args[1]["n"]}_{zoom}.png",
-            f"{os.getcwd()}/ats/{frame_args[1]["n"]}.png",
+            f'{os.getcwd()}/ats/frame/{frame_args[1]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/ats/frame/{frame_args[1]["n"]}.png',
+            f'{os.getcwd()}/ats/{frame_args[1]["n"]}_{zoom}.png',
+            f'{os.getcwd()}/ats/{frame_args[1]["n"]}.png',
         ]
 
         # path check
@@ -847,10 +847,10 @@ def get_toolbar_icon(image, theme, zoom):
 
     # prioritized lookup list
     path_lookup = {
-        f"{os.getcwd()}/ats/ico/{theme}/v3/{zoom}/{image["n"]}.png",
-        f"{os.getcwd()}/ats/ico/{theme}/v6/{zoom}/{image["n"]}.png",
-        f"{os.getcwd()}/ico/{theme}/v3/{zoom}/{image["n"]}.png",
-        f"{os.getcwd()}/ico/{theme}/v6/{zoom}/{image["n"]}.png",
+        f'{os.getcwd()}/ats/ico/{theme}/v3/{zoom}/{image["n"]}.png',
+        f'{os.getcwd()}/ats/ico/{theme}/v6/{zoom}/{image["n"]}.png',
+        f'{os.getcwd()}/ico/{theme}/v3/{zoom}/{image["n"]}.png',
+        f'{os.getcwd()}/ico/{theme}/v6/{zoom}/{image["n"]}.png',
     }
 
     # return path and type on success
@@ -858,7 +858,7 @@ def get_toolbar_icon(image, theme, zoom):
         if os.path.isfile(path):
             return path
 
-    raise FileExistsError(f"Couldn't find assets for {image["n"]}")
+    raise FileExistsError(f"Couldn't find assets for {image['n']}")
 
 # ------------------------------------------------------------------
 #   Method : Get Image
@@ -868,10 +868,10 @@ def get_image(image, theme, zoom):
 
     # prioritized lookup list
     path_lookup = {
-        f"{os.getcwd()}/ats/{theme}/{image["n"]}_{zoom}.png",
-        f"{os.getcwd()}/ats/{image["n"]}_{zoom}.png",
-        f"{os.getcwd()}/ats/{theme}/{image["n"]}.png",
-        f"{os.getcwd()}/ats/{image["n"]}.png"
+        f'{os.getcwd()}/ats/{theme}/{image["n"]}_{zoom}.png',
+        f'{os.getcwd()}/ats/{image["n"]}_{zoom}.png',
+        f'{os.getcwd()}/ats/{theme}/{image["n"]}.png',
+        f'{os.getcwd()}/ats/{image["n"]}.png'
     }
 
     # return path and type on success
@@ -879,7 +879,7 @@ def get_image(image, theme, zoom):
         if os.path.isfile(path):
             return path
 
-    raise FileExistsError(f"Couldn't find assets for {image["n"]}")
+    raise FileExistsError(f"Couldn't find assets for {image['n']}")
 
 
 # ------------------------------------------------------------------
@@ -1004,12 +1004,12 @@ def create_dummy(args):
     for theme in themes:
         img = Image.new('RGBA', (1, 1), (0, 0, 0, 0))
 
-        output_path = f"{os.getcwd()}/out/{theme}"
+        output_path = f'{os.getcwd()}/out/{theme}'
 
         os.makedirs(output_path, exist_ok=True)
 
         for out_file in args["out"]:
-            img.save(f"{output_path}/{out_file["n"]}.png")
+            img.save(f'{output_path}/{out_file["n"]}.png')
 
     print_done_str()
 
@@ -1040,12 +1040,12 @@ def create_fill(args):
             
         img = Image.new('RGBA', (w, h), (r, g, b, a))
 
-        output_path = f"{os.getcwd()}/out/{theme}"
+        output_path = f'{os.getcwd()}/out/{theme}'
 
         os.makedirs(output_path, exist_ok=True)
 
         for out_file in args["out"]:
-            img.save(f"{output_path}/{out_file["n"]}.png")
+            img.save(f'{output_path}/{out_file["n"]}.png')
 
     print_done_str()
 
@@ -1189,14 +1189,14 @@ def create_sprite(args):
 
             # output
             if zoom == 100 or "single-level" in args:
-                output_path = f"{os.getcwd()}/out/{theme}"
+                output_path = f'{os.getcwd()}/out/{theme}'
             else:
-                output_path = f"{os.getcwd()}/out/{theme}/{zoom}"
+                output_path = f'{os.getcwd()}/out/{theme}/{zoom}'
 
             os.makedirs(output_path, exist_ok=True)
 
             for out_file in args["out"]:
-                spritesheet.save(f"{output_path}/{out_file["n"]}.png")
+                spritesheet.save(f'{output_path}/{out_file["n"]}.png')
 
     print_done_str()
 
@@ -1212,24 +1212,24 @@ def copy_toolbar_icons():
 
         for zoom in zoom_levels:
 
-            print_creation_str(None,f"Copying v3 toolbar icons for {theme} - {zoom}...")
+            print_creation_str(None,f'Copying v3 toolbar icons for {theme} - {zoom}...')
 
-            ico_path = f"{os.getcwd()}/ats/ico/{theme}/v3/{zoom}/"
+            ico_path = f'{os.getcwd()}/ats/ico/{theme}/v3/{zoom}/'
 
             # skip if path not extists
             if not os.path.exists(ico_path):
 
-                ico_path = f"{os.getcwd()}/ico/{theme}/v3/{zoom}/"
+                ico_path = f'{os.getcwd()}/ico/{theme}/v3/{zoom}/'
 
                 if not os.path.exists(ico_path):
-                    print_error_str(f"Missing folder for v3 - {zoom} - {theme} icons")
+                    print_error_str(f'Missing folder for v3 - {zoom} - {theme} icons')
                     continue
 
             # destination path
-            dest_path = f"{os.getcwd()}/out/{theme}/"
+            dest_path = f'{os.getcwd()}/out/{theme}/'
 
             if zoom != 100:
-                dest_path += f"{zoom}/"
+                dest_path += f'{zoom}/'
 
             # handle pngs
             for filename in os.listdir(ico_path):
@@ -1271,7 +1271,7 @@ def copy_toolbar_icons():
 
 def copy_image(args):
 
-    print_creation_str(None,f"Copying {args["copy"][0]["n"]}...")
+    print_creation_str(None,f'Copying {args["copy"][0]["n"]}...')
 
     for theme in themes:
 
@@ -1294,7 +1294,7 @@ def copy_image(args):
 
                 # copy file of source is available
                 if os.path.isfile(filepath):
-                    outpath = f"{path}/{image["n"]}.png"
+                    outpath = f'{path}/{image["n"]}.png'
 
                     img = Image.open(filepath)
 
@@ -1381,7 +1381,7 @@ def copy_files_to(path_from, use_recursion, path_to):
 def process_folder(args):
 
     for folder_entry in args["folder"]:
-        file_path = f"{folder_entry["n"]}"
+        file_path = f'{folder_entry["n"]}'
         file_path_abs = f"{file_path}/{spritemaker_file}"
 
         # check if spritemaker file exists
@@ -1413,7 +1413,7 @@ def process_folder(args):
                     current_statement = ""
                             
         else:
-            print_error_str(f"Couldn't find '{spritemaker_file}' file in {folder_entry["n"]}")
+            print_error_str(f"Couldn't find '{spritemaker_file}' file in {folder_entry['n']}")
 
 
 # ------------------------------------------------------------------
