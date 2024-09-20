@@ -8,6 +8,8 @@
 
 
 
+
+
 ;THEMEBUILDER_INSERT_PARAMETERS
 
 ; ====================================================================================================================================
@@ -307,13 +309,13 @@
 
                 ; vertical label margins
                 set VAL_Margin_Label_vertical           \
-                        SCALE>=2.5      [5 10 5 10]     \
-                        SCALE>=2.25     [5 9 5 9]       \
-                        SCALE>=2        [4 8 4 8]       \
-                        SCALE>=1.75     [4 7 4 7]       \
-                        SCALE>=1.5      [3 6 3 6]       \
-                        SCALE>=1.25     [3 5 3 5]       \
-                                        [2 4 2 4]
+                        SCALE>=2.5      [1 10 1 10]     \
+                        SCALE>=2.25     [1 9 1 9]       \
+                        SCALE>=2        [1 8 1 8]       \
+                        SCALE>=1.75     [1 7 1 7]       \
+                        SCALE>=1.5      [1 6 1 6]       \
+                        SCALE>=1.25     [1 5 1 5]       \
+                                        [1 4 1 4]
 
                 ; transport time section label margins
                 set VAL_Margin_Label_Trans_Time     \
@@ -367,13 +369,13 @@
                 ; fader size
                 ; [mcp_size mcp_offset tcp_size tcp_offset]
                 set VAL_Fader                       \
-                    SCALE>=2.5      [31 5 25 5]     \
-                    SCALE>=2.25     [29 4 22 4]     \
-                    SCALE>=2        [24 4 20 4]     \
-                    SCALE>=1.75     [22 3 18 3]     \
-                    SCALE>=1.5      [19 3 15 3]     \
-                    SCALE>=1.25     [17 2 13 2]     \
-                                    [12 2 10 2]
+                    SCALE>=2.5      [31 7 25 5]     \
+                    SCALE>=2.25     [29 6 22 4]     \
+                    SCALE>=2        [24 6 20 4]     \
+                    SCALE>=1.75     [22 6 18 3]     \
+                    SCALE>=1.5      [19 4 15 3]     \
+                    SCALE>=1.25     [17 3 13 2]     \
+                                    [12 3 10 2]
 
                 ; average button
                 set VAL_Button                  \
@@ -3297,7 +3299,7 @@
             set CUR_h_section                                                                                                                   \
                 ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                           \
                     + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_fader_pan_height  \
-                    + CUR_h_section_min{0} * SCALE                      * 2                     par_mcp_##PARAMETER_SECTION##_fader_pan_height
+                    + CUR_h_section_min{0} * SCALE                      * 0.25                  par_mcp_##PARAMETER_SECTION##_fader_pan_height
 
             set CUR_y_post_pan + CUR_y{0} + CUR_h_section{0} * 2 VAL_mcp_spacing_fader_y{0}
 

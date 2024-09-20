@@ -98,4 +98,19 @@
 --out item_pooled_on_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool      -tint item_button_symbol_on       border -tint item_border
 --out item_props_on_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info      -tint item_button_symbol_on       border -tint item_border
 
+#       Ranking
+# --------------------------------------
+
+--out item_rank                 --single-level 100 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_gray    rank_neutral    -tint item_button_symbol_on      rank_border -tint item_border
+--out item_rank_up              --single-level 100 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_yellow  rank_up         -tint item_button_symbol_on      rank_border -tint item_border
+--out item_rank_down            --single-level 100 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_red     rank_down       -tint item_button_symbol_on      rank_border -tint item_border
+
+#       Ranking - HDPI
+# --------------------------------------
+
+--out item_rank_hidpi           --single-level 200 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_gray    rank_neutral    -tint item_button_symbol_on      rank_border -tint item_border
+--out item_rank_up_hidpi        --single-level 200 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_yellow  rank_up         -tint item_button_symbol_on      rank_border -tint item_border
+--out item_rank_down_hidpi      --single-level 200 --spritesheet --button --images rank_bg -alpha $alpha_item_button_bg -tint color_red     rank_down       -tint item_button_symbol_on      rank_border -tint item_border
+
+
 --copy-files
