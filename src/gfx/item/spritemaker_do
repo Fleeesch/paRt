@@ -66,7 +66,7 @@
 --out item_props            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
 
 # On State
---out item_mute_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           mute      -tint item_button_symbol_on       border -tint item_border
+--out item_mute_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute      -tint item_button_symbol_on       border -tint item_border
 --out item_env_on           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
 --out item_fx_on            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
 --out item_group_sel        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border
@@ -89,7 +89,7 @@
 --out item_props_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
 
 # On State
---out item_mute_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           mute      -tint item_button_symbol_on       border -tint item_border
+--out item_mute_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute      -tint item_button_symbol_on       border -tint item_border
 --out item_env_on_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
 --out item_fx_on_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
 --out item_group_sel_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border

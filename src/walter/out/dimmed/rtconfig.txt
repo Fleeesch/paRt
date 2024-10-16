@@ -2,9 +2,11 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dimmed
-;       Version: 1.2.0
-;       Date: 2024-09-20 12:44:00
+;       Version: 1.2.1
+;       Date: 2024-10-16 13:40:09
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
 
 
 
@@ -23,12 +25,12 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.0' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.1' 0 0 0
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 0 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 670 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 150 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 500 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 198 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 450 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
@@ -2607,23 +2609,11 @@ set THEME_color_red                         [238 117 117]
                     ; separator
                     MAC_DrawMcp_Buttons_Separator SCALE 4 WALTER_ELEMENT PARAMETER_SECTION
 
-                    ; [BUTTON] Record Arm / Record Monitor
-                    set CUR_Linebreak                                   \
-                        par_mcp_##PARAMETER_SECTION##_element_width==0  \
-                            1                                           \
-                            0
-
-                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 8 16
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 8 WALTER_ELEMENT PARAMETER_SECTION "recarm" CUR_Linebreak
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "recmon" 1
-
-                    ; separator
-                    MAC_DrawMcp_Buttons_Separator SCALE 16 WALTER_ELEMENT PARAMETER_SECTION
 
                     ; [BUTTON] Input FX
                     set CUR_w VAL_Button{0}
 
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "fxin" 1
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 8 WALTER_ELEMENT PARAMETER_SECTION "fxin" 1
 
                     ; input fx extension icon
                     set WALTER_ELEMENT##.custom.label_infx                                                                                                                  \
@@ -2645,34 +2635,13 @@ set THEME_color_red                         [238 117 117]
                             VAL_button{0}                                       \
                             CUR_w_2{0}
 
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "fx" 1
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "fx" 1
 
                     ; [BUTTON] FX Bypass
                     MAC_DrawMcp_Buttons_FxBypass SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                     ; separator
-                    MAC_DrawMcp_Buttons_Separator SCALE 64 WALTER_ELEMENT PARAMETER_SECTION
-
-                    ; [BUTTON] Envelope
-                    set CUR_H VAL_Button{1}
-
-                    set CUR_w                                               \
-                        par_mcp_##PARAMETER_SECTION##_element_width==0      \
-                            VAL_button{0}                                   \
-                            CUR_w_2{0}
-
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 128 WALTER_ELEMENT PARAMETER_SECTION "env" 1
-
-                    set WALTER_ELEMENT##.custom.env_icon                                                                \
-                        ?VAL_mcp_show_button_env{0}                                                                     \
-                            par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
-                                [WALTER_ELEMENT##.env{0} WALTER_ELEMENT##.env{1} VAL_Button{0} VAL_Button{1} 0 0 0 0]   \
-                                0                                                                                       \
-                            0
-
-                    front WALTER_ELEMENT##.custom.env_icon
-
-                    MAC_DrawMcp_Buttons_Separator SCALE 128 WALTER_ELEMENT PARAMETER_SECTION
+                    MAC_DrawMcp_Buttons_Separator SCALE 16 WALTER_ELEMENT PARAMETER_SECTION
 
                     ; [BUTTON] IO / Phase
 
@@ -2683,10 +2652,10 @@ set THEME_color_red                         [238 117 117]
                             1                                           \
                             0
 
-                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 256 512
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 256 WALTER_ELEMENT PARAMETER_SECTION "io" CUR_Linebreak
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 512 WALTER_ELEMENT PARAMETER_SECTION "phase" 1
-                    MAC_DrawMcp_Buttons_Separator SCALE 512 WALTER_ELEMENT PARAMETER_SECTION
+                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 32 64
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "io" CUR_Linebreak
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "phase" 1
+                    MAC_DrawMcp_Buttons_Separator SCALE 64 WALTER_ELEMENT PARAMETER_SECTION
 
                     ; [BUTTON] Mute / Solo
                     set CUR_W VAL_Button{0}
@@ -2695,11 +2664,44 @@ set THEME_color_red                         [238 117 117]
                             1                                               \
                             0
 
-                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 1024 2048
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION "mute" CUR_Linebreak
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 2048 WALTER_ELEMENT PARAMETER_SECTION "solo" 1
+                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 128 256
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 128 WALTER_ELEMENT PARAMETER_SECTION "mute" CUR_Linebreak
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 256 WALTER_ELEMENT PARAMETER_SECTION "solo" 1
 
+                    ; separator
+                    MAC_DrawMcp_Buttons_Separator SCALE 256 WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; [BUTTON] Record Arm / Record Monitor
+                    set CUR_Linebreak                                   \
+                        par_mcp_##PARAMETER_SECTION##_element_width==0  \
+                            1                                           \
+                            0
+
+                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 512 1024
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 512 WALTER_ELEMENT PARAMETER_SECTION "recarm" CUR_Linebreak
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION "recmon" 1
+
+                    ; separator
+                    MAC_DrawMcp_Buttons_Separator SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION
+
+                    ; [BUTTON] Envelope
+                    set CUR_H VAL_Button{1}
+
+                    set CUR_w                                               \
+                        par_mcp_##PARAMETER_SECTION##_element_width==0      \
+                            VAL_button{0}                                   \
+                            CUR_w_2{0}
+
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 2048 WALTER_ELEMENT PARAMETER_SECTION "env" 1
+
+                    set WALTER_ELEMENT##.custom.env_icon                                                                \
+                        ?VAL_mcp_show_button_env{0}                                                                     \
+                            par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
+                                [WALTER_ELEMENT##.env{0} WALTER_ELEMENT##.env{1} VAL_Button{0} VAL_Button{1} 0 0 0 0]   \
+                                0                                                                                       \
+                            0
+
+                    front WALTER_ELEMENT##.custom.env_icon
 
                     ; [SHARED] Close
                     MAC_DrawMcp_Buttons_Close SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -2734,28 +2736,6 @@ set THEME_color_red                         [238 117 117]
                     ; separator
                     MAC_DrawMcp_Buttons_Separator SCALE 2 WALTER_ELEMENT PARAMETER_SECTION
 
-                    ; [BUTTON] Envelope
-                    set CUR_H VAL_Button{1}
-
-                    set CUR_w                                               \
-                        par_mcp_##PARAMETER_SECTION##_element_width==0      \
-                            VAL_button{0}                                   \
-                            CUR_w_2{0}
-
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 4 WALTER_ELEMENT PARAMETER_SECTION "env" 1
-
-                    set WALTER_ELEMENT##.custom.env_icon                                                                \
-                        ?VAL_mcp_show_button_env{0}                                                                     \
-                            par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
-                                [WALTER_ELEMENT##.env{0} WALTER_ELEMENT##.env{1} VAL_Button{0} VAL_Button{1} 0 0 0 0]   \
-                                0                                                                                       \
-                            0
-
-                    front WALTER_ELEMENT##.custom.env_icon
-
-                    ; separator
-                    MAC_DrawMcp_Buttons_Separator SCALE 4 WALTER_ELEMENT PARAMETER_SECTION
-
 
                     ; [BUTTON] IO / Mono
 
@@ -2766,12 +2746,12 @@ set THEME_color_red                         [238 117 117]
                             1                                               \
                             0
 
-                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 8 16
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 8 WALTER_ELEMENT PARAMETER_SECTION "io" CUR_Linebreak
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "mono" 1
+                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 4 8
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 4 WALTER_ELEMENT PARAMETER_SECTION "io" CUR_Linebreak
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 8 WALTER_ELEMENT PARAMETER_SECTION "mono" 1
 
                     ; separator
-                    MAC_DrawMcp_Buttons_Separator SCALE 16 WALTER_ELEMENT PARAMETER_SECTION
+                    MAC_DrawMcp_Buttons_Separator SCALE 8 WALTER_ELEMENT PARAMETER_SECTION
 
                     ; [BUTTON] Mute / Solo
                     set CUR_W VAL_Button{0}
@@ -2780,9 +2760,31 @@ set THEME_color_red                         [238 117 117]
                             1                                               \
                             0
 
-                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 32 64
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "mute" CUR_Linebreak
-                    MAC_DrawMcp_Buttons_SingleButton SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "solo" 1
+                    MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION 16 32
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "mute" CUR_Linebreak
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "solo" 1
+                    
+                    ; separator
+                    MAC_DrawMcp_Buttons_Separator SCALE 32 WALTER_ELEMENT PARAMETER_SECTION
+
+                    ; [BUTTON] Envelope
+                    set CUR_H VAL_Button{1}
+
+                    set CUR_w                                               \
+                        par_mcp_##PARAMETER_SECTION##_element_width==0      \
+                            VAL_button{0}                                   \
+                            CUR_w_2{0}
+
+                    MAC_DrawMcp_Buttons_SingleButton SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "env" 1
+
+                    set WALTER_ELEMENT##.custom.env_icon                                                                \
+                        ?VAL_mcp_show_button_env{0}                                                                     \
+                            par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
+                                [WALTER_ELEMENT##.env{0} WALTER_ELEMENT##.env{1} VAL_Button{0} VAL_Button{1} 0 0 0 0]   \
+                                0                                                                                       \
+                            0
+
+                    front WALTER_ELEMENT##.custom.env_icon
 
                     ; [SHARED] Close
                     MAC_DrawMcp_Buttons_Close SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -4899,8 +4901,8 @@ set THEME_color_red                         [238 117 117]
                     ; [BUTTON] Mute / Solo
                     set VAL_tcp_button_group_count 0
 
-                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "mute"
-                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "solo"
+                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "solo"
+                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "mute"
 
                     ; separator
                     MAC_DrawTcp_Buttons_Separator SCALE 32 WALTER_ELEMENT PARAMETER_SECTION
@@ -4908,8 +4910,8 @@ set THEME_color_red                         [238 117 117]
                     ; [BUTTON] IO / Phase
                     set VAL_tcp_button_group_count 0
 
-                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "io"
-                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 128 WALTER_ELEMENT PARAMETER_SECTION "phase"
+                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 64 WALTER_ELEMENT PARAMETER_SECTION "phase"
+                    MAC_DrawTcp_Buttons_SingleButton_Track SCALE 128 WALTER_ELEMENT PARAMETER_SECTION "io"
 
                     ; separator
                     MAC_DrawTcp_Buttons_Separator SCALE 128 WALTER_ELEMENT PARAMETER_SECTION
@@ -4948,9 +4950,6 @@ set THEME_color_red                         [238 117 117]
 
                     MAC_DrawTcp_Buttons_SingleButton_Track SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION "recmode"
                     
-                    ; separator
-                    MAC_DrawTcp_Buttons_Separator SCALE 1024 WALTER_ELEMENT PARAMETER_SECTION
-
                     ; [BUTTON] Record Input
                     set VAL_tcp_button_group_count 0
 
@@ -5023,8 +5022,8 @@ set THEME_color_red                         [238 117 117]
                     ; [BUTTON] IO / Mono
                     set VAL_tcp_button_group_count 0
 
-                    MAC_DrawTcp_Buttons_SingleButton_master SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "io"
-                    MAC_DrawTcp_Buttons_SingleButton_master SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "mono"
+                    MAC_DrawTcp_Buttons_SingleButton_master SCALE 16 WALTER_ELEMENT PARAMETER_SECTION "mono"
+                    MAC_DrawTcp_Buttons_SingleButton_master SCALE 32 WALTER_ELEMENT PARAMETER_SECTION "io"
 
                     ; separator
                     MAC_DrawTcp_Buttons_Separator SCALE 32 WALTER_ELEMENT PARAMETER_SECTION

@@ -1,5 +1,5 @@
-added custom item ranking assets
-larger margins for vertical mixer labels (less letter clipping)
-corrected fader x-offset in MCP
-fixed pan height calculation bug when pan is placed in bottom section
-fixed pan / width fader thumb offset in mixer at 225%
+reorganized button layouts for more consistency across TCP / MCP
+changed color of solo-elements to yellow
+added orange color for mute-elements
+Theme Adjuster: scaling is now quantized to zoom factors supported by the paRt theme files
+Theme Adjuster: added space between element groups in visibility matrix

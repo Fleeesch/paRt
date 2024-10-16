@@ -56,9 +56,9 @@
 # --------------------------------------
 
 --out   meter_automute      --images  infobar -tint color_red
---out   meter_mute          --images  infobar -tint color_yellow
---out   meter_foldermute    --images  infobar -tint color_yellow -alpha 0.5
---out   meter_unsolo        --images  infobar -tint color_blue
---out   meter_solodim       --images  infobar -tint color_blue -alpha 0.75
+--out   meter_mute          --images  infobar -tint color_orange
+--out   meter_foldermute    --images  infobar -tint color_orange -alpha 0.5
+--out   meter_unsolo        --images  infobar -tint color_yellow
+--out   meter_solodim       --images  infobar -tint color_yellow -alpha 0.75
 
 --copy-files

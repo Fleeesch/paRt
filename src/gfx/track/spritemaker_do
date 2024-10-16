@@ -39,8 +39,8 @@
 --out track_stereo              --spritesheet --button --frame frame -fit --images bg           -tint button_bg_off       mono          -tint button_symbol_off     border_round    -tint button_border
 
 # track buttons - on
---out track_mute_on             --spritesheet --button --frame frame -fit --images bg           -tint color_yellow        mute          -tint button_symbol_on      border_round    -tint button_border
---out track_solo_on             --spritesheet --button --frame frame -fit --images bg           -tint color_blue          solo          -tint button_symbol_on      border_round    -tint button_border
+--out track_mute_on             --spritesheet --button --frame frame -fit --images bg           -tint color_orange        mute          -tint button_symbol_on      border_round    -tint button_border
+--out track_solo_on             --spritesheet --button --frame frame -fit --images bg           -tint color_yellow        solo          -tint button_symbol_on      border_round    -tint button_border
 --out track_recarm_on           --spritesheet --button --frame frame -fit --images bg_circle    -tint color_red           recarm        -tint button_symbol_on      border_circle   -tint button_border
 --out track_recarm_auto_on      --spritesheet --button --frame frame -fit --images bg_circle    -tint color_red           recauto       -tint button_symbol_on      border_circle   -tint button_border
 --out track_mono                --spritesheet --button --frame frame -fit --images bg           -tint color_cyan          mono_on       -tint button_symbol_on      border_round    -tint button_border
