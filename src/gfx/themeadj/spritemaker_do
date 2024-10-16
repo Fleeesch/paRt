@@ -17,18 +17,18 @@
 
 
 # track
---out track_mute                                --images fill -tint themeadj_color_yellow mute                  -tint button_symbol_on
---out track_solo                                --images fill -tint themeadj_color_blue solo                    -tint button_symbol_on
---out track_env                                 --images fill -tint themeadj_color_gray env                     -tint button_symbol_on
---out track_fx                                  --images fill -tint themeadj_button_bg_off fx                   -tint button_symbol_off
---out track_infx                                --images fill -tint themeadj_button_bg_off fx_in                -tint button_symbol_off
---out track_phase                               --images fill -tint themeadj_button_bg_off phase                -tint button_symbol_off
---out track_input                               --images fill -tint themeadj_color_red recinput                 -tint button_symbol_on
---out track_recarm                              --images fill -tint themeadj_color_red recarm                   -tint button_symbol_on
---out track_recmode     --mask-template inner   --images fill -tint themeadj_button_bg_off recmode -mask        -tint button_symbol_off
---out track_monitor                             --images fill -tint themeadj_button_bg_off monitor              -tint button_symbol_off
---out track_mono                                --images fill -tint themeadj_button_bg_off mono                 -tint button_symbol_off
---out track_io          --mask-template inner   --images fill -tint themeadj_button_bg_off io_1 -mask           -tint color_cyan io_0 -mask -tint themeadj_color_yellow io_2 -mask -tint themeadj_color_red
+--out track_mute                                --images fill -tint themeadj_color_orange       mute            -tint button_symbol_on
+--out track_solo                                --images fill -tint themeadj_color_yellow       solo            -tint button_symbol_on
+--out track_env                                 --images fill -tint themeadj_color_gray         env             -tint button_symbol_on
+--out track_fx                                  --images fill -tint themeadj_button_bg_off      fx              -tint button_symbol_off
+--out track_infx                                --images fill -tint themeadj_button_bg_off      fx_in           -tint button_symbol_off
+--out track_phase                               --images fill -tint themeadj_button_bg_off      phase           -tint button_symbol_off
+--out track_input                               --images fill -tint themeadj_color_red          recinput        -tint button_symbol_on
+--out track_recarm                              --images fill -tint themeadj_color_red          recarm          -tint button_symbol_on
+--out track_recmode     --mask-template inner   --images fill -tint themeadj_button_bg_off      recmode -mask   -tint button_symbol_off
+--out track_monitor                             --images fill -tint themeadj_button_bg_off      monitor         -tint button_symbol_off
+--out track_mono                                --images fill -tint themeadj_button_bg_off      mono            -tint button_symbol_off
+--out track_io          --mask-template inner   --images fill -tint themeadj_button_bg_off      io_1 -mask      -tint color_cyan io_0 -mask -tint themeadj_color_yellow io_2 -mask -tint themeadj_color_red
 
 # envcp
 --out envcp_hide                                --images fill -tint themeadj_button_bg_off      envcp_hide     -tint button_symbol_off
