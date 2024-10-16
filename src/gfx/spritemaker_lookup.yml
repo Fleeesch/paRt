@@ -41,6 +41,7 @@ universal:
     color_cyan: [113, 210, 174]
     color_blue: [116, 180, 208]
     color_red: [210, 101, 101]
+    color_orange: [210, 132, 101]
     color_yellow: [215, 178, 99]
     color_violet: [139, 112, 199]
     color_gray: [151, 151, 151]
@@ -54,6 +55,7 @@ universal:
     themeadj_color_gray: [165, 165, 165]
     themeadj_color_red: [160, 70, 70]
     themeadj_color_yellow: [218, 181, 102]
+    themeadj_color_orange: [210, 132, 101]
     themeadj_color_blue: [110, 177, 206]
 
     # toolbar
@@ -257,6 +259,7 @@ dimmed:
     color_cyan: [142, 221, 191]
     color_blue: [130, 204, 237]
     color_red: [238, 117, 117]
+    color_orange: [238,150,117]
     color_yellow: [233, 199, 124]
     color_violet: [171, 146, 227]
     color_gray: [194, 194, 194]
@@ -270,6 +273,7 @@ dimmed:
     themeadj_color_gray: [175, 175, 175]
     themeadj_color_red: [200, 80, 80]
     themeadj_color_yellow: [228, 191, 122]
+    themeadj_color_orange: [238,150,117]
     themeadj_color_blue: [110, 187, 226]
 
     # toolbar
@@ -462,6 +466,7 @@ light:
     color_cyan: [156, 235, 205]
     color_blue: [155, 209, 233]
     color_red: [234, 154, 154]
+    color_orange: [234,179,154]
     color_yellow: [241, 208, 138]
     color_violet: [177, 160, 215]
     color_gray: [185, 185, 185]
@@ -475,6 +480,7 @@ light:
     themeadj_color_gray: [160, 160, 160]
     themeadj_color_red: [220, 96, 96]
     themeadj_color_yellow: [238, 191, 102]
+    themeadj_color_orange: [234,179,154]
     themeadj_color_blue: [120, 187, 226]
 
     # toolbar

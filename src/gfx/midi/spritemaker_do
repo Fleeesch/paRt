@@ -17,8 +17,8 @@
 --out table_locked_on           --spritesheet --button --images bg -tint color_violet               lock        -tint generic_button_symbol_on
 --out table_target_on           --spritesheet --button --images bg -tint generic_button_bg_on       cursor      -tint generic_button_symbol_on
 --out table_visible_on          --spritesheet --button --images bg -tint generic_button_bg_on       visible     -tint generic_button_symbol_on
---out table_mute_on             --spritesheet --button --images bg -tint color_yellow               mute        -tint generic_button_symbol_on
---out table_solo_on             --spritesheet --button --images bg -tint color_blue                 solo        -tint generic_button_symbol_on
+--out table_mute_on             --spritesheet --button --images bg -tint color_orange               mute        -tint generic_button_symbol_on
+--out table_solo_on             --spritesheet --button --images bg -tint color_yellow               solo        -tint generic_button_symbol_on
 --out table_recarm_on           --spritesheet --button --images bg -tint color_red                  arm         -tint generic_button_symbol_on
 --out table_remove_on           --spritesheet --button --images bg -tint generic_button_bg_on       remove      -tint generic_button_symbol_on
 
