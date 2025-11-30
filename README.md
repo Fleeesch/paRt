@@ -1,25 +1,15 @@
-# paRT - plain adapting Reaper theme
+# paRt - plain adapting Reaper theme
 
-A custom Reaper theme with a strong focus on functionality.
-
-## Features
-
-- Support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
-- 3 Theme files covering different brightness levels
-- Support for all Reaper V7 assets
-- Custom Theme Adjuster
-    - 200+ parameters to adjust colors, TCP, MCP, ENVCP
-    - Banking of parameters selectively toggle between differen settings
-    - Save and recall settings
-    - Synchronization of parameter settings between theme files
+A custom Reaper theme with a heavy focus on functionality.
+  
+* 3 theme variants with different brightness levels and parameter synchronization
+* Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+* Complete coverage of all Reaper V7 UI elements
+* Custom Theme Adjuster with extensive configuration options
 
 ## Requirements
 
-- Reaper 7.0+ (7.17 recommended)
-- js_ReaScriptAPI
-
-### js_ReaScriptAPI
-This extension is used for file-dialog. Saving and loading external user setting files is disabled in the Theme Adjuster when the js_ReaScriptAPI is missing
+- Reaper 7.0+ (7.55 recommended)
 
 ## Installation
 
