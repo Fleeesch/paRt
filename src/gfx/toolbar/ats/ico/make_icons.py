@@ -22,9 +22,15 @@ zoom_levels = (100,125,150,175,200,225, 250)
 themes = ("dark", "dimmed", "light")
 versions = ("v3", "v6")
 
+path_original = "original"
+path_custom = "custom"
+
 # hover modulation
 hover_brightness=1.2
 hover_contrast=0.8
+
+# tcp icon alpha per sprite
+tcp_sheet_alpha = [0.3,0.5,0.75]
 
 # resize filter
 resize_filter=Image.BILINEAR
@@ -176,8 +182,8 @@ sprite_size_lookup={
 }
 
 color_filter_lookup={
-    "record_button_off":((126,58,42),0.75,0),    
-    "record_button_on": ((187,37,0),0.75,0),
+    #"record_button_off":((126,58,42),0.75,0),    
+    #"record_button_on": ((187,37,0),0.75,0),
     "red": ((163,82,109),0.1,0),
     "recarm": ((134,60,43),0.1,0.9),
     "solo_yellow": ((191,191,0),0.5,0),
@@ -217,6 +223,11 @@ sprite_on=[
     "*ripple_one.png"
 ]
 
+# tcp empty area sprites
+sprite_tcp_empty_area=[
+    "toolbar_add_insert.png",
+]
+
 # v3 buttons
 sprite_v3=[
     "*v3*"
@@ -233,7 +244,10 @@ sprite_use_last=[
 # remove original border
 sprite_border_remove=[
     "toolbar_midi_mode_*",
-    "toolbar_ex_tempo_match_*"
+    "toolbar_ex_tempo_match_*",
+    "toolbar_ripple_one_*",
+    "toolbar_ripple_all_*",
+    "toolbar_playtime*"
 ]
 
 # clear dummy bitmap
@@ -386,6 +400,9 @@ def create_spritesheet(theme,filename,base_sprite):
     # init spritesheet
     spritesheet = Image.new("RGBA", (base_sprite.width*3,base_sprite.height), (0, 0, 0, 0))
 
+    # for sprites that act as an overlay instead of button
+    spritesheet_tcp_empty = False
+
     filter="red"
     base_colors = [pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_on")]
 
@@ -398,6 +415,9 @@ def create_spritesheet(theme,filename,base_sprite):
     if pattern_match(filename,sprite_v3):
         base_colors = [pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_on")]
 
+    if pattern_match(filename,sprite_tcp_empty_area):
+        spritesheet_tcp_empty = True
+
     if pattern_match(filename,filter_color):
         filter="color"
 
@@ -408,18 +428,16 @@ def create_spritesheet(theme,filename,base_sprite):
     if pattern_match(filename,filter_envelope):
         filter="env"
 
-
     if pattern_match(filename,filter_rec):
         filter="rec"
 
     if pattern_match(filename,filter_rec_off):
-         filter="rec_off"
+         filter="red"
          base_colors = [pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off")]
 
     if pattern_match(filename,filter_rec_on):
-         filter="rec_on"
-         base_colors = [pick_color(theme,"toolbar_button_symbol_on"),pick_color(theme,"toolbar_button_symbol_on"),pick_color(theme,"toolbar_button_symbol_on")]
-
+         filter="red"
+         base_colors = [pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off"),pick_color(theme,"toolbar_button_symbol_off")]
 
     # color overlay
     color_img = None
@@ -429,7 +447,6 @@ def create_spritesheet(theme,filename,base_sprite):
     # record icon
     if filter=="rec_off" :
         sprite_filter, sprite_rest = color_filter(base_sprite,color_filter_lookup["record_button_off"][0],color_filter_lookup["record_button_off"][1],color_filter_lookup["record_button_off"][2])
-        sprite_filter = tint_image(sprite_filter,pick_color(theme, "color_red"))
         
         sprites[0] = combine_images(sprite_filter,tint_image(sprite_rest,base_colors[0]))
         sprites[1] = combine_images(sprite_filter,tint_image(sprite_rest,base_colors[1]))
@@ -552,10 +569,31 @@ def create_spritesheet(theme,filename,base_sprite):
         sprites[1] = combine_images(sprite_colors, tint_image(sprite_rest,base_colors[1]))
         sprites[2] = combine_images(sprite_colors, tint_image(sprite_rest,base_colors[2]))
 
+    # alpha modifier factor
+    alpha_mod = [1.0] * len(sprites)
+
+    # tcp track icon
+    if spritesheet_tcp_empty:
+            
+            color_folder = pick_color(theme, "folder_symbol")
+
+            # colorize
+            sprites[0] = tint_image(sprites[0],color_folder)
+            sprites[1] = tint_image(sprites[1],color_folder)
+            sprites[2] = tint_image(sprites[2],color_folder)
+
+            # alpha pattern
+            alpha_mod[0] = tcp_sheet_alpha[0]
+            alpha_mod[1] = tcp_sheet_alpha[1]
+            alpha_mod[2] = tcp_sheet_alpha[2]
+        
+    
+
     # alpha modifier
     for idx, sprite in enumerate(sprites):        
-        sprites[idx] = adjust_image_alpha(sprite, base_colors[idx][3]/255 )
+        sprites[idx] = adjust_image_alpha(sprite, (base_colors[idx][3]*alpha_mod[idx])/255 )
 
+    
     # construct spritesheet
     pos_1 = (0,0)
     pos_2 = (base_sprite.width,0)
@@ -773,7 +811,7 @@ def colorize_image(img, theme, tint):
 #           Method : Create Icons
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def create_icons(theme,zoom,version):
+def create_icons(theme,zoom,version, source_path):
 
     # base zoom level
     source_zoom = 100
@@ -784,7 +822,7 @@ def create_icons(theme,zoom,version):
         source_zoom = 200
 
     # get source path
-    org_path = f"{os.getcwd()}/original/{version}/{source_zoom}/*.png"
+    org_path = f"{os.getcwd()}/{source_path}/{version}/{source_zoom}/*.png"
 
     # go through original bitmaps
     for org_file in glob.glob(org_path):
@@ -878,7 +916,8 @@ for theme in themes:
             if not os.path.exists(path):
                 os.makedirs(path)
 
-            create_icons(theme,zoom,version)
+            create_icons(theme,zoom,version,path_original)
+            create_icons(theme,zoom,version,path_custom)
 
         if print_group_message:
             print("done")

@@ -12,8 +12,9 @@
 --out table_mcp_fader_layout_vert               --images fadermode_vert                                         -tint themeadj_table_icon
 --out table_mcp_fader_layout_horz               --images fadermode_spread                                       -tint themeadj_table_icon
 --out table_tcp_fader_layout_inline             --images fadermode_horz                                         -tint themeadj_table_icon
---out table_tcp_fader_layout_separate           --images fadermode_stacked                                      -tint themeadj_table_icon
 --out table_tcp_fader_layout_explode            --images fadermode_spread                                       -tint themeadj_table_icon
+--out table_tcp_fader_layout_separate           --images fadermode_multivert                                    -tint themeadj_table_icon
+
 
 
 # track
@@ -49,3 +50,6 @@
 --out transport_bpm                             --images fill -tint themeadj_button_bg_off     transport_bpm                -tint button_symbol_off
 --out transport_status                          --images fill -tint themeadj_button_bg_off     transport_status             -tint button_symbol_off
 --out transport_selection                       --images fill -tint themeadj_button_bg_off     transport_selection          -tint button_symbol_off
+
+# logo
+--out logo      --images logo  -tint themeadj_color_logo

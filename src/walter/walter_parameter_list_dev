@@ -2,9 +2,10 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.2.1
+part_version 1.2.2
 
     bank_selected 'Selected Bank' 2 2 9
+    config_selected 'Selected Configuration' 0 0 7
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ;       Colors
@@ -55,14 +56,11 @@ part_version 1.2.1
     colors_track_meter_text_tone_readout_clip   'Colors - Track - Meter Text Tone Readout Clip'         DEF_colors_track_meter_text_tone_readout_clip   0           VAL_PAR_RANGE
     colors_track_meter_text_tone_lit            'Colors - Track - Meter Text Tone Lit'                  DEF_colors_track_meter_text_tone_lit            0           VAL_PAR_RANGE
     colors_track_meter_text_tone_unlit          'Colors - Track - Meter Text Tone Unlit'                DEF_colors_track_meter_text_tone_unlit          0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_track         'Colors - Track - Meter Text Alpha Track'               DEF_colors_track_meter_text_alpha_track         0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_master        'Colors - Track - Meter Text Alpha Master'              DEF_colors_track_meter_text_alpha_master        0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_lit           'Colors - Track - Meter Text Alpha Lit'                 DEF_colors_track_meter_text_alpha_lit           0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_unlit         'Colors - Track - Meter Text Alpha Unlit'               DEF_colors_track_meter_text_alpha_unlit         0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_readout       'Colors - Track - Meter Text Alpha Readout'             DEF_colors_track_meter_text_alpha_readout       0           VAL_PAR_RANGE
-    colors_track_meter_text_alpha_readout_clip  'Colors - Track - Meter Text Alpha Readout Clip'        DEF_colors_track_meter_text_alpha_readout_clip  0           VAL_PAR_RANGE
     colors_track_meter_text_shadow_lit          'Colors - Track - Meter Text Shadow Top'                DEF_colors_track_meter_text_shadow_lit          0           VAL_PAR_RANGE
     colors_track_meter_text_shadow_unlit        'Colors - Track - Meter Text Shadow Bottom'             DEF_colors_track_meter_text_shadow_unlit        0           VAL_PAR_RANGE
+    colors_track_meter_text_alpha_tcp           'Colors - Track - Meter Text Alpha TCP'                 DEF_colors_track_meter_text_alpha_tcp           0           VAL_PAR_RANGE
+    colors_track_meter_text_alpha_mcp           'Colors - Track - Meter Text Alpha MCP'                 DEF_colors_track_meter_text_alpha_mcp           0           VAL_PAR_RANGE
+    
 
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -123,6 +121,7 @@ part_version 1.2.1
 ; ::: Element Adjustments
 
     tcp_gen_element_adj_spacing_x               'TCP - General - Element Adjustment Spacing X'          DEF_tcp_gen_element_adj_spacing_x               0           VAL_PAR_RANGE
+    tcp_gen_element_adj_spacing_y               'TCP - General - Element Adjustment Spacing Y'          DEF_tcp_gen_element_adj_spacing_y               0           VAL_PAR_RANGE
     tcp_gen_element_adj_spacing_x_fader         'TCP - General - Element Adjustment Spacing X Fader'    DEF_tcp_gen_element_adj_spacing_x_fader         0           VAL_PAR_RANGE
     tcp_gen_element_adj_spacing_y_fader         'TCP - General - Element Adjustment Spacing Y Fader'    DEF_tcp_gen_element_adj_spacing_y_fader         0           VAL_PAR_RANGE
     tcp_gen_element_adj_spacing_section_x       'TCP - General - Element Adjustment Spacing Section X'  DEF_tcp_gen_element_adj_spacing_section_x       0           VAL_PAR_RANGE
@@ -143,6 +142,7 @@ part_version 1.2.1
     tcp_track_element_adj_label_size            'TCP - Track - Element Adjustment Label Size'           DEF_tcp_track_element_adj_label_size            0           VAL_PAR_RANGE
     tcp_track_element_adj_size_env              'TCP - Track - Element Adjustment Envelope Size'        DEF_tcp_track_element_adj_size_env              0           1
     tcp_track_element_adj_size_input            'TCP - Track - Element Adjustment Input Size'           DEF_tcp_track_element_adj_size_input            0           VAL_PAR_RANGE
+    tcp_track_element_adj_wrap_buttons          'TCP - Track - Element Adjustment Wrap Buttons'         DEF_tcp_track_element_adj_wrap_buttons          0           3
 
 ; ::: Element Visibility
 
@@ -164,7 +164,7 @@ part_version 1.2.1
     tcp_track_fader_vol_size_scale              'TCP - Track - Faders Volume Size Scaling'              DEF_tcp_track_fader_vol_size_scale              0           1
     tcp_track_fader_pan_size_scale              'TCP - Track - Faders Pan Size Scaling'                 DEF_tcp_track_fader_pan_size_scale              0           1
     tcp_track_fader_wid_size_scale              'TCP - Track - Faders Width Size Scaling'               DEF_tcp_track_fader_wid_size_scale              0           1
-    tcp_track_fader_placement                   'TCP - Track - Faders Placement'                        DEF_tcp_track_fader_placement                   0           2
+    tcp_track_fader_placement                   'TCP - Track - Faders Placement'                        DEF_tcp_track_fader_placement                   0           3
 
 ; ::: Inserts
 
@@ -197,6 +197,9 @@ part_version 1.2.1
     tcp_envcp_settings_lane_display             'TCP - ENVCP - Settings Lane Display'                   DEF_tcp_envcp_settings_lane_display             0           2
     tcp_envcp_settings_symbol                   'TCP - ENVCP - Settings Symbol'                         DEF_tcp_envcp_settings_symbol                   0           1
 
+; ::: Element Adjustment
+    tcp_envcp_element_adj_wrap_buttons          'TCP - ENVCP - Element Adjustment Wrap Buttons'         DEF_tcp_envcp_element_adj_wrap_buttons          0           3
+
 ; ::: Element Visibility
 
     tcp_envcp_element_vis                       'TCP - ENVCP - Element Visibility'                      DEF_tcp_envcp_element_vis                       0           VAL_PAR_BITMASK
@@ -226,9 +229,11 @@ part_version 1.2.1
 
     tcp_master_element_adj_size_env             'TCP - Master - Element Adjustment Envelope Size'       DEF_tcp_master_element_adj_size_env             0           1
     tcp_master_element_adj_size_fx              'TCP - Master - Element Adjustment FX Size'             DEF_tcp_master_element_adj_size_fx              0           1
+    tcp_master_element_adj_wrap_buttons         'TCP - Master - Element Adjustment Wrap Buttons'        DEF_tcp_master_element_adj_wrap_buttons         0           3
 
 ; ::: Meter
 
+    tcp_master_meter_mode                       'TCP - Master - Mode'                                   DEF_tcp_master_meter_mode                       0           1
     tcp_master_meter_vu_db                      'TCP - Master - Meter VU dB'                            DEF_tcp_master_meter_vu_db                      0           1
     tcp_master_meter_vu_readout                 'TCP - Master - Meter VU Readout'                       DEF_tcp_master_meter_vu_readout                 0           1
     tcp_master_meter_size                       'TCP - Master - Meter Size'                             DEF_tcp_master_meter_size                       0           VAL_PAR_RANGE
@@ -247,7 +252,7 @@ part_version 1.2.1
     tcp_master_fader_vol_size_scale             'TCP - Master - Faders Volume Size Scaling'             DEF_tcp_master_fader_vol_size_scale             0           1
     tcp_master_fader_pan_size_scale             'TCP - Master - Faders Pan Size Scaling'                DEF_tcp_master_fader_pan_size_scale             0           1
     tcp_master_fader_wid_size_scale             'TCP - Master - Faders Width Size Scaling'              DEF_tcp_master_fader_wid_size_scale             0           1
-    tcp_master_fader_placement                  'TCP - Master - Faders Placement'                       DEF_tcp_master_fader_placement                  0           2
+    tcp_master_fader_placement                  'TCP - Master - Faders Placement'                       DEF_tcp_master_fader_placement                  0           3
 
 ; ::: Inserts
 
@@ -282,14 +287,15 @@ part_version 1.2.1
 
 ; ::: Element Adjustments
 
-    mcp_gen_element_adj_spacing_x               'MCP - Track - Element Adjustments Spacing X'           DEF_mcp_gen_element_adj_spacing_x               0           VAL_PAR_RANGE
-    mcp_gen_element_adj_spacing_y               'MCP - Track - Element Adjustments Spacing Y'           DEF_mcp_gen_element_adj_spacing_y               0           VAL_PAR_RANGE
-    mcp_gen_element_adj_spacing_fader_x         'MCP - Track - Element Adjustments Spacing Fader X'     DEF_mcp_gen_element_adj_spacing_fader_x         0           VAL_PAR_RANGE
-    mcp_gen_element_adj_spacing_fader_y         'MCP - Track - Element Adjustments Spacing Fader Y'     DEF_mcp_gen_element_adj_spacing_fader_y         0           VAL_PAR_RANGE
-    mcp_gen_element_adj_spacing_section_x       'MCP - Track - Element Adjustments Spacing Section X'   DEF_mcp_gen_element_adj_spacing_section_x       0           VAL_PAR_RANGE
-    mcp_gen_element_adj_spacing_section_y       'MCP - Track - Element Adjustments Spacing Section Y'   DEF_mcp_gen_element_adj_spacing_section_y       0           VAL_PAR_RANGE
-    mcp_gen_element_adj_separator               'MCP - Track - Element Adjustments Separator'           DEF_mcp_gen_element_adj_separator               0           VAL_PAR_RANGE
-    mcp_gen_element_adj_separator_line          'MCP - Track - Element Adjustments Separator Line'      DEF_mcp_gen_element_adj_separator_line          0           1
+    mcp_gen_element_adj_spacing_x               'MCP - General - Element Adjustments Spacing X'         DEF_mcp_gen_element_adj_spacing_x               0           VAL_PAR_RANGE
+    mcp_gen_element_adj_spacing_y               'MCP - General - Element Adjustments Spacing Y'         DEF_mcp_gen_element_adj_spacing_y               0           VAL_PAR_RANGE
+    mcp_gen_element_adj_spacing_fader_x         'MCP - General - Element Adjustments Spacing Fader X'   DEF_mcp_gen_element_adj_spacing_fader_x         0           VAL_PAR_RANGE
+    mcp_gen_element_adj_spacing_fader_y         'MCP - General - Element Adjustments Spacing Fader Y'   DEF_mcp_gen_element_adj_spacing_fader_y         0           VAL_PAR_RANGE
+    mcp_gen_element_adj_spacing_section_x       'MCP - General - Element Adjustments Spacing Section X' DEF_mcp_gen_element_adj_spacing_section_x       0           VAL_PAR_RANGE
+    mcp_gen_element_adj_spacing_section_y       'MCP - General - Element Adjustments Spacing Section Y' DEF_mcp_gen_element_adj_spacing_section_y       0           VAL_PAR_RANGE
+    mcp_gen_element_adj_separator               'MCP - General - Element Adjustments Separator'         DEF_mcp_gen_element_adj_separator               0           VAL_PAR_RANGE
+    mcp_gen_element_adj_separator_line          'MCP - General - Element Adjustments Separator Line'    DEF_mcp_gen_element_adj_separator_line          0           1
+    mcp_gen_element_adj_pad                     'MCP - General - Element Adjustments Padding'           DEF_mcp_gen_element_adj_pad                     0           VAL_PAR_RANGE
 
 ; ::: Folder
 
@@ -335,7 +341,7 @@ part_version 1.2.1
 
     mcp_track_element_vis                       'MCP - Track - Element Visibility'                      DEF_mcp_track_element_vis                       0           VAL_PAR_BITMASK
     mcp_track_element_separator                 'MCP - Track - Element Separator'                       DEF_mcp_track_element_separator                 0           VAL_PAR_BITMASK
-    mcp_track_element_width                     'MCP - Track - Element Width'                           DEF_mcp_track_element_width                     0           1
+    mcp_track_element_width                     'MCP - Track - Element Width'                           DEF_mcp_track_element_width                     0           2
     mcp_track_element_input_size                'MCP - Track - Element Input Size'                      DEF_mcp_track_element_input_size                0           VAL_PAR_RANGE
 
 ; ::: Volume / Pan / Width
@@ -381,7 +387,7 @@ part_version 1.2.1
 
     mcp_master_element_vis                      'MCP - Master - Element Visibility'                     DEF_mcp_master_element_vis                      0           VAL_PAR_BITMASK
     mcp_master_element_separator                'MCP - Master - Element Separator'                      DEF_mcp_master_element_separator                0           VAL_PAR_BITMASK
-    mcp_master_element_width                    'MCP - Master - Element Width'                          DEF_mcp_master_element_width                    0           1
+    mcp_master_element_width                    'MCP - Master - Element Width'                          DEF_mcp_master_element_width                    0           2
 
 ; ::: Volume / Pan / Width
 
@@ -393,3 +399,51 @@ part_version 1.2.1
     mcp_master_fader_pan_height                 'MCP - Master - Faders Pan Height'                      DEF_mcp_master_fader_pan_height                 0           VAL_PAR_RANGE
     mcp_master_fader_pan_height_scale           'MCP - Master - Faders Pan Height Scale'                DEF_mcp_master_fader_pan_height_scale           0           1
     mcp_master_fader_wid_always                 'MCP - Master - Faders Always Show Width'               DEF_mcp_master_fader_wid_always                 0           1
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;       USER
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    ;   Ranges
+    ; ----------------------------------------------
+
+        user_range_0                    'User - Range - 0'                  DEF_user_range_0                0           VAL_PAR_RANGE
+        user_range_1                    'User - Range - 1'                  DEF_user_range_1                0           VAL_PAR_RANGE
+        user_range_2                    'User - Range - 2'                  DEF_user_range_2                0           VAL_PAR_RANGE
+        user_range_3                    'User - Range - 3'                  DEF_user_range_3                0           VAL_PAR_RANGE
+        user_range_4                    'User - Range - 4'                  DEF_user_range_4                0           VAL_PAR_RANGE
+        user_range_5                    'User - Range - 5'                  DEF_user_range_5                0           VAL_PAR_RANGE
+        user_range_6                    'User - Range - 6'                  DEF_user_range_6                0           VAL_PAR_RANGE
+        user_range_7                    'User - Range - 7'                  DEF_user_range_7                0           VAL_PAR_RANGE
+        user_range_8                    'User - Range - 8'                  DEF_user_range_8                0           VAL_PAR_RANGE
+        user_range_9                    'User - Range - 9'                  DEF_user_range_9                0           VAL_PAR_RANGE
+        user_range_10                   'User - Range - 10'                 DEF_user_range_10               0           VAL_PAR_RANGE
+        user_range_11                   'User - Range - 11'                 DEF_user_range_11               0           VAL_PAR_RANGE
+        user_range_12                   'User - Range - 12'                 DEF_user_range_12               0           VAL_PAR_RANGE
+        user_range_13                   'User - Range - 13'                 DEF_user_range_13               0           VAL_PAR_RANGE
+        user_range_14                   'User - Range - 14'                 DEF_user_range_14               0           VAL_PAR_RANGE
+        user_range_15                   'User - Range - 15'                 DEF_user_range_15               0           VAL_PAR_RANGE
+
+    ;   Switches
+    ; ----------------------------------------------
+
+        user_switch_0                   'User - Switch - 0'                 DEF_user_switch_0               0           1
+        user_switch_1                   'User - Switch - 1'                 DEF_user_switch_1               0           1
+        user_switch_2                   'User - Switch - 2'                 DEF_user_switch_2               0           1
+        user_switch_3                   'User - Switch - 3'                 DEF_user_switch_3               0           1
+        user_switch_4                   'User - Switch - 4'                 DEF_user_switch_4               0           1
+        user_switch_5                   'User - Switch - 5'                 DEF_user_switch_5               0           1
+        user_switch_6                   'User - Switch - 6'                 DEF_user_switch_6               0           1
+        user_switch_7                   'User - Switch - 7'                 DEF_user_switch_7               0           1
+
+    ;   Selection
+    ; ----------------------------------------------
+
+        user_selection_0                'User - Selection - 0'              DEF_user_selection_0            0           8
+        user_selection_1                'User - Selection - 1'              DEF_user_selection_1            0           8
+        user_selection_2                'User - Selection - 2'              DEF_user_selection_2            0           8
+        user_selection_3                'User - Selection - 3'              DEF_user_selection_3            0           8
+        user_selection_4                'User - Selection - 4'              DEF_user_selection_4            0           8
+        user_selection_5                'User - Selection - 5'              DEF_user_selection_5            0           8
+        user_selection_6                'User - Selection - 6'              DEF_user_selection_6            0           8
+        user_selection_7                'User - Selection - 7'              DEF_user_selection_7            0           8

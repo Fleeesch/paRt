@@ -390,7 +390,7 @@ printProgressStart("Creating Graphics")
 create_graphics()
 
 # theme adjuster
-add_shadow("res/theme_adj.png","out/theme_adj.png")
+#add_shadow("res/theme_adj.png","out/theme_adj.png")
 
 # logo
 add_shadow("res/banner_logo.png","out/banner_logo.png")
