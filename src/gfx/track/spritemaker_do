@@ -50,7 +50,7 @@
 --out track_phase_inv           --spritesheet --button --frame frame -fit --images bg           -tint color_cyan          phase         -tint button_symbol_on  -flip-v                 phase       -tint button_symbol_on -alpha 0.25  border_round -tint button_border
 
 # solo defaet
---out tcp_solodefeat_on mcp_solodefeat_on    --crop-template solo --spritesheet --button --frame frame -fit --images bg -tint color_blue          shadow        -tint button_symbol_on -crop      border_round -tint button_border
+--out tcp_solodefeat_on mcp_solodefeat_on    --crop-template solo --spritesheet --button --frame frame -fit --images bg -tint color_yellow          shadow        -tint button_symbol_on -crop      border_round -tint button_border
 
 # track io button
 --out track_io_dis              --spritesheet --button --frame frame -fit --mask-template bg --images bg -tint button_bg_off    io_parent -mask -tint button_io_off    io_send -mask -tint button_io_off  io_receive -mask -tint button_io_off   border_round -tint button_border
@@ -63,14 +63,14 @@
 --out track_io_s_r_dis          --spritesheet --button --frame frame -fit --mask-template bg --images bg -tint button_bg_off    io_parent -mask -tint button_io_off    io_send -mask -tint color_yellow   io_receive -mask -tint color_red       border_round -tint button_border
 
 # track monitor button
---out track_monitor_off         --spritesheet --button --frame frame -fit --images bg -tint button_bg_off   recmon              -tint button_symbol_off     border_round -tint button_border
---out track_monitor_on          --spritesheet --button --frame frame -fit --images bg -tint color_cyan      recmon              -tint button_symbol_on      border_round -tint button_border
---out track_monitor_auto        --spritesheet --button --frame frame -fit --images bg -tint color_blue      recmon -alpha 0.5   -tint button_symbol_on      border_round -tint button_border
+--out track_monitor_off                                 --spritesheet --button --frame frame -fit --images bg -tint button_bg_off       recmon              -tint button_symbol_off         border_round -tint button_border
+--out track_monitor_on                                  --spritesheet --button --frame frame -fit --images bg -tint color_cyan          recmon              -tint button_symbol_on          border_round -tint button_border
+--out track_monitor_auto        --crop-template recmon  --spritesheet --button --frame frame -fit --images bg -tint color_blue          shadow              -tint button_symbol_on -crop    border_round -tint button_border
 
 # track record mode button
 --out track_recmode_off         --spritesheet --button --frame frame -fit --images bg -tint button_bg_off   recbutton       -tint button_symbol_off     border_round -tint button_border
 --out track_recmode_in          --spritesheet --button --frame frame -fit --images bg -tint color_red       jack            -tint button_symbol_on      border_round -tint button_border
---out track_recmode_out         --spritesheet --button --frame frame -fit --images bg -tint color_yellow    speaker         -tint button_symbol_on      border_round -tint button_border
+--out track_recmode_out         --spritesheet --button --frame frame -fit --images bg -tint color_orange    speaker         -tint button_symbol_on      border_round -tint button_border
 
 # track envelope button
 --out track_env                                 --spritesheet --button --frame frame -fit -flip-h -flip-v  --images bg -tint color_gray         env_trim        -tint button_symbol_on   border_round -tint button_border
@@ -85,7 +85,7 @@
 --out track_fx_norm                             --spritesheet --button --frame frame -fit   --images bg       -tint color_cyan      fx      -tint button_symbol_on      border_round -tint button_border
 --out track_fx_dis                              --spritesheet --button --frame frame -fit   --images bg       -tint color_gray      fx      -tint button_symbol_on      border_round -tint button_border
 
---out mcp_fx_in_norm    track_fx_in_norm        --spritesheet --button --frame frame -fit   --images bg       -tint color_red       fx_in   -tint button_symbol_on      border_round -tint button_border
+--out mcp_fx_in_norm    track_fx_in_norm        --spritesheet --button --frame frame -fit   --images bg       -tint color_cyan      fx_in   -tint button_symbol_on      border_round -tint button_border
 --out mcp_fx_in_empty   track_fx_in_empty       --spritesheet --button --frame frame -fit   --images bg       -tint button_bg_off   fx_in   -tint button_symbol_off     border_round -tint button_border
 
 --out track_fxempty_v track_fxempty_h           --spritesheet --button --frame frame -fit   --images overlay  -tint overlay_fxbyp_hover -frame 1 1 overlay -tint overlay_fxbyp_click -frame 2 2 fxbyp_on      -tint button_symbol_off
@@ -121,13 +121,14 @@
 # --------------------------------------
 
 # background
---out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border -tint insert_border
---out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border -tint insert_border
+--out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          
+--out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   
 --out track_custom_insert_bg            --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border -tint insert_border
 --out track_custom_insert_bg_select     --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border -tint insert_border
 
 # section handle
---out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg   --frame frame_section --images bg_section -tint insert_divider
+#--out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg   --frame frame_section --images bg_section -tint insert_divider
+--dummy --out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg
 
 # embed fx
 --out tcp_fxembed_header_bg_v     --frame frame -fit --images bg_r -tint button_label_bg
@@ -168,10 +169,12 @@
 # --------------------------------------
 
 # icon
---out mcp_iconbg                            --frame frame                       --images bg_icon -tint gui_bg
---out mcp_iconbgsel                         --frame frame                       --images bg_icon -tint gui_bg
---out tcp_iconbg        --flip-vertical     --frame frame_slim -rotate 180      --images bg_icon -tint track_icon_bg           border_icon -tint track_icon_border
---out tcp_iconbgsel     --flip-vertical     --frame frame_slim -rotate 180      --images bg_icon -tint track_icon_bg_select    border_icon -tint track_icon_border
+--out mcp_iconbg                        --frame frame                       --images bg_icon     -tint gui_bg
+--out mcp_iconbgsel                     --frame frame                       --images bg_icon     -tint gui_bg
+--out tcp_iconbg                        --frame frame_slim -rotate 180      --images bg_icon_tcp -tint track_icon_bg           border_icon_tcp  -tint track_icon_border
+--out tcp_iconbgsel                     --frame frame_slim -rotate 180      --images bg_icon_tcp -tint track_icon_bg_select    border_icon_tcp  -tint track_icon_border
+--out track_custom_tcp_iconbg           --frame frame                       --images bg_icon     -tint track_icon_bg           border_icon      -tint track_icon_border
+--out track_custom_tcp_iconbgsel        --frame frame                       --images bg_icon     -tint track_icon_bg_select    border_icon      -tint track_icon_border
 
 # frames
 --out track_custom_bg_frame             --frame frame_border --images border -tint border_bg

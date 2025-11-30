@@ -52,9 +52,12 @@ if [ "$dir_to_dev_folder" == false ]; then
             # clear first
             rm -rf "$target_folder"/*
 
-            # copy
-            rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
-            rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
+            # copy contents excluding parameter files
+            rsync -a --quiet                        \
+            --exclude "parameters.partmap"          \
+            --exclude "last_theme.partmap"          \
+            --exclude "conf/slot/**"                \
+            "$source_folder/" "$target_folder/"
 
             echo -e "${COLOR_GREEN}done${COLOR_RESET}"
         fi

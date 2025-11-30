@@ -27,7 +27,9 @@
 --out tcp_volthumb          --rotate 270        --images frame/frame_thumb_slim -tint frame_pink -flip-v     thumb_slim_fill     -tint fader_knob_bg        thumb_slim_border      -tint fader_knob_border
 --out tcp_panthumb          --rotate 270        --images frame/frame_thumb_slim -tint frame_pink -flip-v     thumb_slim_fill     -tint fader_knob_bg_pan    thumb_slim_border      -tint fader_knob_border
 --out tcp_widththumb        --rotate 270        --images frame/frame_thumb_slim -tint frame_pink -flip-v     thumb_slim_fill     -tint fader_knob_bg_wid    thumb_slim_border      -tint fader_knob_border
-
+--out tcp_volthumb_vert                         --images frame/frame_thumb_slim -tint frame_pink             thumb_slim_fill     -tint fader_knob_bg_envcp  thumb_slim_border      -tint fader_knob_border
+--out tcp_panthumb_vert                         --images frame/frame_thumb_slim -tint frame_pink             thumb_slim_fill     -tint fader_knob_bg_pan    thumb_slim_border      -tint fader_knob_border
+--out tcp_widththumb_vert                       --images frame/frame_thumb_slim -tint frame_pink             thumb_slim_fill     -tint fader_knob_bg_wid    thumb_slim_border      -tint fader_knob_border
 
 # envcp
 --out envcp_fader_vert                          --images frame/frame_thumb_slim -tint frame_pink             thumb_slim_fill     -tint fader_knob_bg_envcp  thumb_slim_border      -tint fader_knob_border

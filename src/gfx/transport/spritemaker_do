@@ -80,6 +80,17 @@
 --out transport_playspeedbg         --frame frame_rate_fader        --images rate_fader_bg     -tint transport_rate_fader_bg
 --out transport_playspeedthumb      --frame frame_rate_fader_knob   --images rate_fader_knob   -tint transport_rate_fader_knob
 
+#       Tap Tempo
+# --------------------------------------
+
+--out transport_tap                         --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_tap        -tint transport_tap_fg
+--out transport_basis_half                  --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_half       -tint transport_tap_fg
+--out transport_basis_quarter               --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_quarter    -tint transport_tap_fg
+--out transport_basis_eighth                --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_eight      -tint transport_tap_fg
+--out transport_basis_half_dotted           --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_half       -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
+--out transport_basis_quarter_dotted        --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_quarter    -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
+--out transport_basis_eighth_dotted         --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_eight      -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
+
 #       Status
 # --------------------------------------
 
