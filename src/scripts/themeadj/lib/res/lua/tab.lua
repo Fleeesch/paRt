@@ -1,7 +1,15 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
+
+--[[
+    Top-header tab management.
+    
+    Is quite confusing right now because of the division between main- and sub-tabs.
+    Could be replaced with something better in the future.
+]]
+
 local tab = { Entry = {}, EntrySub = {}, Group = {} }
 
 -- =======================================================================
@@ -59,6 +67,9 @@ function tab.Entry.TabEntry:new(o, tab_group, title)
     -- register entry to group
     o.tab_group:addEntry(o)
 
+    -- entry can potentially sub-group
+    o.sub_group = nil
+
     -- active state
     o.state = false
 
@@ -96,6 +107,13 @@ function tab.Entry.TabEntry:active()
     return self.state
 end
 
+--  Tab : Entry : add Group
+-- -------------------------------------------
+
+function tab.Entry.TabEntry:addSubGroup(group)
+    self.sub_group = group
+end
+
 --  Tab : Entry : Prepare
 -- -------------------------------------------
 
@@ -131,8 +149,8 @@ function tab.Entry.TabEntry:draw()
 
     -- hover
     if Part.Gui.Mouse.hoverCheck(self) and Part.Gui.Mouse.Drag.isOff() then
-        color_bg = Part.Color.lightenColor(color_bg, 0.1)
-        color_fg = Part.Color.lightenColor(color_fg, 0.1)
+        color_bg = Part.Color.lightenColor(color_bg, 0.05)
+        color_fg = Part.Color.lightenColor(color_fg, 0.05)
 
         -- activation
         if Part.Gui.Mouse.leftClick() then
@@ -154,7 +172,7 @@ function tab.Entry.TabEntry:draw()
     -- text
     Part.Cursor.setCursorPos(x, y)
     Part.Color.setColor(color_fg, true)
-    Part.Draw.Graphics.setFont(16, "b")
+    Part.Draw.Graphics.setFont(14, "b")
     gfx.drawstr(self.title, self.flags, x + w, y + h)
 end
 
@@ -187,9 +205,9 @@ function tab.EntrySub.TabEntrySub:prepare()
     self.draw_h = Part.Functions.rescale(self.dim_h)
 
     local str_w, str_h = gfx.measurestr(self.title)
-    Part.Draw.Graphics.setFont(16)
+    Part.Draw.Graphics.setFont(14)
     self.draw_circle_x = math.floor(self.draw_x + self.draw_w / 2 - str_w / 2 - Part.Functions.rescale(10))
-    self.draw_circle_y = math.floor(self.draw_y + str_h / 1.1)
+    self.draw_circle_y = math.floor(self.draw_y + Part.Functions.rescale(12)) - Part.Functions.rescale(2)
     self.draw_circle_r = math.floor(Part.Functions.rescale(3))
 end
 
@@ -215,8 +233,8 @@ function tab.EntrySub.TabEntrySub:draw()
 
     -- hover
     if Part.Gui.Mouse.hoverCheck(self) and Part.Gui.Mouse.Drag.isOff() then
-        color_bg = Part.Color.lightenColor(color_bg, 0.1)
-        color_fg = Part.Color.lightenColor(color_fg, 0.1)
+        color_bg = Part.Color.lightenColor(color_bg, 0.05)
+        color_fg = Part.Color.lightenColor(color_fg, 0.05)
 
         -- activation
         if Part.Gui.Mouse.leftClick() then
@@ -230,8 +248,8 @@ function tab.EntrySub.TabEntrySub:draw()
 
     -- font
     Part.Color.setColor(color_fg, true)
-    Part.Draw.Graphics.setFont(16)
-    y = y + Part.Functions.rescale(2)
+    Part.Draw.Graphics.setFont(14)
+    y = y + Part.Functions.rescale(0)
     Part.Cursor.setCursorPos(x, y)
     gfx.drawstr(self.title, self.flags, x + w, y + h)
 
@@ -293,6 +311,10 @@ function tab.Group.TabGroup:new(o, name, tab, level)
 
     -- tab representing this tab group
     o.tab = tab
+
+    if tab ~= nil then
+        tab:addSubGroup(o)
+    end
 
     -- name of group
     o.name = name
@@ -446,6 +468,112 @@ function tab.Group.TabGroup:setActiveEntry(entry)
     tab.Group.active_tab_changed = true
 end
 
+-- Tab : Group : Set active Entry by Index
+-- -------------------------------------------
+
+function tab.Group.TabGroup:setActiveEntryByIndex(index, target_sub)
+    target_sub = target_sub or false
+
+    -- pick entry
+    if not target_sub then
+        self.active_entry = self.entries[math.min(math.max(index, 1), #self.entries)]
+    else
+        -- pick entry in sub group
+        if self.active_entry.sub_group ~= nil then
+            -- sub group needs to have multiple entries
+            if #self.active_entry.sub_group.entries <= 1 then
+                return
+            end
+
+            self.active_entry.sub_group:setActiveEntryByIndex(index, false)
+        end
+
+        return
+    end
+
+    -- update sats
+    self:storeTab()
+    tab.Group.active_tab_changed = true
+end
+
+-- Get Entry based on Index Offset
+-- -------------------------------------------
+
+function tab.Group.TabGroup:getEntryBasedOnIndexOffset(offset, target_sub)
+    target_sub = target_sub or false
+
+    -- target pool of entries
+    local target_pool = self
+
+    -- optionally target sub-entries
+    if self.active_entry.sub_group ~= nil and target_sub then
+        target_pool = self.active_entry.sub_group
+    end
+
+    -- pick active entry
+    local active_entry_index = 0
+    for idx, entry in ipairs(target_pool.entries) do
+        if target_pool.active_entry == entry then
+            active_entry_index = idx
+            break
+        end
+    end
+
+    -- return the entrey based on offset value (cap at borders)
+    return target_pool.entries[math.min(math.max(active_entry_index + offset, 1), #target_pool.entries)]
+end
+
+-- Tab : Group : Select Previous Entry
+-- -------------------------------------------
+
+function tab.Group.TabGroup:selectPreviousEntry(target_sub)
+    -- get entry
+    local target = self
+
+    -- optionally pick source of entries from sub-group
+    if self.active_entry.sub_group ~= nil and target_sub then
+        -- sub group needs to have multiple entries
+        if #self.active_entry.sub_group.entries <= 1 then
+            return
+        end
+
+        target = self.active_entry.sub_group
+    end
+
+    local target_entry = self:getEntryBasedOnIndexOffset(-1, target_sub)
+
+    -- update stats
+    target:setActiveEntry(target_entry)
+    target:storeTab()
+    tab.Group.active_tab_changed = true
+end
+
+-- Tab : Group : Select Next Entry
+-- -------------------------------------------
+
+function tab.Group.TabGroup:selectNextEntry(target_sub)
+    -- get entry
+
+    local target = self
+
+    -- optionally pick source of entries from sub-group
+    if self.active_entry.sub_group ~= nil and self.active_entry.sub_group and target_sub then
+        -- sub group needs to have multiple entries
+        if #self.active_entry.sub_group.entries <= 1 then
+            return
+        end
+
+        target = self.active_entry.sub_group
+    end
+
+    local target_entry = self:getEntryBasedOnIndexOffset(1, target_sub)
+
+    -- update stats
+    target:setActiveEntry(target_entry)
+    target:storeTab()
+    tab.Group.active_tab_changed = true
+end
+
 -- Tab : Group : Add Entry
 -- -------------------------------------------
 
@@ -468,9 +596,10 @@ function tab.Group.TabGroup:prepare()
     self.draw_y = Part.Functions.rescale(self.dim_y)
     self.draw_h = Part.Functions.rescale(self.dim_h)
 
-    if #self.entries <= 0 then
-        self.draw_h = Part.Functions.rescale(4)
-    end
+    -- no entries override
+    -- if #self.entries <= 0 then
+    --     self.draw_h = Part.Functions.rescale(4)
+    -- end
 
     self:calculateDimensions()
 

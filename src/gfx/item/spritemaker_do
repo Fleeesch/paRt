@@ -56,47 +56,55 @@
 # --------------------------------------
 
 # Off State
---out item_mute_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute      -tint item_button_symbol_off      border -tint item_border
---out item_env_off          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env       -tint item_button_symbol_off      border -tint item_border
---out item_fx_off           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx        -tint item_button_symbol_off      border -tint item_border
---out item_group            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group     -tint item_button_symbol_off      border -tint item_border
---out item_lock_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock      -tint item_button_symbol_off      border -tint item_border
---out item_note_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes     -tint item_button_symbol_off      border -tint item_border
---out item_pooled           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool      -tint item_button_symbol_off      border -tint item_border
---out item_props            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
+--out item_mute_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute            -tint item_button_symbol_off      border -tint item_border
+--out item_env_off          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env             -tint item_button_symbol_off      border -tint item_border
+--out item_fx_off           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx              -tint item_button_symbol_off      border -tint item_border
+--out item_group            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group           -tint item_button_symbol_off      border -tint item_border
+--out item_lock_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock            -tint item_button_symbol_off      border -tint item_border
+--out item_note_off         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes           -tint item_button_symbol_off      border -tint item_border
+--out item_pooled           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool            -tint item_button_symbol_off      border -tint item_border
+--out item_props            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info            -tint item_button_symbol_off      border -tint item_border
+--out item_timebase_beat    --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     timebase        -tint item_button_symbol_off      border -tint item_border
+--out item_timebase_time    --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     timebase_time   -tint item_button_symbol_off      border -tint item_border
 
 # On State
---out item_mute_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute      -tint item_button_symbol_on       border -tint item_border
---out item_env_on           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
---out item_fx_on            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
---out item_group_sel        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border
---out item_lock_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock      -tint item_button_symbol_on       border -tint item_border
---out item_note_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes     -tint item_button_symbol_on       border -tint item_border
---out item_pooled_on        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool      -tint item_button_symbol_on       border -tint item_border
---out item_props_on         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info      -tint item_button_symbol_on       border -tint item_border
+--out item_mute_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute            -tint item_button_symbol_on       border -tint item_border
+--out item_env_on           --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env             -tint item_button_symbol_on       border -tint item_border
+--out item_fx_on            --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx              -tint item_button_symbol_on       border -tint item_border
+--out item_group_sel        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group           -tint item_button_symbol_on       border -tint item_border
+--out item_lock_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock            -tint item_button_symbol_on       border -tint item_border
+--out item_note_on          --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes           -tint item_button_symbol_on       border -tint item_border
+--out item_pooled_on        --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool            -tint item_button_symbol_on       border -tint item_border
+--out item_props_on         --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info            -tint item_button_symbol_on       border -tint item_border
+--out item_timebase_beat_on --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           timebase        -tint item_button_symbol_on       border -tint item_border
+--out item_timebase_time_on --single-level 100 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           timebase_time   -tint item_button_symbol_on       border -tint item_border
 
 #       Item Buttons - HDPI
 # --------------------------------------
 
 # Off State
---out item_mute_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute      -tint item_button_symbol_off      border -tint item_border
---out item_env_off_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env       -tint item_button_symbol_off      border -tint item_border
---out item_fx_off_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx        -tint item_button_symbol_off      border -tint item_border
---out item_group_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group     -tint item_button_symbol_off      border -tint item_border
---out item_lock_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock      -tint item_button_symbol_off      border -tint item_border
---out item_note_off_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes     -tint item_button_symbol_off      border -tint item_border
---out item_pooled_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool      -tint item_button_symbol_off      border -tint item_border
---out item_props_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info      -tint item_button_symbol_off      border -tint item_border
+--out item_mute_off_hidpi           --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     mute            -tint item_button_symbol_off      border -tint item_border
+--out item_env_off_hidpi            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     env             -tint item_button_symbol_off      border -tint item_border
+--out item_fx_off_hidpi             --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     fx              -tint item_button_symbol_off      border -tint item_border
+--out item_group_hidpi              --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     group           -tint item_button_symbol_off      border -tint item_border
+--out item_lock_off_hidpi           --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     lock            -tint item_button_symbol_off      border -tint item_border
+--out item_note_off_hidpi           --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     notes           -tint item_button_symbol_off      border -tint item_border
+--out item_pooled_hidpi             --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     pool            -tint item_button_symbol_off      border -tint item_border
+--out item_props_hidpi              --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     info            -tint item_button_symbol_off      border -tint item_border
+--out item_timebase_beat            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     timebase        -tint item_button_symbol_off      border -tint item_border
+--out item_timebase_time            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint item_button_bg_off     timebase_time   -tint item_button_symbol_off      border -tint item_border
 
 # On State
---out item_mute_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute      -tint item_button_symbol_on       border -tint item_border
---out item_env_on_hidpi     --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env       -tint item_button_symbol_on       border -tint item_border
---out item_fx_on_hidpi      --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx        -tint item_button_symbol_on       border -tint item_border
---out item_group_sel_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group     -tint item_button_symbol_on       border -tint item_border
---out item_lock_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock      -tint item_button_symbol_on       border -tint item_border
---out item_note_on_hidpi    --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes     -tint item_button_symbol_on       border -tint item_border
---out item_pooled_on_hidpi  --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool      -tint item_button_symbol_on       border -tint item_border
---out item_props_on_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info      -tint item_button_symbol_on       border -tint item_border
+--out item_mute_on_hidpi            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_orange           mute            -tint item_button_symbol_on       border -tint item_border
+--out item_env_on_hidpi             --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           env             -tint item_button_symbol_on       border -tint item_border
+--out item_fx_on_hidpi              --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_cyan             fx              -tint item_button_symbol_on       border -tint item_border
+--out item_group_sel_hidpi          --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             group           -tint item_button_symbol_on       border -tint item_border
+--out item_lock_on_hidpi            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_violet           lock            -tint item_button_symbol_on       border -tint item_border
+--out item_note_on_hidpi            --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_green            notes           -tint item_button_symbol_on       border -tint item_border
+--out item_pooled_on_hidpi          --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             pool            -tint item_button_symbol_on       border -tint item_border
+--out item_props_on_hidpi           --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_blue             info            -tint item_button_symbol_on       border -tint item_border
+--out item_timebase_beat_on_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           timebase        -tint item_button_symbol_on       border -tint item_border
+--out item_timebase_time_on_hidpi   --single-level 200 --spritesheet --button --images bg -alpha $alpha_item_button_bg -tint color_yellow           timebase_time   -tint item_button_symbol_on       border -tint item_border
 
 #       Ranking
 # --------------------------------------

@@ -1,4 +1,4 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -12,6 +12,7 @@ end
 Part.Functions = require("lib.res.lua.functions")
 
 -- bank
+Part.Config = require("lib.res.lua.config")
 Part.Bank = require("lib.res.lua.bank")
 Part.Parameter = require("lib.res.lua.parameter")
 Part.Parameter.Lookup.importThemeParameters()
@@ -20,6 +21,16 @@ Part.Parameter.Lookup.importThemeParameters()
 local var = require("lib.res.lua.var")
 Part.Global = var.globals
 Part.List = var.list
+
+-- custom parameter settings
+Part.Parameter.Lookup.importCustomParameterSettings()
+
+--      Config Handler
+-- -----------------------------
+
+-- initialize config handler
+Part.Config.Handler = Part.Config.Handler.ConfigHandler:new(nil,
+    Part.Parameter.Theme.ThemeParameter:new(nil, "par_config_selected", false, true))
 
 --      Bank Initialization
 -- -----------------------------
@@ -50,10 +61,13 @@ Part.Draw = require("lib.res.lua.draw")
 Part.Tab = require("lib.res.lua.tab")
 Part.Layout = require("lib.res.lua.layout")
 Part.Control = require("lib.res.lua.control")
-Part.Control.Bank = require("lib.res.lua.control_bank")
-Part.Version = require("lib.res.lua.version")
+Part.Control.Config = require("lib.res.lua.control_config")
+Part.Config = require("lib.res.lua.config")
 Part.Parameter.Map = require("lib.res.lua.parameter_map")
 Part.Macro = require("lib.res.lua.macro")
+Part.Version = require("lib.res.lua.version")
+
+
 
 --      Check if JS Extension is available
 -- -----------------------------------------

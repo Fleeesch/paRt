@@ -21,7 +21,7 @@ command_list = [
 ]
 
 
-default_copy_info = [[["out/dark", 0], "/root/int/development/reaper/theming/paRt/reaper/ColorThemes/paRt_dark"]]
+default_copy_info = [[["out/dark", 0], "/root/int/dev/reaper/theming/paRt/reaper/ColorThemes/paRt_dark"]]
 default_copy_on = False
 
 spritemaker_file = "spritemaker_do"

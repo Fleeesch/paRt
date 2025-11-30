@@ -1,9 +1,14 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
+--[[
+    Snippets for creating the control maps.
+    Mostly to safe space und reduce layout code redundancy, and constantly changing depending on what the map.lua demands.
 
+    Could use an overhaul.
+]]--
 
 local map_macros = {}
 
@@ -26,6 +31,7 @@ map_macros.icons = {
         tcp_fader_layout_inline = "table_tcp_fader_layout_inline",
         tcp_fader_layout_separate = "table_tcp_fader_layout_separate",
         tcp_fader_layout_explode = "table_tcp_fader_layout_explode",
+        tcp_fader_layout_vertical = "table_tcp_fader_layout_separate",
     },
     transport = {
         rewind = "transport_rewind",
@@ -70,12 +76,13 @@ map_macros.icons = {
 
 map_macros.icon_alpha = 0.75
 
-map_macros.pos_y_top = 55
-map_macros.pos_x_left = 30
+map_macros.pos_y_top = 45
+map_macros.pos_x_left = 5
 
 map_macros.line_h = 16
 map_macros.slider_w = 75
 map_macros.par_label_w = 50
+map_macros.section_space = 6
 
 map_macros.pad_x = 6
 map_macros.pad_y = 6
@@ -88,10 +95,13 @@ map_macros.knob_w = 16
 map_macros.slider_w = 90
 map_macros.slider_offset = 0
 map_macros.slider_h = 14
+map_macros.slider_button_w = 30
+map_macros.paramter_monitor_w = 30
 
 map_macros.group_pad_x = 10
 map_macros.group_pad_y = 30
 
+map_macros.button_percentage_label = "◀▶"
 map_macros.button_percentage_w = 40
 map_macros.button_large_w = 100
 map_macros.button_select_w = 75
@@ -99,8 +109,8 @@ map_macros.button_select_w = 75
 map_macros.par_label_w = 70
 
 map_macros.table_icon_w = 30
-map_macros.table_label_w = 50
-map_macros.table_marker_w = 22
+map_macros.table_label_w = 100
+map_macros.table_marker_w = 45
 
 map_macros.label = nil
 
@@ -108,6 +118,9 @@ map_macros.last_group_dim = { 0, 0, 0, 0 }
 map_macros.last_group = nil
 
 map_macros.icon_path_root = "lib/res/icon"
+
+map_macros.parameter_frame_pad_x = 3
+map_macros.parameter_frame_pad_y = 1
 
 map_macros.parameter_labels = {}
 
@@ -146,7 +159,7 @@ end
 
 function map_macros.nextInline()
     map_macros.placeCursorAtLastLabel(true, false)
-    Part.Cursor.setCursorPos(Part.Cursor.getCursorX() + Part.Cursor.getCursorPadX())
+    Part.Cursor.setCursorPos(Part.Cursor.getCursorX() + Part.Cursor.getCursorPadX() + 10)
 end
 
 -- Function : Next Line
@@ -154,6 +167,22 @@ end
 
 function map_macros.nextLine()
     Part.Cursor.incCursor(0, map_macros.line_h)
+end
+
+-- Function : Next Section
+-- --------------------------------------------------
+
+function map_macros.nextSection(width)
+    local w = width or 200
+    local x = Part.Cursor.getCursorX()
+    local y = Part.Cursor.getCursorY()
+
+    w = Part.Functions.rescale(w)
+
+    Part.Cursor.incCursor(0, map_macros.section_space, 0, 0)
+
+    local line = Part.Layout.Line.Line:new(nil, x, y, false, w)
+    line:setColor(Part.Color.Lookup.color_palette.group.section.line)
 end
 
 -- Function : Open Label
@@ -223,6 +252,8 @@ function map_macros.drawGroupBox(header_text, x, y, w, h)
 
     -- store coordinates of group
     map_macros.last_group_dim = { x = x, y = y, w = w, h = h }
+
+    return map_macros.last_group
 end
 
 -- Function : Place Cursor at last Group
@@ -330,10 +361,11 @@ function map_macros.drawHeader(header_text, w)
     local text = Part.Layout.Text.Text:new(nil, header_text)
     text:setColor(Part.Color.Lookup.color_palette.group.inline_header.fg,
         Part.Color.Lookup.color_palette.group.inline_header.bg,
-        nil)
+        nil, Part.Color.Lookup.color_palette.group.inline_header.underline)
     text:centerHorz()
     text:centerVert()
     text:setFontFlags("b")
+    text:underline()
 
     map_macros.trackParameterLabel(text)
 
@@ -346,6 +378,13 @@ end
 function map_macros.drawButtonToggleGroup(has_bank, parameter, button_w, label, button_label, label_w)
     Part.Cursor.stackCursor()
 
+    -- store starting point of box
+    local pad_x = map_macros.parameter_frame_pad_x
+    local pad_y = map_macros.parameter_frame_pad_y
+    local frame_x = Part.Cursor.getCursorX()
+    local frame_y = Part.Cursor.getCursorY()
+    local frame_h = 16
+
     -- create background label
     map_macros.openLabel()
 
@@ -353,12 +392,19 @@ function map_macros.drawButtonToggleGroup(has_bank, parameter, button_w, label, 
     Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
     if has_bank then
         Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, Part.Draw.Elements.lastElement(), true)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
+
     -- label
     if label then
-        Part.Cursor.setCursorSize(label_w, nil)
+        if has_bank then
+            Part.Cursor.setCursorSize(label_w, nil)
+        else
+            Part.Cursor.setCursorSize(label_w + Part.Cursor.getCursorW() + Part.Cursor.getCursorPadX(), nil)
+        end
+
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
         map_macros.trackParameterLabel(text)
@@ -373,16 +419,26 @@ function map_macros.drawButtonToggleGroup(has_bank, parameter, button_w, label, 
     -- button
     Part.Cursor.setCursorSize(button_w, nil)
 
+    local button
+
     if has_bank then
-        Part.Control.Button.Button:new(nil, parameter[1], true, button_label, 1)
+        button = Part.Control.Button.Button:new(nil, parameter[1], true, button_label, 1)
     else
-        Part.Control.Button.Button:new(nil, parameter, true, button_label, 1)
+        button = Part.Control.Button.Button:new(nil, parameter, true, button_label, 1)
     end
+
+    -- box width
+    local frame_w = Part.Cursor.getCursorX() - frame_x + Part.Cursor.getCursorW() + pad_x
+
+    -- box
+    Part.Layout.Box.Box:new(nil, true, true, frame_x - pad_x, frame_y - pad_y, frame_w + pad_x * 2, frame_h + pad_y * 2)
 
     -- udpate background label dimensions
     map_macros.closeLabel()
 
     Part.Cursor.destackCursor()
+
+    return button
 end
 
 -- Function : Draw Button Selection Group
@@ -391,6 +447,15 @@ end
 function map_macros.drawButtonSelectionGroup(has_bank, parameter, is_toggle, selection, label, label_w)
     Part.Cursor.stackCursor()
 
+    local buttons = {}
+
+    -- store starting point of box
+    local pad_x = map_macros.parameter_frame_pad_x
+    local pad_y = map_macros.parameter_frame_pad_y
+    local frame_x = Part.Cursor.getCursorX()
+    local frame_y = Part.Cursor.getCursorY()
+    local frame_h = 16
+
     -- background label
     map_macros.openLabel()
 
@@ -398,12 +463,18 @@ function map_macros.drawButtonSelectionGroup(has_bank, parameter, is_toggle, sel
     Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
     if has_bank then
         Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, Part.Draw.Elements.lastElement(), true)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
     -- parameter label
     if label then
-        Part.Cursor.setCursorSize(label_w, nil)
+        if has_bank then
+            Part.Cursor.setCursorSize(label_w, nil)
+        else
+            Part.Cursor.setCursorSize(label_w + Part.Cursor.getCursorW() + Part.Cursor.getCursorPadX(), nil)
+        end
+
         local text = Part.Layout.Text.Text:new(nil, label)
         text:parameterLabel()
         map_macros.trackParameterLabel(text)
@@ -423,20 +494,32 @@ function map_macros.drawButtonSelectionGroup(has_bank, parameter, is_toggle, sel
 
         -- button
         Part.Cursor.setCursorSize(sel.width, nil)
-        local button = Part.Control.Button.Button:new(nil, parameter[1], is_toggle, button_label, sel.value)
-        button:selectionButton()
+        local button
 
-        -- color lookup
-        local color_palette = Part.Color.Lookup.color_palette.button.selection
+        if has_bank then
+            button = Part.Control.Button.Button:new(nil, parameter[1], is_toggle, button_label, sel.value)
+        else
+            button = Part.Control.Button.Button:new(nil, parameter, is_toggle, button_label, sel.value)
+        end
+
+        table.insert(buttons, button)
+        button:selectionButton()
 
         -- increment cursor
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
+    -- box width
+    local frame_w = Part.Cursor.getCursorX() - frame_x
+
+    -- box
+    Part.Layout.Box.Box:new(nil, true, true, frame_x - pad_x, frame_y - pad_y, frame_w + pad_x * 2, frame_h + pad_y * 2)
+
     -- udpate background label
     map_macros.closeLabel()
 
     Part.Cursor.destackCursor()
+    return buttons
 end
 
 -- Function : Draw Knob Group with Display
@@ -539,14 +622,45 @@ function map_macros.drawKnobGroup(has_bank, parameter, knob_is_bi, label, label_
     map_macros.closeLabel()
 
     Part.Cursor.destackCursor()
+    return knob
 end
 
 -- Function : Draw Slider Group
 -- --------------------------------------------------
 
 function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, slider_w, label, label_w, parameter_toggle,
-                                    parameter_toggle_label)
+                                    parameter_toggle_label, show_monitoring, monitoring_has_bank, monitoring_offset,
+                                    monitoring_multiplier)
     Part.Cursor.stackCursor()
+
+    -- parameter monitoring
+    show_monitoring = show_monitoring or false
+    monitoring_has_bank = monitoring_has_bank or false
+    monitoring_offset = monitoring_offset or 0
+    monitoring_multiplier = monitoring_multiplier or 1
+
+    -- additional toggle button
+    local toggle_button
+    local toggle_button_label = map_macros.button_percentage_label
+
+    -- slider size
+    local slider_size = slider_w or 50
+
+    if parameter_toggle then
+        slider_size = slider_size - 30
+    end
+
+    if show_monitoring then
+        slider_size = slider_size - 30
+    end
+
+
+    -- store starting point of box
+    local pad_x = map_macros.parameter_frame_pad_x
+    local pad_y = map_macros.parameter_frame_pad_y
+    local frame_x = Part.Cursor.getCursorX()
+    local frame_y = Part.Cursor.getCursorY()
+    local frame_h = 16
 
     -- background label
     map_macros.openLabel()
@@ -555,6 +669,7 @@ function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, sl
     Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
     if has_bank then
         Part.Control.ButtonBank.ButtonBank:new(nil, parameter_slider[2])
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, Part.Draw.Elements.lastElement(), true)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     else
         label_w = label_w + Part.Cursor.getCursorW() + Part.Cursor.getCursorPadX()
@@ -571,10 +686,10 @@ function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, sl
 
 
     -- slider
-    Part.Cursor.setCursorSize(slider_w)
+    Part.Cursor.setCursorSize(slider_size)
     Part.Cursor.stackCursor()
-    Part.Cursor.setCursorSize(slider_w, map_macros.slider_h)
-    Part.Cursor.incCursor(0,map_macros.slider_offset,0,0)
+    Part.Cursor.setCursorSize(slider_size, map_macros.slider_h)
+    Part.Cursor.incCursor(0, map_macros.slider_offset, 0, 0)
 
     local slider
 
@@ -584,16 +699,33 @@ function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, sl
         slider = Part.Control.Slider.Slider:new(nil, parameter_slider)
     end
 
-    Part.Cursor.destackCursor()
-
     -- bi-directional value fill
     if slider_is_bi then
         slider:valueFillBi()
     end
 
+    -- additional parameter monitor
+    if show_monitoring then
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0, 2, 0)
+        Part.Cursor.setCursorSize(map_macros.paramter_monitor_w)
+
+        if monitoring_has_bank then
+            Part.Layout.Text.Text:new(nil, "", parameter_slider[1])
+        else
+            Part.Layout.Text.Text:new(nil, "", parameter_slider)
+        end
+
+        Part.Draw.Elements.lastElement():parameterMonitor(monitoring_multiplier)
+    end
+
+    -- box width
+    local frame_w = Part.Cursor.getCursorX() - frame_x + Part.Cursor.getCursorW()
+
+    Part.Cursor.destackCursor()
+
     -- additional toggle parameter
     if parameter_toggle ~= nil then
-        local label = "%"
+        local label = toggle_button_label
 
         if parameter_toggle_label ~= nil then
             label = parameter_toggle_label
@@ -601,140 +733,134 @@ function map_macros.drawSliderGroup(has_bank, parameter_slider, slider_is_bi, sl
 
         -- toggle button
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
-        Part.Cursor.setCursorSize(25, nil)
-        Part.Control.Button.Button:new(nil, parameter_toggle, true, label, 1)
+        Part.Cursor.setCursorSize(map_macros.slider_button_w, nil)
+        toggle_button = Part.Control.Button.Button:new(nil, parameter_toggle, true, label, 1)
     end
+
 
     -- update background label
     map_macros.closeLabel()
+
+    -- box
+    Part.Layout.Box.Box:new(nil, true, true, frame_x - pad_x, frame_y - pad_y, frame_w + pad_x * 2, frame_h + pad_y * 2)
+
     Part.Cursor.destackCursor()
+
+    -- optionally return the toggle button
+    if parameter_toggle ~= nil then
+        return slider, toggle_button
+    end
+
+    return slider
 end
 
 -- Function : Draw MCP Layout Configuration
 -- --------------------------------------------------
 
-function map_macros.drawMcpLayoutConfiguration(row_data, parameter)
-    local base_y = Part.Cursor.getCursorY()
-
+function map_macros.drawMcpLayoutConfiguration(parameter)
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
-    local images = {
-        { image = map_macros.icons.table.mcp_pan_layout_top },
-        { image = map_macros.icons.table.mcp_pan_layout_strip },
-        { image = map_macros.icons.table.mcp_pan_layout_bottom }
+    local layouts = {
+        { value = 0, image = map_macros.icons.table.mcp_pan_layout_top,    hint = Part.Gui.Hint.Lookup.mcp_layout_fader_top },
+        { value = 1, image = map_macros.icons.table.mcp_pan_layout_strip,  hint = Part.Gui.Hint.Lookup.mcp_layout_strip },
+        { value = 2, image = map_macros.icons.table.mcp_pan_layout_bottom, hint = Part.Gui.Hint.Lookup.mcp_layout_block }
     }
 
     -- dimensions
-    local label_w = 70
-    local table_w = 27
+    local description_w = 80
+
+    -- created icons
+    local images = {}
 
     Part.Cursor.stackCursor()
 
-    Part.Cursor.setCursorSize(label_w, map_macros.table_icon_h)
-
-    -- starting corner shading
-    local label = Part.Layout.Label.Label:new(nil)
-    label:tableEmptySpace()
+    -- background shader
+    Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
+    map_macros.openLabel()
 
     -- bank button
-    Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
-    Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+    local button = Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, button, false)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
-    -- parameter label
-    Part.Cursor.setCursorSize(50, map_macros.table_icon_h)
-    local text = Part.Layout.Text.Text:new(nil, "Layout")
-    text:tableEntry()
-    text:centerHorz()
-    text:centerVert()
+    -- layout label
+    Part.Cursor.setCursorSize(description_w, map_macros.table_icon_h)
+    local text = Part.Layout.Text.Text:new(nil, "Fader Layout")
+    text:parameterLabel()
+    Part.Cursor.incCursor(Part.Cursor.getCursorW() + 10, 0)
+
+    -- iterate layouts
+    for _, layout in pairs(layouts) do
+        -- marker
+        Part.Cursor.setCursorSize(10, map_macros.table_icon_h)
+        local marker = Part.Control.Marker.Marker:new(nil, parameter[1], false, layout.value)
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+
+        -- image
+        Part.Cursor.setCursorSize(30, map_macros.table_icon_h)
+        local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, layout.image)
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+        map_macros.trackParameterLabel(image)
+        table.insert(images, image)
+
+        -- hints
+        Part.Control.Hint.Hint:new(nil, layout.hint, marker)
+
+        local hint = Part.Control.Hint.Hint:new(nil, layout.hint, image)
+        hint:showHover(0, 4)
+    end
 
     Part.Cursor.destackCursor()
 
-    map_macros.nextLine()
+    -- update background shader
+    map_macros.closeLabel()
 
-    Part.Cursor.setCursorSize(table_w, map_macros.table_icon_h)
-
-    -- iterate layouts
-    for idx, row in pairs(row_data) do
-        -- row background shader
-        local label = Part.Layout.Label.Label:new(nil)
-        label:tableRow(idx % 2)
-
-        Part.Cursor.stackCursor()
-
-        -- image
-        Part.Cursor.setCursorSize(table_w, map_macros.table_icon_h)
-        Part.Cursor.incCursor(5, 0)
-        local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, images[idx].image)
-        map_macros.trackParameterLabel(image)
-        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
-
-        -- marker
-        Part.Control.Marker.Marker:new(nil, parameter[1], false, idx - 1)
-
-        -- update row shader
-        label:stretch(Part.Cursor.getCursorX() + Part.Cursor.getCursorW())
-
-
-        -- increment line
-        Part.Cursor.destackCursor()
-        map_macros.nextLine()
-    end
-
-    Part.Cursor.setCursorPos(nil, base_y)
+    return images
 end
 
 -- Function : Draw MCP Fader Configuration
 -- --------------------------------------------------
 
 function map_macros.drawMcpPanConfiguration(row_data)
-    local base_y = Part.Cursor.getCursorY()
-
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
-    local images = {
-        { image = map_macros.icons.table.mcp_fader_layout_knob },
-        { image = map_macros.icons.table.mcp_fader_layout_vert },
-        { image = map_macros.icons.table.mcp_fader_layout_horz }
+    local column_data = {
+        { image = map_macros.icons.table.mcp_fader_layout_knob, hint = Part.Gui.Hint.Lookup.mcp_panmode_fader_normal },
+        { image = map_macros.icons.table.mcp_fader_layout_vert, hint = Part.Gui.Hint.Lookup.mcp_panmode_fader_vertical },
+        { image = map_macros.icons.table.mcp_fader_layout_horz, hint = Part.Gui.Hint.Lookup.mcp_panmode_fader_horizontal }
     }
 
     -- dimensions
-    local label_w = 70
-    local table_w = 20
+    local label_w = 110
+    local table_w = 35
+    local header_h = 20
 
     Part.Cursor.stackCursor()
     Part.Cursor.setCursorSize(label_w, map_macros.table_icon_h)
 
-    -- starting corner shading
-    local label = Part.Layout.Label.Label:new(nil)
-    label:tableEmptySpace()
-
-    Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
+    -- bank button
+    Part.Cursor.setCursorSize(map_macros.bank_w, header_h)
     Part.Control.ButtonBank.ButtonBank:new(nil, row_data[1].parameter[2])
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, button, false)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
     -- starting corner header text
     Part.Cursor.setCursorSize(label_w, map_macros.table_icon_h)
-    local text = Part.Layout.Text.Text:new(nil, "Pan Mode")
-    text:tableEntry()
+    local text = Part.Layout.Text.Text:new(nil, "Pan Fader Layout")
+    text:parameterLabel()
     text:centerHorz()
     text:centerVert()
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.mcp_panmode, text, false)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
-    -- update corner label
-    label:stretch(Part.Cursor.getCursorX() - Part.Cursor.getCursorPadX())
-
     -- table header
-    Part.Cursor.setCursorSize(table_w, map_macros.table_icon_h)
-    local label_column = {}
+    Part.Cursor.setCursorSize(table_w, header_h)
 
     -- iterate header images
-    for idx, column in pairs(images) do
-        -- column shader
-        table.insert(label_column, Part.Layout.Label.Label:new(nil))
-
+    for _, column in pairs(column_data) do
         -- header image
         local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, column.image)
+        local hint = Part.Control.Hint.Hint:new(nil, column.hint, image, false)
+        hint:showHover(-2, 3)
+
         map_macros.trackParameterLabel(image)
 
         -- increment cursor
@@ -742,7 +868,7 @@ function map_macros.drawMcpPanConfiguration(row_data)
     end
 
     Part.Cursor.destackCursor()
-    map_macros.nextLine()
+    Part.Cursor.incCursor(0, header_h)
 
     -- iterate rows
     for idx, row in pairs(row_data) do
@@ -756,12 +882,13 @@ function map_macros.drawMcpPanConfiguration(row_data)
         Part.Cursor.setCursorSize(label_w + 20, map_macros.line_h)
         local text = Part.Layout.Text.Text:new(nil, row.label)
         text:tableEntry(true)
+
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
 
         -- iterate row entries
         Part.Cursor.setCursorSize(table_w, map_macros.table_icon_h)
-        for idx, column in pairs(images) do
+        for idx, column in pairs(column_data) do
             -- marker
             Part.Control.Marker.Marker:new(nil, row.parameter[1], false, idx - 1)
             -- increment cursor
@@ -777,16 +904,6 @@ function map_macros.drawMcpPanConfiguration(row_data)
         -- increment line
         map_macros.nextLine()
     end
-
-    -- iterate columns
-    for idx, label in pairs(label_column) do
-        -- update column shaders
-        label:stretch(nil, Part.Cursor.getCursorY() - Part.Cursor.getCursorPadY())
-        label:tableColumn(idx % 2)
-    end
-
-    -- place cursor at bottom
-    Part.Cursor.setCursorPos(nil, base_y)
 end
 
 -- Function : Draw TCP Fader Layout Configuration
@@ -794,12 +911,14 @@ end
 
 function map_macros.drawTcpFaderLayoutConfiguration(parameter)
     -- images
-    local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
     local layouts = {
-        { value = 0, image = map_macros.icons.table.tcp_fader_layout_inline },
-        { value = 1, image = map_macros.icons.table.tcp_fader_layout_separate },
-        { value = 2, image = map_macros.icons.table.tcp_fader_layout_explode }
+        { value = 0, image = map_macros.icons.table.tcp_fader_layout_inline,   hint = Part.Gui.Hint.Lookup.tcp_fader_layout_inline },
+        { value = 2, image = map_macros.icons.table.tcp_fader_layout_explode,  hint = Part.Gui.Hint.Lookup.tcp_fader_layout_stacked },
+        { value = 3, image = map_macros.icons.table.tcp_fader_layout_vertical, hint = Part.Gui.Hint.Lookup.tcp_fader_layout_vertical }
     }
+
+    -- created icons
+    local images = {}
 
     Part.Cursor.stackCursor()
 
@@ -808,7 +927,8 @@ function map_macros.drawTcpFaderLayoutConfiguration(parameter)
     map_macros.openLabel()
 
     -- bank button
-    Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+    local button = Part.Control.ButtonBank.ButtonBank:new(nil, parameter[2])
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, button, false)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
     -- layout label
@@ -821,7 +941,7 @@ function map_macros.drawTcpFaderLayoutConfiguration(parameter)
     for idx, layout in pairs(layouts) do
         -- marker
         Part.Cursor.setCursorSize(10, map_macros.table_icon_h)
-        Part.Control.Marker.Marker:new(nil, parameter[1], false, idx - 1)
+        local marker = Part.Control.Marker.Marker:new(nil, parameter[1], false, layout.value)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
         -- image
@@ -829,12 +949,23 @@ function map_macros.drawTcpFaderLayoutConfiguration(parameter)
         local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, layout.image)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
         map_macros.trackParameterLabel(image)
+        table.insert(images, image)
+
+        -- hints
+        Part.Control.Hint.Hint:new(nil, layout.hint, marker)
+
+        local hover_offset_x = -4
+        local hover_offset_y = 6
+        local hint = Part.Control.Hint.Hint:new(nil, layout.hint, image)
+        hint:showHover(hover_offset_x, hover_offset_y)
     end
 
     Part.Cursor.destackCursor()
 
     -- update background shader
     map_macros.closeLabel()
+
+    return images
 end
 
 -- Function : Draw TCP Fader Configuration
@@ -844,8 +975,8 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
     local icon_path = map_macros.icon_path_root .. "/" .. Part.Color.Lookup.image_set_table .. "/"
 
     -- default dimensions
-    if label_w == nil then label_w = 50 end
-    if slider_w == nil then slider_w = 50 end
+    if label_w == nil then label_w = 40 end
+    if slider_w == nil then slider_w = 110 end
 
     -- icon width
     local icon_w = 20
@@ -856,28 +987,35 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
 
     -- check if mixer-hide is available
     local has_mixer = false
-    for idx, entry in pairs(fader_data) do
+    for _, entry in pairs(fader_data) do
         if entry.par_vis_mixer ~= nil then
             has_mixer = true
         end
     end
 
+    local hint
+    local hover_offset_x = 4
+    local hover_offset_y = 6
+
     -- visibility header image
     local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, map_macros.icons.table.visbility)
-    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility, image, false)
+    hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility, image, false)
+    hint:showHover(hover_offset_x, hover_offset_y)
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
     -- mixer-hide header image
     if has_mixer then
         local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, map_macros.icons.table.mixer_hide)
-        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer, image, false)
+        hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer, image, false)
+        hint:showHover(hover_offset_x, hover_offset_y)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
     -- fader size header image
     Part.Cursor.setCursorSize(slider_w)
     local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, map_macros.icons.table.fader_size)
-    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.fader_size, image, false)
+    hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_size, image, false)
+    hint:showHover(-40, hover_offset_y)
 
     Part.Cursor.destackCursor()
     map_macros.nextLine()
@@ -891,7 +1029,8 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
 
         -- bank button
         Part.Cursor.setCursorSize(map_macros.bank_w, map_macros.line_h)
-        Part.Control.ButtonBank.ButtonBank:new(nil, entry.par_vis[2])
+        local button = Part.Control.ButtonBank.ButtonBank:new(nil, entry.par_vis[2])
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, button, false)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
         -- fader label
@@ -915,18 +1054,22 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
         Part.Cursor.setCursorSize(slider_w)
         Part.Cursor.stackCursor()
 
-        Part.Cursor.setCursorSize(slider_w,Part.Gui.Macros.slider_h)
-        Part.Cursor.incCursor(0,Part.Gui.Macros.slider_offset,0,0)
+        Part.Cursor.setCursorSize(slider_w, Part.Gui.Macros.slider_h)
+        Part.Cursor.incCursor(0, Part.Gui.Macros.slider_offset, 0, 0)
 
-        Part.Control.Slider.Slider:new(nil, entry.par_size[1])
-        
+        -- slider
+        local slider = Part.Control.Slider.Slider:new(nil, entry.par_size[1])
+        Part.Control.Hint.Hint:new(nil, entry.size_hint, slider, false)
+
         Part.Cursor.destackCursor()
-        
+
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
-        
+
         -- scale button
         Part.Cursor.setCursorSize(30)
-        Part.Control.Button.Button:new(nil, entry.par_size_scale[1], true, "%", 1)
+        local button = Part.Control.Button.Button:new(nil, entry.par_size_scale[1], true,
+            map_macros.button_percentage_label, 1)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.size_percentual, button, false)
 
         -- update row shader
         local label = map_macros.closeLabel()
@@ -947,11 +1090,11 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
 
     -- top-left corner shader
     local empty_space = Part.Layout.Label.Label:new(nil)
-    empty_space:tableEmptySpace()
+    -- empty_space:tableEmptySpace()
 
     -- dimensions
     local empty_space_y = 0
-    local label_w = 100
+    local label_w = map_macros.table_label_w
 
     -- optionally override label width
     if matrix_data["label_width"] ~= nil then
@@ -972,14 +1115,18 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
     -- ::::::::::::::::::::::::::::::::::::::::
     local function drawTableHeader(parameter_set, icon)
         -- column shader
-        table.insert(label_columns, Part.Layout.Label.Label:new(nil))
+        -- table.insert(label_columns, Part.Layout.Label.Label:new(nil))
 
         Part.Cursor.stackCursor()
 
+        local offset = -24
+
         -- bank button
+        Part.Cursor.incCursor(offset, 0, 0, 0)
         Part.Control.ButtonBank.ButtonBank:new(nil, parameter_set[2])
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_toggle, Part.Draw.Elements.lastElement(), true)
         Part.Draw.Elements.lastElement():triggerBankUpdate()
-        Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
+        Part.Cursor.incCursor(24, 0, 0, 0)
 
         -- image
         local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, icon)
@@ -992,25 +1139,36 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
         -- next icon
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
+    -- ::::::::::::::::::::::::::::::::::::::::
+
+    -- hover area differs
+    local hover_offset_x = -6
+    local hover_offset_y = 4
 
     -- visibility header column
     if parameter_visibility ~= nil then
         drawTableHeader(parameter_visibility, map_macros.icons.table.visbility)
-        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility, map_macros.getLastParameterLabel(),
+        local hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_visbility,
+            map_macros.getLastParameterLabel(),
             false)
+        hint:showHover(hover_offset_x, hover_offset_y)
     end
 
     -- mixer-hide header column
     if parameter_mixer ~= nil then
         drawTableHeader(parameter_mixer, map_macros.icons.table.mixer_hide)
-        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer, map_macros.getLastParameterLabel(), false)
+        local hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_nomixer,
+            map_macros.getLastParameterLabel(), false)
+        hint:showHover(hover_offset_x, hover_offset_y)
     end
 
     -- separator column
     if parameter_separator ~= nil then
         drawTableHeader(parameter_separator, map_macros.icons.table.separator)
-        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_separator, map_macros.getLastParameterLabel(),
+        local hint = Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.vismatrix_separator,
+            map_macros.getLastParameterLabel(),
             false)
+        hint:showHover(hover_offset_x, hover_offset_y)
     end
 
     -- update corner shader
@@ -1019,9 +1177,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
     Part.Cursor.destackCursor()
 
     -- row starting position
-    for i = 0, 1 do
-        Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
-    end
+    Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
 
     -- rigthmost position
     local rows_max_x = 0
@@ -1071,13 +1227,10 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
         -- rightmost position
         rows_max_x = math.max(rows_max_x, Part.Cursor.getCursorX() - Part.Cursor.getCursorPadX())
 
-        -- next line
+        -- destack
         Part.Cursor.destackCursor()
-        Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
 
-        if parameter_separator ~= nil and entry.separator then
-            Part.Cursor.incCursor(0, 8,0,0)
-        end
+        Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
     end
 
     -- upade row shaders

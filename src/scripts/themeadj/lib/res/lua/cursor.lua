@@ -1,9 +1,13 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
+--[[
+    Drawing Cursor handling.
 
+    Exists to make layout easier by giving one a drawing cursor than be dynamically transformed.
+]]
 
 local cursor = {}
 

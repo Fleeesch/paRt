@@ -1,17 +1,15 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
-local gui = {
-    Window = {},
-    Theme = {},
-    Keyboard = {},
-    Mouse = {},
-    Hint = {
-        Hint = {},
-        Lookup = {}
-    }
-}
+
+--[[
+    Windows and Theme management; handles dpi tracking and theme file analysis.
+
+    Also contains mouse-over-hint management.
+]] --
+
+local gui = { Window = {}, Theme = {}, Keyboard = {}, Mouse = {}, Hint = { Hint = {}, Lookup = {} } }
 
 -- ================================================================================
 --                          Window Management
@@ -56,7 +54,7 @@ end
 --  Method : Get Window Scaling Factor
 -- -------------------------------------------
 function gui.Window.calcScale()
-    Part.Global.scale = Part.Functions.match_array(gfx.ext_retina,Part.Global.zoom_levels)
+    Part.Global.scale = Part.Functions.match_array(gfx.ext_retina, Part.Global.zoom_levels)
     Part.Draw.Graphics.border = math.max(math.floor(Part.Draw.Graphics.border_base * Part.Global.scale), 1)
     return Part.Global.scale
 end
@@ -114,7 +112,6 @@ end
 -- -------------------------------------------
 
 function gui.Window.setWindowPosition(x, y)
-    
     -- set window x and y position
     local w, h
 
@@ -135,7 +132,6 @@ end
 -- -------------------------------------------
 
 function gui.Window.setScale(scale_factor)
-    
     -- calculate width and height
     local w, h
 
@@ -246,8 +242,33 @@ end
 --                          Theme Handling
 -- ================================================================================
 
+gui.last_theme_layout = "default"
 
---  Method : Get Light Theme
+--  Helper Method : Words Match
+-- -------------------------------------------
+
+-- OR logic, single match counts as proper match
+
+local function words_match(input, words)
+    -- words must be table
+    if type(words) ~= "table" then
+        words = { words }
+    end
+
+    -- case-insensitive
+    input = input:lower()
+
+    -- iterate words
+    for _, w in ipairs(words) do
+        -- look for a match
+        if input:find(w:lower(), 1, true) then
+            return true
+        end
+    end
+    return false
+end
+
+--  Method : Check Current Theme
 -- -------------------------------------------
 
 function gui.Theme.checkCurrentTheme()
@@ -270,7 +291,6 @@ function gui.Theme.checkCurrentTheme()
         Part.Global.par_theme_selected:setValue(2)
         Part.Color.Lookup.useLightPalette()
     end
-
 end
 
 --  Method : Validate Theme
@@ -286,36 +306,91 @@ function gui.Theme.validateTheme(initial_validation)
             return false
         end
 
+        -- update global theme data
+        local theme_path, theme_name = reaper.BR_GetCurrentTheme()
+        local theme_data = gui.Theme.getThemeMetaData(theme_name)
+        Part.Global.theme_is_unpacked = not theme_data.zipped
+        Part.Global.theme_is_modded = theme_data.mod
+
         return true
     end
 
     return false
 end
 
+--  Method : Get Theme Meta Data
+-- -------------------------------------------
+
+function gui.Theme.getThemeMetaData(theme_path)
+    local file_name, file_extension = Part.Functions.getFileNameFromPath(theme_path)
+
+    local modded = false
+    local unpacked = false
+    local zip = words_match(file_extension, "ReaperThemeZip")
+
+
+    if words_match(theme_path, { "mod", "modded", "modified" }) then
+        modded = theme_path
+    elseif words_match(theme_path, "unpacked") then
+        unpacked = theme_path
+    end
+
+    return { mod = modded, unpacked = unpacked, zipped = zip }
+end
+
 --  Method : Lookup available Themes
 -- -------------------------------------------
 
-function gui.Theme.loofForPartThemes()
-    -- Sub-Function : Look for Words in String
-    local function find_words_in_order(str, word1, word2)
-        str = string.lower(str)
-        word1 = string.lower(word1)
-        word2 = string.lower(word2)
-
-        local w1_start_pos, w1_end_pos = string.find(str, word1)
-        local w2_start_pos, w2_end_pos = string.find(str, word2)
-
-
-        if w1_start_pos == nil or w2_start_pos == nil then
-            return false
-        end
-
-        if w2_start_pos > w1_start_pos then
-            return true
-        end
-
-        return false
+function gui.Theme.lookForPartThemes()
+    -- Helper-Function : Theme Match
+    -- ==============================================
+    local function theme_matches(input_string, target_theme)
+        return words_match(input_string, "part") and words_match(input_string, target_theme)
     end
+
+    -- Helper-Function : Prioritize Theme
+    -- ==============================================
+    local function parse_them(theme_collection)
+        -- filter targets
+        local original = nil
+        local modded = nil
+        local unpacked = nil
+
+        -- iterate theme collection
+        for _, theme in pairs(theme_collection) do
+            -- ignore themes that are meant to be skipped
+            if not words_match(theme, { "skip" }) then
+                local theme_data = gui.Theme.getThemeMetaData(theme)
+
+                if theme_data.mod then
+                    modded = theme
+                elseif theme_data.unpacked then
+                    unpacked = theme
+                elseif theme_data.zipped then
+                    original = theme
+                end
+            end
+        end
+
+        -- prioritize modded themes over everything
+        if modded ~= nil then
+            return { file = modded, mod = true, unpacked = true }
+        end
+
+        -- prioritize unpacked themes over zipped ones
+        if unpacked ~= nil then
+            return { file = unpacked, mod = false, unpacked = true }
+        end
+
+        -- use original theme if there's nothing else
+        if original ~= nil then
+            return { file = original, mod = false, unpacked = false }
+        end
+
+        return nil
+    end
+
+    -- ==============================================
 
     local themepath = reaper.GetResourcePath() .. "/ColorThemes/"
 
@@ -324,27 +399,38 @@ function gui.Theme.loofForPartThemes()
     local reapertheme_zip = Part.Functions.listFilesInFolder(themepath, "ReaperThemeZip")
     local theme_list = { reapertheme_zip, reapertheme }
 
-    -- theme file names
+    -- theme file collections separated by color scheme
+    local theme_collection_dark = {}
+    local theme_collection_dimmed = {}
+    local theme_collection_light = {}
+
+    -- target theme files
     local theme_dark = nil
     local theme_dimmed = nil
     local theme_light = nil
 
     -- iterate themes, prioritizing reaperthemezip files
     for _, theme_files in pairs(theme_list) do
-        for key, val in pairs(theme_files) do
-            if find_words_in_order(val, "part", "dark") then
-                theme_dark = val
+        for _, theme in pairs(theme_files) do
+            -- dark themes
+            if theme_matches(theme, "dark") then
+                table.insert(theme_collection_dark, theme)
             end
-
-            if find_words_in_order(val, "part", "dimmed") then
-                theme_dimmed = val
+            -- dimmed themes
+            if theme_matches(theme, "dimmed") then
+                table.insert(theme_collection_dimmed, theme)
             end
-
-            if find_words_in_order(val, "part", "light") then
-                theme_light = val
+            -- light themes
+            if theme_matches(theme, "light") then
+                table.insert(theme_collection_light, theme)
             end
         end
     end
+
+    -- filter themes by prioritization
+    theme_dark = parse_them(theme_collection_dark)
+    theme_dimmed = parse_them(theme_collection_dimmed)
+    theme_light = parse_them(theme_collection_light)
 
     -- return theme lists based on keywords
     return { Dark = theme_dark, Dimmed = theme_dimmed, Light = theme_light }
@@ -355,8 +441,14 @@ end
 
 function gui.Theme.validateLoadingTheme(title)
     -- get theme file
-    local themes = gui.Theme.loofForPartThemes()
-    local theme_file = themes[title]
+    local themes = gui.Theme.lookForPartThemes()
+
+    -- abort if no theme found
+    if themes[title] == nil then
+        return nil
+    end
+
+    local theme_file = themes[title].file
 
     -- theme file must exist
     if theme_file == nil then
@@ -399,7 +491,6 @@ end
 
 function gui.Theme.initiateLoadingTheme(title)
     local theme_file = gui.Theme.validateLoadingTheme(title)
-
     -- theme needs to be loadable
     if theme_file == nil then
         return
@@ -414,8 +505,40 @@ function gui.Theme.initiateLoadingTheme(title)
     Part.Draw.Graphics.splashMessage("Loading " .. title .. " Theme...")
 end
 
+--  Method : Freeze Theme
+-- -------------------------------------------
+
+-- gets called whenever a large amount of theme parameters are changed
+-- -> this is not an actual freeze in a technical sense, there is no functionality provided by Reaper for this
+
+function gui.Theme.freezeTheme()
+    -- only allow freezing after startup, otherwise you'll be dealing with slowdown
+    if Part.Global.ticks < Part.Global.startup_delay then
+        return
+    end
+
+    -- load a layout that doesn't exist (seems to halt individual parameter updates during this layout)
+    reaper.ThemeLayout_SetLayout("global", "freeze")
+end
+
+--  Method : Unfreeze Theme
+-- -------------------------------------------
+
+-- gets called whenever a large amount of theme parameters are changed
+
+function gui.Theme.unfreezeTheme()
+    -- only allow freezing after startup, otherwise you'll be dealing with slowdown
+    if Part.Global.ticks < Part.Global.startup_delay then
+        return
+    end
+
+    -- back to default layout
+    reaper.ThemeLayout_SetLayout("global", "")
+end
+
 --  Method : Load Dark Theme
 -- -------------------------------------------
+-- has to be global because of an externally stored function call
 
 function loadDarkTheme()
     gui.Theme.initiateLoadingTheme("Dark")
@@ -423,6 +546,7 @@ end
 
 --  Method : Load Dark Windows Theme
 -- -------------------------------------------
+-- has to be global because of an externally stored function call
 
 function loadDimmedTheme()
     gui.Theme.initiateLoadingTheme("Dimmed")
@@ -430,6 +554,7 @@ end
 
 --  Method : Load Light Theme
 -- -------------------------------------------
+-- has to be global because of an externally stored function call
 
 function loadLightTheme()
     gui.Theme.initiateLoadingTheme("Light")
@@ -475,7 +600,7 @@ gui.Mouse.drag_active = false
 -- hover
 gui.Mouse.hover_target = nil
 
--- timeout for registering lack of movement
+-- timeout frames for registering lack of movement
 gui.Mouse.stop_time = 15
 
 -- timeout counter
@@ -778,10 +903,43 @@ gui.Keyboard.input = 0
 
 -- character codes lookup table
 gui.Keyboard.charcode = {
-    null = -1,
-    esc = 27,
-    r = 114,
-    t = 116
+    null    = -1,
+    esc     = 27,
+    r       = 114,
+    t       = 116,
+    up      = 30064,
+    down    = 1685026670,
+    left    = 1818584692,
+    right   = 1919379572,
+    insert  = 6909555,
+    delete  = 6579564,
+    home    = 1752132965,
+    key_end = 6647396,
+    pgup    = 1885825906,
+    pgdn    = 1885828460,
+    f1      = 26161,
+    f2      = 26162,
+    f3      = 26163,
+    f4      = 26164,
+    f5      = 26165,
+    f6      = 26166,
+    f7      = 26167,
+    f8      = 26168,
+    f9      = 26169,
+    f10     = 6697264,
+    f11     = 6697265,
+    f12     = 6697266,
+    key_0   = 48,
+    key_1   = 49,
+    key_2   = 50,
+    key_3   = 51,
+    key_4   = 52,
+    key_5   = 53,
+    key_6   = 54,
+    key_7   = 55,
+    key_8   = 56,
+    key_9   = 57,
+
 }
 
 
@@ -836,15 +994,25 @@ function gui.Hint.Hint:new(o)
     o.last_alpha = 0
     o.buffer_slot = 10
 
-    o.font_size = 13
-    o.height_size = 13
+    o.font_size = 16
+    o.height_size = 16
+    o.block_space = 20
     o.paragraph_line_size = 8
-    o.padding = 12
+    o.padding = 10
     o.shadow_size = 3
+
+    -- hard-coded coordinates
+    o.hint_pos_x = Part.Global.hint_x
+    o.hint_pos_y = Part.Global.hint_y
+    o.hint_width = Part.Global.hint_w
+    o.hint_height = Part.Global.hint_h
+    o.hint_pad = 0
 
     o.source = nil
 
     o.remove = false
+
+    o.do_buffer = false
 
     return o
 end
@@ -858,110 +1026,160 @@ gui.Hint.hint_message = gui.Hint.Hint:new()
 function gui.Hint.Hint:buffer()
     local source = self.source
 
-    -- padding
-    local p = Part.Functions.rescale(self.padding)
-    local s = Part.Functions.rescale(self.shadow_size)
+    -- padding and shadow offsets
+    local pad = Part.Functions.rescale(self.padding)
+    local pad_callout = Part.Functions.rescale(4)
 
-    -- colors
-    local color_bg = Part.Functions.deepCopy(source.color_bg)
-    local color_border = Part.Functions.deepCopy(source.color_border)
-    local color_fg = Part.Functions.deepCopy(source.color_fg)
-    local color_shadow = Part.Functions.deepCopy(source.color_shadow)
-
-    -- attributes
+    -- text attributes
     local font_size = self.font_size
     local line_height = Part.Functions.rescale(self.height_size)
-    local paragraph_line_height = Part.Functions.rescale(self.paragraph_line_size)
+    local block_space = Part.Functions.rescale(self.block_space)
 
-    -- generate text block
-    local lines = Part.Functions.textBlock(source.text, 30)
-
-    -- calculate max width from string measurements, record line height
-    local max_w = 0
-    local max_h = 0
-
-    -- measure string
-    Part.Draw.Graphics.setFont(self.font_size)
-
-    for _, line in pairs(lines) do
-        max_w = math.max(gfx.measurestr(line), max_w)
-
-        if line == "[Linebreak]" then
-            max_h = max_h + paragraph_line_height
-        else
-            max_h = max_h + line_height
-        end
-    end
-
-    -- add padding to max dimnesions
-    max_w = max_w + p * 2
-    max_h = max_h + p * 2
-
-    -- dimensions
-    local x = 0
-    local y = 0
-    local w = max_w
-    local h = max_h
-
-    self.draw_w = w
-    self.draw_h = h
-
-    -- clear buffer
+    -- initial buffer dimensions (temporary, will resize later)
+    local w = self.hint_width - pad * 2
+    local h = self.hint_height - pad * 2
     gfx.setimgdim(self.buffer_slot, -1, -1)
-    gfx.setimgdim(self.buffer_slot, w + s, h + s)
+    gfx.setimgdim(self.buffer_slot, w, h)
 
-    local last_dest = gfx.dest
+    -- store current buffer slot
+    local buffer_slot_last = gfx.dest
+
+    -- destination buffer slot
     gfx.dest = self.buffer_slot
 
-    -- background
-    Part.Cursor.setCursorPos(0, 0)
-    Part.Draw.Graphics.drawRectangle(s, s, w, h, color_shadow)
-    Part.Draw.Graphics.drawRectangle(0, 0, w, h, color_bg, color_border)
+    -- output block width
+    local width_limit = Part.Functions.rescale(w)
 
-    -- draw text line by line
-    Part.Cursor.setCursorPos(0 + p, 0 + p)
+    -- block storage and starting values
+    local blocks = {}
+    local block_max_width = 0
+    local block_total_height = 0
 
-    Part.Color.setColor(color_fg,true)
+    -- iterate blocks
+    for _, block in ipairs(source.text) do
+        -- get type (default to "normal")
+        local block_type = block.type or "normal"
+        local font_flags = ""
 
-    local color_text_highlight = Part.Color.Lookup.color_palette.hint.text_highlight
-
-    -- iterate lines
-    for _, line in pairs(lines) do
-        -- linebreak exception
-        if line == "[Linebreak]" then
-            gfx.x = Part.Cursor.getCursorX()
-            gfx.y = gfx.y + paragraph_line_height
-        else
-            -- iterate words
-            for word in line:gmatch("%S+") do
-                -- highlight
-                if word:match("%[.*%]") then
-                    -- filter extra symbols
-                    word = word:gsub("%[([^%[%]]*)%]", "%1")
-                    word = word:gsub("|", " ")
-
-                    -- change formatting
-                    Part.Color.setColor(color_text_highlight, true)
-                    Part.Draw.Graphics.setFont(font_size, "b")
-                end
-
-                -- print word
-                gfx.drawstr(word .. " ")
-                Part.Draw.Graphics.setFont(font_size)
-                Part.Color.setColor(color_fg, true)
-            end
-
-            gfx.x = Part.Cursor.getCursorX()
-            gfx.y = gfx.y + line_height
+        -- bold font
+        if
+            block.type == Part.Gui.Hint.Lookup.HintTypes.warning or
+            --block.type == Part.Gui.Hint.Lookup.HintTypes.attention or
+            --block.type == Part.Gui.Hint.Lookup.HintTypes.info or
+            --block.type == Part.Gui.Hint.Lookup.HintTypes.tip or
+            block.type == Part.Gui.Hint.Lookup.HintTypes.highlight
+        then
+            font_flags = "b"
         end
+
+        -- get lines using width limit
+        local lines = Part.Functions.wrap_text_block(block.text, width_limit, font_size, font_flags)
+
+        -- get block dimensions
+        local block_width, block_height = 0, 0
+        for _, line in ipairs(lines) do
+            block_width = math.max(block_width, gfx.measurestr(line))
+            block_height = block_height + line_height
+        end
+
+        -- append block data to output table
+        table.insert(blocks, { type = block_type, lines = lines, w = block_width, h = block_height })
+
+        -- record max dimensions
+        block_max_width = math.max(block_max_width, block_width)
+        block_total_height = block_total_height + block_height
     end
+
+    -- calculate final block size
+    local block_out_width = block_max_width + pad * 2
+    local block_out_height = block_total_height + pad * 2 + block_space * (#blocks - 1)
+
+    -- height of background
+    local background_w = Part.Functions.rescale(Part.Global.hint_w)
+    local background_h = Part.Functions.rescale(Part.Global.hint_h - 20)
+
+    -- resize buffer to final dimensions
+    gfx.setimgdim(self.buffer_slot, -1, -1)
+    gfx.setimgdim(self.buffer_slot, background_w, background_h)
+
+    -- set target buffer slot
+    gfx.dest = self.buffer_slot
+
+    -- draw background
+    Part.Draw.Graphics.drawRectangle(0, 0, background_w, background_h, Part.Color.Lookup.color_palette.hint.stage_bg, nil)
+
+
+    -- starting position
+    local pos_x = pad
+    local pos_y = pad
+
+    local function draw_callout_bg(x, y, w, h)
+        gfx.rect(x - pad_callout, y - pad_callout, w + 2 * pad_callout, h + 3 * pad_callout)
+    end
+
+    -- iterate blocks
+    for _, block in ipairs(blocks) do
+        -- select color based on type
+
+        -- warning
+        if block.type == Part.Gui.Hint.Lookup.HintTypes.warning then
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.warning_bg, true)
+            draw_callout_bg(pos_x, pos_y, block.w, block.h)
+
+            Part.Draw.Graphics.setFont(font_size, "b")
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.warning_fg, true)
+
+            -- attention
+        elseif block.type == Part.Gui.Hint.Lookup.HintTypes.attention then
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.attention_bg, true)
+            draw_callout_bg(pos_x, pos_y, block.w, block.h)
+
+            --Part.Draw.Graphics.setFont(font_size, "b")
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.attention_fg, true)
+
+            -- tip
+        elseif block.type == Part.Gui.Hint.Lookup.HintTypes.tip then
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.tip_bg, true)
+            draw_callout_bg(pos_x, pos_y, block.w, block.h)
+
+            --Part.Draw.Graphics.setFont(font_size, "b")
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.tip_fg, true)
+
+            -- highlight
+        elseif block.type == Part.Gui.Hint.Lookup.HintTypes.highlight then
+            Part.Draw.Graphics.setFont(font_size, "b")
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.highlight_fg, true)
+        else
+            -- neutral
+            Part.Draw.Graphics.setFont(font_size, "")
+            Part.Color.setColor(Part.Color.Lookup.color_palette.hint.fg, true)
+        end
+
+        -- draw each wrapped line
+        for _, ln in ipairs(block.lines) do
+            gfx.x = pos_x
+            gfx.y = pos_y
+            gfx.drawstr(ln)
+
+            -- space after line
+            pos_y = pos_y + line_height
+        end
+
+        -- space after block
+        pos_y = pos_y + block_space
+    end
+
+    -- restore previous buffer slot
+    gfx.dest = buffer_slot_last
 end
 
 --  Hint Message : Set Source
 -- -------------------------------------------
 
 function gui.Hint.Hint:setSource(source)
-    local show = source ~= self.source
+    if source ~= self.source then
+        self.do_buffer = true
+    end
 
     self.source = source
 end
@@ -970,7 +1188,7 @@ end
 -- -------------------------------------------
 
 function gui.Hint.Hint:clear()
-    self.remove = true
+    self.source = nil
 end
 
 --  Hint Message : Draw
@@ -981,58 +1199,22 @@ function gui.Hint.Hint:draw()
         return
     end
 
+    self.draw_x = Part.Functions.rescale(self.hint_pos_x + self.hint_pad, true, false)
+    self.draw_y = Part.Functions.rescale(self.hint_pos_y, false, true)
 
-    -- cursor offset
-    local offset = 12
-    local padding = 10
-    local p = Part.Functions.rescale(padding)
-    local o = Part.Functions.rescale(offset)
-
-    -- get fade-in factor
-    local alpha = self.source:displayFactor()
-
-    if alpha > 0 and self.last_alpha <= 0 then
+    if self.do_buffer then
         self:buffer()
-    end
-
-    local track_mouse = alpha >= self.last_alpha
-    self.last_alpha = alpha
-
-    -- clear hint after fade-out
-    if self.remove and alpha <= 0 then
-        self.source = nil
-        return
-    end
-
-    -- mouse trakcing
-    if track_mouse then
-        self.draw_x = gfx.mouse_x
-        self.draw_y = gfx.mouse_y
-    end
-
-    -- coordinates
-    local x = self.draw_x + o
-    local y = self.draw_y + o
-
-    -- x axis overshoot flip
-    if x + self.draw_w + p > gfx.w then
-        x = x - self.draw_w - p * 2
-    end
-
-    -- y axis overshoot flip
-    if y + self.draw_h + p > gfx.h then
-        y = y - self.draw_h - p * 2
+        self.do_buffer = false
     end
 
     -- draw buffered images
     local dest_last = gfx.dest
     gfx.dest = -1
-    gfx.x = x
-    gfx.y = y
-    gfx.a = alpha
+    gfx.x = self.draw_x
+    gfx.y = self.draw_y
+    gfx.a = 1
     gfx.blit(self.buffer_slot, 1, 0)
     gfx.dest = dest_last
 end
-
 
 return gui

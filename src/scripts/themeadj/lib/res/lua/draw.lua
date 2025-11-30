@@ -1,7 +1,12 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
+
+--[[
+    Tools for drawing stuff; anything that actually puts the graphics on display.
+]]
+
 local draw = { Buffer = {}, Elements = {}, Graphics = {}, Sprites = {} }
 
 -- ===========================================================================
@@ -83,7 +88,7 @@ function draw.Sprites.createCornerAssets()
     gfx.dest = dest
 
     Part.Color.setColor(draw.Sprites.color_hint, true)
-    gfx.triangle(0, 0, size-1, 0, 0, size-1)
+    gfx.triangle(0, 0, size - 1, 0, 0, size - 1)
 
     gfx.dest = last_dest
 end
@@ -462,49 +467,78 @@ draw.Graphics.splash_message = nil
 
 function draw.Graphics.drawThemeError()
     local color_fg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.theme_error.fg)
-    local color_bg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.theme_error.bg)
-    local color_box = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.theme_error.box)
-    local color_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.theme_error.border)
+    local color_fg_info = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.theme_error.fg_info)
 
     -- display dimensions
     local w = gfx.w
     local h = gfx.h
 
-    -- error string
-    local str = "no paRt theme detected"
+    -- header string
+    local str_header = "No paRt theme detected"
+
+    -- info string
+    local str_info = {
+        {
+            "Make sure you have a valid paRt theme and",
+            "its filename contains a combination of \"part\" and a theme color"
+        },
+        {
+            "Examples:",
+            "Part - Dark.ReaperThemeZip",
+            "part_dimmmed.ReaperThemeZip",
+            "part is light.ReaperTheme"
+        }
+    }
+
 
     -- update font size
     draw.Graphics.setFont(30)
 
     -- get string width
-    local str_w = gfx.measurestr(str)
+    local str_w = gfx.measurestr(str_header)
 
     -- calculate center drawing dimensions
     local x = (w - str_w) / 2
-    local y = (h - 200) / 2
+    local y = (h - 280) / 2
 
     -- padding
     local pad = Part.Functions.rescale(40)
 
     -- set cursor
     Part.Cursor.setCursor(x, y, str_w, str_s)
-
-    draw.Graphics.drawRectangle(0, 0, gfx.w, gfx.h, color_bg)
-
     gfx.x = Part.Cursor.getCursorX()
     gfx.y = Part.Cursor.getCursorY() - pad
-
-    -- draw background
-    draw.Graphics.drawRectangle(Part.Cursor.getCursorX() - pad, Part.Cursor.getCursorY() - pad,
-        Part.Cursor.getCursorW() + pad * 2, Part.Cursor.getCursorH() + pad * 2, color_box,
-        color_border)
 
     -- font color
     Part.Color.setColor(color_fg, true)
 
     -- draw string
-    gfx.drawstr(str, 5, Part.Cursor.getCursorX() + Part.Cursor.getCursorW(),
-        Part.Cursor.getCursorY() + Part.Cursor.getCursorH() + pad)
+    gfx.drawstr(str_header, 5, Part.Cursor.getCursorX() + Part.Cursor.getCursorW(), Part.Cursor.getCursorY() + Part.Cursor.getCursorH() + pad)
+
+    -- update font
+    draw.Graphics.setFont(18)
+    Part.Color.setColor(color_fg_info, true)
+
+    -- draw info text using separated blocks
+    Part.Cursor.incCursor(-40, 60)
+    gfx.x = Part.Cursor.getCursorX()
+    gfx.y = Part.Cursor.getCursorY()
+    local line_x = gfx.x
+
+    -- iterate blocks
+    for _, block in pairs(str_info) do
+        -- iterate lines
+        for _, line in pairs(block) do
+            -- draw line
+            gfx.drawstr(line, 5)
+            gfx.x = line_x
+            Part.Cursor.incCursor(0, 20)
+            gfx.y = Part.Cursor.getCursorY()
+        end
+
+        -- block separator
+        Part.Cursor.incCursor(0, 10)
+    end
 end
 
 --  Method : Draw Corner Triangle
@@ -658,6 +692,65 @@ function draw.Graphics.drawSplashMessage()
     draw.Graphics.splash_message = nil
 end
 
+--  Method : Draw Controls
+-- -------------------------------------------
+
+function draw.Graphics.drawControls()
+    --
+    --  Helper Function: Draw Command Line
+    -- =======================================
+    local function draw_command_line(input, description, start_x, space)
+        -- dimensions
+        local line_h = 20
+        local column_offset = 80
+
+        -- extra space
+        if space then
+            line_h = line_h + 10
+        end
+
+        -- input
+        Part.Color.setColor(Part.Color.Lookup.color_palette.hint.controls_fg, true)
+        gfx.drawstr(input .. "")
+        gfx.x = start_x + Part.Functions.rescale(column_offset)
+
+        -- description
+        Part.Color.setColor(Part.Color.Lookup.color_palette.hint.controls_fg_desc, true)
+        gfx.drawstr(description)
+
+        -- next line
+        gfx.x = start_x
+        gfx.y = gfx.y + Part.Functions.rescale(line_h)
+    end
+
+    -- initial position
+    local x = Part.Functions.rescale(Part.Global.hint_x + 10, true, false)
+    local y = Part.Functions.rescale(Part.Global.hint_y + 20, false, true)
+    gfx.x = x
+    gfx.y = y
+
+    -- font setup
+    draw.Graphics.setFont(14)
+
+    -- shortcuts
+    local commands = {
+        { label = "Mouse L",     description = "Set Value",           space = false },
+        { label = "Mouse R",     description = "Reset Value",         space = false },
+        { label = "CTRL / CMD",  description = "Fine Adjustment",     space = true },
+        { label = "Left, Right", description = "Browse Tabs",         space = false },
+        { label = "Up, Down",    description = "Browse Sub-Tabs",     space = true },
+        { label = "1-8",         description = "Bank Select",         space = false },
+        { label = "F1-F8",       description = "Config Select",       space = true },
+        { label = "R",           description = "Reset Window",        space = false },
+        { label = "T",           description = "Restart T. Adjuster", space = false },
+        { label = "ESC",         description = "Close Window",        space = false },
+    }
+
+    for _, command in ipairs(commands) do
+        draw_command_line(command.label, command.description, x, command.space)
+    end
+end
+
 --  Method : Draw Background
 -- -------------------------------------------
 
@@ -667,27 +760,116 @@ function draw.Graphics.drawBackground()
 
     -- draw background
     gfx.rect(0, 0, gfx.w, gfx.h)
+
+    -- hint background
+    local x = Part.Functions.rescale(Part.Global.hint_x, true, false)
+    local y = Part.Functions.rescale(Part.Global.hint_y, false, true)
+    local w = Part.Functions.rescale(Part.Global.hint_w)
+    local h = Part.Functions.rescale(Part.Global.hint_h)
+
+    Part.Color.setColor(Part.Color.Lookup.color_palette.hint.stage_bg, true)
+    gfx.rect(x, y, w, h)
+
+    -- theme hint coordinates
+    gfx.x = x + Part.Functions.rescale(10)
+    gfx.y = y + h - Part.Functions.rescale(20)
+    draw.Graphics.setFont(16)
+
+    -- unpacked
+    if Part.Global.theme_is_unpacked then
+        Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.unpacked, true)
+        gfx.drawstr("UNPACKED")
+        gfx.drawstr("  ")
+    end
+
+    -- modded
+    if Part.Global.theme_is_modded then
+        Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.modded, true)
+        gfx.drawstr("MOD")
+    end
+
+    -- control hint overlay
+    draw.Graphics.drawControls()
+end
+
+--  Method : Draw Theme Palette Sample
+-- -------------------------------------------
+
+function draw.Graphics.drawThemePaletteSample(palette_address, width)
+    local total_w = width or 200
+    local sample_h = 20
+    local pad = 5
+
+    -- palette has to be valid
+    if Part.Color.Lookup[palette_address] == nil then
+        return
+    end
+
+    local palette = Part.Color.Lookup[palette_address]
+
+    -- background
+    local x = Part.Cursor.getCursorX()
+    local y = Part.Cursor.getCursorY()
+    local shadow_offset = Part.Functions.rescale(4)
+    local draw_x = Part.Functions.rescale(x)
+    local draw_y = Part.Functions.rescale(y)
+    local w = total_w
+    local h = sample_h + pad * 2
+
+    -- shadow
+    Part.Color.setColor(palette.sample.shadow, true)
+    draw.Graphics.drawRectangle(draw_x + shadow_offset, draw_y + shadow_offset, w, h,
+        Part.Color.Lookup.color_palette.sample.drop_shadow)
+
+    -- fill
+    Part.Color.setColor(palette.sample.shadow, true)
+    gfx.rect(x, y, w, h)
+
+    -- border
+    draw.Graphics.drawRectangle(draw_x, draw_y, w, h, nil, Part.Color.Lookup.color_palette.sample.border)
+
+    -- coordinates
+    x = Part.Cursor.getCursorX() + pad
+    y = Part.Cursor.getCursorY() + pad
+
+    -- colors
+    local colors = Part.Functions.deepCopy(palette.sample.palette)
+
+    -- color size
+    local sample_w = math.floor((total_w - pad * 2) / #colors)
+
+    -- draw palettes
+    for _, color in ipairs(colors) do
+        Part.Color.setColor(color, true)
+        gfx.rect(x, y, sample_w, sample_h)
+        x = x + sample_w
+    end
 end
 
 --  Method : Draw Info bar
 -- -------------------------------------------
 
 function draw.Graphics.drawInfoBar()
-    -- calculate size
-    local size = Part.Functions.rescale(Part.Global.bank_bar_size)
-
     -- setup dimensions
     local x = Part.Functions.rescale(0)
     local y = Part.Functions.rescale(Part.Global.win_h - Part.Global.bank_bar_size + Part.Global.win_y_offset)
     local w = gfx.w
-    local h = Part.Functions.rescale(Part.Global.corner_triangle_size)
+    local h = Part.Functions.rescale(Part.Global.infobar_h)
+    local h_backdrop = Part.Functions.rescale(Part.Global.bank_bar_size + Part.Global.win_y_offset) + h
 
     -- get colors
+    local color_backdrop = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.infobar.backdrop)
     local color_bg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.infobar.bg)
     local color_fg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.infobar.fg)
+    local color_label_fg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.infobar.label.fg)
+    local color_label_frame = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.infobar.label.frame)
+
 
     -- y position
     y = y - h
+
+    Part.Color.setColor(color_backdrop, true)
+    gfx.rect(x, y, w, h_backdrop)
 
     -- draw background if visible (depending on alpha level)
     if color_bg[4] ~= 0 then
@@ -701,26 +883,62 @@ function draw.Graphics.drawInfoBar()
     -- set color
     Part.Color.setColor(color_fg, true)
 
-    -- udpate font
+    -- update font
     draw.Graphics.setFont(12)
 
-    -- info text table
-    local str_data = { { "Esc", "Close" }, { "R", "Reset Window" }, { "L Click", "Set Value" }, { "R Click", "Reset Value" },
-        { "Ctrl", "Slow Drag" } }
+    -- info bar string
+    local version_string = "v" .. Part.Version.version_theme
+    gfx.drawstr("paRt Theme Adjuster  -  v" .. Part.Version.version_theme)
 
-    -- go through text entries
-    for key, val in pairs(str_data) do
-        -- draw entry
-        gfx.drawstr(val[1] .. ": " .. val[2])
+    --  Helper: Place Label
+    -- =======================================
 
-        -- draw divider
-        if key < #str_data then
-            gfx.drawstr("     -     ")
-        end
+    local function place_label(x, y, text)
+        gfx.x = x
+        gfx.y = y
+        draw.Graphics.setFont(13)
+        Part.Color.setColor(color_label_fg, true)
+        gfx.drawstr(text)
     end
 
-    gfx.x = Part.Functions.rescale(Part.Global.win_w - 75)
-    gfx.drawstr("   v" .. Part.Version.version_theme)
+    --  Helper: Place Frame
+    -- =======================================
+
+    local function place_frame(x, y, w, h)
+        Part.Color.setColor(color_label_fg, true)
+        draw.Graphics.drawRectangle(x, y, Part.Functions.rescale(w), Part.Functions.rescale(h), nil, color_label_frame)
+    end
+    -- =======================================
+
+    -- labels
+    local label_x
+    local label_y
+    local icon_size = 16
+
+    -- bank plus symbol
+    label_x = x + Part.Functions.rescale(16)
+    label_y = y + h + Part.Functions.rescale(6)
+
+    place_frame(label_x, label_y, icon_size, icon_size)
+
+    gfx.x = label_x
+    gfx.y = label_y
+    Part.Color.setColor(color_label_frame, true)
+    draw.Graphics.setFont(20)
+
+    gfx.drawstr("+", 5, gfx.x + Part.Functions.rescale(icon_size), gfx.y + Part.Functions.rescale(icon_size - 3))
+
+    -- bank label
+    label_x = x + Part.Functions.rescale(40)
+    label_y = y + h + Part.Functions.rescale(7)
+    place_label(label_x, label_y, "Bank")
+    place_frame(label_x + Part.Functions.rescale(30), y + h + Part.Functions.rescale(2), 260, 25)
+    label_x = label_x + Part.Functions.rescale(3)
+
+    -- config
+    label_x = x + Part.Functions.rescale(380)
+    place_label(label_x, label_y, "Config")
+    place_frame(label_x + Part.Functions.rescale(40), y + h + Part.Functions.rescale(2), 355, 25)
 end
 
 --  Method : Draw Rectangle
@@ -738,7 +956,7 @@ function draw.Graphics.drawRectangle(x, y, w, h, color_bg, color_border)
 
     -- border
     if color_border ~= nil then
-        Part.Color.setColor(color_border)
+        Part.Color.setColor(color_border, true)
 
         if gfx.a > 0 then
             for i = 0, draw.Graphics.border - 1 do
@@ -803,7 +1021,7 @@ function draw.Graphics.drawGradient(x, y, w, h, padding, color_table, color_bord
     -- border
     if color_border ~= nil then
         -- set color
-        Part.Color.setColor(color_border)
+        Part.Color.setColor(color_border, true)
 
         -- draw border lines
         gfx.rect(x, y, w, draw.Graphics.border)
@@ -829,13 +1047,19 @@ end
 --  Method : Setup Font
 -- -------------------------------------------
 function draw.Graphics.setFont(size, flag_str)
-    
+    size = size or 12
+
     -- default windows font
     local face = "Tahoma"
-    
-    -- mac os 
+
+    -- mac os
     if Part.Global.os_macos == true then
         size = size * 0.7
+    end
+
+    -- linux
+    if Part.Global.os_linux == true then
+        size = size * 0.825
     end
 
     -- Part.Functions.rescale( font

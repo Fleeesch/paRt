@@ -1,9 +1,13 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
-
+--[[
+    The inclusion of WALTER parameters is happening here.
+    It is mostly a 1:1 translation list for the parameters in the rtconfig.txt file,
+    but sometimes there are exceptions that require a specific treatment.
+]]--
 
 local par = {}
 
@@ -21,88 +25,53 @@ par.par_global_color_gamma = Part.Parameter.Theme.ThemeParameter:new(nil, "gamma
 par.par_global_color_highlights = Part.Parameter.Theme.ThemeParameter:new(nil, "highlights", true)
 par.par_global_color_midtones = Part.Parameter.Theme.ThemeParameter:new(nil, "midtones", true)
 par.par_global_color_shadows = Part.Parameter.Theme.ThemeParameter:new(nil, "shadows", true)
-par.par_global_color_gamma:rescale(800, 1200)
-par.par_global_color_highlights:rescale(-50, 50)
-par.par_global_color_midtones:rescale(-50, 50)
-par.par_global_color_shadows:rescale(-50, 50)
+par.par_global_color_gamma:rescale(1400, 600)
+par.par_global_color_highlights:rescale(-75, 75)
+par.par_global_color_midtones:rescale(-75, 75)
+par.par_global_color_shadows:rescale(-75, 75)
 par.par_global_color_custom_overwrite = Part.Parameter.Theme.ThemeParameter:new(nil, "custom_color_mod", false)
 
 -- track background
 par.par_colors_track_track_bg_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_bg_tone") }
 par.par_colors_track_track_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_bg_tint") }
-par.par_colors_track_track_bg_select_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_bg_select_tone") }
-par.par_colors_track_track_bg_select_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_bg_select_tint") }
+par.par_colors_track_track_bg_select_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_bg_select_tone") }
+par.par_colors_track_track_bg_select_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_bg_select_tint") }
 
 -- track label
-par.par_colors_track_track_label_bg_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_label_bg_tone") }
-par.par_colors_track_track_label_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_label_bg_tint") }
-par.par_colors_track_track_label_text_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_label_text_tone") }
-par.par_colors_track_track_index_tone_tcp = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_index_tone_tcp") }
-par.par_colors_track_track_index_tone_mcp = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_index_tone_mcp") }
-par.par_colors_track_track_label_select_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_label_select_tone") }
-par.par_colors_track_track_label_select_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_label_select_tint") }
+par.par_colors_track_track_label_bg_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_label_bg_tone") }
+par.par_colors_track_track_label_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_label_bg_tint") }
+par.par_colors_track_track_label_text_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_label_text_tone") }
+par.par_colors_track_track_index_tone_tcp = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_index_tone_tcp") }
+par.par_colors_track_track_index_tone_mcp = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_index_tone_mcp") }
+par.par_colors_track_track_label_select_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_label_select_tone") }
+par.par_colors_track_track_label_select_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_label_select_tint") }
 
 -- envcp
 par.par_colors_track_envcp_bg_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_bg_tone") }
 par.par_colors_track_envcp_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_bg_tint") }
-par.par_colors_track_envcp_label_bg_Tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_envcp_label_bg_Tone") }
-par.par_colors_track_envcp_label_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_envcp_label_bg_tint") }
-par.par_colors_track_envcp_label_text_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_envcp_label_text_tone") }
-par.par_colors_track_envcp_label_readout_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_envcp_label_readout_tone") }
+par.par_colors_track_envcp_label_bg_Tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_label_bg_Tone") }
+par.par_colors_track_envcp_label_bg_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_label_bg_tint") }
+par.par_colors_track_envcp_label_text_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_label_text_tone") }
+par.par_colors_track_envcp_label_readout_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_envcp_label_readout_tone") }
 
 -- folder
-par.par_colors_track_folder_foldertrack_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_folder_foldertrack_tone") }
-par.par_colors_track_folder_foldertrack_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_folder_foldertrack_tint") }
-par.par_colors_track_folder_foldertree_tone = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_folder_foldertree_tone") }
-par.par_colors_track_folder_foldertree_tint = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_folder_foldertree_tint") }
+par.par_colors_track_folder_foldertrack_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_folder_foldertrack_tone") }
+par.par_colors_track_folder_foldertrack_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_folder_foldertrack_tint") }
+par.par_colors_track_folder_foldertree_tone = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_folder_foldertree_tone") }
+par.par_colors_track_folder_foldertree_tint = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_folder_foldertree_tint") }
 
 -- meter
-par.par_colors_track_meter_text_alpha_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_unlit") }
-par.par_colors_track_meter_text_alpha_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_lit") }
-par.par_colors_track_meter_text_tone_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_tone_unlit") }
-par.par_colors_track_meter_text_tone_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_tone_lit") }
-par.par_colors_track_meter_text_tone_readout = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_tone_readout") }
-par.par_colors_track_meter_text_tone_readout_clip = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_tone_readout_clip") }
-par.par_colors_track_meter_text_alpha_track = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_track") }
-par.par_colors_track_meter_text_alpha_master = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_master") }
-par.par_colors_track_meter_text_alpha_readout = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_readout") }
-par.par_colors_track_meter_text_alpha_readout_clip = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_alpha_readout_clip") }
-par.par_colors_track_meter_text_shadow_lit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_shadow_lit") }
-par.par_colors_track_meter_text_shadow_unlit = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_meter_text_shadow_unlit") }
+par.par_colors_track_meter_text_tone_unlit = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_tone_unlit") }
+par.par_colors_track_meter_text_tone_lit = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_tone_lit") }
+par.par_colors_track_meter_text_tone_readout = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_tone_readout") }
+par.par_colors_track_meter_text_tone_readout_clip = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_tone_readout_clip") }
+par.par_colors_track_meter_text_shadow_lit = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_shadow_lit") }
+par.par_colors_track_meter_text_shadow_unlit = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_shadow_unlit") }
+par.par_colors_track_meter_text_alpha_tcp = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_alpha_tcp") }
+par.par_colors_track_meter_text_alpha_mcp = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_meter_text_alpha_mcp") }
 
 -- colorbar
-par.par_colors_track_track_colorbar_intensity = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_colors_track_track_colorbar_intensity") }
-
+par.par_colors_track_track_colorbar_intensity = { Part.Parameter.Group.ParameterGroup:new(nil, "par_colors_track_track_colorbar_intensity") }
 
 --      Transport
 -- -------------------------------------------
@@ -121,21 +90,14 @@ par.par_trans_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_
 par.par_trans_element_separator = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_separator") }
 
 -- adjustments
-par.par_trans_element_adj_selection_size = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_selection_size") }
-par.par_trans_element_adj_selection_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_selection_size_scale", nil, par.par_trans_element_adj_selection_size[3]) }
-par.par_trans_element_adj_status_size = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_status_size") }
-par.par_trans_element_adj_status_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_status_size_scale", nil, par.par_trans_element_adj_status_size[3]) }
+par.par_trans_element_adj_selection_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_selection_size") }
+par.par_trans_element_adj_selection_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_selection_size_scale", nil, par.par_trans_element_adj_selection_size[3]) }
+par.par_trans_element_adj_status_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_status_size") }
+par.par_trans_element_adj_status_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_status_size_scale", nil, par.par_trans_element_adj_status_size[3]) }
 par.par_trans_element_adj_spacing_x = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_spacing_x") }
-par.par_trans_element_adj_spacing_time_x = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_spacing_time_x") }
-par.par_trans_element_adj_spacing_section_x = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_spacing_section_x") }
-par.par_trans_element_adj_separator_size = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_trans_element_adj_separator_size") }
+par.par_trans_element_adj_spacing_time_x = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_spacing_time_x") }
+par.par_trans_element_adj_spacing_section_x = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_spacing_section_x") }
+par.par_trans_element_adj_separator_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_separator_size") }
 
 par.par_trans_element_adj_bpm_tap = { Part.Parameter.Group.ParameterGroup:new(nil, "par_trans_element_adj_bpm_tap") }
 
@@ -148,8 +110,9 @@ par.par_trans_playrate_size = { Part.Parameter.Group.ParameterGroup:new(nil, "pa
 -- -------------------------------------------
 
 -- spacing
-par.par_tcp_gen_element_adj_spacing_x = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_tcp_gen_element_adj_spacing_x") }
+par.par_tcp_gen_element_adj_spacing_x = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_gen_element_adj_spacing_x") }
+par.par_tcp_gen_element_adj_spacing_y = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_tcp_gen_element_adj_spacing_y") }
 par.par_tcp_gen_element_adj_spacing_x_fader = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_tcp_gen_element_adj_spacing_x_fader") }
 par.par_tcp_gen_element_adj_spacing_y_fader = { Part.Parameter.Group.ParameterGroup:new(nil,
@@ -183,6 +146,8 @@ par.par_tcp_track_element_adj_size_env = { Part.Parameter.Group.ParameterGroup:n
     "par_tcp_track_element_adj_size_env") }
 par.par_tcp_track_element_adj_size_input = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_tcp_track_element_adj_size_input") }
+par.par_tcp_track_element_adj_wrap_buttons = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_tcp_track_element_adj_wrap_buttons") }
 
 -- element visibility
 par.par_tcp_track_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_element_vis") }
@@ -238,6 +203,8 @@ par.par_tcp_track_label_index_vis = { Part.Parameter.Group.ParameterGroup:new(ni
 
 par.par_tcp_envcp_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_envcp_element_vis") }
 par.par_tcp_envcp_element_separator = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_envcp_element_separator") }
+par.par_tcp_envcp_element_adj_wrap_buttons = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_tcp_envcp_element_adj_wrap_buttons") }
 
 par.par_tcp_envcp_settings_symbol = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_envcp_settings_symbol") }
 par.par_tcp_envcp_settings_indent = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_envcp_settings_indent") }
@@ -264,10 +231,14 @@ par.par_tcp_master_element_adj_size_env = { Part.Parameter.Group.ParameterGroup:
     "par_tcp_master_element_adj_size_env") }
 par.par_tcp_master_element_adj_size_fx = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_tcp_master_element_adj_size_fx") }
+par.par_tcp_master_element_adj_wrap_buttons = { Part.Parameter.Group.ParameterGroup:new(nil,
+    "par_tcp_master_element_adj_wrap_buttons") }
 
+par.par_tcp_master_meter_mode = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_mode") }
 par.par_tcp_master_meter_vu_db = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_vu_db") }
 par.par_tcp_master_meter_vu_readout = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_vu_readout") }
 par.par_tcp_master_meter_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_size") }
+par.par_tcp_master_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_size_scale") }
 par.par_tcp_master_meter_vol_readout = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_tcp_master_meter_vol_readout") }
 
@@ -364,11 +335,9 @@ par.par_mcp_track_meter_size = { Part.Parameter.Group.ParameterGroup:new(nil, "p
 par.par_mcp_track_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_size_scale",
     nil, par.par_mcp_track_meter_size[3]) }
 par.par_mcp_track_meter_expand = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand") }
-par.par_mcp_track_meter_expand_mode = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand_mode",
-    nil, par.par_mcp_track_meter_expand[3]) }
+par.par_mcp_track_meter_expand_mode = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand_mode") }
 par.par_mcp_track_meter_expand_threshold = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_mcp_track_meter_expand_threshold") }
-
 par.par_mcp_track_meter_channeldiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_channeldiv") }
 
 -- elements
@@ -435,5 +404,47 @@ par.par_mcp_master_fader_pan_height = { Part.Parameter.Group.ParameterGroup:new(
 par.par_mcp_master_fader_pan_height_scale = { Part.Parameter.Group.ParameterGroup:new(nil,
     "par_mcp_master_fader_pan_height_scale", nil, par.par_mcp_master_fader_pan_height[3]) }
 par.par_mcp_master_fader_wid_always = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_fader_wid_always") }
+
+--      User
+-- -------------------------------------------
+
+-- range
+par.par_user_range_0 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_0") }
+par.par_user_range_1 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_1") }
+par.par_user_range_2 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_2") }
+par.par_user_range_3 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_3") }
+par.par_user_range_4 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_4") }
+par.par_user_range_5 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_5") }
+par.par_user_range_6 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_6") }
+par.par_user_range_7 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_7") }
+par.par_user_range_8 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_8") }
+par.par_user_range_9 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_9") }
+par.par_user_range_10 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_10") }
+par.par_user_range_11 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_11") }
+par.par_user_range_12 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_12") }
+par.par_user_range_13 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_13") }
+par.par_user_range_14 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_14") }
+par.par_user_range_15 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_range_15") }
+
+-- selection
+par.par_user_selection_0 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_0") }
+par.par_user_selection_1 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_1") }
+par.par_user_selection_2 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_2") }
+par.par_user_selection_3 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_3") }
+par.par_user_selection_4 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_4") }
+par.par_user_selection_5 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_5") }
+par.par_user_selection_6 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_6") }
+par.par_user_selection_7 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_selection_7") }
+
+-- switches
+par.par_user_switch_0 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_0") }
+par.par_user_switch_1 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_1") }
+par.par_user_switch_2 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_2") }
+par.par_user_switch_3 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_3") }
+par.par_user_switch_4 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_4") }
+par.par_user_switch_5 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_5") }
+par.par_user_switch_6 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_6") }
+par.par_user_switch_7 = { Part.Parameter.Group.ParameterGroup:new(nil, "par_user_switch_7") }
+
 
 return par

@@ -15,7 +15,7 @@
 !/src/build/*.ReaperThemeZip
 
 # local Reaper developement folder
-/reaper/
+/reaper*/
 
 # example project
 part_example-project_rec_gitignore.rpp

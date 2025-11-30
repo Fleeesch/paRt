@@ -1,11 +1,13 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
+--[[
+    Non-interactive Graphical elements that are handled in a pseudo-OOP style.
+]]--
 
-
-local layout = { BankBar = {}, Group = {}, Label = {}, Text = {}, Image = {}, Spritesheet = {}, Sprite = {} }
+local layout = { BankBar = {}, ConfigBar = {}, Group = {}, Label = {}, Text = {}, Image = {}, Spritesheet = {}, Sprite = {}, Line = {}, Box = {}, Function = {} }
 
 -- ==========================================================================================
 --                      Layout : Generic
@@ -84,7 +86,8 @@ function layout.BankBar.BankBar:new(o, handler)
     o.color_border = Part.Color.Lookup.color_palette.bank_bar.border
 
     -- button size
-    o.button_size = 24
+    o.button_w = 20
+    o.button_h = 16
 
     -- padding
     o.padding = 5
@@ -137,18 +140,24 @@ function layout.BankBar.BankBar:setupButtons()
     Part.Cursor.setCursorSize(80, Part.Cursor.getCursorH())
 
     -- increment cursor
-    Part.Cursor.incCursor(0, 7)
+    Part.Cursor.incCursor(0, 6)
 
     -- set button dimensions
-    Part.Cursor.setCursorSize(self.button_size, self.button_size)
+    Part.Cursor.setCursorSize(self.button_w, self.button_h)
     Part.Cursor.setCursorPadding(self.padding, self.padding)
 
     -- go through banks
+
+    local button_x = Part.Cursor.getCursorX()
+    local button_x_end = Part.Cursor.getCursorX()
+    local button_y = Part.Cursor.getCursorY()
+
     for idx, bank in pairs(self.handler.bank_slot) do
         -- bank is not a global bank?
         if not bank:isGlobal() then
             -- create bank button
-            Part.Control.Bank.Select.ButtonBankSelect:new(nil, self.handler, bank.label, bank)
+            local button = Part.Control.Config.SelectBank.ButtonBankSelect:new(nil, self.handler, bank.label, bank)
+            Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_slot_select, button, true)
 
             Part.Draw.Elements.lastElement():setFontFlags("b")
 
@@ -157,56 +166,172 @@ function layout.BankBar.BankBar:setupButtons()
 
             -- register bank button
             table.insert(self.bank_buttons, Part.Draw.Elements.lastElement())
+
+            -- linebreak
+            -- if (idx - 1) % 4 == 0 then
+            --     button_x_end = Part.Cursor.getCursorX()
+            --     Part.Cursor.setCursorPos(button_x, Part.Cursor.getCursorY())
+            --     Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
+            -- end
         end
     end
 
+
+    Part.Cursor.incCursor(5, 0)
+
     -- copy button
-    Part.Control.Bank.Copy.ButtonBankCopy:new(nil, self.handler, "Copy Bank")
-
-    Part.Cursor.incCursor(Part.Cursor.getCursorW() + 10, 0)
-
-    -- save and load are only drawn when the JS_Extension is installed
-    Part.Cursor.setCursorSize(40, self.button_size)
-
-    if Part.Global.js_extension_available then
-        Part.Control.Bank.Save.ButtonBankSave:new(nil, self.handler, "Save")
-    end
-
-    Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
-
-    if Part.Global.js_extension_available then
-        Part.Control.Bank.Load.ButtonBankLoad:new(nil, self.handler, "Load")
-    end
-
-    Part.Cursor.incCursor(Part.Cursor.getCursorW() + 10, 0)
-
-    -- reset values button
-    Part.Control.Bank.Reset.ButtonBankReset:new(nil, self.handler, "Default Config")
-
-    Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
-
-    -- reset values button
-    Part.Control.Bank.HardReset.ButtonBankResetHard:new(nil, self.handler, "Hard Reset")
-end
-
---  Bank Bar : Draw
--- -------------------------------------------
-
-function layout.BankBar.BankBar:draw()
-    -- prepare dimensions
-    local x = Part.Functions.rescale(self.dim_x)
-    local y = Part.Functions.rescale(self.dim_y + Part.Global.win_y_offset)
-    local w = gfx.w
-    local h = gfx.h - y
-
-    -- draw background, rest of drawing is handled by individual elements
-    Part.Draw.Graphics.drawRectangle(x, y, w, h, self.color_bg, self.color_border)
+    Part.Cursor.setCursorSize(self.button_w)
+    local button = Part.Control.Config.Copy.ButtonBankCopy:new(nil, self.handler, "Copy")
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.bank_copy_mode, button, true)
 end
 
 --  Bank Bar : Tab Check
 -- -------------------------------------------
 
 function layout.BankBar.BankBar:tabCheck()
+    return true
+end
+
+-- ==========================================================================================
+--                      Layout : Config Bar
+-- ==========================================================================================
+
+--  Config Bar
+-- -------------------------------------------
+
+layout.ConfigBar.ConfigBar = layout.LayoutElement:new()
+
+function layout.ConfigBar.ConfigBar:new(o, handler)
+    o = o or layout.LayoutElement:new(o)
+    setmetatable(o, self)
+    self.__index = self
+
+    Part.Cursor.applyCursorToTarget(o)
+
+    -- regsiter bank handler
+    o.handler = handler or Part.Bank.Handler
+
+    -- default colors
+    o.color_bg = Part.Color.Lookup.color_palette.bank_bar.bg
+    o.color_fg = Part.Color.Lookup.color_palette.bank_bar.fg
+    o.color_border = Part.Color.Lookup.color_palette.bank_bar.border
+
+    -- button size
+    o.button_w = 20
+    o.button_h = 16
+
+    -- padding
+    o.padding = 5
+
+    -- button list
+    o.config_buttons = {}
+
+    -- setup buttons
+    o:setupButtons()
+
+    -- register in lookup list
+    table.insert(Part.List.layout, o)
+
+    return o
+end
+
+--  Config Bar : Setup Buttons
+-- -------------------------------------------
+
+function layout.ConfigBar.ConfigBar:setupButtons()
+    local button
+
+    -- set cursor dimensions
+    Part.Cursor.setCursorPos(self.dim_x + 5, self.dim_y)
+    Part.Cursor.setCursorSize(80, Part.Cursor.getCursorH())
+
+    -- increment cursor
+    Part.Cursor.incCursor(0, 7)
+
+    -- store source positions
+    local source_x = Part.Cursor.getCursorX()
+    local source_y = Part.Cursor.getCursorY()
+
+    -- set button dimensions
+    Part.Cursor.setCursorSize(self.button_w, self.button_h)
+    Part.Cursor.setCursorPadding(self.padding, self.padding)
+
+    -- iterate slots
+    local button_x = Part.Cursor.getCursorX()
+    local button_y = Part.Cursor.getCursorY()
+    local button_x_end = Part.Cursor.getCursorX()
+
+    for i = 0, 7 do
+        -- create config button
+        local button = Part.Control.Config.SelectConfig.ButtonConfigSelect:new(nil, self.handler, tostring(i + 1), i)
+        Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_slot_select, button, true)
+
+        Part.Draw.Elements.lastElement():setFontFlags("b")
+
+        -- increment cursor
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+
+        -- register bank button
+        table.insert(self.config_buttons, Part.Draw.Elements.lastElement())
+
+        -- if (i + 1) % 4 == 0 then
+        --     button_x_end = Part.Cursor.getCursorX()
+        --     Part.Cursor.setCursorPos(button_x, Part.Cursor.getCursorY())
+        --     Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
+        -- end
+    end
+
+    -- offset position
+    Part.Cursor.incCursor(5, 0)
+
+    -- load to file using browser
+    Part.Cursor.setCursorSize(35, self.button_h)
+    button = Part.Control.Config.Load.ButtonConfigLoad:new(nil, self.handler, "Load")
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_slot_load, button, true)
+    Part.Draw.Elements.lastElement():useSelectedConfig()
+    Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+
+    -- save from file using browser
+    button = Part.Control.Config.Save.ButtonConfigSave:new(nil, self.handler, "Save")
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_slot_save, button, true)
+    Part.Draw.Elements.lastElement():useSelectedConfig()
+    Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+
+    --  optional file handling (requires extension)
+    -- =============================================
+
+    -- Part.Cursor.setCursorPos(source_x + pos_file_handling_x, source_y)
+    -- Part.Cursor.setCursorSize(60, self.button_h)
+    -- Part.Cursor.stackCursor()
+
+    -- -- load file
+    -- if Part.Global.js_extension_available then
+    --     button = Part.Control.Config.Load.ButtonConfigLoad:new(nil, self.handler, "Load File")
+    --     Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_load_from_file, button, true)
+    --     Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
+    -- end
+    -- -- save file
+    -- if Part.Global.js_extension_available then
+    --     button = Part.Control.Config.Save.ButtonConfigSave:new(nil, self.handler, "Save File")
+    --     Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_save_to_file, button, true)
+    -- end
+
+    -- Part.Cursor.destackCursor()
+    -- Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+
+    -- reset values button
+    Part.Cursor.incCursor(5, 0)
+    Part.Cursor.setCursorSize(40, nil)
+
+    -- reset values button
+    button = Part.Control.Config.HardReset.ButtonConfigResetHard:new(nil, self.handler, "Reset")
+    Part.Control.Hint.Hint:new(nil, Part.Gui.Hint.Lookup.config_hard_reset, button, true)
+end
+
+--  Config Bar : Tab Check
+-- -------------------------------------------
+
+function layout.ConfigBar.ConfigBar:tabCheck()
     return true
 end
 
@@ -228,7 +353,11 @@ function layout.Group.Group:new(o, header_text)
     -- transfer cursor dimensions
     Part.Cursor.applyCursorToTarget(o)
 
+    -- header settings
     o.header_text = header_text
+    o.limit_header_width = true
+    o.header_width = 200
+    o.header_pad = 4
 
     -- color values
     o.color_bg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.group.bg)
@@ -239,7 +368,7 @@ function layout.Group.Group:new(o, header_text)
     o.color_header_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.group.header.border)
     o.color_bg_tinted = Part.Functions.deepCopy(o.color_bg)
 
-    -- register image in list
+    -- register in list
     table.insert(Part.List.layout, o)
 
     return o
@@ -265,25 +394,18 @@ function layout.Group.Group:setColor(fg, bg, border)
     end
 end
 
--- Layout : Group : Set Tint
+-- Layout : Group : Stretch
 -- -------------------------------------------
 
-function layout.Group.Group:setTint(tint)
-    -- check if tint exists
-    if Part.Color.Lookup.color_palette.group.tint ~= nil then
-        -- get tint
-        local tint_color = Part.Color.Lookup.color_palette.group.tint[tint]
+function layout.Group.Group:stretchToPosition(target_x, target_y)
+    -- stretch width
+    if target_x ~= nil then
+        self.dim_w = target_x - self.dim_x
+    end
 
-        -- inrterpolate color values using the tints alpha value
-        self.color_bg_tinted[1] = Part.Functions.interpolate(self.color_bg[1], tint_color[1], tint_color[4])
-        self.color_bg_tinted[2] = Part.Functions.interpolate(self.color_bg[2], tint_color[2], tint_color[4])
-        self.color_bg_tinted[3] = Part.Functions.interpolate(self.color_bg[3], tint_color[3], tint_color[4])
-
-        -- use the original color alpha value
-        self.color_bg_tinted[4] = self.color_bg[4]
-
-        -- mark color as tinted
-        self.color_is_tinted = true
+    -- stretch height
+    if target_y ~= nil then
+        self.dim_h = target_y - self.dim_y
     end
 end
 
@@ -297,25 +419,193 @@ function layout.Group.Group:draw()
     local w = Part.Functions.rescale(self.dim_w)
     local h = Part.Functions.rescale(self.dim_h)
 
-    local pad_x = Part.Functions.rescale(10)
-    local pad_y = Part.Functions.rescale(4)
+    local pad_x = self.header_pad
+    local pad_y = self.header_pad
+    local pad_x_text = Part.Functions.rescale(10)
+    local pad_y_text = Part.Functions.rescale(2)
+    local line_h = Part.Functions.rescale(18)
+    local header_w = math.floor(w / 2)
+
 
     Part.Draw.Graphics.drawRectangle(x, y, w, h, self.color_bg_tinted, self.color_border)
 
     if self.header_text ~= nil then
-        gfx.x = x + pad_x
-        gfx.y = y + pad_y
+        gfx.x = x + pad_x + pad_x_text
+        gfx.y = y + pad_y + pad_y_text
 
-        local line_h = Part.Functions.rescale(16)
-        local pad_line = Part.Functions.rescale(20)
-
-        Part.Color.setColor(self.color_fg, true)
         Part.Draw.Graphics.setFont(13, "b")
-        gfx.drawstr(self.header_text, 1, gfx.x + w - pad_x * 2, gfx.y + line_h)
 
-        Part.Draw.Graphics.drawRectangle(x + pad_line, gfx.y + line_h, w - pad_line * 2, Part.Draw.Graphics.border,
-            self.color_header_border)
+        -- make sure background is covering text
+        local string_w = gfx.measurestr(self.header_text)
+
+        -- original width calculation using half the width
+        --local bg_w = math.max(string_w + pad_x_text * 2, header_w)
+
+        -- width
+        local bg_w = math.max(string_w + pad_x_text * 2, Part.Functions.rescale(150))
+
+        -- draw background
+        Part.Draw.Graphics.drawRectangle(x + pad_x, y + pad_y, bg_w, line_h, self.color_header_bg)
+
+        -- draw text
+        Part.Color.setColor(self.color_header_fg, true)
+        gfx.drawstr(self.header_text, 0, gfx.x + w - pad_x * 2, gfx.y + line_h)
     end
+end
+
+-- ==========================================================================================
+--                      Layout : Line
+-- ==========================================================================================
+
+-- Line
+-- -------------------------------------------
+
+layout.Line.Line = layout.LayoutElement:new()
+
+function layout.Line.Line:new(o, start_x, start_y, vertical, length)
+    o = o or layout.LayoutElement:new(o)
+    setmetatable(o, self)
+    self.__index = self
+
+    -- transfer cursor dimensions
+    Part.Cursor.applyCursorToTarget(o)
+
+    -- coordinates
+    o.start_x = start_x
+    o.start_y = start_y
+    o.vertical = vertical
+    o.length = length
+
+    -- scaling of thickness
+    o.scaling_factor = 2
+
+    -- color values
+    o.color_fg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.line)
+
+    -- register in list
+    table.insert(Part.List.layout, o)
+
+    return o
+end
+
+-- Group : Scale
+-- -------------------------------------------
+
+function layout.Line.Line:scale(factor)
+    self.scaling_factor = factor
+end
+
+-- Group : Set Color
+-- -------------------------------------------
+
+function layout.Line.Line:setColor(color)
+    self.color_fg = color
+end
+
+-- Group : Draw
+-- -------------------------------------------
+
+function layout.Line.Line:draw()
+    -- prepare dimensions
+    local x = Part.Functions.rescale(self.start_x, true)
+    local y = Part.Functions.rescale(self.start_y, false, true)
+    local length = Part.Functions.rescale(self.length)
+
+    -- target size
+    local w
+    local h
+
+    -- thickness
+    local thickness = math.ceil(Part.Draw.Graphics.border * self.scaling_factor)
+    local thickness_offset = math.floor(thickness * 0.5)
+
+    -- direction
+    if self.vertical then
+        x = x - thickness_offset
+        w = thickness
+        h = y + length
+    else
+        y = y - thickness_offset
+        w = length
+        h = thickness
+    end
+
+    -- draw line
+    Part.Draw.Graphics.drawRectangle(x, y, w, h, self.color_fg, nil)
+end
+
+-- ==========================================================================================
+--                      Layout : Box
+-- ==========================================================================================
+
+-- Box
+-- -------------------------------------------
+
+layout.Box.Box = layout.LayoutElement:new()
+
+function layout.Box.Box:new(o, fill, border, start_x, start_y, width, height)
+    o = o or layout.LayoutElement:new(o)
+    setmetatable(o, self)
+    self.__index = self
+
+    -- transfer cursor dimensions
+    Part.Cursor.applyCursorToTarget(o)
+
+    o.fill = fill or false
+    o.border = border or true
+
+    -- coordinates
+    o.start_x = start_x
+    o.start_y = start_y
+    o.width = width
+    o.height = height
+
+    -- color values default to nil
+    o.color_fill = nil
+    o.color_border = nil
+
+    -- set colors depending on filling mode
+    if fill then
+        o.color_fill = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.box.fill)
+    end
+
+    if border then
+        o.color_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.box.border)
+    end
+
+    -- register in list
+    table.insert(Part.List.layout, o)
+
+    return o
+end
+
+-- Group : Set Color
+-- -------------------------------------------
+
+function layout.Box.Box:setColor(input_fill, input_border)
+    -- fill
+    if self.fill and input_fill ~= nil then
+        self.color_fill = input_fill
+    end
+
+    -- border
+    if self.border and input_border ~= nil then
+        self.color_fg = input_border
+    end
+end
+
+-- Group : Draw
+-- -------------------------------------------
+
+function layout.Box.Box:draw()
+    -- prepare dimensions
+    local start_x = Part.Functions.rescale(self.start_x, true)
+    local start_y = Part.Functions.rescale(self.start_y, false, true)
+    local width = Part.Functions.rescale(self.width)
+    local height = Part.Functions.rescale(self.height)
+
+    -- draw box
+    Part.Draw.Graphics.drawRectangle(start_x, start_y, width, height, self.color_fill, self.color_border)
 end
 
 -- ==========================================================================================
@@ -323,7 +613,7 @@ end
 -- ==========================================================================================
 
 
--- Output : Text
+-- Output : Label
 -- -------------------------------------------
 layout.Label.Label = layout.LayoutElement:new()
 
@@ -339,6 +629,10 @@ function layout.Label.Label:new(o)
     o.color_bg = Part.Color.Lookup.color_palette.label.bg
     o.color_border = Part.Color.Lookup.color_palette.label.border
 
+    -- optional underline
+    o.use_table_underline = false
+    o.use_table_underline_thickness = 2
+
     o.expand_w = 1
     o.expand_h = 1
 
@@ -349,7 +643,7 @@ function layout.Label.Label:new(o)
     return o
 end
 
--- Output : Text : Stretch
+-- Output : Label : Stretch
 -- -------------------------------------------
 
 function layout.Label.Label:stretch(x, y)
@@ -357,7 +651,7 @@ function layout.Label.Label:stretch(x, y)
     if y ~= nil then self.dim_h = y - self.dim_y end
 end
 
--- Output : Text : Table Row
+-- Output : Label : Table Row
 -- -------------------------------------------
 
 function layout.Label.Label:tableRow(uneven)
@@ -368,7 +662,16 @@ function layout.Label.Label:tableRow(uneven)
     end
 end
 
--- Output : Text : Table Column
+-- Output : Label : Underline
+-- -------------------------------------------
+
+function layout.Label.Label:tableUnderline(thickness)
+    thickness = thickness or 2
+    self.use_table_underline = true
+    self.use_table_underline_thickness = thickness
+end
+
+-- Output : Label : Table Column
 -- -------------------------------------------
 
 function layout.Label.Label:tableColumn(uneven)
@@ -379,14 +682,14 @@ function layout.Label.Label:tableColumn(uneven)
     end
 end
 
--- Output : Text : Table Empty Space
+-- Output : Label : Table Empty Space
 -- -------------------------------------------
 
 function layout.Label.Label:tableEmptySpace()
     self:setColor(Part.Color.Lookup.color_palette.table.empty_space)
 end
 
--- Output : Text : Set Color
+-- Output : Label : Set Color
 -- -------------------------------------------
 
 function layout.Label.Label:setColor(bg, border)
@@ -401,7 +704,7 @@ function layout.Label.Label:setColor(bg, border)
     end
 end
 
--- Output : Text : Draw
+-- Output : Label : Draw
 -- -------------------------------------------
 
 function layout.Label.Label:draw()
@@ -410,18 +713,24 @@ function layout.Label.Label:draw()
     local y = Part.Functions.rescale(self.dim_y - self.expand_h, false, self.autocenter_position)
     local w = Part.Functions.rescale(self.dim_w + self.expand_w * 2)
     local h = Part.Functions.rescale(self.dim_h + self.expand_h * 2)
+    local border = Part.Functions.rescale(self.use_table_underline_thickness)
 
-
-    -- background color available?
+    -- color required
     if self.color_bg ~= nil then
-        Part.Draw.Graphics.drawRectangle(x, y, w, h, self.color_bg, self.color_border)
+        if not self.use_table_underline then
+            -- conventional background
+            Part.Draw.Graphics.drawRectangle(x, y, w, h, self.color_bg, self.color_border)
+        else
+            -- underline for tables
+            Part.Draw.Graphics.drawRectangle(x, y + h + math.floor(border * 0.5), w, border, self.color_bg,
+                self.color_border)
+        end
     end
 end
 
 -- ==========================================================================================
 --                      Layout : Text
 -- ==========================================================================================
-
 
 -- Output : Text
 -- -------------------------------------------
@@ -449,6 +758,9 @@ function layout.Text.Text:new(o, text_blank, parameter)
     -- flags for display formatting
     o.flags = 0
 
+    -- optional underline
+    o.draw_underline = false
+
     -- lookup table (for dynamic output text)
     o.lookup = nil
 
@@ -460,6 +772,7 @@ function layout.Text.Text:new(o, text_blank, parameter)
     o.color_font = Part.Color.Lookup.color_palette.text.fg
     o.color_bg = Part.Color.Lookup.color_palette.text.bg
     o.color_border = Part.Color.Lookup.color_palette.text.border
+    o.color_underline = Part.Color.Lookup.color_palette.text.underline
 
     -- is a divider (sub-heading)
     o.is_divider = false
@@ -576,17 +889,24 @@ function layout.Text.Text:divider(keep_width)
 
     self:centerHorz()
     self:centerVert()
-    self:setColors(Part.Color.Lookup.color_palette.label.divider, Part.Color.Lookup.color_palette.label.divider_bg, nil)
+    self:setColor(Part.Color.Lookup.color_palette.label.divider, Part.Color.Lookup.color_palette.label.divider_bg, nil)
 
 
     -- register itself as divider
     self.is_divider = true
 end
 
+-- Output : Text : Underline
+-- -------------------------------------------
+
+function layout.Text.Text:underline()
+    self.draw_underline = true
+end
+
 -- Output : Text : Set Color
 -- -------------------------------------------
 
-function layout.Text.Text:setColor(fg, bg, border)
+function layout.Text.Text:setColor(fg, bg, border, underline)
     -- foreground
     if type(fg) == "table" or fg == nil then
         self.color_font = fg
@@ -600,6 +920,11 @@ function layout.Text.Text:setColor(fg, bg, border)
     -- border
     if type(border) == "table" or border == nil then
         self.color_border = border
+    end
+
+    -- underline
+    if type(underline) == "table" or underline == nil then
+        self.color_underline = underline
     end
 end
 
@@ -735,10 +1060,18 @@ function layout.Text.Text:draw()
         text = self.lookup[idx]
     end
 
-    -- draw
+    -- draw text
     Part.Draw.Graphics.setFont(13, self.font_flags)
 
     gfx.drawstr(text, self:getFlags(), x + w - p_x * 2, y + h - p_y * 2)
+
+    -- optional underline
+    if self.draw_underline then
+        local line_h = Part.Functions.rescale(16)
+        local pad_line = Part.Functions.rescale(20)
+        Part.Draw.Graphics.drawRectangle(x, y + line_h, w, Part.Draw.Graphics.border,
+            self.color_underline)
+    end
 end
 
 -- ==========================================================================================
@@ -928,7 +1261,7 @@ function layout.Image.Image:draw()
         -- get image dimensions
         local img_w, img_h = gfx.getimgdim(self.handle)
 
-        -- Part.Functions.rescale( dimensions
+        -- rescaling
         img_w = img_w * size
         img_h = img_h * size
 
@@ -980,9 +1313,6 @@ function layout.Spritesheet:new(o, file_image, file_lookup)
 
     o.lookup_data = require(file_lookup)
 
-
-    --reaper.ShowConsoleMsg(o.lookup_data.dark[100].table_mcp_pan_layout_top.width)
-
     o.handle = Part.Draw.Sprites.getNextFreeImageSlot()
     gfx.loadimg(o.handle, ScriptPath .. o.file_image)
 
@@ -1008,9 +1338,11 @@ end
 -- Spritesheet : Draw Sprite
 -- -------------------------------------------
 
-function layout.Spritesheet:drawSprite(name, src_x, src_y, src_w, src_h, just_horz, just_vert)
+function layout.Spritesheet:drawSprite(name, src_x, src_y, src_w, src_h, just_horz, just_vert, scaling)
     local current_theme = Part.Global.themes[Part.Global.par_theme_selected:getValue() + 1]
     local current_dpi = Part.Global.scale * 100
+
+    scaling = scaling or 1
 
     local sheet_x, sheet_y, sheet_w, sheet_h = self:getSprite(current_theme, current_dpi, name)
 
@@ -1038,7 +1370,7 @@ function layout.Spritesheet:drawSprite(name, src_x, src_y, src_w, src_h, just_ho
 
 
     if sheet_x ~= nil then
-        gfx.blit(self.handle, 1, 0, sheet_x, sheet_y, sheet_w, sheet_h, gfx.x, gfx.y, sheet_w, sheet_h, 0, 0)
+        gfx.blit(self.handle, 1, 0, sheet_x, sheet_y, sheet_w, sheet_h, gfx.x, gfx.y, sheet_w * scaling, sheet_h * scaling, 0, 0)
     end
 end
 
@@ -1065,6 +1397,16 @@ function layout.Sprite.Sprite:new(o, spritesheet, name, alpha)
     o.justHorz = 0
     o.justVert = 0
 
+    -- center on resize
+    o.center_x = true
+    o.center_y = true
+
+    -- stick sprite to bottom edge
+    o.stick_to_bottom = false
+
+    -- optional scaling
+    o.scale_factor = 1
+
     -- transfer cursor dimensions
     Part.Cursor.applyCursorToTarget(o)
 
@@ -1073,6 +1415,29 @@ function layout.Sprite.Sprite:new(o, spritesheet, name, alpha)
 
     return o
 end
+
+-- Sprite : Set Center Behaviour
+-- -------------------------------------------
+
+function layout.Sprite.Sprite:setCenterBehaviour(center_x, center_y, stick_to_bottom)
+    if center_x ~= nil then
+        self.center_x = center_x
+    end
+    if center_y ~= nil then
+        self.center_y = center_y
+    end
+    if stick_to_bottom ~= nil then
+        self.stick_to_bottom = stick_to_bottom
+    end
+end
+
+-- Sprite : Scale
+-- -------------------------------------------
+
+function layout.Sprite.Sprite:setScaleFactor(factor)
+    self.scale_factor = factor or 1
+end
+
 
 -- Sprite : Justify
 -- -------------------------------------------
@@ -1101,16 +1466,71 @@ end
 -- -------------------------------------------
 
 function layout.Sprite.Sprite:draw()
+    -- optionally stick to bottom
+    local bottom_offset = 0
+    if self.stick_to_bottom then
+        bottom_offset = Part.Global.win_y_offset
+    end
+
     -- prepare dimensions
-    local x = Part.Functions.rescale(self.dim_x, true)
-    local y = Part.Functions.rescale(self.dim_y, false, true)
+    local x = Part.Functions.rescale(self.dim_x, self.center_x)
+    local y = Part.Functions.rescale(self.dim_y + bottom_offset, false, self.center_y)
     local w = Part.Functions.rescale(self.dim_w)
     local h = Part.Functions.rescale(self.dim_h)
 
     gfx.a = self.alpha
 
     -- draw sprite
-    self.spritesheet:drawSprite(self.name, x, y, w, h, self.justHorz, self.justVert)
+    self.spritesheet:drawSprite(self.name, x, y, w, h, self.justHorz, self.justVert,self.scale_factor)
+end
+
+-- ==========================================================================================
+--                      Layout : Function
+-- ==========================================================================================
+
+-- Function
+-- -------------------------------------------
+
+layout.Function.Function = layout.LayoutElement:new()
+
+function layout.Function.Function:new(o, function_address, ...)
+    o = o or layout.LayoutElement:new(o)
+    setmetatable(o, self)
+    self.__index = self
+
+    -- store address of target function
+    o.function_address = function_address
+    o.function_args = { ... } or {}
+
+    -- transfer cursor dimensions
+    Part.Cursor.applyCursorToTarget(o)
+
+    -- register sprite in list
+    table.insert(Part.List.layout, o)
+
+    return o
+end
+
+-- Function : Draw
+-- -------------------------------------------
+
+function layout.Function.Function:draw()
+    -- prepare dimensions
+    local x = Part.Functions.rescale(self.dim_x, true)
+    local y = Part.Functions.rescale(self.dim_y, false, true)
+    local w = Part.Functions.rescale(self.dim_w)
+    local h = Part.Functions.rescale(self.dim_h)
+
+    -- update cursor position before function call
+    Part.Cursor.stackCursor()
+    Part.Cursor.setCursor(x, y, w, h, 0, 0)
+
+    -- call function
+    local f = self.function_address
+    if f then
+        f(table.unpack(self.function_args))
+    end
+    Part.Cursor.destackCursor()
 end
 
 return layout

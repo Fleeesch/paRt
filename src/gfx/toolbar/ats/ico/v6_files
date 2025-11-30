@@ -34,9 +34,6 @@ toolbar_midi_mode_piano_roll.png
 toolbar_new.png
 toolbar_projprop.png
 toolbar_redo.png
-toolbar_ripple_all.png
-toolbar_ripple_off.png
-toolbar_ripple_one.png
 toolbar_save.png
 toolbar_snap_off.png
 toolbar_snap_on.png
@@ -61,7 +58,6 @@ toolbar_v3_grid_off.png
 toolbar_v3_group_off.png
 toolbar_v3_lock_off.png
 toolbar_v3_metro_off.png
-toolbar_v3_ripple_off.png
 toolbar_v3_snap_off.png
 toolbar_v3_xfade_off.png
 toolbar_midi_events_mode_drum_diamond.png
@@ -75,3 +71,12 @@ toolbar_razor_off.png
 toolbar_razor_on.png
 toolbar_marquee_cursor_selection_off.png
 toolbar_marquee_cursor_selection_on.png
+toolbar_highlight_off.png
+toolbar_highlight_on.png
+toolbar_ripple_one_off.png
+toolbar_ripple_one_on.png
+toolbar_ripple_all_off.png
+toolbar_ripple_all_on.png
+toolbar_v3_ripple_off.png
+toolbar_v3_ripple_all.png
+toolbar_v3_ripple_one.png

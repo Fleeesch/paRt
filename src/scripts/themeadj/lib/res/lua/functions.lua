@@ -1,11 +1,30 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
-
+--[[
+    Various functions to help out with calculations, data management and string conversions.
+    A little toolkit that can be used everywhere.
+]]
 
 local functions = {}
+
+--  Method : Print Table to Console
+-- ------------------------------------------------
+
+function functions.printTableToConsole(table, indent)
+    indent = indent or ""
+    for k, v in pairs(table) do
+        local key = tostring(k)
+        if type(v) == "table" then
+            reaper.ShowConsoleMsg(indent..key..":\n")
+            functions.printTableToConsole(v, indent.."  ")
+        else
+            reaper.ShowConsoleMsg(indent..key.." = "..tostring(v).."\n")
+        end
+    end
+end
 
 
 --  Method : Check if String starts with a Phrase
@@ -13,6 +32,18 @@ local functions = {}
 
 function functions.stringStarts(String, Start)
     return string.sub(String, 1, string.len(Start)) == Start
+end
+
+--  Method : Get File Name from Path
+-- -------------------------------------------
+
+function functions.getFileNameFromPath(path)
+    -- last element
+    local name = path:match("([^/\\]+)$")
+
+    -- split name and extension
+    local base, ext = name:match("^(.*)%.([^%.]+)$")
+    return base or name, ext or ""
 end
 
 --  Method : List Files in Folder
@@ -84,53 +115,6 @@ function functions.deepCopy(orig)
     return copy
 end
 
---  Method : Text Block
--- -------------------------------------------
-
-function functions.textBlock(input_txt, char_limit)
-    -- return table
-    local out = {}
-
-    -- line string
-    local line = ""
-
-    -- cahracter count and per-line-limit
-    local char_count = 0
-    local char_max = char_limit or 20
-
-    -- go trough words
-    for word in input_txt:gmatch("%S+") do
-        -- increment character count
-        char_count = char_count + string.len(word)
-
-        -- transform linebreaks into extra lines, using a [Linebreak] markdown entry
-        if word == "\\n" then
-            char_count = 0
-            table.insert(out, line)
-            table.insert(out, "[Linebreak]")
-            line = ""
-        else
-            -- insert a new line when character count has been reached
-            if char_count > char_max then
-                char_count = 0
-                table.insert(out, line)
-                line = ""
-            end
-
-            -- add word to line
-            line = line .. word .. " "
-        end
-    end
-
-    -- add remainder of line if available
-    if line ~= "" then
-        table.insert(out, line)
-    end
-
-    -- return table containing ordered lines
-    return out
-end
-
 --  Method : Refresh Theme
 -- -------------------------------------------
 function functions.refreshTheme()
@@ -163,6 +147,10 @@ end
 function functions.extractExtension(path)
     local _, _, extension = string.find(path, "%.([^%.]+)$")
 
+    if extension == nil then
+        return ""
+    end
+
     return extension
 end
 
@@ -174,6 +162,10 @@ function functions.extractFileName(path)
 
     -- get filename
     local fileName = normalizedPath:match("/([^/]+)$")
+
+    if fileName == nil then
+        return ""
+    end
 
     -- return filename
     return fileName
@@ -231,7 +223,7 @@ end
 function functions.match_array(value, array)
     local closest = array[1]
     local min_diff = math.abs(value - closest)
-    
+
     for i = 2, #array do
         local diff = math.abs(value - array[i])
         if diff < min_diff then
@@ -239,9 +231,116 @@ function functions.match_array(value, array)
             min_diff = diff
         end
     end
-    
+
     return closest
+end
+
+--  Method : Wrap Text block
+-- -------------------------------------------
+function functions.wrap_text_block(input_string, width_limit, font_size, font_flags)
+    font_flags = font_flags or ""
+    width_limit = width_limit or 200
+    font_size = font_size or 12
+
+    Part.Draw.Graphics.setFont(font_size, font_flags)
+    local output_lines = {}
+    local line = ""
+
+    -- iterate words
+    for word in input_string:gmatch("%S+") do
+        -- handle words that extend width
+        if gfx.measurestr(word) > width_limit then
+            -- character-by-character splitting
+            local chunk = ""
+            for i = 1, #word do
+                -- get character
+                local character = word:sub(i, i)
+                -- start a new line when added character exceeds width
+                if gfx.measurestr(chunk .. character) > width_limit then
+                    table.insert(output_lines, chunk)
+                    chunk = character
+                else
+                    -- simply add character to form word
+                    chunk = chunk .. character
+                end
+            end
+
+            -- if there is any: add remaining text to output
+            if chunk ~= "" then
+                table.insert(output_lines, chunk)
+            end
+        else
+            -- start with word if empty or append with space
+            local target_string = word
+            if line ~= "" then
+                target_string = line .. " " .. word
+            end
+
+            -- words exceeds width limit
+            if gfx.measurestr(target_string) > width_limit then
+                table.insert(output_lines, line)
+                line = word
+            else
+                line = target_string
+            end
+        end
+    end
+
+    -- add remaining line content if there is any
+    if line ~= "" then
+        table.insert(output_lines, line)
+    end
+
+    return output_lines
+end
+
+--  Method : Text Block
+-- -------------------------------------------
+
+function functions.textBlock(input_txt, char_limit)
+    -- return table
+    local out = {}
+
+    -- line string
+    local line = ""
+
+    -- cahracter count and per-line-limit
+    local char_count = 0
+    local char_max = char_limit or 20
+
+    -- go trough words
+    for word in input_txt:gmatch("%S+") do
+        -- increment character count
+        char_count = char_count + string.len(word)
+
+        -- transform linebreaks into extra lines, using a [Linebreak] markdown entry
+        if word == "\\n" then
+            char_count = 0
+            table.insert(out, line)
+            table.insert(out, "[Linebreak]")
+            line = ""
+        else
+            -- insert a new line when character count has been reached
+            if char_count > char_max then
+                char_count = 0
+                table.insert(out, line)
+                line = ""
+            end
+
+            -- add word to line
+            line = line .. word .. " "
+        end
+    end
+
+    -- add remainder of line if available
+    if line ~= "" then
+        table.insert(out, line)
+    end
+
+    -- return table containing ordered lines
+    return out
 end
 
 
 return functions
+

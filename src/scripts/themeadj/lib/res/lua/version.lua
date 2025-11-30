@@ -1,9 +1,13 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
+--[[
+    Version Management.
 
+    Is still very limited and only contains some basic legacy fixes.
+]]
 
 local version = {}
 
@@ -18,6 +22,63 @@ version.version_adjuster = ""
 version.version_theme = ""
 version.version_theme_is_dev = false
 
+-- initial fixes
+version.universal_fixes_applied = false
+
+
+--  Method : Apply Legacy Fixes
+-- -------------------------------------------
+
+-- fixes based on configuration changes
+-- no requirement for version comparison in this case
+
+function version.applyLegacyFixes()
+    --      Helper Function : Correct Parameter Values of a Group
+    -- ==============================================================
+    local function set_parameter_group_value(parameter_group, condition_value, target_value)
+        -- check if group has parameters
+        if parameter_group.parameters ~= nil then
+            -- detect necessary update
+            local update_group = false
+
+            -- iterate parameters
+            for _, parameter in ipairs(parameter_group.parameters) do
+                -- correct value
+                if parameter.value == condition_value then
+                    parameter.value = target_value
+                    update_group = true
+                end
+            end
+
+            -- set value again to refresh theme
+            if update_group then
+                parameter_group:setValue(nil, true)
+            end
+        end
+    end
+
+    -- ==============================================================
+
+    --  Fix : TCP Fader Placement
+    -- ===============================================
+
+    -- track
+    if Part.Parameter.Map.par_tcp_track_fader_placement[1] ~= nil then
+        set_parameter_group_value(Part.Parameter.Map.par_tcp_track_fader_placement[1], 1, 2)
+    end
+
+    -- master
+    if Part.Parameter.Map.par_tcp_master_fader_placement[1] ~= nil then
+        set_parameter_group_value(Part.Parameter.Map.par_tcp_master_fader_placement[1], 1, 2)
+    end
+
+    -- envcp
+    if Part.Parameter.Map.par_tcp_envcp_value_mode[1] ~= nil then
+        set_parameter_group_value(Part.Parameter.Map.par_tcp_envcp_value_mode[1], 2, 1)
+    end
+
+    version.universal_fixes_applied = true
+end
 
 --  Method : Set Script Version
 -- -------------------------------------------
@@ -53,12 +114,12 @@ function version.getThemeVersion()
 
     if Part.Functions.stringStarts(desc, "paRt Theme") then
         local version_string = desc:match("v([0-9%.]+)")
-        
+
         -- developer version exception
         if string.find(desc, "dev") or string.find(desc, "vdev") then
             version.version_theme_is_dev = true
             version.version_theme = "_DEV"
-        -- actual version number available
+            -- actual version number available
         elseif version_string ~= nil and #version_string > 0 then
             version.version_theme_is_dev = false
             version.version_theme = version_string
@@ -101,6 +162,9 @@ end
 --  Method : Detect Version Difference
 -- -------------------------------------------
 
+-- there's no real version handling available currently,
+-- just a bunch of simple parameter overrides
+
 function version.handleVersionDifference()
     if version.version_theme ~= version.version_adjuster then
         local version_latest = version.compareVersions(version.version_theme, version.version_adjuster)
@@ -113,6 +177,9 @@ function version.handleVersionDifference()
         if version_latest == version.version_adjuster then
         end
     end
+
+    -- universal fixes are always applied
+    version.applyLegacyFixes()
 end
 
 return version

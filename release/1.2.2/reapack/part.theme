@@ -1,0 +1,73 @@
+@version 1.2.2
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+  
+  * 3 theme variants with different brightness levels and parameter synchronization
+  * Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Complete coverage of all Reaper V7 UI elements
+  * Custom Theme Adjuster with extensive configuration options
+@changelog
+  - Appearance: Reworked colors for all theme files
+  - Appearance: More edgy faders
+  - Appearance: Improved insert slot margins
+  - Appearance: Fixed TCP send knob offset
+  - Appearance: Larger volume readout labels
+  - Appearance: Higher contrast take markers
+  - Appearance: Dimmed loop and time selection edges
+  - Appearance: Volume knobs now use a stroke shape
+  - Changed: Tracks are no longer seamless and come with fixed padding to comply with visual spacers
+  - Changed: TCP fader order corrects itself for proper dual-panning display
+  - Changed: TCP fader layout adjusted to ensure compliance with button wrapping
+  - Changed: TCP inserts are now always below buttons and faders when not in inline mode
+  - Changed: TCP inserts use section spacing when not in inline mode
+  - Changed: TCP master track uses the same layout as tracks
+  - Changed: TCP button order updated
+  - Changed: Simplified meter label alpha adjustment
+  - Added: Missing elements introduced with previous Reaper V7 updates
+  - Added: Missing toolbar icons and custom replacements
+  - Added: Extra-wide layout for MCP buttons
+  - Added: Optional TCP button wrapping
+  - Added: TCP vertical fader layout
+  - Added: Full 2D spacing adjustments for TCP
+  - Added: Full separator toggle support for every element
+  - Added: MCP inserts in sidebar mode now support padding options
+  - Fixed: Improved separator overflow hiding logic
+  - Fixed: Linux font formatting quirks
+  - Removed: TCP post-button fader layout
+  - Removed: Separator line feature
+  - Theme Adjuster: Complete layout rework
+  - Theme Adjuster: Changed window size
+  - Theme Adjuster: Replaced bank button symbol with "+"
+  - Theme Adjuster: Added static hint system with help messages for each element
+  - Theme Adjuster: Added keyboard shortcuts for navigation
+  - Theme Adjuster: Fixed various typos
+  - Theme Adjuster: Fixed Linux font formatting quirks
+  - Theme Adjuster: Removed configuration management via file browser
+  - Theme Adjuster: Added configuration slots for storing complete snapshots
+  - Theme Adjuster: Improved theme detection method with file name prioritization

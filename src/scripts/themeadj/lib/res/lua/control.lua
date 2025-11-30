@@ -1,9 +1,13 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
-
+--[[
+    Control Elements. Anything that can be clicked and modified by the user.
+    
+    Contains also some unused stuff like knobs from previous versions.
+]]
 
 local control = { Button = {}, ButtonBank = {}, Slider = {}, Knob = {}, Marker = {}, Hint = {} }
 
@@ -140,7 +144,7 @@ function control.Button.Button:new(o, parameter, toggle, text, target_value)
     -- default colors
     o.color_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.off_bg)
     o.color_fg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.off_fg)
-    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.blue)
+    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
     o.color_fg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.on_fg)
     o.color_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.border)
 
@@ -187,7 +191,7 @@ end
 function control.Button.Button:selectionButton()
     self.color_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.selection.off_bg)
     self.color_fg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.selection.off_fg)
-    self.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.blue)
+    --self.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.yellow)
     self.color_fg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.selection.on_fg)
     self.color_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.selection.border)
 end
@@ -460,12 +464,12 @@ function control.ButtonBank.ButtonBank:new(o, parameter)
 
     o.color_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.bank.off_bg)
     o.color_fg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.bank.off_fg)
-    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
+    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.blue)
     o.color_fg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.bank.on_fg)
     o.color_border_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.bank.off_border)
     o.color_border_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.button.bank.on_border)
 
-    o.text = "B"
+    o.text = "+"
 
     o.trigger_bank_update = true
 
@@ -553,11 +557,11 @@ function control.ButtonBank.ButtonBank:draw()
     Part.Draw.Graphics.drawRectangle(x, y, w, h, color_bg, color_border)
 
     -- draw text
-    
-    self:setFontFlags("b")
-    Part.Draw.Graphics.setFont(12, self.font_flags)
 
-    Part.Cursor.setCursorPos(x, y)
+    self:setFontFlags("b")
+    Part.Draw.Graphics.setFont(16, self.font_flags)
+
+    Part.Cursor.setCursorPos(x, y - Part.Functions.rescale(2))
     Part.Color.setColor(color_fg, true)
     gfx.drawstr(self.text, self.flags, x + w, y + h)
 
@@ -633,7 +637,7 @@ function control.Marker.Marker:new(o, parameter, toggle, target_value)
     -- colors
     o.color_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.marker.border)
     o.color_bg_off = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.marker.bg_off)
-    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.blue)
+    o.color_bg_on = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.cyan)
 
     -- add to lists
     table.insert(Part.List.control, o)
@@ -840,7 +844,7 @@ function control.Marker.Marker:drawSymbol(hover)
     local y = self.draw_symbol_y
 
     -- border
-    Part.Color.setColor(self.color_border)
+    Part.Color.setColor(self.color_border, true)
     gfx.circle(x, y, r, true, true)
 
     -- fill color
@@ -910,14 +914,8 @@ function control.Slider.Slider:new(o, parameter)
     o.color_knob = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.knob)
     o.color_knob_border = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.knob_border)
     o.color_knob_slot = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.slot)
-    o.color_value_fill = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.color.blue)
+    o.color_value_fill = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.value_fill)
     o.color_slot_default = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.slot_default)
-
-    if o.color_value_fill[4] == nil then
-        o.color_value_fill[4] = 0.25
-    else
-        o.color_value_fill[4] = o.color_value_fill[4] * 0.25
-    end
 
     -- compression, vertical padding to make the slider slimmer
     o.compression = 2
@@ -998,6 +996,7 @@ function control.Slider.Slider:colorFinder(color_picker, color_table)
     self.color_finder = true
     self.color_table = color_table
     self.color_picker = color_picker
+    self.color_knob = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.slider.gradient_knob)
 end
 
 --  Control : Slider : Prepare
@@ -1177,31 +1176,8 @@ function control.Slider.Slider:draw()
     end
 
     -- knob
-    if not self.color_finder then
-        Part.Draw.Graphics.drawRectangle(self.draw_def_slot_x, y + Part.Draw.Graphics.border, Part.Draw.Graphics.border,
-            h - Part.Draw.Graphics.border * 2, self.color_slot_default)
-        Part.Draw.Graphics.drawRectangle(knob_x, y, k, h, color_knob_bg, color_knob_border)
-    else
-        gfx.x = Part.Functions.map(float_val, 0, 1, self.draw_inner_x, self.draw_x + self.draw_inner_w)
-
-        gfx.y = y + h / 2
-        local r, g, b = gfx.getpixel()
-
-        local knob_color = { r, g, b, 1 }
-
-        for i = 1, #knob_color - 1 do
-            knob_color[i] = math.min(math.floor(knob_color[i] * 255), 255)
-        end
-
-        local m = 0.5
-        local a = 0.1
-
-        gfx.muladdrect(inner_x, inner_y, inner_w, inner_h, m, m, m, 1, a, a, a, 0)
-
-        Part.Draw.Graphics.drawRectangle(self.draw_def_slot_x, y + Part.Draw.Graphics.border, Part.Draw.Graphics.border,
-            h - Part.Draw.Graphics.border * 2, self.color_slot_default)
-        Part.Draw.Graphics.drawRectangle(knob_x, y, k, h, knob_color, color_knob_border)
-    end
+    Part.Draw.Graphics.drawRectangle(self.draw_def_slot_x, y + Part.Draw.Graphics.border, Part.Draw.Graphics.border, h - Part.Draw.Graphics.border * 2, self.color_slot_default)
+    Part.Draw.Graphics.drawRectangle(knob_x, y, k, h, color_knob_bg, color_knob_border)
 end
 
 -- ===============================================================================
@@ -1411,25 +1387,65 @@ end
 --                      Control : Hint
 -- ===============================================================================
 
+-- recent hint
+control.Hint.target = nil
 
 --  Control : Hint
 -- -------------------------------------------
 control.Hint.Hint = control.Control:new()
 
-function control.Hint.Hint:new(o, text, linked_element, is_parameter_hint, use_cursor)
+function control.Hint.Hint:new(o, input_text, linked_element, is_parameter_hint, use_cursor)
     o = o or control.Control:new(o, nil, true)
 
     setmetatable(o, self)
     self.__index = self
 
     -- hint message
-    o.text = text
+    o.text = {}
+
+    -- process input text data
+    if input_text ~= nil then
+        -- convert basic string to table
+        if type(input_text) == "string" then
+            o.text = { { type = "normal", text = input_text } }
+
+            -- check table
+        elseif type(input_text) == "table" then
+            -- iterate table
+            for i, entry in ipairs(input_text) do
+                -- convert normal string entries into table entries
+                if type(entry) == "string" then
+                    o.text[i] = { type = "normal", text = entry }
+
+                    -- process table structure if one is given
+                elseif type(entry) == "table" then
+                    -- use existing or default data
+                    local type = entry.type or "normal"
+                    local text = entry.text
+
+                    -- recognize multiple lists as words
+                    if entry.text == nil then
+                        text = table.concat(entry, " ")
+                    end
+
+                    -- store formatted output table entry
+                    o.text[i] = { type = type, text = text }
+                end
+            end
+        end
+    end
+
 
     -- functions
     o.functions = {}
 
-    -- linked element
-    o.linked_element = linked_element or Part.Draw.Elements.lastElement()
+    -- linked elements
+    o.linked_elements = linked_element or { Part.Draw.Elements.lastElement() }
+
+    -- force linked elements in table
+    if type(o.linked_elements) ~= "table" or #o.linked_elements == 0 then
+        o.linked_elements = { o.linked_elements }
+    end
 
     -- use cursor positions for hover detection
     o.use_cursor = use_cursor or false
@@ -1463,7 +1479,10 @@ function control.Hint.Hint:new(o, text, linked_element, is_parameter_hint, use_c
     -- alpha level
     o.alpha = 1
 
-    o.symbol_rotation = 1.5708
+    -- optional hover graphic
+    o.hover_highlight = false
+    o.hover_pad_x = 0
+    o.hover_pad_y = 0
 
     -- default colors
     o.color_bg = Part.Functions.deepCopy(Part.Color.Lookup.color_palette.hint.bg)
@@ -1494,6 +1513,23 @@ function control.Hint.Hint:setPadding(pad)
     self.pad = math.max(pad, 0)
 end
 
+--  Control : Hint : Hover Graphic
+-- -------------------------------------------
+
+function control.Hint.Hint:showHover(pad_x, pad_y)
+    -- enable hover highlighting
+    self.hover_highlight = true
+
+    -- potential dimension offset
+    if pad_x ~= nil then
+        self.hover_pad_x = pad_x
+    end
+
+    if pad_y ~= nil then
+        self.hover_pad_y = pad_y
+    end
+end
+
 --  Control : Hint : Calculate Display factor
 -- ----------------------------------------------
 
@@ -1511,10 +1547,20 @@ function control.Hint.Hint:prepare()
     self.draw_h = Part.Functions.rescale(self.dim_h)
     self.draw_p = Part.Functions.rescale(self.pad)
 
-    self.draw_link_x = Part.Functions.rescale(self.linked_element.dim_x, true)
-    self.draw_link_y = Part.Functions.rescale(self.linked_element.dim_y, false, true)
-    self.draw_link_w = Part.Functions.rescale(self.linked_element.dim_w)
-    self.draw_link_h = Part.Functions.rescale(self.linked_element.dim_h)
+    self.draw_hover_pad_x = Part.Functions.rescale(self.hover_pad_x)
+    self.draw_hover_pad_y = Part.Functions.rescale(self.hover_pad_y)
+
+    self.draw_link = {}
+
+    -- store hover regions
+    for _, link in ipairs(self.linked_elements) do
+        table.insert(self.draw_link, {
+            x = Part.Functions.rescale(link.dim_x, true),
+            y = Part.Functions.rescale(link.dim_y, false, true),
+            w = Part.Functions.rescale(link.dim_w),
+            h = Part.Functions.rescale(link.dim_h)
+        })
+    end
 
     self.draw_symbol_size = Part.Functions.rescale(2)
 end
@@ -1523,75 +1569,41 @@ end
 -- -------------------------------------------
 
 function control.Hint.Hint:draw()
-    -- get dimensions
-    local link_x = self.draw_link_x
-    local link_y = self.draw_link_y
-    local link_w = self.draw_link_w
-    local link_h = self.draw_link_h
+    -- count hover instances
+    local hover_count = 0
 
-    local x, y, w, h
+    -- iterate linked elements
+    for _, link in ipairs(self.draw_link) do
+        -- hover coordiantes
+        local x = link.x
+        local y = link.y
+        local w = link.w
+        local h = link.h
 
+        -- register hover as long as there is no ongoing drag
+        if Part.Gui.Mouse.hoverCheck(nil, x, y, w, h) then
+            hover_count = hover_count + 1
 
-    if self.use_cursor then
-        x = self.draw_x
-        y = self.draw_y
-        w = self.draw_w
-        h = self.draw_h
-    else
-        x = link_x
-        y = link_y
-        w = link_w
-        h = link_h
-    end
-
-
-    -- hover state
-    local hover = false
-
-    -- hover active?
-    if Part.Gui.Mouse.hoverCheck(nil, x, y, w, h) then
-        if Part.Gui.Mouse.Drag.isOff() then
-            hover = true
-
-
-            -- increment counter
-            if self.show_counter < self.show_time then
-                self.show_counter = self.show_counter + 1
-
-                if self.show_counter >= self.show_delay then
-                    Part.Gui.Hint.hint_message:setSource(self)
-                end
+            -- hover highlight
+            if self.hover_highlight then
+                -- manipulate graphics section
+                local multiply = Part.Color.Lookup.color_palette.mod.lighten_hint[1] or 1
+                local add = Part.Color.Lookup.color_palette.mod.lighten_hint[2] or 0
+                gfx.muladdrect(x - self.draw_hover_pad_x, y - self.draw_hover_pad_y, w + 2 * self.draw_hover_pad_x,
+                    h + 2 * self.draw_hover_pad_y, multiply, multiply, multiply, multiply, add, add, add, add)
             end
         end
+    end
 
-        -- no hovering?
-    else
-        -- decrement or reset counter
-        if self.show_counter >= self.show_delay then
-            self.show_counter = self.show_counter - 1
-        else
-            self.show_counter = 0
-        end
-
-        -- clear as active hint
-        if Part.Gui.Hint.hint_message.source == self then
+    -- set or release hover source as long as there is no ongoing mouse drag
+    if Part.Gui.Mouse.Drag.isOff() then
+        if hover_count > 0 then
+            Part.Gui.Hint.hint_message:setSource(self)
+            control.Hint.target = self
+        elseif Part.Gui.Hint.hint_message.source == self then
             Part.Gui.Hint.hint_message:clear()
+            control.Hint.target = nil
         end
-    end
-
-    -- symbol
-    if self.draw_symbol then
-        Part.Draw.Graphics.drawRectangle(x - self.draw_symbol_size, y, self.draw_symbol_size, h, Part.Color.Lookup.color_palette.hint.symbol)
-    end
-
-    -- custom overlay drawing
-    if hover then
-        local p = self.draw_p
-        local f = Part.Functions.cap((self.show_counter / self.show_delay) - 0.01 * 1.01, 0, 1)
-        local r = self.color_hover[1] * f + 1
-        local g = self.color_hover[2] * f + 1
-        local b = self.color_hover[3] * f + 1
-        gfx.muladdrect(link_x - p, link_y - p, link_w + p * 2, link_h + p * 2, r, g, b, 1, 0, 0, 0, 0)
     end
 end
 

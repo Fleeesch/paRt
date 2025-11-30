@@ -1,7 +1,14 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
+
+--[[
+    This section was originally the central point for file and bank management.
+    It has been partially moved to the config.lua file since v1.2.2,
+    but there's still some old stuff here that would require some time porting.
+    ]] --
+
 local bank = { Functions = {}, Handler = {}, ParameterSet = {}, Slot = {} }
 
 -- ==========================================================================================
@@ -68,7 +75,7 @@ function bank.Functions.storeParameterFile(target_file_name)
         -- path has to be valid
         if last_theme_filepath ~= nil then
             local last_theme = Part.Functions.extractFileName(reaper.GetLastColorThemeFile())
-            
+
             -- string has to be valid
             if last_theme ~= nil and #last_theme > 0 then
                 -- store last theme
@@ -134,9 +141,12 @@ function bank.Functions.loadParameterFile(force, target_file_name)
     if force or not same_theme then
         local file = io.open(file_name, "r")
 
-        -- if previous parameters aren't available load the default file
+        -- file not found
         if not file then
-            file = io.open(Part.Global.config_dir .. "/defaults.partmap", "r")
+            --file = io.open(Part.Global.config_dir .. "/defaults.partmap", "r")
+            Part.Message.Handler.showMessage(
+                'Couldn\'t find "' .. Part.Functions.extractFileName(file_name) .. '"', "!", "error")
+            return
         end
 
         if file then
@@ -149,6 +159,9 @@ function bank.Functions.loadParameterFile(force, target_file_name)
             local success, data = pcall(load(content, nil, nil, _G))
 
             if success then
+                -- freeze
+                Part.Gui.Theme.freezeTheme()
+
                 -- clear graphics buffer
                 Part.Draw.Buffer.clearCompleteBuffer()
 
@@ -158,6 +171,7 @@ function bank.Functions.loadParameterFile(force, target_file_name)
                 if data["version"] ~= nil then
                     --load_version = data["version"]
                 end
+
 
                 -- theme parameters
                 for key, val in pairs(data) do
@@ -176,11 +190,17 @@ function bank.Functions.loadParameterFile(force, target_file_name)
                 -- force a bank update
                 bank.Handler:update(true)
 
+                -- apply legacy fixes
+                Part.Version.applyLegacyFixes()
+
                 -- success message
                 if manual_load then
                     Part.Message.Handler.showMessage('Successfully loaded "' ..
                         Part.Functions.extractFileName(file_name) .. '"')
                 end
+
+                -- unfreeze
+                Part.Gui.Theme.unfreezeTheme()
             else
                 -- error message
                 if not manual_load then
@@ -205,13 +225,21 @@ end
 -- -------------------------------------------
 
 function bank.Functions.hardResetAllParameters()
+    -- freeze
+    Part.Gui.Theme.freezeTheme()
+
+    -- reset theme parameters
     for i = 1, #Part.List.theme_parameter do
         Part.List.theme_parameter[i]:reset()
     end
 
+    -- reset bank-linked parameters
     for i = 1, #Part.List.banked_parameter do
         Part.List.banked_parameter[i]:reset()
     end
+
+    -- unfreeze
+    Part.Gui.Theme.unfreezeTheme()
 end
 
 -- ==========================================================================================
@@ -349,7 +377,7 @@ end
 
 function bank.Handler.BankHandler:init()
     -- select bank based on bank-select-parameter
-    self:selectBank(math.max(self.bank_parameter:getValue(), 2))
+    self:selectBank(self.bank_parameter:getValue())
     self:update(true)
 end
 
@@ -364,6 +392,9 @@ end
 -- -------------------------------------------
 
 function bank.Handler.BankHandler:selectBank(idx)
+    -- cap index
+    idx = math.min(math.max(idx, 1), #self.bank_slot)
+
     -- select bank based on index
     self.bank_selected = self.bank_slot[idx]
 
@@ -388,11 +419,15 @@ function bank.Handler.BankHandler:update(force)
 
     -- bank selection happened or force is active?
     if self.bank_selected_last ~= self.bank_selected or (force ~= nil and force) then
+        Part.Gui.Theme.freezeTheme()
+
         -- go through parameter sets
         for key, val in pairs(self.parameter_set) do
             -- load bank of parameter set
             val:loadBank(self.bank_selected:getIndex())
         end
+
+        Part.Gui.Theme.unfreezeTheme()
     end
 
     -- store current bank as last selected
@@ -463,6 +498,7 @@ function bank.ParameterSet.BankParameterSet:loadBank(idx)
     if self.parameter ~= nil then
         --self.parameter:setValue()
     end
+
 
     for key, val in pairs(self.parameter_group) do
         -- load bank parameter of group

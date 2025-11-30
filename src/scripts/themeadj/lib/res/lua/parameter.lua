@@ -1,9 +1,15 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
-local parameter = { Group = {}, Reaper = {}, Theme = {}, Banked = {}, Lookup = {}, Map = {} }
+--[[
+    Parameter handling. Anything that is a user-adjustable value and has something to do with storage.
+    This file also covers parameter groups that are used to store multiple parameters in order to
+    implement the bank system.
+]]--
+
+local parameter = { Group = {}, Reaper = {}, Theme = {}, Banked = {}, Lookup = {}, Map = {}, CustomParameterSettings = {} }
 
 -- ==========================================================================================
 --                      Parameter : Generic
@@ -73,7 +79,6 @@ function parameter.Parameter:new(o, lookup_name, value_default, value_min, value
 
     return o
 end
-
 
 -- Parameter : Store in Settings
 -- -------------------------------------------
@@ -319,7 +324,7 @@ function parameter.Group.ParameterGroup:new(o, lookup_name, type, bank_to_use)
     o.parameter_theme = parameter.Theme.ThemeParameter:new(nil, lookup_name)
 
     -- iterate bank parameter names
-    for key, name in pairs(bank_names) do
+    for _, name in pairs(bank_names) do
         -- parameter is a theme parmeter?
         if type == "theme_autobank" then
             -- create a theme parameter
@@ -344,7 +349,7 @@ function parameter.Group.ParameterGroup:new(o, lookup_name, type, bank_to_use)
     o.loaded_parameter = nil
     o.loaded_parameter_index = nil
 
-    -- load fist parameter in group
+    -- load first parameter in group
     o:loadParameter(1)
 
     -- update value
@@ -433,9 +438,9 @@ end
 -- Parameter Group : Set Value
 -- -------------------------------------------
 
-function parameter.Group.ParameterGroup:setValue(value)
+function parameter.Group.ParameterGroup:setValue(value, force)
     if value == nil then
-        if Part.Global.initial_load then
+        if Part.Global.initial_load or (force ~= nil and force) then
             self.parameter_theme:setValue(self.loaded_parameter:getValue())
         end
         return
@@ -463,7 +468,6 @@ function parameter.Group.ParameterGroup:valueToFloat(value, use_rescale)
     -- address loaded parameter
     return self.loaded_parameter:valueToFloat(value, use_rescale)
 end
-
 
 -- Parameter Group : Rescale
 -- -------------------------------------------
@@ -595,7 +599,6 @@ parameter.Theme.ThemeParameter = parameter.Parameter:new()
 parameter.Theme.theme_parameter_by_name = {}
 
 function parameter.Theme.ThemeParameter:new(o, lookup_name, buffered, store)
-    
     local parameter_missing = false
 
     -- check if parameter is available
@@ -680,7 +683,6 @@ end
 -- -------------------------------------------
 
 function parameter.Theme.ThemeParameter:reset()
-
     -- skip missing parameter
     if self.parameter_missing then return end
 
@@ -691,7 +693,6 @@ end
 -- -------------------------------------------
 
 function parameter.Theme.ThemeParameter:getValue()
-
     -- skip missing parameter
     if self.parameter_missing then return end
 
@@ -761,7 +762,7 @@ end
 function parameter.Theme.ThemeParameter:buffer()
     -- skip missing parameter
     if self.parameter_missing then return end
-    
+
     -- buffer is active and enough time has passed?
     if self.buffer_to_process and Part.Global.ticks > self.timestamp then
         -- set theme paremeter
@@ -802,14 +803,124 @@ function parameter.Lookup.importThemeParameters()
     while not end_reached do
         local retval, desc, value, defValue, minValue, maxValue = reaper.ThemeLayout_GetParameter(index)
 
+        -- [?] not sure if there really was an actual parameter limit
         -- max parmeter limit, end reached when retval is none
-        if index > 1000 or retval == nil then
+        --if index > 1000 or retval == nil then
+
+        -- check if end has been reached
+        if retval == nil then
             end_reached = true
         else
             -- store parameter index of name
             parameter.Lookup.theme_par_lookup[retval] = index
         end
         index = index + 1
+    end
+end
+
+-- ==========================================================================================
+--                      Parameter : Custom
+-- ==========================================================================================
+
+-- fallback configuration
+parameter.CustomParameterSettings = {
+    version = nil,
+    adjustments = {
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+    },
+    buttons = {
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+    },
+    choices = {
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+        nil,
+    }
+}
+
+
+-- Method : Import Custom Parameter Settings
+-- -------------------------------------------
+
+function parameter.Lookup.importCustomParameterSettings()
+    -- get target path
+    local config_path = Part.Global.config_dir
+    local target_path = config_path .. "/" .. Part.Global.config_user_path .. "/" .. Part.Global.config_custom_parameter_settings_file
+    local target_path_alt = config_path .. "/" .. Part.Global.config_user_path .. "/" .. Part.Global.config_custom_parameter_settings_file_fallback
+
+    -- use fallback file if user file doesn't exist
+    if not reaper.file_exists( target_path ) then
+        target_path = target_path_alt
+    end
+
+    -- try loading file
+    local file = io.open(target_path, "r")
+    if file then
+        -- try reading content
+        local content = file:read("*all")
+        file:close()
+
+        -- try parsing content
+        local success, data = pcall(load(content, nil, nil, _G))
+
+        -- parsing successfully completed
+        if success then
+            -- try storing version
+            if data["version"] then
+                parameter.CustomParameterSettings.version = data["version"]
+            end
+
+            -- data entries to gather
+            local lookup = {
+                { label = "adjustments", size = 16 },
+                { label = "buttons",     size = 8 },
+                { label = "choices",     size = 8 }
+            }
+
+            -- iterate sections of lookup table
+            for _, section in ipairs(lookup) do
+                -- check if the original and custom settings data structure has the same label
+                if parameter.CustomParameterSettings[section.label] ~= nil and data[section.label] ~= nil then
+                    -- iterate section entries
+                    for idx, entry in ipairs(data[section.label]) do
+                        -- stay within the given limit
+                        if idx > section.size then
+                            break
+                        end
+
+                        -- overwrite default config
+                        parameter.CustomParameterSettings[section.label][idx] = entry
+                    end
+                end
+            end
+        end
     end
 end
 

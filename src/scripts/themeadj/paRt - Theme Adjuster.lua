@@ -1,23 +1,21 @@
--- @version 1.2.1
+-- @version 1.2.2
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
-
-
 
 Part = {}
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --  External Files
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
---
+
 -- store script path
 local info = debug.getinfo(1, 'S');
 ScriptPath = info.source:match [[^@?(.*[\/])[^\/]-$]]
-Restart_Command_id="_RS8dc6c730d9860a7787be4d2defc319dd2cdfdc44"
+Restart_Command_id = "_RS8dc6c730d9860a7787be4d2defc319dd2cdfdc44"
 
 -- package path
-local path = ({reaper.get_action_context()})[2]:match('^.+[\\//]')
+local path = ({ reaper.get_action_context() })[2]:match('^.+[\\//]')
 package.path = path .. "?.lua"
 
 -- base library
@@ -28,9 +26,7 @@ Part.Gui.Theme.checkCurrentTheme()
 Part.Gui.Macros = require("lib.res.lua.map_macros")
 require("lib.res.lua.map")
 
-Part.Version.setVersion("1.2.1")
-
-
+Part.Version.setVersion("1.2.2")
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --  Method : Draw
@@ -74,8 +70,6 @@ function Part.draw()
         Part.Draw.Buffer.buffer_bg:deactivate()
     end
 
-    -- bank bar
-    Part.Gui.BankBar:draw()
 
     -- validate paRt theme
     if Part.Gui.Theme.validateTheme() then
@@ -115,7 +109,7 @@ function Part.draw()
 
         -- controls
         for i = 1, #Part.List.visible_control do
-           Part.List.visible_control[i]:draw()
+            Part.List.visible_control[i]:draw()
         end
 
         -- output
@@ -128,17 +122,17 @@ function Part.draw()
             Part.List.tab_group[i]:draw()
         end
 
-
         -- control hints
         for i = 1, #Part.List.visible_control_hint do
             Part.List.visible_control_hint[i]:draw()
         end
 
-        -- pop-up messages
-        Part.Gui.MessageHandler:draw()
-
+        
         -- draw single active hint
         Part.Gui.Hint.hint_message:draw()
+        
+        -- pop-up messages
+        Part.Gui.MessageHandler:draw()
 
         -- refesh theme when required
         Part.Functions.handleThemeRefresh()
@@ -160,9 +154,45 @@ end
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function Part.main()
-
     -- change theme refresh frequency according to track count
     Part.Parameter.Theme.updateThemeParameterRefreshRate()
+
+    --      Keyoard Shortcuts
+    -- ========================================
+
+    -- tab scroll left
+    if Part.Gui.Keyboard.isPressed("left") then
+        Part.Gui.Tab.tab_top:selectPreviousEntry()
+    end
+
+    -- tab scroll right
+    if Part.Gui.Keyboard.isPressed("right") then
+        Part.Gui.Tab.tab_top:selectNextEntry()
+    end
+
+    -- sub-tab scroll left
+    if Part.Gui.Keyboard.isPressed("up") then
+        Part.Gui.Tab.tab_top:selectPreviousEntry(true)
+    end
+
+    -- sub-tab scroll right
+    if Part.Gui.Keyboard.isPressed("down") then
+        Part.Gui.Tab.tab_top:selectNextEntry(true)
+    end
+
+    -- select bank slots
+    for i = 1, #Part.Bank.Handler.bank_slot - 1 do
+        if Part.Gui.Keyboard.isPressed("key_" .. tostring(i)) then
+            Part.Bank.Handler:selectBank(i + 1)
+        end
+    end
+
+    -- select config slots
+    for i = 1, #Part.Bank.Handler.bank_slot - 1 do
+        if Part.Gui.Keyboard.isPressed("f" .. tostring(i)) then
+            Part.Config.Handler:selectConfig(i - 1)
+        end
+    end
 
     -- window reset
     if Part.Gui.Keyboard.isPressed("r") then
@@ -174,6 +204,8 @@ function Part.main()
         Part.exit(true)
     end
 
+    -- ========================================
+
     -- script restart
     if Part.Global.restart_shortcut and Part.Gui.Keyboard.isPressed("t") then
         Part.reload(true)
@@ -181,7 +213,6 @@ function Part.main()
 
     -- drawing process
     Part.draw()
-
 
     -- tick counter
     Part.Global.ticks = Part.Global.ticks + 1
@@ -201,7 +232,7 @@ end
 
 function Part.reload(store_settings)
     Part.exit(store_settings)
-    reaper.Main_OnCommand(reaper.NamedCommandLookup(Restart_Command_id),0)
+    reaper.Main_OnCommand(reaper.NamedCommandLookup(Restart_Command_id), 0)
 end
 
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -217,8 +248,8 @@ function Part.exit(store_settings)
     if Part.Gui.Theme.validateTheme() and store_settings ~= nil and store_settings then
         Part.Bank.Functions.storeParameterFile()
     end
-    
-    reaper.SetExtState(Part.Global.ext_section,"Status","stopped",false)
+
+    reaper.SetExtState(Part.Global.ext_section, "Status", "stopped", false)
 
     -- close window, stop main loop
     gfx.quit()
@@ -246,18 +277,20 @@ if Part.Gui.Theme.validateTheme(true) then
     -- restore previously opened tabs
     Part.Tab.Group.restoreTabs()
 
-    
     -- force load the parameter file, skipping theme change comparison
     Part.Bank.Functions.loadParameterFile(true)
-    
-    Part.Global.initial_load = true
-    
-    -- initialize bank handler
-    Part.Bank.Handler:init()
 
+    Part.Global.initial_load = true
+
+    -- initialize handlers
+    Part.Bank.Handler:init()
+    Part.Config.Handler:init()
+
+    -- universal non-critical fixes required for older versions
+    Part.Version.applyLegacyFixes()
 end
 
 -- main loop
 Part.main()
 
-reaper.SetExtState(Part.Global.ext_section,"Status","running",false)
+reaper.SetExtState(Part.Global.ext_section, "Status", "running", false)
