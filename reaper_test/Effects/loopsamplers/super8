@@ -1,0 +1,1658 @@
+desc:Super8 MIDI-controlled synchronized looper (Cockos)
+
+// Copyright (C) 2015 and onward Cockos Inc
+// LICENSE: LGPL v2 or later - http://www.gnu.org/licenses/lgpl.html
+
+// General notes:
+// 8 channels of audio input (1 channel per channel)
+// 9 channels of audio output (1 channel per channel, 9th channel is selected-channel-only monitoring output)
+
+// 8 channels are all synchronized. You can turn each channel on and off and overdub on each channel.
+
+// MIDI assignments are mappable by right-click-dragging them in the UI.
+//   - right click to cycle note/CC/PC/off
+//   - ctrl/cmd+right click to assign to the last MIDI event received
+//
+// for each channel:
+//   - note1=if not recording, start record
+//           if already recording (and initial length-setting pass), set length and continue (overdub)
+//           if already recording (and length is set), go back to playback
+//   - note2=toggle playback (stop/rec->play, play->stop)
+//   - note3=toggle selected-for-monitoring
+//   - note4=reverse loop
+// Right click the channel's monitoring icon to go through off/auto/always-on. 
+//   - I use 'off' for things like mic'd drums
+//   - I use 'always-on' for stuff where the source should always be audible (usually looping is less important)
+
+// extra buttons:
+// - halve length
+// - double length
+// - double length (no repeat) -- if there's existing content after the current loop, it won't be overwritten
+// - x-fade shortened loop: crossfade at the loop boundary, use after shortening a loop
+//   fadesize sub-button (drag): fade this amount when halving loop or when running the 
+//     x-fade shortened loop command.
+//     If you intend to double (no repeat) back up, set to 0ms and accept the clicks.
+// - play all: play all channels that have content, or if all channels that have content are playing, stop
+// - rec/play selected: cycle the selected channel (or channels, if linked) between stop/record/play/stop
+// - add to project: add active channels as .wav files to the end of the project, on their respective tracks,
+//   setting the tempo accordingly. (!) This uses a new undocumented (except for this) JSFX API...
+// - kill (click) -- delete ALL!
+
+// top menu items:
+// - sync: off: classic freeform mode.
+//         project: synchronize loop length to project tempo/beat count. if project is playing back
+//           then loop is synchronized
+//         playback: full transport sync
+// - offs/length: (classic freeform only) adjust start/end points of loop
+// - click cnt: loop length in clicks. affects metronome output, visual click, and loop length
+//              in synchronized modes
+// - vclick: visual click, if click cnt is enabled, display offset (or off)
+// - start gate: when recording the initial loop, use this gate value before starting recording 
+//   (useful for hand-shortages)
+// - latch: wait to run commands until next loop iteration
+
+<? nch < 1 ? nch = 8 ?>
+<? maxmem < 8 ? maxmem = 256 ?>
+<?
+  loop(x=0;nch,printf("in_pin:input %d\n",x+=1));
+  loop(x=0;nch,printf("out_pin:output %d\n",x+=1));
+?>
+out_pin:monitor output
+out_pin:click output
+
+config: nch "Channels" 8 1 2 4 8="8 (namesake)" 12 16 24 32 48
+config: maxmem "Memory Size -preserve-config" 256 64="64MB - max length 0:23 for 8 channels @ 44.1kHz" 128="128MB - max length 0:47 for 8 channels @ 44.1kHz" 256="256MB (default) - max length 1:35 for 8 channels @ 44.1kHz" 512="512MB - max length 3:10 for 8 channels @ 44.1kHz" 1024="1GB - max length 6:20 for 8 channels @ 44.1kHz"
+
+options: maxmem=<? printf("%d",maxmem*1024*128); ?> no_meter gfx_idle prealloc=* 
+
+slider1:g_slider_sync=0<0,2,1{off,project,playback}>-Sync
+slider4:g_slider_click_cnt=0<0,64,1>-Click count/length
+
+@init
+
+// constants
+g_nchan = <? printf("%d",nch) ?>;
+g_max_alloc = __memtop(); // JSFX memory available
+g_latchq_len = 1024; // 1024 midi events queueable for latch mode
+g_maxlen = ((g_max_alloc - 4096 - g_latchq_len*3)/g_nchan)|0; // use nearly all of available memory
+g_infthreshdb = -120;
+g_infthresh = 10^(g_infthreshdb/20);
+g_latchmode=0;
+
+// per-channel state/configuration record (mem_stlist)
+st_monmode = 0; // mirrors chX.monmode
+st_note1 = 1; // mirrors chX.note/chX.note2/chX.note3/chX.note4
+st_note2 = 2;
+st_note3 = 3;
+st_note4 = 4; // reverse note
+
+st_state = 5; // 0=off, 1=play, 2=recording
+st_buf   = 6; // pointer to audio buffer
+st_dirty = 7;  // set if buffer is dirty, and also may indicate how much of it 
+               // is using max(mem_stlist[st_dirty],chX.dirty_top+1)
+st_lastd = 8; // UI flags for mode + monitor + dirty
+st_lastpkupd = 9; // time of last peak drawin
+st_peak_in = 10;
+st_rdc = 11; // msec, chX.rdc is samples
+st_div = 12; // subdiv, 1=normal, chX.div is 1/this
+st_fade_size = 13; // fadeout size
+st_num = 14;
+
+function recalc_fades() (
+  g_fadespeed = exp(-1/(srate * 0.002));  // fade speed for monitoring
+  g_slope_recin = 1/(srate * 0.001); // fade length for starting rec
+  g_slope_recout = -1/(srate * 0.030); // fade length for ending rec
+  g_slope_playin = 1/(srate * 0.050); // fade length for starting playback
+  g_slope_playout = -1/(srate * 0.050); // fade length for ending playback
+);
+
+recalc_fades();
+
+function get_section(s) local(r) ( s?(r=s):r; );
+
+function alloc(sz) ( (this.top+=sz)-sz; );
+
+function updatefromrec() instance(rec)
+(
+  this.note  = rec[st_note1];
+  this.note2 = rec[st_note2];
+  this.note3 = rec[st_note3];
+  this.note4 = rec[st_note4];
+  this.monmode = rec[st_monmode];
+  this.rdc =(rec[st_rdc]*.001*srate+.5)|0;
+  this.div = 1 / rec[st_div];
+);
+
+function init(x, n1,n2,n3) 
+  instance(idx rec buf monvol fpos fpos2 fpos_slope fpos2_slope dirty_top) 
+(
+  idx = x;
+  fpos_slope = monvol = fpos = fpos2 = fpos2_slope = 0;
+  dirty_top = -1;
+  buf = alloc(g_maxlen);
+  
+  rec = mem_stlist + x*st_num;
+  rec[st_note1] = n1;
+  rec[st_note2] = n2;
+  rec[st_note3] = n3;
+  rec[st_note4] = 128;
+  rec[st_state]=0;
+  rec[st_lastd]=-1;
+  rec[st_dirty]=0;
+  rec[st_monmode] = 1;
+  rec[st_buf] = buf;
+  rec[st_peak_in] = 0;
+  rec[st_rdc] = 0;
+  rec[st_div] = 1;
+  rec[st_fade_size] = 0;
+  
+  this.updatefromrec();
+);
+
+// clearing the buffer when starting recording on a particular channel
+function set_need_zero(dt) global(g_maxlen) instance(need_zero nz_0) (
+  need_zero = max(need_zero, min(g_maxlen,dt+1));
+  nz_0 = -1;
+);
+function process_need_zero(p1, p2) global()
+  instance(need_zero nz_0 nz_0e nz_1 nz_1e nz_2 buf) 
+  local(sz)
+(
+  nz_0 === -1 ? (
+    // three write pointers:  0..p1 p1..p2 p2..need_zero
+    nz_0 = 0;
+    nz_0e = nz_1 = min(p1,p2);
+    nz_1e = nz_2 = max(p1,p2);
+  );
+  
+  (sz = min(8, nz_0e-nz_0)) > 0 ? ( memset(buf + nz_0, 0, sz); nz_0 += sz; );
+  (sz = min(8, nz_1e-nz_1)) > 0 ? ( memset(buf + nz_1, 0, sz); nz_1 += sz; );
+  (sz = min(8, need_zero-nz_2)) > 0 ? ( memset(buf + nz_2, 0, sz); nz_2 += sz; );
+  nz_2 >= need_zero && nz_1 >= nz_1e && nz_0>=nz_0e ? need_zero=0;
+);
+
+function setstate(st) instance(fpos_slope, fpos2_slope, rec) local(dt)
+(
+  rec[st_state] ? (
+    st==0 ? ( 
+      g_active_mask &= -(1<<this.idx + 1);
+    ) : g_length > 0 ? (
+      g_firstrec = 0;   
+      g_prevent_processing &= 0xe;
+      this.extra_recording = (g_pos == 0 || g_pos == g_length) ? (0|min(srate*.5, g_maxlen-g_length)) : 0;
+    );
+  ) : (
+    st>0 ? ( 
+      st == 2 && (dt = max(rec[st_dirty], this.dirty_top+1)) > 0 ? (
+        this.set_need_zero(dt);
+        this.dirty_top=-1;
+        rec[st_dirty]=0;
+      );
+      
+      (g_active_mask |= (1<<this.idx)) == (1<<this.idx) ? (
+        st == 2 ? ( 
+          cfgp_gate[] > g_infthreshdb && cfgp_sync[] == 0 ? (
+            g_recstart_gate = 10^(cfgp_gate[]/20);
+            g_prevent_processing |= 1;
+          ) : (
+            g_prevent_processing &= 0xe;
+          );
+
+          cfgp_sync[] == 0 ? (
+            g_pos = g_offs = g_length = 0; 
+            g_firstrec = 1+this.idx;
+          );
+        );        
+      );
+    );
+  );
+  rec[st_state] = st;
+  rec[st_dirty] = max(max(rec[st_dirty],this.dirty_top+1),st==2);
+  
+  st == 2 ? (
+    fpos_slope = g_slope_recin;
+    fpos2_slope = g_slope_playin;
+  ) : (
+    fpos_slope = g_slope_recout;
+    fpos2_slope = st > 0 ? g_slope_playin :
+                  (rec[st_fade_size]>0) ? -1/(rec[st_fade_size]*g_length) :
+                  g_slope_playout;
+  );
+);
+
+function get_linked_rec(idx) ( 
+  cfgp_link[]&(1<<(idx>>1)) ? mem_stlist+st_num*(idx~1) : -1; 
+);
+
+function is_chan_selected(idx) (
+  g_chan_selected == idx ||
+    ((cfgp_link[]&(1<<(idx>>1))) && g_chan_selected == idx~1);
+);
+
+function setstate_for_rec(rec, state) (
+  rec = (rec-mem_stlist)/st_num;
+  <? loop(x=0;nch, printf("rec == %d ? ch%d.setstate(state) :\n",x,x+1); x+=1) ?> 0;
+);
+
+function play_or_stop_all() local(want_state rec)
+(
+  want_state = 0;
+  rec = mem_stlist;
+  loop(g_nchan,
+    rec[st_state] != 1 && rec[st_dirty]>0 ? want_state = 1;
+    rec += st_num;
+  );
+  loop(g_nchan,
+    rec -= st_num;
+    rec[st_state] != want_state && (rec[st_dirty]>0||rec[st_state]) ? setstate_for_rec(rec,want_state);
+  );
+);
+
+function process_rev(buf)
+  instance(rev_state, rev_pos, rev_p0, rev_p1, rev_p2,
+           rev_fade_pos, rev_fade_slope, l_length, l_pos, l_offs)
+  local(tmpo old)
+  global(srate)
+(
+  // if the user reverses right after starting recording, shrug
+  this.need_zero > 0 ? this.process_need_zero(l_offs+l_length,l_offs+l_length);
+
+  // process reverse ahead of the read pointer
+  // if l_pos is more than halfway, then we go until the end, then the mirror of the original l_pos+1
+  // if l_pos is less than halfway, we go until the halfway point, then to the mirror of the original l_pos+1
+  rev_pos === -1 ? (
+    rev_pos = (l_length/2)|0; // number of samples we need to reverse, also the halfway point
+    rev_fade_slope = 1.0/(srate * 0.030);
+    rev_fade_pos = 0;
+    rev_p0 = l_pos;
+    rev_p1 = l_pos < rev_pos ? rev_pos+1 : l_length;
+    rev_p2 = l_length - 1 + 1 - l_pos;
+  );
+  loop(min(20, rev_pos), // a 10s loop will take 500ms to reverse
+    tmpo = buf + l_length - 1 - rev_p0;
+    old=buf[rev_p0];
+    buf[rev_p0] = tmpo[];
+    tmpo[] = old;
+    (rev_p0 += 1) == rev_p1 ? rev_p0 = rev_p2;
+    rev_pos -= 1;
+  );
+  rev_fade_pos = min(rev_fade_pos + rev_fade_slope, 1);
+  rev_pos == 0 && rev_fade_pos == 1 ? rev_state=0;
+  buf[l_pos] * rev_fade_pos + buf[l_length - 1 - l_pos] * (1-rev_fade_pos);
+);
+
+function process(s)
+  instance(fpos, fpos2, monvol, monmode, rec, peak_in, div, l_length, l_pos)
+  local(r,wrpos,buf,l_offs, sc)
+(
+  g_prevent_processing===0 ? (
+    fpos = min(max(0,fpos+this.fpos_slope),1);
+    sc = sqr(fpos2 = min(max(0,fpos2+this.fpos2_slope),1));
+  ) : (
+    fpos = fpos2 = sc = 0;
+  );
+  peak_in = max(abs(s),peak_in);
+
+  l_length = g_length;
+  l_pos = g_pos;
+  l_offs = g_offs;
+  div < 1 ? (
+    l_length = max((l_length*div+0.5)|0,1);
+    g_firstrec === 0 ? (
+      l_pos %= l_length;
+      l_offs %= l_length;
+    );
+  );
+  wrpos = l_pos;
+  buf = this.buf + l_offs;
+  g_firstrec === 0 ? (
+    this.extra_recording > 0 ? (
+      buf[l_length + l_pos] = s; // write past the end of the loop (in case we want to trim later)
+      this.dirty_top = max(this.dirty_top,l_length + l_pos + l_offs);
+      this.extra_recording -= 1;
+    );
+
+    this.rdc < l_length ? (
+      wrpos -= this.rdc;
+      wrpos < 0 ? wrpos += l_length;
+    );
+  );
+  this.need_zero > 0 ? this.process_need_zero(l_offs+wrpos,l_offs+l_pos);
+  
+  r = this.rev_state!==0 ? this.process_rev(buf)*sc : sc > 0.0001 ? buf[l_pos]*sc;
+  monmode === 0 ? (
+    // no monitoring
+    fpos > 0.0001 ? (
+      this.dirty_top = max(this.dirty_top,wrpos + l_offs);
+      buf[wrpos] += s*fpos;
+    );
+    r;
+  ) : (
+    this.monmode_sel ? (
+      monvol = 1 + (monvol-1)*g_fadespeed;
+    ) : ( 
+      monvol *= g_fadespeed;
+    );
+    
+    fpos > 0.0001 ? (
+      this.dirty_top = max(this.dirty_top,wrpos + l_offs);
+      wrpos == l_pos ? (
+        buf[l_pos] += s*fpos;
+        r + s*max(fpos*sc, monvol);
+      ) : (
+        buf[wrpos] += s*fpos;
+        r + s * monvol;
+      );
+    ) : (
+      r + s*monvol;
+    );
+  );
+);
+
+function rev_stop() instance (rec)
+(
+  atomic_set(this.rev_requested,0);
+  this.rev_state=0;
+);
+
+function reverse() instance(rec) local(l)
+(
+  atomic_add(this.rev_requested,1);
+  l = (g_length * this.div)|0;
+  rec[st_dirty] = this.dirty_top = max(rec[st_dirty],max(this.dirty_top,l));
+  rec[st_lastd] = -1;
+);
+
+function onmsg(m1,m2,m3) instance(rec,note,note2,note3,note4)
+  local(newstate)
+(
+   newstate = -1;
+   (m2 == note && (m2 != note2 || rec[st_state]==0)) || m2 == 1024+rec+st_note1 ? (
+     newstate = (rec[st_state] == 2 && g_was_firstrec==0) ? 1 : 2;
+   ) : m2 == note2  || m2 == 1024+rec+st_note2 ? (
+     newstate = rec[st_state] == 2 || (rec[st_state]==0 && g_length) ? 1 : 0
+   ) : m2 == note3 ? (
+     g_chan_selected = (g_chan_selected == this.idx) ? -1 : this.idx;
+   ) : m2 == note4 || m2 == 1024+rec+st_note4 ? (
+     this.reverse();
+   );
+   newstate >= 0 ? (
+     this.setstate(newstate);
+     setstate_for_rec(get_linked_rec(this.idx), newstate);
+     g_chan_selected = this.idx;
+   );
+);
+
+function redraw_channels() local(p)
+(
+  p=mem_stlist+st_lastd;
+  loop(g_nchan,
+    p[0] = -1;
+    p+=st_num;
+  );
+);
+
+function repeatbuf(buf,osz, nsz) local(p,s)
+(
+  p=buf+osz;
+  while (p < buf+nsz) 
+  (
+    s = min(buf+nsz-p,osz);
+    memcpy(p,buf,s);
+    p+=s;
+  ); 
+);
+
+function xfadebuf(buf, osz, nsz) local(fsz,s,ds)
+(
+  fsz = (0.001*cfgp_fade[]*srate)|0;
+  s=0;
+  osz>0 && osz == nsz ? osz += fsz;
+  fsz = min(fsz,osz-nsz)|0;
+  ds=1/fsz;
+  // fade buf[0..fsz] with buf[nsz..nsz+fsz] 
+  loop(fsz,
+    buf[0] = buf[0] * s + buf[nsz]*(1-s);
+    s+=ds;
+    buf+=1;
+  );
+ 
+);
+
+function adjustsizes(scale, repup) local(nlen,olen, lp, l, offs, nlen2)
+(
+  olen = g_length;
+  nlen = (olen*scale)|0;
+  nlen >= 1 && nlen < g_maxlen ? (
+    lp=mem_stlist;
+    loop(g_nchan,
+      lp[st_dirty] ? (
+        l = max(floor(olen / lp[st_div] + 0.5),1);
+        nlen2 = max(floor(nlen / lp[st_div] + 0.5),1);
+        offs = g_offs%l;
+        nlen2 > l ? (
+          repup ? repeatbuf(lp[st_buf] + offs,l,nlen2);
+          nlen2+offs > lp[st_dirty] ? lp[st_dirty] = nlen2+offs;
+        ) : (
+          xfadebuf(lp[st_buf] + offs,l,nlen2);
+        );
+      );
+      lp += st_num;
+    );
+    g_length = nlen;
+    g_pos %= nlen;
+
+    cfgp_sync[] ? (
+      g_slider_click_cnt = g_click_int = cfgp_clickcnt[] = ((((cfgp_clickcnt[]|0) > 0 ? cfgp_clickcnt[] : ts_num) |0)*scale)|0;
+    );
+
+    redraw_channels();
+  );
+);
+
+function updatechfromrec()
+(
+  <? loop(x=0;nch,printf("ch%d.updatefromrec();\n",x+=1)) ?>
+);
+
+function reset() local(lp)
+( 
+  g_chan_selected=-1;
+  // setstate() will latch dirty_top to st_dirty
+  <? loop(x=0;nch, x+=1; printf("ch%d.setstate(0); ch%d.rev_stop(); ch%d.dirty_top=-1;\n",x,x,x)) ?>
+  lp = mem_stlist;
+  loop(g_nchan,
+    lp[st_dirty] > 0 ? (
+      memset(lp[st_buf], 0, lp[st_dirty]);
+      lp[st_dirty] = 0;
+    );
+    lp += st_num;
+  );
+  g_firstrec=g_offs=g_length=g_pos=0;
+);
+
+
+function estbpm(len) local(bpm, tsnum) global(ts_num, srate, cfgp_clickcnt)
+(
+  bpm = 240.0 * srate / len;
+  (tsnum = (cfgp_clickcnt[]|0)) < 2 ? tsnum = ts_num;
+  tsnum >= 2 ? bpm *= tsnum * .25;
+
+  while (bpm < 60) ( bpm*=2; );
+  while (bpm > 240) ( bpm/=2; );
+  bpm;
+);
+
+
+// one-time initialization
+ext_noinit == 0 ? (
+  ext_noinit=1;
+  ext_nodenorm=1;
+  
+  alloc.top=32;
+  
+  g_latchq = alloc(g_latchq_len*3);
+  g_latchq_used=0;
+  
+  mem_gen_sz=17;
+  mem_gen_cfg = alloc(mem_gen_sz);
+  memset(mem_gen_cfg,128,mem_gen_sz);
+
+  cfgp_reset  = mem_gen_cfg + 0;
+  cfgp_halve  = mem_gen_cfg + 1;
+  cfgp_double = mem_gen_cfg + 2;
+  cfgp_double_norep = mem_gen_cfg + 3;
+  (cfgp_gate =     mem_gen_cfg + 4)[]=g_infthreshdb;
+  (cfgp_fade =     mem_gen_cfg + 5)[]=5;
+  (cfgp_length =   mem_gen_cfg + 6)[]=0;
+  cfgp_export =    mem_gen_cfg + 7;
+  (cfgp_latch =    mem_gen_cfg + 8)[]=0;
+  (cfgp_clickcnt = mem_gen_cfg + 9)[]=0;
+  (cfgp_vclick =   mem_gen_cfg + 10)[]=0;
+  cfgp_xfade =     mem_gen_cfg + 11;
+  (cfgp_offs =     mem_gen_cfg + 12)[]=0;
+  (cfgp_sync =     mem_gen_cfg + 13)[]=0;
+  cfgp_playall =   mem_gen_cfg + 14;
+  cfgp_playsel =   mem_gen_cfg + 15;
+  (cfgp_link =     mem_gen_cfg + 16)[]=0;
+  
+  mem_gen_names = alloc(mem_gen_sz);
+  memset(mem_gen_names,"",mem_gen_sz);
+  mem_gen_names[0] = "kill";
+  mem_gen_names[1] = "halve";
+  mem_gen_names[2] = "double";
+  mem_gen_names[3] = "double\nno rep";
+  mem_gen_names[4] = "init\nrec\ngate";
+  mem_gen_names[7] = "add to\nproject";
+  mem_gen_names[11] = "x-fade\nshortened\nloop";
+  mem_gen_names[14] = "play all";
+  mem_gen_names[15] = "rec/play\nselected";
+ 
+  mem_gen_order = alloc(9);
+  mem_gen_order[0]=1;
+  mem_gen_order[1]=2;
+  mem_gen_order[2]=3;
+  mem_gen_order[3]=11;
+  mem_gen_order[4]=14;
+  mem_gen_order[5]=15;
+  mem_gen_order[6]=7;
+  mem_gen_order[7]=0;
+  mem_gen_order[8]=-1; // end marker
+  
+  mem_stlist = alloc(g_nchan * st_num);
+
+  g_inject_midinote = 0;
+
+  g_inactive_blockcnt=0;  
+  g_active_mask = 0; 
+  g_offs = 0;
+  g_length = 0;
+  g_pos=0;
+  g_firstrec=0;
+  g_recstart_gate=0;
+  g_prevent_processing = 0; // &1=gate, &2=sync mode
+  g_chan_selected = -1; // currently selected channel
+  g_lastmsg = -1;
+  
+  <? loop(x=0;a=36; nch, 
+      printf("ch%d.init(%d,%d,%d, 128);\n",x+1,x,a,a+1);
+      a+= x==1 ||x==4 || x==6? 3 : 2;
+      x+=1;
+     )
+   ?>
+);
+
+@slider
+cfgp_sync[] != floor(g_slider_sync+0.5) ? (
+  cfgp_sync[] = floor(g_slider_sync+0.5);
+  g_offs = 0;
+);
+
+(cfgp_clickcnt[]|0) != (g_slider_click_cnt|0) ? (
+  cfgp_clickcnt[] = g_slider_click_cnt|0;
+);
+
+recalc_fades();
+
+@serialize
+function doconf() local(i,s) (
+  i=mem_stlist;
+  loop(g_nchan,
+    file_var(0,i[st_monmode]);
+    i+=st_num;
+  );
+  
+  s=mem_gen_sz; // safe to increase mem_gen_sz without breaking compat
+  file_var(0,s);
+
+  i=0;
+  loop(s,
+    file_var(0,i < mem_gen_sz ? mem_gen_cfg[i] : 0);
+    i+=1;
+  );
+  
+  i = mem_stlist;
+  loop(g_nchan,
+    file_var(0,i[st_note1]);
+    file_var(0,i[st_note2]);
+    file_var(0,i[st_note3]);
+    i+=st_num;
+  );
+  
+  file_avail(0) != 0 ? (
+    i = mem_stlist;
+    loop(g_nchan,
+      file_var(0,i[st_note4]);
+      i+=st_num;
+    );  
+  );
+
+  loop(x=0;3, // st_rdc, st_div, st_fade_size
+    file_avail(0) != 0 ? (
+      i = mem_stlist;
+      loop(g_nchan,
+        file_var(0,i[st_rdc+x]);
+        i+=st_num;
+      );
+    );
+    x+=1;
+  );
+
+  file_avail(0)>=0 ? ( // is reading config
+    updatechfromrec();
+    g_slider_sync = cfgp_sync[];
+    g_latchmode = cfgp_latch[];
+    g_slider_click_cnt = cfgp_clickcnt[]|0;
+    last_w=0;
+  );
+);
+doconf();
+
+@block
+g_peak_decay = 10^(-samplesblock/srate*10);
+
+
+g_prevent_processing &= 0xd;
+(g_syncmode=cfgp_sync[]) ? (
+  g_offs = 0;
+  g_length = (srate * (g_click_int>0?g_click_int:ts_num) * 240.0 / (tempo * ts_denom))|0;
+  (play_state&1) ? (
+    g_inactive_blockcnt=0;
+    g_pos = (play_position*srate + 0.5)%g_length;
+  ) : (
+    g_syncmode==2 ? (
+      g_pos = (play_position*srate + 0.5)%g_length;
+      g_prevent_processing |= 2;
+    ) : (
+      g_pos %= g_length;
+    );
+  );
+  g_firstrec=0; 
+);
+
+g_syncmode==0 || (!(play_state&1) && g_syncmode != 2) ? (
+  g_active_mask==0 ? (
+    <? loop(i=0;nch, printf("%s ch%d.fpos2 > 0.0001\n",i?"||":"",i+1); i+=1; );
+       printf("? g_inactive_blockcnt=0;\n"); ?>
+    g_inactive_blockcnt < 2 ? ( 
+      g_inactive_blockcnt+=1; 
+    ) : (
+      g_pos = 0
+    );
+  ) : g_inactive_blockcnt=0;
+);
+
+sidx=0;
+nextmsg_offs=-1;
+g_inject_midinote >= 1024 ? (
+  nextmsg_offs = 0;
+  nextmsg_1=0x90;
+  nextmsg_2=g_inject_midinote;
+  nextmsg_3=127;
+  g_inject_midinote=0;
+) : (
+  midirecv(nextmsg_offs,nextmsg_1,nextmsg_2,nextmsg_3) ? midisend(nextmsg_offs,nextmsg_1,nextmsg_2,nextmsg_3);
+);
+
+function onblock()
+  instance(rec peak_in monmode_sel monmode idx)
+  global(g_peak_decay st_peak_in srate last_w g_length)
+(
+  rec[st_peak_in] = peak_in;
+  peak_in *= g_peak_decay;
+  monmode_sel = monmode >= 2 || is_chan_selected(idx);
+  this.rev_state == 0 || !g_length ? (
+    this.rev_requested && atomic_exch(this.rev_state=0,this.rev_requested) ? (
+      this.rev_state &= 1;
+      this.rev_pos = -1;
+    );
+  );
+  this.rev_state !== 0 ? last_w=-1; // force redraw if reversing this block
+);
+
+<? loop(x=0;nch, printf("ch%d.onblock();\n",x+=1)) ?>
+
+(g_click_int = (cfgp_clickcnt[]|0)) > 0 ?( 
+  g_click_lenspls = (0.01*srate)|0;
+  g_click_fadesz = (0.0041*srate)|0;
+  g_click_fadesz_i = 1/g_click_fadesz;
+);
+
+i_srate = 1.0/srate;
+
+@sample
+
+function chan_onmsg(m1,m2,m3)
+(
+  g_was_firstrec = g_firstrec; // latch to this value for any messages that apply to multiple channels
+  (m2 == cfgp_playsel[] || m2 == 1024+cfgp_playsel) && g_chan_selected>=0 ? (
+    m2 = 1024 + mem_stlist + g_chan_selected*st_num + st_note1 + 
+      (mem_stlist[g_chan_selected*st_num + st_state]?1:0);
+  );
+
+  m2 == cfgp_playall[] || m2 == 1024+cfgp_playall ? play_or_stop_all();
+  <? loop(x=0;nch, printf("ch%d.onmsg(m1,m2,m3);\n",x+=1)) ?>
+);
+
+function latchq_add(m1,m2,m3) local(v)
+(
+  g_latchq_used < g_latchq_len ? 
+  (
+    v = g_latchq_used*3;
+    g_latchq[v]=m1;
+    g_latchq[v+1]=m2;
+    g_latchq[v+2]=m3;
+    g_latchq_used+=1;
+  );
+);
+
+function latchq_process() local(r)
+(
+  r=g_latchq;
+  loop(g_latchq_used,
+    chan_onmsg(r[0],r[1],r[2]);
+    r+=3;
+  );
+  g_latchq_used=0;
+);
+
+
+function tonegen(x) (
+  1/*change to 0 for sine*/ ? (
+    x = x - floor(x);
+    4 * (x < 0.25 ? x : x < 0.75 ? 0.5-x : (x-1));
+  ) : sin(x*2*$pi);
+);
+
+function generate_click() 
+  global(g_pos, g_length, i_srate, 
+         g_click_int, g_click_lenspls, g_click_fadesz, g_click_fadesz_i)
+  local(s, int)
+(
+  int = (g_length/g_click_int);
+  s = g_pos - floor(g_pos/int)*int;
+  s < g_click_lenspls ? (
+    (s < g_click_lenspls-g_click_fadesz ? 1 : ( (g_click_lenspls-s)*g_click_fadesz_i )) * (
+       g_pos < int ? 
+         tonegen(s*800*i_srate)*1 
+       :
+         tonegen(s*1600*i_srate)*.75; 
+    );
+  );
+);
+
+g_latchq_used>0 && (g_pos == 0 || g_firstrec) ? latchq_process();
+
+while (sidx == nextmsg_offs)
+(
+  nextmsg_1 == 0xb0 ? ( nextmsg_1 = 0x90; nextmsg_2 += 129; ) :
+  nextmsg_1 == 0xc0 ? ( nextmsg_1 = 0x90; nextmsg_2 += 129*2; nextmsg_3=127; );
+
+  nextmsg_1 == 0x90 && nextmsg_3 != 0  ? (
+    (!g_latchmode || g_pos == 0 || g_firstrec) ? (
+      chan_onmsg(nextmsg_1,nextmsg_2,nextmsg_3);    
+    ) : (
+      latchq_add(nextmsg_1,nextmsg_2,nextmsg_3);
+    );
+    
+    nextmsg_2 == cfgp_reset[]        ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "r")) :
+    nextmsg_2 == cfgp_halve[]        ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "h")) :
+    nextmsg_2 == cfgp_double[]       ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "d")) :
+    nextmsg_2 == cfgp_double_norep[] ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "D")) :
+    nextmsg_2 == cfgp_export[]       ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "e")) :
+    nextmsg_2 == cfgp_xfade[]        ? (strlen(#mainthread_todo)<100 ? strcat(#mainthread_todo, "x"));
+      
+    nextmsg_2 < 1024 ? g_lastmsg = nextmsg_2;
+  );
+  nextmsg_offs=-1;
+  midirecv(nextmsg_offs,nextmsg_1,nextmsg_2,nextmsg_3) ? midisend(nextmsg_offs,nextmsg_1,nextmsg_2,nextmsg_3);  
+);
+
+sidx+=1;
+g_chan_selected >= 0 ? (
+  g_chan_peak = abs(spl(g_chan_selected));
+  g_peakvol = max(g_chan_peak,g_peakvol);
+  
+  g_prevent_processing==1 && g_firstrec ? (
+    g_chan_peak >= g_recstart_gate ? g_prevent_processing = 0;
+  );
+);
+
+g_pos >= g_length && g_firstrec == 0 ? g_pos = 0;
+
+<? loop(x=0;nch, printf("spl%d=ch%d.process(spl%d);\n",x,x+1,x);x+=1) ?>
+
+g_prevent_processing===0 ? (
+  g_click_int > 0 && g_active_mask && g_length > 0 && !g_firstrec ? (
+    <? printf("spl%d",nch+1) ?> = generate_click();
+  );
+
+  g_firstrec !== 0 ? (
+     (g_pos+=1) >= g_maxlen ? (
+       g_firstrec=0;
+       g_pos=0;
+     ) : (
+       g_length = g_pos *
+            ((g_firstrec > 0 && g_firstrec < 1 + g_nchan) ?
+              mem_stlist[(g_firstrec-1)*st_num + st_div] : 1);
+     );
+  ) : (
+    (g_pos += 1) >= g_length ? g_pos=0;
+  );
+);
+
+<? printf("spl%d",nch) ?> = g_chan_selected >= 0 ? spl(g_chan_selected);
+
+@gfx 420 480
+
+get_section('gfx');
+
+function format_note(str, note) //1=CC,2=PC
+(
+  (note%129) == 128 || note >= 129*3 ? (
+    strcpy(str,"OFF");
+    0;
+  ) : (
+    sprintf(str,"%d",note%129);
+    (note/129)|0;
+  );
+);
+
+function draw_button(xpos,ypos, w, h, bordersz)
+(
+  gfx_rect(xpos,ypos,w,h);
+  bordersz > 0 ? (
+    gfx_set(1,1,1);
+    gfx_rect(xpos,ypos,bordersz,h);
+    gfx_rect(xpos+bordersz,ypos,w-bordersz*2,bordersz);
+    gfx_rect(xpos+w-bordersz,ypos,bordersz,h);
+    gfx_rect(xpos+bordersz,ypos+h-bordersz,w-bordersz*2,bordersz);
+  );
+);
+
+function mouse_in(xpos,ypos,w,h) (
+  mouse_x>=xpos && mouse_x <= xpos+w && 
+    mouse_y>=ypos && mouse_y <= ypos+h;
+);
+
+function draw_speaker(xpos, ypos, w)
+(
+  xpos -= w*.5;
+  gfx_line(xpos,ypos-w*.35,xpos+w*.4,ypos-w*.35);
+  gfx_line(xpos,ypos-w*.35,xpos,ypos+w*.35);
+  gfx_line(xpos,ypos+w*.35,xpos+w*.4,ypos+w*.35);
+  gfx_line(xpos+w*.4,ypos-w*.35,xpos+w*.4,ypos+w*.35);
+  
+  gfx_line(xpos+w*.4,ypos-w*.35,xpos+w*.8,ypos-w*.7);
+  gfx_line(xpos+w*.4,ypos+w*.35,xpos+w*.8,ypos+w*.7);
+
+  gfx_line(xpos+w*.8,ypos-w*.7,xpos+w*.8,ypos+w*.7);
+  
+);
+
+// draws it right-aligned to xpos, returns width used
+function draw_value_tweaker(xpos,ypos,midimem,draw, lbl)
+  local(t w tw th do_overlay cap_cnt rec2)
+(          
+  w = 24;
+  xpos < 0 ? xpos = (-xpos)-w;
+  cap_mode == midimem ? (
+    t = (mouse_y-cap_last_y)/4;
+    lbl == "RDC" ? (
+      t ? (
+        cap_last_y = mouse_y;
+        midimem[0] = min(max(midimem[0]-t*(.1*4),0),500);
+        rec2 = get_linked_rec(((midimem-mem_stlist)/st_num)|0);
+        rec2 >= 0 ? (
+          rec2[st_rdc]=midimem[0];
+          lastchanlink |= (1<<40); // trigger redraw
+        );
+        updatechfromrec();
+        draw=1;
+      );
+    ) : lbl == "div" ? (
+      (tw=(t|0)) ? (
+        cap_last_y = mouse_y - (t - tw)*4;
+        t = min(max(midimem[0] - tw,1),64);
+        midimem[0] != t ? (
+          midimem[0] = t;
+          updatechfromrec();
+          draw=1;
+          lastchanlink |= (1<<40); // trigger redraw
+        );
+      );
+    ) : lbl == "fad" ? (
+      (tw=-(t|0)) ? (
+        cap_last_y = mouse_y - (t + tw)*4;
+        t = max(midimem[0],0);
+        t==0 && tw > 0 ? t = 1/16;
+        tw > 0 ? ( t >= 2 ? t+=1 : t*=2; ) : ( t<2 ? t/=2 : t -= 1 );
+        t < 1/16 ? t=0;
+        t > 32 ? t=32;
+        midimem[0] != t ? (
+          midimem[0] = t;
+          lm = get_linked_rec((midimem-mem_stlist)/st_num);
+          lm >= 0 ? lm[st_fade_size] = midimem[0];
+          updatechfromrec();
+          draw=1;
+          lastchanlink |= (1<<40); // trigger redraw
+        );
+      );
+    ) : (
+      (tw=(t|0)) ? (
+        cap_last_y = mouse_y - (t - tw)*4;
+        t = (t = (midimem[0]%129) - tw) < 0 ? 128 : t > 128 ? 0 : t;
+        (midimem[0]%129) != t ? (
+          midimem[0] =  (midimem[0] >= 129*3 ? 0 : midimem[0] - (midimem[0]%129)) + t;
+          updatechfromrec();
+          draw=1;
+          cap_cnt += 1;
+        );
+      );
+      !(mouse_cap&2) && !cap_cnt ? (
+        (last_mouse_cap&4) ? (
+          g_lastmsg>=0 ? midimem[0] = g_lastmsg;
+        ) : (
+          midimem[0] = (midimem[0]%129)==128 ? 0 : (midimem[0]+129)%(129*4);
+        );
+        updatechfromrec();
+        draw=1;
+      );
+    );
+  );
+  cap_mode == 0 &&  mouse_in(xpos,ypos,w,24) ? (
+    (mouse_cap & 1) && !(last_mouse_cap&1) ? (  
+      midimem >= mem_stlist && midimem < mem_stlist+st_num*g_nchan ? (
+        t = (midimem-mem_stlist)%st_num;
+        t == st_note1 || t == st_note2 || t == st_note4 ? (
+          t != st_note4 || g_latchmode ? (
+            g_inject_midinote = 1024+midimem;
+          ) : (
+            t = ((midimem-mem_stlist)/st_num)|0;
+            <? loop(x=0;nch, printf("t == %d ? ch%d.reverse() :\n",x,x+1); x+=1;) ?> 0;
+          );
+        ) : t == st_fade_size ? (
+          midimem[0] = midimem[0] ? -midimem[0] : 1;
+          lm = get_linked_rec((midimem-mem_stlist)/st_num);
+          lm >= 0 ? lm[st_fade_size] = midimem[0];
+          updatechfromrec();
+          draw=1;
+          lastchanlink |= (1<<40); // trigger redraw
+        );
+      );
+    ) : (mouse_cap & 2) && !(last_mouse_cap&2) ? (
+      cap_mode = midimem;
+      cap_cnt = 0;
+      cap_last_y = mouse_y;
+    );
+  );
+  draw ? (
+    t=midimem[0];
+    gfx_set(.35);
+    gfx_rect(xpos,ypos,w,24);
+    lbl == "RDC" ? (
+      do_overlay=0;
+      t=floor(t*10)*.1;
+      t = t<0.1 ? "0mS" : sprintf(#str, t<10?"%.1f":"%d",t);
+    ) : lbl == "fad" ? (
+      t >= 1 ? (
+        t=sprintf(#,"%d",t);
+      ) : t > 0 ? (
+        t=sprintf(#,"1/%d",ceil(1/t));
+      ) : t="off";
+    ) : (
+      (do_overlay=format_note(#str,t)) ? (
+        do_overlay = do_overlay==1?"CC":"PC";
+        gfx_measurestr(do_overlay,tw,th);
+        gfx_y=ypos + (lbl?(22-th):(24-th)*.5)- 4;
+        gfx_x=xpos + max(0,(w-tw)*.5 - 3);
+        do_overlay=="CC" ? gfx_set(0.9,.5,.2) : gfx_set(0.5,.5,.9);
+        gfx_drawstr(do_overlay);
+        do_overlay=3;
+      );
+      t=#str;
+    );
+    gfx_measurestr(t,tw,th);
+    gfx_y=ypos + min((lbl?(22-th):(24-th)*.5) + do_overlay, 24-th);
+    gfx_x=xpos + min((w-tw)*.5 + do_overlay, w-tw);
+    gfx_set(0.1);
+    gfx_drawstr(t);
+    lbl ? (
+      gfx_set(.5);
+      gfx_measurestr(lbl,tw,th);
+      gfx_x=xpos+(w-tw)*.5;
+      gfx_y=ypos+2;
+      gfx_drawstr(lbl);
+    );
+  );
+  w;
+);
+
+function draw_waveform(xpos,ycent,w,amp,start_offs,bptr,srclen,chan_idx)
+  local(minv,maxv, i,v, di, dbptr z0 z0e z1 z1e z2 z2e)
+(
+  bptr += start_offs;
+  <? 
+    0 /*enable this if you want to show/debug zeroing logic*/ ? printf("z2e = 0;") :
+    loop(i=0; nch,
+      printf("chan_idx == %d ? ( (z2e = ch%d.need_zero)>0 ? ( 
+                  z0 = ch%d.nz_0; z0e = ch%d.nz_0e;
+                  z1 = ch%d.nz_1; z1e = ch%d.nz_1e;
+                  z2 = ch%d.nz_2;
+                )) %s\n",i,i+1,i+1,i+1,i+1,i+1,i+1,
+                i == nch-1 ? ";" : ":");
+                i+=1; 
+      );
+  ?>
+  z2e > 0 ? (
+    z0 += start_offs; z1 += start_offs; z2 += start_offs;
+    z0e += start_offs; z1e += start_offs; z2e += start_offs;
+  );
+  minv=100;
+  maxv=-100;
+  i=xpos|0;
+  dbptr = 1;
+  while (srclen > 100000) ( srclen*=0.5; dbptr *= 2.0; );
+  di = w / srclen;
+  ycent|=0;
+  loop(srclen,
+    v = z2e <= 0 || (
+        (bptr < z0 || bptr >= z0e) &&
+        (bptr < z1 || bptr >= z1e) &&
+        (bptr < z2 || bptr >= z2e)) ? bptr[0] : 0;
+    minv=min(v,minv);
+    maxv=max(v,maxv);
+    bptr+=dbptr;
+    v=0|(i+=di);
+    v>xpos ? (
+      gfx_line(xpos=v,ycent+amp*max(min(minv,1),-1),v,ycent+amp*max(min(maxv,1),-1),0);
+      minv=100; maxv=-100;
+    );
+  );
+);
+
+function draw_topbar_button(xp, yp, str)
+  instance(w,h,x,y)
+  globals(gfx_x,gfx_y)
+(
+  gfx_measurestr(str, w, h);
+  x=xp;
+  y=yp;
+  w+=3;
+  h+=3;
+  gfx_set(.5,.7,1);
+  gfx_line(x,y,x+w,y);
+  gfx_line(x+w,y,x+w,y+h);
+  gfx_line(x,y+h,x+w,y+h);
+  gfx_line(x,y,x,y+h);
+  h+=1;
+  w+=1;
+  gfx_x=xp+2; gfx_y=yp+2;
+  gfx_drawstr(str);
+  gfx_x = xp+w;
+);
+
+function hit_topbar_button(xp,yp,cm)
+  instance(w,h,x,y)
+  globals(cap_mode, cap_last_y)
+(
+  xp>=x&&yp>=y&&xp<x+w&&yp<y+h ? (
+    cap_last_y = yp;
+    cap_mode=cm;
+  );
+);
+
+function load_file(filename, channel) local(fh nch sr len rec rec2 buf buf2 v i)
+(
+  rec = mem_stlist + st_num * channel;
+  buf = rec[st_buf];
+
+  rec2 = (channel & 1) == 0 ? get_linked_rec(channel) : -1;
+  buf2 = rec2 >= 0 ? rec2[st_buf] : -1;
+
+  (fh = file_open(filename)) >= 0 ? (
+    // REAPER 6.29+ will take nch='rqsr' sr>0 as a hint for desired samplerate
+    file_riff(fh, nch='rqsr', sr=srate) > 0 ? (
+      len = min((file_avail(fh) / nch)|0,g_maxlen);
+      len > 0 ? (
+        cfgp_sync[] != 0 && len > g_length ? len = g_length;
+
+        // load samples, if channel is even and linked, load to second channel too
+        i=0;
+        loop(len,
+          file_var(fh,v);
+          buf[i]=v;
+          nch>1 ? ( 
+            file_var(fh,v);
+            nch>2 ? loop(nch-2,file_var(fh,0));
+          );
+          buf2 >= 0 ? buf2[i]=v;
+          i+=1;
+        );
+        cfgp_sync[] == 0 ? (
+          !(g_active_mask & (-1 - (1<<channel) - (rec2>=0 ? 1<<(channel+1) : 0))) ? (
+            g_length > 0 ? adjustsizes(len / g_length, 1) : g_length = len;
+          );
+        );
+        len > 0 ? while (len < g_length) ? (
+          memcpy(buf+len, buf, i=min(g_length-len, len));
+          buf2 >= 0 ? memcpy(buf2+len, buf2, i);
+          len += i;
+        );
+        rec[st_dirty] = max(rec[st_dirty],len);
+        rec[st_state]==0 ? setstate_for_rec(rec, 1);
+        rec2 >= 0 ? (
+          rec2[st_dirty] = max(rec2[st_dirty],len);
+          rec2[st_state]==0 ? setstate_for_rec(rec2, 1);
+        );
+      );
+    );
+    file_close(fh);
+  );
+);
+
+function draw(ixpos, ypos) local(i i2 w h gap rec mode force_redraw rowsize
+  mx my mw t nrows lx ly wantr ty tw th rec2 wl
+  now lasthalve lastlen lastoffs col xpos dropfile)
+(
+  force_redraw = gfx_w != last_w || gfx_h != last_h ||
+    lasthalve != cfgp_fade[] || lastlen != g_length ||
+    lastoffs != g_offs || lastchanlink != cfgp_link[];
+  lasthalve = cfgp_fade[];
+  lastlen = g_length;
+  lastoffs = g_offs;
+  lastchanlink = cfgp_link[];
+
+  gap = 4;
+  xpos = (ixpos += 2);
+  col = 16*(gfx_h-ypos-8) / ((gfx_w - ixpos)*(g_nchan+8));
+  rowsize = col <= .115 ? 16 : col <= .5 ? 8 : col <= 2 ? 4 : col <= 8 ? 2 : 1;
+  w=(gfx_w - 2 - gap*(rowsize-1))/rowsize;
+  (nrows = (8+g_nchan)/rowsize) != 2 ? w=min(w, ((gfx_h - ypos - 8 - gap*(nrows-1))/nrows));
+
+  h=(w|=0);
+  mw = (w*.2)|0;
+  col=i=0;
+  rec = mem_stlist;
+  now=time_precise();
+
+  gfx_getdropfile(0, dropfile=#) ? (
+    gfx_getdropfile(-1);
+    force_redraw = 1;
+  ) : (
+    dropfile = 0;
+  );
+
+  loop(g_nchan,
+    mx = xpos + w - mw - gap;
+    my = ypos+gap;
+
+    dropfile && mouse_in(xpos,ypos,w,h) ? load_file(dropfile, i);
+
+    !cap_mode && (mouse_cap&1) && !(last_mouse_cap&1) ? (
+      w > 80 &&
+        (!(i&1) ? mouse_in(xpos+w-10, my+mw+1, 10+gap-1, 10) :
+          mouse_in(xpos, my+mw+1, 12, 10)) ? (
+        cfgp_link[] ~= 1<<(i>>1);
+      ) : mouse_in(xpos, ypos, w, h) ? (
+        g_chan_selected=i;
+      );
+    );
+
+    mode = rec[st_state];
+    mode ? (
+      gfx_set(mode==2 ? 1 : 0.25,mode==1?1:0.25, 0.25);
+    ) : (
+      rec[st_dirty] ? gfx_set(0.3,0.3,0.4) : gfx_set(0.25);
+    );
+    is_chan_selected(i) ? mode|=8;
+    rec[st_dirty] ? mode|=16;
+    mode |= rec[st_monmode] << 8;
+    g_firstrec ? mode |= 1<<30;
+  
+    force_redraw || rec[st_lastd] != mode || ((mode&2) && now>rec[st_lastpkupd]+0.5) ? (
+      rec[st_lastd] = mode;
+      rec[st_lastpkupd]=now;
+      draw_button(xpos,ypos,w,h, mode&8 ? 2 : 0);
+
+      gfx_set(1,1,1);
+      gfx_x = xpos + 8;
+      gfx_y = ypos + 8;
+      gfx_printf("%d",i+1);    
+
+      gfx_set(0.5);
+      w > 80 && rec[st_dirty] && (wl = floor(g_length/rec[st_div] + 0.5)) > 0 ?
+        draw_waveform(xpos+gap,ypos+h*.5,floor(w/rec[st_div]+.5)-2*gap,h*.25, rec[st_buf], (g_offs % wl),wl, i);
+
+      rec[st_monmode]==0 ? (
+        gfx_set(0.2)
+      ) : rec[st_monmode]==1 ? (
+        (mode&8) ? gfx_set(0.3,0.3,1.0) : gfx_set(0.3,0.3,0.7)
+      ) : (
+        gfx_set(0.9,0.8,0);
+      );
+
+      gfx_rect(mx,my,mw,mw);
+      
+      rec[st_monmode] == 0 ? (
+        gfx_set(0);
+      ) : (
+        rec[st_monmode]==2 || (mode&8) ? (
+          gfx_set(1,1,1, 1);
+        ) : (
+          gfx_set(1,1,1, .25);
+        );
+      );
+      draw_speaker(mx+mw/2,my+mw/2,mw/2);    
+        
+      rec[st_monmode] == 0 ? (
+        gfx_set(0);
+        gfx_line(mx,my,mx+mw,my+mw);
+        gfx_line(mx+mw,my,mx,my+mw);
+      );      
+         
+      wantr=1;
+    ) : (
+      wantr=0;
+    );
+    t = mem_stlist + i*st_num;
+    lx = xpos + w - gap;
+    ly = ypos+h-24-gap;
+    w > 80 ? ( lx -= draw_value_tweaker(-lx,ly,t + st_note3,wantr, "sel") + gap; );
+    lx -= draw_value_tweaker(-lx,ly,t + st_note2,wantr, rec[st_state] == 1 ? "stp" : "ply") + gap;
+    lx -= draw_value_tweaker(-lx,ly,t + st_note1,wantr, rec[st_state] == 2 && !g_firstrec ? "ply" : "rec") + gap;
+    
+    lx = -mx+gap;
+    lx += draw_value_tweaker(lx,my,t + st_rdc, wantr, "RDC") + gap;
+    w > 90 ? lx += draw_value_tweaker(lx,my,t + st_div, wantr, "div") + gap;
+    w > 120 ? lx += draw_value_tweaker(lx,my,t + st_fade_size, wantr, "fad") + gap;
+
+    w > 120 ? (
+      lx = xpos+gap;
+      lx -= draw_value_tweaker(xpos+gap,ly,t + st_note4,wantr, "rev") + gap;    
+    );
+
+    (mouse_cap&2) && !(last_mouse_cap&2) && !cap_mode && mouse_in(mx,my,mw,mw) ? (
+      rec[st_monmode] = (rec[st_monmode]+1)%3;
+      rec2 = get_linked_rec(i);
+      rec2 >= 0 ? rec2[st_monmode] = rec[st_monmode];
+      updatechfromrec();
+      sliderchange(-1);
+    );
+    
+    g_curpk = (max(min(log10(rec[st_peak_in]) * 20,0),-68) * w * (1/68) + w);
+    g_curpk = g_curpk > (10^-5) && g_curpk<3 ? 3 : (g_curpk|0);
+    
+    gfx_set(0);
+    gfx_rect(xpos-2,ypos,2,w-g_curpk);
+    gfx_set(.75,.75,0);
+    gfx_rect(xpos-2,ypos+w-g_curpk,2,g_curpk);
+    
+    (i&1) && w > 80 ? (
+      gfx_set(0.35);
+      ty=my+mw+gap;
+      gfx_rect(xpos-16,ty,12,8);
+      gfx_rect(xpos,ty,12,8);
+      get_linked_rec(i) >= 0 ? (
+        gfx_set(0.75);
+        gfx_rect(xpos-14,ty,24,2);
+        gfx_rect(xpos-16,ty,2,8);
+        gfx_rect(xpos+10,ty,2,8);
+        gfx_rect(xpos-14,ty+6,24,2);
+      ) : (
+        gfx_set(0.0);
+        gfx_rect(xpos-4,ty,2,8);
+      );
+    );
+
+    i+=1;
+    rec += st_num;
+    xpos += w + gap;
+    (col+=1)>=rowsize ? (
+      xpos = ixpos;
+      ypos += h + gap;
+      col=0;
+    );
+  );
+
+
+  t=0;
+  ypos < gfx_h - 24 ? while ((i=mem_gen_order[t])>=0)
+  (
+    force_redraw ? (
+      i == 1  ? gfx_set(0.0, 0.5, 0.6) :
+      i == 2  ? gfx_set(0.0, 0.6, 0.5) :
+      i == 3  ? gfx_set(0.0, 0.6, 0.4) :
+      i == 7  ? gfx_set(0.7, 0.6, 0.7) :
+      i == 11 ? gfx_set(0.0, 0.5, 0.5) :
+      i == 14 ? gfx_set(0.0, 0.7, 0.0) :
+      i == 15 ? gfx_set(0.9, 0.7, 0.0) :
+                gfx_set(0.5, 0.0, 0.0);
+
+      draw_button(xpos,ypos,w,h,0);
+      gfx_set(1);
+      gfx_measurestr(mem_gen_names[i],tw,th);
+      gfx_x=xpos+(w-tw)*.5;
+      gfx_y=min(ypos+(h-th)*.5,gfx_h-24);
+      gfx_drawstr(mem_gen_names[i]);
+
+      i == 11 ? fadesz_button.draw_topbar_button(xpos+4,ypos+4,
+               sprintf(#,"%s%.0f mS",w<98 ? "" : w<160 ? "fade " : "halve fade: ",lasthalve)
+               );
+    );
+
+    i += mem_gen_cfg;
+    draw_value_tweaker(-(xpos+w-gap), min(ypos+h-24-gap,gfx_h-24),  i, force_redraw, 0);
+
+    !(last_mouse_cap&1) && (mouse_cap&1) && mouse_in(xpos,ypos,w,h) ? (
+      i == cfgp_reset        ? strcat(#mainthread_todo, "r") :
+      i == cfgp_halve        ? strcat(#mainthread_todo, "h") :
+      i == cfgp_double       ? strcat(#mainthread_todo, "d") :
+      i == cfgp_double_norep ? strcat(#mainthread_todo, "D") :
+      i == cfgp_export       ? strcat(#mainthread_todo, "e") :
+      i == cfgp_xfade        ? strcat(#mainthread_todo, "x") :
+      i == cfgp_playall || i == cfgp_playsel ? g_inject_midinote = 1024 + i; // inject to support latch mode
+    );
+
+    t+=1;
+    xpos += w + gap;
+    (col+=1)>=rowsize ? (
+      xpos = ixpos;
+      ypos += h + gap;
+      col=0;
+    );
+  );
+);
+
+function draw_position(ypos) local(last_pos,last_len)
+(
+  last_w != gfx_w || last_h != gfx_h || last_pos != g_pos || last_len != g_length ? (
+    last_len = g_length;
+    last_pos = g_pos;
+    gfx_set(0.25,0.125,0.0);
+    gfx_rect(0,ypos,gfx_w,20);
+    gfx_set(0.125,0.25,0.5);
+    g_length > 0 ? gfx_rect(0,ypos,g_pos/g_length * gfx_w,20);
+    gfx_x=2;
+    gfx_y=ypos+2;
+    gfx_set(1,1,1);
+    gfx_printf("%d mS\n%.1f BPM",g_length/srate * 1000, 
+      cfgp_sync[] ? tempo : estbpm(last_len));
+  );
+);
+
+function draw_topbar(need_ref) local(s,i,t, lastlen, lastgate, lastlatch, lastclickcount, lastvclickoffs, lastoffs, lastsync)
+(
+  need_ref == 0 ? (
+    need_ref = (lastlen != g_length || 
+                lastsync != cfgp_sync[] ||
+                lastoffs != g_offs ||
+                lastgate != cfgp_gate[] || 
+                lastlatch != g_latchmode ||
+                lastclickcount != (cfgp_clickcnt[]|0) ||
+                lastvclickoffs != cfgp_vclick[]);
+  );
+
+  need_ref ? (
+    gfx_set(0,0,0.3);
+    gfx_rect(0,0,gfx_w,14);
+
+    gfx_x=60;
+
+    lastsync=cfgp_sync[];
+    projsync_button.draw_topbar_button(gfx_x+4,2,lastsync == 2 ? "sync: playback" : lastsync == 0 ? "sync: off" : "sync: project");
+
+    lastlen = g_length;
+    lastoffs = g_offs;
+    lastgate = cfgp_gate[];
+    lastvclickoffs = cfgp_vclick[];
+
+    lastsync==0 ? (
+      offs_button.draw_topbar_button(gfx_x+4,2, sprintf(#,"offs %.0f spls", g_offs));  
+      length_button.draw_topbar_button(gfx_x+4,2, sprintf(#,"%.0f spls", g_length));
+    );
+
+    lastclickcount = cfgp_clickcnt[]|0;
+
+    clickcnt_button.draw_topbar_button(gfx_x+4,2,
+      lastsync ?
+       lastclickcount==0 ? "length: measure" : sprintf(#,"length: %d",lastclickcount)
+       : sprintf(#,"click cnt: %d",lastclickcount)
+    );
+
+    lastclickcount>0||lastsync ? vclick_button.draw_topbar_button(gfx_x+4,2, lastvclickoffs>0 ? sprintf(#,"vclick: +%.1fmS",lastvclickoffs): "vclick: off");
+
+    lastsync == 0 ?  gate_button.draw_topbar_button(gfx_x+4,2,cfgp_gate[] < g_infthreshdb ? "gate: -inf dB" : sprintf(#,"gate: %.0fdB",lastgate));
+
+    latch_button.draw_topbar_button(gfx_x+4,2, (lastlatch=g_latchmode) ? "latch on" : "latch off");
+  );
+  
+  (mouse_cap&1) && !(mouse_cap&2) ? ( 
+    !(last_mouse_cap&1) ? (
+    
+      projsync_button.hit_topbar_button(mouse_x,mouse_y,-1) ? (
+        cfgp_sync[] = (cfgp_sync[]+1)%3;
+        g_slider_sync = cfgp_sync[];
+        g_offs = 0;
+      ) : latch_button.hit_topbar_button(mouse_x,mouse_y,-1) ? (
+        // toggle
+        cfgp_latch[] = g_latchmode = !g_latchmode;
+      ) : (
+        (lastsync==0 && (gate_button.hit_topbar_button(mouse_x,mouse_y,cfgp_gate)||
+                         length_button.hit_topbar_button(mouse_x,mouse_y,cfgp_length)||
+                         offs_button.hit_topbar_button(mouse_x,mouse_y,cfgp_offs))
+        ) ||
+        clickcnt_button.hit_topbar_button(mouse_x,mouse_y,cfgp_clickcnt)||
+        ((lastclickcount||lastsync)&&vclick_button.hit_topbar_button(mouse_x,mouse_y,cfgp_vclick))||
+        fadesz_button.hit_topbar_button(mouse_x,mouse_y,cfgp_fade);
+      );
+    ) : (cap_mode >= mem_gen_cfg && cap_mode < mem_gen_cfg+mem_gen_sz && (dy = mouse_y - cap_last_y)) ? (
+      cap_mode == cfgp_gate ? (
+        cap_mode[0] = min(max(cap_mode[0]-dy*.2,g_infthreshdb),-1);
+      ) : cap_mode == cfgp_fade ? (
+        cap_mode[0] = min(max(cap_mode[0]-dy*0.05,0),500);
+      ) : cap_mode == cfgp_length ? (
+        t = g_length - dy*((mouse_cap&8)?4:100);
+        (t=max(t|0,1)) != g_length ? (
+          g_length = t;
+          g_pos %= g_length;
+          g_edgetrim_drawstate=1;
+        );
+      ) : cap_mode == cfgp_clickcnt ? (
+        g_slider_click_cnt = (cap_mode[0] = min(max(cap_mode[0]-dy*0.05,0),64))|0;
+      ) : cap_mode == cfgp_vclick ? (
+        cap_mode[0] = min(max(cap_mode[0]-dy*0.05,0),100);
+      ) : cap_mode == cfgp_offs ? (
+        t = (dy*((mouse_cap&8)?4:100))|0;
+        t ? (
+          i = g_offs+g_length;
+          g_offs = min(max(g_offs-t,0),i-1);
+          t = (i-g_length) - g_offs;
+          g_length = i - g_offs;
+          g_pos = (g_pos + t) % g_length;
+          g_edgetrim_drawstate=1;
+        );
+      );
+      cap_last_y=mouse_y;
+    );
+  );
+
+  // animated logo
+  gfx_x=0;
+  gfx_y=4;
+  t=time_precise();
+  s="Super<?printf("%d",nch)?>";
+  i=0;
+  loop(strlen(s),
+    gfx_set(sin(t+i*0.2)*0.3+0.5, cos(t*.61+i*0.5)*.7+0.3, sin(t*2.1-i*0.6)*.3+0.7);
+    gfx_drawchar(str_getchar(s,i));
+    i+=1;
+  );
+);
+
+function get_vclick_pos(latms) local(tmp)
+(
+  tmp=cfgp_sync[];
+  (vclick_len = cfgp_clickcnt[]|0)<1 && tmp ? vclick_len=ts_num;
+  vclick_len >= 1 && (
+    tmp ? (
+      (tmp!=2 && g_active_mask) || (play_state&1);
+    ) : (
+      g_active_mask && !g_firstrec
+    );
+  ) ? (
+    tmp = g_pos - latms*srate*0.001;
+    tmp < 0 ? tmp += g_length;
+    (tmp >= 0) ? (
+      floor(g_pos * vclick_len / g_length)
+    ) : -1;
+  ) : -1;
+);
+
+function draw_vclick(pos,clen) 
+  global(gfx_w,gfx_h,gfx_x,gfx_y)
+  local(sw,sh,str)
+(
+  str=sprintf(#,"%d",1 + pos);
+
+  gfx_w > gfx_h * 2 ? (
+    gfx_setfont(2,"Arial",gfx_h);
+    gfx_measurestr(str,sw,sh);
+    gfx_x = (gfx_w-sw*.8) * pos / clen;
+    gfx_y = 0;
+  ) : gfx_w < gfx_h * .5 ? (
+    gfx_setfont(2,"Arial",gfx_w*.7);
+    gfx_measurestr(str,sw,sh);
+    gfx_y = (gfx_h-sh*.5) * pos / clen;
+    gfx_x = gfx_w*.5 - sw*.5;
+  ) : (
+    gfx_setfont(2,"Arial",min(gfx_h,gfx_w)*.5);
+    gfx_measurestr(str,sw,sh);
+    gfx_x=gfx_w*.5 + ((pos&1)?sw*.3:-sw*1.3);
+    gfx_y=gfx_h*.5 + ((pos&2)?0:-sh);
+  );
+  gfx_set(1);
+  gfx_drawstr(str);
+  gfx_setfont(0);
+);
+
+function draw_trim_waveform(xpos, ypos, w, h, chan, isend)
+  global(g_length mem_stlist st_num st_dirty st_buf g_offs srate) 
+  local(rec buf len maxl linepos xpos2 w2)
+(
+  rec = mem_stlist + chan*st_num;
+  gfx_set(0.25);
+  gfx_rect(xpos,ypos,w,h);
+  
+  gfx_set(1);
+  len = (w * 0.0005 * srate)|0; // 0.5ms/pixel
+  xpos2 = xpos;
+  w2=w;
+
+  isend ? (
+    buf = g_offs + g_length - len*.8;
+  ) : (
+    buf = g_offs - len*.2;
+  );
+
+  buf < 0 ? (
+    xpos2 -= buf*w/len;
+    len += buf;
+    w2 -= xpos2-xpos;
+    buf = 0;
+  );
+  
+  g_length && rec[st_dirty] ? 
+    draw_waveform(xpos2,ypos+h*.5,w2,h*.25,rec[st_buf],buf,len,chan);
+    
+  gfx_set(0,.5,.7,.5);
+  xpos += (w*(isend?.8:.2))|0;
+  gfx_line(xpos,ypos,xpos,ypos+h);
+);
+
+!(gfx_ext_flags&2) ? (
+  gfx_clear=-1;
+  
+  vclick_pos = cfgp_vclick[]>0 ? get_vclick_pos(cfgp_vclick[]) : -1;
+  
+  last_vclick_pos != vclick_pos ? (
+    last_w=0;
+    last_vclick_pos=vclick_pos;
+  );
+  
+  last_w != gfx_w || last_h != gfx_h ? (
+    gfx_set(0.125);
+    gfx_rect(0,0,gfx_w,gfx_h);
+  );
+  
+  draw_topbar(last_w != gfx_w || last_h != gfx_h);
+  draw_position(15);
+  draw(0, 40);
+  
+  gfx_x=0;
+  gfx_y=gfx_h-8;
+  gfx_set(0);
+  gfx_rect(gfx_x,gfx_y,6*8,8);
+  gfx_set(.3);
+  g_peakvol < g_infthresh ? (
+    gfx_printf("-inf");
+  ) : (
+    gfx_printf("%.0fdB",log10(g_peakvol)*20);
+    g_peakvol *= 0.93;
+  );
+  
+  g_lastmsg>=0 && g_lastmsg_draw!=g_lastmsg ? (
+    g_lastmsg_t = format_note(#str,g_lastmsg);
+    gfx_x=gfx_w-g_lastmsg_w;
+    g_lastmsg_w = (strlen(#str) + (g_lastmsg_t?3:0)) * 8;
+    gfx_x = min(gfx_x, gfx_w-g_lastmsg_w);
+    gfx_y=gfx_h-8;
+    gfx_set(0);
+    gfx_rect(gfx_x,gfx_y,gfx_w-gfx_x,8);
+    gfx_set(.3);
+    gfx_x = gfx_w-g_lastmsg_w;
+    gfx_printf("%s%s",g_lastmsg_t==1?"CC ":g_lastmsg_t?"PC ":"",#str);
+    g_lastmsg_draw=g_lastmsg;
+  );
+  
+  last_w = gfx_w;
+  last_h = gfx_h;
+  last_mouse_cap = mouse_cap;
+  0 == (mouse_cap & 3) ? (
+    cap_mode > 0 ? (
+      sliderchange(-1);
+    );
+    cap_mode = 0;
+  );
+  
+  vclick_pos >= 0 ? draw_vclick(vclick_pos,vclick_len);
+  
+  cap_mode == cfgp_offs || cap_mode == cfgp_length ? (
+    g_edgetrim_drawstate>=0 ? (
+      draw_trim_waveform(0,40,gfx_w,gfx_h-40, max(g_chan_selected,0), cap_mode == cfgp_length);
+      g_edgetrim_drawstate=1;
+    );
+  ) : (
+    g_edgetrim_drawstate>0 ? (
+      last_w=-1;
+      g_edgetrim_drawstate=0;
+    );  
+  );
+); // !(gfx_ext_flags&2)
+
+
+function export()  local(rec, flag, tidx, idx, ster, l)
+(
+  rec = mem_stlist;
+  flag=1<<16; // go to end of project
+  flag|=2<<16; // use tempo from next parameter
+  tidx = idx = 0;
+  g_length > 0 ? loop(g_nchan,
+    !(idx&1) || get_linked_rec(idx)<0 ? (
+      ster = get_linked_rec(idx);
+      rec[st_state] ? (
+        l = (g_length / rec[st_div])|0;
+        export_buffer_to_project(rec[st_buf]+g_offs%l,l, ster>=0 ? 2 : 1,srate,tidx, flag,
+          flag?(cfgp_sync[] ? tempo : estbpm(g_length)),
+          ster>=0 ? ster[st_buf] - rec[st_buf] : 0
+        );
+        flag=0; // only go to end/set tempo for first item
+      );
+      tidx += 1;
+    );
+    idx += 1;
+    rec+=st_num;
+  );
+);
+
+strlen(#mainthread_todo) > 0 ? (
+  mtc = str_getchar(#mainthread_todo,0);
+  strcpy_substr(#mainthread_todo,#mainthread_todo,1);
+
+  mtc == 'r' ? reset() :
+  mtc == 'h' ? adjustsizes(0.5,1) :
+  mtc == 'd' ? adjustsizes(2,1) :
+  mtc == 'D' ? adjustsizes(2,0) :
+  mtc == 'e' ? export() :
+  mtc == 'x' ? adjustsizes(1, 0);
+);

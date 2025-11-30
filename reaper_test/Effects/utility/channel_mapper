@@ -1,0 +1,509 @@
+// This effect Copyright (C) 2021 and later Cockos Incorporated
+// License: LGPL - http://www.gnu.org/licenses/lgpl.html
+
+desc: Channel Mapper-Downmixer (Cockos)
+//tags: utility channel mapper downmix
+//author: Cockos
+
+<? nch = max(max_nch,64) ?>
+
+<? loop(x=1;nch, printf("slider%d:1<0,1>-Volume %d\n",x,x); x+=1); ?>
+
+options:no_meter
+
+
+@init
+ext_tail_size = -2;
+gfx_ext_retina == 0 ? gfx_ext_retina=1;
+ui_open=0;
+act=0; // activity monitor
+ext_noinit=1;
+max_nch = <? printf("%d",nch); ?>;
+
+chmenu=1024;
+i=0; ch=2; dch=2;
+while (ch <= max_nch) (
+  chmenu[i]=ch;
+  ch == 16 ? dch=4 : ch == 24 ? dch=8 : ch == 32 ? dch=16 : ch == 64 ? dch = 32;
+  ch += dch;
+  i += 1;
+);
+ch=16;
+while (ch <= max_nch) (
+  chmenu[i]=ch;
+  (ch>16 && !(ch&15) && ch < max_nch) ? ( i += 1; chmenu[i]=ch; );
+  ch += 2;
+  i += 1;
+);
+chmenu_len=i;
+linkbuf = chmenu + chmenu_len;
+
+// using _var for audio thread state
+// unrolling for efficiency
+<? loop(x=0; nch, printf("_v%d=slider%d;%s",x,x+1,(x&3)<3?" ":"\n"); x+=1) ?>
+
+@block
+
+_s=samplesblock;
+_flags=get_pinmapper_flags();
+_umix = (_flags&14) == 8;
+_umix ? (
+<?
+  loop(x=0; nch/4,
+    x>0 ? printf("num_ch > %d ? ( ",x);
+    loop(4, printf("_dv%d=(slider%d-_v%d)/samplesblock; _v%d=slider%d;%s",
+      x,x+1,x,x,x+1,(x&3)==3?"\n":" "); x+=1);
+  );
+  loop(nch/4-1, printf(");"));
+?>
+);
+
+
+@sample
+
+_umix ? (
+_s -= 1;
+<?
+  loop(x=0; nch/4,
+    x>0 ? printf("num_ch > %d ? ( ",x);
+    loop(4, printf("spl%d *= _v%d-_dv%d*_s;%s",x,x,x,(x&3)<3?" ":"\n"); x+=1);
+  );
+  loop(nch/4-1, printf(")"));
+?>;
+);
+
+ui_open ? (
+<?
+  loop(x=0; nch/4,
+    x>0 ? printf("num_ch > %d ? ( ",x);
+    loop(4, printf("abs(spl%d) > 0.001 ? act[%d]=1;%s",x,x,(x&3)<3?" " : "\n"); x+=1);
+  );
+  loop(nch/4-1, printf(")"));
+?>;
+);
+
+@serialize
+
+file_mem(0, linkbuf, ceil(max_nch/64));
+
+
+@gfx 240 280
+
+ui_open=1;
+
+sc=gfx_ext_retina;
+bg=gfx_getsyscol();
+bgr=bg&0xff; bgg=(bg>>8)&0xff; bgb=(bg>>16)&0xff;
+fg = bgr*130+bgg*256+bgb*50 < 60000;
+hg=((bgr+bgg+bgb)/(256*3)+fg)/2;
+
+gfx_clear=bg;
+gfx_set(fg,fg,fg);
+fsz = sc == 1 ? 16 : 24;
+gfx_setfont(1,"Arial",fsz);
+gfx_setfont(2,"Arial",fsz,'Y');
+gfx_setfont(3,"Arial",fsz,'Z');
+gfx_setfont(4,"Arial",fsz+4);
+gfx_setfont(5,"Arial",fsz+4,'Z');
+gfx_setfont(6,"Arial",fsz-2,'Y');
+str_setchar(#arr,0,0x9e9ee2,'iu');
+
+function draw_str(tx ty ts tf tfl)
+(
+  gfx_x=tx;
+  gfx_y=ty;
+  gfx_setfont(tf);
+  gfx_drawstr(ts,tfl,tx,ty);
+);
+
+flags=get_pinmapper_flags();
+umix = (flags&14) == 8;
+
+nch=get_host_numchan();
+sz=16*sc;
+ox=2*sz;
+oy = umix ? 11.5*sz : (flags&6) ? 5*sz : 4.5*sz;
+
+ni=max(floor((gfx_w-ox)/sz-14),2);
+nj=max(floor((gfx_h-oy)/sz-2),2);
+xscr = ni < nch || (ni == nch && nj < nch) ? 1 : 0;
+yscr = nj < nch || (nj == nch && ni < nch) ? 1 : 0;
+ni > nch ? ni=nch : ni == nch && yscr ? ni -= 1;
+nj > nch ? nj=nch : nj == nch && xscr ? nj -= 1;
+si < 0 ? si=0 : si > 0 && si+ni > nch ? si=nch-ni;
+sj < 0 ? sj=0 : sj > 0 && sj+nj > nch ? sj=nch-nj;
+yscr ? ox += sz;
+
+!(flags&14) ? draw_str(ox,sz,"Ins",1,260);
+draw_str(ox+(ni+3)*sz,oy,"Outs",3,256);
+
+i=si;
+loop(ni+1,
+  i-si < ni ? (
+    sprintf(#num, "%d", i+1);
+    draw_str(ox+(i-si+0.5)*sz,oy-1.75*sz,#num,2,265);
+    draw_str(ox+(i-si+0.5)*sz,oy-0.5*sz,#arr,5,265);
+  );
+  sy=oy;
+  ey=oy+nj*sz;
+  sj > 0 ? sy -= sz/4;
+  sj+nj < nch ? ey += sz/4;
+  gfx_x=ox+(i-si)*sz;
+  gfx_y=sy;
+  gfx_lineto(gfx_x, ey);
+  (i == 0 && si == 0) || (i == nch && si+ni == nch) ? (
+    gfx_x += i == 0 ? -1 : 1;
+    gfx_y=sy;
+    gfx_lineto(gfx_x, ey);
+  );
+  i += 1;
+);
+j=sj;
+loop(nj+1,
+  j-sj < nj ? (
+    sprintf(#num, "%d", j+1);
+    draw_str(ox+(ni+1.75)*sz,oy+(j-sj+0.5)*sz,#num,1,260);
+    draw_str(ox+(ni+0.5)*sz,oy+(j-sj+0.5)*sz,#arr,4,260);
+  );
+  sx=ox;
+  ex=sx+ni*sz;
+  si > 0 ? sx -= sz/4;
+  si+ni < nch ? ex += sz/4;
+  gfx_x=sx;
+  gfx_y=oy+(j-sj)*sz;
+  gfx_lineto(ex, gfx_y);
+  (j == 0 && sj == 0) || (j == nch && sj+nj == nch) ? (
+    gfx_x=sx;
+    gfx_y += j == 0 ? -1 : 1;
+    gfx_lineto(ex, gfx_y);
+  );
+  j += 1;
+);
+
+function mask(n) ( n>=32 ? 0xffffffff : ((1<<n)-1) );
+
+i=si;
+loop(ni,
+  <?
+    loop(i=0; nch/32,
+      printf("map%d=nch > %d ? get_pin_mapping(1,i,%d,mask(nch-%d)) : 0;\n",i,i*32,i*32,i*32);
+      i+=1;
+    );
+  ?>
+  x=ox+(i-si)*sz;
+  j=sj;
+  loop(nj,
+    m = <?
+      loop(i=0; nch/32 - 1,
+        printf("j < %d ? map%d : ",32+i*32,i);
+        i+=1;
+      );
+      printf("map%d\n",i);
+    ?>;
+  
+    m&(1<<(j&31)) ? (
+      y=oy+(j-sj)*sz;
+      gfx_rect(x+sc+1,y+sc+1,sz-(2*sc+1),sz-(2*sc+1));
+      act[i] > 0 ? (
+        gfx_set(0,1,0,act[i]);
+        gfx_a=act[i];
+        gfx_circle(x+sz/2,y+sz/2,sz/8,1,1);
+        gfx_set(fg,fg,fg,1);
+      );
+    );
+    act[i] > 0 ? (
+      act[i] *= 0.95;
+      act[i] < 0.001 ? act[i]=0;
+    );
+    j += 1;
+  );
+  (flags&6) ? (
+    <?
+      loop(i=0; nch/32,
+        printf("(map%d & (map%d - 1)) ||",i,i);
+        i+=1;
+      );
+      printf(" (");
+      loop(i=0; nch/32,
+        printf("+ !!map%d",i);
+        i+=1;
+      );
+      printf(") > 1 ?");
+    ?>(
+      #str = (flags&6) == 2 ? "-3.0" : "-6.0";
+      draw_str(x+0.5*sz,0.5*sz,#str,6,257);
+    );
+  );
+  i += 1;
+);
+
+scyx=oy+(nj+0.75)*sz;
+xscr ? (
+  w=ni*sz;
+  gfx_x=ox;
+  gfx_y=scyx;
+  gfx_set(hg,hg,hg);
+  gfx_rectto(ox+si/nch*w,gfx_y+0.5*sz);
+  gfx_y -= 0.5*sz;
+  gfx_set(fg,fg,fg);
+  gfx_rectto(ox+(si+ni)/nch*w,gfx_y+0.5*sz);
+  gfx_y -= 0.5*sz;
+  gfx_set(hg,hg,hg);
+  gfx_rectto(ox+w,gfx_y+0.5*sz);
+);
+yscr ? (
+  h=nj*sz;
+  gfx_x=ox-1.25*sz;
+  gfx_y=oy;
+  gfx_set(hg,hg,hg);
+  gfx_rectto(gfx_x+0.5*sz,oy+sj/nch*h);
+  gfx_x -= 0.5*sz;
+  gfx_set(fg,fg,fg);
+  gfx_rectto(gfx_x+0.5*sz,oy+(sj+nj)/nch*h);
+  gfx_x -= 0.5*sz;
+  gfx_set(hg,hg,hg);
+  gfx_rectto(gfx_x+0.5*sz,oy+h);
+);
+
+gfx_set(fg,fg,fg);
+
+fy=2.5*sz;
+fh=4.5*sz;
+
+function draw_radio(tx ty te ts)
+(
+  gfx_circle(tx,ty,bsz/2,0,1);
+  te ? gfx_circle(tx,ty,bsz/4,1,1);
+  draw_str(tx+1.5*bsz,ty,ts,1,260);
+);
+
+function is_link(h) ( (linkbuf[h>>5] & (1<<(h&31)))!=0 );
+function tog_link(h) local(mask) ( mask = 1<<(h&31); ((linkbuf[h>>5] ~= mask) & mask)!=0; );
+
+function draw_slider(ti)
+(
+  tti=si+ti;
+  x=ox+(ti+0.5)*sz;
+  v=slider(tti+1);
+  v < 0 ? v=0 : v > 1 ? v=1;
+  vy=fh*(exp(v)-1)/(exp(1)-1);
+
+  gfx_rect(x-sc,fy,2*sc,fh);
+  gfx_rect(x-0.3125*sz,fy+fh-vy-0.25*sz,0.625*sz,0.25*sz);
+
+  has_link=is_link(tti/2);
+  has_link ? (
+    (tti&1) && ti == 0 ? (
+      gfx_rect(x-0.625*sz,fy+fh-vy-0.25*sz,0.375*sz,0.25*sz);
+    ) :
+    !(tti&1) ? (
+      gfx_rect(x+0.3125*sz,fy+fh-vy-0.25*sz,0.375*sz,0.25*sz);
+    );
+  );
+
+  ti > 0 && (tti&1) ? (
+    draw_radio(x-0.5*sz-sc,fy+fh+0.5*sz,has_link,0);
+  );
+
+  v <= 0.0 ? #str="-inf" : (
+    db=20.0*log(v)/log(10);
+    sprintf(#str,"%s%.1f",v >= 1.0 ? "+" : "",db);
+  );
+  draw_str(x,fy-2*sz,#str,6,257);
+);
+
+umix ?
+(
+  draw_str(ox+(ni+1.75)*sz,fy+fh+0.5*sz,"Link",1,260);
+  draw_str(ox+(ni+0.5)*sz,fy+fh+0.5*sz,#arr,4,260);
+  i=0;
+  loop(ni,
+    draw_slider(i);
+    i += 1;
+  );
+);
+
+btw=3*sz+4*sc; bth=sz+4*sc;
+function draw_button(tx,ty,ts)
+(
+  draw_str(tx,ty,ts,1,261);
+  gfx_x=tx-btw/2;
+  gfx_y=ty-bth/2;
+  gfx_lineto(gfx_x+btw,gfx_y);
+  gfx_lineto(gfx_x,gfx_y+bth);
+  gfx_lineto(gfx_x-btw,gfx_y);
+  gfx_lineto(gfx_x,gfx_y-bth);
+);
+
+nx=ox+(ni+5.5)*sz;
+ny=1.5*sz;
+draw_str(nx,ny,"Channels:",1,260);
+gfx_measurestr("Channels:",txtw,txth);
+nx += txtw+2*sz;
+draw_button(nx,ny,"");
+gfx_line(nx+0.25*sz,ny-0.5*sz,nx+0.25*sz,ny+0.5*sz);
+gfx_line(nx+0.625*sz,ny-0.125*sz,nx+0.9375*sz,ny+0.125*sz);
+gfx_line(nx+1.25*sz,ny-0.125*sz,nx+0.9375*sz,ny+0.125*sz);
+sprintf(#str,"%d",nch);
+draw_str(nx-0.75*sz,ny,#str,1,261);
+
+iox=ox+(ni+6)*sz;
+ioy=ny+2.5*sz;
+bsz=0.5*sz;
+draw_str(iox-bsz,ioy,"Unmapped outs:",1,260);
+draw_radio(iox,ioy+sz,(flags&1)==0,"Pass through");
+draw_radio(iox,ioy+2*sz,(flags&1)==1,"Zero out");
+draw_str(iox-bsz,ioy+4*sz,"Downmix:",1,260);
+draw_radio(iox,ioy+5*sz,(flags&14)==0,"None");
+draw_radio(iox,ioy+6*sz,(flags&14)==2,"Shared ins -3dB ");
+draw_radio(iox,ioy+7*sz,(flags&14)==4,"Shared ins -6dB");
+draw_radio(iox,ioy+8*sz,(flags&14)==8,"User mix");
+
+rx=iox-bsz+btw/2;
+ry=ioy+10.5*sz;
+draw_button(rx,ry,"Reset");
+zx=rx+btw+0.5*sz;
+zy=ry;
+draw_button(zx,zy,"Clear");
+
+function hit_button(tx ty tw th)
+(
+  abs(mouse_x-tx) < tw/2 && abs(mouse_y-ty) < th/2;
+);
+function hit_box(tx ty)
+(
+  hit_button(tx,ty,1.5*bsz,1.5*bsz);
+);
+
+(mouse_cap&1) != (cap&1) ? (
+  cap=(mouse_cap&1);
+  cap ? (
+    mouse_x >= ox && mouse_x < ox+ni*sz ? (
+      mouse_y >= oy && mouse_y < oy+nj*sz ? (
+        i=floor((mouse_x-ox)/sz);
+        j=floor((mouse_y-oy)/sz);
+        j32 = (sj+j)&0xffe0;
+        m=get_pin_mapping(1,si+i,j32,-1);
+        b=1<<(sj+j-j32);
+        mouse_cap&4 ? m=b : m ~= b;
+        set_pin_mapping(1,si+i,j32,-1,m);
+      ) :
+      xscr && mouse_y > scyx-0.25*sz ? (
+        cap |= 2;
+        ci=si;
+        cx=mouse_x;
+      ) :
+      umix && mouse_y >= fy-0.25*sz && mouse_y < fy+fh+0.25*sz ? (
+        i=floor((mouse_x-ox)/sz);
+        cap |= (i+1)<<8;
+        cv=slider(si+i+1);
+        cy=mouse_y;
+      ) :
+      umix && abs(mouse_y-(fy+fh+0.5*sz)) < bsz ? (
+        i=si+(mouse_x-ox)/sz-0.75;
+        i < floor(i)+0.5 ? (
+          i |= 0;
+          i >= si && i < si+ni-1 && !(i&1) ? (
+            i /= 2;
+            tog_link(i) ? (
+              slider(2*i+2)=slider(2*i+1);
+              slider_automate(2^(2*i+1));
+            );
+          );
+        );
+      );
+    ) :
+    mouse_x < ox-0.25*sz ? (
+      yscr && mouse_y >= oy && mouse_y < oy+nj*sz ? (
+        cap |= 4;
+        cj=sj;
+        cy=mouse_y;
+      );
+    ) :
+    (do_reset = hit_button(rx,ry,btw,bth)) || hit_button(zx,zy,btw,bth) ? (
+      i=0;
+      loop(max_nch,
+        i < nch ? ( <? loop(i=0; nch/32,
+            printf("nch > %d ? set_pin_mapping(1,i,%d,mask(nch-%d),0);\n",i*32,i*32,i*32);
+            i+=1;
+          ); 
+          ?> 
+        );
+        do_reset ? set_pin_mapping(1,i,i&0xffe0,-1,1<<(i&31));
+        slider(i+1)=1;
+        i += 1;
+      );
+    ) :
+    hit_button(nx,ny,btw,bth) ? (
+      gfx_x=nx-0.5*btw;
+      gfx_y=ny+0.5*bth;
+      loop(i=0; chmenu_len,
+        i > 0 ? (
+          strcat(#menu,i+1 >= chmenu_len || chmenu[i+1] == chmenu[i] ? "|<":"|");
+          chmenu[i] <= chmenu[i-1] ? sprintf(#menu,"%s%s>%d-%d|",#menu,
+                chmenu[i] < chmenu[i-1] ? "|" : "",chmenu[i],chmenu[i]+16);
+        );
+        sprintf(#menu,"%s%s%d",i?#menu:"",chmenu[i] == nch?"!":"",chmenu[i]);
+        i += 1;
+      );
+      menusel=gfx_showmenu(#menu)-1;
+      menusel >= 0 ?  set_host_numchan(chmenu[menusel]);
+    ) :
+    abs(mouse_x-iox) < 0.75*bsz ? (
+      f=flags;
+      hit_box(iox,ioy+sz) ? f&=(-1~1) :
+      hit_box(iox,ioy+2*sz) ? f|=1 :
+      hit_box(iox,ioy+5*sz) ? f&=(-1~14) :
+      hit_box(iox,ioy+6*sz) ? f=(f&(-1~14))|2 :
+      hit_box(iox,ioy+7*sz) ? f=(f&(-1~14))|4 :
+      hit_box(iox,ioy+8*sz) ? f=(f&(-1~14))|8;
+      f != flags ? set_pinmapper_flags(f);
+    );
+  );
+);
+
+(cap&2) ? (
+  si=ci+floor((mouse_x-cx)/sz*nch/ni);
+) :
+(cap&4) ? (
+  sj=cj+floor((mouse_y-cy)/sz*nch/nj);
+) :
+(cap&0xff00) ? (
+  i=si+(cap>>8)-1;
+  v=(exp(cv)-1)/(exp(1)-1)-(mouse_y-cy)/fh;
+  v < 0 ? v=0 : v > 1 ? v=1 : v=log((exp(1)-1)*v+1);
+  abs(v-1/sqrt(2)) < 1.5/fh ? v=1/sqrt(2) :
+  abs(v-0.5) < 1.5/fh ? v=0.5;
+  slider(i+1)=v;
+  slider_automate(2^i);
+  is_link(i/2) ? (
+    j = !(i&1) ? i+1 : i-1;
+    slider(j+1)=v;
+    slider_automate(2^j);
+  );
+) :
+mouse_wheel ? (
+  yscr && mouse_x < ox-0.5*sz ? (
+    sj -= floor(mouse_wheel/120);
+  ) :
+  xscr && mouse_y > scyx-0.25*sz ? (
+    si += floor(mouse_wheel/120);
+  ) :
+  umix && mouse_y >= fy && mouse_y < fy+fh ? (
+    i=floor((mouse_x-ox)/sz);
+    i >= 0 && i < ni ? (
+      i += si;
+      v=slider(i+1)+floor(mouse_wheel)/120*2/fh;
+      v < 0 ? v=0 : v > 1 ? v=1;
+      slider(i+1)=v;
+      slider_automate(2^i);
+      is_link(i/2) ? (
+        j = !(i&1) ? i+1 : i-1;
+        slider(j+1)=v;
+        slider_automate(2^j);
+      );
+    );
+  );
+  mouse_wheel=0;
+);
+
