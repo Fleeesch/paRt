@@ -1,0 +1,15 @@
+extends: default
+
+base:
+  font_family: Helvetica
+  line_height: 1.2
+  font_size: 10
+
+footer:
+  columns: <25% =50% >25%
+  recto: &shared_footer
+    left:
+      content: 'paRt UserGuide _v{revnumber}_'
+    right:
+      content: '{page-number}'
+  verso: *shared_footer

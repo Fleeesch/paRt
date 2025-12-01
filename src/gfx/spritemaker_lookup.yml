@@ -3,15 +3,15 @@ settings:
   copy_dev_info:
     - [
         ["out/dark", 1],
-        "/root/int/dev/reaper/theming/paRt/reaper/ColorThemes/part_dark",
+        "/root/int/dev/reaper/theming/paRt/reaper/dev/ColorThemes/part_dark",
       ]
     - [
         ["out/dimmed", 1],
-        "/root/int/dev/reaper/theming/paRt/reaper/ColorThemes/part_dimmed",
+        "/root/int/dev/reaper/theming/paRt/reaper/dev/ColorThemes/part_dimmed",
       ]
     - [
         ["out/light", 1],
-        "/root/int/dev/reaper/theming/paRt/reaper/ColorThemes/part_light",
+        "/root/int/dev/reaper/theming/paRt/reaper/dev/ColorThemes/part_light",
       ]
 
 variables:

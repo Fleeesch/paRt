@@ -75,8 +75,8 @@ zoom_levels=(100 125 150 175 200 225 250)
 release_folder="release"
 version=$(<./$release_folder/version)
 
-# reaper developement folder
-reaper_theme_folder="$(pwd)/../reaper/ColorThemes"
+# reaper development folder
+reaper_theme_folder="$(pwd)/../reaper/dev/ColorThemes"
 
 # files and folders
 script_version_set="version_set.sh"
