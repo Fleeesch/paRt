@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.2' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.3' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000

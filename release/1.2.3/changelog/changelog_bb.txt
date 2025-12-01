@@ -1,0 +1,4 @@
+[code]
+[b]Changelog - 1.2.3[/b]
+- Bugfix: Initial Theme Adjuster Launch caused missing file error
+[/code]
