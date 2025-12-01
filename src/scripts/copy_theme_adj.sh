@@ -16,7 +16,7 @@ COLOR_RESET='\033[0m'
 #   Preparation
 # --------------------------------------------
 
-source_folder="../../reaper/Scripts/Fleeesch/Themes/paRt"
+source_folder="../../reaper/dev/Scripts/Fleeesch/Themes/paRt"
 target_folder="./themeadj"
 
 #   Direction
@@ -56,7 +56,7 @@ if [ "$dir_to_dev_folder" == false ]; then
             rsync -a --quiet                        \
             --exclude "parameters.partmap"          \
             --exclude "last_theme.partmap"          \
-            --exclude "conf/slot/**"                \
+            --exclude "conf/slot/**.partmap"                \
             "$source_folder/" "$target_folder/"
 
             echo -e "${COLOR_GREEN}done${COLOR_RESET}"

@@ -11,7 +11,7 @@ python make_spritesheet.py
 # Define source and target directories
 SOURCE_DIR="out_sheet/*"
 themeadj_src="../../scripts/themeadj/lib/res/icon"
-themeadj_dev="../../../reaper/scripts/fleeesch/themes/part/lib/res/icon"
+themeadj_dev="../../../reaper/dev/scripts/fleeesch/themes/part/lib/res/icon"
 
 # Function to clean and copy files if target directory exists
 clean_and_copy() {
