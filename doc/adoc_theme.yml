@@ -1,5 +1,6 @@
 extends: default
-
+image:
+  scaled-width: fit
 base:
   font_family: Helvetica
   line_height: 1.2
