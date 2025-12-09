@@ -15,8 +15,6 @@
 --out table_tcp_fader_layout_explode            --images fadermode_spread                                       -tint themeadj_table_icon
 --out table_tcp_fader_layout_separate           --images fadermode_multivert                                    -tint themeadj_table_icon
 
-
-
 # track
 --out track_mute                                --images fill -tint themeadj_color_orange       mute            -tint button_symbol_on
 --out track_solo                                --images fill -tint themeadj_color_yellow       solo            -tint button_symbol_on
@@ -50,6 +48,15 @@
 --out transport_bpm                             --images fill -tint themeadj_button_bg_off     transport_bpm                -tint button_symbol_off
 --out transport_status                          --images fill -tint themeadj_button_bg_off     transport_status             -tint button_symbol_off
 --out transport_selection                       --images fill -tint themeadj_button_bg_off     transport_selection          -tint button_symbol_off
+
+# bank button
+--out bank_off                                  --images bank       -tint themeadj_bank_symbol_off
+--out bank_on                                   --images bank       -tint themeadj_bank_symbol_on
+--out bank_l                                    --images bank_l     -tint themeadj_color_bg_symbol
+
+# stretch button
+--out stretch_off                               --images stretch    -tint button_symbol_off
+--out stretch_on                                --images stretch    -tint button_symbol_on
 
 # logo
 --out logo      --images logo  -tint themeadj_color_logo

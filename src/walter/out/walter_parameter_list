@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.4' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.5' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000
@@ -35,8 +35,8 @@ define_parameter par_user_switch_7 'User - Switch - 7' 0 0 1
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 260 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 653 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 0 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 459 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
@@ -85,12 +85,12 @@ define_parameter par_mcp_gen_settings_trackicons 'MCP - General - Settings Track
 define_parameter par_mcp_master_element_separator 'MCP - Master - Element Separator' 0 0 1000000
 define_parameter par_mcp_master_element_vis 'MCP - Master - Element Visibility' 126 0 1000000
 define_parameter par_mcp_master_element_width 'MCP - Master - Element Width' 2 0 2
-define_parameter par_mcp_master_fader_layout 'MCP - Master - Faders Layout' 0 0 10
+define_parameter par_mcp_master_fader_layout 'MCP - Master - Faders Layout' 1 0 10
 define_parameter par_mcp_master_fader_pan_height 'MCP - Master - Faders Pan Height' 0 0 1000
 define_parameter par_mcp_master_fader_pan_height_scale 'MCP - Master - Faders Pan Height Scale' 0 0 1
-define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 2 0 10
-define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 2 0 10
-define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 2 0 10
+define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 0 0 10
+define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 0 0 10
+define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 0 0 10
 define_parameter par_mcp_master_fader_pan_width 'MCP - Master - Faders Pan Width' 414 0 1000
 define_parameter par_mcp_master_fader_wid_always 'MCP - Master - Faders Always Show Width' 1 0 1
 define_parameter par_mcp_master_insert_mode 'MCP - Master - Inserts Mode' 1 0 2
@@ -100,8 +100,8 @@ define_parameter par_mcp_master_insert_size_scale 'MCP - Master - Inserts Size S
 define_parameter par_mcp_master_meter_channeldiv 'MCP - Master - Meter Channel Division' 0 0 1000
 define_parameter par_mcp_master_meter_channeldiv_rms 'MCP - Master - Meter Channel Division RMS' 0 0 1000
 define_parameter par_mcp_master_meter_padding 'MCP - Master - Meter Padding' 2 0 2
-define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 1 0 2
-define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 733 0 1000
+define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 2 0 2
+define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 407 0 1000
 define_parameter par_mcp_master_meter_size_scale 'MCP - Master - Meter Size Scale' 1 0 1
 define_parameter par_mcp_master_meter_vol_readout 'MCP - Master - Meter Volume Readout' 1 0 2
 define_parameter par_mcp_master_meter_vu_db 'MCP - Master - Meter VU dB' 1 0 1

@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.2.4
+part_version 1.2.5
 
     bank_selected 'Selected Bank' 2 2 9
     config_selected 'Selected Configuration' 0 0 7

@@ -2,20 +2,120 @@
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: 1.2.4
-;       Date: 2025-12-01 23:51:24
+;       Version: 1.2.5
+;       Date: 2025-12-09 20:23:46
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
 
 
+;THEMEBUILDER_INSERT_README
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.4' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.5' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000
@@ -51,8 +151,8 @@ define_parameter par_user_switch_7 'User - Switch - 7' 0 0 1
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 260 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 653 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 0 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 459 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
@@ -101,12 +201,12 @@ define_parameter par_mcp_gen_settings_trackicons 'MCP - General - Settings Track
 define_parameter par_mcp_master_element_separator 'MCP - Master - Element Separator' 0 0 1000000
 define_parameter par_mcp_master_element_vis 'MCP - Master - Element Visibility' 126 0 1000000
 define_parameter par_mcp_master_element_width 'MCP - Master - Element Width' 2 0 2
-define_parameter par_mcp_master_fader_layout 'MCP - Master - Faders Layout' 0 0 10
+define_parameter par_mcp_master_fader_layout 'MCP - Master - Faders Layout' 1 0 10
 define_parameter par_mcp_master_fader_pan_height 'MCP - Master - Faders Pan Height' 0 0 1000
 define_parameter par_mcp_master_fader_pan_height_scale 'MCP - Master - Faders Pan Height Scale' 0 0 1
-define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 2 0 10
-define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 2 0 10
-define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 2 0 10
+define_parameter par_mcp_master_fader_pan_mode_dual 'MCP - Master - Faders Pan Mode Dual' 0 0 10
+define_parameter par_mcp_master_fader_pan_mode_mono 'MCP - Master - Faders Pan Mode Mono' 0 0 10
+define_parameter par_mcp_master_fader_pan_mode_stereo 'MCP - Master - Faders Pan Mode Stereo' 0 0 10
 define_parameter par_mcp_master_fader_pan_width 'MCP - Master - Faders Pan Width' 414 0 1000
 define_parameter par_mcp_master_fader_wid_always 'MCP - Master - Faders Always Show Width' 1 0 1
 define_parameter par_mcp_master_insert_mode 'MCP - Master - Inserts Mode' 1 0 2
@@ -116,8 +216,8 @@ define_parameter par_mcp_master_insert_size_scale 'MCP - Master - Inserts Size S
 define_parameter par_mcp_master_meter_channeldiv 'MCP - Master - Meter Channel Division' 0 0 1000
 define_parameter par_mcp_master_meter_channeldiv_rms 'MCP - Master - Meter Channel Division RMS' 0 0 1000
 define_parameter par_mcp_master_meter_padding 'MCP - Master - Meter Padding' 2 0 2
-define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 1 0 2
-define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 733 0 1000
+define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 2 0 2
+define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 407 0 1000
 define_parameter par_mcp_master_meter_size_scale 'MCP - Master - Meter Size Scale' 1 0 1
 define_parameter par_mcp_master_meter_vol_readout 'MCP - Master - Meter Volume Readout' 1 0 2
 define_parameter par_mcp_master_meter_vu_db 'MCP - Master - Meter VU dB' 1 0 1
@@ -273,6 +373,9 @@ define_parameter paRt_end 'paRt end' 0 0 1
     ;   ## Development
     ; --------------------------------------------------------------------------------
 
+        ; Various development overlays to highlight drawing regions.
+        ; Used mainly for measuring pixels.
+
         ;   ### Development : Draw Overlay : TCP
         ; --------------------------------------------------------------------------------
 
@@ -309,6 +412,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
         ;   ### Math : Interpolate
         ; --------------------------------------------------------------------------------
 
+            ; Interpolate between two values using a 0-1 input range.
+
             macro MAC_Math_Interpolate VAL_A VAL_B   FACTOR  TARGET
 
                 set TARGET##    + VAL_A * FACTOR{0} - VAL_B VAL_A
@@ -317,6 +422,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
         ;   ### Math : Clamp
         ; --------------------------------------------------------------------------------
+
+            ; Clamp value between a minimum and maximum limit.
 
             macro MAC_Math_Cap VAL_INPUT VAL_MIN VAL_MAX
 
@@ -329,6 +436,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
         ;   ### Math : Minimal
         ; --------------------------------------------------------------------------------
 
+            ; Pick the smallest value.
+
             macro MAC_Math_Min VAL_INPUT VAL_MIN
 
                 set VAL_INPUT## VAL_INPUT##{0}<VAL_MIN{0} VAL_MIN{0}
@@ -337,6 +446,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
         ;   ### Math : Maximum
         ; --------------------------------------------------------------------------------
+
+            ; Pick the largest value.
 
             macro MAC_Math_Max VAL_INPUT VAL_MAX
 
@@ -350,6 +461,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
         ;   ### Transform : Move Element
         ; --------------------------------------------------------------------------------
 
+            ; Move an existing element using 2D offset values.
+
             macro MAC_Transform_Move_Element CONDITION ELEMENT MOVE_X MOVE_Y
 
                 set ELEMENT##                                               \
@@ -361,6 +474,8 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
     ;   ## Draw
     ; --------------------------------------------------------------------------------
+
+        ; Various macros for drawing generic shapes.
 
         ;   ### Draw : Image
         ; --------------------------------------------------------------------------------
@@ -442,7 +557,28 @@ define_parameter paRt_end 'paRt end' 0 0 1
         ;   ### Setup : Values
         ; --------------------------------------------------------------------------------
 
+            ;   Pre-defined values covering the various scale factors.
+            ;   This macro is called as soon as possible to give layout code some solid numbers to work with.
+            ; 
+            ;   The values are defined using pseudo-lookup tables in form of long if-else statements.
+            ;
+            ;   Some variables end with something like "_2".
+            ;   Those are pre-multiplied variants of a variable, reducing later calculations and general code length.
+
             macro MAC_SetupValues      SCALE
+
+                
+                ; constant used for fake rounding
+                set VAL_rounding_constant 10000000
+
+                ;   --------------------------------------------------------------------------------------------------------
+                ;      - On Pseudo-Rounding -
+                ;
+                ;   Applied pseudo-rounding works like this:
+                ;       y = (input_value - rounding_constant) + rounding_constant
+                ;
+                ;   Not sure why this works. In theory it might force a truncation of values beyond the decimal point.
+                ;   --------------------------------------------------------------------------------------------------------
 
                 ; fader parameter rescaling factor (for ranges 0-1000)
                 set VAL_Fader_Scale 0.001
@@ -762,14 +898,15 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
             macro MAC_Setup_Values_Tcp   SCALE
 
+                ; [ROUND]
                 ; spacing
-                set VAL_tcp_spacing_x           + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x
-                set VAL_tcp_spacing_y           + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_y
-                set VAL_tcp_spacing_x_fader     + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x_fader
-                set VAL_tcp_spacing_y_fader     + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_y_fader
-                set VAL_tcp_spacing_section_x   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_x
-                set VAL_tcp_spacing_section_y   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_y
-                set VAL_tcp_spacing_separator   + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_separator
+                set VAL_tcp_spacing_x           + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x               VAL_rounding_constant{0}
+                set VAL_tcp_spacing_y           + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_y               VAL_rounding_constant{0}
+                set VAL_tcp_spacing_x_fader     + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_x_fader         VAL_rounding_constant{0}
+                set VAL_tcp_spacing_y_fader     + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_y_fader         VAL_rounding_constant{0}
+                set VAL_tcp_spacing_section_x   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_x       VAL_rounding_constant{0}
+                set VAL_tcp_spacing_section_y   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_spacing_section_y       VAL_rounding_constant{0}
+                set VAL_tcp_spacing_separator   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_tcp_gen_element_adj_separator               VAL_rounding_constant{0}
                 
                 ; height detection
                 set VAL_tcp_h_level     \
@@ -777,8 +914,9 @@ define_parameter paRt_end 'paRt end' 0 0 1
                         1               \
                         0
 
+                ; [ROUND]
                 ; volume readout size
-                set VAL_tcp_vol_readout_w   * SCALE 40
+                set VAL_tcp_vol_readout_w   + VAL_rounding_constant{0} - * SCALE 40 VAL_rounding_constant{0}
 
                 ; minimal width values
                 set VAL_tcp_inserts_min_w   * SCALE 20
@@ -793,25 +931,27 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
             macro MAC_Setup_Values_Mcp SCALE
 
+                ; [ROUND]
                 ; spacing
-                set VAL_mcp_spacing_x           + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_x
-                set VAL_mcp_spacing_y           + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_y
-                set VAL_mcp_spacing_fader_x     + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_x
-                set VAL_mcp_spacing_fader_y     + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_y
-                set VAL_mcp_spacing_section_x   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_x
-                set VAL_mcp_spacing_section_y   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_y
-                set VAL_mcp_spacing_separator   + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_separator
+                set VAL_mcp_spacing_x           + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_x             VAL_rounding_constant{0}
+                set VAL_mcp_spacing_y           + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_y             VAL_rounding_constant{0}
+                set VAL_mcp_spacing_fader_x     + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_x       VAL_rounding_constant{0}
+                set VAL_mcp_spacing_fader_y     + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_fader_y       VAL_rounding_constant{0}
+                set VAL_mcp_spacing_section_x   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_x     VAL_rounding_constant{0}
+                set VAL_mcp_spacing_section_y   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_spacing_section_y     VAL_rounding_constant{0}
+                set VAL_mcp_spacing_separator   + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_mcp_gen_element_adj_separator             VAL_rounding_constant{0}
 
+                ; [ROUND]
                 ; minimal height values
-                set VAL_mcp_inserts_min_h   * SCALE 30
-                set VAL_mcp_meter_min_h     * SCALE 10
-                set VAL_mcp_fader_min_h     * SCALE 40
+                set VAL_mcp_inserts_min_h   + VAL_rounding_constant{0} - * SCALE 30     VAL_rounding_constant{0}
+                set VAL_mcp_meter_min_h     + VAL_rounding_constant{0} - * SCALE 10     VAL_rounding_constant{0}
+                set VAL_mcp_fader_min_h     + VAL_rounding_constant{0} - * SCALE 30     VAL_rounding_constant{0}
                 set VAL_mcp_fader_min_h_2   + * 2 VAL_mcp_fader_min_h{0} VAL_mcp_spacing_fader_y{0}
 
                 ; button section width
                 set VAL_mcp_w_button_slim   + VAL_Unit{0}       VAL_Button{0}
-                set VAL_mcp_w_button_wide   + VAL_Unit{0} + * 2 VAL_Button{0} VAL_mcp_spacing_x{0}
-                set VAL_mcp_w_button_large  + VAL_Unit{0} + * 4 VAL_Button{0} * 3 VAL_mcp_spacing_x{0}
+                set VAL_mcp_w_button_wide   + VAL_Unit{0} + * 2 VAL_Button{0}       VAL_mcp_spacing_x{0}
+                set VAL_mcp_w_button_large  + VAL_Unit{0} + * 4 VAL_Button{0} * 3   VAL_mcp_spacing_x{0}
 
                 ; minimal fader height before hiding
                 set VAL_mcp_vol_h_min_show  + VAL_Knob{0} VAL_Pad{0}
@@ -1106,16 +1246,20 @@ set THEME_color_red                         [234 154 154]
                 set VAL_Color_Meter_Text_Readout        * THEME_color_meter_readout             * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout
                 set VAL_Color_Meter_Text_Readout_Clip   * THEME_color_meter_readout             * VAL_Fader_Scale{0} par_colors_track_meter_text_tone_readout_clip
 
+                ; alpha value compensation:
+                ;   There’s a strange difference in how alpha levels are interpreted between master and non-master tracks.
+                ;   For now this is compensated by simply offsetting the alpha value depending on the track context.
+
                 ; [MASTER]
-                ; alpha value compensation
                 set VAL_meter_alpha_compensation_tcp    \
-                    !trackidx                       \
-                        -70                         \
+                    !trackidx                           \
+                        -70                             \
                         0
-        
+
+                ; [MASTER]
                 set VAL_meter_alpha_compensation_mcp    \
-                    !trackidx                       \
-                        0                           \
+                    !trackidx                           \
+                        0                               \
                         -70
 
                 ; alpha values
@@ -1137,7 +1281,7 @@ set THEME_color_red                         [234 154 154]
                 set VAL_Color_Meter_Shadow_Lit_MCP      *   / VAL_Color_Meter_Alpha_MCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_lit
                 set VAL_Color_Meter_Shadow_Unlit_MCP    *   / VAL_Color_Meter_Alpha_MCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_unlit
 
-                ; meter values - TCP?
+                ; meter values - TCP
                 set VAL_meter_tcp_lit_top           [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_TCP{0}            0 0 0 VAL_Color_Meter_Shadow_Lit_TCP{0}]
                 set VAL_meter_tcp_lit_bottom        [VAL_Color_Meter_Text_Lit{0}        VAL_Color_Meter_Text_Lit{1}     VAL_Color_Meter_Text_Lit{2}     VAL_Color_Meter_Alpha_TCP{0}            0 0 0 VAL_Color_Meter_Shadow_Lit_TCP{0}]
                 set VAL_meter_tcp_unlit_top         [VAL_Color_Meter_Text_Unlit{0}      VAL_Color_Meter_Text_Unlit{1}   VAL_Color_Meter_Text_Unlit{2}   VAL_Color_Meter_Alpha_TCP{0}            0 0 0 VAL_Color_Meter_Shadow_Unlit_TCP{0}]
@@ -1204,15 +1348,17 @@ set THEME_color_red                         [234 154 154]
             ; width
             set VAL_trans_w 600
 
+            ; [ROUND]
             ; extra padding
-            set VAL_trans_extrapad_x * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_x
-            set VAL_trans_extrapad_y * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_y
+            set VAL_trans_extrapad_x + VAL_rounding_constant{0} - * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_x       VAL_rounding_constant{0}
+            set VAL_trans_extrapad_y + VAL_rounding_constant{0} - * SCALE * 0.05 par_##PARAMETER_SECTION##_settings_extrapad_y       VAL_rounding_constant{0}
 
+            ; [ROUND]
             ; spacing
-            set VAL_trans_spacing_x                 + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_x
-            set VAL_trans_spacing_time_x            + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_time_x
-            set VAL_trans_spacing_section_x         + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_spacing_section_x
-            set VAL_trans_spacing_separator         + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_separator_size
+            set VAL_trans_spacing_x                 + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_x           VAL_rounding_constant{0}
+            set VAL_trans_spacing_time_x            + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.025 par_##PARAMETER_SECTION##_element_adj_spacing_time_x      VAL_rounding_constant{0}
+            set VAL_trans_spacing_section_x         + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_spacing_section_x    VAL_rounding_constant{0}
+            set VAL_trans_spacing_separator         + VAL_rounding_constant{0} - + VAL_Pad{0} * SCALE * 0.04 par_##PARAMETER_SECTION##_element_adj_separator_size       VAL_rounding_constant{0}
 
             ; top position
             set VAL_trans_y_top + VAL_pad VAL_trans_extrapad_y{0}
@@ -1639,6 +1785,11 @@ set THEME_color_red                         [234 154 154]
     ;   ## Draw : Transport : Place Elements
     ; --------------------------------------------------------------------------------
 
+        ;   Transport elements aren't drawn immediately, instead their coordinates are pre-calculated and then
+        ;   used in combination with offset values for the final drawing process.
+        ;
+        ;   This makes the optional centering of the entire transport section way easier.
+
         macro MAC_DrawTransport_PlaceElements SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; x position offset (optional centering)
@@ -1838,6 +1989,13 @@ set THEME_color_red                         [234 154 154]
     ;   ## Draw : MCP : Setup
     ; --------------------------------------------------------------------------------
 
+        ;   The MCP layout does a full pre-calculation of its final width
+        ;   before anything gets drawn.
+        ;
+        ;   This avoids elements constantly reacting to each other’s sizes.
+        ;   Instead, they all use the total MCP width as their main anchor and
+        ;   rely on pre-calculated values from this section.
+
         ;   ### Draw : MCP : Setup : Shared Code : Open
         ; --------------------------------------------------------------------------------
 
@@ -1888,23 +2046,24 @@ set THEME_color_red                         [234 154 154]
                 ; initialize pre-calculated width
                 set VAL_mcp_precalc_w 0
 
-                ; update mcp width
+                ; -> update mcp width if it has increased
                 set VAL_mcp_precalc_w                                       \
                     VAL_mcp_precalc_w{0}<VAL_mcp_precalc_w_buttons{0}       \
                         VAL_mcp_precalc_w_buttons{0}
 
+                ; [ROUND]
                 ; top fader width extension
-                set VAL_mcp_precalc_w_faders_top                                                                                        \
-                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0                                                                    \
-                        0                                                                                                               \
-                        + + * 2 VAL_Knob{0} VAL_mcp_spacing_fader_x{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_fader_pan_width
+                set VAL_mcp_precalc_w_faders_top                                                                                                                                                \
+                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0                                                                                                                            \
+                        0                                                                                                                                                                       \
+                        + VAL_rounding_constant{0} - + + * 2 VAL_Knob{0} VAL_mcp_spacing_fader_x{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_fader_pan_width     VAL_rounding_constant{0}
 
                 set VAL_mcp_precalc_w_faders_top_full                       \
                     par_mcp_##PARAMETER_SECTION##_fader_layout{0}==0        \
                         + VAL_mcp_precalc_w_faders_top{0} * 2 VAL_Unit{0}   \
                         0
 
-                ; update mcp width
+                ; -> update mcp width if it has increased
                 set VAL_mcp_precalc_w                                               \
                     par_mcp_##PARAMETER_SECTION##_fader_layout{0}==0                \
                         VAL_mcp_precalc_w{0}<VAL_mcp_precalc_w_faders_top_full{0}   \
@@ -1924,7 +2083,7 @@ set THEME_color_red                         [234 154 154]
 
                 set VAL_Mcp_precalc_w_bottom_nobuttons VAL_Mcp_precalc_w_bottom{0}
 
-                ; update mcp width
+                ; -> update mcp width if it has increased
                 set VAL_mcp_precalc_w                                   \
                     VAL_mcp_precalc_w{0}<VAL_mcp_precalc_w_bottom{0}    \
                         VAL_mcp_precalc_w_bottom{0}
@@ -1971,13 +2130,15 @@ set THEME_color_red                         [234 154 154]
                                 0                                               \
                             0
 
+                    ; [ROUND]
                     ; width extra padding
-                    set VAL_mcp_padding + * 2 VAL_Unit{0} * SCALE * 0.03 par_mcp_track_settings_extrapad{0}
+                    set VAL_mcp_padding + VAL_rounding_constant{0} - + * 2 VAL_Unit{0} * SCALE * 0.03 par_mcp_track_settings_extrapad{0} VAL_rounding_constant{0}
 
+                    ; [ROUND]
                     ; left x offset
-                    set VAL_mcp_x_offset_folder                                     \
-                        folderstate>0                                               \
-                            * SCALE * 0.03 par_mcp_gen_folder_pad_folder_parent     \
+                    set VAL_mcp_x_offset_folder                                                                                                 \
+                        folderstate>0                                                                                                           \
+                            + VAL_rounding_constant{0} - * SCALE * 0.03 par_mcp_gen_folder_pad_folder_parent    VAL_rounding_constant{0}        \
                             0
 
                     set VAL_mcp_x_offset                                        \
@@ -1985,27 +2146,29 @@ set THEME_color_red                         [234 154 154]
                             + VAL_mcp_padding{0} VAL_mcp_x_offset_folder{0}     \
                             VAL_mcp_padding{0}
 
+                    ; [ROUND]
                     ; width right extension (folder)
-                    set VAL_mcp_x_extension_folder                              \
-                        folderstate<0                                           \
-                            * SCALE * 0.03 par_mcp_gen_folder_pad_folder_last   \
+                    set VAL_mcp_x_extension_folder                                                                                              \
+                        folderstate<0                                                                                                           \
+                            + VAL_rounding_constant{0} - * SCALE * 0.03 par_mcp_gen_folder_pad_folder_last      VAL_rounding_constant{0}        \
                             0
                     
-                    ; width rigth extension
-                    set VAL_mcp_x_extension                                     \
-                        folderstate<0                                           \
-                            + VAL_mcp_padding{0} VAL_mcp_x_extension_folder{0}  \
+                    ; width right extension
+                    set VAL_mcp_x_extension                                         \
+                        folderstate<0                                               \
+                            + VAL_mcp_padding{0} VAL_mcp_x_extension_folder{0}      \
                             VAL_mcp_padding{0}
-
+                    
+                    ; [ROUND]
                     ; inserts sidebar width
-                    set VAL_mcp_precalc_w_sidebar                                                                                                                   \
-                        !VAL_mcp_use_sidebar{0}                                                                                                                     \
-                            0                                                                                                                                       \
-                            par_mcp_##PARAMETER_SECTION##_insert_mode{0}==2                                                                                         \
-                                * SCALE + 20 * 0.3    par_mcp_##PARAMETER_SECTION##_insert_size_embed                                                               \
-                                !mcp_fxembed                                                                                                                        \
-                                    * SCALE + 20    * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size                                                               \
-                                    * SCALE + 20 +  * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size_embed     * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size
+                    set VAL_mcp_precalc_w_sidebar                                                                                                                                                                           \
+                        !VAL_mcp_use_sidebar{0}                                                                                                                                                                             \
+                            0                                                                                                                                                                                               \
+                            par_mcp_##PARAMETER_SECTION##_insert_mode{0}==2                                                                                                                                                 \
+                                + VAL_rounding_constant{0} - * SCALE + 20 * 0.3    par_mcp_##PARAMETER_SECTION##_insert_size_embed  VAL_rounding_constant{0}                                                                \
+                                !mcp_fxembed                                                                                                                                                                                \
+                                    + VAL_rounding_constant{0} - * SCALE + 20    * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size                                                              VAL_rounding_constant{0}    \
+                                    + VAL_rounding_constant{0} - * SCALE + 20 +  * 0.3   par_mcp_##PARAMETER_SECTION##_insert_size_embed     * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size    VAL_rounding_constant{0}
 
                     ; size calculations
                     MAC_DrawMcp_Setup_Size SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -2018,8 +2181,10 @@ set THEME_color_red                         [234 154 154]
                             VAL_Button_Folder{0}        \
                             0
 
-                    set VAL_mcp_y_offset        + VAL_mcp_genFolderOffset{0} * folderdepth      * SCALE * 0.02 par_mcp_gen_folder_indent
-                    set VAL_mcp_y_offset_max    + VAL_mcp_genFolderOffset{0} * maxfolderdepth   * SCALE * 0.02 par_mcp_gen_folder_indent
+                    ; [ROUND]
+                    ; y indentation
+                    set VAL_mcp_y_offset        + VAL_rounding_constant{0} - + VAL_mcp_genFolderOffset{0} * folderdepth      * SCALE * 0.02 par_mcp_gen_folder_indent       VAL_rounding_constant{0}
+                    set VAL_mcp_y_offset_max    + VAL_rounding_constant{0} - + VAL_mcp_genFolderOffset{0} * maxfolderdepth   * SCALE * 0.02 par_mcp_gen_folder_indent       VAL_rounding_constant{0}
 
                     ; indent background
                     set CUR_y - VAL_mcp_h{0} VAL_mcp_y_offset{0}
@@ -2054,7 +2219,7 @@ set THEME_color_red                         [234 154 154]
                             0
 
                     ; width extra padding
-                    set VAL_mcp_padding + * 2 VAL_unit{0} * SCALE * 0.03 par_mcp_master_settings_extrapad
+                    set VAL_mcp_padding + VAL_rounding_constant{0} - + * 2 VAL_unit{0} * SCALE * 0.03 par_mcp_master_settings_extrapad      VAL_rounding_constant{0}
 
                     ; left x offset
                     set VAL_mcp_x_offset VAL_mcp_padding{0}
@@ -2063,11 +2228,12 @@ set THEME_color_red                         [234 154 154]
                     set VAL_mcp_x_extension_folder 0
                     set VAL_mcp_x_extension VAL_mcp_padding{0}
 
+                    ; [ROUND]
                     ; inserts full sidebar width
-                    set VAL_mcp_precalc_w_sidebar                                                                           \
-                        !VAL_mcp_use_sidebar{0}                                                                             \
-                            0                                                                                               \
-                            + VAL_mcp_spacing_section_x{0} * SCALE + 30 * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size
+                    set VAL_mcp_precalc_w_sidebar                                                                                                                                   \
+                        !VAL_mcp_use_sidebar{0}                                                                                                                                     \
+                            0                                                                                                                                                       \
+                            + VAL_rounding_constant{0} - + VAL_mcp_spacing_section_x{0} * SCALE + 30 * 0.3 par_mcp_##PARAMETER_SECTION##_insert_size    VAL_rounding_constant{0}
 
                     ; size calculations
                     MAC_DrawMcp_Setup_Size SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -2149,10 +2315,11 @@ set THEME_color_red                         [234 154 154]
 
             macro MAC_DrawMcp_Setup_Meter SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                ; [ROUND]
                 ; width
-                set VAL_mcp_meter_bottom_w_precalc + VAL_Button{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_meter_size
+                set VAL_mcp_meter_bottom_w_precalc + VAL_rounding_constant{0} - + VAL_Button{0} * SCALE * 0.1 par_mcp_##PARAMETER_SECTION##_meter_size VAL_rounding_constant{0}
 
-                ; width expansion
+                ; width expansion channel count
                 set VAL_channels                                                    \
                     /                                                               \
                         - tracknch * - par_mcp_track_meter_expand_threshold 1 2     \
@@ -2168,12 +2335,13 @@ set THEME_color_red                         [234 154 154]
                         VAL_channels{0}>1                   \
                             1
 
+                ; [ROUND]
                 ; additional width
-                set CUR_w_add                                                               \
-                    trackidx>0                                                              \
-                        !par_mcp_track_meter_expand_mode                                    \
-                            * VAL_channels{0} * SCALE * 0.02 par_mcp_track_meter_expand     \
-                            * VAL_channels{0} * SCALE * 0.2 par_mcp_track_meter_expand      \
+                set CUR_w_add                                                                                                                       \
+                    trackidx>0                                                                                                                      \
+                        !par_mcp_track_meter_expand_mode                                                                                            \
+                            + VAL_rounding_constant{0} - * VAL_channels{0} * SCALE * 0.02 par_mcp_track_meter_expand   VAL_rounding_constant{0}     \
+                            + VAL_rounding_constant{0} - * VAL_channels{0} * SCALE * 0.2 par_mcp_track_meter_expand    VAL_rounding_constant{0}     \
                         0
 
                 ; update mcp widith pre-calculation
@@ -2235,10 +2403,11 @@ set THEME_color_red                         [234 154 154]
 
             macro MAC_DrawMcp_Label_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                ; [ROUND]
                 ; selection marker height
-                set CUR_h_selection                                             \
-                    ?par_mcp_gen_highlight_selection                            \
-                        * SCALE + 3 * 0.02 par_mcp_gen_highlight_selection      \
+                set CUR_h_selection                                                                                                     \
+                    ?par_mcp_gen_highlight_selection                                                                                    \
+                        + VAL_rounding_constant{0} - * SCALE + 3 * 0.02 par_mcp_gen_highlight_selection     VAL_rounding_constant{0}    \
                         0
 
                 ; initial y position
@@ -2252,27 +2421,29 @@ set THEME_color_red                         [234 154 154]
 
                 macro MAC_DrawMcp_Label_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; [ROUND]
                     ; color marker height
-                    set CUR_h_color                                             \
-                        ?par_mcp_gen_highlight_color                            \
-                            * SCALE + 3 * 0.02  par_mcp_gen_highlight_color     \
+                    set CUR_h_color                                                                                                         \
+                        ?par_mcp_gen_highlight_color                                                                                        \
+                            + VAL_rounding_constant{0} - * SCALE + 3 * 0.02  par_mcp_gen_highlight_color    VAL_rounding_constant{0}        \
                             0
 
                     ; [SHARED] Open
                     MAC_DrawMcp_Label_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; [ROUND]
                     ; label height
                     set VAL_remaining_h - h VAL_mcp_y_offset_max{0}
 
-                    set CUR_h_min                                                   \
-                        !par_mcp_##PARAMETER_SECTION##_settings_label_vertical      \
-                            * SCALE 18                                              \
+                    set CUR_h_min                                                                           \
+                        !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                              \
+                            + VAL_rounding_constant{0} - * SCALE 18         VAL_rounding_constant{0}        \
                             * 4 VAL_MCP_Label{0}
 
-                    set CUR_h                                                                                   \
-                        !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                  \
-                            + CUR_h_min{0} * SCALE * 0.05   par_mcp_##PARAMETER_SECTION##_settings_label_size   \
-                            + CUR_h_min{0} * SCALE * 0.25  par_mcp_##PARAMETER_SECTION##_settings_label_size
+                    set CUR_h                                                                                                                                           \
+                        !par_mcp_##PARAMETER_SECTION##_settings_label_vertical                                                                                          \
+                            + VAL_rounding_constant{0} - + CUR_h_min{0} * SCALE * 0.05   par_mcp_##PARAMETER_SECTION##_settings_label_size  VAL_rounding_constant{0}    \
+                            + VAL_rounding_constant{0} - + CUR_h_min{0} * SCALE * 0.25  par_mcp_##PARAMETER_SECTION##_settings_label_size   VAL_rounding_constant{0}
 
                     ; label background
                     set CUR_y - CUR_y{0} CUR_h{0}
@@ -2381,9 +2552,10 @@ set THEME_color_red                         [234 154 154]
                     ; [SHARED] Open
                     MAC_DrawMcp_Label_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; [ROUND]
                     ; label height
                     set CUR_h_min * SCALE 18
-                    set CUR_h + CUR_h_min{0} * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_settings_label_size
+                    set CUR_h + VAL_rounding_constant{0} - + CUR_h_min{0} * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_settings_label_size  VAL_rounding_constant{0}
 
                     set CUR_h                       \
                         CUR_h{0}<CUR_h_min{0}       \
@@ -2476,10 +2648,10 @@ set THEME_color_red                         [234 154 154]
                     VAL_mcp_precalc_w_sidebar{0}
 
             ; x position
-            set CUR_x                                                           \
-                !VAL_mcp_use_sidebar{0}                                         \
-                    VAL_mcp_x_insert{0}                                         \
-                    + VAL_mcp_x_offset{0} + VAL_mcp_w{0} VAL_mcp_padding{0}
+            set CUR_x                                                                               \
+                !VAL_mcp_use_sidebar{0}                                                             \
+                    VAL_mcp_x_insert{0}                                                             \
+                    - VAL_mcp_w_full{0} + CUR_w{0} + VAL_mcp_x_extension_folder{0} VAL_Border{0}
 
             ; sidebar padding y offset
             set CUR_y_inserts                           \
@@ -2491,7 +2663,7 @@ set THEME_color_red                         [234 154 154]
             set CUR_w                                                   \
                 ?VAL_mcp_use_sidebar{0}                                 \
                     VAL_mcp_insert_padding{0}>=1                        \
-                        - CUR_w{0} + VAL_Pad{0} VAL_mcp_trim_right{0}
+                        - CUR_w{0} VAL_Pad{0}
             
             ; sidebar padding height offset
             set VAL_remaining_h                                             \
@@ -2507,6 +2679,31 @@ set THEME_color_red                         [234 154 154]
                 VAL_mcp_insert_overshoot{0}<CUR_h{0}    \
                     VAL_mcp_insert_overshoot{0}
 
+            ; calculate inner frame offset values
+            set CUR_x_inserts_inner                         \
+                + CUR_x{0}      * 2         VAL_Unit{0}
+
+            set CUR_y_inserts_inner                         \
+                CUR_y_inserts{0}      
+            
+            set CUR_w_inserts_inner                         \
+                - CUR_w{0}      * 2         VAL_Unit{0}
+            
+            set CUR_h_inserts_inner                         \
+                !VAL_mcp_use_sidebar{0}                     \
+                    - CUR_h{0}              VAL_Unit{0}     \
+                    - VAL_remaining_h{0}    VAL_Unit{0}
+
+            ; ------------------------------------------------------------------------------------------------------------
+            ;       - On MCP Inserts -
+            ;
+            ;   The margins of slots inside the MCP’s inserts section are hard to control,
+            ;   mainly because you can mix FX, sends, parameters, and also use embedded FX.
+            ;
+            ;   As a workaround, the actual inserts area is drawn with a slight offset and without a border.
+            ;   The visible background and border come from an additional custom element.
+            ; ------------------------------------------------------------------------------------------------------------
+
 
             ; [DRAW] inserts border
             set WALTER_ELEMENT##.custom.inserts_bg                                  \
@@ -2516,11 +2713,9 @@ set THEME_color_red                         [234 154 154]
                         [CUR_x{0} CUR_y_inserts{0} CUR_w{0} CUR_h{0} 0 0 1 0]
 
             ; [DRAW] inserts
-            set WALTER_ELEMENT##.extmixer.position                                                                                                                  \
-                ?VAL_mcp_use_sidebar{0}                                                                                                                             \
-                    + [CUR_x{0} CUR_y_inserts CUR_w{0} VAL_remaining_h{0} 0 0 1 0] [VAL_Border{0} VAL_Border{0} VAL_Border_Neg_2{0} VAL_Border_Neg_2{0} 0 0 0 0]    \
-                    ?VAL_mcp_show_inserts{0}                                                                                                                        \
-                        + [CUR_x{0} CUR_y_inserts{0} CUR_w{0} CUR_h{0} 0 0 1 0] [VAL_Border{0} VAL_Border{0} VAL_Border_Neg_2{0} VAL_Border_Neg_2{0} 0 0 0 0]
+            set WALTER_ELEMENT##.extmixer.Position                                                                          \
+                ?VAL_mcp_show_inserts{0}                                                                                    \
+                    [CUR_x_inserts_inner{0} CUR_y_inserts_inner CUR_w_inserts_inner{0} CUR_h_inserts_inner{0} 0 0 1 0]
 
             set WALTER_ELEMENT##.extmixer.mode [1]
             front WALTER_ELEMENT##.custom.inserts_bg
@@ -2544,6 +2739,12 @@ set THEME_color_red                         [234 154 154]
 
     ;   ## Draw : MCP : RecInput
     ; --------------------------------------------------------------------------------
+
+        ; The MCP Record Input selector gets its own drawing process instead of
+        ; the conventional button-drawing macro.
+        ;
+        ; This is due to its flexible size and varying orientation.
+
 
         macro MAC_DrawMcp_Recinput SCALE WALTER_ELEMENT PARAMETER_SECTION
 
@@ -2708,10 +2909,11 @@ set THEME_color_red                         [234 154 154]
                         1                                               \
                         0
 
+                ; [ROUND]
                 ; center offset x positions
-                set VAL_mcp_button_x_center_offset                                                                      \
-                    par_mcp_##PARAMETER_SECTION##_element_width==1                                                      \
-                        + VAL_mcp_x_button_start{0} * 0.5 - VAL_mcp_precalc_w_buttons{0} + VAL_Button{0} VAL_Pad{0}     \
+                set VAL_mcp_button_x_center_offset                                                                                                                              \
+                    par_mcp_##PARAMETER_SECTION##_element_width==1                                                                                                              \
+                        + VAL_rounding_constant{0} - + VAL_mcp_x_button_start{0} * 0.5 - VAL_mcp_precalc_w_buttons{0} + VAL_Button{0} VAL_Pad{0}    VAL_rounding_constant{0}    \
                         VAL_mcp_x_button_start{0}
                 
                 
@@ -3034,6 +3236,11 @@ set THEME_color_red                         [234 154 154]
                 ;   ##### Draw : MCP : Buttons : Center Offset
                 ; --------------------------------------------------------------------------------
 
+                    ; Depending on which buttons are visible and which layout is active,
+                    ; each button line gets a pre-calculated horizontal offset to center the buttons.
+                    ;
+                    ; This macro covers the 2-buttons-per-line layout.
+
                     macro MAC_DrawMcp_Buttons_CenterOffset SCALE WALTER_ELEMENT PARAMETER_SECTION IS_WIDE INDEX_1 INDEX_2 
 
                         set CUR_x                                                       \
@@ -3051,6 +3258,11 @@ set THEME_color_red                         [234 154 154]
 
                 ;   ##### Draw : MCP : Buttons : Center Offset : Wide
                 ; --------------------------------------------------------------------------------
+
+                    ; Depending on which buttons are visible and which layout is active,
+                    ; each button line gets a pre-calculated horizontal offset to center the buttons.
+                    ;
+                    ; This macro covers the 4-buttons-per-line layout.
 
                     macro MAC_DrawMcp_Buttons_CenterOffset_Wide SCALE WALTER_ELEMENT PARAMETER_SECTION IS_WIDE INDEX_1 INDEX_2 INDEX_3 INDEX_4 WEIGHT_1 WEIGHT_2 WEIGHT_3 WEIGHT_4
 
@@ -3084,15 +3296,16 @@ set THEME_color_red                         [234 154 154]
                                     .                                               \
                                     + VAL_mcp_button_offset_count{0} WEIGHT_4{0}
                         
+                        ; [ROUND]
                         ; apply offset
-                        set CUR_x                                                                                   \
-                            ?IS_WIDE{0}                                                                             \
-                                VAL_mcp_button_offset_count{0}<=0                                                   \
-                                    VAL_mcp_x_button_start{0}                                                       \
-                                VAL_mcp_button_offset_count{0}>0                                                    \
-                                    +                                                                               \
-                                        VAL_mcp_x_button_start{0}                                                   \
-                                        * 0.5 * VAL_mcp_button_offset_count + VAL_Button{0} VAL_mcp_spacing_x{0}
+                        set CUR_x                                                                                                                                           \
+                            ?IS_WIDE{0}                                                                                                                                     \
+                                VAL_mcp_button_offset_count{0}<=0                                                                                                           \
+                                    VAL_mcp_x_button_start{0}                                                                                                               \
+                                VAL_mcp_button_offset_count{0}>0                                                                                                            \
+                                    +                                                                                                                                       \
+                                        VAL_mcp_x_button_start{0}                                                                                                           \
+                                        + VAL_rounding_constant{0} - * 0.5 * VAL_mcp_button_offset_count + VAL_Button{0} VAL_mcp_spacing_x{0} VAL_rounding_constant{0}
 
                         
                     endmacro
@@ -3221,14 +3434,15 @@ set THEME_color_red                         [234 154 154]
             ; x position
             set CUR_x VAL_mcp_x_meter{0}
 
+            ; [ROUND]
             ; height
             set VAL_mcp_meter_top_remaining_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y{0} - VAL_mcp_h{0} VAL_mcp_y_post_label{0}
 
-            set CUR_h                                                                                                                                                               \
-                ?VAL_mcp_show_meter_top{0}                                                                                                                                          \
-                    ?par_mcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                                 \
-                        + VAL_mcp_meter_min_h{0} * - VAL_mcp_meter_top_remaining_h{0} VAL_mcp_meter_min_h{0}    * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_meter_size    \
-                        + VAL_mcp_meter_min_h{0} * SCALE                                                        * 0.3                   par_mcp_##PARAMETER_SECTION##_meter_size    \
+            set CUR_h                                                                                                                                                                                                                       \
+                ?VAL_mcp_show_meter_top{0}                                                                                                                                                                                                  \
+                    ?par_mcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                                                                                         \
+                        + VAL_rounding_constant{0} - + VAL_mcp_meter_min_h{0} * - VAL_mcp_meter_top_remaining_h{0} VAL_mcp_meter_min_h{0}    * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_meter_size    VAL_rounding_constant{0}   \
+                        + VAL_rounding_constant{0} - + VAL_mcp_meter_min_h{0} * SCALE                                                        * 0.3                   par_mcp_##PARAMETER_SECTION##_meter_size    VAL_rounding_constant{0}   \
                     0
 
             ; padding correction
@@ -3468,12 +3682,13 @@ set THEME_color_red                         [234 154 154]
                     CUR_h_section_min{0}<CUR_h_section_min_horz{0}  \
                         CUR_h_section_min_horz{0}
 
+            ; [ROUND]
             ; section actual height
-            set CUR_h_section                                                                                                                                                       \
-                ?VAL_mcp_show_faders_top{0}                                                                                                                                         \
-                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                           \
-                        + CUR_h_section_min{0} * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * VAL_Fader_Scale{0}  par_mcp_##PARAMETER_SECTION##_fader_pan_height        \
-                        + CUR_h_section_min{0} * SCALE                                                  * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height                   \
+            set CUR_h_section                                                                                                                                                                                                               \
+                ?VAL_mcp_show_faders_top{0}                                                                                                                                                                                                 \
+                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                                                                   \
+                        + VAL_rounding_constant{0} - + CUR_h_section_min{0} * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * VAL_Fader_Scale{0}  par_mcp_##PARAMETER_SECTION##_fader_pan_height       VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                                                  * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height                  VAL_rounding_constant{0}    \
                     0
 
             ; hiding logic
@@ -3496,25 +3711,27 @@ set THEME_color_red                         [234 154 154]
                     + CUR_y{0} + CUR_h_section{0} VAL_mcp_spacing_section_y{0}  \
                     0
 
+            ; [ROUND]
             ; initial x position
-            set CUR_x                                                                                                                               \
-                ?VAL_mcp_show_faders_top{0}                                                                                                         \
-                    VAL_mcp_faders_panmode{0}==2                                                                                                    \
-                        +       VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0}          CUR_w{0}                                  \
-                        ?VAL_mcp_faders_show_width{0}                                                                                               \
-                            +   VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0} + * 2    CUR_w{0}    VAL_mcp_spacing_fader_x{0}    \
-                            +   VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0}          CUR_w{0}
+            set CUR_x                                                                                                                                                                                       \
+                ?VAL_mcp_show_faders_top{0}                                                                                                                                                                 \
+                    VAL_mcp_faders_panmode{0}==2                                                                                                                                                            \
+                        + VAL_rounding_constant{0} - + VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0}          CUR_w{0}  VAL_rounding_constant{0}                                         \
+                        ?VAL_mcp_faders_show_width{0}                                                                                                                                                       \
+                            + VAL_rounding_constant{0} - +   VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0} + * 2    CUR_w{0}    VAL_mcp_spacing_fader_x{0}   VAL_rounding_constant{0}    \
+                            + VAL_rounding_constant{0} - +   VAL_mcp_x_offset{0} * 0.5 - - VAL_mcp_w{0} VAL_mcp_trim_right{0}          CUR_w{0}                                 VAL_rounding_constant{0}
 
+            ; [ROUND]
             ; y position center offset
-            set CUR_y_offset                                                                            \
-                ?VAL_mcp_show_faders_top{0}                                                             \
-                    VAL_mcp_faders_panmode{0}==1                                                        \
-                        0                                                                               \
-                    VAL_mcp_faders_panmode{0}==2                                                        \
-                        ?VAL_mcp_faders_show_width{0}                                                   \
-                            * 0.5 - CUR_h_section{0} + VAL_mcp_spacing_fader_y{0} * 2 CUR_h{2}          \
-                            * 0.5 - CUR_h_section{0} CUR_h{0}                                           \
-                        * 0.5 - CUR_h_section{0} CUR_h{0}                                               \
+            set CUR_y_offset                                                                                                                                \
+                ?VAL_mcp_show_faders_top{0}                                                                                                                 \
+                    VAL_mcp_faders_panmode{0}==1                                                                                                            \
+                        0                                                                                                                                   \
+                    VAL_mcp_faders_panmode{0}==2                                                                                                            \
+                        ?VAL_mcp_faders_show_width{0}                                                                                                       \
+                            + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} + VAL_mcp_spacing_fader_y{0} * 2 CUR_h{2}     VAL_rounding_constant{0}    \
+                            + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} CUR_h{0}                                      VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} CUR_h{0}              VAL_rounding_constant{0}                                \
                     0
 
             ; initial y offset
@@ -3642,8 +3859,9 @@ set THEME_color_red                         [234 154 154]
             ; width
             set CUR_w VAL_mcp_meter_bottom_w_precalc{0}
 
+            ; [ROUND]
             ; x position
-            set CUR_x + VAL_mcp_x_offset{0} * 0.5 - VAL_mcp_w{0} VAL_mcp_precalc_w_bottom{0}
+            set CUR_x + VAL_rounding_constant{0} - + VAL_mcp_x_offset{0} * 0.5 - VAL_mcp_w{0} VAL_mcp_precalc_w_bottom{0} VAL_rounding_constant{0}
 
             ; [DRAW] meter
             set CUR_meter + [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h_meter{0}] [VAL_Border{0} VAL_Border{0} VAL_Border_Neg_2{0} VAL_Border_Neg_2{0}]
@@ -3663,12 +3881,13 @@ set THEME_color_red                         [234 154 154]
                         CUR_w{0}                                        \
                         VAL_MCP_Label{0}
 
+            ; [ROUND]
             ; readout x
-            set VAL_mcp_vol_readout_x                                           \
-                ?VAL_mcp_show_vol_readout{0}                                    \
-                    par_mcp_##PARAMETER_SECTION##_meter_vol_readout==1          \
-                        CUR_x{0}                                                \
-                        + CUR_x{0} * 0.5 - CUR_w{0} VAL_mcp_vol_readout_w{0}    \
+            set VAL_mcp_vol_readout_x                                                                                                   \
+                ?VAL_mcp_show_vol_readout{0}                                                                                            \
+                    par_mcp_##PARAMETER_SECTION##_meter_vol_readout==1                                                                  \
+                        CUR_x{0}                                                                                                        \
+                        + VAL_rounding_constant{0} - + CUR_x{0} * 0.5 - CUR_w{0} VAL_mcp_vol_readout_w{0}   VAL_rounding_constant{0}    \
                     0
 
             ; readout y
@@ -3753,28 +3972,31 @@ set THEME_color_red                         [234 154 154]
                         VAL_mcp_fader_min_h_2{0}                        \
                     VAL_mcp_fader_min_h_2{0}
 
-            set CUR_h_section                                                                                                                   \
-                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                           \
-                    + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_fader_pan_height  \
-                    + CUR_h_section_min{0} * SCALE                      * 0.25                  par_mcp_##PARAMETER_SECTION##_fader_pan_height
+            ; [ROUND]
+            set CUR_h_section                                                                                                                                                                               \
+                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                                       \
+                    + VAL_rounding_constant{0} - + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}    \
+                    + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                      * 0.25                  par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}
 
             set CUR_y_post_pan + CUR_y{0} + CUR_h_section{0} * 2 VAL_mcp_spacing_fader_y{0}
 
+            ; [ROUND]
             ; individual fader height
-            set CUR_h                           \
-                VAL_mcp_faders_panmode{0}==0    \
-                    VAL_Knob{0}                 \
-                ?VAL_mcp_faders_show_width{0}   \
-                    * 0.5 CUR_h_section{0}      \
+            set CUR_h                                                                                   \
+                VAL_mcp_faders_panmode{0}==0                                                            \
+                    VAL_Knob{0}                                                                         \
+                ?VAL_mcp_faders_show_width{0}                                                           \
+                    + VAL_rounding_constant{0} - * 0.5 CUR_h_section{0}    VAL_rounding_constant{0}     \
                     CUR_h_section{0}
 
+            ; [ROUND]
             ; pan knob y offset
-            set CUR_y_offset                                        \
-                VAL_mcp_faders_panmode{0}!=0                        \
-                    0                                               \
-                    ?VAL_mcp_faders_show_width{0}                   \
-                        * 0.5 - CUR_h_section{0} * 2    CUR_h{0}    \
-                        * 0.5 - CUR_h_section{0}        CUR_h{0}
+            set CUR_y_offset                                                                                                \
+                VAL_mcp_faders_panmode{0}!=0                                                                                \
+                    0                                                                                                       \
+                    ?VAL_mcp_faders_show_width{0}                                                                           \
+                        + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} * 2    CUR_h{0}   VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0}        CUR_h{0}   VAL_rounding_constant{0}
 
             ; pan hiding logic
             set CUR_y_hide + CUR_y CUR_h_section
@@ -3851,6 +4073,7 @@ set THEME_color_red                         [234 154 154]
 
             ; [DRAW] volume
             set CUR_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y{0} - VAL_mcp_h{0} - VAL_mcp_y_post_label{0} VAL_Pad{0}
+
 
             set VAL_mcp_show_vol                    \
                 CUR_h{0}>VAL_mcp_vol_h_min_show{0}  \
@@ -4304,6 +4527,7 @@ set THEME_color_red                         [234 154 154]
                     ; [SHARED] Open
                     MAC_DrawTcp_Setup_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; [MASTER]
                     ;folder features
                     set VAL_tcp_FolderFeatures                  \
                         !trackidx                               \
@@ -4327,8 +4551,9 @@ set THEME_color_red                         [234 154 154]
                             ?par_tcp_gen_folder_icon_mode                       \
                                 + VAL_tcp_x_offset_folder VAL_Button_Folder{0}
 
-                    set VAL_tcp_x_offset                + VAL_tcp_x_offset_folder{0} * folderdepth  	* SCALE     * 0.02 par_tcp_gen_folder_indent
-                    set VAL_tcp_x_offset_max_precomp    + VAL_tcp_x_offset_folder{0} * maxfolderdepth   * SCALE     * 0.02 par_tcp_gen_folder_indent
+                    ; [ROUND]
+                    set VAL_tcp_x_offset                + VAL_rounding_constant{0} - + VAL_tcp_x_offset_folder{0} * folderdepth  	    * SCALE     * 0.02 par_tcp_gen_folder_indent    VAL_rounding_constant{0}
+                    set VAL_tcp_x_offset_max_precomp    + VAL_rounding_constant{0} - + VAL_tcp_x_offset_folder{0} * maxfolderdepth      * SCALE     * 0.02 par_tcp_gen_folder_indent    VAL_rounding_constant{0}
 
                     ; compact width
                     set VAL_compact_w + VAL_tcp_x_offset_max_precomp{0} * SCALE 120
@@ -4377,6 +4602,23 @@ set THEME_color_red                         [234 154 154]
                     ; color highlight
                     MAC_DrawTcp_Setup_Highlight_Color SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    ; ----------------------------------------------------------------------------------------
+                    ;       - On TCP Hiding Positions -
+                    ;
+                    ;   The TCP drawing flow goes from right to left,
+                    ;   so most elements are anchored on the right side — except for the label.
+                    ;
+                    ;   Since the label and the buttons interact but use different coordinate anchors,
+                    ;   some algorithms are used to calculate a position that serves as a reference
+                    ;   for hiding and stretching buttons.
+                    ;
+                    ;   It’s a bit clunky and should probably be replaced with something simpler in future releases.
+                    ;
+                    ;   The original reason for this approach was the lack of proper number rounding.
+                    ;   With the current pseudo-rounding workaround, this might be solvable,
+                    ;   but it does require major code replacements.
+                    ; ----------------------------------------------------------------------------------------
+
 
                     ; hiding position - line 1 containing label
                     set VAL_tcp_hide_x_line_1                               \
@@ -4421,7 +4663,7 @@ set THEME_color_red                         [234 154 154]
                     set VAL_tcp_wrap_buttons par_tcp_master_element_adj_wrap_buttons
 
                     ; custom elements
-                    custom WALTER_ELEMENT##.custom.readout_bg       "" "" "" "meter_custom_readout_bg_horz_flip"
+                    custom WALTER_ELEMENT##.custom.readout_bg       "" "" "" "meter_custom_readout_bg_horz"
 
                     ; label size
                     set VAL_tcp_label_size 0
@@ -4532,10 +4774,11 @@ set THEME_color_red                         [234 154 154]
 
                         macro MAC_DrawTcp_Setup_Highlight_Selection SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                            ; [ROUND]
                             ; width
-                            set CUR_w                                                   \
-                                ?par_tcp_gen_highlight_selection                        \
-                                    * SCALE + 3 * 0.02 par_tcp_gen_highlight_selection  \
+                            set CUR_w                                                                                                           \
+                                ?par_tcp_gen_highlight_selection                                                                                \
+                                    + VAL_rounding_constant{0} - * SCALE + 3 * 0.02 par_tcp_gen_highlight_selection VAL_rounding_constant{0}    \
                                     0
 
                             set CUR_x - CUR_x{0} CUR_w{0}
@@ -4550,11 +4793,13 @@ set THEME_color_red                         [234 154 154]
 
                         macro MAC_DrawTcp_Setup_Highlight_Color SCALE WALTER_ELEMENT PARAMETER_SECTION
 
-                            set CUR_w                                               \
-                                ?par_tcp_gen_highlight_color                        \
-                                    * SCALE + 3 * 0.02 par_tcp_gen_highlight_color  \
+                            ; [ROUND]
+                            ; width
+                            set CUR_w                                                                                                       \
+                                ?par_tcp_gen_highlight_color                                                                                \
+                                    + VAL_rounding_constant{0} - * SCALE + 3 * 0.02 par_tcp_gen_highlight_color VAL_rounding_constant{0}    \
                                     0
-
+                                                        
                             set CUR_x                                           \
                                 ?par_tcp_gen_highlight_selection                \
                                     - CUR_x{0} -    CUR_w{0} VAL_Border{0}      \
@@ -4772,19 +5017,19 @@ set THEME_color_red                         [234 154 154]
                     ; width
                     set VAL_remaining_w - VAL_tcp_available_space{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
 
-                    set CUR_w                                                                                                                                                                   \
-                        ?VAL_tcp_show_##PAR_NAME##{0}                                                                                                                                           \
-                            ?VAL_tcp_##PAR_NAME##_knob{0}                                                                                                                                       \
-                                VAL_Knob_s{0}                                                                                                                                                   \
-                            par_tcp_##PARAMETER_SECTION##_fader_placement{0}==3                                                                                                                 \
-                                VAL_Fader{2}                                                                                                                                                    \
-                            par_tcp_##PARAMETER_SECTION##_fader_placement{0}==2                                                                                                                 \
-                                !par_tcp_##PARAMETER_SECTION##_fader_vol_size_scale                                                                                                             \
-                                    + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                               * 0.2                   par_tcp_##PARAMETER_SECTION##_fader_vol_size            \
-                                    + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_fader_vol_size            \
-                            !par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size_scale                                                                                                        \
-                                + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                               * 0.2                   par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size       \
-                                + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size
+                    set CUR_w                                                                                                                                                                                                                           \
+                        ?VAL_tcp_show_##PAR_NAME##{0}                                                                                                                                                                                                   \
+                            ?VAL_tcp_##PAR_NAME##_knob{0}                                                                                                                                                                                               \
+                                VAL_Knob_s{0}                                                                                                                                                                                                           \
+                            par_tcp_##PARAMETER_SECTION##_fader_placement{0}==3                                                                                                                                                                         \
+                                VAL_Fader{2}                                                                                                                                                                                                            \
+                            par_tcp_##PARAMETER_SECTION##_fader_placement{0}==2                                                                                                                                                                         \
+                                !par_tcp_##PARAMETER_SECTION##_fader_vol_size_scale                                                                                                                                                                     \
+                                    + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                               * 0.2                   par_tcp_##PARAMETER_SECTION##_fader_vol_size         VAL_rounding_constant{0}      \
+                                    + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_fader_vol_size         VAL_rounding_constant{0}      \
+                            !par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size_scale                                                                                                                                                                \
+                                + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0}    +   VAL_Button{0}                               * 0.2                   par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size     VAL_rounding_constant{0}     \
+                                + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0}    * - VAL_remaining_w{0} VAL_tcp_fader_min_w{0}   * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_fader_##PAR_NAME##_size     VAL_rounding_constant{0}
 
                     ; height
                     set VAL_tcp_fader_h                                             \
@@ -4912,19 +5157,16 @@ set THEME_color_red                         [234 154 154]
                             VAL_Border{0}
 
                     ; height (master track differs)
-                    set CUR_h                                               \
-                        !trackidx                                           \
-                            - WALTER_ELEMENT##.size{1} VAL_Border{0}        \
-                            - WALTER_ELEMENT##.size{1} VAL_Border_2{0}
+                    set CUR_h   - WALTER_ELEMENT##.size{1} VAL_Border_2{0}                        
 
                     ; width
                     set VAL_tcp_meter_remaining_w - VAL_tcp_available_space{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
 
-                    set CUR_w                                                                                                                                                           \
-                        ?VAL_tcp_show_meter{0}                                                                                                                                          \
-                            !par_tcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                             \
-                                + VAL_tcp_meter_min_w{0}    * SCALE + 1                                             * 0.3                   par_tcp_##PARAMETER_SECTION##_meter_size    \
-                                + VAL_tcp_meter_min_w{0}    * - VAL_tcp_meter_remaining_w{0} VAL_tcp_meter_min_w{0} * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_meter_size    \
+                    set CUR_w                                                                                                                                                                                                                   \
+                        ?VAL_tcp_show_meter{0}                                                                                                                                                                                                  \
+                            !par_tcp_##PARAMETER_SECTION##_meter_size_scale                                                                                                                                                                     \
+                                + VAL_rounding_constant{0} - + VAL_tcp_meter_min_w{0}    * SCALE + 1                                             * 0.3                   par_tcp_##PARAMETER_SECTION##_meter_size    VAL_rounding_constant{0}   \
+                                + VAL_rounding_constant{0} - + VAL_tcp_meter_min_w{0}    * - VAL_tcp_meter_remaining_w{0} VAL_tcp_meter_min_w{0} * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_meter_size    VAL_rounding_constant{0}   \
                             0
 
                     ; readout visibility
@@ -5071,27 +5313,25 @@ set THEME_color_red                         [234 154 154]
                         1
 
             ; y position
-            set CUR_y                                                                   \
-                ?VAL_tcp_inserts_inline{0}                                              \
-                    - VAL_tcp_y_top{0}      VAL_Border{0}                               \
-                    + VAL_tcp_y_top{0} +    VAL_Button{1} VAL_tcp_spacing_section_y{0}
+            set CUR_y                                                                       \
+                ?VAL_tcp_inserts_inline{0}                                                  \
+                        VAL_tcp_y_top{0}                                                    \
+                    +   VAL_tcp_y_top{0} +    VAL_Button{1} VAL_tcp_spacing_section_y{0}
 
             ; height
             set CUR_h - WALTER_ELEMENT##.size{1} + CUR_y{0} VAL_Border{0}
 
             ; width
             set VAL_remaining_w - VAL_tcp_available_space{0} + VAL_tcp_spacing_section_x{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
-            set CUR_w                                                                                                                                               \
-                !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                    \
-                    + VAL_tcp_inserts_min_w{0} * SCALE + 10                                 * 0.3                   par_tcp_##PARAMETER_SECTION##_insert_size       \
-                    + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_insert_size       \
+            set CUR_w                                                                                                                                                                                                           \
+                !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                                                                                \
+                    + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10                                 * 0.3                   par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
+                    + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
 
             ; x position
             set CUR_x                                                                       \
                 ?VAL_tcp_inserts_inline{0}                                                  \
-                    - VAL_tcp_x_start_button{0} - CUR_w{0} VAL_Border{0}                    \
-                    - VAL_tcp_x_start_button{0} + CUR_w{0} VAL_tcp_spacing_section_x{0}
-
+                    - VAL_tcp_x_start_button{0} - CUR_w{0} VAL_Border{0}
  
             ; overshoot correction
             set VAL_tcp_inserts_w_overshoot - VAL_tcp_meter_overshoot_line{0} CUR_x{0}
@@ -5715,12 +5955,14 @@ set THEME_color_red                         [234 154 154]
     ;   ## Draw : TCP : Embedded FX
     ; --------------------------------------------------------------------------------
 
+        ; This one also covers the inserts section if it is displayed as a separate block.
+
         macro MAC_DrawTcp_EmbedFx SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; calculate insert / embedded fx placement box
             set CUR_y           VAL_tcp_y_start_fxembed{0}
             set CUR_x           + VAL_tcp_x_leftmost{0} VAL_Pad{0}
-            set CUR_w           - w + VAL_tcp_spacing_section_x{0} + + VAL_tcp_x_offset VAL_Pad{0} - WALTER_ELEMENT##.size{0} VAL_tcp_x_end_inserts{0}
+            set CUR_w           - w + VAL_tcp_spacing_section_x{0} + + VAL_tcp_x_offset{0} * 2 VAL_Pad{0} - WALTER_ELEMENT##.size{0} VAL_tcp_x_end_inserts{0}
             set CUR_h           - WALTER_ELEMENT##.size{1} + VAL_tcp_y_start_fxembed{0} VAL_Pad{0}
             set CUR_h_insert    - CUR_h * SCALE 6
             
@@ -5751,12 +5993,12 @@ set THEME_color_red                         [234 154 154]
                     0   
             
             ; insert size
-            set CUR_w_insert                                                                                                                        \
-                !VAL_tcp_show_inserts_in_embed_area{0}                                                                                              \
-                    0                                                                                                                               \
-                    !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                \
-                        + VAL_tcp_inserts_min_w{0} * SCALE + 10 * 0.3 par_tcp_##PARAMETER_SECTION##_insert_size                                     \
-                        + VAL_tcp_inserts_min_w{0} * - CUR_w{0} VAL_insert_slot{4} * VAL_Fader_Scale{0} par_tcp_##PARAMETER_SECTION##_insert_size
+            set CUR_w_insert                                                                                                                                                                                    \
+                !VAL_tcp_show_inserts_in_embed_area{0}                                                                                                                                                          \
+                    0                                                                                                                                                                                           \
+                    !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                                                            \
+                        + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10 * 0.3 par_tcp_##PARAMETER_SECTION##_insert_size                                        VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - CUR_w{0} VAL_insert_slot{4} * VAL_Fader_Scale{0} par_tcp_##PARAMETER_SECTION##_insert_size      VAL_rounding_constant{0}
 
             ; limit insert size
             set CUR_w_insert                \
@@ -6008,7 +6250,7 @@ set THEME_color_red                         [234 154 154]
             ; button wrapping
             set VAL_tcp_wrap_buttons par_tcp_envcp_element_adj_wrap_buttons
 
-            ; height detection -> loads [height / y-top-posiiiion]
+            ; height detection -> loads [height / y-top-position]
             set VAL_Envcp_h_level   \
                 h>=VAL_Envcp_h{0}   \
                     1               \
@@ -6022,10 +6264,10 @@ set THEME_color_red                         [234 154 154]
                     0
 
             ; envcp indentation
-            set VAL_envcp_indent                                                                                \
-                !par_tcp_envcp_settings_symbol                                                                  \
-                    * SCALE         * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent                        \
-                    + * SCALE       * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent VAL_Envcp_Symbol{0}
+            set VAL_envcp_indent                                                                                                                                        \
+                !par_tcp_envcp_settings_symbol                                                                                                                          \
+                    + VAL_rounding_constant{0} - * SCALE         * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent                       VAL_rounding_constant{0}    \
+                    + VAL_rounding_constant{0} - + * SCALE       * 0.03 par_tcp_##PARAMETER_SECTION##_settings_indent VAL_Envcp_Symbol{0}   VAL_rounding_constant{0}
 
             ; x offset
             set VAL_envcp_x_offset                              \
@@ -6237,16 +6479,16 @@ set THEME_color_red                         [234 154 154]
                             0
 
             ; width
-            set CUR_w                                                                                                                                                               \
-                ?par_tcp_##PARAMETER_SECTION##_value_vertical                                                                                                                       \
-                    VAL_Knob_s{0}                                                                                                                                                   \
-                ?VAL_envcp_lanedisplay{0}                                                                                                                                           \
-                    - tcp_iconsize * 3 VAL_Pad{0}                                                                                                                                   \
-                ?VAL_envcp_fader_knob{0}                                                                                                                                            \
-                    VAL_Knob_s{0}                                                                                                                                                   \
-                !par_tcp_##PARAMETER_SECTION##_value_scale                                                                                                                          \
-                    + VAL_tcp_fader_min_w{0} + VAL_Knob{0}                                              * 0.2 * SCALE                 par_tcp_##PARAMETER_SECTION##_value_size      \
-                    + VAL_tcp_fader_min_w{0} * - VAL_envcp_available_space{0} VAL_tcp_fader_min_w{0}    * VAL_Fader_Scale{0}        par_tcp_##PARAMETER_SECTION##_value_size
+            set CUR_w                                                                                                                                                                                                                   \
+                ?par_tcp_##PARAMETER_SECTION##_value_vertical                                                                                                                                                                           \
+                    VAL_Knob_s{0}                                                                                                                                                                                                       \
+                ?VAL_envcp_lanedisplay{0}                                                                                                                                                                                               \
+                    - tcp_iconsize * 3 VAL_Pad{0}                                                                                                                                                                                       \
+                ?VAL_envcp_fader_knob{0}                                                                                                                                                                                                \
+                    VAL_Knob_s{0}                                                                                                                                                                                                       \
+                !par_tcp_##PARAMETER_SECTION##_value_scale                                                                                                                                                                              \
+                    + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0} + VAL_Knob{0}                                              * 0.2 * SCALE              par_tcp_##PARAMETER_SECTION##_value_size    VAL_rounding_constant{0}    \
+                    + VAL_rounding_constant{0} - + VAL_tcp_fader_min_w{0} * - VAL_envcp_available_space{0} VAL_tcp_fader_min_w{0}    * VAL_Fader_Scale{0}       par_tcp_##PARAMETER_SECTION##_value_size    VAL_rounding_constant{0}
 
             ; target x position
             set CUR_x_target                                                                    \
@@ -6541,13 +6783,26 @@ set THEME_color_red                         [234 154 154]
 ;   # GLOBAL
 ; ====================================================================================================================================
 
+    ; Here's where the main process of the layouting starts.
+    ; Everything above this code is just macros triggered from here on.
+
     ;   ## Draw
     ; --------------------------------------------------------------------------------
 
+        ; This is the main drawing process, triggerd once per scaling factor
+
         macro MAC_Draw     SCALE
+            
+            ; Preparation of core variables
             MAC_Setup           SCALE
+            
+            ; Transport Section
             MAC_DrawTransport   SCALE
+            
+            ; TCP [Master / Track / Envelope Lane]
             MAC_DrawTcp         SCALE
+            
+            ; MCP [Master / Track]
             MAC_DrawMcp         SCALE
         endmacro
 
@@ -6577,7 +6832,7 @@ item_volknobfg 00000000 00000000 00000000
         tinttcp 1980
         peaksedges 0
 
-        ; warnings
+        ; warnings (set to be highly sensitive)
         warnings pedantic
 
         ; record label
@@ -6639,37 +6894,37 @@ item_volknobfg 00000000 00000000 00000000
 
         MAC_Draw            1.0
 
-        ; Layout : 100
+        ; Layout 100
         Layout '100' ''
             MAC_Draw            1.0
         endLayout
 
-        ; Layout : 125
+        ; Layout 125
         Layout '125' '125'
             MAC_Draw           1.25
         endLayout
 
-        ; Layout : 150
+        ; Layout 150
         Layout '150' '150'
             MAC_Draw           1.5
         endLayout
 
-        ; Layout : 175
+        ; Layout 175
         Layout '175' '175'
             MAC_Draw           1.75
         endLayout
 
-        ; Layout : 200
+        ; Layout 200
         Layout '200' '200'
             MAC_Draw           2.0
         endLayout
 
-        ; Layout : 225
+        ; Layout 225
         Layout '225' '225'
             MAC_Draw           2.25
         endLayout
 
-        ; Layout : 250
+        ; Layout 250
         Layout '250' '250'
             MAC_Draw           2.5
         endLayout
