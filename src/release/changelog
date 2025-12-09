@@ -1,5 +1,16 @@
-Github: Updated documentation
-Github: added PDF render of the user guide
-Theme Adjuster: added theme version requirement check
-Theme Adjuster: fixed false positives when trying to detect unpacked and modded themes
-Theme Adjuster: fixed bug that made config file saving impossible
+WALTER: included pseudo-rounding into rtconfig.txt to maximize pixel precision
+WALTER: added readme and additional descriptive comments to rtconfig.txt
+Transport: Updated Theme Adjuster icon
+TCP: Added additional padding to inserts when displayed as separate block
+TCP: fixed volume readout label background orientation (was flipped)
+TCP: fixed master track meter height
+MCP: corrected inserts section size when displayed as sidebar
+MCP: allow smaller vertical fader height in strip layout
+MCP: minor fx slot margins correction
+Theme Adjuster: updated hint messages
+Theme Adjuster: updated bank button icon
+Theme Adjuster: updated size scaling toggle icon
+Theme Adjuster: organized fader layout (buttons on left side)
+Theme Adjuster: reworked light theme color palette
+Tweak: higher contrast for scrollbars
+Tweak: light theme color tweaks

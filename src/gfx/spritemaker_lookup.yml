@@ -57,7 +57,7 @@ universal:
     color_green: [135, 199, 115]
 
     # theme adjuster
-    themeadj_color_logo: [255,255,255,0.25]
+    themeadj_color_bg_symbol: [255,255,255,0.25]
     themeadj_table_icon: [180, 180, 180]
     themeadj_button_bg_off: [30, 30, 30]
     themeadj_button_fg_off: [200, 200, 200]
@@ -67,6 +67,8 @@ universal:
     themeadj_color_yellow: [218, 181, 102]
     themeadj_color_orange: [210, 132, 101]
     themeadj_color_blue: [110, 177, 206]
+    themeadj_bank_symbol_off: [180,180,180]
+    themeadj_bank_symbol_on: [0,0,0]
 
     # toolbar
     toolbar_button_bg_off: [70, 70, 70]
@@ -88,8 +90,8 @@ universal:
     gui_bg: [36, 36, 36]
     gui_tab_off: [60,60,60]
     gui_scrollbar_bg: [36, 36, 36]
-    gui_scrollbar_bar: [80, 80, 80]
-    gui_scrollbar_symbols: [100, 100, 100]
+    gui_scrollbar_bar: [110,110,110]
+    gui_scrollbar_symbols: [110,110,110]
     gui_scrollbar_window_bg: [156, 156, 156]
     gui_scrollbar_window_bar: [80, 80, 80]
     gui_scrollbar_window_symbols: [80,80,80]
@@ -164,7 +166,7 @@ universal:
     item_bg_border: [0, 0, 0, 1]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
-    item_border: [30, 30, 30, 0]
+    item_border: [0,0,0,0]
     item_button_bg_off: [50, 50, 50]
     item_button_bg_on: [200, 200, 200]
     item_button_symbol_off: [220, 220, 220]
@@ -278,7 +280,7 @@ dimmed:
     color_green: [163, 222, 145]
 
     # theme adjuster
-    themeadj_color_logo: [255,255,255,0.25]
+    themeadj_color_bg_symbol: [255,255,255,0.25]
     themeadj_table_icon: [220, 220, 220]
     themeadj_button_bg_off: [60, 60, 60]
     themeadj_button_fg_off: [255, 255, 255]
@@ -288,6 +290,8 @@ dimmed:
     themeadj_color_yellow: [228, 191, 122]
     themeadj_color_orange: [238, 150, 117]
     themeadj_color_blue: [110, 187, 226]
+    themeadj_bank_symbol_off: [200,200,200]
+    themeadj_bank_symbol_on: [20,20,20]
 
     # toolbar
     toolbar_button_bg_off: [55,55,55]
@@ -309,8 +313,8 @@ dimmed:
     gui_bg: [77, 77, 77]
     gui_tab_off: [41, 41, 41]
     gui_scrollbar_bg: [77, 77, 77]
-    gui_scrollbar_bar: [107, 107, 107]
-    gui_scrollbar_symbols: [125, 125, 125]
+    gui_scrollbar_bar: [130,130,130]
+    gui_scrollbar_symbols: [130,130,130]
     gui_scrollbar_window_bg: [168, 168, 168]
     gui_scrollbar_window_bar: [90,90,90]
     gui_scrollbar_window_symbols: [90,90,90]
@@ -344,7 +348,7 @@ dimmed:
     transport_status_bg: [55,55,55]
     transport_status_bg_error: [79,19,19]
     transport_selection_bg: [55,55,55]
-    transport_bank_button_off: [100,100,100]
+    transport_bank_button_off: [85,85,85]
     transport_bank_logo: [255, 255, 255, 0.75]
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [90,90,90]
@@ -378,7 +382,7 @@ dimmed:
     item_bg_border: [0, 0, 0]
     item_bg_border_select: [255, 255, 255]
     item_bg_border_select_corners: [255, 255, 255, 0]
-    item_border: [0, 0, 0, 0.5]
+    item_border: [0,0,0,0]
     item_button_bg_off: [49,49,49]
     item_button_bg_on: [235,235,235]
     item_button_symbol_off: [235,235,235]
@@ -487,7 +491,7 @@ light:
     color_green: [173, 216, 160]
 
     # theme adjuster
-    themeadj_color_logo: [0,0,0,0.25]
+    themeadj_color_bg_symbol: [0,0,0,0.25]
     themeadj_table_icon: [75,75,75]
     themeadj_button_bg_off: [125,125,125]
     themeadj_button_fg_off: [255, 255, 255]
@@ -497,6 +501,8 @@ light:
     themeadj_color_yellow: [238, 191, 102]
     themeadj_color_orange: [234, 179, 154]
     themeadj_color_blue: [120, 187, 226]
+    themeadj_bank_symbol_off: [220,220,220]
+    themeadj_bank_symbol_on: [50,50,50]
 
     # toolbar
     toolbar_button_bg_off: [139,139,139]
@@ -516,11 +522,11 @@ light:
     gui_bg: [214,214,214]
     gui_tab_off: [137, 137, 137]
     gui_scrollbar_bg: [214,214,214]
-    gui_scrollbar_bar: [141,141,141]
-    gui_scrollbar_symbols: [130,130,130]
+    gui_scrollbar_bar: [120,120,120]
+    gui_scrollbar_symbols: [120,120,120]
     gui_scrollbar_window_bg: [230,230,230]
-    gui_scrollbar_window_bar: [110,110,110]
-    gui_scrollbar_window_symbols: [110,110,110]
+    gui_scrollbar_window_bar: [140,140,140]
+    gui_scrollbar_window_symbols: [140,140,140]
 
     # generic button
     generic_button_bg_off: [131,131,131]
@@ -548,17 +554,17 @@ light:
     # transport
     transport_bg: [214, 214, 214]
     transport_button_bg_off: [139,139,139]
-    transport_status_bg: [179,179,179]
+    transport_status_bg: [230,230,230]
     transport_status_bg_error: [236,123,123]
-    transport_selection_bg: [179,179,179]
+    transport_selection_bg: [230,230,230]
     transport_bank_button_off: [139,139,139]
     transport_bank_logo: [0, 0, 0, 0.75]
     transport_bank_menu: [0, 0, 0, 0.5]
-    transport_rate_knob_bg: [240,240,240]
-    transport_rate_knob_line: [50,50,50]
+    transport_rate_knob_bg: [195,195,195]
+    transport_rate_knob_line: [20,20,20]
     transport_rate_knob_line_border: [0, 0, 0, 0]
-    transport_rate_fader_bg: [100,100,100]
-    transport_rate_fader_knob: [240,240,240]
+    transport_rate_fader_bg: [195,195,195]
+    transport_rate_fader_knob: [100,100,100]
     transport_tap_bg: [0,0,0, 0]
     transport_tap_fg: [0,0,0]
 
@@ -585,7 +591,7 @@ light:
     item_bg_border: [115,115,115]
     item_bg_border_select: [0, 0, 0]
     item_bg_border_select_corners: [255, 255, 255, 0]
-    item_border: [0, 0, 0, 0]
+    item_border: [0,0,0,0]
     item_button_bg_off: [85,85,85]
     item_button_bg_on: [255,255,255]
     item_button_symbol_off: [255, 255, 255]
@@ -656,7 +662,7 @@ light:
     fader_knob_line: [0, 0, 0, 0]
 
     # text
-    readout_bg: [0, 0, 0, 0.25]
+    readout_bg: [0, 0, 0, 0.125]
 
     # envcp
     envcp_tailicon: [63,63,63]

@@ -50,15 +50,19 @@ def change_alpha(image, alpha_level):
 # --------------------------------------------------
 
 def fill_image(img, color):
-    
-    # fill image with solid color
-    if color is not None:
-        color = color[:3]
-        color_img = Image.new("RGB", img.size, color)
-        color_img.putalpha(img.getchannel('A'))
-        return color_img
 
-    return img
+    if img.mode != "RGBA":
+        img = img.convert("RGBA")
+        
+    r, g, b = color[:3]
+    
+    # create a solid color image with same size
+    color_img = Image.new("RGBA", img.size, (r, g, b, 255))
+    
+    # copy original alpha
+    color_img.putalpha(img.getchannel("A"))
+    
+    return color_img
 
 #   Function : Adjust Image Alpha
 # --------------------------------------------------
@@ -128,7 +132,7 @@ def trim_screenshots():
         left = 0
         right = img_sshot.width
         top = trim
-        bottom = img_sshot.height - trim
+        bottom = img_sshot.height
         
         img_sshot = img_sshot.crop((left, top, right, bottom))
         
@@ -165,30 +169,37 @@ def create_board_thumb(sshot,out_name,label,FitScreenshot=True):
     img_sshot = img_sshot.crop((left, top, right, bottom))
     
     # combine sprites
-    sprite = Image.new('RGBA', img_thumb_header_bg.size)
+    sprite = Image.new('RGBA', img_thumb_header_bg.size, (255,255,255,0))
     sprite.paste(img_sshot, (0, 0), img_thumb_sshot_mask)
-    sprite.paste(img_thumb_header_bg, (0, 0),img_thumb_header_bg)
-    sprite.paste(img_thumb_border, (0, 0),img_thumb_border)
+    sprite = Image.alpha_composite(sprite,img_thumb_header_bg)
 
     # top label
-    label_image = Image.new('RGBA', (sprite.width, int(label_font_size*1.5)))
-    draw = ImageDraw.Draw(label_image)
+    label_image = Image.new('RGBA', sprite.size,LABEL_FONT_COLOR)
+    label_text = Image.new('L', sprite.size,0)
+    draw = ImageDraw.Draw(label_text)
 
     # label font
     try:
-        font = ImageFont.truetype("c/windows/fonts/tahoma.ttf", label_font_size) 
+        font = ImageFont.truetype("c/windows/fonts/calibril.ttf", LABEL_FONT_SIZE) 
     except IOError:
         font = ImageFont.load_default()
 
+        
     # label position
     bbox = draw.textbbox((0, 0), label, font=font)
     text_width = bbox[2] - bbox[0]
-    text_x = (label_image.width - text_width) // 2
-    text_y = 2
+    text_x = (label_text.width - text_width) // 2
+    text_y = 7
 
-    draw.text((text_x, text_y), label, fill=label_font_color, font=font)
-    sprite.paste(label_image, (0, 0), label_image)
+    # draw and paste font
+    draw.text((text_x, text_y), label, fill=255, font=font)        
+    label_image.putalpha(label_text)
+    
+    sprite = Image.alpha_composite(sprite,label_image)
 
+    # paste border on top
+    sprite = Image.alpha_composite(sprite,img_thumb_border)
+    
     # output
     out_name = out_name.replace("part_","part_bb_")
     
@@ -210,21 +221,30 @@ def create_board_thumb_large(sshot,out_name):
     img_sshot = Image.open(sshot).convert("RGBA")
 
     aspect_ratio = img_sshot.height / img_sshot.width
-    new_width = 700
+    new_width = 900
     new_height = int(new_width * aspect_ratio)
     img_sshot = img_sshot.resize((new_width, new_height), Image.LANCZOS)
     
-    # rounded mask
+    # frame data
     size_factor = 10
-    mask = Image.new("L", (img_sshot.width*size_factor,img_sshot.height*size_factor), 0)
-    draw = ImageDraw.Draw(mask)
-    corner_radius = 5*size_factor
-    draw.rounded_rectangle([0, 0, mask.size[0], mask.size[1]], radius=corner_radius, fill=255)    
-    mask = mask.resize((img_sshot.width, img_sshot.height), Image.LANCZOS)
+    corner_radius = 8*size_factor
+    border_width=15
+
+    # rounded mask
+    frame_mask = Image.new("L", (img_sshot.width*size_factor,img_sshot.height*size_factor), 0)
+    frame_draw = ImageDraw.Draw(frame_mask)
+    frame_draw.rounded_rectangle([0, 0, frame_mask.size[0], frame_mask.size[1]], radius=corner_radius, fill=255)    
+    frame_mask = frame_mask.resize((img_sshot.width, img_sshot.height), Image.LANCZOS)
+
+    border_img = Image.new("RGBA", (img_sshot.width*size_factor,img_sshot.height*size_factor), 0)
+    border_draw = ImageDraw.Draw(border_img)
+    border_draw.rounded_rectangle([0, 0, border_img.size[0], border_img.size[1]], radius=corner_radius, fill=None,outline=BORDER_COLOR, width=border_width)
+    border_img = border_img.resize((img_sshot.width, img_sshot.height), Image.LANCZOS)
 
     # setup sprite
     sprite = Image.new('RGBA', img_sshot.size)
-    sprite.paste(img_sshot, (0, 0), mask)
+    sprite.paste(img_sshot, (0, 0), frame_mask)
+    sprite = Image.alpha_composite(sprite,border_img)
 
     # output
     out_name = out_name.replace("part_","part_bb_")
@@ -344,12 +364,17 @@ file_thumb_border = f'{ressource_folder}/thumb_border.png'
 output_folder = 'out'
 
 # label font settings
-label_font_size = 14
-label_font_color = (240,240,240)
+LABEL_FONT_SIZE = 18
+LABEL_FONT_COLOR = (255,255,255)
 
 # alpha settings
-header_bg_alpha = 0.75
-border_alpha = 0.5
+HEADER_BG_ALPHA = 0.9
+BORDER_ALPHA = 1
+
+# colors
+HEADER_BG_COLOR = (40,40,40)
+BORDER_COLOR = (20,20,20)
+
 
 # label lookup texts
 labels_resolution = {
@@ -382,8 +407,11 @@ img_thumb_sshot_mask = Image.open(file_thumb_sshot_mask).convert("RGBA")
 img_thumb_border = Image.open(file_thumb_border).convert("RGBA")
 
 # alpha adjustments
-img_thumb_header_bg = change_alpha(img_thumb_header_bg,header_bg_alpha)
-img_thumb_border = change_alpha(img_thumb_border,border_alpha)
+img_thumb_border = change_alpha(img_thumb_border,BORDER_ALPHA)
+
+# colorization
+img_thumb_header_bg = fill_image(img_thumb_header_bg,HEADER_BG_COLOR)
+img_thumb_border = fill_image(img_thumb_border,BORDER_COLOR)
 
 # create all the graphics
 printProgressStart("Creating Graphics")
