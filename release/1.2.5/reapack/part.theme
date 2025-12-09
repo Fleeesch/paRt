@@ -1,0 +1,51 @@
+@version 1.2.5
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+  
+  * 3 theme variants with different brightness levels and parameter synchronization
+  * Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Complete coverage of all Reaper V7 UI elements
+  * Custom Theme Adjuster with extensive configuration options
+@changelog
+  - WALTER: included pseudo-rounding into rtconfig.txt to maximize pixel precision
+  - WALTER: added readme and additional descriptive comments to rtconfig.txt
+  - Transport: Updated Theme Adjuster icon
+  - TCP: Added additional padding to inserts when displayed as separate block
+  - TCP: fixed volume readout label background orientation (was flipped)
+  - TCP: fixed master track meter height
+  - MCP: corrected inserts section size when displayed as sidebar
+  - MCP: allow smaller vertical fader height in strip layout
+  - MCP: minor fx slot margins correction
+  - Theme Adjuster: updated hint messages
+  - Theme Adjuster: updated bank button icon
+  - Theme Adjuster: updated size scaling toggle icon
+  - Theme Adjuster: organized fader layout (buttons on left side)
+  - Theme Adjuster: reworked light theme color palette
+  - Tweak: higher contrast for scrollbars
+  - Tweak: light theme color tweaks

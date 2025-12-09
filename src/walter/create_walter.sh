@@ -89,10 +89,12 @@ hint_end="\n;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK_CLOSE ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ "
 themes=("dark" "dimmed" "light")
 
 # source files
+file_readme="walter_readme.txt"
 file_colors="walter_colors.txt"
 file_colors_zeroline="walter_colors_zeroline.txt"
 file_parameter_list="out/walter_parameter_list"
 
+placeholder_readme="THEMEBUILDER_INSERT_README"
 placeholder_colors="THEMEBUILDER_INSERT_COLORS"
 placeholder_zeroline="THEMEBUILDER_INSERT_ZEROLINE"
 placeholder_parameters="THEMEBUILDER_INSERT_PARAMETERS"
@@ -176,11 +178,15 @@ for theme in "${themes[@]}"; do
     parameter_list=$(cat "$file_parameter_list")
     parameter_list="$hint_start\n$parameter_list\n$hint_end"
 
+    # readme
+    readme_content=$(cat "$file_readme")
+
     # replace placeholders with dynamically read content
     output_content=$(cat "$file_walter")
+    output_content=$(replace_placeholders "$output_content" "$placeholder_readme" "$readme_content")
     output_content=$(replace_placeholders "$output_content" "$placeholder_colors" "$colors")
-    output_content=$(replace_placeholders "$output_content" "$placeholder_zeroline" "$colors_zeroline")
     output_content=$(replace_placeholders "$output_content" "$placeholder_parameters" "$parameter_list")
+    output_content=$(replace_placeholders "$output_content" "$placeholder_zeroline" "$colors_zeroline")
 
     # add header comment
     theme_tag=";       Theme: $theme\n"
@@ -191,10 +197,12 @@ for theme in "${themes[@]}"; do
 
     echo -e "${COLOR_GREEN}done${COLOR_RESET}"
 
+    # -------------------------------------------------------------------------
+    #   optional split-layout creation (currently bypassed, possibly broken)
+    # -------------------------------------------------------------------------
+    
     # file containing different layout configurations
     #file_layouts="walter_rtconfig_split.txt"
-
-    # --> optional  split file creation, currently disabled
 
     # # create split files
     # for level in "${zoom_levels[@]}"; do

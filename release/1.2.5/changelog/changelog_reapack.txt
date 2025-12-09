@@ -1,0 +1,17 @@
+@changelog
+  - WALTER: included pseudo-rounding into rtconfig.txt to maximize pixel precision
+  - WALTER: added readme and additional descriptive comments to rtconfig.txt
+  - Transport: Updated Theme Adjuster icon
+  - TCP: Added additional padding to inserts when displayed as separate block
+  - TCP: fixed volume readout label background orientation (was flipped)
+  - TCP: fixed master track meter height
+  - MCP: corrected inserts section size when displayed as sidebar
+  - MCP: allow smaller vertical fader height in strip layout
+  - MCP: minor fx slot margins correction
+  - Theme Adjuster: updated hint messages
+  - Theme Adjuster: updated bank button icon
+  - Theme Adjuster: updated size scaling toggle icon
+  - Theme Adjuster: organized fader layout (buttons on left side)
+  - Theme Adjuster: reworked light theme color palette
+  - Tweak: higher contrast for scrollbars
+  - Tweak: light theme color tweaks
