@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -31,6 +31,7 @@ version.universal_fixes_applied = false
 
 -- version comparison results
 version.theme_version_is_lower = false
+version.theme_is_part = false
 
 --  Method : Apply Legacy Fixes
 -- -------------------------------------------
@@ -130,6 +131,10 @@ end
 -- -------------------------------------------
 
 function version.getThemeVersion()
+    
+    -- initially assume we're not dealing with a paRt theme
+    version.theme_is_part = false
+
     -- get first theme parameter
     local retval, desc, value, defValue, minValue, maxValue = reaper.ThemeLayout_GetParameter(0)
 
@@ -139,6 +144,10 @@ function version.getThemeVersion()
     end
 
     if Part.Functions.stringStarts(desc, "paRt Theme") then
+        
+        -- paRt theme detected if the version parameter is there
+        version.theme_is_part = true
+
         local version_string = desc:match("v([0-9%.]+)")
 
         -- developer version exception

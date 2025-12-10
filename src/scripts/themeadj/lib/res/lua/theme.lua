@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -14,8 +14,6 @@ local themehandling = {}
 -- ================================================================================
 
 themehandling.last_theme_layout = "default"
-
-themehandling.error_theme_version_is_too_low = false
 
 --  Helper Method : Words Match
 -- -------------------------------------------
@@ -71,6 +69,9 @@ end
 
 function themehandling.validateTheme(initial_validation)
     Part.Version.getThemeVersion()
+
+    -- transfer part theme detection flag to global variable list
+    Part.Global.theme_is_part = Part.Version.theme_is_part
 
     -- reload if theme suddenly became valid
     if Part.Version.themeVersionIsValid() then

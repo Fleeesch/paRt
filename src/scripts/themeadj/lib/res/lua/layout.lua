@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -166,7 +166,6 @@ function layout.BankBar.BankBar:setupButtons()
 
             -- register bank button
             table.insert(self.bank_buttons, Part.Draw.Elements.lastElement())
-
         end
     end
 
@@ -637,6 +636,14 @@ function layout.Label.Label:new(o)
     return o
 end
 
+-- Output : Label : Expand
+-- -------------------------------------------
+
+function layout.Label.Label:expand(w, h)
+    if w ~= nil then self.expand_w = w end
+    if h ~= nil then self.expand_h = h end
+end
+
 -- Output : Label : Stretch
 -- -------------------------------------------
 
@@ -761,6 +768,7 @@ function layout.Text.Text:new(o, text_blank, parameter)
     -- custom expansion (for dealing with clipping)
     o.expand_w = 0
     o.expand_h = 0
+    o.height_plus = 3
 
     -- color values
     o.color_font = Part.Color.Lookup.color_palette.text.fg
@@ -852,6 +860,7 @@ end
 function layout.Text.Text:tableEntry(just_right)
     if just_right ~= nil and just_right then
         self:justRight()
+        self:centerVert()
     end
 
     self:setColor(Part.Color.Lookup.color_palette.table.entry_fg, nil, nil)
@@ -1015,6 +1024,7 @@ function layout.Text.Text:draw()
     local y = Part.Functions.rescale(self.dim_y - self.expand_h, false, self.autocenter_position)
     local w = Part.Functions.rescale(self.dim_w + self.expand_w * 2)
     local h = Part.Functions.rescale(self.dim_h + self.expand_h * 2)
+    local h_text = h + Part.Functions.rescale(self.height_plus)
 
     -- font y position
     local y_f = Part.Functions.rescale(self.dim_y - 2 - -self.expand_h, false, self.autocenter_position)
@@ -1057,7 +1067,7 @@ function layout.Text.Text:draw()
     -- draw text
     Part.Draw.Graphics.setFont(13, self.font_flags)
 
-    gfx.drawstr(text, self:getFlags(), x + w - p_x * 2, y + h - p_y * 2)
+    gfx.drawstr(text, self:getFlags(), x + w - p_x * 2, y + h_text - p_y * 2)
 
     -- optional underline
     if self.draw_underline then

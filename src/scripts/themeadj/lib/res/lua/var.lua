@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -48,6 +48,7 @@ var.globals.themes = { "dark", "dimmed", "light" }
 -- theme flags
 var.globals.theme_is_unpacked = false
 var.globals.theme_is_modded = false
+var.globals.theme_is_part = false
 
 -- paRt provided zoom levels
 var.globals.zoom_levels = { 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5 }

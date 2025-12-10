@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -148,23 +148,27 @@ hint.highlights_selectionbar_size = {
 
 -- visibility
 hint.vismatrix_visbility = {
+    { type = hint.HintTypes.highlight, text = "Visibility" },
     { type = hint.HintTypes.normal, text = "Toggles the element's visibility." },
 }
 
 -- hide when mixer is visible
 hint.vismatrix_nomixer = {
+    { type = hint.HintTypes.highlight, text = "Mixer Context" },
     { type = hint.HintTypes.normal, text = "Hides the element when enabled and the mixer is visible." },
 }
 
 -- add separator
 hint.vismatrix_separator = {
-    { type = hint.HintTypes.normal, text = "Adds extra spacing after the element." },
+    { type = hint.HintTypes.highlight, text = "Extra Space" },
+    { type = hint.HintTypes.normal, text = "Adds extra padding after the element." },
     { type = hint.HintTypes.normal, text = "The element must be visible." },
     hint.line_bypass_possible
 }
 
 -- size adjustment
 hint.vismatrix_size = {
+    { type = hint.HintTypes.highlight, text = "Size" },
     { type = hint.HintTypes.normal, text = "Adjusts the size of the element." },
 }
 
@@ -748,17 +752,20 @@ hint.mcp_panmode = {
 
 -- MCP panmode fader normal
 hint.mcp_panmode_fader_normal = {
+    { type = hint.HintTypes.highlight, text = "Knobs" },
     { type = hint.HintTypes.normal, text = "Display Pan and Width as knobs." },
 }
 
 -- MCP panmode fader vertical
 hint.mcp_panmode_fader_vertical = {
+    { type = hint.HintTypes.highlight, text = "Faders - Vertical" },
     { type = hint.HintTypes.normal, text = "Display Pan and Width as vertical faders." },
     { type = hint.HintTypes.attention, text = "Faders convert to knobs if there isn’t enough space." },
 }
 
 -- MCP panmode fader horizontal
 hint.mcp_panmode_fader_horizontal = {
+    { type = hint.HintTypes.highlight, text = "Faders - Horizontal" },
     { type = hint.HintTypes.normal,    text = "Display Pan and Width as a stacked pair of horizontal faders." },
     { type = hint.HintTypes.attention, text = "Only possible in Split-Section Layout." },
 }
@@ -952,17 +959,20 @@ hint.config_hard_reset = {
 
 -- custom range
 hint.custom_range = {
-    { type = hint.HintTypes.normal, text = "A custom adjustment reserved for theme modding." },
+    { type = hint.HintTypes.highlight, text = "Custom Parameter" },
+    { type = hint.HintTypes.normal, text = "A free range adjustment that can be used when modding the theme." },
 }
 
 -- custom button
 hint.custom_button = {
-    { type = hint.HintTypes.normal, text = "A custom button for reserved theme modding." },
+    { type = hint.HintTypes.highlight, text = "Custom Parameter" },
+    { type = hint.HintTypes.normal, text = "A free toggle button that can be used when modding the theme." },
 }
 
 -- custom selection
 hint.custom_selection = {
-    { type = hint.HintTypes.normal, text = "A custom multiple-choice set reserved for theme modding." },
+    { type = hint.HintTypes.highlight, text = "Custom Parameter" },
+    { type = hint.HintTypes.normal, text = "A free multiple-choice parameter that can be used when modding the theme." },
 }
 
 return hint

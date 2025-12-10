@@ -90,10 +90,10 @@ universal:
     gui_bg: [36, 36, 36]
     gui_tab_off: [60,60,60]
     gui_scrollbar_bg: [36, 36, 36]
-    gui_scrollbar_bar: [110,110,110]
+    gui_scrollbar_bar: [100,100,100]
     gui_scrollbar_symbols: [110,110,110]
     gui_scrollbar_window_bg: [156, 156, 156]
-    gui_scrollbar_window_bar: [80, 80, 80]
+    gui_scrollbar_window_bar: [90, 90, 90]
     gui_scrollbar_window_symbols: [80,80,80]
 
     # generic button
@@ -136,7 +136,7 @@ universal:
     transport_bank_logo: [255, 255, 255, 0.75]
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [26, 26, 26]
-    transport_rate_knob_line: [220, 220, 220]
+    transport_rate_knob_line: [245, 245, 245]
     transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [26, 26, 26]
     transport_rate_fader_knob: [220, 220, 220]
@@ -313,10 +313,10 @@ dimmed:
     gui_bg: [77, 77, 77]
     gui_tab_off: [41, 41, 41]
     gui_scrollbar_bg: [77, 77, 77]
-    gui_scrollbar_bar: [130,130,130]
+    gui_scrollbar_bar: [120,120,120]
     gui_scrollbar_symbols: [130,130,130]
     gui_scrollbar_window_bg: [168, 168, 168]
-    gui_scrollbar_window_bar: [90,90,90]
+    gui_scrollbar_window_bar: [100,100,100]
     gui_scrollbar_window_symbols: [90,90,90]
 
     # generic button
@@ -352,7 +352,7 @@ dimmed:
     transport_bank_logo: [255, 255, 255, 0.75]
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [90,90,90]
-    transport_rate_knob_line: [235,235,235]
+    transport_rate_knob_line: [250,250,250]
     transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [90,90,90]
     transport_rate_fader_knob: [235,235,235]
@@ -522,10 +522,10 @@ light:
     gui_bg: [214,214,214]
     gui_tab_off: [137, 137, 137]
     gui_scrollbar_bg: [214,214,214]
-    gui_scrollbar_bar: [120,120,120]
+    gui_scrollbar_bar: [130,130,130]
     gui_scrollbar_symbols: [120,120,120]
     gui_scrollbar_window_bg: [230,230,230]
-    gui_scrollbar_window_bar: [140,140,140]
+    gui_scrollbar_window_bar: [150,150,150]
     gui_scrollbar_window_symbols: [140,140,140]
 
     # generic button

@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -497,7 +497,7 @@ function draw.Graphics.drawThemeError()
     }
 
     -- alterantive string on version mismatch
-    if Part.Version.theme_version_is_lower then
+    if Part.Global.theme_is_part and Part.Version.theme_version_is_lower then
         str_header = "paRt Theme Version is outdated"
 
         str_info = {

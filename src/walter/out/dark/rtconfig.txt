@@ -3,7 +3,7 @@
 ;
 ;       Theme: dark
 ;       Version: 1.2.5
-;       Date: 2025-12-09 20:23:46
+;       Date: 2025-12-10 18:35:26
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
@@ -1412,28 +1412,28 @@ set THEME_color_red                         [210 101 101]
             set CUR_h VAL_Button_Trans{1}
 
             ; rewind / forward
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 2 "trans" "trans" "rew"
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 4 "trans" "trans" "fwd"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 2 1 "trans" "trans" "rew"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 4 1 "trans" "trans" "fwd"
 
             ; pause / stop / play
             set VAL_trans_button_group_count 0
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 8 "trans" "trans" "stop"
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 16 "trans" "trans" "pause"
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 32 "trans" "trans" "play"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 8 1 "trans" "trans" "stop"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 16 1 "trans" "trans" "pause"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 32 1 "trans" "trans" "play"
 
             ; record
             set VAL_trans_button_group_count 0
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 64 "trans" "trans" "rec"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 64 1 "trans" "trans" "rec"
 
             ; repeat
             set VAL_trans_button_group_count 0
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 128 "trans" "trans" "repeat"
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 128 1 "trans" "trans" "repeat"
 
             set CUR_w VAL_Button_Trans{2}
 
             ; automation
-            set VAL_trans_button_group_count 0s
-            MAC_DrawTransport_Buttons_SingleButton          SCALE 256 "trans" "trans" "automode"
+            set VAL_trans_button_group_count 0
+            MAC_DrawTransport_Buttons_SingleButton          SCALE 256 0 "trans" "trans" "automode"
 
             ; bpm / timebase / playrate
             set VAL_trans_button_section_count 0
@@ -1445,7 +1445,7 @@ set THEME_color_red                         [210 101 101]
         ;  ### Draw : Transport : Buttons : Single Button
         ; --------------------------------------------------------------------------------
 
-            macro MAC_DrawTransport_Buttons_SingleButton SCALE INDEX WALTER_ELEMENT PARAMETER_SECTION ELEMENT
+            macro MAC_DrawTransport_Buttons_SingleButton SCALE INDEX HAS_SEPARATOR WALTER_ELEMENT PARAMETER_SECTION ELEMENT
 
                 ; detect separator setting
                 set trans_##ELEMENT##_separator                         \
@@ -1494,10 +1494,12 @@ set THEME_color_red                         [210 101 101]
                 set VAL_trans_button_section_count  +  VAL_trans_show_##ELEMENT##{0}
 
                 ; increment x position
-                set CUR_x                                                           \
-                    ?VAL_trans_show_##ELEMENT##{0}                                  \
-                        ?trans_##ELEMENT##_separator{0}                             \
-                            + CUR_x{0} + CUR_w{0} VAL_trans_spacing_separator{0}    \
+                set CUR_x                                                               \
+                    ?VAL_trans_show_##ELEMENT##{0}                                      \
+                        ?trans_##ELEMENT##_separator{0}                                 \
+                            ?HAS_SEPARATOR                                              \
+                                + CUR_x{0} + CUR_w{0} VAL_trans_spacing_separator{0}    \
+                                + CUR_x{0} CUR_w{0}                                     \
                             + CUR_x{0} CUR_w{0}
 
             endmacro

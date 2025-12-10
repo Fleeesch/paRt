@@ -1,4 +1,4 @@
--- @version 1.2.2
+-- @version 1.2.5
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -263,7 +263,6 @@ end
 --  Main Process
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
--- @deprecated - no knob spritesheets needd since v1.2.2 since there are no knobs
 -- setup knob graphics
 -- Part.Draw.Sprites.createAssets()
 
