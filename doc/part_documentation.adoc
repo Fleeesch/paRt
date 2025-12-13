@@ -3,7 +3,7 @@
 :toclevels: 4
 :numbered:
 :author: Fleeesch
-:revnumber: 1.2.4
+:revnumber: 1.2.6
 
 = paRt User Guide
 
@@ -145,6 +145,7 @@ This will reset the complete data of the current configuration; that includes al
 There are three theme files available, each with a different color scheme covering multiple brightness levels.
 
 This is mostly for technical reasons:
+
 - a large amount of the color values are static and embedded into the theme file
 - the loading times per theme file become huge when loading a large set of bitmap variations
 - the WLATER code would have to be even more complex that it already is

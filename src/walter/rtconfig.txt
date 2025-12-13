@@ -1,6 +1,309 @@
 
 
+
+
+
+
+
+
 ;THEMEBUILDER_INSERT_README
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
 
 
 ;THEMEBUILDER_INSERT_PARAMETERS
@@ -1985,8 +2288,8 @@
                 MAC_DrawMcp_Setup_Size_AutofitSection SCALE WALTER_ELEMENT PARAMETER_SECTION "meter"    VAL_mcp_x_meter  VAL_mcp_w_meter
 
                 ; final precalculated mcp width
-                set VAL_mcp_w_label + VAL_mcp_precalc_w{0} +    * 2 VAL_mcp_padding{0} VAL_mcp_precalc_w_sidebar{0}
-                set VAL_mcp_w_full  + VAL_mcp_precalc_w{0} +        VAL_mcp_x_offset{0}     + VAL_mcp_x_extension{0} VAL_mcp_precalc_w_sidebar{0}
+                set VAL_mcp_w_label + VAL_mcp_precalc_w{0} +    * 2 VAL_mcp_padding{0}                                  VAL_mcp_precalc_w_sidebar{0}
+                set VAL_mcp_w_full  + VAL_mcp_precalc_w{0} +        VAL_mcp_x_offset{0}     + VAL_mcp_x_extension{0}    VAL_mcp_precalc_w_sidebar{0}
 
             endmacro
 
@@ -2278,11 +2581,14 @@
                     VAL_mcp_insert_padding{0}>=1        \
                         + CUR_y_inserts{0} VAL_Pad{0}
 
+            ; [MASTER]
             ; sidebar padding width offset
             set CUR_w                                                   \
                 ?VAL_mcp_use_sidebar{0}                                 \
                     VAL_mcp_insert_padding{0}>=1                        \
-                        - CUR_w{0} VAL_Pad{0}
+                        !trackidx                                       \
+                            - CUR_w{0} - VAL_Pad{0} VAL_Unit{0}         \
+                            - CUR_w{0} VAL_Pad{0}
             
             ; sidebar padding height offset
             set VAL_remaining_h                                             \
@@ -2298,21 +2604,6 @@
                 VAL_mcp_insert_overshoot{0}<CUR_h{0}    \
                     VAL_mcp_insert_overshoot{0}
 
-            ; calculate inner frame offset values
-            set CUR_x_inserts_inner                         \
-                + CUR_x{0}      * 2         VAL_Unit{0}
-
-            set CUR_y_inserts_inner                         \
-                CUR_y_inserts{0}      
-            
-            set CUR_w_inserts_inner                         \
-                - CUR_w{0}      * 2         VAL_Unit{0}
-            
-            set CUR_h_inserts_inner                         \
-                !VAL_mcp_use_sidebar{0}                     \
-                    - CUR_h{0}              VAL_Unit{0}     \
-                    - VAL_remaining_h{0}    VAL_Unit{0}
-
             ; ------------------------------------------------------------------------------------------------------------
             ;       - On MCP Inserts -
             ;
@@ -2323,6 +2614,15 @@
             ;   The visible background and border come from an additional custom element.
             ; ------------------------------------------------------------------------------------------------------------
 
+            ; calculate inner frame offset values
+            set CUR_x_inserts_inner     + CUR_x{0} VAL_Border_2{0}
+            set CUR_y_inserts_inner CUR_y_inserts{0}
+            set CUR_w_inserts_inner     - CUR_w{0} VAl_Border_2{0}
+            
+            set CUR_h_inserts_inner         \
+                !VAL_mcp_use_sidebar{0}     \
+                    CUR_h{0}                \
+                    VAL_remaining_h{0}    
 
             ; [DRAW] inserts border
             set WALTER_ELEMENT##.custom.inserts_bg                                  \
@@ -2796,7 +3096,7 @@
 
                     set WALTER_ELEMENT##.custom.env_icon                                                                \
                         ?VAL_mcp_show_button_env{0}                                                                     \
-                            par_mcp_##PARAMETER_SECTION##_element_width==1                                              \
+                            par_mcp_##PARAMETER_SECTION##_element_width>=1                                              \
                                 [WALTER_ELEMENT##.env{0} WALTER_ELEMENT##.env{1} VAL_Button{0} VAL_Button{1} 0 0 0 0]   \
                                 0                                                                                       \
                             0
@@ -3214,12 +3514,13 @@
                     0
 
             ; horizontal fader correction
-            set VAL_mcp_faders_panmode                              \
-                par_mcp_##PARAMETER_SECTION##_fader_layout{0}==2    \
-                    1                                               \
-                par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0    \
-                    VAL_mcp_faders_panmode{0}==2                    \
-                        1
+            set VAL_mcp_faders_panmode                                  \
+                ?VAL_mcp_show_faders_top{0}                             \
+                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}==2    \
+                        1                                               \
+                    par_mcp_##PARAMETER_SECTION##_fader_layout{0}!=0    \
+                        VAL_mcp_faders_panmode{0}==2                    \
+                            1
 
             ; fadermodes
             set WALTER_ELEMENT##.volume.fadermode -1
@@ -3302,13 +3603,18 @@
                         CUR_h_section_min_horz{0}
 
             ; [ROUND]
-            ; section actual height
-            set CUR_h_section                                                                                                                                                                                                               \
-                ?VAL_mcp_show_faders_top{0}                                                                                                                                                                                                 \
-                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                                                                   \
-                        + VAL_rounding_constant{0} - + CUR_h_section_min{0} * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * VAL_Fader_Scale{0}  par_mcp_##PARAMETER_SECTION##_fader_pan_height       VAL_rounding_constant{0}    \
-                        + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                                                  * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height                  VAL_rounding_constant{0}    \
+            ; section target height
+            set CUR_h_section                                                                                                                                                                                                       \
+                ?VAL_mcp_show_faders_top{0}                                                                                                                                                                                         \
+                    ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                                                           \
+                        + VAL_rounding_constant{0} - * - VAL_mcp_faders_top_remaining_h{0} CUR_h_section_min  * VAL_Fader_Scale{0}              par_mcp_##PARAMETER_SECTION##_fader_pan_height          VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                                                  * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height          VAL_rounding_constant{0}    \
                     0
+
+            ; preserve minimal height
+            set CUR_h_section                           \
+                CUR_h_section{0}<CUR_h_section_min{0}   \
+                    CUR_h_section_min{0}
 
             ; hiding logic
             set CUR_y_hide + CUR_y{0} CUR_h_section{0}
@@ -3563,7 +3869,9 @@
                     1                           \
                     0
 
-            ; ::: Layout [Pan above Volume]
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+            ;       Layout -> Pan above Volume
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
 
             ; pan section visibility
             set VAL_mcp_show_pansection                             \
@@ -3584,6 +3892,7 @@
             set VAL_bottom_remaining_h - h - 0 + CUR_y{0} - VAL_mcp_h{0} - VAL_mcp_y_post_label{0} VAL_Pad{0}
             set CUR_h VAL_bottom_remaining_h{0}
 
+            ; calculate the minimal height
             set CUR_h_section_min                                       \
                 !VAL_mcp_faders_has_horz{0}                             \
                     !VAL_mcp_faders_has_vert{0}                         \
@@ -3592,12 +3901,19 @@
                     VAL_mcp_fader_min_h_2{0}
 
             ; [ROUND]
-            set CUR_h_section                                                                                                                                                                               \
-                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                                       \
-                    + VAL_rounding_constant{0} - + CUR_h_section_min{0} * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}    \
-                    + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                      * 0.25                  par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}
+            ; panning sectiom height
+            set CUR_h_section                                                                                                                                                                   \
+                ?par_mcp_##PARAMETER_SECTION##_fader_pan_height_scale                                                                                                                           \
+                    + VAL_rounding_constant{0} - * VAL_bottom_remaining_h{0}  * VAL_Fader_Scale{0}              par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}     \
+                    + VAL_rounding_constant{0} - + CUR_h_section_min{0} * SCALE                      * 0.25     par_mcp_##PARAMETER_SECTION##_fader_pan_height     VAL_rounding_constant{0}
 
-            set CUR_y_post_pan + CUR_y{0} + CUR_h_section{0} * 2 VAL_mcp_spacing_fader_y{0}
+            ; preserve minimal height
+            set CUR_h_section                           \
+                CUR_h_section{0}<CUR_h_section_min{0}   \
+                    CUR_h_section_min{0}
+
+            ; calculate y position past panning section
+            set CUR_y_post_pan      + CUR_y{0} + CUR_h_section{0} * 2 VAL_mcp_spacing_fader_y{0}
 
             ; [ROUND]
             ; individual fader height
@@ -3606,7 +3922,7 @@
                     VAL_Knob{0}                                                                         \
                 ?VAL_mcp_faders_show_width{0}                                                           \
                     + VAL_rounding_constant{0} - * 0.5 CUR_h_section{0}    VAL_rounding_constant{0}     \
-                    CUR_h_section{0}
+                    + CUR_h_section{0} VAL_mcp_spacing_fader_y{0}
 
             ; [ROUND]
             ; pan knob y offset
@@ -3614,12 +3930,12 @@
                 VAL_mcp_faders_panmode{0}!=0                                                                                \
                     0                                                                                                       \
                     ?VAL_mcp_faders_show_width{0}                                                                           \
-                        + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} * 2    CUR_h{0}   VAL_rounding_constant{0}    \
+                        + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0} * 2    CUR_h{0}   VAL_rounding_constant{0}   \
                         + VAL_rounding_constant{0} - * 0.5 - CUR_h_section{0}        CUR_h{0}   VAL_rounding_constant{0}
 
             ; pan hiding logic
             set CUR_y_hide + CUR_y CUR_h_section
-
+            
             set VAL_mcp_hide_faders_Pan                 \
                 CUR_y_hide{0}>VAL_mcp_y_labelHide{0}    \
                     1                                   \
@@ -3683,60 +3999,53 @@
                             VAL_mcp_faders_panmode{0}==0        \
                                 WALTER_ELEMENT##.width
 
-            ; width fader post y offset
+            ; place y cursor past panning section
             set CUR_y                           \
                 ?VAL_mcp_show_pansection{0}     \
                     CUR_y_post_pan{0}
 
-            ; ::: End [Pan above Volume]
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+            ;       Volume Fader Dimension Calculations
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-            ; [DRAW] volume
+            ; remaining height calculation
             set CUR_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y{0} - VAL_mcp_h{0} - VAL_mcp_y_post_label{0} VAL_Pad{0}
+            
+            ; store volume fader height
+            set CUR_h_vol_fader CUR_h{0}
 
+            ; store volume x position
+            set CUR_x_vol_knob CUR_x{0}
+            set CUR_x_vol_fader CUR_x_fader{0}
+            
+            ; store volume fader y position
+            set CUR_y_vol_fader CUR_y{0}
 
+            ; hide for volume display
             set VAL_mcp_show_vol                    \
                 CUR_h{0}>VAL_mcp_vol_h_min_show{0}  \
                     1                               \
                     0
 
+            ; height check if volume should be displayed as knob
             set VAL_mcp_vol_knob                    \
                 CUR_h{0}>VAL_mcp_vol_h_min_knob{0}  \
                     0                               \
                     1
 
+            ; volume knob display
             set WALTER_ELEMENT##.volume.fadermode   \
                 ?VAL_mcp_vol_knob{0}                \
                     1                               \
                     -1
 
+            ; volume knob y position
             set CUR_y_volknob + CUR_y * 0.5 - CUR_h VAL_Knob
 
-            set WALTER_ELEMENT##.volume                                                                     \
-                !VAL_mcp_hide_faders_bottom{0}                                                              \
-                    ?VAL_mcp_show_vol{0}                                                                    \
-                        !VAL_mcp_vol_knob{0}                                                                \
-                            [CUR_x_fader{0} CUR_y{0}            CUR_w_fader{0}  CUR_h{0}        0 0 0 0]    \
-                            [CUR_x{0}       CUR_y_volknob{0}    VAL_Knob{0}     VAL_Knob{0}     0 0 0 0]
 
-            set WALTER_ELEMENT##.custom.vol_frame       \
-                !VAL_mcp_hide_faders_bottom{0}          \
-                    ?VAL_mcp_show_vol{0}                \
-                        !VAL_mcp_vol_knob{0}            \
-                            WALTER_ELEMENT##.volume     \
-                            0                           \
-                        0                               \
-                    0
-
-            set WALTER_ELEMENT##.custom.vol_knob_frame                                                      \
-                !VAL_mcp_hide_faders_bottom{0}                                                              \
-                    ?VAL_mcp_show_vol{0}                                                                    \
-                        ?VAL_mcp_vol_knob{0}                                                                \
-                            [CUR_x{0}       CUR_y_volknob{0}    VAL_Knob{0}     VAL_Knob{0}     0 0 0 0]    \
-                            0                                                                               \
-                        0                                                                                   \
-                    0
-
-    	    ; ::: Layout [Pan next to Volume]
+    	    ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+            ;       Layout -> Pan next to Volume
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
 
             ; pan section visibility
             set VAL_mcp_show_pansection                         \
@@ -3758,10 +4067,11 @@
             ; x position offset
             set CUR_x_fader + CUR_x VAL_Fader{1}
 
+            ; [ROUND]
             ; fader height
-            set CUR_h                                               \
-                ?VAL_mcp_faders_show_width{0}                       \
-                    * 0.5 - CUR_h{0} VAL_mcp_spacing_fader_y{0}
+            set CUR_h                                                                                                   \
+                ?VAL_mcp_faders_show_width{0}                                                                           \
+                    + VAL_rounding_constant{0} - * 0.5 - CUR_h{0} VAL_mcp_spacing_fader_y{0} VAL_rounding_constant{0}
 
             set VAL_mcp_show_pansection                 \
                 CUR_h{0}<VAL_mcp_vol_h_min_show{0}      \
@@ -3772,27 +4082,44 @@
                     CUR_h{0}<VAL_mcp_vol_h_min_show{0}  \
                         0
 
-            ; minimal height knob mode
-            set VAL_mcp_pan_knobs                       \
-                    CUR_h{0}<VAL_mcp_vol_h_min_knob{0}  \
-                        1                               \
-                        0
+            ; knob mode detection
+            set VAL_mcp_pan_knobs                                   \
+                    ?VAL_mcp_show_pansection{0}                     \
+                        CUR_h{0}<VAL_mcp_vol_h_min_knob{0}          \
+                            1                                       \
+                            0                                       \
+                    0
 
             ; knob y offset
             set CUR_y_knob_offset * 0.5 - CUR_h{0} VAL_Knob{0}
 
+            ; knob mode override -> volume
+            set WALTER_ELEMENT##.volume.fadermode    \
+                ?VAL_mcp_show_pansection{0}         \
+                    ?VAL_mcp_pan_knobs{0}           \
+                        1                           \
+                        -1
+
+            ; volume knob instruction override
+            set VAL_mcp_vol_knob                \
+                ?VAL_mcp_show_pansection{0}     \
+                    ?VAL_mcp_pan_knobs{0}       \
+                        1
+
+            ; knob mode override -> pan
             set WALTER_ELEMENT##.pan.fadermode      \
                 ?VAL_mcp_show_pansection{0}         \
                     ?VAL_mcp_pan_knobs{0}           \
                         1                           \
                         -1
 
+            ; knob mode override -> pan
             set WALTER_ELEMENT##.width.fadermode    \
                 ?VAL_mcp_show_pansection{0}         \
                     ?VAL_mcp_pan_knobs{0}           \
                         1                           \
                         -1
-
+            
             ; [DRAW] pan
             set WALTER_ELEMENT##.pan                                                                                                    \
                 ?VAL_mcp_show_pansection{0}                                                                                             \
@@ -3813,18 +4140,18 @@
                         ?VAL_mcp_pan_knobs{0}           \
                             WALTER_ELEMENT##.pan
 
-            ; y position increment
-            set CUR_y                                                   \
-                ?VAL_mcp_show_pansection{0}                             \
-                    + CUR_y{0} + CUR_h{0} VAL_mcp_spacing_fader_y{0}
+            
+            ; width y position
+            set CUR_y                                                           \
+                + VAL_mcp_bottom_faders_y{0} - CUR_h_vol_fader{0} CUR_h{0}
 
             ; [DRAW] width
-            set WALTER_ELEMENT##.width                                                                                                          \
-                ?VAL_mcp_show_pansection{0}                                                                                                     \
-                    ?VAL_mcp_faders_show_width{0}                                                                                               \
-                        !VAL_mcp_hide_faders_bottom{0}                                                                                          \
-                            !VAL_mcp_pan_knobs{0}                                                                                               \
-                                [   CUR_x_fader{0}  CUR_y{0}    CUR_w_fader{0}  CUR_h{0}        0 0 0 0]                                        \
+            set WALTER_ELEMENT##.width                                                                                              \
+                ?VAL_mcp_show_pansection{0}                                                                                         \
+                    ?VAL_mcp_faders_show_width{0}                                                                                   \
+                        !VAL_mcp_hide_faders_bottom{0}                                                                              \
+                            !VAL_mcp_pan_knobs{0}                                                                                   \
+                                [   CUR_x_fader{0}  CUR_y{0}    CUR_w_fader{0}  CUR_h{0}        0 0 0 0]                            \
                                 + [ CUR_x{0}        CUR_y{0}    VAL_Knob{0}     VAL_Knob{0}     0 0 0 0] CUR_y_knob_offset{0}@y
 
             set WALTER_ELEMENT##.custom.wid_frame           \
@@ -3841,9 +4168,42 @@
                             ?VAL_mcp_pan_knobs{0}           \
                                 WALTER_ELEMENT##.width
 
-            ; ::: End [Pan next to Volume]
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+            ;       Volume Fader Placement
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-            ; z order
+            ; [DRAW] volume
+            set WALTER_ELEMENT##.volume                                                                                 \
+                !VAL_mcp_hide_faders_bottom{0}                                                                          \
+                    ?VAL_mcp_show_vol{0}                                                                                \
+                        !VAL_mcp_vol_knob{0}                                                                            \
+                            [CUR_x_vol_fader{0}     CUR_y_vol_fader{0}  CUR_w_fader{0}  CUR_h_vol_fader{0}  0 0 0 0]    \
+                            [CUR_x_vol_knob{0}  CUR_y_volknob{0}    VAL_Knob{0}     VAL_Knob{0}         0 0 0 0]
+
+            ; [DRAW] volume fader frame
+            set WALTER_ELEMENT##.custom.vol_frame       \
+                !VAL_mcp_hide_faders_bottom{0}          \
+                    ?VAL_mcp_show_vol{0}                \
+                        !VAL_mcp_vol_knob{0}            \
+                            WALTER_ELEMENT##.volume     \
+                            0                           \
+                        0                               \
+                    0
+
+            ; [DRAW] volume knob frame
+            set WALTER_ELEMENT##.custom.vol_knob_frame                                                              \
+                !VAL_mcp_hide_faders_bottom{0}                                                                      \
+                    ?VAL_mcp_show_vol{0}                                                                            \
+                        ?VAL_mcp_vol_knob{0}                                                                        \
+                            [CUR_x_vol_knob{0}       CUR_y_volknob{0}    VAL_Knob{0}     VAL_Knob{0}     0 0 0 0]   \
+                            0                                                                                       \
+                        0                                                                                           \
+                    0
+
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+            ;       Z-Order
+            ; ::::::::::::::::::::::::::::::::::::::::::::::::::
+
             front WALTER_ELEMENT##.volume
             front WALTER_ELEMENT##.pan
             front WALTER_ELEMENT##.width
@@ -3872,9 +4232,9 @@
         macro MAC_DrawMcp_Folder SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; position setup
-            set CUR_x_rightmost     - VAL_mcp_w_full{0} VAL_mcp_x_extension_folder{0}
-            set CUR_x               - CUR_x_rightmost{0} VAL_Button_Folder{0}
-            set CUR_y               - VAL_mcp_h{0} VAL_mcp_y_offset{0}
+            set CUR_x_rightmost     -   VAL_mcp_w_full{0}   VAL_mcp_x_extension_folder{0}
+            set CUR_x               -   CUR_x_rightmost{0}  VAL_Button_Folder{0}
+            set CUR_y               -   VAL_mcp_h{0}        VAL_mcp_y_offset{0}
             
 
             ; [DRAW] Folder Icon
@@ -3894,15 +4254,14 @@
                         - 0 VAL_Pad{0}
 
             ; folder icon width
-            set CUR_w                                                   \
-                folderstate<0                                           \
-                    par_mcp_gen_folder_icon_folder==1                   \
-                        * 0.6 VAL_Button_Folder{0}                      \
-                        - CUR_x_rightmost * 0.3 VAL_Button_Folder{0}    \
-                folderstate==0                                          \
-                    par_mcp_gen_folder_icon_folder==2                   \
-                        + VAL_mcp_w_full{0} * 2 VAL_Pad{0}
-
+            set CUR_w                                                       \
+                folderstate<0                                               \
+                    par_mcp_gen_folder_icon_folder==1                       \
+                        * 0.6 VAL_Button_Folder{0}                          \
+                        - CUR_x_rightmost{0} * 0.5 VAL_Button_Folder{0}     \
+                folderstate==0                                              \
+                    par_mcp_gen_folder_icon_folder==2                       \
+                        CUR_w_bg{0}
 
             ; folder icon height
             set CUR_h * 0.5 VAL_Button_Folder{0}
@@ -3913,31 +4272,26 @@
                     folderstate<0                                                       \
                         + [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1] VAL_Pad{0}@y
 
-            ; [DRAW] Last Track in Folder Icon - Lines activateed
-            set WALTER_ELEMENT##.custom.folder_last                     \
-                par_mcp_gen_folder_icon_folder==2                       \
-                    folderstate<0                                       \
-                        [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]
+            ; [DRAW] Last Track in Folder Icon (lines activated)
+            set WALTER_ELEMENT##.custom.folder_last                 \
+                par_mcp_gen_folder_icon_folder==2                   \
+                    folderstate<0                                   \
+                        [0 CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]
 
 
-            ; x-offset for nested folders
-            set CUR_x               \
-                folderstate>0       \
-                    - 0 VAL_Pad{0}
-
-            ; width for nested folders
+            ; width of line for nested folder tracks
             set CUR_w                                               \
                 folderstate>0                                       \
                     - CUR_x_rightmost{0} VAL_Button_Folder{0}
 
-            ; [DRAW] Child Track
-            set WALTER_ELEMENT##.custom.folder_child                        \
-                par_mcp_gen_folder_icon_folder==2                           \
-                    folderdepth>0                                           \
-                        folderstate>=0                                      \
-                            [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]   \
-                            0                                               \
-                        0                                                   \
+            ; [DRAW] Child Track (lines activated)
+            set WALTER_ELEMENT##.custom.folder_child                \
+                par_mcp_gen_folder_icon_folder==2                   \
+                    folderdepth>0                                   \
+                        folderstate>=0                              \
+                            [0 CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]  \
+                            0                                       \
+                        0                                           \
                     0
 
             ; update z order
@@ -3956,7 +4310,7 @@
             macro MAC_DrawMcp_Font_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; inserts
-                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} ##WALTER_ELEMENT##.extmixer.position{w} 0 0 0 0]
                 set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
                 set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxlist.font
                 set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
@@ -5688,7 +6042,7 @@
             ; y position of line
             set CUR_y_line                              \
                 par_tcp_gen_folder_icon_collapse==2     \
-                    - 0 * 2 VAL_Pad{0}                  \
+                    0                       \
                     + CUR_y VAL_Pad{0}
 
             ; x position of line
@@ -5706,9 +6060,9 @@
             ; line height
             set CUR_h_line                                              \
                 folderstate>0                                           \
-                    - WALTER_ELEMENT##.size{1} VAL_Button_Folder{0}     \
+                    - WALTER_ELEMENT##.size{1} VAL_tcp_h{0}             \
                 folderstate==0                                          \
-                    + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}           \
+                    - WALTER_ELEMENT##.size{1} VAL_Border{0}            \
                 folderstate<0                                           \
                     par_tcp_gen_folder_icon_collapse==2                 \
                         - tcp.size{1} * 0.5 VAL_Button_Folder{0}        \

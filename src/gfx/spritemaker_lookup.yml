@@ -105,6 +105,14 @@ universal:
     generic_button_symbol_partial: [209, 209, 209]
     generic_button_border: [40, 40, 40, 1]
 
+    # midi table
+    midi_table_button_bg_off: [75,75,75]
+    midi_table_button_bg_partial: [120,120,120]
+    midi_table_button_bg_on: [200,200,200]
+    midi_table_button_symbol_off: [240,240,240]
+    midi_table_button_symbol_on: [40,40,40]
+    midi_table_button_symbol_partial: [200,200,200]
+
     # generic fader
     generic_fader_bg: [50, 50, 50, 0.5]
     generic_fader_border: [0, 0, 0, 0.5]
@@ -191,14 +199,12 @@ universal:
     insert_send_meter: [0, 0, 0, 0.2]
     insert_send_knob_border: [30, 30, 30, 1]
     insert_send_knob_0: [20, 20, 20]
-    insert_send_knob_1: [215, 178, 99]
+    insert_send_knob_1: [174, 138, 73]
     insert_send_knob_2: [255, 255, 255]
 
-    # fx parameter
-    insert_slot_fxparm: [0, 0, 0, 0.25]
-    insert_fxparm_bg: [0, 0, 0, 0.25]
-    insert_fxparm_border: [255, 255, 255, 1]
-
+    # fx parameters
+    insert_slot_fxparm: [20,20,20]
+    
     # track icon
     track_icon_bg: [64, 64, 64]
     track_icon_bg_select: [69,69,69]
@@ -211,7 +217,8 @@ universal:
     knob_line_pan: [113, 210, 174]
     knob_line_wid: [116, 180, 208]
     knob_line_border: [30, 30, 30, 1]
-
+    knob_centerdot: [255,255,255,0.2]
+    
     # meter
     meter_bg: [45, 45, 45]
     meter_border: [30, 30, 30, 1]
@@ -328,6 +335,14 @@ dimmed:
     generic_button_symbol_partial: [213, 213, 213]
     generic_button_border: [40,40,40, 1]
 
+    # midi table
+    midi_table_button_bg_off: [90,90,90]
+    midi_table_button_bg_partial: [140,140,140]
+    midi_table_button_bg_on: [220,220,220]
+    midi_table_button_symbol_off: [245,245,245]
+    midi_table_button_symbol_on: [50,50,50]
+    midi_table_button_symbol_partial: [210,210,210]
+
     # generic fader
     generic_fader_bg: [86, 86, 86, 0.5]
     generic_fader_border: [0, 0, 0, 0.5]
@@ -353,7 +368,7 @@ dimmed:
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [90,90,90]
     transport_rate_knob_line: [250,250,250]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_line_border: [0,0,0,0]
     transport_rate_fader_bg: [90,90,90]
     transport_rate_fader_knob: [235,235,235]
     transport_tap_bg: [235, 235, 235, 0]
@@ -404,14 +419,12 @@ dimmed:
     insert_send_meter: [0, 0, 0, 0.2]
     insert_send_knob_border: [40, 40, 40]
     insert_send_knob_0: [30, 30, 30]
-    insert_send_knob_1: [233, 199, 124]
+    insert_send_knob_1: [188, 156, 94]
     insert_send_knob_2: [255, 255, 255]
 
-    # fx parameter
-    insert_slot_fxparm: [0, 0, 0, 0.6]
-    insert_fxparm_bg: [0, 0, 0, 0.25]
-    insert_fxparm_border: [0, 0, 0, 0.5]
-
+    # fx parameters
+    insert_slot_fxparm: [35,35,35]
+    
     # track icon
     track_icon_bg: [112,112,112]
     track_icon_bg_select: [117,117,117]
@@ -424,6 +437,7 @@ dimmed:
     knob_line_pan: [142, 221, 191]
     knob_line_wid: [130, 204, 237]
     knob_line_border: [40,40,40,1]
+    knob_centerdot: [0,0,0,0.15]
 
     # meter
     meter_bg: [61,61,61]
@@ -522,11 +536,11 @@ light:
     gui_bg: [214,214,214]
     gui_tab_off: [137, 137, 137]
     gui_scrollbar_bg: [214,214,214]
-    gui_scrollbar_bar: [130,130,130]
-    gui_scrollbar_symbols: [120,120,120]
+    gui_scrollbar_bar: [150,150,150]
+    gui_scrollbar_symbols: [140,140,140]
     gui_scrollbar_window_bg: [230,230,230]
-    gui_scrollbar_window_bar: [150,150,150]
-    gui_scrollbar_window_symbols: [140,140,140]
+    gui_scrollbar_window_bar: [130,130,130]
+    gui_scrollbar_window_symbols: [120,120,120]
 
     # generic button
     generic_button_bg_off: [131,131,131]
@@ -536,6 +550,14 @@ light:
     generic_button_symbol_on: [0, 0, 0]
     generic_button_symbol_partial: [233, 233, 233]
     generic_button_border: [75,75,75]
+
+    # midi table
+    midi_table_button_bg_off: [120,120,120]
+    midi_table_button_bg_partial: [175,175,175]
+    midi_table_button_bg_on: [250,250,250]
+    midi_table_button_symbol_off: [255,255,255]
+    midi_table_button_symbol_on: [65,65,65]
+    midi_table_button_symbol_partial: [240,240,240]
 
     # generic fader
     generic_fader_bg: [148, 148, 148, 0.5]
@@ -612,14 +634,12 @@ light:
     insert_send_meter: [0, 0, 0, 0.2]
     insert_send_knob_border: [50,50,50, 0]
     insert_send_knob_0: [50,50,50]
-    insert_send_knob_1: [241, 208, 138]
+    insert_send_knob_1: [194, 163, 105]
     insert_send_knob_2: [255, 255, 255]
 
-    # fx parameter
-    insert_slot_fxparm: [0, 0, 0, 0.4]
-    insert_fxparm_bg: [0, 0, 0, 0.25]
-    insert_fxparm_border: [75,75,75]
-
+    # fx parameters
+    insert_slot_fxparm: [60,60,60]
+    
     # track icon
     track_icon_bg: [190, 190, 190]
     track_icon_bg_select: [195,195,195]
@@ -631,7 +651,8 @@ light:
     knob_line: [255, 255, 255]
     knob_line_pan: [176, 239, 215]
     knob_line_wid: [155, 209, 233]
-    knob_line_border: [0, 0, 0, 0.4]
+    knob_line_border: [60,60,60,1]    
+    knob_centerdot: [0,0,0,0.15]
 
     # meter
     meter_bg: [90,90,90]

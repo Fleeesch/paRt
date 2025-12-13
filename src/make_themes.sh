@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#   Constants
+# --------------------------------------------
+
+BYPASS_COPY_FILE="bypass_copy"
+
 #   Colors
 # --------------------------------------------
 
@@ -220,6 +225,9 @@ fi
 
 if [ "$rebuild_assets" = true ]; then
 
+    # create a file that informs the spritemaker that copying shall by bypassed
+    touch "$BYPASS_COPY_FILE"
+
     print_info_line "Rebuilding all assets..."
 
     base_dir="./gfx"
@@ -237,6 +245,10 @@ if [ "$rebuild_assets" = true ]; then
         fi
     done
     cd "$org_path"
+
+    # remove copy blocking file
+    rm -f "$BYPASS_COPY_FILE"
+
 fi
 
 #   Walter / Theme Files
