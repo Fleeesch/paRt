@@ -1,16 +1,23 @@
-WALTER: included pseudo-rounding into rtconfig.txt to maximize pixel precision
-WALTER: added readme and additional descriptive comments to rtconfig.txt
-Transport: Updated Theme Adjuster icon
-TCP: Added additional padding to inserts when displayed as separate block
-TCP: fixed volume readout label background orientation (was flipped)
-TCP: fixed master track meter height
-MCP: corrected inserts section size when displayed as sidebar
-MCP: allow smaller vertical fader height in strip layout
-MCP: minor fx slot margins correction
-Theme Adjuster: updated hint messages
-Theme Adjuster: updated bank button icon
-Theme Adjuster: updated size scaling toggle icon
-Theme Adjuster: organized fader layout (buttons on left side)
-Theme Adjuster: reworked light theme color palette
-Tweak: higher contrast for scrollbars
-Tweak: light theme color tweaks
+Folder Indentation: added small interceptions to lines
+Knobs: thinner strokes on 100% for TCP
+Knobs: subtle center dot for pan and width knobs
+Knobs: Volume knob uses two layers of strokes for indicating +0dB
+Knobs: darker send knob background
+MCP: added empty insert slot bitmaps for all elements (fx, parameter, sends)
+MCP: tweaked inserts slot margins
+MCP: when using block layout the volume fader follows knob mode of panning section
+MCP: fixed minor vertical misalignment for width fader in block layout
+MCP: fixed bug where envelope button symbol was missing on wide button layout
+MCP: optimized dynamic vertical scaling for panning section
+TCP: added empty insert slot bitmaps (fx, parameter, sends)
+MIDI Editor: overhauled table grid and button colors
+Theme Adjuster: fixed bug where non-paRt theme would be diagnosed as version-mismatch
+Theme Adjuster: fixed hint message bug for TCP inserts slot size
+Theme Adjuster: minor hint message corrections and tweaks
+Theme Adjuster: fixed vertical offset for text elements
+Theme Adjuster: fixed TCP fader configuration table header image position
+Theme Adjuster: minor layout adjustments
+Transport: removed extra space toggle for Automation Button
+Transport: replaced playrate-knob pointer with stroke-shape
+updated custom splash images
+minor color and bitmap tweaks

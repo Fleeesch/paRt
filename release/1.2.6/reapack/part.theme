@@ -1,0 +1,58 @@
+@version 1.2.6
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+  
+  * 3 theme variants with different brightness levels and parameter synchronization
+  * Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Complete coverage of all Reaper V7 UI elements
+  * Custom Theme Adjuster with extensive configuration options
+@changelog
+  - Folder Indentation: added small interceptions to lines
+  - Knobs: thinner strokes on 100% for TCP
+  - Knobs: subtle center dot for pan and width knobs
+  - Knobs: Volume knob uses two layers of strokes for indicating +0dB
+  - Knobs: darker send knob background
+  - MCP: added empty insert slot bitmaps for all elements (fx, parameter, sends)
+  - MCP: tweaked inserts slot margins
+  - MCP: when using block layout the volume fader follows knob mode of panning section
+  - MCP: fixed minor vertical misalignment for width fader in block layout
+  - MCP: fixed bug where envelope button symbol was missing on wide button layout
+  - MCP: optimized dynamic vertical scaling for panning section
+  - TCP: added empty insert slot bitmaps (fx, parameter, sends)
+  - MIDI Editor: overhauled table grid and button colors
+  - Theme Adjuster: fixed bug where non-paRt theme would be diagnosed as version-mismatch
+  - Theme Adjuster: fixed hint message bug for TCP inserts slot size
+  - Theme Adjuster: minor hint message corrections and tweaks
+  - Theme Adjuster: fixed vertical offset for text elements
+  - Theme Adjuster: fixed TCP fader configuration table header image position
+  - Theme Adjuster: minor layout adjustments
+  - Transport: removed extra space toggle for Automation Button
+  - Transport: replaced playrate-knob pointer with stroke-shape
+  - updated custom splash images
+  - minor color and bitmap tweaks
