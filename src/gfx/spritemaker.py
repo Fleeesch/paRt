@@ -10,6 +10,8 @@ import shlex
 #   Globals
 # ------------------------------------------------------------------
 
+
+
 # filter command
 command_list = [
     "folder",
@@ -20,6 +22,7 @@ command_list = [
     "fill",
 ]
 
+BYPASS_COPY_FILE = "bypass_copy"
 
 default_copy_info = [[["out/dark", 0], "/root/int/dev/reaper/theming/paRt/reaper/dev/ColorThemes/paRt_dark"]]
 default_copy_on = False
@@ -221,6 +224,12 @@ def print_done_str():
     END = '\033[0m'
     print(f'{GREEN}{"done"}{END}')
 
+# ------------------------------------------------------------------
+#   Method : Check for Copy Bypass
+# ------------------------------------------------------------------
+
+def copy_is_allowed():
+    return not os.path.exists(f'{BYPASS_COPY_FILE}')
 
 # ------------------------------------------------------------------
 #   Method : Show Palette
@@ -326,12 +335,13 @@ def load_config_data():
                 if "settings" in data:
                     
                     settings = data["settings"]
-
-                    if "copy_dev_info" in settings:
-                        default_copy_info = settings["copy_dev_info"]
                     
-                    if "copy_dev_on" in settings and settings["copy_dev_on"] == True:
-                        default_copy_on = True
+                    if copy_is_allowed():
+                        if "copy_dev_info" in settings:
+                            default_copy_info = settings["copy_dev_info"]
+                        
+                        if "copy_dev_on" in settings and settings["copy_dev_on"] == True:
+                            default_copy_on = True
 
                 # convert rgb to tuples
                 for group in data:
@@ -1446,7 +1456,7 @@ def process_direct(args=""):
     
     # copy files using defaults
     if "copy-files" in args:
-        if default_copy_on:
+        if default_copy_on and copy_is_allowed():
             for copy_info in default_copy_info:
                 copy_files_to(copy_info[0][0],copy_info[0][1],copy_info[1])
         return    

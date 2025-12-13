@@ -121,10 +121,10 @@
 # --------------------------------------
 
 # background
---out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          
---out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   
---out track_custom_insert_bg            --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border -tint insert_border
---out track_custom_insert_bg_select     --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border -tint insert_border
+--out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border_inner   -tint insert_border
+--out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border_inner   -tint insert_border
+--out track_custom_insert_bg            --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border          -tint insert_border
+--out track_custom_insert_bg_select     --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border          -tint insert_border
 
 # section handle
 #--out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg   --frame frame_section --images bg_section -tint insert_divider
@@ -135,7 +135,8 @@
 --out tcp_fxembed_header_bg_h     --frame frame -fit --images bg_b -tint button_label_bg
 
 # empty slots
---out mcp_fxlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot -tint insert_slot_empty -frame 0 0 ins_slot -tint insert_slot_empty_hover -frame 1 1 ins_slot -tint insert_slot_empty_click -frame 2 2
+--out mcp_fxlist_empty mcp_fxparm_empty mcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint insert_slot_empty -frame 0 0 ins_slot         -tint insert_slot_empty_hover -frame 1 1 ins_slot       -tint insert_slot_empty_click -frame 2 2
+--out tcp_fxlist_empty tcp_fxparm_empty tcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot_tcp  -tint insert_slot_empty -frame 0 0 ins_slot_tcp     -tint insert_slot_empty_hover -frame 1 1 ins_slot_tcp   -tint insert_slot_empty_click -frame 2 2
 
 # fx insert slot
 --out mcp_fxlist_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray

@@ -269,8 +269,10 @@ def create_web_thumb(sshot,out_name,FitScreenshot=True):
     # screenshot
     img_sshot = Image.open(sshot).convert("RGBA")
 
-    target_width = img_thumb_header_bg.width * 2
-    target_height = img_thumb_header_bg.height * 2
+    # target_width = img_thumb_header_bg.width * 2
+    # target_height = img_thumb_header_bg.height * 2
+    target_width = 1280
+    target_height= 720
 
     # resize screenshot
     if FitScreenshot:
@@ -278,7 +280,7 @@ def create_web_thumb(sshot,out_name,FitScreenshot=True):
         new_width = target_width
         new_height = int(new_width * aspect_ratio)
         img_sshot = img_sshot.resize((new_width, new_height), Image.LANCZOS)
-        
+
     # crop screenshot
     left = 0
     right = target_width
