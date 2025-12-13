@@ -28,15 +28,15 @@
 --out knob_stack                --mask-template stack_trans_bg              --images stack_trans_line_border                    -mask       -tint transport_rate_knob_line_border       stack_trans_line        -mask       -tint transport_rate_knob_line
 
 # volume
---out mcp_vol_knob_stack        --mask-template stack_mcp_mask_inner_2nd    --images    stack_mcp_stroke_lin_border_phase_1     -mask       -tint knob_line_border                      stack_mcp_stroke_lin_phase_1        -tint knob_line         stack_mcp_stroke_lin_border_phase_2     -mask   -tint knob_line_border      stack_tcp_stroke_lin_phase_2    -tint color_yellow
+--out mcp_vol_knob_stack        --mask-template stack_mcp_mask_inner_2nd    --images    stack_mcp_stroke_lin_border_phase_1     -mask       -tint knob_line_border                      stack_mcp_stroke_lin_phase_1        -tint knob_line         stack_mcp_stroke_lin_border_phase_2     -mask   -tint knob_line_border      stack_mcp_stroke_lin_phase_2    -tint color_yellow
 --out tcp_vol_knob_stack        --mask-template stack_tcp_mask_inner_2nd    --images    stack_tcp_stroke_lin_border_phase_1     -mask       -tint knob_line_border                      stack_tcp_stroke_lin_phase_1        -tint knob_line         stack_tcp_stroke_lin_border_phase_2     -mask   -tint knob_line_border      stack_tcp_stroke_lin_phase_2    -tint color_yellow
 
 # pan
---out mcp_pan_knob_stack        --mask-template stack_mcp_mask_inner        --images    stack_mcp_stroke_border                 -mask       -tint knob_line_border                      stack_mcp_stroke                    -tint knob_line_pan     stack_tcp_stroke_center                         -tint knob_centerdot
+--out mcp_pan_knob_stack        --mask-template stack_mcp_mask_inner        --images    stack_mcp_stroke_border                 -mask       -tint knob_line_border                      stack_mcp_stroke                    -tint knob_line_pan     stack_mcp_stroke_center                         -tint knob_centerdot
 --out tcp_pan_knob_stack        --mask-template stack_tcp_mask_inner        --images    stack_tcp_stroke_border                 -mask       -tint knob_line_border                      stack_tcp_stroke                    -tint knob_line_pan     stack_tcp_stroke_center                         -tint knob_centerdot
 
 # width
---out mcp_wid_knob_stack        --mask-template stack_mcp_mask_inner        --images    stack_mcp_stroke_border                 -mask       -tint knob_line_border                      stack_mcp_stroke                    -tint knob_line_wid     stack_tcp_stroke_center                         -tint knob_centerdot
+--out mcp_wid_knob_stack        --mask-template stack_mcp_mask_inner        --images    stack_mcp_stroke_border                 -mask       -tint knob_line_border                      stack_mcp_stroke                    -tint knob_line_wid     stack_mcp_stroke_center                         -tint knob_centerdot
 --out tcp_wid_knob_stack        --mask-template stack_tcp_mask_inner        --images    stack_tcp_stroke_border                 -mask       -tint knob_line_border                      stack_tcp_stroke                    -tint knob_line_wid     stack_tcp_stroke_center                         -tint knob_centerdot
 
 # envcp

@@ -3,7 +3,7 @@
 ;
 ;       Theme: dark
 ;       Version: 1.2.6
-;       Date: 2025-12-13 01:59:59
+;       Date: 2025-12-13 03:02:58
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
 
 
@@ -454,8 +454,8 @@ define_parameter par_user_switch_7 'User - Switch - 7' 0 0 1
 define_parameter par_bank_selected 'Selected Bank' 2 2 9
 define_parameter par_colors_track_envcp_bg_tint 'Colors - Track - ENVCP Background Select' 260 0 1000
 define_parameter par_colors_track_envcp_bg_tone 'Colors - Track - ENVCP Background Tone' 653 0 1000
-define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_bg_tint 'Colors - Track - ENVCP Label Background Select' 0 0 1000
+define_parameter par_colors_track_envcp_label_bg_Tone 'Colors - Track - ENVCP Label Background Tone' 453 0 1000
 define_parameter par_colors_track_envcp_label_readout_tone 'Colors - Track - ENVCP Label Readout Tone' 0 0 1000
 define_parameter par_colors_track_envcp_label_text_tone 'Colors - Track - ENVCP Label Text Tone' 459 0 1000
 define_parameter par_colors_track_folder_foldertrack_tint 'Colors - Track - Folder Track Tint' 500 0 1000
