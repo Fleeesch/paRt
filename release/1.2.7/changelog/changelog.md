@@ -1,0 +1,9 @@
+**1.2.7 - Changelog**
+- Transport: last button in chain will never apply extra space
+- Transport: removed button spacing before first drawn button
+- TCP: hide everything (including meter) when track is minimized
+- TCP: added new infobar element as an optional part of the label
+- TCP: wider volume readout block
+- Items: implemented left edge colors
+- Theme Adjuster: added TCP-infobar toggle switch
+- Theme Adjuster: layout tweaks for a more streamlined interface

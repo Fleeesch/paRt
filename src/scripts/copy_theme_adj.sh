@@ -53,10 +53,10 @@ if [ "$dir_to_dev_folder" == false ]; then
             rm -rf "$target_folder"/*
 
             # copy contents excluding parameter files
-            rsync -a --quiet                        \
-            --exclude "parameters.partmap"          \
-            --exclude "last_theme.partmap"          \
-            --exclude "conf/slot/**.partmap"                \
+            rsync -a --quiet                            \
+            --exclude "parameters.partmap"              \
+            --exclude "last_theme.partmap"              \
+            --exclude "conf/slot/**.partmap"            \
             "$source_folder/" "$target_folder/"
 
             echo -e "${COLOR_GREEN}done${COLOR_RESET}"
@@ -66,32 +66,33 @@ if [ "$dir_to_dev_folder" == false ]; then
 
 else
 
+    echo "INFO: Updating Theme Adjuster in Development Folder is currently bypassed"
 
-    echo -en "Updating theme adjuster in development folder..."
+    # echo -en "Updating theme adjuster in development folder..."
 
-    source_folder_bu="$source_folder"
-    source_folder="$target_folder"
-    target_folder="$source_folder_bu"
+    # source_folder_bu="$source_folder"
+    # source_folder="$target_folder"
+    # target_folder="$source_folder_bu"
 
-    # source has to be available
-    if [ ! -d "$source_folder" ]; then
-        echo -e "${COLOR_RED}no Theme Adjuster found${COLOR_RESET}"
-    else
+    # # source has to be available
+    # if [ ! -d "$source_folder" ]; then
+    #     echo -e "${COLOR_RED}no Theme Adjuster found${COLOR_RESET}"
+    # else
 
-        # check if source folder is empty
-        if [ -z "$(ls -A "$source_folder")" ]; then
-            echo -e "${COLOR_RED}Source folder is empty${COLOR_RESET}"
-        else
-            # clear first
-            rm -rf "$target_folder"/*
+    #     # check if source folder is empty
+    #     if [ -z "$(ls -A "$source_folder")" ]; then
+    #         echo -e "${COLOR_RED}Source folder is empty${COLOR_RESET}"
+    #     else
+    #         # clear first
+    #         rm -rf "$target_folder"/*
 
-            # copy
-            rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
-            rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
+    #         # copy
+    #         rsync -a --quiet "$source_folder/conf/defaults.partmap" "$target_folder/conf/"
+    #         rsync -a --quiet --exclude "conf" "$source_folder/" "$target_folder/"
 
-            echo -e "${COLOR_GREEN}done${COLOR_RESET}"
-        fi
+    #         echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+    #     fi
 
-    fi
+    # fi
 
 fi

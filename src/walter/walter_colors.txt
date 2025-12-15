@@ -20,7 +20,7 @@ set THEME_color_button_text_on              [1 1 1]
 set THEME_color_button_bg_off               [45 45 45]
 set THEME_color_readout_font                [166 166 166]
 set THEME_color_red                         [210 101 101]
-
+set THEME_color_infobox_text                [25 25 25]
 EndColors
 
 Colors dimmed
@@ -45,7 +45,7 @@ set THEME_color_button_text_on              [10 10 10]
 set THEME_color_button_bg_off               [61 61 61]
 set THEME_color_readout_font                [195 195 195]
 set THEME_color_red                         [238 117 117]
-
+set THEME_color_infobox_text                [35 35 35]
 EndColors
 
 Colors light
@@ -70,5 +70,5 @@ set THEME_color_button_text_on              [30 30 30]
 set THEME_color_button_bg_off               [131 131 131]
 set THEME_color_readout_font                [1 1 1]
 set THEME_color_red                         [234 154 154]
-
+set THEME_color_infobox_text                [50 50 50]
 EndColors
