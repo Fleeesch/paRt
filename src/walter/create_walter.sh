@@ -169,10 +169,10 @@ for theme in "${themes[@]}"; do
     colors_zeroline="$hint_start$(echo "$colors_zeroline" | awk '{gsub(/[\/&]/,"\\\\&",$0); print}')$hint_end"    
 
     # create theme output folder
-    mkdir -p "out/$theme"
+    mkdir -p "out/part_$theme"
 
     # output file
-    output_file="out/$theme/rtconfig.txt"
+    output_file="out/part_$theme/rtconfig.txt"
 
     # theme parameters
     parameter_list=$(cat "$file_parameter_list")

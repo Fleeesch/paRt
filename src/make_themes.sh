@@ -359,7 +359,7 @@ for ((i = 0; i < ${#themes[@]}; i++)); do
     theme=${themes[$i]}
 
     # walter file
-    walter_source_file="$script_walter_folder/out/$theme/rtconfig.txt"
+    walter_source_file="$script_walter_folder/out/part_$theme/rtconfig.txt"
 
     folder=$(get_theme_folder $theme)
     target_dir="./build/$folder"

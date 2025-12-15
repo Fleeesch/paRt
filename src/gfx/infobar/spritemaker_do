@@ -1,0 +1,73 @@
+--clear-output-folder
+
+# background
+--dummy --out tcp_infoblock_bg
+
+# mute
+--out tcp_infoblock_automute                --frame frame_box -fit          --images        fill_inset_s      -tint color_orange        mute_auto       -tint infobox_fg_on         border -tint infobox_border
+--out tcp_infoblock_mute                    --frame frame_box -fit          --images        fill_inset_s      -tint color_orange        mute            -tint infobox_fg_on         border -tint infobox_border
+--out tcp_infoblock_foldermute              --frame frame_box -fit          --images        fill_inset_s      -tint color_orange        mute_folder     -tint infobox_fg_on         border -tint infobox_border
+
+# solo
+--out tcp_infoblock_notsolo                 --frame frame_box -fit          --images        fill_inset_s      -tint infobox_bg_dimmed   mute_solo       -tint infobox_fg_dimmed     border -tint infobox_border
+--out tcp_infoblock_solo_soloinplace        --frame frame_box -fit          --images        fill_inset_s      -tint color_yellow        solo            -tint infobox_fg_on         border -tint infobox_border
+--out tcp_infoblock_solo_solodefeat         --frame frame_box -fit          --images        fill_inset_s      -tint color_yellow        solo_defeat     -tint infobox_fg_on         border -tint infobox_border
+
+# faders
+--out tcp_infoblock_vol_bg                  --frame frame_box -fit          --images        fill_inset_s    -tint infobox_bg_neutral    border -tint infobox_border
+--out tcp_infoblock_width_bg                --frame frame_box -fit          --images        fill_inset_s    -tint knob_line_wid         border -tint infobox_border
+--out tcp_infoblock_pan_bg                  --frame frame_box -fit          --images        fill_inset_s    -tint knob_line_pan         border -tint infobox_border
+--out tcp_infoblock_panl_bg                 --frame frame_box -fit          --images        fill_inset_s    -tint knob_line_pan         border -tint infobox_border
+--out tcp_infoblock_panr_bg                 --frame frame_box -fit          --images        fill_inset_s    -tint knob_line_wid         border -tint infobox_border
+
+# phase
+--out tcp_infoblock_phase_normal            --frame frame_box -fit          --images        fill_inset_s  -tint infobox_bg_dimmed       phase_inverted   -tint infobox_fg_dimmed    -alpha 0.25     phase_normal    -tint infobox_fg_dimmed                                         border -tint infobox_border                                                   
+--out tcp_infoblock_phase_invert            --frame frame_box -fit          --images        fill_inset_s  -tint color_cyan              phase_normal     -tint infobox_fg_on        -alpha 0.25     phase_inverted  -tint infobox_fg_on         phase_arrow -tint infobox_fg_on     border -tint infobox_border
+
+# env
+--out tcp_infoblock_env                     --frame frame_box -fit          --images        fill_inset_s -tint color_gray         env_symbol          -tint infobar_fg_on       env_trim        -tint infobar_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_read                --frame frame_box -fit          --images        fill_inset_s -tint color_green        env_symbol          -tint infobar_fg_on       env_read        -tint infobar_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_latch               --frame frame_box -fit          --images        fill_inset_s -tint color_yellow       env_symbol          -tint infobar_fg_on       env_latch       -tint infobar_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_preview             --frame frame_box -fit          --images        fill_inset_s -tint color_yellow       env_symbol          -tint infobar_fg_on       env_preview     -tint infobar_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_touch               --frame frame_box -fit          --images        fill_inset_s -tint color_violet       env_symbol          -tint infobar_fg_on       env_touch       -tint infobar_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_write               --frame frame_box -fit          --images        fill_inset_s -tint color_red          env_symbol          -tint infobar_fg_on       env_write       -tint infobar_fg_on       border -tint infobox_border
+
+# env - latched
+--out tcp_infoblock_env_latched             --frame frame_box -fit          --images        fill_inset_s -tint color_red          env_symbol          -tint infobox_fg_on       env_latch       -tint infobox_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_preview_latched     --frame frame_box -fit          --images        fill_inset_s -tint color_red          env_symbol          -tint infobox_fg_on       env_preview     -tint infobox_fg_on       border -tint infobox_border
+--out tcp_infoblock_env_touch_touched       --frame frame_box -fit          --images        fill_inset_s -tint color_red          env_symbol          -tint infobox_fg_on       env_touch       -tint infobox_fg_on       border -tint infobox_border
+
+# hide / pin override
+--out tcp_infoblock_hidden_override         --frame frame_box -fit          --images        fill_inset_s -tint infobox_bg_neutral       hide_override       -tint infobox_fg_neutral
+--out tcp_infoblock_pinned_override         --frame frame_box -fit          --images        fill_inset_s -tint infobox_bg_neutral       pin_override        -tint infobox_fg_neutral
+
+# record
+--out tcp_infoblock_recarm_norec            --frame frame_box -fit          --images      fill_inset_s      -tint infobox_bg_dimmed     rec_symbol  -tint infobox_fg_dimmed       rec_disabled            -tint infobox_fg_dimmed       border -tint infobox_border
+--out tcp_infoblock_recarm_input            --frame frame_box -fit          --images      fill_inset_s      -tint color_red             rec_symbol  -tint infobox_fg_on           rec_input               -tint infobox_fg_on           border -tint infobox_border
+--out tcp_infoblock_recarm_output_postfade  --frame frame_box -fit          --images      fill_inset_s      -tint color_orange          rec_symbol  -tint infobox_fg_on           rec_output              -tint infobox_fg_on           border -tint infobox_border
+--out tcp_infoblock_recarm_output_prefade   --frame frame_box -fit          --images      fill_inset_s      -tint color_orange          rec_symbol  -tint infobox_fg_on           rec_output_prefade      -tint infobox_fg_on           border -tint infobox_border
+--out tcp_infoblock_recarm_midi_overdub     --frame frame_box -fit          --images      fill_inset_s      -tint color_violet          rec_symbol  -tint infobox_fg_on           rec_midi_overdub        -tint infobox_fg_on           border -tint infobox_border
+--out tcp_infoblock_recarm_midi_replace     --frame frame_box -fit          --images      fill_inset_s      -tint color_violet          rec_symbol  -tint infobox_fg_on           rec_midi_replace        -tint infobox_fg_on           border -tint infobox_border
+
+# routing
+--out tcp_infoblock_io                      --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint color_cyan            io_send         -tint infobox_io_off        io_receive      -tint infobox_io_off      border -tint infobox_border
+--out tcp_infoblock_io_dis                  --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint infobox_io_off        io_send         -tint infobox_io_off        io_receive      -tint infobox_io_off      border -tint infobox_border
+--out tcp_infoblock_io_r                    --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint color_cyan            io_send         -tint infobox_io_off        io_receive      -tint color_red           border -tint infobox_border
+--out tcp_infoblock_io_r_dis                --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint infobox_io_off        io_send         -tint infobox_io_off        io_receive      -tint color_red           border -tint infobox_border
+--out tcp_infoblock_io_s                    --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint color_cyan            io_send         -tint color_yellow          io_receive      -tint infobox_io_off      border -tint infobox_border
+--out tcp_infoblock_io_s_dis                --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint infobox_io_off        io_send         -tint color_yellow          io_receive      -tint infobox_io_off      border -tint infobox_border
+--out tcp_infoblock_io_s_r                  --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint color_cyan            io_send         -tint color_yellow          io_receive      -tint color_red           border -tint infobox_border
+--out tcp_infoblock_io_s_r_dis              --frame frame_box -fit          --images  fill_inset_s -tint infobox_io_bg    io_master           -tint infobox_io_off        io_send         -tint color_yellow          io_receive      -tint color_red           border -tint infobox_border
+
+# routing - contextual
+--out tcp_infoblock_io_refer_r              --frame frame_box -fit          --images  fill_arrow    -flip-h     -tint color_yellow      io_context_to           -tint infobox_fg_on         fill_arrow_border       -flip-h     -tint infobox_border
+--out tcp_infoblock_io_refer_s              --frame frame_box -fit          --images  fill_arrow                -tint color_red         io_context_from         -tint infobox_fg_on         fill_arrow_border                   -tint infobox_border 
+--out tcp_infoblock_io_refer_s_r            --frame frame_box -fit          --images  fill_arrow_bi             -tint color_cyan        io_context_feedback     -tint infobox_fg_on         fill_arrow_bi_border                -tint infobox_border
+
+# # tempo
+--out tcp_infoblock_timebase_beat           --frame frame_box -fit          --images fill_inset_s    -tint infobox_bg_dimmed        timebase_beat       -tint infobox_fg_dimmed
+--out tcp_infoblock_timebase_beat_on        --frame frame_box -fit          --images fill_inset_s    -tint color_cyan               timebase_beat       -tint infobox_fg_on
+--out tcp_infoblock_timebase_time           --frame frame_box -fit          --images fill_inset_s    -tint infobox_bg_dimmed        timebase_time       -tint infobox_fg_dimmed
+--out tcp_infoblock_timebase_time_on        --frame frame_box -fit          --images fill_inset_s    -tint color_cyan               timebase_time       -tint infobox_fg_on
+
+--copy-files

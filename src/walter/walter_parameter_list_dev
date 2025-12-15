@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.2.6
+part_version 1.2.7
 
     bank_selected 'Selected Bank' 2 2 9
     config_selected 'Selected Configuration' 0 0 7
@@ -186,6 +186,7 @@ part_version 1.2.6
 
     tcp_track_label_size                        'TCP - Track - Size'                                    DEF_tcp_track_label_size                        0           VAL_PAR_RANGE
     tcp_track_label_index_vis                   'TCP - Track - Index Vsibility'                         DEF_tcp_track_label_index_vis                   0           2
+    tcp_track_label_infobox                     'TCP - Track - Info Box'                                DEF_tcp_track_label_infobox                     0           1
 
 
 ;   ENVCP

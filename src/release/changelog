@@ -1,23 +1,8 @@
-Folder Indentation: added small interceptions to lines
-Knobs: thinner strokes on 100% for TCP
-Knobs: subtle center dot for pan and width knobs
-Knobs: Volume knob uses two layers of strokes for indicating +0dB
-Knobs: darker send knob background
-MCP: added empty insert slot bitmaps for all elements (fx, parameter, sends)
-MCP: tweaked inserts slot margins
-MCP: when using block layout the volume fader follows knob mode of panning section
-MCP: fixed minor vertical misalignment for width fader in block layout
-MCP: fixed bug where envelope button symbol was missing on wide button layout
-MCP: optimized dynamic vertical scaling for panning section
-TCP: added empty insert slot bitmaps (fx, parameter, sends)
-MIDI Editor: overhauled table grid and button colors
-Theme Adjuster: fixed bug where non-paRt theme would be diagnosed as version-mismatch
-Theme Adjuster: fixed hint message bug for TCP inserts slot size
-Theme Adjuster: minor hint message corrections and tweaks
-Theme Adjuster: fixed vertical offset for text elements
-Theme Adjuster: fixed TCP fader configuration table header image position
-Theme Adjuster: minor layout adjustments
-Transport: removed extra space toggle for Automation Button
-Transport: replaced playrate-knob pointer with stroke-shape
-updated custom splash images
-minor color and bitmap tweaks
+Transport: last button in chain will never apply extra space
+Transport: removed button spacing before first drawn button
+TCP: hide everything (including meter) when track is minimized
+TCP: added new infobar element as an optional part of the label
+TCP: wider volume readout block
+Items: implemented left edge colors
+Theme Adjuster: added TCP-infobar toggle switch
+Theme Adjuster: layout tweaks for a more streamlined interface

@@ -388,10 +388,10 @@ lpffadecol=65280
 lpffademode=163840
 col_vudbscale=1
 col_vudbscale2=1
-col_mi_left=0
-col_mi_leftb=163840
-col_mi_leftsel=16777215
-col_mi_leftselb=163840
+col_mi_left=7566195
+col_mi_leftb=196608
+col_mi_leftsel=0
+col_mi_leftselb=196608
 
 [REAPER]
 ui_img=part_light

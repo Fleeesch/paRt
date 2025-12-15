@@ -6,7 +6,209 @@
 
 
 
+
+
+
+
 ;THEMEBUILDER_INSERT_README
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;
+;   ==============================================
+;       paRt WALTER File Readme
+;   ==============================================
+;
+;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
+;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
+;   This guide gives you a quick overview of what’s going on in here.
+;   
+;   -----------------------------------
+;       Formatting
+;   -----------------------------------
+;
+;   WALTER doesn’t enforce any formatting rules.
+;   Still, to keep things readable this file relies heavily on line breaks
+;   and follows a somewhat consistent visual layout:
+;
+;       set TargetVariable                                      \
+;           ?condition                                          \
+;               >> value if condition is true <<                \
+;               >> value if condition is false <<
+;
+;   This increases the linecount, but you avoids overly long lines most of the time.
+;
+;   -----------------------------------
+;       Variable Names
+;   -----------------------------------
+;
+;   WALTER doesn’t have variable types, but to keep things organized
+;   this file uses a simple naming scheme:
+;
+;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
+;       "CUR_..."       ->  cursor values that keep getting updated while drawing
+;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
+;
+;   -----------------------------------
+;       "THEMEBUILDER" Blocks
+;   -----------------------------------
+;
+;    Several comment lines in this file contain the word "THEMEBUILDER".
+;    They sometimes come with matching opening and closing comment markers.
+;
+;    These are placeholders that get dynamically replaced with content from other files
+;    during the theme-building process whenever a new release is created.
+;    They include things like the WALTER parameter list or static color values reserved for each theme file.
+;
+;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
+;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
+;    can easily make the Theme Adjuster crash.
+;
+;   -----------------------------------
+;       [BOOKMARKS]
+;   -----------------------------------
+;
+;    There are several comment lines in this file that contain hints written like [THIS].
+;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
+;    Here’s a quick overview:
+;
+;    [LINUX OS FIX]      - exception for Linux operating systems
+;    [MAC OS FIX]        - exception for Apple operating systems
+;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
+;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
+;    [SHARED]            - inserts a macro that’s also used elsewhere
+;    [DEV]               - development tools (these blocks should be commented out for release)
+;
+;   -----------------------------------
+;       Macros
+;   -----------------------------------
+;
+;    This theme file uses macros extensively to streamline repeated code.
+;    All macros start with "MAC_..." so they are easy to identify.
+;
+;    "Shared" Macro Concept:
+;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
+;        These exist to reduce redundancy by covering sections shared across multiple elements.
+;        You don't need to duplicate these sections manually.
+;
+;        Here's an abstract example:
+;
+;            MAC_drawContents_SharedCode_Open
+;                >> code applied to all track types before individual track code <<
+;            endmacro
+                ;
+;            MAC_drawContents_SharedCode_Close
+;                >> code applied to all track types after individual track code <<
+;            endmacro
+;
+;            MAC_drawContentsOfMasterTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code specific to the master track <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
+;            MAC_drawContentsOfArrangeTrack
+;                MAC_drawContents_SharedCode_Open
+;                >> code applied to all non-master tracks <<
+;                MAC_drawContents_SharedCode_Close
+;            endmacro
+;
 ;
 ;   ==============================================
 ;       paRt WALTER File Readme
@@ -558,18 +760,29 @@
                     SCALE>=1.25     [23 18]     \
                                     [18 14]
 
+                ; info box (w / h)
+                set VAL_InfoBox                     \
+                    SCALE>=2.5      [125    35]     \
+                    SCALE>=2.25     [113    32]     \
+                    SCALE>=2        [100    28]     \
+                    SCALE>=1.75     [88     24]     \
+                    SCALE>=1.5      [75     21]     \
+                    SCALE>=1.25     [62     18]     \
+                                    [50     14]
+
+
 
                 set VAL_Button_2            * 2     VAL_Button
 
                 ; transport button
-                set VAL_Button_Trans                \
-                    SCALE>=2.5      [85 45 127]     \
-                    SCALE>=2.25     [77 41 115]     \
-                    SCALE>=2        [68 36 102]     \
-                    SCALE>=1.75     [60 32 90]      \
-                    SCALE>=1.5      [51 27 76]      \
-                    SCALE>=1.25     [43 23 64]      \
-                                    [34 18 51]
+                set VAL_Button_Trans                    \
+                    SCALE>=2.5      [85     45  127 ]   \
+                    SCALE>=2.25     [77     41  115 ]   \
+                    SCALE>=2        [68     36  102 ]   \
+                    SCALE>=1.75     [60     32  90  ]   \
+                    SCALE>=1.5      [51     27  76  ]   \
+                    SCALE>=1.25     [43     23  64  ]   \
+                                    [34     18  51  ]
 
                 ; folder button / icon
                 set VAL_Button_Folder       \
@@ -674,97 +887,97 @@
                 ; label margins
                 set VAL_Margin_Label                            \
                     os_type==2                                  \
-                        SCALE>=2.5      [6 -2 6 VAL_Border]     \
-                        SCALE>=2.25     [5 -6 5 VAL_Border]     \
-                        SCALE>=2        [4 -4 4 VAL_Border]     \
-                        SCALE>=1.75     [4 -3 4 VAL_Border]     \
-                        SCALE>=1.5      [3 -1 3 VAL_Border]     \
-                        SCALE>=1.25     [3 -2 3 VAL_Border]     \
-                                        [3 -1 3 VAL_Border]     \
-                    os_type==1                                  \
-                        SCALE>=2.5      [16 4 16 VAL_Border]    \
-                        SCALE>=2.25     [14 4 14 VAL_Border]    \
-                        SCALE>=2        [12 3 12 VAL_Border]    \
-                        SCALE>=1.75     [11 5 11 VAL_Border]    \
-                        SCALE>=1.5      [9 5 9 VAL_Border]      \
-                        SCALE>=1.25     [8 4 8 VAL_Border]      \
-                                        [6 2 6 VAL_Border]      \
-                        SCALE>=2.5      [6 -4 6 VAL_Border]     \
-                        SCALE>=2.25     [5 -3 5 VAL_Border]     \
-                        SCALE>=2        [4 -2 4 VAL_Border]     \
-                        SCALE>=1.75     [4 -2 4 VAL_Border]     \
-                        SCALE>=1.5      [3 0 3 VAL_Border]      \
-                        SCALE>=1.25     [3 -1 3 VAL_Border]     \
-                                        [3 0 3 VAL_Border]
+                        SCALE>=2.5      [6      -2  6   VAL_Border]     \
+                        SCALE>=2.25     [5      -6  5   VAL_Border]     \
+                        SCALE>=2        [4      -4  4   VAL_Border]     \
+                        SCALE>=1.75     [4      -3  4   VAL_Border]     \
+                        SCALE>=1.5      [3      -1  3   VAL_Border]     \
+                        SCALE>=1.25     [3      -2  3   VAL_Border]     \
+                                        [3      -1  3   VAL_Border]     \
+                    os_type==1                                          \
+                        SCALE>=2.5      [16     4   16  VAL_Border]     \
+                        SCALE>=2.25     [14     4   14  VAL_Border]     \
+                        SCALE>=2        [12     3   12  VAL_Border]     \
+                        SCALE>=1.75     [11     5   11  VAL_Border]     \
+                        SCALE>=1.5      [9      5   9   VAL_Border]     \
+                        SCALE>=1.25     [8      4   8   VAL_Border]     \
+                                        [6      2   6   VAL_Border]     \
+                        SCALE>=2.5      [6      -4  6   VAL_Border]     \
+                        SCALE>=2.25     [5      -3  5   VAL_Border]     \
+                        SCALE>=2        [4      -2  4   VAL_Border]     \
+                        SCALE>=1.75     [4      -2  4   VAL_Border]     \
+                        SCALE>=1.5      [3      0   3   VAL_Border]     \
+                        SCALE>=1.25     [3      -1  3   VAL_Border]     \
+                                        [3      0   3   VAL_Border]
 
 
                 ; vertical label margins
-                set VAL_Margin_Label_vertical           \
-                        SCALE>=2.5      [1 10 1 10]     \
-                        SCALE>=2.25     [1 9 1 9]       \
-                        SCALE>=2        [1 8 1 8]       \
-                        SCALE>=1.75     [1 7 1 7]       \
-                        SCALE>=1.5      [1 6 1 6]       \
-                        SCALE>=1.25     [1 5 1 5]       \
-                                        [1 4 1 4]
+                set VAL_Margin_Label_vertical               \
+                        SCALE>=2.5      [1  10  1   10  ]   \
+                        SCALE>=2.25     [1  9   1   9   ]   \
+                        SCALE>=2        [1  8   1   8   ]   \
+                        SCALE>=1.75     [1  7   1   7   ]   \
+                        SCALE>=1.5      [1  6   1   6   ]   \
+                        SCALE>=1.25     [1  5   1   5   ]   \
+                                        [1  4   1   4   ]
 
                 ; transport time section label margins
-                set VAL_Margin_Label_Trans_Time     \
-                    SCALE>=2.5      [10 5 10 5]     \
-                    SCALE>=2.25     [9 4 9 4]       \
-                    SCALE>=2        [8 4 8 4]       \
-                    SCALE>=1.75     [7 3 7 3]       \
-                    SCALE>=1.5      [6 3 6 3]       \
-                    SCALE>=1.25     [5 2 5 2]       \
-                                    [4 2 4 2]
+                set VAL_Margin_Label_Trans_Time             \
+                    SCALE>=2.5      [10     5   10  5   ]   \
+                    SCALE>=2.25     [9      4   9   4   ]   \
+                    SCALE>=2        [8      4   8   4   ]   \
+                    SCALE>=1.75     [7      3   7   3   ]   \
+                    SCALE>=1.5      [6      3   6   3   ]   \
+                    SCALE>=1.25     [5      2   5   2   ]   \
+                                    [4      2   4   2   ]
 
                 ; transport status margins
-                set VAL_Margin_Label_Trans_Status   \
-                    SCALE>=2.5      [10 0 10 0]     \
-                    SCALE>=2.25     [9 0 9 0]       \
-                    SCALE>=2        [8 0 8 0]       \
-                    SCALE>=1.75     [7 0 7 0]       \
-                    SCALE>=1.5      [6 0 6 0]       \
-                    SCALE>=1.25     [5 0 5 0]       \
-                                    [4 0 4 0]
+                set VAL_Margin_Label_Trans_Status           \
+                    SCALE>=2.5      [10     0   10  0   ]   \
+                    SCALE>=2.25     [9      0   9   0   ]   \
+                    SCALE>=2        [8      0   8   0   ]   \
+                    SCALE>=1.75     [7      0   7   0   ]   \
+                    SCALE>=1.5      [6      0   6   0   ]   \
+                    SCALE>=1.25     [5      0   5   0   ]   \
+                                    [4      0   4   0   
 
                 ; transport selection margins
-                set VAL_Margin_Label_Trans_Selection    \
-                    SCALE>=2.5      [20 0 20 0]         \
-                    SCALE>=2.25     [18 0 18 0]         \
-                    SCALE>=2        [16 0 16 0]         \
-                    SCALE>=1.75     [14 0 14 0]         \
-                    SCALE>=1.5      [12 0 12 0]         \
-                    SCALE>=1.25     [10 0 10 0]         \
-                                    [8 0 8 0]
+                set VAL_Margin_Label_Trans_Selection            \
+                    SCALE>=2.5      [20     0   20      0   ]   \
+                    SCALE>=2.25     [18     0   18      0   ]   \
+                    SCALE>=2        [16     0   16      0   ]   \
+                    SCALE>=1.75     [14     0   14      0   ]   \
+                    SCALE>=1.5      [12     0   12      0   ]   \
+                    SCALE>=1.25     [10     0   10      0   ]   \
+                                    [8      0   8       0   ]
 
                 ; [MAC OS FIX]
                 ; [LINUX OS FIX]
                 ; record input margins
-                set VAL_Margin_RecInput             \
-                    os_type==2                      \
-                        SCALE>=2.5      [6 -1 6 2]  \
-                        SCALE>=2.25     [4 -1 4 2]  \
-                        SCALE>=2        [3 -1 3 2]  \
-                        SCALE>=1.75     [2 1 2 1]   \
-                        SCALE>=1.5      [2 1 2 1]   \
-                        SCALE>=1.25     [2 1 2 1]   \
-                                        [2 1 2 1]   \
-                    os_type==1                      \
-                        SCALE>=2.5      [6 0 6 0]   \
-                        SCALE>=2.25     [4 0 4 0]   \
-                        SCALE>=2        [3 0 3 0]   \
-                        SCALE>=1.75     [2 0 2 0]   \
-                        SCALE>=1.5      [2 0 2 0]   \
-                        SCALE>=1.25     [2 0 2 0]   \
-                                        [2 0 2 0]   \
-                        SCALE>=2.5      [6 1 6 2]   \
-                        SCALE>=2.25     [4 1 4 2]   \
-                        SCALE>=2        [3 1 3 2]   \
-                        SCALE>=1.75     [2 0 2 1]   \
-                        SCALE>=1.5      [2 0 2 1]   \
-                        SCALE>=1.25     [2 0 2 1]   \
-                                        [2 0 2 1]
+                set VAL_Margin_RecInput                         \
+                    os_type==2                                  \
+                        SCALE>=2.5      [6      -1  6   2   ]   \
+                        SCALE>=2.25     [4      -1  4   2   ]   \
+                        SCALE>=2        [3      -1  3   2   ]   \
+                        SCALE>=1.75     [2      1   2   1   ]   \
+                        SCALE>=1.5      [2      1   2   1   ]   \
+                        SCALE>=1.25     [2      1   2   1   ]   \
+                                        [2      1   2   1   ]   \
+                    os_type==1                                  \
+                        SCALE>=2.5      [6      0   6   0   ]   \
+                        SCALE>=2.25     [4      0   4   0   ]   \
+                        SCALE>=2        [3      0   3   0   ]   \
+                        SCALE>=1.75     [2      0   2   0   ]   \
+                        SCALE>=1.5      [2      0   2   0   ]   \
+                        SCALE>=1.25     [2      0   2   0   ]   \
+                                        [2      0   2   0   ]   \
+                        SCALE>=2.5      [6      1   6   2   ]   \
+                        SCALE>=2.25     [4      1   4   2   ]   \
+                        SCALE>=2        [3      1   3   2   ]   \
+                        SCALE>=1.75     [2      0   2   1   ]   \
+                        SCALE>=1.5      [2      0   2   1   ]   \
+                        SCALE>=1.25     [2      0   2   1   ]   \
+                                        [2      0   2   1   ]
 
                 ; fader size
                 ; [mcp_size mcp_offset tcp_size tcp_offset]
@@ -823,14 +1036,14 @@
 
 
                 ; font - small
-                set VAL_fxlist_scrollbar        \
-                    SCALE>=2.5      [16 8]      \
-                    SCALE>=2.25     [10 5]      \
-                    SCALE>=2        [8 4]       \
-                    SCALE>=1.75     [6 2]       \
-                    SCALE>=1.5      [6 2]       \
-                    SCALE>=1.25     [6 2]       \
-                                    [4 2]
+                set VAL_fxlist_scrollbar            \
+                    SCALE>=2.5      [16     8]      \
+                    SCALE>=2.25     [10     5]      \
+                    SCALE>=2        [8      4]      \
+                    SCALE>=1.75     [6      2]      \
+                    SCALE>=1.5      [6      2]      \
+                    SCALE>=1.25     [6      2]      \
+                                    [4      2]
 
 
 
@@ -4491,8 +4704,12 @@
                     ; button wrapping
                     set VAL_tcp_wrap_buttons par_tcp_track_element_adj_wrap_buttons
 
-                    ; label size
-                    set VAL_tcp_label_size + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
+                    ; label size (extended with infobox)
+                    set VAL_tcp_label_size                                                                                                      \
+                        !par_tcp_##PARAMETER_SECTION##_label_infobox                                                                            \
+                            +   VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size                                   \
+                            + + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size + VAL_Pad{0} VAL_InfoBox{0}
+                            
 
                     ; top position
                     set VAL_tcp_y_top 0
@@ -5864,6 +6081,18 @@
                     + VAL_tcp_spacing_section_x{0} - VAL_tcp_x_end_buttons{0} + CUR_x{0} VAL_Pad{0}
             set CUR_h VAL_Button{1}
 
+            ; infobar position
+            set CUR_x_infobar                                   \
+                ?par_tcp_##PARAMETER_SECTION##_label_infobox    \
+                    + CUR_x{0} - CUR_w{0} VAL_InfoBox{0}        \
+                    0
+
+            ; infobar width compensation
+            set CUR_w_infobar_padding                           \
+                ?par_tcp_##PARAMETER_SECTION##_label_infobox    \
+                    + VAL_Pad{0} VAL_InfoBox{0}                 \
+                    0
+
             ; index width
             set CUR_w_idx                               \
                 * SCALE + 8 * 8 VAL_index_letters{0}
@@ -5879,47 +6108,52 @@
                 par_tcp_##PARAMETER_SECTION##_label_index_vis==1    \
                     - CUR_w{0} CUR_w_idx{0}
 
-            ; label font x
+            ; inner label x position
             set CUR_x_innerLabel                                    \
                 par_tcp_##PARAMETER_SECTION##_label_index_vis!=0    \
                     + CUR_x{0} CUR_w_idx{0}                         \
                     CUR_x{0}
 
-            ; label font width
-            set CUR_w_innerLabel                                    \
-                par_tcp_##PARAMETER_SECTION##_label_index_vis==2    \
-                    - CUR_w{0} CUR_w_idx{0}                         \
-                    CUR_w{0}
+            ; inner label width
+            set CUR_w_innerLabel                                            \
+                par_tcp_##PARAMETER_SECTION##_label_index_vis==2            \
+                    - CUR_w{0} + CUR_w_idx{0} CUR_w_infobar_padding{0}      \
+                    - CUR_w{0} CUR_w_infobar_padding{0}
 
-            ; [DRAW] label
+            
+            ; [DRAW] label background
             MAC_Draw_Box    1 WALTER_ELEMENT "label" VAL_Color_Track_Label_Bg{0} VAL_Color_Track_Label_Bg{1} VAL_Color_Track_Label_Bg{2}    CUR_x_label{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 0 1 0
             
-            ; v1.2.2 - no frame
-            ;MAC_Draw_Image  1 WALTER_ELEMENT "label" "track_custom_bg_frame"                                                                CUR_x_label{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 0 1 0
-
+            ; hide label on comapct height
             set WALTER_ELEMENT##.custom.Box_label           \
                 !VAL_tcp_h_level{0}                         \
                     [0 0 0 0 0 0 0 0]
 
-            ; v1.2.2 - no frame
-            ;set WALTER_ELEMENT##.custom.Image_label     \
-            ;    !VAL_tcp_h_level{0}                     \
-            ;        [0 0 0 0 0 0 0 0]
-
+            ; [DRAW] label
             set WALTER_ELEMENT##.label                                                      \
                 ?VAL_tcp_h_level{0}                                                         \
                     [CUR_x_innerLabel{0} CUR_y{0} CUR_w_innerLabel{0} CUR_h{0} 0 0 1 0]
 
+            ; [DRAW] track index
             set WALTER_ELEMENT##.trackidx                                   \
                 ?par_tcp_##PARAMETER_SECTION##_label_index_vis              \
                     ?VAL_tcp_h_level{0}                                     \
                         [CUR_x{0} CUR_y{0} CUR_w_idx{0} CUR_h{0} 0 0 0 0]
 
             set VAL_tcp_IndexOffset * SCALE 4
+    
+            ; [DRAW] infobar
+            set WALTER_ELEMENT##.infoblock                                              \
+                ?par_tcp_##PARAMETER_SECTION##_label_infobox                            \
+                    [CUR_x_infobar{0} CUR_y{0} VAL_InfoBox{0} VAL_InfoBox{1} 1 0 1 0]\
+                    0
+
+            set WALTER_ELEMENT##.infoblock.color THEME_color_infobox_text    
 
             ; z order
             front WALTER_ELEMENT##.label
             front WALTER_ELEMENT##.trackidx
+            front WALTER_ELEMENT##.infoblock
 
             
 
@@ -6672,9 +6906,7 @@
             ; [DRAW] label background
             MAC_Draw_Box    1 WALTER_ELEMENT "label" VAL_Color_Envcp_label_Bg{0} VAL_Color_Envcp_label_Bg{1} VAL_Color_Envcp_label_Bg{2}    CUR_x{0} CUR_y{0} CUR_w_label_bg{0} CUR_h{0} 0 0 1 0
             
-            ; v1.2.2 - no frame
-            ;MAC_Draw_Image  1 WALTER_ELEMENT "label" "track_custom_bg_frame"                                                                CUR_x{0} CUR_y{0} CUR_w_label_bg{0} CUR_h{0} 0 0 1 0
-
+            
             ; [DRAW] label
             set WALTER_ELEMENT##.label [CUR_x{0} CUR_y{0} CUR_w_label{0} CUR_h{0} 0 0 1 0]
 
