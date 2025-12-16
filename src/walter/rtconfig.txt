@@ -1,613 +1,4 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ;THEMEBUILDER_INSERT_README
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;
-;   ==============================================
-;       paRt WALTER File Readme
-;   ==============================================
-;
-;   This file contains all the custom layouts provided by Reaper’s theming layout engine.
-;   Since the theme offers a high amount of user customization, this file is pretty large and challenging to maintain or even modify.
-;   This guide gives you a quick overview of what’s going on in here.
-;   
-;   -----------------------------------
-;       Formatting
-;   -----------------------------------
-;
-;   WALTER doesn’t enforce any formatting rules.
-;   Still, to keep things readable this file relies heavily on line breaks
-;   and follows a somewhat consistent visual layout:
-;
-;       set TargetVariable                                      \
-;           ?condition                                          \
-;               >> value if condition is true <<                \
-;               >> value if condition is false <<
-;
-;   This increases the linecount, but you avoids overly long lines most of the time.
-;
-;   -----------------------------------
-;       Variable Names
-;   -----------------------------------
-;
-;   WALTER doesn’t have variable types, but to keep things organized
-;   this file uses a simple naming scheme:
-;
-;       "VAL_..."       ->  pre-computed semi-constants meant for repeated use later
-;       "CUR_..."       ->  cursor values that keep getting updated while drawing
-;       "VARIABLE"      ->  plain uppercase names are reserved for macro arguments
-;
-;   -----------------------------------
-;       "THEMEBUILDER" Blocks
-;   -----------------------------------
-;
-;    Several comment lines in this file contain the word "THEMEBUILDER".
-;    They sometimes come with matching opening and closing comment markers.
-;
-;    These are placeholders that get dynamically replaced with content from other files
-;    during the theme-building process whenever a new release is created.
-;    They include things like the WALTER parameter list or static color values reserved for each theme file.
-;
-;    Best to leave them as they are. If you're modifying the theme, it's recommended to replace them with
-;    the content from newer official paRt releases. An incomplete or altered parameter list, for example,
-;    can easily make the Theme Adjuster crash.
-;
-;   -----------------------------------
-;       [BOOKMARKS]
-;   -----------------------------------
-;
-;    There are several comment lines in this file that contain hints written like [THIS].
-;    They’re basically little bookmarks that point to edge cases, exceptions, and other important events.
-;    Here’s a quick overview:
-;
-;    [LINUX OS FIX]      - exception for Linux operating systems
-;    [MAC OS FIX]        - exception for Apple operating systems
-;    [DRAW]              - marks a command that tells Reaper to actually place an object somewhere
-;    [ROUND]             - marks calculations that use a pseudo-rounding algorithm
-;    [SHARED]            - inserts a macro that’s also used elsewhere
-;    [DEV]               - development tools (these blocks should be commented out for release)
-;
-;   -----------------------------------
-;       Macros
-;   -----------------------------------
-;
-;    This theme file uses macros extensively to streamline repeated code.
-;    All macros start with "MAC_..." so they are easy to identify.
-;
-;    "Shared" Macro Concept:
-;        Some macros end with "..._SharedCode_Open" or "..._SharedCode_Close".
-;        These exist to reduce redundancy by covering sections shared across multiple elements.
-;        You don't need to duplicate these sections manually.
-;
-;        Here's an abstract example:
-;
-;            MAC_drawContents_SharedCode_Open
-;                >> code applied to all track types before individual track code <<
-;            endmacro
-                ;
-;            MAC_drawContents_SharedCode_Close
-;                >> code applied to all track types after individual track code <<
-;            endmacro
-;
-;            MAC_drawContentsOfMasterTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code specific to the master track <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-;            MAC_drawContentsOfArrangeTrack
-;                MAC_drawContents_SharedCode_Open
-;                >> code applied to all non-master tracks <<
-;                MAC_drawContents_SharedCode_Close
-;            endmacro
-;
-
 
 ;THEMEBUILDER_INSERT_PARAMETERS
 
@@ -1176,10 +567,11 @@
                 set VAL_tcp_vol_readout_w   + VAL_rounding_constant{0} - * SCALE 40 VAL_rounding_constant{0}
 
                 ; minimal width values
-                set VAL_tcp_inserts_min_w   * SCALE 20
-                set VAL_tcp_meter_min_w     * SCALE 6
-                set VAL_tcp_fader_min_w     * SCALE 10
-                set VAL_tcp_label_min_w     * SCALE 50
+                set VAL_tcp_inserts_min_w           * SCALE 20
+                set VAL_tcp_meter_min_w             * SCALE 6
+                set VAL_tcp_fader_min_w             * SCALE 10
+                set VAL_tcp_label_min_w             * SCALE 50
+                set VAL_tcp_label_min_w_infobar     + VAL_tcp_label_min_w + VAL_Pad{0} VAL_InfoBox{0}
 
             endmacro
 
@@ -1487,14 +879,14 @@
                 ; [MASTER]
                 set VAL_meter_alpha_compensation_tcp    \
                     !trackidx                           \
-                        -70                             \
-                        0
+                        0                               \
+                        -50
 
                 ; [MASTER]
                 set VAL_meter_alpha_compensation_mcp    \
                     !trackidx                           \
                         0                               \
-                        -70
+                        -50
 
                 ; alpha values
                 set VAL_Color_Meter_Alpha_TCP_NEUTRAL     * 0.255     par_colors_track_meter_text_alpha_tcp
@@ -1510,7 +902,7 @@
 
                 ; shadow
                 set VAL_Color_Meter_Shadow_Lit_TCP      *   / VAL_Color_Meter_Alpha_TCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_lit
-                set VAL_Color_Meter_Shadow_Unlit_TCP    *   / VAL_Color_Meter_Alpha_TCP{0}      255     *   0.255 VAL_Color_Meter_Alpha_MCP
+                set VAL_Color_Meter_Shadow_Unlit_TCP    *   / VAL_Color_Meter_Alpha_TCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_unlit
 
                 set VAL_Color_Meter_Shadow_Lit_MCP      *   / VAL_Color_Meter_Alpha_MCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_lit
                 set VAL_Color_Meter_Shadow_Unlit_MCP    *   / VAL_Color_Meter_Alpha_MCP{0}      255     *   0.255 par_colors_track_meter_text_shadow_unlit
@@ -2481,10 +1873,6 @@
                     set CUR_x_bg 0
                     set CUR_w_bg VAL_mcp_w_full{0}
                     set CUR_h_bg VAL_mcp_h{0}
-
-                    ; meter rms channel division
-                    set CUR_chan_div * SCALE par_mcp_##PARAMETER_SECTION##_meter_channeldiv_rms
-                    set WALTER_ELEMENT##.meter.vu.rmsdiv [CUR_chan_div{0} 0]
 
                     ; [SHARED] Close
                     MAC_DrawMcp_Setup_SharedCode_Close SCALE WALTER_ELEMENT PARAMETER_SECTION
@@ -3793,8 +3181,14 @@
         macro MAC_DrawMcp_Meter_Format_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; meter channel division
-            set CUR_chan_div * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
-            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+            set CUR_chan_div           * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
+            
+            ; gain reduction
+            set CUR_gain_div           * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_gaindiv
+            set CUR_gain_wid    + 1    * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_gainwid
+
+            ; set dimensions
+            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0 CUR_gain_div{0} CUR_gain_wid{0}]
 
         endmacro
 
@@ -3802,11 +3196,13 @@
     ; --------------------------------------------------------------------------------
 
         macro MAC_DrawMcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
-
+            
             ; meter channel division
-            set CUR_chan_div * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
-            set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
-            set WALTER_ELEMENT##.meter.vu.rmsdiv [CUR_chan_div{0} 0]
+            set CUR_chan_div           * SCALE * 0.05 par_mcp_##PARAMETER_SECTION##_meter_channeldiv
+            
+            ; set dimensions
+            set WALTER_ELEMENT##.meter.vu.div       [CUR_chan_div{0} 0]
+            set WALTER_ELEMENT##.meter.vu.rmsdiv    [CUR_chan_div{0} 0]
 
         endmacro
 
@@ -4805,13 +4201,15 @@
                     ; button wrapping
                     set VAL_tcp_wrap_buttons par_tcp_track_element_adj_wrap_buttons
 
-                    ; label size (extended with infobox)
-                    set VAL_tcp_label_size                                                                                                      \
-                        !par_tcp_##PARAMETER_SECTION##_label_infobox                                                                            \
-                            +   VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size                                   \
-                            + + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size + VAL_Pad{0} VAL_InfoBox{0}
-                            
-
+                    ; label size
+                    set VAL_tcp_label_size  + VAL_tcp_label_min_w{0} * SCALE * 0.3 par_tcp_##PARAMETER_SECTION##_label_size
+                    
+                    ; keep label above increased minimal size when infobar is visible
+                    set VAL_tcp_label_size                                          \
+                        ?par_tcp_##PARAMETER_SECTION##_label_infobox                \
+                            VAL_tcp_label_size{0}<VAL_tcp_label_min_w_infobar{0}    \
+                                VAL_tcp_label_min_w_infobar{0}                      \
+                    
                     ; top position
                     set VAL_tcp_y_top 0
 
@@ -5129,8 +4527,6 @@
                 set VAL_tcp_y_start_fxembed     + VAL_tcp_h{0} VAL_tcp_spacing_section_y{0}
                 set VAL_tcp_x_end_inserts       CUR_x{0}
                 set VAL_tcp_button_line_h + VAL_Button{1} VAL_tcp_spacing_y
-                
-
 
                 ; available space
                 set VAL_tcp_available_space - w + VAL_tcp_x_offset_max{0} VAL_Pad{0}
@@ -5437,18 +4833,22 @@
                 macro MAC_DrawTcp_Meter SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                     ; meter visibility
-                    set VAL_tcp_show_meter                              \
-                        ?par_tcp_##PARAMETER_SECTION##_meter_mode       \
-                            1                                           \
-                            0
+                    set VAL_tcp_show_meter                                      \
+                        ?par_tcp_##PARAMETER_SECTION##_meter_mode               \
+                            VAL_tcp_h_level{0}>0                                \
+                                1                                               \
+                                ?par_tcp_##PARAMETER_SECTION##_meter_mode==2    \
+                                    1                                           \
+                                    0                                           \
+                                0
 
                     ; y position
-                    set CUR_y                                   \
-                        ?VAL_tcp_show_meter{0}                  \
+                    set CUR_y                       \
+                        ?VAL_tcp_show_meter{0}      \
                             VAL_Border{0}
 
                     ; height (master track differs)
-                    set CUR_h   - WALTER_ELEMENT##.size{1} VAL_Border_2{0}                        
+                    set CUR_h   - WALTER_ELEMENT##.size{1} VAL_Border_2{0}
 
                     ; width
                     set VAL_tcp_meter_remaining_w - VAL_tcp_available_space{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
@@ -5561,8 +4961,14 @@
             macro MAC_DrawTcp_Meter_Format_Track SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; meter channel division
-                set CUR_chan_div * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
-                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+                set CUR_chan_div        * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
+                
+                ; gain reduction
+                set CUR_gain_div        * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_gaindiv
+                set CUR_gain_wid    + 1 * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_gainwid
+                
+                ; set dimensions
+                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0 CUR_gain_div{0} CUR_gain_wid{0}]
 
             endmacro
 
@@ -5572,8 +4978,14 @@
             macro MAC_DrawTcp_Meter_Format_Master SCALE WALTER_ELEMENT PARAMETER_SECTION
 
                 ; meter channel division
-                set CUR_chan_div * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
-                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0]
+                set CUR_chan_div        * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_channeldiv
+                
+                ; gain reduction
+                set CUR_gain_div        * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_gaindiv
+                set CUR_gain_wid    + 1 * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_gainwid
+                
+                ; set dimensions
+                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0 CUR_gain_div{0} CUR_gain_wid{0}]
                 set WALTER_ELEMENT##.meter.vu.rmsdiv [CUR_chan_div{0} 0]
 
             endmacro
@@ -6566,14 +5978,9 @@
             ; button wrapping
             set VAL_tcp_wrap_buttons par_tcp_envcp_element_adj_wrap_buttons
 
-            ; height detection -> loads [height / y-top-position]
-            set VAL_Envcp_h_level   \
-                h>=VAL_Envcp_h{0}   \
-                    1               \
-                    0
-
             ; compact width
             set VAL_envcp_compact_w + tcp_iconsize + VAL_tcp_x_offset_max_precomp * SCALE 120
+            
             set VAL_tcp_compact             \
                 w<VAL_envcp_compact_w{0}    \
                     1                       \
@@ -6598,9 +6005,11 @@
             set CUR_y_symbol * SCALE 3
 
             ; [DRAW] Envcp Symbol
-            set WALTER_ELEMENT##.custom.envcp_symbol                                        \
-                ?par_tcp_envcp_settings_symbol{0}                                           \
-                    [0 CUR_y_symbol VAL_envcp_x_offset{0} VAL_Envcp_Symbol{1} 0 0 0 0]      \
+            set WALTER_ELEMENT##.custom.envcp_symbol                                            \
+                ?par_tcp_envcp_settings_symbol{0}                                               \
+                    VAL_tcp_h_level{0}>0                                                        \
+                        [0 CUR_y_symbol VAL_envcp_x_offset{0} VAL_Envcp_Symbol{1} 0 0 0 0]      \
+                        0                                                                       \
                     0
 
             front WALTER_ELEMENT##.custom.envcp_symbol
@@ -6751,6 +6160,8 @@
 
             ; visibility
             set VAL_envcp_show_fader                                \
+                !VAL_tcp_h_level{0}                                 \
+                    0                                               \
                 !VAL_tcp_compact{0}                                 \
                     ?VAL_envcp_lanedisplay{0}                       \
                         tcp_iconsize>VAL_envcp_fader_min_w{0}       \
@@ -6996,6 +6407,8 @@
             set CUR_x_readout_abs - w - WALTER_ELEMENT##.size{0} - CUR_x_readout{0} - VAL_envcp_label_size{0} VAL_tcp_x_offset{0}
 
             set VAL_Show_readout                                            \
+                !VAL_tcp_h_level{0}                                         \
+                    0                                                       \
                 !par_tcp_##PARAMETER_SECTION##_label_readout_placement      \
                     0                                                       \
                 CUR_x_readout_abs{0}>CUR_x{0}                               \
@@ -7003,25 +6416,34 @@
                         1                                                   \
                         0                                                   \
                     0
+            
+            set VAL_envcp_show_label        \
+                VAL_tcp_h_level{0}>0        \
+                    1                       \
+                    0
 
+            ; inner label width when there's no readout
             set CUR_w_label                 \
                 !VAL_Show_readout{0}        \
                     CUR_w{0}
 
+            ; label background width when there's no readout
             set CUR_w_label_bg              \
                 !VAL_Show_readout{0}        \
                     CUR_w{0}
 
-            ; [DRAW] label background
-            MAC_Draw_Box    1 WALTER_ELEMENT "label" VAL_Color_Envcp_label_Bg{0} VAL_Color_Envcp_label_Bg{1} VAL_Color_Envcp_label_Bg{2}    CUR_x{0} CUR_y{0} CUR_w_label_bg{0} CUR_h{0} 0 0 1 0
+            ; [DRAW] label background (when there is enough height)
+            MAC_Draw_Box    VAL_envcp_show_label{0} WALTER_ELEMENT "label" VAL_Color_Envcp_label_Bg{0} VAL_Color_Envcp_label_Bg{1} VAL_Color_Envcp_label_Bg{2}    CUR_x{0} CUR_y{0} CUR_w_label_bg{0} CUR_h{0} 0 0 1 0
             
             
-            ; [DRAW] label
-            set WALTER_ELEMENT##.label [CUR_x{0} CUR_y{0} CUR_w_label{0} CUR_h{0} 0 0 1 0]
+            ; [DRAW] label (when there is enough height)
+            set WALTER_ELEMENT##.label                                      \
+                ?VAL_envcp_show_label{0}                                    \
+                    [CUR_x{0} CUR_y{0} CUR_w_label{0} CUR_h{0} 0 0 1 0]
 
             ; [DRAW] readout
-            set WALTER_ELEMENT##.value                                  \
-                ?VAL_Show_readout{0}                                    \
+            set WALTER_ELEMENT##.value                                              \
+                ?VAL_envcp_show_label{0}                                            \
                     [CUR_x_readout{0} CUR_y{0} CUR_w_readout{0} CUR_h{0} 1 0 1 0]
 
             ; z order
@@ -7040,7 +6462,7 @@
             set CUR_x   - VAL_tcp_x_offset{0} CUR_w{0}
 
             ; y position of line
-            set CUR_y_line      - 0 * 2 VAL_Pad{0}
+            set CUR_y_line      0
                 
             ; x position of line
             set CUR_x_line                                  \
@@ -7055,7 +6477,7 @@
                     - CUR_w * 0.5 VAL_Button_Folder{0}
             
             ; line height
-            set CUR_h_line  + WALTER_ELEMENT##.size{1} * 2 VAL_Pad{0}
+            set CUR_h_line  - WALTER_ELEMENT##.size{1} VAL_Unit{0}
                 
             ; [DRAW] child track line
             set WALTER_ELEMENT##.custom.folder_child                                                \
