@@ -1,4 +1,4 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -339,7 +339,7 @@ function map_macros.drawParameterLabel(parameter_text, w)
     local text = Part.Layout.Text.Text:new(nil, parameter_text)
     text:setColor(Part.Color.Lookup.color_palette.text.parameter.fg, Part.Color.Lookup.color_palette.text.parameter.bg,
         nil)
-    text:justRight()
+    text:parameterLabel()
 
     -- increment cursor
     Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
@@ -1010,6 +1010,11 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
         Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
     end
 
+    -- compensate for lacking mixer icon
+    if not has_mixer then
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(),0)
+    end
+    
     -- fader size header image
     Part.Cursor.setCursorSize(slider_w)
     local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, map_macros.icons.table.fader_size)
@@ -1053,9 +1058,10 @@ function map_macros.drawTcpFaderConfiguration(fader_data, label_w, slider_w)
 
         -- mixer-hide marker
         if has_mixer then
-            Part.Control.Marker.Marker:new(nil, entry.par_vis_mixer[1], true, 1)
-            Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
+            Part.Control.Marker.Marker:new(nil, entry.par_vis_mixer[1], true, 1) 
         end
+
+        Part.Cursor.incCursor(Part.Cursor.getCursorW(), 0)
 
         -- fader size
         Part.Cursor.setCursorSize(slider_w)
@@ -1103,7 +1109,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
     end
 
     -- table header left x-axis offset
-    local offset = map_macros.table_icon_w + label_w + Part.Cursor.getCursorPadX()
+    local offset = map_macros.table_icon_w + label_w + Part.Cursor.getCursorPadX() - 24
     Part.Cursor.incCursor(offset, 0)
 
     local empty_space_x = Part.Cursor.getCursorX() - Part.Cursor.getCursorPadX()
@@ -1123,7 +1129,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
         -- bank button
         local bank_button = Part.Control.ButtonBank.ButtonBank:new(nil, parameter_set[2])
         Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.bank_toggle, Part.Draw.Elements.lastElement(), true)
-        Part.Cursor.incCursor(0, 20, 0, 0)
+        Part.Cursor.incCursor(24, 0, 0, 0)
 
         -- image
         local image = Part.Layout.Sprite.Sprite:new(nil, Part.Layout.icon_spritesheet, icon)
@@ -1139,7 +1145,7 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
     -- ::::::::::::::::::::::::::::::::::::::::
 
     -- hover area differs
-    local hover_offset_x = -6
+    local hover_offset_x = -8
     local hover_offset_y = 4
 
     -- visibility header column
@@ -1175,7 +1181,6 @@ function map_macros.drawVisibilityMatrix(matrix_data, visibility_data, parameter
 
     -- row starting position
     Part.Cursor.incCursor(0, Part.Cursor.getCursorH())
-    Part.Cursor.incCursor(0, 14)
 
     -- rigthmost position
     local rows_max_x = 0

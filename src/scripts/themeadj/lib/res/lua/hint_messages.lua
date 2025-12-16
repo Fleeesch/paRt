@@ -1,4 +1,4 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -53,6 +53,11 @@ hint.line_warning_overwrite_copy = { type = hint.HintTypes.warning, text = "This
 
 -- requirements
 hint.line_requirement_rejs = { type = hint.HintTypes.attention, text = "Requires Rejs_ReaScriptAPI. If issues occur, fallback to the configuration slots." }
+
+-- coarse adjustment
+hint.line_coarse_adjustment = { type = hint.HintTypes.attention, text = "REAPER strongly affects how the distance is interpreted. Use this as a coarse adjustment." }
+hint.line_gainreduction = { type = hint.HintTypes.attention, text = "Requires a plugin on the track that supports gain reduction metering." }
+
 
 --      Spacing
 -- --------------------------------------
@@ -149,27 +154,27 @@ hint.highlights_selectionbar_size = {
 -- visibility
 hint.vismatrix_visbility = {
     { type = hint.HintTypes.highlight, text = "Visibility" },
-    { type = hint.HintTypes.normal, text = "Toggles the element's visibility." },
+    { type = hint.HintTypes.normal,    text = "Toggles the element's visibility." },
 }
 
 -- hide when mixer is visible
 hint.vismatrix_nomixer = {
     { type = hint.HintTypes.highlight, text = "Mixer Context" },
-    { type = hint.HintTypes.normal, text = "Hides the element when enabled and the mixer is visible." },
+    { type = hint.HintTypes.normal,    text = "Hides the element when enabled and the mixer is visible." },
 }
 
 -- add separator
 hint.vismatrix_separator = {
     { type = hint.HintTypes.highlight, text = "Extra Space" },
-    { type = hint.HintTypes.normal, text = "Adds extra padding after the element." },
-    { type = hint.HintTypes.normal, text = "The element must be visible." },
+    { type = hint.HintTypes.normal,    text = "Adds extra padding after the element." },
+    { type = hint.HintTypes.normal,    text = "The element must be visible." },
     hint.line_bypass_possible
 }
 
 -- size adjustment
 hint.vismatrix_size = {
     { type = hint.HintTypes.highlight, text = "Size" },
-    { type = hint.HintTypes.normal, text = "Adjusts the size of the element." },
+    { type = hint.HintTypes.normal,    text = "Adjusts the size of the element." },
 }
 
 
@@ -474,6 +479,12 @@ hint.tcp_meter_show = {
     { type = hint.HintTypes.normal, text = "Toggles meter visibility." },
 }
 
+-- TCP meter show collapsed
+hint.tcp_meter_show_collapsed = {
+    { type = hint.HintTypes.normal, text = "Toggles meter visibility." },
+    { type = hint.HintTypes.normal, text = "Meter will be visible when the track is collapsed." },
+}
+
 -- TCP meter volume readout
 hint.tcp_meter_vol_readout = {
     { type = hint.HintTypes.normal, text = "Shows a volume level readout label next to the meter." },
@@ -499,8 +510,22 @@ hint.tcp_meter_size = {
 
 -- TCP meter VU space
 hint.tcp_meter_vu_space = {
-    { type = hint.HintTypes.normal,    text = "Adjusts the space between meter channels." },
-    { type = hint.HintTypes.attention, text = "REAPER strongly affects how the distance is interpreted. Use this as a coarse adjustment." },
+    { type = hint.HintTypes.normal, text = "Adjusts the space between meter channels." },
+    hint.line_coarse_adjustment
+}
+
+-- TCP meter gain reduction space
+hint.tcp_meter_gainreduction_space = {
+    { type = hint.HintTypes.normal, text = "Adjusts the space between channel peaks and gain reduction meter." },
+    hint.line_gainreduction,
+    hint.line_coarse_adjustment
+}
+
+-- TCP meter gain reduction width
+hint.tcp_meter_gainreduction_width = {
+    { type = hint.HintTypes.normal,    text = "Adjusts the width of the gain reduction meter." },
+    hint.line_gainreduction,
+    hint.line_coarse_adjustment
 }
 
 -- TCP fader size - volume
@@ -765,7 +790,7 @@ hint.mcp_panmode = {
 -- MCP panmode fader normal
 hint.mcp_panmode_fader_normal = {
     { type = hint.HintTypes.highlight, text = "Knobs" },
-    { type = hint.HintTypes.normal, text = "Display Pan and Width as knobs." },
+    { type = hint.HintTypes.normal,    text = "Display Pan and Width as knobs." },
     { type = hint.HintTypes.attention, text = "Ignored in Block Layout." },
 }
 
@@ -846,8 +871,8 @@ hint.mcp_inserts_placement_embed = {
 
 -- MCP inserts padding minimal
 hint.mcp_inserts_padding_minimal = {
-    { type = hint.HintTypes.normal,    text = "Adds minimal padding to the edges of the inserts section." },
-    { type = hint.HintTypes.normal,    text = "Ignores additional padding whitespace." },
+    { type = hint.HintTypes.normal, text = "Adds minimal padding to the edges of the inserts section." },
+    { type = hint.HintTypes.normal, text = "Ignores additional padding whitespace." },
 }
 
 -- MCP inserts padding full
@@ -907,8 +932,8 @@ hint.mcp_master_menu_button = {
 -- bank slot select
 hint.bank_slot_select = {
     { type = hint.HintTypes.normal, text = "Sets the active slot in the Bank System." },
-    { type = hint.HintTypes.tip,    text = "Use the [⇆] buttons to enable bank support for the respective parameter." },
-    { type = hint.HintTypes.tip,    text = "Bank slots can also be selected via Theme Adjuster, optional transport buttons or custom paRt scripts." },
+    { type = hint.HintTypes.tip, text = "Use the [⇆] buttons to enable bank support for the respective parameter." },
+    { type = hint.HintTypes.tip, text = "Bank slots can also be selected via Theme Adjuster, optional transport buttons or custom paRt scripts." },
 }
 
 -- bank copy mode
@@ -941,15 +966,15 @@ hint.config_slot_load = {
 
 -- config save to file
 hint.config_save_to_file = {
-    { type = hint.HintTypes.normal,    text = "Saves all Theme Adjuster settings to a file." },
-    { type = hint.HintTypes.normal,    text = "The file can be selected via your OS file browser." },
+    { type = hint.HintTypes.normal, text = "Saves all Theme Adjuster settings to a file." },
+    { type = hint.HintTypes.normal, text = "The file can be selected via your OS file browser." },
     hint.line_requirement_rejs
 }
 
 -- config load from file
 hint.config_load_from_file = {
-    { type = hint.HintTypes.normal,    text = "Loads all Theme Adjuster settings from a file." },
-    { type = hint.HintTypes.normal,    text = "The file can be selected via your OS file browser." },
+    { type = hint.HintTypes.normal, text = "Loads all Theme Adjuster settings from a file." },
+    { type = hint.HintTypes.normal, text = "The file can be selected via your OS file browser." },
     hint.line_requirement_rejs
 }
 
@@ -973,19 +998,19 @@ hint.config_hard_reset = {
 -- custom range
 hint.custom_range = {
     { type = hint.HintTypes.highlight, text = "Custom Parameter" },
-    { type = hint.HintTypes.normal, text = "A free range adjustment that can be used when modding the theme." },
+    { type = hint.HintTypes.normal,    text = "A free range adjustment that can be used when modding the theme." },
 }
 
 -- custom button
 hint.custom_button = {
     { type = hint.HintTypes.highlight, text = "Custom Parameter" },
-    { type = hint.HintTypes.normal, text = "A free toggle button that can be used when modding the theme." },
+    { type = hint.HintTypes.normal,    text = "A free toggle button that can be used when modding the theme." },
 }
 
 -- custom selection
 hint.custom_selection = {
     { type = hint.HintTypes.highlight, text = "Custom Parameter" },
-    { type = hint.HintTypes.normal, text = "A free multiple-choice parameter that can be used when modding the theme." },
+    { type = hint.HintTypes.normal,    text = "A free multiple-choice parameter that can be used when modding the theme." },
 }
 
 return hint

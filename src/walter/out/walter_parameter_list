@@ -1,5 +1,5 @@
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.7' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.8' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000
@@ -99,6 +99,8 @@ define_parameter par_mcp_master_insert_size 'MCP - Master - Inserts Size' 140 0 
 define_parameter par_mcp_master_insert_size_scale 'MCP - Master - Inserts Size Scale' 0 0 1
 define_parameter par_mcp_master_meter_channeldiv 'MCP - Master - Meter Channel Division' 0 0 1000
 define_parameter par_mcp_master_meter_channeldiv_rms 'MCP - Master - Meter Channel Division RMS' 0 0 1000
+define_parameter par_mcp_master_meter_gaindiv 'MCP - Master - Meter Gain Division' 0 0 1000
+define_parameter par_mcp_master_meter_gainwid 'MCP - Master - Meter Gain Width' 0 0 1000
 define_parameter par_mcp_master_meter_padding 'MCP - Master - Meter Padding' 2 0 2
 define_parameter par_mcp_master_meter_pos 'MCP - Master - Meter Position' 2 0 2
 define_parameter par_mcp_master_meter_size 'MCP - Master - Meter Size' 407 0 1000
@@ -129,6 +131,8 @@ define_parameter par_mcp_track_meter_channeldiv 'MCP - Track - Meter Channel Div
 define_parameter par_mcp_track_meter_expand 'MCP - Track - Meter Expansion' 0 0 1000
 define_parameter par_mcp_track_meter_expand_mode 'MCP - Track - Meter Expansion Mode' 0 0 1
 define_parameter par_mcp_track_meter_expand_threshold 'MCP - Track - Meter Expansion Threshold' 2 2 36
+define_parameter par_mcp_track_meter_gaindiv 'MCP - Track - Meter Gain Division' 23 0 1000
+define_parameter par_mcp_track_meter_gainwid 'MCP - Track - Meter Gain Width' 32 0 1000
 define_parameter par_mcp_track_meter_padding 'MCP - Track - Meter Padding' 0 0 2
 define_parameter par_mcp_track_meter_pos 'MCP - Track - Meter Position' 2 0 2
 define_parameter par_mcp_track_meter_size 'MCP - Track - Meter Size' 0 0 1000
@@ -189,7 +193,9 @@ define_parameter par_tcp_master_fader_wid_vis 'TCP - Master - Faders Width Visib
 define_parameter par_tcp_master_insert_mode 'TCP - Master - Inserts Mode' 2 0 2
 define_parameter par_tcp_master_insert_size 'TCP - Master - Inserts Size' 211 0 1000
 define_parameter par_tcp_master_insert_size_scale 'TCP - Master - Inserts Size Scaling' 0 0 1
-define_parameter par_tcp_master_meter_channeldiv 'TCP - Master - Meter Channel Division' 43 0 1000
+define_parameter par_tcp_master_meter_channeldiv 'TCP - Master - Meter Channel Division' 0 0 1000
+define_parameter par_tcp_master_meter_gaindiv 'TCP - Master - Meter Gain Reduction Division' 0 0 1000
+define_parameter par_tcp_master_meter_gainwid 'TCP - Master - Meter Gain Reduction Width' 38 0 1000
 define_parameter par_tcp_master_meter_mode 'TCP - Master - Mode' 1 0 1
 define_parameter par_tcp_master_meter_size 'TCP - Master - Meter Size' 430 0 1000
 define_parameter par_tcp_master_meter_size_scale 'TCP - Master - Meter Size Scaling' 1 0 1
@@ -223,8 +229,10 @@ define_parameter par_tcp_track_label_index_vis 'TCP - Track - Index Vsibility' 2
 define_parameter par_tcp_track_label_infobox 'TCP - Track - Info Box' 0 0 1
 define_parameter par_tcp_track_label_size 'TCP - Track - Size' 155 0 1000
 define_parameter par_tcp_track_meter_channeldiv 'TCP - Track - Meter Channel Division' 0 0 1000
-define_parameter par_tcp_track_meter_mode 'TCP - Track - Mode' 1 0 1
-define_parameter par_tcp_track_meter_size 'TCP - Track - Meter Size' 24 0 1000
+define_parameter par_tcp_track_meter_gaindiv 'TCP - Track - Meter Gain Reduction Division' 23 0 1000
+define_parameter par_tcp_track_meter_gainwid 'TCP - Track - Meter Gain Reduction Width' 22 0 1000
+define_parameter par_tcp_track_meter_mode 'TCP - Track - Mode' 1 0 2
+define_parameter par_tcp_track_meter_size 'TCP - Track - Meter Size' 26 0 1000
 define_parameter par_tcp_track_meter_size_scale 'TCP - Track - Meter Size Scaling' 0 0 1
 define_parameter par_tcp_track_meter_vol_readout 'TCP - Track - Meter Volume Readout' 0 0 1
 define_parameter par_tcp_track_meter_vu_db 'TCP - Track - Meter VU dB' 0 0 1
