@@ -180,6 +180,7 @@ for theme in "${themes[@]}"; do
 
     # readme
     readme_content=$(cat "$file_readme")
+    readme_content="$hint_start\n$readme_content\n$hint_end"
 
     # replace placeholders with dynamically read content
     output_content=$(cat "$file_walter")

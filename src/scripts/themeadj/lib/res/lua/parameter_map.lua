@@ -1,4 +1,4 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -7,7 +7,7 @@
     The inclusion of WALTER parameters is happening here.
     It is mostly a 1:1 translation list for the parameters in the rtconfig.txt file,
     but sometimes there are exceptions that require a specific treatment.
-]]--
+]] --
 
 local par = {}
 
@@ -194,6 +194,8 @@ par.par_tcp_track_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(n
 par.par_tcp_track_meter_vol_readout = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_meter_vol_readout") }
 
 par.par_tcp_track_meter_channeldiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_meter_channeldiv") }
+par.par_tcp_track_meter_gaindiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_meter_gaindiv") }
+par.par_tcp_track_meter_gainwid = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_meter_gainwid") }
 
 -- label
 par.par_tcp_track_label_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_track_label_size") }
@@ -244,6 +246,8 @@ par.par_tcp_master_meter_vol_readout = { Part.Parameter.Group.ParameterGroup:new
     "par_tcp_master_meter_vol_readout") }
 
 par.par_tcp_master_meter_channeldiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_channeldiv") }
+par.par_tcp_master_meter_gaindiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_gaindiv") }
+par.par_tcp_master_meter_gainwid = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_meter_gainwid") }
 
 par.par_tcp_master_fader_vol_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_fader_vol_vis") }
 par.par_tcp_master_fader_pan_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_tcp_master_fader_pan_vis") }
@@ -336,9 +340,11 @@ par.par_mcp_track_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(n
     nil, par.par_mcp_track_meter_size[3]) }
 par.par_mcp_track_meter_expand = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand") }
 par.par_mcp_track_meter_expand_mode = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand_mode") }
-par.par_mcp_track_meter_expand_threshold = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_track_meter_expand_threshold") }
+par.par_mcp_track_meter_expand_threshold = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_expand_threshold") }
+
 par.par_mcp_track_meter_channeldiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_channeldiv") }
+par.par_mcp_track_meter_gaindiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_gaindiv") }
+par.par_mcp_track_meter_gainwid = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_meter_gainwid") }
 
 -- elements
 par.par_mcp_track_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_track_element_vis") }
@@ -363,15 +369,12 @@ par.par_mcp_track_fader_wid_always = { Part.Parameter.Group.ParameterGroup:new(n
 
 -- master
 
-par.par_mcp_master_settings_extrapad = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_master_settings_extrapad") }
-par.par_mcp_master_settings_label_size = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_master_settings_label_size") }
+par.par_mcp_master_settings_extrapad = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_settings_extrapad") }
+par.par_mcp_master_settings_label_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_settings_label_size") }
 
 par.par_mcp_master_insert_mode = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_insert_mode") }
 par.par_mcp_master_insert_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_insert_size") }
-par.par_mcp_master_insert_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_master_insert_size_scale", nil, par.par_mcp_master_insert_size[3]) }
+par.par_mcp_master_insert_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_insert_size_scale", nil, par.par_mcp_master_insert_size[3]) }
 par.par_mcp_master_insert_pad = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_insert_pad") }
 
 par.par_mcp_master_meter_padding = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_padding") }
@@ -380,17 +383,20 @@ par.par_mcp_master_meter_vol_readout = { Part.Parameter.Group.ParameterGroup:new
 par.par_mcp_master_meter_vu_db = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_vu_db") }
 par.par_mcp_master_meter_vu_readout = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_vu_readout") }
 par.par_mcp_master_meter_size = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_size") }
-par.par_mcp_master_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_size_scale",
-    nil, par.par_mcp_master_meter_size[3]) }
+par.par_mcp_master_meter_size_scale = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_size_scale", nil, par.par_mcp_master_meter_size[3]) }
 
 par.par_mcp_master_element_vis = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_element_vis") }
 par.par_mcp_master_element_width = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_element_width") }
-par.par_mcp_master_element_separator = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_master_element_separator") }
+par.par_mcp_master_element_separator = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_element_separator") }
 
 par.par_mcp_master_meter_channeldiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_channeldiv") }
-par.par_mcp_master_meter_channeldiv_rms = { Part.Parameter.Group.ParameterGroup:new(nil,
-    "par_mcp_master_meter_channeldiv_rms") }
+par.par_mcp_master_meter_channeldiv_rms = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_channeldiv_rms") }
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--  --> stated in documentation, apparently not supported
+par.par_mcp_master_meter_gaindiv = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_gaindiv") }
+par.par_mcp_master_meter_gainwid = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_meter_gainwid") }
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 par.par_mcp_master_fader_layout = { Part.Parameter.Group.ParameterGroup:new(nil, "par_mcp_master_fader_layout") }
 par.par_mcp_master_fader_pan_mode_mono = { Part.Parameter.Group.ParameterGroup:new(nil,

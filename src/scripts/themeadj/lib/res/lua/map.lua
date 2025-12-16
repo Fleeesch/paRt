@@ -1,4 +1,4 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -50,7 +50,8 @@ Part.Gui.Tab.tab_transport_sub = Part.Tab.Group.TabGroup:new(nil, "Transport", P
 -- Tcp
 Part.Gui.Tab.tab_tcp_sub = Part.Tab.Group.TabGroup:new(nil, "TCP", Part.Gui.Tab.tab_tcp, 1)
 Part.Gui.Tab.tab_tcp_general = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "General")
-Part.Gui.Tab.tab_tcp_track = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "Track")
+Part.Gui.Tab.tab_tcp_track_a = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "Track A")
+Part.Gui.Tab.tab_tcp_track_b = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "Track B")
 Part.Gui.Tab.tab_tcp_master = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "Master")
 Part.Gui.Tab.tab_tcp_envcp = Part.Tab.EntrySub.TabEntrySub:new(nil, Part.Gui.Tab.tab_tcp_sub, "Envelope")
 
@@ -171,6 +172,12 @@ Part.Gui.Macros.placeCursorAtLastGroup(false, true)
 group_y = Part.Cursor.getCursorY() + Part.Gui.Macros.pad_group
 group = Part.Gui.Macros.drawGroupBox("Color Adjustments", group_x, group_y, group_w_wide, 295)
 
+-- apply-to-all button
+Part.Cursor.setCursorSize(210, 22)
+Part.Control.Button.Button:new(nil, Part.Parameter.Map.par_global_color_custom_overwrite, true, "Apply Adjustments to Custom Colors", 1)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.colors_reaper_apply_custom, Part.Draw.Elements.lastElement(), true)
+Part.Cursor.incCursor(0, 40, 0, 0)
+
 -- color slider list
 local color_adj_list = {
     { separator = false, label = "Hue",        parameter = Part.Parameter.Map.par_global_color_hue,        thumb_opcaity = 1, gradient = Part.Color.Lookup.color_palette.gradient.slider.hue },
@@ -184,6 +191,10 @@ local color_adj_list = {
 
 -- draw sliders
 for _, color_adj in pairs(color_adj_list) do
+    
+    -- slider size
+    Part.Cursor.setCursorSize(600, Part.Gui.Macros.slider_h + 10)
+
     Part.Cursor.stackCursor()
     Part.Gui.Macros.openLabel()
 
@@ -197,9 +208,8 @@ for _, color_adj in pairs(color_adj_list) do
     -- label
     Part.Gui.Macros.drawParameterLabel(color_adj.label, label_w)
 
-    Part.Cursor.setCursorSize(slider_w, nil)
+    Part.Cursor.setCursorSize(430, Part.Gui.Macros.slider_h)
     Part.Cursor.stackCursor()
-    Part.Cursor.setCursorSize(300, Part.Gui.Macros.slider_h)
     Part.Cursor.incCursor(0, Part.Gui.Macros.slider_offset, 0, 0)
 
     -- slider
@@ -226,17 +236,9 @@ for _, color_adj in pairs(color_adj_list) do
 
     -- additional separator
     if color_adj.separator then
-        Part.Cursor.incCursor(0, 10, 0, 0)
+        --Part.Cursor.incCursor(0, 10, 0, 0)
     end
 end
-
--- apply-to-all button
-Part.Cursor.incCursor(0, 10, 0, 0)
-Part.Cursor.setCursorSize(210, 26)
-
--- button
-Part.Control.Button.Button:new(nil, Part.Parameter.Map.par_global_color_custom_overwrite, true, "Apply Adjustments to Custom Colors", 1)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.colors_reaper_apply_custom, Part.Draw.Elements.lastElement(), true)
 
 -- stretch group
 group:stretchToPosition(nil, bottom_y)
@@ -674,22 +676,11 @@ slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_gen_hi
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.highlights_colorbar_size, slider, true)
 Part.Gui.Macros.nextLine()
 
--- Inserts
--- ------------------------------
-
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 55)
-
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_gen_insert_slot_width, false, slider_w, "Slot Size", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_general_insert_slot_size, slider, true)
-
-
-
 -- Folders
 -- ------------------------------
 
 Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-group = Part.Gui.Macros.drawGroupBox("Folders", group_x, Part.Cursor.getCursorY(), group_w, 355)
+group = Part.Gui.Macros.drawGroupBox("Folders", group_x, Part.Cursor.getCursorY(), group_w, 100)
 
 -- folder indentation
 local slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_gen_folder_indent, false, slider_w, "Indentation", label_w)
@@ -714,69 +705,39 @@ button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_general_folder_mode, button, true)
 Part.Gui.Macros.nextLine()
 
+-- Inserts
+-- ------------------------------
+
+Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
+group = Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 55)
+
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_gen_insert_slot_width, false, slider_w, "Slot Size", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_general_insert_slot_size, slider, true)
+
+
+
 -- stretch group
 group:stretchToPosition(nil, bottom_y)
 
 
 -- ===========================================================================
---      Tab : TCP : Track
+--      Tab : TCP : Track A
 -- ===========================================================================
 
 -- Settings
 -- ------------------------------
 
-Part.Tab.Entry.setRecentTab(Part.Gui.Tab.tab_tcp_track)
+Part.Tab.Entry.setRecentTab(Part.Gui.Tab.tab_tcp_track_a)
 Part.Gui.Macros.resetCursor()
 
 local group_x = Part.Cursor.getCursorX()
 local group_y = Part.Cursor.getCursorY()
 
--- Meter
--- ------------------------------
-
-group_x = Part.Cursor.getCursorX()
-Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 114)
-
--- Visibility
-Part.Cursor.stackCursor()
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_mode, button_w, nil, "Show Meter")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_show, button, true)
-Part.Gui.Macros.nextInline()
-
--- VU Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vu_db, button_w, nil, "VU Text")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
-Part.Cursor.destackCursor()
-Part.Gui.Macros.nextLine()
-Part.Cursor.stackCursor()
-
--- Volume Readout
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vol_readout, button_w, nil, "Volume Readout")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vol_readout, button, true)
-Part.Gui.Macros.nextInline()
-
--- Clip Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vu_readout, button_w, nil, "Clip Text")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
-Part.Cursor.destackCursor()
-Part.Gui.Macros.nextLine()
-
--- Meter Size
-slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_size, false, slider_w, "Meter Width",
-    label_w, Part.Parameter.Map.par_tcp_track_meter_size_scale[1])
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_size, slider, true)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
-Part.Gui.Macros.nextLine()
-
--- Meter VU Space
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_channeldiv, false, slider_w, "Channel Spacing", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, true)
 
 -- Inserts
 -- ------------------------------
 
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 70)
+Part.Gui.Macros.drawGroupBox("Inserts", group_x, group_y, group_w, 70)
 
 selection = {
     { label = "Inline",   value = 1, width = button_w_2 },
@@ -796,32 +757,6 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_inserts_placement_inline, b
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_inserts_placement_separate, button[2], true)
 Part.Cursor.destackCursor()
 Part.Gui.Macros.nextLine()
-
-
--- Faders
--- ------------------------------
-
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-Part.Gui.Macros.drawGroupBox("Faders", group_x, Part.Cursor.getCursorY(), group_w, 155)
-
--- Fader Layout
-Part.Cursor.incCursor(0, 4, 0, 0)
-Part.Gui.Macros.drawTcpFaderLayoutConfiguration(Part.Parameter.Map.par_tcp_track_fader_placement)
-Part.Gui.Macros.nextLine()
-
-Part.Cursor.incCursor(0, 4, 0, 0)
-Part.Gui.Macros.nextSection(section_w)
-Part.Cursor.incCursor(0, 4, 0, 0)
-
--- Fader Configuration
-local fader_data = {
-    { label = "Vol",   par_vis = Part.Parameter.Map.par_tcp_track_fader_vol_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_vol_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_vol_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_vol_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_vol },
-    { label = "Pan",   par_vis = Part.Parameter.Map.par_tcp_track_fader_pan_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_pan_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_pan_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_pan_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_pan },
-    { label = "Width", par_vis = Part.Parameter.Map.par_tcp_track_fader_wid_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_wid_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_wid_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_wid_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_wid }
-}
-
-Part.Gui.Macros.drawTcpFaderConfiguration(fader_data)
-
 
 -- Label
 -- ------------------------------
@@ -898,19 +833,119 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_button_wrap_full, button[1]
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_button_wrap_compact, button[2], true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_button_wrap_narrow, button[3], true)
 
--- Rec Input Size
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_element_adj_size_input, false, slider_w, "RecInput Width", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_button_recinput_size, slider, true)
-Part.Gui.Macros.nextLine()
-
 -- Envelope Button Size
 button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_element_adj_size_env, button_w_2, "Envelope Button", "Large", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.button_env_large, button, true)
 Part.Gui.Macros.nextLine()
 
+-- Rec Input Size
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_element_adj_size_input, false, slider_w, "RecInput Width", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_button_recinput_size, slider, true)
+Part.Gui.Macros.nextLine()
+
+
 -- stretch group
 group:stretchToPosition(nil, bottom_y)
 
+-- ===========================================================================
+--      Tab : TCP : Track B
+-- ===========================================================================
+
+-- Settings
+-- ------------------------------
+
+Part.Tab.Entry.setRecentTab(Part.Gui.Tab.tab_tcp_track_b)
+Part.Gui.Macros.resetCursor()
+
+local group_x = Part.Cursor.getCursorX()
+local group_y = Part.Cursor.getCursorY()
+
+
+-- Meter
+-- ------------------------------
+
+group = Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 114)
+
+-- Visibility
+local selection = {
+    { label = "Visible",   value = 1, width = button_w_2 },
+    { label = "Collapsed", value = 2, width = button_w_2 }
+}
+
+button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_tcp_track_meter_mode, true, selection, "Visibility", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_show, button[1], true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_show_collapsed, button[2], true)
+Part.Gui.Macros.nextLine()
+
+-- Meter Size
+slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_size, false, slider_w, "Meter Width",
+    label_w, Part.Parameter.Map.par_tcp_track_meter_size_scale[1])
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_size, slider, true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
+Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
+
+-- Volume Readout
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vol_readout, button_w_full, "Volume Readout", "Next to Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vol_readout, button, true)
+Part.Gui.Macros.nextLine()
+
+-- VU Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vu_db, button_w_full, "VU Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
+Part.Gui.Macros.nextLine()
+
+-- Clip Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_track_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
+Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
+
+-- Meter VU Space
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_channeldiv, false, slider_w, "Channel Spacing", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Pad
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_gaindiv, false, slider_w, "Gain Red. Spacing", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_space, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Width
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_track_meter_gainwid, false, slider_w, "Gain Red. Width", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_width, slider, true)
+Part.Gui.Macros.nextLine()
+
+
+-- stretch group
+group:stretchToPosition(nil, bottom_y)
+
+-- Faders
+-- ------------------------------
+
+Part.Gui.Macros.placeCursorAtLastGroup(true, false, true)
+group = Part.Gui.Macros.drawGroupBox("Faders", Part.Cursor.getCursorX(), group_y, group_w, 155)
+
+-- Fader Layout
+Part.Cursor.incCursor(0, 4, 0, 0)
+Part.Gui.Macros.drawTcpFaderLayoutConfiguration(Part.Parameter.Map.par_tcp_track_fader_placement)
+Part.Gui.Macros.nextLine()
+
+Part.Cursor.incCursor(0, 4, 0, 0)
+Part.Gui.Macros.nextSection(section_w)
+Part.Cursor.incCursor(0, 4, 0, 0)
+
+-- Fader Configuration
+local fader_data = {
+    { label = "Vol",   par_vis = Part.Parameter.Map.par_tcp_track_fader_vol_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_vol_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_vol_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_vol_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_vol },
+    { label = "Pan",   par_vis = Part.Parameter.Map.par_tcp_track_fader_pan_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_pan_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_pan_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_pan_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_pan },
+    { label = "Width", par_vis = Part.Parameter.Map.par_tcp_track_fader_wid_vis, par_vis_mixer = Part.Parameter.Map.par_tcp_track_fader_wid_vis_mixer, par_size = Part.Parameter.Map.par_tcp_track_fader_wid_size, par_size_scale = Part.Parameter.Map.par_tcp_track_fader_wid_size_scale, size_hint = Part.Hint.Lookup.tcp_fader_size_wid }
+}
+
+Part.Gui.Macros.drawTcpFaderConfiguration(fader_data)
+
+-- stretch group
+group:stretchToPosition(nil, bottom_y)
 
 -- ===========================================================================
 --      Tab : TCP : Master
@@ -928,30 +963,11 @@ local group_y = Part.Cursor.getCursorY()
 -- Meter
 -- ------------------------------
 
-Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 114)
+Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 220)
 
 -- Visibility
-Part.Cursor.stackCursor()
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_mode, button_w, nil, "Show Meter")
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_mode, button_w_full, "Visibility", "Show Meter in Master", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_show, button, true)
-Part.Gui.Macros.nextInline()
-
--- VU Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vu_db, button_w, nil, "VU Text")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
-Part.Cursor.destackCursor()
-Part.Gui.Macros.nextLine()
-Part.Cursor.stackCursor()
-
--- Volume Readout
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vol_readout, button_w, nil, "Volume Readout")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vol_readout, button, true)
-Part.Gui.Macros.nextInline()
-
--- Clip Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vu_readout, button_w, nil, "Clip Text")
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
-Part.Cursor.destackCursor()
 Part.Gui.Macros.nextLine()
 
 -- Meter Size
@@ -959,10 +975,37 @@ slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tc
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_size, slider, true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
 Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
+
+-- Volume Readout
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vol_readout, button_w_full, "Volume Readout", "Next to Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vol_readout, button, true)
+Part.Gui.Macros.nextLine()
+
+-- VU Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vu_db, button_w_full, "VU Text", "Show in Meter",label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
+Part.Gui.Macros.nextLine()
+
+-- Clip Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_tcp_master_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter",label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
+Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
 
 -- Meter VU Space
 slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_master_meter_channeldiv, false, slider_w, "Channel Spacing", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Pad
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_master_meter_gaindiv, false, slider_w, "Gain Red. Spacing", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_space, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Width
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_tcp_master_meter_gainwid, false, slider_w, "Gain Red. Width", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_width, slider, true)
 
 
 
@@ -970,7 +1013,7 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, tru
 -- ------------------------------
 
 Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 70)
+group = Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 70)
 
 -- Inserts Size
 Part.Cursor.stackCursor()
@@ -992,12 +1035,15 @@ Part.Cursor.destackCursor()
 Part.Gui.Macros.nextLine()
 
 
+group:stretchToPosition(nil, bottom_y)
 
 -- Faders
 -- ------------------------------
 
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-group = Part.Gui.Macros.drawGroupBox("Faders", group_x, Part.Cursor.getCursorY(), group_w, 160)
+Part.Gui.Macros.placeCursorAtLastGroup(true, false, true)
+group_x = Part.Cursor.getCursorX()
+
+group = Part.Gui.Macros.drawGroupBox("Faders", group_x, group_y, group_w, 160)
 
 -- Fader Layout
 Part.Cursor.incCursor(0, 4, 0, 0)
@@ -1017,15 +1063,12 @@ local fader_data = {
 
 Part.Gui.Macros.drawTcpFaderConfiguration(fader_data)
 
--- stretch group
-group:stretchToPosition(nil, bottom_y)
 
 -- Buttons
 -- ------------------------------
 
-Part.Gui.Macros.placeCursorAtLastGroup(true, false, true)
-group_x = Part.Cursor.getCursorX()
-group = Part.Gui.Macros.drawGroupBox("Buttons", group_x, group_y, group_w, 266)
+Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
+group = Part.Gui.Macros.drawGroupBox("Buttons", group_x, Part.Cursor.getCursorY(), group_w, 266)
 
 local visibility_data = {
     { label = "Solo", image = Part.Gui.Macros.icons.track.solo, separator = true,  index = 2 },
@@ -1275,7 +1318,7 @@ group:stretchToPosition(nil, bottom_y)
 
 Part.Gui.Macros.placeCursorAtLastGroup(true, false, true)
 group_x = Part.Cursor.getCursorX()
-Part.Gui.Macros.drawGroupBox("Highlights", group_x, group_y, group_w, 84)
+Part.Gui.Macros.drawGroupBox("Highlights", group_x, group_y, group_w, 80)
 
 -- Selection Marker
 slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_gen_highlight_selection, false, slider_w, "Selection Bar", label_w)
@@ -1293,6 +1336,11 @@ Part.Gui.Macros.nextLine()
 Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
 group = Part.Gui.Macros.drawGroupBox("Folders", group_x, Part.Cursor.getCursorY(), group_w, 140)
 
+-- Indentation
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_gen_folder_indent, false, slider_w, "Indentation", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_general_folder_indent, slider, true)
+Part.Gui.Macros.nextLine()
+
 -- Buttons
 local selection = {
     { label = "Buttons", value = 1, width = button_w_2 },
@@ -1305,12 +1353,6 @@ button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_m
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_general_folder_collapse_buttons, button[1], true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_general_folder_collapse_lines, button[2], true)
 Part.Gui.Macros.nextLine()
-
--- Indentation
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_gen_folder_indent, false, slider_w, "Indentation", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_general_folder_indent, slider, true)
-Part.Gui.Macros.nextLine()
-Part.Gui.Macros.nextSection(section_w)
 
 -- Folder Start Pad
 slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_gen_folder_pad_folder_parent, false, slider_w, "Folder Padding", label_w)
@@ -1409,13 +1451,13 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_padding_full, butto
 Part.Gui.Macros.nextLine()
 
 -- Size
-slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_insert_size, false, slider_w, "Inserts Size", label_w, Part.Parameter.Map.par_mcp_track_insert_size_scale[1])
+slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_insert_size, false, slider_w, "Size", label_w, Part.Parameter.Map.par_mcp_track_insert_size_scale[1])
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_size, slider, true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
 Part.Gui.Macros.nextLine()
 
 -- Size on Embed
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_insert_size_embed, false, slider_w, "on Embed", label_w)
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_insert_size_embed, false, slider_w, "Embed Size +", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_size_on_embed, slider, true)
 Part.Gui.Macros.nextLine()
 
@@ -1502,7 +1544,7 @@ local selection = {
 }
 
 -- Position
-button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_track_meter_pos, true, selection, "Meter Placement", label_w)
+button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_track_meter_pos, true, selection, "Placement", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_placement_top, button[1], true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_placement_bottom, button[2], true)
 Part.Gui.Macros.nextLine()
@@ -1520,23 +1562,10 @@ Part.Gui.Macros.nextLine()
 
 -- Size
 Part.Cursor.stackCursor()
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_size, false, slider_w, "Meter Size", label_w, Part.Parameter.Map.par_mcp_track_meter_size_scale[1])
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_size, false, slider_w, "Size", label_w, Part.Parameter.Map.par_mcp_track_meter_size_scale[1])
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_size, slider, true)
 Part.Gui.Macros.nextLine()
 Part.Gui.Macros.nextSection(section_w)
-
-
--- VU Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_track_meter_vu_db, button_w_full, "VU Text", "Show in Meter", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
-Part.Gui.Macros.nextLine()
-
--- Clip Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_track_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
-
-Part.Gui.Macros.nextLine()
-
 
 -- Volume Readout
 selection = {
@@ -1549,14 +1578,35 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_volume_readout_horizo
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_volume_readout_vertical, button[2], true)
 Part.Gui.Macros.nextLine()
 
+-- VU Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_track_meter_vu_db, button_w_full, "VU Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
+Part.Gui.Macros.nextLine()
+
+-- Clip Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_track_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
+Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
+
 -- VU Spacing
 slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_channeldiv, false, slider_w, "Channel Spacing", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, true)
 Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Pad
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_gaindiv, false, slider_w, "Gain R. Spacing", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_space, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Gain Reduction Width
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_gainwid, false, slider_w, "Gain R. Width", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_gainreduction_width, slider, true)
+Part.Gui.Macros.nextLine()
 Part.Gui.Macros.nextSection(section_w)
 
--- Channel Expansion
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_expand, false, slider_w, "Channel Expansion", label_w)
+-- Dynamic Size
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_track_meter_expand, false, slider_w, "Dynamic Size", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_channel_expansion, slider, true)
 Part.Gui.Macros.nextLine()
 
@@ -1630,14 +1680,14 @@ local group_y = Part.Cursor.getCursorY()
 -- Meter
 -- ------------------------------
 
-Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 188)
+Part.Gui.Macros.drawGroupBox("Meter", group_x, group_y, group_w, 200)
 local selection = {
     { label = "Top",    value = 1, width = button_w_2 },
     { label = "Bottom", value = 2, width = button_w_2 }
 }
 
 -- Position
-button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_meter_pos, true, selection, "Meter Placement", label_w)
+button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_meter_pos, true, selection, "Placement", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_placement_top, button[1], true)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_placement_bottom, button[2], true)
 Part.Gui.Macros.nextLine()
@@ -1655,24 +1705,11 @@ Part.Gui.Macros.nextLine()
 
 -- Size
 Part.Cursor.stackCursor()
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_meter_size, false, slider_w, "Meter Size", label_w,
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_meter_size, false, slider_w, "Size", label_w,
     Part.Parameter.Map.par_mcp_master_meter_size_scale[1])
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_size, slider, true)
 Part.Gui.Macros.nextLine()
 Part.Gui.Macros.nextSection(section_w)
-
-
--- VU Text
-
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_master_meter_vu_db, button_w_full, "VU Text", "Show in Meter", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
-Part.Gui.Macros.nextLine()
-
--- Clip Text
-button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_master_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
-Part.Gui.Macros.nextLine()
-
 
 -- Volume Readout
 selection = {
@@ -1685,16 +1722,87 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_volume_readout_horizo
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_meter_volume_readout_vertical, button[2], true)
 Part.Gui.Macros.nextLine()
 
+-- VU Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_master_meter_vu_db, button_w_full, "VU Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_text, button, true)
+Part.Gui.Macros.nextLine()
+
+-- Clip Text
+button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_master_meter_vu_readout, button_w_full, "Clip Text", "Show in Meter", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_clip_text, button, true)
+Part.Gui.Macros.nextLine()
+Part.Gui.Macros.nextSection(section_w)
+
 -- VU Spacing
 slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_meter_channeldiv, false, slider_w, "Channel Spacing", label_w)
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.tcp_meter_vu_space, slider, true)
 Part.Gui.Macros.nextLine()
 
--- Faders
+
+-- Inserts
 -- ------------------------------
 
 Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-group = Part.Gui.Macros.drawGroupBox("Faders", group_x, Part.Cursor.getCursorY(), group_w, 225)
+group = Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 100)
+
+-- Position
+selection = {
+    { label = "Top",  value = 1, width = button_w_2 },
+    { label = "Side", value = 2, width = button_w_2 },
+}
+
+button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_insert_mode, true, selection, "Placement", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_top, button[1], true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_side, button[2], true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_embed, button[3], true)
+Part.Gui.Macros.nextLine()
+
+
+-- Side Padding
+selection = {
+    { label = "Minimal", value = 1, width = button_w_2 },
+    { label = "Full",    value = 2, width = button_w_2 }
+}
+
+button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_insert_pad, true, selection, "Padding", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_padding_minimal, button[1], true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_padding_full, button[2], true)
+Part.Gui.Macros.nextLine()
+
+-- Size
+slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_insert_size, false, slider_w, "Size", label_w,
+    Part.Parameter.Map.par_mcp_master_insert_size_scale[1])
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_size, slider, true)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
+Part.Gui.Macros.nextLine()
+
+-- Settings
+-- ------------------------------
+Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
+
+group = Part.Gui.Macros.drawGroupBox("Settings", group_x, Part.Cursor.getCursorY(), group_w, 80)
+
+-- Extend Width
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_settings_extrapad, false, slider_w, "Side Padding", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_add_padding, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- Menu Button Size
+Part.Cursor.stackCursor()
+slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_settings_label_size, false, slider_w, "Menu Button Size", label_w)
+Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_master_menu_button, slider, true)
+Part.Gui.Macros.nextLine()
+
+-- stretch group
+group:stretchToPosition(nil, bottom_y)
+
+
+-- Faders
+-- ------------------------------
+
+Part.Gui.Macros.placeCursorAtLastGroup(true,false, true)
+group_x = Part.Cursor.getCursorX()
+group = Part.Gui.Macros.drawGroupBox("Faders", group_x, group_y, group_w, 220)
 
 -- Fader Layout
 Part.Gui.Macros.drawMcpLayoutConfiguration(Part.Parameter.Map.par_mcp_master_fader_layout)
@@ -1730,16 +1838,12 @@ button = Part.Gui.Macros.drawButtonToggleGroup(true, Part.Parameter.Map.par_mcp_
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_always_show_width, button, true)
 Part.Gui.Macros.nextLine()
 
--- stretch group
-group:stretchToPosition(nil, bottom_y)
-
 
 -- Buttons
 -- ------------------------------
 
-Part.Gui.Macros.placeCursorAtLastGroup(true, false, true)
-group_x = Part.Cursor.getCursorX()
-group = Part.Gui.Macros.drawGroupBox("Buttons", group_x, group_y, group_w, 240)
+Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
+group = Part.Gui.Macros.drawGroupBox("Buttons", group_x, Part.Cursor.getCursorY(), group_w, 240)
 
 local visibility_data = {
     { label = "FX",   image = Part.Gui.Macros.icons.track.fx,   separator = true,  index = 1 },
@@ -1772,59 +1876,7 @@ Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_button_layout_medium, butto
 Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_button_layout_wide, button[3], true)
 Part.Gui.Macros.nextLine()
 
--- Settings
--- ------------------------------
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
 
-group = Part.Gui.Macros.drawGroupBox("Settings", group_x, Part.Cursor.getCursorY(), group_w, 80)
-
--- Extend Width
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_settings_extrapad, false, slider_w, "Side Padding", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_add_padding, slider, true)
-Part.Gui.Macros.nextLine()
-
--- Menu Button Size
-Part.Cursor.stackCursor()
-slider = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_settings_label_size, false, slider_w, "Menu Button Size", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_master_menu_button, slider, true)
-Part.Gui.Macros.nextLine()
-
--- Inserts
--- ------------------------------
-
-Part.Gui.Macros.placeCursorAtLastGroup(false, true, true)
-group = Part.Gui.Macros.drawGroupBox("Inserts", group_x, Part.Cursor.getCursorY(), group_w, 100)
-
--- Position
-selection = {
-    { label = "Top",  value = 1, width = button_w_2 },
-    { label = "Side", value = 2, width = button_w_2 },
-}
-
-button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_insert_mode, true, selection, "Inserts Placement", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_top, button[1], true)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_side, button[2], true)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_placement_embed, button[3], true)
-Part.Gui.Macros.nextLine()
-
-
--- Side Padding
-selection = {
-    { label = "Minimal", value = 1, width = button_w_2 },
-    { label = "Full",    value = 2, width = button_w_2 }
-}
-
-button = Part.Gui.Macros.drawButtonSelectionGroup(true, Part.Parameter.Map.par_mcp_master_insert_pad, true, selection, "Padding", label_w)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_padding_minimal, button[1], true)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_padding_full, button[2], true)
-Part.Gui.Macros.nextLine()
-
--- Size
-slider, button = Part.Gui.Macros.drawSliderGroup(true, Part.Parameter.Map.par_mcp_master_insert_size, false, slider_w, "Inserts Size", label_w,
-    Part.Parameter.Map.par_mcp_master_insert_size_scale[1])
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.mcp_inserts_size, slider, true)
-Part.Control.Hint.Hint:new(nil, Part.Hint.Lookup.size_percentual, button, true)
-Part.Gui.Macros.nextLine()
 
 -- stretch group
 group:stretchToPosition(nil, bottom_y)

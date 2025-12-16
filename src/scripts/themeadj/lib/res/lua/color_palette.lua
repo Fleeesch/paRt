@@ -1,4 +1,4 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
@@ -358,8 +358,8 @@ color.color_dimmed = {
         border = { 50, 50, 50 },
         shadow = { 80, 80, 80 },
         palette = {
-            { 225, 225, 225, 1 },
             { 100, 100, 100, 1 },
+            { 225, 225, 225, 1 },
             { 131, 204, 177 },
             { 138, 192, 216 },
             { 222, 123, 123 },

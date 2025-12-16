@@ -1,11 +1,11 @@
--- @version 1.2.7
+-- @version 1.2.8
 -- @author Fleeesch
 -- @description paRt Theme Adjuster
 -- @noIndex
 
 --[[
     Tools for drawing stuff; anything that actually puts the graphics on display.
-    
+
     Includes:
       - spritesheet creation
       - screenbuffer processing
@@ -783,31 +783,34 @@ function draw.Graphics.drawBackground()
     -- draw background
     gfx.rect(0, 0, gfx.w, gfx.h)
 
-    -- hint background
-    local x = Part.Functions.rescale(Part.Global.hint_x, true, false)
-    local y = Part.Functions.rescale(Part.Global.hint_y, false, true)
-    local w = Part.Functions.rescale(Part.Global.hint_w)
-    local h = Part.Functions.rescale(Part.Global.hint_h)
+    -- only draw hint background if theme version is valid
+    if not (Part.Global.theme_is_part and Part.Version.theme_version_is_lower) then
+        -- hint background
+        local x = Part.Functions.rescale(Part.Global.hint_x, true, false)
+        local y = Part.Functions.rescale(Part.Global.hint_y, false, true)
+        local w = Part.Functions.rescale(Part.Global.hint_w)
+        local h = Part.Functions.rescale(Part.Global.hint_h)
 
-    Part.Color.setColor(Part.Color.Lookup.color_palette.hint.stage_bg, true)
-    gfx.rect(x, y, w, h)
+        Part.Color.setColor(Part.Color.Lookup.color_palette.hint.stage_bg, true)
+        gfx.rect(x, y, w, h)
 
-    -- theme hint coordinates
-    gfx.x = x + Part.Functions.rescale(10)
-    gfx.y = y + h - Part.Functions.rescale(20)
-    draw.Graphics.setFont(16)
+        -- theme hint coordinates
+        gfx.x = x + Part.Functions.rescale(10)
+        gfx.y = y + h - Part.Functions.rescale(20)
+        draw.Graphics.setFont(16)
 
-    -- unpacked
-    if Part.Global.theme_is_unpacked then
-        Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.unpacked, true)
-        gfx.drawstr("UNPACKED")
-        gfx.drawstr("  ")
-    end
+        -- unpacked
+        if Part.Global.theme_is_unpacked then
+            Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.unpacked, true)
+            gfx.drawstr("UNPACKED")
+            gfx.drawstr("  ")
+        end
 
-    -- modded
-    if Part.Global.theme_is_modded then
-        Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.modded, true)
-        gfx.drawstr("MOD")
+        -- modded
+        if Part.Global.theme_is_modded then
+            Part.Color.setColor(Part.Color.Lookup.color_palette.theme_hint.modded, true)
+            gfx.drawstr("MOD")
+        end
     end
 end
 
