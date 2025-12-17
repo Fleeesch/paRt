@@ -62,7 +62,7 @@
 # routing - contextual
 --out tcp_infoblock_io_refer_r              --frame frame_box -fit          --images  fill_arrow    -flip-h     -tint color_yellow      io_context_to           -tint infobox_fg_on         fill_arrow_border       -flip-h     -tint infobox_border
 --out tcp_infoblock_io_refer_s              --frame frame_box -fit          --images  fill_arrow                -tint color_red         io_context_from         -tint infobox_fg_on         fill_arrow_border                   -tint infobox_border 
---out tcp_infoblock_io_refer_s_r            --frame frame_box -fit          --images  fill_arrow_bi             -tint color_cyan        io_context_feedback     -tint infobox_fg_on         fill_arrow_bi_border                -tint infobox_border
+--out tcp_infoblock_io_refer_s_r            --frame frame_box -fit          --images  fill_arrow_bi             -tint color_orange      io_context_feedback     -tint infobox_fg_on         fill_arrow_bi_border                -tint infobox_border
 
 # # tempo
 --out tcp_infoblock_timebase_beat           --frame frame_box -fit          --images fill_inset_s    -tint infobox_bg_dimmed        timebase_beat       -tint infobox_fg_dimmed

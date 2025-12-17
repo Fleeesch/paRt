@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.2.8
+part_version 1.2.9
 
     bank_selected 'Selected Bank' 2 2 9
     config_selected 'Selected Configuration' 0 0 7
@@ -90,6 +90,7 @@ part_version 1.2.8
     trans_element_adj_spacing_section_x         'Transport - Element Adjustments Spacing Section X'     DEF_trans_element_adj_spacing_section_x         0           VAL_PAR_RANGE
     trans_element_adj_separator_size            'Transport - Element Adjustments Separator Size'        DEF_trans_element_adj_separator_size            0           VAL_PAR_RANGE
     trans_element_adj_bpm_tap                   'Transport - Element Adjustments BPM Tap'               DEF_trans_element_adj_bpm_tap                   0           1
+    trans_element_adj_timebase                  'Transport - Element Adjustments Timebase'              DEF_trans_element_adj_timebase                  0           1
 
 ; ::: Playrate
 

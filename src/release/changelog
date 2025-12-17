@@ -1,15 +1,15 @@
-TCP: updated infobox IO icons
-TCP: meter can be optionally displayed in collapsed mode
-TCP: infoblock doesn't extend label size when activated unless there's not enough room
-TCP: tweaked minimal height threshold values for modded "tcp_heights"
-TCP: added ENVCP hiding logic for small height for modded "tcp_heights"
-TCP: corrected ENVCP folder line margins
-Meters: added parameters for controlling the gain reduction meter gap and width
-Meters: better alpha-calibration for meter text overlay
-Meters: fixed missing unlit-text-shadow for TCP
-Theme Adjuster: fixed potential drawing error on theme-error-message-display
-Theme Adjuster: split TCP Track section into 2 tabs
-Theme Adjuster: added option to show meter in TCP track collapsed mode
-Theme Adjuster: additional layout changes for more streamlined experience
-fixed multiple instances of readme comment section in rtconfig.txt
-updated pinned tracks divider line colors
+Transport: minor formatting tweaks
+Transport: added project timebase buttons
+Transport: updated Tap Tempo button to be wider
+Transport: rearrangement of tempo controls
+Transport: added BPM label
+Transport: placed playrate elements in separate section
+Transport: corrected status bar hiding behaviour
+TCP: added vertical hiding logic to infobar for modded "tcp_heights"
+TCP: updated graphics for infobar IO buttons
+TCP: updated colors for infobar timebase icons
+Items: updated timebase button assets 
+Theme Adjuster: added transport timebase-button settings
+Theme Adjuster: added section toggle for playrate
+Theme Adjuster: fixed dpi-related jank in "Color Palettes" tab
+Theme Adjuster: several colors and label tweaks

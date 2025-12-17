@@ -5,6 +5,11 @@
 
 --dummy --out transport_group_bg transport_edit_bg transport_bpm_bg transport_bpm
 
+#       BPM
+# --------------------------------------
+
+--out transport_custom_bpm      --frame frame -fit      --images bpm -tint transport_click_fg_off
+
 #       Buttons
 # --------------------------------------
 
@@ -74,28 +79,35 @@
 # --------------------------------------
 
 # knob
---out transport_knob_bg_large transport_knob_bg_small   --frame frame_rate_knob --images rate_knob_bg -tint transport_rate_knob_bg
+--out transport_knob_bg_large transport_knob_bg_small   --frame frame_rate_knob         --images rate_knob_bg       -tint transport_rate_knob_bg
 
-# fader
---out transport_playspeedbg         --frame frame_rate_fader        --images rate_fader_bg     -tint transport_rate_fader_bg
---out transport_playspeedthumb      --frame frame_rate_fader_knob   --images rate_fader_knob   -tint transport_rate_fader_knob
+        # fader
+--out transport_playspeedbg                             --frame frame_rate_fader        --images rate_fader_bg      -tint transport_rate_fader_bg
+--out transport_playspeedthumb                          --frame frame_rate_fader_knob   --images rate_fader_knob    -tint transport_rate_fader_knob
+
+#       Timebase
+# --------------------------------------
+
+--out transport_timebase_beat            --spritesheet --button --frame frame_w -fit     --images timebase_beats    -tint transport_click_fg_on      --images timebase_time    -tint transport_click_fg_off       timebase_fill -tint transport_click_hover -frame 1 1 -alpha 0.5       timebase_fill -tint transport_click_hover -frame 2 2
+--out transport_timebase_time            --spritesheet --button --frame frame_w -fit     --images timebase_beats    -tint transport_click_fg_off     --images timebase_time    -tint transport_click_fg_on        timebase_fill -tint transport_click_hover -frame 1 1 -alpha 0.5       timebase_fill -tint transport_click_hover -frame 2 2
+
 
 #       Tap Tempo
 # --------------------------------------
 
---out transport_tap                         --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_tap        -tint transport_tap_fg
---out transport_basis_half                  --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_half       -tint transport_tap_fg
---out transport_basis_quarter               --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_quarter    -tint transport_tap_fg
---out transport_basis_eighth                --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_eight      -tint transport_tap_fg
---out transport_basis_half_dotted           --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_half       -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
---out transport_basis_quarter_dotted        --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_quarter    -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
---out transport_basis_eighth_dotted         --spritesheet --button --frame frame -fit      --images tap_tempo_fill    -tint transport_tap_bg       tap_tempo_t          -tint transport_tap_fg     tap_tempo_eight      -tint transport_tap_fg       tap_tempo_dot       -tint transport_tap_fg
+--out transport_tap                         --spritesheet --button --frame frame -fit      --images tap_tempo_tap        -tint transport_click_fg_on                                                                                                                tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_half                  --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_half       -tint transport_click_fg_on                                                           tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_quarter               --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_quarter    -tint transport_click_fg_on                                                           tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_eighth                --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_eight      -tint transport_click_fg_on                                                           tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_half_dotted           --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_half       -tint transport_click_fg_on       tap_tempo_dot       -tint transport_click_fg_on     tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_quarter_dotted        --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_quarter    -tint transport_click_fg_on       tap_tempo_dot       -tint transport_click_fg_on     tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
+--out transport_basis_eighth_dotted         --spritesheet --button --frame frame -fit      --images tap_tempo_t          -tint transport_click_fg_on     tap_tempo_eight      -tint transport_click_fg_on       tap_tempo_dot       -tint transport_click_fg_on     tap_tempo_fill -tint transport_click_hover -frame 1 1 -alpha 0.5           tap_tempo_fill -tint transport_click_hover -frame 2 2
 
 #       Status
 # --------------------------------------
 
---out transport_status_bg       --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg           
---out transport_status_bg_err   --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg_error     
+--out transport_status_bg       --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg
+--out transport_status_bg_err   --frame frame_custom    --images custom_fill_full -tint transport_bg        --images custom_fill    -tint transport_status_bg_error
 
 #       Section
 # --------------------------------------
@@ -105,6 +117,6 @@
 #       Stage
 # --------------------------------------
 
---out transport_bg                  --fill gui_bg
+--out transport_bg              --fill gui_bg
 
 --copy-files
