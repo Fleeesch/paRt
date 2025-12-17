@@ -158,8 +158,9 @@ universal:
     transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [26, 26, 26]
     transport_rate_fader_knob: [220, 220, 220]
-    transport_tap_bg: [220, 220, 220, 0]
-    transport_tap_fg: [220, 220, 220, 1]
+    transport_click_fg_off: [220, 220, 220, 0.4]
+    transport_click_fg_on: [220, 220, 220, 1]
+    transport_click_hover: [255,255,255,0.2]
 
     # buttons
     button_bg_off: [45, 45, 45]
@@ -391,8 +392,9 @@ dimmed:
     transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [90, 90, 90]
     transport_rate_fader_knob: [235, 235, 235]
-    transport_tap_bg: [235, 235, 235, 0]
-    transport_tap_fg: [235, 235, 235, 1]
+    transport_click_fg_off: [235, 235, 235, 0.35]
+    transport_click_fg_on: [235, 235, 235, 1]
+    transport_click_hover: [255,255,255,0.2]
 
     # buttons
     button_bg_off: [61, 61, 61]
@@ -617,8 +619,9 @@ light:
     transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [195, 195, 195]
     transport_rate_fader_knob: [100, 100, 100]
-    transport_tap_bg: [0, 0, 0, 0]
-    transport_tap_fg: [0, 0, 0]
+    transport_click_fg_off: [0,0,0, 0.4]
+    transport_click_fg_on: [0,0,0, 1]
+    transport_click_hover: [0,0,0,0.15]
 
     # buttons
     button_bg_off: [131, 131, 131]

@@ -1,0 +1,4 @@
+-- @version 1.2.8
+-- @author Fleeesch
+-- @description paRt Theme Adjuster
+-- @noIndex

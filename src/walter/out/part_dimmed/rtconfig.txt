@@ -2,9 +2,13 @@
 ;       paRt WALTER file
 ;
 ;       Theme: dimmed
-;       Version: 1.2.8
-;       Date: 2025-12-16 23:00:13
+;       Version: 1.2.9
+;       Date: 2025-12-17 22:43:54
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
+
+
 
 
 ;THEMEBUILDER_INSERT_README
@@ -116,7 +120,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.2.8' 0 0 0
+define_parameter part_version 'paRt Theme v1.2.9' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000
@@ -363,6 +367,7 @@ define_parameter par_trans_element_adj_spacing_time_x 'Transport - Element Adjus
 define_parameter par_trans_element_adj_spacing_x 'Transport - Element Adjustments Spacing X' 0 0 1000
 define_parameter par_trans_element_adj_status_size 'Transport - Element Adjustments Status Size' 295 0 1000
 define_parameter par_trans_element_adj_status_size_scale 'Transport - Element Adjustments Status Size Scale' 0 0 1
+define_parameter par_trans_element_adj_timebase 'Transport - Element Adjustments Timebase' 0 0 1
 define_parameter par_trans_element_separator 'Transport - Element Separator' 196 0 1000000
 define_parameter par_trans_element_vis 'Transport - Element Visibility' 4094 0 1000000
 define_parameter par_trans_playrate_mode 'Transport - Playrate Display Mode' 2 0 2
@@ -639,15 +644,15 @@ define_parameter paRt_end 'paRt end' 0 0 1
 
                 set VAL_Button_2            * 2     VAL_Button
 
-                ; transport button
-                set VAL_Button_Trans                    \
-                    SCALE>=2.5      [85     45  127 ]   \
-                    SCALE>=2.25     [77     41  115 ]   \
-                    SCALE>=2        [68     36  102 ]   \
-                    SCALE>=1.75     [60     32  90  ]   \
-                    SCALE>=1.5      [51     27  76  ]   \
-                    SCALE>=1.25     [43     23  64  ]   \
-                                    [34     18  51  ]
+                ; transport button (width / height / extended width / tempo button width)
+                set VAL_Button_Trans                            \
+                    SCALE>=2.5      [85     45  127     95]     \
+                    SCALE>=2.25     [77     41  115     87]     \
+                    SCALE>=2        [68     36  102     77]     \
+                    SCALE>=1.75     [60     32  90      68]     \
+                    SCALE>=1.5      [51     27  76      58]     \
+                    SCALE>=1.25     [43     23  64      47]     \
+                                    [34     18  51      38]
 
                 ; folder button / icon
                 set VAL_Button_Folder       \
@@ -1332,6 +1337,7 @@ set THEME_color_infobox_text                [35 35 35]
             clear trans.*
             MAC_DrawTransport_Setup             SCALE   "trans" "trans"
             MAC_DrawTransport_Buttons           SCALE   "trans" "trans"
+            MAC_DrawTransport_Playrate          SCALE   "trans" "trans"
             MAC_DrawTransport_Status            SCALE   "trans" "trans"
             MAC_DrawTransport_Selection         SCALE   "trans" "trans"
             MAC_DrawTransport_Size              SCALE   "trans" "trans"
@@ -1367,6 +1373,8 @@ set THEME_color_infobox_text                [35 35 35]
             custom WALTER_ELEMENT##.custom.bank_logo    "" ""                                               ""      "transport_custom_bank_part"
             custom WALTER_ELEMENT##.custom.bank_bg      "" ""                                               ""      "transport_group_bg"
             custom WALTER_ELEMENT##.custom.time_bg      "" ""                                               ""      "transport_group_bg"
+            custom WALTER_ELEMENT##.custom.rate_bg      "" ""                                               ""      "transport_group_bg"
+            custom WALTER_ELEMENT##.custom.bpm_bg       "" ""                                               ""      "transport_custom_bpm"
 
             ; width
             set VAL_trans_w 600
@@ -1410,7 +1418,7 @@ set THEME_color_infobox_text                [35 35 35]
             set VAL_trans_x_rightmost_padding - VAL_trans_w{0} - VAL_trans_x_rightmost{0} VAL_trans_w_bank_section{0}
 
             ; hiding x position
-            set VAL_trans_hide_x - w VAL_trans_x_rightmost_padding{0}
+            set VAL_trans_hide_x - w + VAL_trans_x_rightmost_padding{0} * SCALE 10
 
 
         endmacro
@@ -1533,7 +1541,7 @@ set THEME_color_infobox_text                [35 35 35]
             macro MAC_DrawTransport_Buttons_Bpm SCALE INDEX WALTER_ELEMENT PARAMETER_SECTION
 
                 ; side padding value
-                set VAL_trans_timepad * SCALE 10
+                set VAL_trans_timepad * 5 VAL_Unit{0}
 
                 ; section offset
                 set CUR_x                                               \
@@ -1555,42 +1563,27 @@ set THEME_color_infobox_text                [35 35 35]
                             0                   \
                         0
 
-                ; playrate visibility
-                set VAL_trans_show_playrate     \
-                    ?VAL_trans_show_bpm{0}      \
-                        trans_flags&2           \
-                            1                   \
-                            0                   \
-                        0
-
+                ; timebase visibility
+                set VAL_trans_show_timebase  * VAL_trans_show_bpm{0} par_##PARAMETER_SECTION##_element_adj_timebase
+                
                 ; tap visibility
                 set VAL_trans_show_bpm_tap  * VAL_trans_show_bpm{0} par_##PARAMETER_SECTION##_element_adj_bpm_tap
+                
 
                 ; elements width
+                set CUR_w_bpm_text  * VAL_trans_show_bpm{0}         VAL_Button_Trans{3}
                 set CUR_w_edit      * VAL_trans_show_bpm{0}         * SCALE 64
-                set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     VAL_Button_Trans{0}
+                set CUR_w_tap       * VAL_trans_show_bpm_tap{0}     VAL_Button_Trans{2}
                 set CUR_w_timesig   * VAL_trans_show_timesig{0}     * SCALE 64
-                set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 95
-
-               ; playrate fader size
-                set CUR_w_rate_fader                                        \
-                    ?VAL_trans_show_playrate{0}                             \
-                        par_trans_playrate_mode==0                          \
-                            0                                               \
-                        par_trans_playrate_mode==1                          \
-                            VAL_button_trans{1}                             \
-                        par_trans_playrate_mode==2                          \
-                            * SCALE + 20 * 0.2 par_trans_playrate_size      \
-                            0                                               \
-                        0
-
-                ; total width
-                set VAL_trans_time_spacing_count + VAL_trans_show_timesig VAL_trans_show_playrate
-
+                set CUR_w_timebase  * VAL_trans_show_timebase{0}    VAL_Button_Trans{3}
+                
+                ; section width
                 set CUR_w_section                                                                               \
                      + * 2 VAL_trans_timepad{0}                                                                 \
-                     + * VAL_trans_time_spacing_count{0} VAL_trans_spacing_time_x{0}                            \
-                     + CUR_w_edit{0} + CUR_w_tap{0} + CUR_w_timesig{0} + CUR_w_rate{0} CUR_w_rate_fader{0}
+                     + * VAL_trans_show_bpm_tap{0}  VAL_trans_spacing_time_x{0}                                 \
+                     + * VAL_trans_show_timesig{0}  VAL_trans_spacing_time_x{0}                                 \
+                     + * VAL_trans_show_timebase{0} VAL_trans_spacing_time_x{0}                                 \
+                     + CUR_w_bpm_text{0} + CUR_w_edit{0} + CUR_w_tap{0} + CUR_w_timesig{0} CUR_w_timebase{0}
 
                 ; hiding logic
                 set CUR_x_target + CUR_x{0} CUR_w_section{0}
@@ -1600,19 +1593,42 @@ set THEME_color_infobox_text                [35 35 35]
                         CUR_x_target{0}>VAL_trans_hide_x{0}     \
                         1
 
+                ; hide overwrite
                 set VAL_trans_show_bpm          ?VAL_trans_hide_buttons{0}      0
                 set VAL_trans_show_timesig      ?VAL_trans_hide_buttons{0}      0
-                set VAL_trans_show_playrate     ?VAL_trans_hide_buttons{0}      0
                 set VAL_trans_show_bpm_tap      ?VAL_trans_hide_buttons{0}      0
 
                 ; [DRAW] Background
                 set DRAW_trans_time_bg                                  \
                     ?VAL_trans_show_bpm{0}                              \
-                        [CUR_x CUR_y CUR_w_section CUR_h 0 0 0 0]       \
+                        [CUR_x CUR_y CUR_w_section{0} CUR_h 0 0 0 0]    \
                         0
 
                 ; increment x position
-                set CUR_x + * VAL_trans_show_bpm{0} VAL_trans_timepad{0}
+                set CUR_x                                   \
+                    ?VAL_trans_show_bpm{0}                  \
+                        + CUR_x{0} VAL_trans_timepad{0}
+                
+                ; [DRAW] BPM Text
+                set DRAW_trans_time_bpm_text                                \
+                    ?VAL_trans_show_bpm{0}                                  \
+                        [CUR_x CUR_y VAL_Button_Trans{3} CUR_h 0 0 0 0]     \
+                        0
+
+                ; increment x position
+                set CUR_x                                           \
+                    ?VAL_trans_show_bpm{0}                          \
+                        + CUR_x{0} VAL_Button_Trans{3}
+
+                ; [DRAW] BPM Tap Button
+                set DRAW_trans_time_bpm_tap                         \
+                    ?VAL_trans_show_bpm{0}                          \
+                        [CUR_x CUR_y CUR_w_tap CUR_h 0 0 0 0]       \
+                        0
+
+                ; increment x position
+                set CUR_x + * VAL_trans_show_bpm_tap{0} + CUR_w_tap{0} VAL_trans_spacing_time_x{0}
+
 
                 ; [DRAW] BPM Edit Field
                 set DRAW_trans_time_bpm_edit                        \
@@ -1622,15 +1638,6 @@ set THEME_color_infobox_text                [35 35 35]
 
                 ; increment x position
                 set CUR_x + * VAL_trans_show_bpm{0} CUR_w_edit{0}
-
-                ; [DRAW] BPM Tap Button
-                set DRAW_trans_time_bpm_tap                         \
-                    ?VAL_trans_show_bpm{0}                          \
-                        [CUR_x CUR_y CUR_w_tap CUR_h 0 0 0 0]       \
-                        0
-
-                ; increment x position
-                set CUR_x + * VAL_trans_show_bpm_tap{0} CUR_w_tap{0}
 
                 ; add x spacing before time signature
                 set CUR_x + * VAL_trans_show_timesig{0} VAL_trans_spacing_time_x{0}
@@ -1644,62 +1651,136 @@ set THEME_color_infobox_text                [35 35 35]
                         0
 
                 ; increment x position
-                set CUR_x + * VAL_trans_show_timesig{0} CUR_w_timesig{0}
+                set CUR_x                                                           \
+                    ?VAL_trans_show_timesig{0}                                      \
+                        + CUR_x{0} + CUR_w_timesig{0} VAL_trans_spacing_time_x{0}
 
-                ; add x spacing before playrate
-                set CUR_x + * VAL_trans_show_playrate{0} VAL_trans_spacing_time_x{0}
-
-                ; [DRAW] Playrate
-                set DRAW_trans_time_rate                                \
-                    ?VAL_trans_show_bpm{0}                              \
-                        ?VAL_trans_show_playrate{0}                     \
-                            [CUR_x CUR_y CUR_w_rate CUR_h 0 0 0 0]      \
-                            0                                           \
+                
+                ; [DRAW] Timebase
+                set DRAW_trans_timebase                                         \
+                    ?VAL_trans_show_bpm{0}                                      \
+                        ?VAL_trans_show_timebase{0}                             \
+                            [CUR_x CUR_y VAL_Button_Trans{3} CUR_h 0 0 0 0]     \
+                            0                                                   \
                         0
 
-                ; increment x position
-                set CUR_x + CUR_x{0} * VAL_trans_show_playrate{0} CUR_w_rate{0}
-
-                ; playrate fader knob mode
-                set WALTER_ELEMENT##.rate.fader.fadermode           \
-                    par_##PARAMETER_SECTION##_playrate_mode==1      \
-                        1                                           \
-                    par_##PARAMETER_SECTION##_playrate_mode==2      \
-                        -1
-
-                ; [DRAW] Playrate Fader
-                set CUR_h_fader                                     \
-                    par_##PARAMETER_SECTION##_playrate_mode==2      \
-                        * VAL_Button{1} 0.5                         \
-                        VAL_Button_Trans{1}
-
-
-                set CUR_y_fader                                     \
-                    par_##PARAMETER_SECTION##_playrate_mode==2      \
-                        + CUR_y{0} * 0.5 - CUR_h{0} CUR_h_fader{0}  \
-                        VAL_trans_y_top
-
-                set DRAW_trans_time_rate_fader                                              \
-                    ?VAL_trans_show_playrate{0}                                             \
-                        ?par_##PARAMETER_SECTION##_playrate_mode                            \
-                            [CUR_x CUR_y_fader CUR_w_rate_fader CUR_h_fader 0 0 0 0]        \
-                            0                                                               \
-                        0
-
-                ; element counter
-                set VAL_trans_button_section_count  +   VAL_trans_button_section_count{0}      VAL_trans_show_bpm{0}
-                set VAL_trans_button_group_count    +   VAL_trans_button_group_count{0}        VAL_trans_show_bpm{0}
-                set VAL_trans_button_count          +   VAL_trans_button_count{0}              VAL_trans_show_bpm{0}
-
-                ; increment x position post rate-fader
-                set CUR_x                                                                   \
-                    ?par_##PARAMETER_SECTION##_playrate_mode                                \
-                        + CUR_x{0} * VAL_trans_show_playrate{0} CUR_w_rate_fader{0}
+                ; add x spacing after timebase playrate
+                set CUR_x                                       \
+                    ?VAL_trans_show_bpm{0}                      \
+                        ?VAL_trans_show_timebase{0}             \
+                            + CUR_x{0} VAL_Button_Trans{3}
 
                 ; post-section spacing
                 set CUR_x + CUR_x{0} * VAL_trans_show_bpm{0} + VAL_trans_timepad{0} VAL_trans_spacing_section_x{0}
 
             endmacro
+
+    ;   ## Draw : Transport : Playrate
+    ; --------------------------------------------------------------------------------
+
+        macro MAC_DrawTransport_Playrate SCALE WALTER_ELEMENT PARAMETER_SECTION
+
+            ; playrate visibility
+            set VAL_trans_show_playrate     \
+                trans_flags&2               \
+                    1                       \
+                    0
+            ; width
+            set CUR_w_rate      * VAL_trans_show_playrate{0}    * SCALE 95
+
+            ; playrate fader size
+            set CUR_w_rate_fader                                        \
+                ?VAL_trans_show_playrate{0}                             \
+                    par_trans_playrate_mode==0                          \
+                        0                                               \
+                    par_trans_playrate_mode==1                          \
+                        VAL_button_trans{1}                             \
+                    par_trans_playrate_mode==2                          \
+                        * SCALE + 20 * 0.2 par_trans_playrate_size      \
+                        0                                               \
+                    0
+            
+            ; section width
+            set CUR_w_section + * 2 VAL_trans_timepad{0} + CUR_w_rate{0} CUR_w_rate_fader{0}
+
+            ; hiding logic
+            set CUR_x_target + CUR_x{0} CUR_w_section{0}
+
+            set VAL_trans_hide_buttons                      \
+                ?VAL_trans_show_playrate{0}                 \
+                    CUR_x_target{0}>VAL_trans_hide_x{0}     \
+                    1
+
+            ; hide overwrite
+            set VAL_trans_show_playrate      ?VAL_trans_hide_buttons{0}      0
+
+            ; [DRAW] Background
+            set DRAW_trans_rate_bg                                      \
+                ?VAL_trans_show_playrate{0}                             \
+                    !VAL_trans_hide_buttons{0}                          \
+                        [CUR_x CUR_y CUR_w_section{0} CUR_h 0 0 0 0]    \
+                        0                                               \
+                    0
+
+            ; initial x position
+            set CUR_x                                   \
+                ?VAL_trans_show_playrate{0}             \
+                    + CUR_x{0} VAL_trans_timepad{0}
+
+            ; [DRAW] Playrate
+            set DRAW_trans_time_rate                                \
+                    ?VAL_trans_show_playrate{0}                     \
+                        [CUR_x CUR_y CUR_w_rate CUR_h 0 0 0 0]      \
+                        0
+
+            ; increment x position
+            set CUR_x                           \
+                ?VAL_trans_show_playrate{0}     \
+                    + CUR_x{0} CUR_w_rate{0}
+
+            ; playrate fader knob mode
+            set WALTER_ELEMENT##.rate.fader.fadermode           \
+                par_##PARAMETER_SECTION##_playrate_mode==1      \
+                    1                                           \
+                par_##PARAMETER_SECTION##_playrate_mode==2      \
+                    -1
+
+            ; fader height
+            set CUR_h_fader                                     \
+                par_##PARAMETER_SECTION##_playrate_mode==2      \
+                    * VAL_Button{1} 0.5                         \
+                    VAL_Button_Trans{1}
+
+            ; fader y position
+            set CUR_y_fader                                         \
+                par_##PARAMETER_SECTION##_playrate_mode==2          \
+                    + CUR_y{0} * 0.5 - CUR_h{0} CUR_h_fader{0}      \
+                    VAL_trans_y_top
+
+            ; [DRAW] Playrate Fader
+            set DRAW_trans_time_rate_fader                                              \
+                ?VAL_trans_show_playrate{0}                                             \
+                    ?par_##PARAMETER_SECTION##_playrate_mode                            \
+                        [CUR_x CUR_y_fader CUR_w_rate_fader CUR_h_fader 0 0 0 0]        \
+                        0                                                               \
+                    0
+
+            ; element counter
+            set VAL_trans_button_section_count  +   VAL_trans_button_section_count{0}      VAL_trans_show_bpm{0}
+            set VAL_trans_button_group_count    +   VAL_trans_button_group_count{0}        VAL_trans_show_bpm{0}
+            set VAL_trans_button_count          +   VAL_trans_button_count{0}              VAL_trans_show_bpm{0}
+
+            ; increment x position post rate-fader
+            set CUR_x                                                                   \
+                ?par_##PARAMETER_SECTION##_playrate_mode                                \
+                    + CUR_x{0} * VAL_trans_show_playrate{0} CUR_w_rate_fader{0}
+
+            ; post-section spacing
+            set CUR_x                                                                   \
+                ?VAL_trans_show_playrate{0}                                             \
+                    + CUR_x{0} + VAL_trans_timepad{0} VAL_trans_spacing_section_x{0}
+
+        endmacro
 
     ;   ## Draw : Transport : Status
     ; --------------------------------------------------------------------------------
@@ -1715,7 +1796,7 @@ set THEME_color_infobox_text                [35 35 35]
                     * SCALE                 * 3 + 20  * 0.15  par_trans_element_adj_status_size
 
             ; hiding logic
-            set CUR_x_target + CUR_x_target{0} CUR_w{0}
+            set CUR_x_target + CUR_x{0} CUR_w{0}
 
             set VAL_trans_hide_buttons                  \
                 CUR_x_target{0}>VAL_trans_hide_x{0}     \
@@ -1832,9 +1913,12 @@ set THEME_color_infobox_text                [35 35 35]
 
             ; time settings
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_bg"           "custom.time_bg"    VAL_x_offset
+            MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "rate_bg"           "custom.rate_bg"    VAL_x_offset
+            MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_bpm_text"     "custom.bpm_bg"     VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_bpm_edit"     "bpm.edit"          VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_bpm_tap"      "bpm.tap"           VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_timesig"      "curtimesig"        VAL_x_offset
+            MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "timebase"          "timebase"          VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_rate"         "rate"              VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "time_rate_fader"   "rate.fader"        VAL_x_offset
             MAC_DrawTransport_PlaceElements_Draw SCALE WALTER_ELEMENT PARAMETER_SECTION "rew"               "rew"               VAL_x_offset
@@ -6061,9 +6145,11 @@ set THEME_color_infobox_text                [35 35 35]
             set VAL_tcp_IndexOffset * SCALE 4
     
             ; [DRAW] infobar
-            set WALTER_ELEMENT##.infoblock                                              \
-                ?VAL_tcp_show_infobar{0}                                                \
-                    [CUR_x_infobar{0} CUR_y{0} VAL_InfoBox{0} VAL_InfoBox{1} 1 0 1 0]   \
+            set WALTER_ELEMENT##.infoblock                                                  \
+                ?VAL_tcp_show_infobar{0}                                                    \
+                    ?VAL_tcp_h_level{0}                                                     \
+                        [CUR_x_infobar{0} CUR_y{0} VAL_InfoBox{0} VAL_InfoBox{1} 1 0 1 0]   \
+                        0                                                                   \
                     0
 
             set WALTER_ELEMENT##.infoblock.color THEME_color_infobox_text    
