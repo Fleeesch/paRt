@@ -6,9 +6,9 @@
 	],
 	"settings": {
 		"Lua.workspace.library": [
-            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.15/resources/Sexan_reaper_defs.lua",
-            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.15/resources/imgui_defs_0.9.lua",
-            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.15/resources/reawwise_defs.lua"
+            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.16/resources/Sexan_reaper_defs.lua",
+            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.16/resources/imgui_defs_0.10.lua",
+            "c:\\Users\\F\\.vscode\\extensions\\antoinebalaine.reascript-docs-0.1.16/resources/reawwise_defs.lua"
         ],
 		"git.ignoreLimitWarning": true,
 		"terminal.integrated.cwd": "${workspaceFolder}",

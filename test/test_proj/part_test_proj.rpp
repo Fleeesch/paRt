@@ -1,4 +1,4 @@
-<REAPER_PROJECT 0.1 "7.55/win64" 1765589961 0
+<REAPER_PROJECT 0.1 "7.56/win64" 1765923701 0
   TITLE "paRt v1.2.2 Test Project"
   AUTHOR Fleeesch
   <NOTES 0 2
@@ -1642,7 +1642,7 @@
       WAK 0 0
       BYPASS 0 0 0
       <JS Liteon/moog24db Filter
-        0 0 0 0.642 0 0 1 0 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        0 0 48.05 0.642 0 0 1 0 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       >
       FLOATPOS 0 0 0 0
       FXID {DD962F23-8A6B-4FCC-AB16-5A72DFF5B377}
@@ -1937,7 +1937,7 @@
       BYPASS 0 0 0
       <VST "VSTi: ReaSynth (Cockos)" reasynth.dll 0 Synth 1919251321<5653547265737972656173796E746800> ""
         eXNlcu9e7f4AAAAAAgAAAAEAAAAAAAAAAgAAAAAAAABEAAAAAAAAAAAAEAA=
-        776t3g3wrd72R45AnSGePgAAAAAAAAAAAACAP1yPgj/pZ4g9cT0qPwAAQD8AAIA/AACAP/reAD8AAAAAAAAAAAAAAAA=
+        776t3g3wrd72R45AnSGePgAAAAAAAAAAyOPxPkG69j7pZ4g9cT0qPwAAQD8AAIA/AACAPwGdAT8AAAAAAAAAAAAAAAA=
         AFByb2dyYW0gMQAQAAAA
       >
       FLOATPOS 24 52 345 461
@@ -8720,7 +8720,7 @@
         WAK 0 0
         BYPASS 0 0 0
         <JS schwa/gaussian_noise_generator "Noise Generator"
-          -30.4 1 0 0.004031 1.000693 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          -30.4 1 0 -0.002084 0.998537 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         >
         FLOATPOS 24 52 505 199
         FXID {128410F4-C3B7-41A0-8B7C-C17D1B3B29C7}
@@ -8751,7 +8751,7 @@
         BYPASS 0 0 0
         <VST "VSTi: ReaSynth (Cockos)" reasynth.dll 0 Synth 1919251321<5653547265737972656173796E746800> ""
           eXNlcu9e7f4AAAAAAgAAAAEAAAAAAAAAAgAAAAAAAABEAAAAAAAAAAAAEAA=
-          776t3g3wrd4AAAAAF7fROgAAgD8AAAAAAAAAAORfJz24O1w6AAAAAAAAAD8AAAAAPONxPwAAAD8AAAAAAAAAAAAAAAA=
+          776t3g3wrd4AAAAAF7fROgAAgD8AAAAAAAAAAORfJz24O1w6AAAAAAAAAD8AAAAAmzV6PwAAAD8AAAAAAAAAAAAAAAA=
           AFByb2dyYW0gMQAQAAAA
         >
         FLOATPOS 0 0 0 0
@@ -9386,15 +9386,15 @@
       MUTE 0 0
       SEL 0
       YPOS 0 0.25 2
-      IGUID {CAEDDB39-4588-4A29-8BF9-EF792C2B149C}
-      IID 2435
+      IGUID {F2436E23-729E-4FF9-BCE5-81A852A7F95D}
+      IID 2436
       NAME 01-Track-251127_1642.opus
       VOLPAN 1 0 1 -1
       SOFFS 6.64721630722702
       PLAYRATE 0.25 1 0 983040 0 0.0025
       CHANMODE 0
       TAKECOLOR 20147869 R
-      GUID {334123F3-FE66-41FA-9DA6-FBDEF9B28205}
+      GUID {152B8D7E-C83B-443B-9509-24186636B8D2}
       RECPASS 3
       <SOURCE SECTION
         LENGTH 32
@@ -9421,7 +9421,7 @@
         WAK 0 0
       >
       <VOLENV
-        EGUID {49E6ECC3-85DA-44BB-9B18-EDEDB3EE4F19}
+        EGUID {16122EF9-DDC5-43F0-9890-D3B820E86997}
         ACT 1 -1
         VIS 1 1 1
         LANEHEIGHT 0 0

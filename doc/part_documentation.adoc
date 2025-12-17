@@ -3,7 +3,7 @@
 :toclevels: 4
 :numbered:
 :author: Fleeesch
-:revnumber: 1.2.6
+:revnumber: 1.2.9
 
 = paRt User Guide
 
@@ -220,9 +220,15 @@ Be aware that any edits to the Theme Adjuster will be overwritten by updates.
 
 === Configuration Files
 
+The user configuration for the Theme Adjuster is stored in `Scripts/Fleeesch/Themes/paRt/conf/parameters.partmap`. The Theme Adjuster data from this file when initialized and whenever a theme file change is happening. Updates to the file happen after a short delay of tweaking a parameter or if the Theme Adjuster is manually closed.
+
+You should not tweak the `parameters.partmap` directly, but you can force the Theme Adjuster to load an old backup by overwriting it. Just make sure you don't do this while the Theme Adjuster is running.
+
 Configuration slot files are stored in your Reaper resource folder under `Scripts/Fleeesch/Themes/paRt/conf/slot`. You can back up existing configurations using these files, or, if you prefer, edit the entire Theme Adjuster configuration manually in your favorite code editor. Note that this is not a nested LUA table, so manual editing may feel unintuitive.
 
 Fallback configuration files are stored in `conf/default` and should be left untouched, as any automated update will overwrite them.
+
+The Theme Adjuster will try to load as much data as possible whenever it loads a configuration file. Any missing parameter values in the configuration file will revert to their default values. If you restore an old configuration with missing parameters introduced in newer versions, your theme may appear slightly off because the Theme Adjuster used a default value.
 
 === Custom Parameters
 
