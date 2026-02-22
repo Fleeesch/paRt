@@ -59,23 +59,27 @@
 # --------------------------------------
 
 # off state
---out gen_refresh       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       refresh     -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_up            --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       up          -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_back          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       forward     -tint generic_button_symbol_off    -flip-h border_small -tint generic_button_border
---out gen_forward       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       forward     -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_io            --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       out         -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_midi_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       midi        -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_stereo        --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mono        -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_mute_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mute        -tint generic_button_symbol_off            border_small -tint generic_button_border
---out gen_solo_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       solo        -tint generic_button_symbol_off            border_small -tint generic_button_border
+--out gen_down_arrow    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       arrow       -flip-v         -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_up_arrow      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       arrow                       -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_refresh       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       refresh                     -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_up            --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       up                          -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_back          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       arrow       -rotate 90      -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_forward       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       arrow       -rotate 270     -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_io            --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       out                         -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_midi_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       midi                        -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_stereo        --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mono                        -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_mute_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       mute                        -tint generic_button_symbol_off         border_small -tint generic_button_border
+--out gen_solo_off      --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       solo                        -tint generic_button_symbol_off         border_small -tint generic_button_border
 
 # on state
---out gen_back_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  forward     -tint generic_button_symbol_on     -flip-h border_small -tint generic_button_border
---out gen_forward_on    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  forward     -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_mute_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_orange                mute        -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_solo_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_yellow                solo        -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_midi_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  midi        -tint generic_button_symbol_on             border_small -tint generic_button_border
---out gen_mono          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  mono_on     -tint generic_button_symbol_on             border_small -tint generic_button_border
+--out gen_down_arrow_on --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  arrow       -flip-v         -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_up_arrow_on   --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  arrow                       -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_back_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  arrow       -rotate 90      -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_forward_on    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  arrow       -rotate 270     -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_mute_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_orange                mute                        -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_solo_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_yellow                solo                        -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_midi_on       --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  midi                        -tint generic_button_symbol_on          border_small -tint generic_button_border
+--out gen_mono          --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint color_cyan                  mono_on                     -tint generic_button_symbol_on          border_small -tint generic_button_border
 
 # phase
 --out gen_phase_norm    --spritesheet --button --frame-make 0 0 1 1 --images bg_small -tint generic_button_bg_off       phase       -tint generic_button_symbol_off     -flip-v -alpha 0.25     phase   -tint generic_button_symbol_off                 border_small -tint generic_button_border

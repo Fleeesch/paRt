@@ -2,6 +2,8 @@
 
 
 
+
+
 ;THEMEBUILDER_INSERT_README
 
 ;THEMEBUILDER_INSERT_PARAMETERS
@@ -545,6 +547,7 @@
 
             endmacro
 
+
         ;   ### Setup : Values : TCP
         ; --------------------------------------------------------------------------------
 
@@ -684,25 +687,25 @@
                 set VAL_color_track_bg_tinted                       \
                     ?trackcolor_valid                               \
                         [trackcolor_r trackcolor_g trackcolor_b]    \
-                        VAL_color_track_bg_base
+                        THEME_color_track_neutral
 
                 ; track label bg
                 set VAL_color_track_label_bg_tinted                 \
                     ?trackcolor_valid                               \
                         [trackcolor_r trackcolor_g trackcolor_b]    \
-                        VAL_color_track_label_bg_base
+                        THEME_color_track_neutral
 
                 ; envcp bg
                 set VAL_color_envcp_bg_tinted                       \
                     ?trackcolor_valid                               \
                         [trackcolor_r trackcolor_g trackcolor_b]    \
-                        VAL_color_envcp_bg_base
+                        THEME_color_track_neutral
 
                 ; envcp label bg
                 set VAL_color_envcp_label_bg_tinted                 \
                     ?trackcolor_valid                               \
                         [trackcolor_r trackcolor_g trackcolor_b]    \
-                        VAL_color_envcp_label_bg_base
+                        THEME_color_track_neutral
 
                 ;   ::: Tint Crossfading :::
 
@@ -832,13 +835,13 @@
                 set VAL_color_colorbar      \
                     ?track_selected         \
                         VAL_colorbar_on     \
-                        VAL_colorbar_off    \
+                        VAL_colorbar_off
 
                 ; color bar (envcp)
                 set VAL_color_colorbar_envcp    \
                     ?track_selected             \
                         VAL_colorbar_on         \
-                        VAL_colorbar_off        \
+                        VAL_colorbar_off
 
                 ; selection bar
                 set VAL_color_selectbar                                                                     \
@@ -846,6 +849,13 @@
                         [THEME_color_select_bar{4} THEME_color_select_bar{5} THEME_color_select_bar{6}]     \
                         [THEME_color_select_bar{0} THEME_color_select_bar{1} THEME_color_select_bar{2}]
 
+                ; selection frame
+                set VAL_color_selection_frame_tint    *   VAL_Fader_Scale{0}    par_colors_track_track_selectionframe_tint
+                set VAL_color_selection_frame_tone    *   VAL_Fader_Scale{0}    par_colors_track_track_selectionframe_tone
+                
+                MAC_Math_Interpolate     THEME_color_track_frame            VAL_color_track_bg_tinted           VAL_color_selection_frame_tint          VAL_color_selection_frame
+                MAC_Math_Interpolate     VAL_color_selection_frame          255                                 VAL_color_selection_frame_tone          VAL_color_selection_frame
+                
                 ; selection bar (envcp)
                 set VAL_color_selectbar_envcp                                                               \
                     ?env_selected                                                                           \
@@ -1725,6 +1735,14 @@
                 custom WALTER_ELEMENT##.custom.index_bg         "" "" "" "track_custom_idx_bg"
                 custom WALTER_ELEMENT##.custom.env_icon         "" "" "" "track_custom_env_icon"
 
+                ; visibility of the selection frame in track
+                set VAL_show_selection_frame                \
+                    ?par_mcp_gen_highlight_selectionframe   \
+                        ?track_selected                     \
+                            1                               \
+                            0                               \
+                        0
+
                 ; hide flag
                 set VAL_mcp_hide_rest 0
 
@@ -1973,6 +1991,17 @@
                 ; background
                 MAC_Draw_Box    1 WALTER_ELEMENT "bg"                           VAL_Color_Track_Bg{0} VAL_Color_Track_Bg{1} VAL_Color_Track_Bg{2}   CUR_x_bg 0 CUR_w_bg CUR_h_bg 0 0 1 1
                 MAC_Draw_Image  1 WALTER_ELEMENT "frame" "track_custom_bg_frame"                                                                    CUR_x_bg 0 CUR_w_bg CUR_h_bg 0 0 1 1
+
+                ; offset for covering border
+                set CUR_xr_frame    -   +   CUR_x_bg{0}     CUR_w_bg{0}     VAL_Border{0}
+                set CUR_w_frame     -       CUR_w_bg{0}                     0
+                set CUR_h_frame     -       CUR_h_bg{0}                     VAL_Border{0}
+
+                ; selection frame                            
+                MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_l" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     Cur_x_bg{0}          0                   VAL_Border{0}       CUR_h_frame{0}      0 0 0 1
+                MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_r" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     CUR_xr_frame{0}      0                   VAL_Border{0}       CUR_h_frame{0}      0 0 0 1
+                MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_t" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     Cur_x_bg{0}          0                   CUR_w_frame{0}      VAL_Border{0}       0 0 1 0
+                MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_b" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     Cur_x_bg{0}          CUR_h_frame{0}      CUR_w_frame{0}      VAL_Border{0}       0 1 1 1
 
                 ; bottom position
                 set VAL_mcp_bottom CUR_h{0}
@@ -4184,6 +4213,12 @@
             
             ; box frame
             front WALTER_ELEMENT##.custom.Image_frame
+
+            ; selection frame
+            front WALTER_ELEMENT##.custom.Box_selection_frame_l
+            front WALTER_ELEMENT##.custom.Box_selection_frame_r
+            front WALTER_ELEMENT##.custom.Box_selection_frame_t
+            front WALTER_ELEMENT##.custom.Box_selection_frame_b
         
         endmacro
 
@@ -4265,6 +4300,22 @@
 
                 ; rightmost position
                 set VAL_tcp_x_rightmost WALTER_ELEMENT##.size{0}
+
+                ; visibility of the selection frame in track
+                set VAL_show_selection_frame                \
+                    ?par_tcp_gen_highlight_selectionframe   \
+                        ?track_selected                     \
+                            1                               \
+                            0                               \
+                        0
+        
+                ; visibility of the selection frame in envcp
+                set VAL_show_selection_frame_envcp          \
+                    ?par_tcp_gen_highlight_selectionframe   \
+                        ?env_selected                       \
+                            1                               \
+                            0                               \
+                        0
 
             endmacro
 
@@ -4535,6 +4586,17 @@
                         set CUR_w - WALTER_ELEMENT##.size{0} VAL_tcp_x_offset{0}
                         MAC_Draw_Box    1 WALTER_ELEMENT "bg" Val_Color_Track_Bg{0} Val_Color_Track_Bg{1} Val_Color_Track_Bg{2}     VAL_tcp_x_offset{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 0 1 1
                         MAC_Draw_Image  1 WALTER_ELEMENT "frame" "track_custom_bg_frame"                                            VAL_tcp_x_offset{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 0 1 1
+
+                        ; offset for covering border
+                        set CUR_xr_frame    -       + WALTER_ELEMENT##.size{0}    tcp_iconsize          VAL_Border{0}
+                        set CUR_w_frame     -       + CUR_w{0}                    tcp_iconsize          VAL_Border{0}
+                        set CUR_h_frame     -         CUR_h{0}                                          VAL_Border{0}
+
+                        ; selection frame                            
+                        MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_l" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_tcp_x_offset{0}      0               VAL_Border{0}       CUR_h_frame{0}  0 0 0 1
+                        MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_r" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     CUR_xr_frame{0}          0               VAL_Border{0}       CUR_h{0}        1 0 1 1
+                        MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_t" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_tcp_x_offset{0}      0               CUR_w_frame{0}      VAL_Border{0}   0 0 1 0
+                        MAC_Draw_Box    VAL_show_selection_frame     WALTER_ELEMENT "selection_frame_b" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_tcp_x_offset{0}      CUR_h_frame{0}  CUR_w_frame{0}      VAL_Border{0}   0 1 1 1
 
                     endmacro
 
@@ -6037,6 +6099,11 @@
 
                 front WALTER_ELEMENT##.custom.Image_frame
 
+                front WALTER_ELEMENT##.custom.Box_selection_frame_l
+                front WALTER_ELEMENT##.custom.Box_selection_frame_r
+                front WALTER_ELEMENT##.custom.Box_selection_frame_t
+                front WALTER_ELEMENT##.custom.Box_selection_frame_b
+
             endmacro
 
 
@@ -6170,6 +6237,17 @@
 
             MAC_Draw_Box    1 WALTER_ELEMENT "bg" VAL_Color_Envcp_Bg{0} VAL_Color_Envcp_Bg{1} VAL_Color_Envcp_Bg{2}     VAL_envcp_x_offset{0} 0 CUR_w{0} CUR_h{0} 0 0 1 1
             MAC_Draw_Image  1 WALTER_ELEMENT "frame" "track_custom_bg_frame"                                            VAL_envcp_x_offset{0} 0 CUR_w{0} CUR_h{0} 0 0 1 1
+
+            ; offset for lower frame line
+            set CUR_xr_frame    - WALTER_ELEMENT##.size{0}      VAL_Border{0}
+            set CUR_w_frame     - WALTER_ELEMENT##.size{0}      VAL_envcp_x_offset{0}
+            set CUR_h_frame     - CUR_h{0}                      VAL_Border{0}
+
+            ; selection frame
+            MAC_Draw_Box    VAL_show_selection_frame_envcp     WALTER_ELEMENT "selection_frame_l" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_envcp_x_offset{0}      0               VAL_Border{0}       CUR_h_frame{0}      0 0 0 1
+            MAC_Draw_Box    VAL_show_selection_frame_envcp     WALTER_ELEMENT "selection_frame_r" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     CUR_xr_frame{0}            0               VAL_Border{0}       CUR_h{0}            1 0 1 1
+            MAC_Draw_Box    VAL_show_selection_frame_envcp     WALTER_ELEMENT "selection_frame_t" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_envcp_x_offset{0}      0               CUR_w_frame{0}      VAL_Border{0}       0 0 1 0
+            MAC_Draw_Box    VAL_show_selection_frame_envcp     WALTER_ELEMENT "selection_frame_b" VAL_color_selection_frame{0} VAL_color_selection_frame{1} VAL_color_selection_frame{2}     VAL_envcp_x_offset{0}      CUR_h_frame{0}  CUR_w_frame{0}      VAL_Border{0}       0 1 1 1
 
             ; z-alignment correction
             front WALTER_ELEMENT##.custom.Box_highlight_select

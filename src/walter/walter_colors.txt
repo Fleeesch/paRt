@@ -1,5 +1,7 @@
 Colors dark
 
+set THEME_color_track_neutral               [112 210 173]
+set THEME_color_track_frame                 [10 10 10]
 set THEME_color_tcp_empty_space             [36 36 36]
 set THEME_color_mcp_empty_space             [36 36 36]
 set THEME_color_track_bg                    [75 75 75]
@@ -25,6 +27,8 @@ EndColors
 
 Colors dimmed
 
+set THEME_color_track_neutral               [112 210 173]
+set THEME_color_track_frame                 [20 20 20]
 set THEME_color_tcp_empty_space             [77 77 77]
 set THEME_color_mcp_empty_space             [77 77 77]
 set THEME_color_track_bg                    [112 112 112]
@@ -50,6 +54,8 @@ EndColors
 
 Colors light
 
+set THEME_color_track_neutral               [112 210 173]
+set THEME_color_track_frame                 [40 40 40]
 set THEME_color_tcp_empty_space             [214 214 214]
 set THEME_color_mcp_empty_space             [214 214 214]
 set THEME_color_track_bg                    [190 190 190]
