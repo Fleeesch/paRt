@@ -2,7 +2,7 @@
 ;       Global
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-part_version 1.2.9
+part_version 1.3.0
 
     bank_selected 'Selected Bank' 2 2 9
     config_selected 'Selected Configuration' 0 0 7
@@ -16,6 +16,8 @@ part_version 1.2.9
 
 ; ::: Highlights
     colors_track_track_colorbar_intensity       'Colors - Track - Track Colorbar Intensity'             DEF_colors_track_track_colorbar_intensity       0           VAL_PAR_RANGE
+    colors_track_track_selectionframe_tint      'Colors - Track - Track Selection Frame Tint'           DEF_colors_track_track_selectionframe_tone      0           VAL_PAR_RANGE
+    colors_track_track_selectionframe_tone      'Colors - Track - Track Selection Frame Tone'           DEF_colors_track_track_selectionframe_tint      0           VAL_PAR_RANGE
 
 ; ::: Track Background
 
@@ -116,6 +118,7 @@ part_version 1.2.9
 ; ::: Highlight
 
     tcp_gen_highlight_selection                 'TCP - Highlight - Selection Bar'                       DEF_tcp_gen_highlight_selection                 0           VAL_PAR_RANGE
+    tcp_gen_highlight_selectionframe            'TCP - Highlight - Selection Frame'                     DEF_tcp_gen_highlight_selectionframe            0           VAL_PAR_RANGE
     tcp_gen_highlight_color                     'TCP - Highlight - Color Bar'                           DEF_tcp_gen_highlight_color                     0           VAL_PAR_RANGE
 
 
@@ -288,6 +291,7 @@ part_version 1.2.9
 ; ::: Highlights
 
     mcp_gen_highlight_selection                 'MCP - General - Highlight Selection Bar'               DEF_mcp_gen_highlight_selection                 0           VAL_PAR_RANGE
+    mcp_gen_highlight_selectionframe            'MCP - General - Highlight Selection Frame'             DEF_mcp_gen_highlight_selectionframe            0           VAL_PAR_RANGE
     mcp_gen_highlight_color                     'MCP - General - Highlight Color Bar'                   DEF_mcp_gen_highlight_color                     0           VAL_PAR_RANGE
 
 ; ::: Element Adjustments

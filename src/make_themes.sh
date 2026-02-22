@@ -167,14 +167,14 @@ if [ "$unattended" = false ]; then
     esac
 
     # copy reaper theme zip files
-    print_prompt_line "Copy ReaperThemeZip files?"
-    read -n 1 choice
-    echo ""
+    # print_prompt_line "Copy ReaperThemeZip files?"
+    # read -n 1 choice
+    # echo ""
 
-    case "$choice" in
-    y | Y) copy_reaperthemezip=true ;;
-    *) copy_reaperthemezip=false ;;
-    esac
+    # case "$choice" in
+    # y | Y) copy_reaperthemezip=true ;;
+    # *) copy_reaperthemezip=false ;;
+    # esac
 
     # get theme adjuster from development folder
     print_prompt_line "Grab Theme Adjuster from development folder?"

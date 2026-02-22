@@ -138,9 +138,9 @@ universal:
     generic_fader_dark_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [255, 255, 255, 0.5]
+    generic_knob_bg: [200,200,200, 0.75]
     generic_knob_border: [0, 0, 0, 0.8]
-
+    
     # folder buttons
     folder_symbol: [255, 255, 255, 0.5]
 
@@ -155,7 +155,7 @@ universal:
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [26, 26, 26]
     transport_rate_knob_line: [245, 245, 245]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_line_border: [30,30,30, 1]
     transport_rate_fader_bg: [26, 26, 26]
     transport_rate_fader_knob: [220, 220, 220]
     transport_click_fg_off: [220, 220, 220, 0.4]
@@ -389,7 +389,7 @@ dimmed:
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [90, 90, 90]
     transport_rate_knob_line: [250, 250, 250]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_line_border: [40, 40, 40, 1]
     transport_rate_fader_bg: [90, 90, 90]
     transport_rate_fader_knob: [235, 235, 235]
     transport_click_fg_off: [235, 235, 235, 0.35]
@@ -616,7 +616,7 @@ light:
     transport_bank_menu: [0, 0, 0, 0.5]
     transport_rate_knob_bg: [195, 195, 195]
     transport_rate_knob_line: [20, 20, 20]
-    transport_rate_knob_line_border: [0, 0, 0, 0]
+    transport_rate_knob_line_border: [0,0,0,0]
     transport_rate_fader_bg: [195, 195, 195]
     transport_rate_fader_knob: [100, 100, 100]
     transport_click_fg_off: [0,0,0, 0.4]

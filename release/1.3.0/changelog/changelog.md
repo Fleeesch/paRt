@@ -1,0 +1,9 @@
+**1.3.0 - Changelog**
+- added optional selection frame highlight for TCP, ENVCP & MCP
+- removed unnecessary SWS dependencies (Theme Adjuter can now be used without SWS)
+- minor IO text adjustments for TCP Infobox
+- overhauled knob colors to ensure proper knob display in ReaSamplOmatic5000
+- implemented custom low-pass fade colors
+- implemented hard-coded fallback custom color if track has no valid custom color
+- updated media explorer arrow button assets
+- Theme Adjuster: additional tab for color adjustments
