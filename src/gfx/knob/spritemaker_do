@@ -48,7 +48,7 @@
 --out mcp_send_knob_stack       --images stack_send_bg      -tint insert_send_knob_0        stack_send_a        -tint insert_send_knob_1     stack_send_b    -tint insert_send_knob_2    stack_send_border       -tint insert_send_knob_border
 
 # fx parameter
---out mcp_fxparm_knob_stack     --images stack_fx_bg        -tint color_cyan    -alpha 0.1      stack_fx_value  -tint color_cyan        stack_fx_border     -tint color_cyan -alpha 0.3
+--out mcp_fxparm_knob_stack     --images stack_fx_bg        -tint insert_slot_fxparm    -alpha 0.1      stack_fx_value  -tint insert_slot_fxparm        stack_fx_border     -tint insert_slot_fxparm -alpha 0.3
 
 # item volume knob
 --out item_volknob_stack            --single-level 100      --images stack_item_bg -tint item_volknob_bg          stack_item_fill_a -tint item_volknob_layer_1        stack_item_fill_b -tint item_volknob_layer_2      stack_item_border -tint item_volknob_border

@@ -1,0 +1,17 @@
+**1.3.1 - Changelog**
+- selection frame is enabled by default
+- folder lines are now aligned with their parent's collapsing button
+- added custom ruler lane colors
+- slightly smaller generic knobs
+- overhauled fx button assets and colors
+- changed MIDI Hardware output slot color
+- Inserts: overhauled slot colors
+- Inserts: added slight color shading to slot backgrounds
+- Inserts: minor corrections on margins
+- TCP: added label text margin adjustment
+- TCP: added optional display mode to place sends in another column
+- TCP: added separate slot size parameter for sends (when displayed in extra column)
+- TCP: always show fx parameters in inserts block, even without fx present
+- MCP: fixed bottom section rounding error during folder parent horizontal offset
+- ENVCP: added label text margin adjustment
+- ENVCP: replaced envelope activation button with a bypass button
