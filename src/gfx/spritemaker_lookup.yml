@@ -17,11 +17,7 @@ settings:
 variables:
   alpha_hover: 0.9
   alpha_meter_unit: 0.05
-  alpha_item_button_bg: 1
-  alpha_insert_slot_empty: 0.08
-  alpha_insert_slot_hover: 0.2
-  alpha_insert_slot_click: 0.3
-  alpha_insert_slot_plus: 0.5
+  alpha_item_button_bg: 1  
 
 #   Universal Color Palette
 # ----------------------------------------------
@@ -212,6 +208,11 @@ universal:
     insert_divider: [255, 255, 255, 0.05]
 
     # slots
+    insert_slot_empty: [255,255,255,0.025]
+    insert_slot_empty_hover: [255,255,255,0.1]
+    insert_slot_empty_click: [255,255,255,0.2]
+    insert_slot_plus: [255,255,255,0.35]
+
     insert_slot_fx_bypass: [67, 83, 78]
     insert_slot_fx_offline: [23, 23, 23]
     insert_slot_fxparm_bypass: [68, 100, 116]
@@ -454,6 +455,11 @@ dimmed:
     insert_divider: [255, 255, 255, 0.05]
 
     # slots
+    insert_slot_empty: [255,255,255,0.025]
+    insert_slot_empty_hover: [255,255,255,0.1]
+    insert_slot_empty_click: [255,255,255,0.2]
+    insert_slot_plus: [255,255,255,0.35]
+
     insert_slot_fx_bypass: [79, 117, 103]
     insert_slot_fx_offline: [45, 45, 45]
     insert_slot_fxparm_bypass: [74, 103, 116]
@@ -691,6 +697,11 @@ light:
     insert_divider: [0, 0, 0, 0.05]
 
     # slots
+    insert_slot_empty: [255,255,255,0.025]
+    insert_slot_empty_hover: [255,255,255,0.1]
+    insert_slot_empty_click: [255,255,255,0.2]
+    insert_slot_plus: [255,255,255,0.35]
+
     insert_slot_fx_bypass: [112, 151, 136]
     insert_slot_fx_offline: [80, 80, 80]
     insert_slot_fxparm_bypass: [95, 136, 154]
