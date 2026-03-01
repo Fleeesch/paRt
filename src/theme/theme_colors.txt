@@ -393,7 +393,7 @@ col_mi_left=0
 col_mi_leftb=196608
 col_mi_leftsel=16777215
 col_mi_leftselb=196608
-ruler_header_text=15132390
+ruler_header_text=12698049
 
 EndColors
 
@@ -543,7 +543,7 @@ region_lane_bg=5066061
 region_edge=0
 region_edge_sel=16777215
 marker=6324273
-marker_lane_bg=5066061
+marker_lane_bg=4276545
 marker_edge=0
 marker_edge_sel=16777215
 marker_lane_text=15066597
@@ -791,7 +791,7 @@ col_mi_left=0
 col_mi_leftb=196608
 col_mi_leftsel=16777215
 col_mi_leftselb=196608
-ruler_header_text=15461355
+ruler_header_text=12698049
 
 EndColors
 
@@ -941,7 +941,7 @@ region_lane_bg=14079702
 region_edge=0
 region_edge_sel=16777215
 marker=13490356
-marker_lane_bg=14079702
+marker_lane_bg=11842740
 marker_edge=0
 marker_edge_sel=16777215
 marker_lane_text=0
@@ -1189,7 +1189,7 @@ col_mi_left=7566195
 col_mi_leftb=196608
 col_mi_leftsel=0
 col_mi_leftselb=196608
-ruler_header_text=0
+ruler_header_text=6250335
 
 EndColors
 
