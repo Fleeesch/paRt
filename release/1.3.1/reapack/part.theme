@@ -1,0 +1,51 @@
+@version 1.3.1
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+  
+  * 3 theme variants with different brightness levels and parameter synchronization
+  * Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Complete coverage of all Reaper V7 UI elements
+  * Custom Theme Adjuster with extensive configuration options
+@changelog
+  - selection frame is enabled by default
+  - folder lines are now aligned with their parent's collapsing button
+  - added custom ruler lane colors
+  - slightly smaller generic knobs
+  - overhauled fx button assets and colors
+  - changed MIDI Hardware output slot color
+  - Inserts: overhauled slot colors
+  - Inserts: added slight color shading to slot backgrounds
+  - Inserts: minor corrections on margins
+  - TCP: added label text margin adjustment
+  - TCP: added optional display mode to place sends in another column
+  - TCP: added separate slot size parameter for sends (when displayed in extra column)
+  - TCP: always show fx parameters in inserts block, even without fx present
+  - MCP: fixed bottom section rounding error during folder parent horizontal offset
+  - ENVCP: added label text margin adjustment
+  - ENVCP: replaced envelope activation button with a bypass button

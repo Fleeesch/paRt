@@ -18,6 +18,10 @@ variables:
   alpha_hover: 0.9
   alpha_meter_unit: 0.05
   alpha_item_button_bg: 1
+  alpha_insert_slot_empty: 0.08
+  alpha_insert_slot_hover: 0.2
+  alpha_insert_slot_click: 0.3
+  alpha_insert_slot_plus: 0.5
 
 #   Universal Color Palette
 # ----------------------------------------------
@@ -71,14 +75,14 @@ universal:
     themeadj_bank_symbol_on: [0, 0, 0]
 
     # infobox
-    infobox_fg_on: [10,10,10]
+    infobox_fg_on: [10, 10, 10]
     infobox_fg_neutral: [255, 255, 255, 0.75]
-    infobox_bg_neutral: [150,150,150]
-    infobox_fg_dimmed: [140,140,140]
-    infobox_bg_dimmed: [80,80,80]
+    infobox_bg_neutral: [150, 150, 150]
+    infobox_fg_dimmed: [140, 140, 140]
+    infobox_bg_dimmed: [80, 80, 80]
     infobox_io_off: [0, 0, 0, 0.1]
-    infobox_io_bg: [40,40,40]
-    infobox_border: [30,30,30]
+    infobox_io_bg: [40, 40, 40]
+    infobox_border: [30, 30, 30]
 
     # toolbar
     toolbar_button_bg_off: [70, 70, 70]
@@ -138,9 +142,9 @@ universal:
     generic_fader_dark_thumb_line: [0, 0, 0, 0]
 
     # generic knob
-    generic_knob_bg: [200,200,200, 0.75]
+    generic_knob_bg: [200, 200, 200, 0.75]
     generic_knob_border: [0, 0, 0, 0.8]
-    
+
     # folder buttons
     folder_symbol: [255, 255, 255, 0.5]
 
@@ -155,12 +159,12 @@ universal:
     transport_bank_menu: [255, 255, 255, 0.5]
     transport_rate_knob_bg: [26, 26, 26]
     transport_rate_knob_line: [245, 245, 245]
-    transport_rate_knob_line_border: [30,30,30, 1]
+    transport_rate_knob_line_border: [30, 30, 30, 1]
     transport_rate_fader_bg: [26, 26, 26]
     transport_rate_fader_knob: [220, 220, 220]
     transport_click_fg_off: [220, 220, 220, 0.4]
     transport_click_fg_on: [220, 220, 220, 1]
-    transport_click_hover: [255,255,255,0.2]
+    transport_click_hover: [255, 255, 255, 0.2]
 
     # buttons
     button_bg_off: [45, 45, 45]
@@ -174,6 +178,10 @@ universal:
     button_symbol_off: [230, 230, 230, 1]
     button_symbol_on: [0, 0, 0, 1]
     button_io_off: [0, 0, 0, 0.2]
+
+    # button fx
+    button_fx_bypass_bg: [59, 79, 72]
+    button_fx_bypass_fg: [117, 185, 160]
 
     # midi inline scrollbar
     midi_inline_scrollbar_bg: [255, 255, 255, 0.5]
@@ -201,10 +209,13 @@ universal:
     insert_bg: [45, 45, 45]
     insert_bg_select: [50, 50, 50]
     insert_border: [30, 30, 30, 1]
-    insert_divider: [255, 255, 255, 0]
-    insert_slot_empty: [255, 255, 255, 0.01]
-    insert_slot_empty_hover: [255, 255, 255, 0.1]
-    insert_slot_empty_click: [255, 255, 255, 0.2]
+    insert_divider: [255, 255, 255, 0.05]
+
+    # slots
+    insert_slot_fx_bypass: [67, 83, 78]
+    insert_slot_fx_offline: [23, 23, 23]
+    insert_slot_fxparm_bypass: [68, 100, 116]
+    insert_slot_fxparm_offline: [23, 23, 23]
 
     # sends
     insert_send_meter: [0, 0, 0, 0.2]
@@ -212,9 +223,10 @@ universal:
     insert_send_knob_0: [20, 20, 20]
     insert_send_knob_1: [174, 138, 73]
     insert_send_knob_2: [255, 255, 255]
+    insert_send_mute: [96, 82, 73]
 
-    # fx parameters
-    insert_slot_fxparm: [20, 20, 20]
+    # fx parameter knob
+    insert_slot_fxparm: [0, 0, 0]
 
     # track icon
     track_icon_bg: [64, 64, 64]
@@ -312,14 +324,14 @@ dimmed:
     themeadj_bank_symbol_on: [20, 20, 20]
 
     # infobox
-    infobox_fg_on: [30,30,30]
-    infobox_fg_neutral: [240,240,240]
-    infobox_bg_neutral: [160,160,160]
-    infobox_fg_dimmed: [160,160,146]
-    infobox_bg_dimmed: [100,100,100]
+    infobox_fg_on: [30, 30, 30]
+    infobox_fg_neutral: [240, 240, 240]
+    infobox_bg_neutral: [160, 160, 160]
+    infobox_fg_dimmed: [160, 160, 146]
+    infobox_bg_dimmed: [100, 100, 100]
     infobox_io_off: [0, 0, 0, 0.1]
-    infobox_io_bg: [50,50,50]
-    infobox_border: [30,30,30]
+    infobox_io_bg: [50, 50, 50]
+    infobox_border: [30, 30, 30]
 
     # toolbar
     toolbar_button_bg_off: [55, 55, 55]
@@ -394,7 +406,7 @@ dimmed:
     transport_rate_fader_knob: [235, 235, 235]
     transport_click_fg_off: [235, 235, 235, 0.35]
     transport_click_fg_on: [235, 235, 235, 1]
-    transport_click_hover: [255,255,255,0.2]
+    transport_click_hover: [255, 255, 255, 0.2]
 
     # buttons
     button_bg_off: [61, 61, 61]
@@ -408,6 +420,10 @@ dimmed:
     button_symbol_off: [235, 235, 235]
     button_symbol_on: [0, 0, 0]
     button_io_off: [0, 0, 0, 0.2]
+
+    # button fx
+    button_fx_bypass_bg: [79, 117, 103]
+    button_fx_bypass_fg: [154, 202, 185]
 
     # midi inline scrollbar
     midi_inline_scrollbar_bg: [0, 0, 0, 0.5]
@@ -435,7 +451,13 @@ dimmed:
     insert_bg: [61, 61, 61]
     insert_bg_select: [66, 66, 66]
     insert_border: [40, 40, 40, 1]
-    insert_divider: [255, 255, 255, 0]
+    insert_divider: [255, 255, 255, 0.05]
+
+    # slots
+    insert_slot_fx_bypass: [79, 117, 103]
+    insert_slot_fx_offline: [45, 45, 45]
+    insert_slot_fxparm_bypass: [74, 103, 116]
+    insert_slot_fxparm_offline: [45, 45, 45]
 
     # sends
     insert_send_meter: [0, 0, 0, 0.2]
@@ -443,8 +465,9 @@ dimmed:
     insert_send_knob_0: [30, 30, 30]
     insert_send_knob_1: [188, 156, 94]
     insert_send_knob_2: [255, 255, 255]
+    insert_send_mute: [110, 92, 52]
 
-    # fx parameters
+    # fx parameter knob
     insert_slot_fxparm: [35, 35, 35]
 
     # track icon
@@ -496,7 +519,7 @@ dimmed:
     envcp_tailicon: [255, 255, 255, 0.5]
 
     # borders
-    border_bg: [0, 0, 0]    
+    border_bg: [0, 0, 0]
     border_label: [30, 30, 30]
     border_selmarker: [30, 30, 30]
     border_colorbar: [30, 30, 30]
@@ -541,15 +564,15 @@ light:
     themeadj_bank_symbol_on: [50, 50, 50]
 
     # infobox
-    infobox_fg_on: [30,30,30]
-    infobox_fg_neutral: [60,60,60]
-    infobox_bg_neutral: [200,200,200]
-    infobox_fg_dimmed: [110,110,110]
-    infobox_bg_dimmed: [185,185,185]
-    infobox_io_off: [0,0,0,0.1]
-    infobox_io_bg: [100,100,100]
-    infobox_border: [50,50,50]
-    
+    infobox_fg_on: [30, 30, 30]
+    infobox_fg_neutral: [60, 60, 60]
+    infobox_bg_neutral: [200, 200, 200]
+    infobox_fg_dimmed: [110, 110, 110]
+    infobox_bg_dimmed: [185, 185, 185]
+    infobox_io_off: [0, 0, 0, 0.1]
+    infobox_io_bg: [100, 100, 100]
+    infobox_border: [50, 50, 50]
+
     # toolbar
     toolbar_button_bg_off: [139, 139, 139]
     toolbar_button_symbol_off: [255, 255, 255]
@@ -616,12 +639,12 @@ light:
     transport_bank_menu: [0, 0, 0, 0.5]
     transport_rate_knob_bg: [195, 195, 195]
     transport_rate_knob_line: [20, 20, 20]
-    transport_rate_knob_line_border: [0,0,0,0]
+    transport_rate_knob_line_border: [0, 0, 0, 0]
     transport_rate_fader_bg: [195, 195, 195]
     transport_rate_fader_knob: [100, 100, 100]
-    transport_click_fg_off: [0,0,0, 0.4]
-    transport_click_fg_on: [0,0,0, 1]
-    transport_click_hover: [0,0,0,0.15]
+    transport_click_fg_off: [0, 0, 0, 0.4]
+    transport_click_fg_on: [0, 0, 0, 1]
+    transport_click_hover: [0, 0, 0, 0.15]
 
     # buttons
     button_bg_off: [131, 131, 131]
@@ -635,6 +658,10 @@ light:
     button_symbol_off: [255, 255, 255]
     button_symbol_on: [30, 30, 30]
     button_io_off: [0, 0, 0, 0.2]
+
+    # button fx
+    button_fx_bypass_bg: [112, 151, 136]
+    button_fx_bypass_fg: [199, 235, 222]
 
     # midi inline scrollbar
     midi_inline_scrollbar_bg: [0, 0, 0, 0.5]
@@ -661,7 +688,13 @@ light:
     insert_bg: [131, 131, 131]
     insert_bg_select: [136, 136, 136]
     insert_border: [75, 75, 75]
-    insert_divider: [0, 0, 0, 0]
+    insert_divider: [0, 0, 0, 0.05]
+
+    # slots
+    insert_slot_fx_bypass: [112, 151, 136]
+    insert_slot_fx_offline: [80, 80, 80]
+    insert_slot_fxparm_bypass: [95, 136, 154]
+    insert_slot_fxparm_offline: [80, 80, 80]
 
     # sends
     insert_send_meter: [0, 0, 0, 0.2]
@@ -669,8 +702,9 @@ light:
     insert_send_knob_0: [50, 50, 50]
     insert_send_knob_1: [194, 163, 105]
     insert_send_knob_2: [255, 255, 255]
+    insert_send_mute: [157, 138, 95]
 
-    # fx parameters
+    # fx parameter knob
     insert_slot_fxparm: [60, 60, 60]
 
     # track icon

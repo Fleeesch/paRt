@@ -176,6 +176,9 @@ if [ "$unattended" = false ]; then
     # *) copy_reaperthemezip=false ;;
     # esac
 
+    # skip copying reaperthemezip files (get's messy in development)
+    copy_reaperthemezip=false
+
     # get theme adjuster from development folder
     print_prompt_line "Grab Theme Adjuster from development folder?"
     read -n 1 choice
@@ -187,14 +190,17 @@ if [ "$unattended" = false ]; then
     esac
 
     # update theme adjuster in development folder
-    print_prompt_line "Update Theme Adjuster in development folder?"
-    read -n 1 choice
-    echo ""
+    # print_prompt_line "Update Theme Adjuster in development folder?"
+    # read -n 1 choice
+    # echo ""
 
-    case "$choice" in
-    y | Y) update_themeadj_post=true ;;
-    *) update_themeadj_post=false ;;
-    esac
+    # case "$choice" in
+    # y | Y) update_themeadj_post=true ;;
+    # *) update_themeadj_post=false ;;
+    # esac
+
+    # never offer to update development edition of theme adjuster (high potential for unnecessary data loss)
+    update_themeadj_post=false
 
 fi
 

@@ -2,9 +2,13 @@
 ;       paRt WALTER file
 ;
 ;       Theme: light
-;       Version: 1.3.0
-;       Date: 2026-02-22 16:52:44
+;       Version: 1.3.1
+;       Date: 2026-03-01 02:38:54
 ; ::::::::::::::::::::::: THEME_HEADER_CLOSE :::::::::::::::::::::::
+
+
+
+
 
 
 
@@ -122,7 +126,7 @@
 ;~ ~ ~ ~ ~ ~ ~ ~ ~ ~ THEME_BLOCK ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
 
 adjuster_script "paRt - Theme Adjuster.lua"
-define_parameter part_version 'paRt Theme v1.3.0' 0 0 0
+define_parameter part_version 'paRt Theme v1.3.1' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000
 define_parameter par_user_range_10 'User - Range - 10' 0 0 1000
@@ -186,8 +190,8 @@ define_parameter par_colors_track_track_label_bg_tone 'Colors - Track - Track La
 define_parameter par_colors_track_track_label_select_tint 'Colors - Track - Track Label Selection Tint' 0 0 1000
 define_parameter par_colors_track_track_label_select_tone 'Colors - Track - Track Label Selection Tone' 345 0 1000
 define_parameter par_colors_track_track_label_text_tone 'Colors - Track - Track Label Text Tone' 507 0 1000
-define_parameter par_colors_track_track_selectionframe_tint 'Colors - Track - Track Selection Frame Tint' 359 0 1000
-define_parameter par_colors_track_track_selectionframe_tone 'Colors - Track - Track Selection Frame Tone' 591 0 1000
+define_parameter par_colors_track_track_selectionframe_tint 'Colors - Track - Track Selection Frame Tint' 164 0 1000
+define_parameter par_colors_track_track_selectionframe_tone 'Colors - Track - Track Selection Frame Tone' 198 0 1000
 define_parameter par_config_selected 'Selected Configuration' 0 0 7
 define_parameter par_mcp_gen_element_adj_pad 'MCP - General - Element Adjustments Padding' 0 0 1000
 define_parameter par_mcp_gen_element_adj_separator 'MCP - General - Element Adjustments Separator' 67 0 1000
@@ -204,7 +208,7 @@ define_parameter par_mcp_gen_folder_pad_folder_last 'MCP - General - Folder Padd
 define_parameter par_mcp_gen_folder_pad_folder_parent 'MCP - General - Folder Padding Parent' 0 0 1000
 define_parameter par_mcp_gen_highlight_color 'MCP - General - Highlight Color Bar' 375 0 1000
 define_parameter par_mcp_gen_highlight_selection 'MCP - General - Highlight Selection Bar' 134 0 1000
-define_parameter par_mcp_gen_highlight_selectionframe 'MCP - General - Highlight Selection Frame' 0 0 1000
+define_parameter par_mcp_gen_highlight_selectionframe 'MCP - General - Highlight Selection Frame' 1 0 1000
 define_parameter par_mcp_gen_settings_multirow 'MCP - General - Settings MultiRow' 0 0 1
 define_parameter par_mcp_gen_settings_multirow_compact 'MCP - General - Settings MultiRow Compact' 0 0 1
 define_parameter par_mcp_gen_settings_trackicons 'MCP - General - Settings Track Icons' 0 0 1
@@ -273,6 +277,7 @@ define_parameter par_mcp_track_settings_label_vertical 'MCP - Track - Settings L
 define_parameter par_tcp_envcp_element_adj_wrap_buttons 'TCP - ENVCP - Element Adjustment Wrap Buttons' 3 0 3
 define_parameter par_tcp_envcp_element_separator 'TCP - ENVCP - Element Separator' 0 0 1000000
 define_parameter par_tcp_envcp_element_vis 'TCP - ENVCP - Element Visibility' 14 0 1000000
+define_parameter par_tcp_envcp_label_margin 'TCP - ENVCP - Label Margin' 0 0 1000
 define_parameter par_tcp_envcp_label_readout_placement 'TCP - ENVCP - Label Readout Placement' 2 0 2
 define_parameter par_tcp_envcp_label_readout_size 'TCP - ENVCP - Label Readout Separator Size' 558 0 1000
 define_parameter par_tcp_envcp_label_readout_size_scale 'TCP - ENVCP - Label Readout Separator Size Scale' 1 0 1
@@ -300,8 +305,11 @@ define_parameter par_tcp_gen_folder_icon_mode 'TCP - General - Folder Mode' 0 0 
 define_parameter par_tcp_gen_folder_indent 'TCP - General - Folder Indentation' 290 0 1000
 define_parameter par_tcp_gen_highlight_color 'TCP - Highlight - Color Bar' 308 0 1000
 define_parameter par_tcp_gen_highlight_selection 'TCP - Highlight - Selection Bar' 181 0 1000
-define_parameter par_tcp_gen_highlight_selectionframe 'TCP - Highlight - Selection Frame' 0 0 1000
+define_parameter par_tcp_gen_highlight_selectionframe 'TCP - Highlight - Selection Frame' 1 0 1000
 define_parameter par_tcp_gen_insert_slot_width 'TCP - General - Inserts - Slot Width' 1000 0 1000
+define_parameter par_tcp_gen_insert_slot_width_sends 'TCP - General - Inserts - Slot Width Sends' 1000 0 1000
+define_parameter par_tcp_gen_insert_split 'TCP - General - Inserts Split' 0 0 9
+define_parameter par_tcp_gen_insert_split_send_crossover 'TCP - General - Inserts Split Send Crossover' 493 0 1000
 define_parameter par_tcp_master_element_adj_size_env 'TCP - Master - Element Adjustment Envelope Size' 1 0 1
 define_parameter par_tcp_master_element_adj_size_fx 'TCP - Master - Element Adjustment FX Size' 0 0 1
 define_parameter par_tcp_master_element_adj_wrap_buttons 'TCP - Master - Element Adjustment Wrap Buttons' 3 0 3
@@ -329,6 +337,7 @@ define_parameter par_tcp_master_meter_size_scale 'TCP - Master - Meter Size Scal
 define_parameter par_tcp_master_meter_vol_readout 'TCP - Master - Meter Volume Readout' 1 0 1
 define_parameter par_tcp_master_meter_vu_db 'TCP - Master - Meter VU dB' 1 0 1
 define_parameter par_tcp_master_meter_vu_readout 'TCP - Master - Meter VU Readout' 0 0 1
+define_parameter par_tcp_track_element_adj_label_margin 'TCP - Track - Element Adjustment Label Margin' 0 0 1000
 define_parameter par_tcp_track_element_adj_label_size 'TCP - Track - Element Adjustment Label Size' 0 0 1000
 define_parameter par_tcp_track_element_adj_size_env 'TCP - Track - Element Adjustment Envelope Size' 0 0 1
 define_parameter par_tcp_track_element_adj_size_input 'TCP - Track - Element Adjustment Input Size' 240 0 1000
@@ -957,6 +966,7 @@ define_parameter paRt_end 'paRt end' 0 0 1
                 set VAL_tcp_fader_min_w             * SCALE 10
                 set VAL_tcp_label_min_w             * SCALE 50
                 set VAL_tcp_label_min_w_infobar     + VAL_tcp_label_min_w + VAL_Pad{0} VAL_InfoBox{0}
+
 
             endmacro
 
@@ -2316,8 +2326,10 @@ set THEME_color_infobox_text                [50 50 50]
 
                     ; [ROUND]
                     ; y indentation
-                    set VAL_mcp_y_offset        + VAL_rounding_constant{0} - + VAL_mcp_genFolderOffset{0} * folderdepth      * SCALE * 0.02 par_mcp_gen_folder_indent       VAL_rounding_constant{0}
-                    set VAL_mcp_y_offset_max    + VAL_rounding_constant{0} - + VAL_mcp_genFolderOffset{0} * maxfolderdepth   * SCALE * 0.02 par_mcp_gen_folder_indent       VAL_rounding_constant{0}
+                    set VAL_mcp_folderindent    + VAL_rounding_constant{0} - * SCALE * 0.02 par_mcp_gen_folder_indent   VAL_rounding_constant{0}
+
+                    set VAL_mcp_y_offset        + VAL_mcp_genFolderOffset{0} * folderdepth      VAL_mcp_folderindent{0}
+                    set VAL_mcp_y_offset_max    + VAL_mcp_genFolderOffset{0} * maxfolderdepth   VAL_mcp_folderindent{0}
 
                     ; indent background
                     set CUR_y - VAL_mcp_h{0} VAL_mcp_y_offset{0}
@@ -4010,9 +4022,8 @@ set THEME_color_infobox_text                [50 50 50]
             ; width
             set CUR_w VAL_mcp_meter_bottom_w_precalc{0}
 
-            ; [ROUND]
             ; x position
-            set CUR_x + VAL_rounding_constant{0} - + VAL_mcp_x_offset{0} * 0.5 - VAL_mcp_w{0} VAL_mcp_precalc_w_bottom{0} VAL_rounding_constant{0}
+            set CUR_x + VAL_mcp_x_offset{0} * 0.5 - VAL_mcp_w{0} VAL_mcp_precalc_w_bottom{0}
 
             ; [DRAW] meter
             set CUR_meter + [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h_meter{0}] [VAL_Border{0} VAL_Border{0} VAL_Border_Neg_2{0} VAL_Border_Neg_2{0}]
@@ -4461,6 +4472,7 @@ set THEME_color_infobox_text                [50 50 50]
             set CUR_x_rightmost     -   VAL_mcp_w_full{0}   VAL_mcp_x_extension_folder{0}
             set CUR_x               -   CUR_x_rightmost{0}  VAL_Button_Folder{0}
             set CUR_y               -   VAL_mcp_h{0}        VAL_mcp_y_offset{0}
+            set CUR_y_line          +   CUR_y{0}            VAL_mcp_folderindent{0}
             
 
             ; [DRAW] Folder Icon
@@ -4492,30 +4504,32 @@ set THEME_color_infobox_text                [50 50 50]
             ; folder icon height
             set CUR_h * 0.5 VAL_Button_Folder{0}
 
+            ; last track line height
+            set CUR_h_line + VAL_mcp_folderindent{0} * 0.5 VAL_Button_Folder{0}
+
             ; [DRAW] Last Track in Folder Icon
             set WALTER_ELEMENT##.folder                                                 \
                 par_mcp_gen_folder_icon_folder==1                                       \
                     folderstate<0                                                       \
                         + [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1] VAL_Pad{0}@y
 
-            ; [DRAW] Last Track in Folder Icon (lines activated)
+            ; [DRAW] last track folder line
             set WALTER_ELEMENT##.custom.folder_last                 \
                 par_mcp_gen_folder_icon_folder==2                   \
                     folderstate<0                                   \
-                        [0 CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]
-
+                        [0 CUR_y{0} CUR_w{0} CUR_h_line{0} 0 1 0 1]
 
             ; width of line for nested folder tracks
             set CUR_w                                               \
                 folderstate>0                                       \
                     - CUR_x_rightmost{0} VAL_Button_Folder{0}
 
-            ; [DRAW] Child Track (lines activated)
+            ; [DRAW] folder line
             set WALTER_ELEMENT##.custom.folder_child                \
                 par_mcp_gen_folder_icon_folder==2                   \
                     folderdepth>0                                   \
                         folderstate>=0                              \
-                            [0 CUR_y{0} CUR_w{0} CUR_h{0} 0 1 0 1]  \
+                            [0 CUR_y_line{0} CUR_w{0} CUR_h{0} 0 1 0 1]  \
                             0                                       \
                         0                                           \
                     0
@@ -4721,6 +4735,10 @@ set THEME_color_infobox_text                [50 50 50]
                             0                               \
                         0
 
+                ; adjustable margins
+                set VAL_tcp_label_margin            + VAL_Margin_Label{0} * SCALE * par_tcp_track_element_adj_label_margin      0.03
+                set VAL_tcp_envcp_label_margin      + VAL_Margin_Label{0} * SCALE * par_tcp_envcp_label_margin                  0.03
+
             endmacro
 
             ;   #### Draw : TCP : Setup : Track
@@ -4779,8 +4797,10 @@ set THEME_color_infobox_text                [50 50 50]
                                 + VAL_tcp_x_offset_folder VAL_Button_Folder{0}
 
                     ; [ROUND]
-                    set VAL_tcp_x_offset                + VAL_rounding_constant{0} - + VAL_tcp_x_offset_folder{0} * folderdepth  	    * SCALE     * 0.02 par_tcp_gen_folder_indent    VAL_rounding_constant{0}
-                    set VAL_tcp_x_offset_max_precomp    + VAL_rounding_constant{0} - + VAL_tcp_x_offset_folder{0} * maxfolderdepth      * SCALE     * 0.02 par_tcp_gen_folder_indent    VAL_rounding_constant{0}
+                    set VAL_tcp_folderindent            + VAL_rounding_constant{0} - * SCALE * 0.02 par_tcp_gen_folder_indent VAL_rounding_constant{0}
+
+                    set VAL_tcp_x_offset                + VAL_tcp_x_offset_folder{0} * folderdepth  	    VAL_tcp_folderindent{0}
+                    set VAL_tcp_x_offset_max_precomp    + VAL_tcp_x_offset_folder{0} * maxfolderdepth      VAL_tcp_folderindent{0}
 
                     ; compact width
                     set VAL_compact_w + VAL_tcp_x_offset_max_precomp{0} * SCALE 120
@@ -5545,7 +5565,23 @@ set THEME_color_infobox_text                [50 50 50]
 
         macro MAC_DrawTcp_Inserts SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+            ; artificial inserts padding
+            set VAL_tcp_inserts_padding * [VAL_Pad{0} 0 VAL_Pad{0} 0 0 0 0] [1 1 -2 1 1 1 1 1]
 
+            ; detect split sends mode (requires user paramter and internal Reaper setting)
+            set VAL_tcp_inserts_split_sends     \
+                ?par_tcp_gen_insert_split       \
+                    ?tcp_sends_enabled          \
+                        1                       \
+                    0                           \
+                0
+
+            ; caclulate split sends crossover point
+            set VAL_tcp_inserts_split_crossover                                     \
+                ?VAL_tcp_inserts_split_sends{0}                                     \
+                    * par_tcp_gen_insert_split_send_crossover VAL_Fader_Scale{0}    \
+                    0
+                
             ; visibility detection
             set VAL_tcp_show_inserts                                \
                 ?VAL_tcp_compact{0}                                 \
@@ -5573,12 +5609,18 @@ set THEME_color_infobox_text                [50 50 50]
             ; height
             set CUR_h - WALTER_ELEMENT##.size{1} + CUR_y{0} VAL_Border{0}
 
+            
             ; width
             set VAL_remaining_w - VAL_tcp_available_space{0} + VAL_tcp_spacing_section_x{0} - WALTER_ELEMENT##.size{0} CUR_x{0}
             set CUR_w                                                                                                                                                                                                           \
                 !par_tcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                                                                                \
                     + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10                                 * 0.3                   par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
                     + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
+
+            ; double the width on split sends mode
+            set CUR_w                               \
+                ?VAL_tcp_inserts_split_sends{0}     \
+                    * CUR_w 2
 
             ; x position
             set CUR_x                                                                       \
@@ -5596,10 +5638,36 @@ set THEME_color_infobox_text                [50 50 50]
                 VAL_tcp_inserts_w_overshoot{0}>0                \
                     - CUR_w{0} VAL_tcp_inserts_w_overshoot{0}
 
-            ; [DRAW] inserts
-            set WALTER_ELEMENT##.fxparm                                                             \
-                ?VAL_tcp_inserts_inline{0}                                                          \
-                    - [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 1 0 1 1] [0 0 VAL_Border_2{0} 0 0 0 0 0]
+
+            ; split sends: fx block width
+            set CUR_w_insert_half_fx                                        \
+                ?VAL_tcp_inserts_split_sends{0}                             \
+                    * CUR_w         VAL_tcp_inserts_split_crossover{0}      \
+                    0
+            
+            ; split sends: sends block width
+            set CUR_w_insert_half_sends                                     \
+                ?VAL_tcp_inserts_split_sends{0}                             \
+                    * CUR_w     - 1 VAL_tcp_inserts_split_crossover{0}      \
+                    0
+
+            ; split sends: send list x offset
+            set CUR_x_sends + CUR_x CUR_w_insert_half_fx
+            
+
+            ; [DRAW] inserts (fx + parameters)
+            set WALTER_ELEMENT##.fxparm                                                                                     \
+                ?VAL_tcp_inserts_inline{0}                                                                                  \
+                    ?VAL_tcp_inserts_split_sends{0}                                                                         \
+                        + [CUR_x{0} CUR_y{0} CUR_w_insert_half_fx{0}            CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding   \
+                        + [CUR_x{0} CUR_y{0} CUR_w{0}                           CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding
+
+            ; [DRAW] sends
+            set WALTER_ELEMENT##.sendlist                                                                                   \
+                ?VAL_tcp_inserts_inline{0}                                                                                  \
+                    ?VAL_tcp_inserts_split_sends{0}                                                                         \
+                        + [CUR_x_sends{0} CUR_y{0} CUR_w_insert_half_sends{0}   CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding   \
+                        0
 
             ; [DRAW] inserts bg - track unselected
             set WALTER_ELEMENT##.custom.inserts_bg                      \
@@ -5624,6 +5692,8 @@ set THEME_color_infobox_text                [50 50 50]
                 ?VAL_tcp_inserts_inline{0}  \
                     CUR_w{0}>0              \
                         CUR_x{0}                
+
+            
 
         endmacro
 
@@ -6269,7 +6339,7 @@ set THEME_color_infobox_text                [50 50 50]
                     !VAL_tcp_inserts_inline{0}          \
                         1                               \
                         0                               \
-                    0   
+                    0
             
             ; insert size
             set CUR_w_insert                                                                                                                                                                                    \
@@ -6279,6 +6349,11 @@ set THEME_color_infobox_text                [50 50 50]
                         + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10 * 0.3 par_tcp_##PARAMETER_SECTION##_insert_size                                        VAL_rounding_constant{0}    \
                         + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - CUR_w{0} VAL_insert_slot{4} * VAL_Fader_Scale{0} par_tcp_##PARAMETER_SECTION##_insert_size      VAL_rounding_constant{0}
 
+            ; double the width on split sends
+            set CUR_w_insert                        \
+                ?VAL_tcp_inserts_split_sends{0}     \
+                    * CUR_w_insert 2
+            
             ; limit insert size
             set CUR_w_insert                \
                 CUR_w_insert{0}>CUR_w{0}    \
@@ -6289,10 +6364,33 @@ set THEME_color_infobox_text                [50 50 50]
                     + CUR_x{0} - CUR_w{0} CUR_w_insert{0}   \
                     0
             
-            ; [DRAW] inserts
+            ; split sends: fx block width
+            set CUR_w_insert_half_fx                                            \
+                ?VAL_tcp_inserts_split_sends{0}                                 \
+                    * CUR_w_insert      VAL_tcp_inserts_split_crossover{0}
+
+            ; split sends: sends block width
+            set CUR_w_insert_half_sends                                         \
+                ?VAL_tcp_inserts_split_sends{0}                                 \
+                    * CUR_w_insert  - 1 VAL_tcp_inserts_split_crossover{0}      \
+                    0
+            
+            ; split sends: send list x offset
+            set CUR_x_sends + CUR_x_insert CUR_w_insert_half_fx
+
+            ; [DRAW] inserts (fx + parameters)
             set WALTER_ELEMENT##.fxparm                                                                                             \
                 ?VAL_tcp_show_inserts_in_embed_area{0}                                                                              \
-                    - [CUR_x_insert{0} CUR_y{0} CUR_w_insert{0} CUR_h_insert{0} 0 0 0 1] [0 0 VAL_Border_2{0} VAL_Pad{0} 0 0 0 0]
+                    ?VAL_tcp_inserts_split_sends{0}                                                                                 \
+                    + [CUR_x_insert{0} CUR_y{0} CUR_w_insert_half_fx{0}     CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding     \
+                    + [CUR_x_insert{0} CUR_y{0} CUR_w_insert{0}             CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding
+
+            ; [DRAW] sends
+            set WALTER_ELEMENT##.sendlist                                                                                           \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                                                              \
+                    ?VAL_tcp_inserts_split_sends{0}                                                                                 \
+                    + [CUR_x_sends{0} CUR_y{0} CUR_w_insert_half_sends{0}   CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding
+                    
 
             ; [DRAW] inserts bg - track unselected
             set WALTER_ELEMENT##.custom.inserts_bg                                          \
@@ -6322,10 +6420,20 @@ set THEME_color_infobox_text                [50 50 50]
                 !VAL_tcp_hide_embed_section{0}                      \
                     [CUR_x{0} CUR_y{0} CUR_w{0} CUR_h{0} 0 0 0 1]
 
-            ;; inserts z order
+            ; inserts z order
             front WALTER_ELEMENT##.custom.inserts_bg
-            front WALTER_ELEMENT##.custom.inserts_bg_select
+            front WALTER_ELEMENT##.custom.inserts_bg_select            
             front WALTER_ELEMENT##.fxparm
+            front WALTER_ELEMENT##.sendlist
+            
+            ; visbility flags for inserts (parameters, fx, sends)
+            ; -> overwrite internal TCP sendlist setttings when split sends mode is activated
+            set WALTER_ELEMENT##.fxparm.visflags    \
+                ?VAL_tcp_inserts_split_sends{0}     \
+                    [1 0 -1]                        \
+                    [1 0 0]
+            
+            
 
         endmacro
 
@@ -6335,9 +6443,10 @@ set THEME_color_infobox_text                [50 50 50]
         macro MAC_DrawTcp_Folder SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; position setup
-            set CUR_w   VAL_Button_Folder{0}
-            set CUR_x   - VAL_tcp_x_offset{0} CUR_w{0}
-            set CUR_y   - tcp.size{1} + VAL_Button_Folder{0} VAL_Pad{0}
+            set CUR_w       VAL_Button_Folder{0}
+            set CUR_x       - VAL_tcp_x_offset{0} CUR_w{0}
+            set CUR_x_line  - CUR_x{0} VAL_tcp_folderindent{0}
+            set CUR_y       - tcp.size{1} + VAL_Button_Folder{0} VAL_Pad{0}
 
             ; [DRAW] folder collapse button
             set WALTER_ELEMENT##.foldercomp                                                     \
@@ -6348,20 +6457,22 @@ set THEME_color_infobox_text                [50 50 50]
             ; y position of line
             set CUR_y_line                              \
                 par_tcp_gen_folder_icon_collapse==2     \
-                    0                       \
+                    0                                   \
                     + CUR_y VAL_Pad{0}
 
             ; x position of line
-            set CUR_x_line                                  \
-                par_tcp_gen_folder_icon_collapse==2         \
-                    + CUR_x * 0.5 VAL_Button_Folder{0}      \
-                    + CUR_x * 0.4 VAL_Button_Folder{0}
+            set CUR_x_line                                      \
+                par_tcp_gen_folder_icon_collapse==2             \
+                    + CUR_x_line * 0.5 VAL_Button_Folder{0}     \
+                    + CUR_x_line * 0.4 VAL_Button_Folder{0}
             
             ; line width
-            set CUR_w_line                                  \
-                par_tcp_gen_folder_icon_collapse==1         \
-                    - CUR_w * 0.6 VAL_Button_Folder{0}      \
-                    - CUR_w * 0.5 VAL_Button_Folder{0}
+            set CUR_w_line                                                                  \
+                par_tcp_gen_folder_icon_collapse==1                                         \
+                    - CUR_w * 0.6 VAL_Button_Folder{0}                                      \
+                    folderstate<0                                                           \
+                        + CUR_w - VAL_tcp_folderindent{0}   * 0.5 VAL_Button_Folder{0}      \
+                        - CUR_w                             * 0.5 VAL_Button_Folder{0}
             
             ; line height
             set CUR_h_line                                              \
@@ -6435,18 +6546,27 @@ set THEME_color_infobox_text                [50 50 50]
         ; --------------------------------------------------------------------------------
 
             macro MAC_DrawTcp_Font_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
-
+                
                 ; insert slot width pre-calculation
-                set VAL_tcp_slot_w_min * WALTER_ELEMENT##.fxparm{w} + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
-                set VAL_tcp_slot_w_max + WALTER_ELEMENT##.fxparm{w} 1
+                set VAL_tcp_slot_w_fx          + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
+                set VAL_tcp_slot_w_sends       + 0.15 * 0.000375 par_tcp_gen_insert_slot_width_sends
 
+                ; fx slot width
+                set VAL_tcp_slot_w_min          * WALTER_ELEMENT##.fxparm{w} VAL_tcp_slot_w_fx{0}
+                set VAL_tcp_slot_w_max          + WALTER_ELEMENT##.fxparm{w} 1
+
+                ;; send slot width
+                set VAL_tcp_slot_w_min_send     * WALTER_ELEMENT##.sendlist{w} VAL_tcp_slot_w_sends{0}
+                set VAL_tcp_slot_w_max_send     + WALTER_ELEMENT##.sendlist{w} 1
+                
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Label_Inserts VAL_insert_slot{0} VAL_tcp_slot_w_min{0} VAL_tcp_slot_w_max{0} 0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3}]
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min{0}           VAL_tcp_slot_w_max{0}       0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.sendlist.font      [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min_send{0}      VAL_tcp_slot_w_max_send{0}  0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
+                
+                set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0}        VAL_Margin_Label{1}     VAL_Margin_Label{2}     VAL_Margin_Label{3} 0 0 0 VAL_Pad{0}]
+                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0}        VAL_Margin_Label{1}     0                       VAL_Margin_Label{3} 0 0 0 VAL_Pad{0}]
                 set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
-                set WALTER_ELEMENT##.sendlist.font      WALTER_ELEMENT##.fxparm.font
-                set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0} VAL_Margin_Label{1} 0 VAL_Margin_Label{3}]
 
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
@@ -6480,8 +6600,8 @@ set THEME_color_infobox_text                [50 50 50]
 
                 ; name label
                 set WALTER_ELEMENT##.label.font VAL_Font_Label
-                set WALTER_ELEMENT##.label.margin [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0 0 0 0]
-                set WALTER_ELEMENT##.label.color [VAL_Color_Track_Label_Text{0} VAL_Color_Track_Label_Text{1} VAL_Color_Track_Label_Text{2} . . . .]
+                set WALTER_ELEMENT##.label.margin   [VAL_tcp_label_margin{0}        VAL_Margin_Label{1}             VAL_Margin_Label{2}             VAL_Margin_Label{3} 0 0 0 0]
+                set WALTER_ELEMENT##.label.color    [VAL_Color_Track_Label_Text{0}  VAL_Color_Track_Label_Text{1}   VAL_Color_Track_Label_Text{2}   .                   . . . .]
 
             endmacro
 
@@ -7026,7 +7146,7 @@ set THEME_color_infobox_text                [50 50 50]
 
             ; position setup
             set CUR_w   VAL_Button_Folder{0}
-            set CUR_x   - VAL_tcp_x_offset{0} CUR_w{0}
+            set CUR_x   - VAL_tcp_x_offset{0} + CUR_w{0} VAL_tcp_folderindent{0}
 
             ; y position of line
             set CUR_y_line      0
@@ -7072,13 +7192,13 @@ set THEME_color_infobox_text                [50 50 50]
 
             ; name label
             set WALTER_ELEMENT##.label.font     VAL_Font_Label
-            set WALTER_ELEMENT##.label.margin   [VAL_Margin_Label{0} VAL_Margin_Label{1} VAL_Margin_Label{2} VAL_Margin_Label{3} 0 0 0 0]
-            set WALTER_ELEMENT##.label.color    [VAL_Color_Envcp_Label_Text{0}  VAL_Color_Envcp_Label_Text{1}   VAL_Color_Envcp_Label_Text{2}   . . . .]
+            set WALTER_ELEMENT##.label.margin   [VAL_tcp_envcp_label_margin{0}      VAL_Margin_Label{1}             VAL_Margin_Label{2}             VAL_Margin_Label{3} 0 0 0 0]
+            set WALTER_ELEMENT##.label.color    [VAL_Color_Envcp_Label_Text{0}      VAL_Color_Envcp_Label_Text{1}   VAL_Color_Envcp_Label_Text{2}   .                   . . . .]
 
             ; readout value
             set WALTER_ELEMENT##.value.font     VAL_Font_Label
-            set WALTER_ELEMENT##.value.margin   [VAL_readout_margin{0} 0 VAL_readout_margin{0} 0]
-            set WALTER_ELEMENT##.value.color    [VAL_Color_Envcp_Readout{0}     VAL_Color_Envcp_Readout{1}      VAL_Color_Envcp_Readout{2}      . . . .]
+            set WALTER_ELEMENT##.value.margin   [VAL_readout_margin{0}          0                               VAL_readout_margin{0}               0]
+            set WALTER_ELEMENT##.value.color    [VAL_Color_Envcp_Readout{0}     VAL_Color_Envcp_Readout{1}      VAL_Color_Envcp_Readout{2}          .                   . . . .]
 
         endmacro
 

@@ -4,7 +4,7 @@
 # --------------------------------------
 
 # knob
---out gen_knob_bg_large gen_knob_bg_small   --images    knob_bg -tint generic_knob_bg   knob_border -tint generic_knob_border
+--out gen_knob_bg_large gen_knob_bg_small   --frame frame_knob --images    knob_bg -tint generic_knob_bg   knob_border -tint generic_knob_border
 
 #       Faders
 # --------------------------------------
