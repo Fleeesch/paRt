@@ -81,35 +81,35 @@
 --out track_env_write                           --spritesheet --button --frame frame -fit -flip-h -flip-v  --images bg -tint color_red          env_write       -tint button_symbol_on   border_round -tint button_border
 
 # track fx button
---out track_fx_empty                            --spritesheet --button --frame frame -fit   --images bg       -tint button_bg_off   fx      -tint button_symbol_off     border_round -tint button_border
---out track_fx_norm                             --spritesheet --button --frame frame -fit   --images bg       -tint color_cyan      fx      -tint button_symbol_on      border_round -tint button_border
---out track_fx_dis                              --spritesheet --button --frame frame -fit   --images bg       -tint color_gray      fx      -tint button_symbol_on      border_round -tint button_border
+--out track_fx_empty                            --spritesheet --button --frame frame -fit   --images bg       -tint button_bg_off               fx      -tint button_symbol_off         border_round -tint button_border
+--out track_fx_norm                             --spritesheet --button --frame frame -fit   --images bg       -tint color_cyan                  fx      -tint button_symbol_on          border_round -tint button_border
+--out track_fx_dis                              --spritesheet --button --frame frame -fit   --images bg       -tint button_fx_bypass_bg         fx      -tint button_fx_bypass_fg       border_round -tint button_border
 
 --out mcp_fx_in_norm    track_fx_in_norm        --spritesheet --button --frame frame -fit   --images bg       -tint color_cyan      fx_in   -tint button_symbol_on      border_round -tint button_border
 --out mcp_fx_in_empty   track_fx_in_empty       --spritesheet --button --frame frame -fit   --images bg       -tint button_bg_off   fx_in   -tint button_symbol_off     border_round -tint button_border
 
---out track_fxempty_v track_fxempty_h           --spritesheet --button --frame frame -fit   --images overlay  -tint overlay_fxbyp_hover -frame 1 1 overlay -tint overlay_fxbyp_click -frame 2 2 fxbyp_on      -tint button_symbol_off
---out track_fxon_v track_fxon_h                 --spritesheet --button --frame frame -fit   --images overlay  -tint overlay_fxbyp_hover -frame 1 1 overlay -tint overlay_fxbyp_click -frame 2 2 fxbyp_on      -tint button_symbol_on
---out track_fxoff_v track_fxoff_h               --spritesheet --button --frame frame -fit   --images overlay  -tint overlay_fxbyp_hover -frame 1 1 overlay -tint overlay_fxbyp_click -frame 2 2 fxbyp_off     -tint button_symbol_on
+--out track_fxempty_v track_fxempty_h           --spritesheet --button --frame frame -fit   --images    overlay  -tint overlay_fxbyp_hover -frame 1 1       overlay -tint overlay_fxbyp_click -frame 2 2        fxplus          -tint button_symbol_off
+--out track_fxon_v track_fxon_h                 --spritesheet --button --frame frame -fit   --images    overlay  -tint overlay_fxbyp_hover -frame 1 1       overlay -tint overlay_fxbyp_click -frame 2 2        fxbyp_on        -tint button_symbol_on
+--out track_fxoff_v track_fxoff_h               --spritesheet --button --frame frame -fit   --images    overlay  -tint overlay_fxbyp_hover -frame 1 1       overlay -tint overlay_fxbyp_click -frame 2 2        fxbyp_off       -tint button_fx_bypass_fg
 
 # track master button / icon
 --out track_custom_master                               --frame-make 0 0 1 1        --images master             -tint button_symbol_off
 --out mixer_menu             --spritesheet --button     --frame frame_shadow -fit   --images overlay_straight   -tint overlay_hover         -frame 1 1 overlay_straight -tint overlay_click -frame 2 2
 
 # track record input button
---out track_custom_recinput_on          --mask-template overlay --frame frame -fit --images bg_input_h -tint color_red       border_input_h   -tint button_border
---out track_custom_recinput_off         --mask-template overlay --frame frame -fit --images bg_input_h -tint button_bg_off   border_input_h   -tint button_border
+--out track_custom_recinput_on          --frame frame -fit --images bg_input_h -tint color_red       border_input_h   -tint button_border
+--out track_custom_recinput_off         --frame frame -fit --images bg_input_h -tint button_bg_off   border_input_h   -tint button_border
 
---out track_custom_recinput_r_on        --mask-template overlay --frame frame -fit --images bg_input_h -tint color_red       border_input_h   -tint button_border
---out track_custom_recinput_r_off       --mask-template overlay --frame frame -fit --images bg_input_h -tint button_bg_off   border_input_h   -tint button_border
+--out track_custom_recinput_r_on        --frame frame -fit --images bg_input_h -tint color_red       border_input_h   -tint button_border
+--out track_custom_recinput_r_off       --frame frame -fit --images bg_input_h -tint button_bg_off   border_input_h   -tint button_border
 
---out track_custom_recinput_vert_on     --mask-template overlay --frame frame -fit --images bg_input_v -tint color_red       border_input_v   -tint button_border
---out track_custom_recinput_vert_off    --mask-template overlay --frame frame -fit --images bg_input_v -tint button_bg_off   border_input_v   -tint button_border
+--out track_custom_recinput_vert_on     --frame frame -fit --images bg_input_v -tint color_red       border_input_v   -tint button_border
+--out track_custom_recinput_vert_off    --frame frame -fit --images bg_input_v -tint button_bg_off   border_input_v   -tint button_border
 
 # envcp
 --out envcp_hide               --spritesheet --button --frame frame_button -fit    --images bg          -tint button_bg_off      envcp_hide     -tint button_symbol_off      border_round   -tint button_border
---out envcp_bypass_on          --spritesheet --button --frame frame_button -fit    --images bg          -tint button_bg_off      envcp_bypass   -tint button_symbol_off      border_round   -tint button_border
---out envcp_bypass_off         --spritesheet --button --frame frame_button -fit    --images bg          -tint color_cyan         envcp_bypass   -tint button_symbol_on       border_round   -tint button_border
+--out envcp_bypass_on          --spritesheet --button --frame frame_button -fit    --images bg          -tint color_orange       envcp_mute     -tint button_symbol_on       border_round   -tint button_border
+--out envcp_bypass_off         --spritesheet --button --frame frame_button -fit    --images bg          -tint button_bg_off      envcp_mute     -tint button_symbol_off      border_round   -tint button_border
 --out envcp_arm_off            --spritesheet --button --frame frame_button -fit    --images bg_circle   -tint button_bg_off      envcp_recarm   -tint button_symbol_off      border_circle  -tint button_border
 --out envcp_arm_on             --spritesheet --button --frame frame_button -fit    --images bg_circle   -tint color_red          envcp_recarm   -tint button_symbol_on       border_circle  -tint button_border
 --out envcp_parammod           --spritesheet --button --frame frame_button -fit    --images bg          -tint button_bg_off      envcp_mod      -tint button_symbol_off      border_round   -tint button_border
@@ -121,47 +121,57 @@
 # --------------------------------------
 
 # background
---out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border_inner   -tint insert_border
---out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border_inner   -tint insert_border
+--out mcp_extmixbg                      --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border_inner    -tint insert_border
+--out mcp_extmixbgsel                   --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border_inner    -tint insert_border
 --out track_custom_insert_bg            --frame frame_ins -fit --images ins_bg -tint insert_bg          ins_border          -tint insert_border
 --out track_custom_insert_bg_select     --frame frame_ins -fit --images ins_bg -tint insert_bg_select   ins_border          -tint insert_border
 
 # section handle
+# -> Currently disabled and replaced with a dummy. Gets quite messy when combined with shadowed insert slots.
 #--out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg   --frame frame_section --images bg_section -tint insert_divider
+
 --dummy --out mcp_sendlist_bg mcp_fxlist_bg mcp_fxparm_bg
 
 # embed fx
 --out tcp_fxembed_header_bg_v     --frame frame -fit --images bg_r -tint button_label_bg
 --out tcp_fxembed_header_bg_h     --frame frame -fit --images bg_b -tint button_label_bg
 
-# empty slots
---out mcp_fxlist_empty mcp_fxparm_empty mcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint insert_slot_empty -frame 0 0 ins_slot         -tint insert_slot_empty_hover -frame 1 1 ins_slot       -tint insert_slot_empty_click -frame 2 2
---out tcp_fxlist_empty tcp_fxparm_empty tcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot_tcp  -tint insert_slot_empty -frame 0 0 ins_slot_tcp     -tint insert_slot_empty_hover -frame 1 1 ins_slot_tcp   -tint insert_slot_empty_click -frame 2 2
+# empty fx slots
+--out tcp_fxlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint color_cyan -frame 0 0     -alpha $alpha_insert_slot_empty     ins_slot        -tint color_cyan   -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot    -tint color_cyan -frame 2 2 -alpha $alpha_insert_slot_click             ins_slot_plus       -tint color_cyan -frame 1 2     -alpha $alpha_insert_slot_plus
+--out mcp_fxlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint color_cyan -frame 0 0     -alpha $alpha_insert_slot_empty     ins_slot        -tint color_cyan   -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot    -tint color_cyan -frame 2 2 -alpha $alpha_insert_slot_click             ins_slot_plus       -tint color_cyan -frame 1 2     -alpha $alpha_insert_slot_plus
+
+# empty fx parameter slots
+--out tcp_fxparm_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint color_blue -frame 0 0     -alpha $alpha_insert_slot_empty     ins_slot        -tint color_blue   -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot   -tint color_blue -frame 2 2   -alpha $alpha_insert_slot_click            ins_slot_plus       -tint color_blue -frame 1 2     -alpha $alpha_insert_slot_plus
+--out mcp_fxparm_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot      -tint color_blue -frame 0 0     -alpha $alpha_insert_slot_empty     ins_slot        -tint color_blue   -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot   -tint color_blue -frame 2 2   -alpha $alpha_insert_slot_click            ins_slot_plus       -tint color_blue -frame 1 2     -alpha $alpha_insert_slot_plus
+
+# empty send slots
+--out tcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot    -tint color_yellow -frame 0 0   -alpha $alpha_insert_slot_empty     ins_slot        -tint color_yellow -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot     -tint color_yellow -frame 2 2   -alpha $alpha_insert_slot_click        ins_slot_plus       -tint color_yellow -frame 1 2   -alpha $alpha_insert_slot_plus
+--out mcp_sendlist_empty      --spritesheet --vertical --frame frame_slot -fit --images ins_slot    -tint color_yellow -frame 0 0   -alpha $alpha_insert_slot_empty     ins_slot        -tint color_yellow -frame 1 1 -alpha $alpha_insert_slot_hover       ins_slot     -tint color_yellow -frame 2 2   -alpha $alpha_insert_slot_click        ins_slot_plus       -tint color_yellow -frame 1 2   -alpha $alpha_insert_slot_plus
 
 # fx insert slot
---out mcp_fxlist_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
---out mcp_fxlist_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_cyan
---out mcp_fxlist_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
---out tcp_fxparm_fx_byp     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
---out tcp_fxparm_fx_norm    --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_cyan
---out tcp_fxparm_fx_off     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
+--out tcp_fxparm_fx_off     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fx_offline
+--out mcp_fxlist_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fx_offline
+--out tcp_fxparm_fx_byp     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fx_bypass
+--out mcp_fxlist_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fx_bypass
+--out tcp_fxparm_fx_norm    --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_cyan
+--out mcp_fxlist_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_cyan
 
 # midi hardware
---out mcp_sendlist_midihw tcp_sendlist_midihw   --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_blue
+--out mcp_sendlist_midihw tcp_sendlist_midihw   --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_violet
 
 # parameter slot
---out mcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint color_gray
---out mcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint insert_slot_fxparm
---out mcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot        -tint button_bg_off
---out tcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint color_gray
---out tcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint insert_slot_fxparm
---out tcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot_tcp    -tint button_bg_off
+--out tcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fxparm_offline
+--out mcp_fxparm_off        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fxparm_offline
+--out tcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fxparm_bypass
+--out mcp_fxparm_byp        --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_slot_fxparm_bypass
+--out tcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_blue
+--out mcp_fxparm_norm       --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_blue
 
 # send slot
---out mcp_sendlist_mute     --spritesheet --button --vertical --frame frame_slot_send        -fit      --images ins_slot_send        -tint color_gray
---out mcp_sendlist_norm     --spritesheet --button --vertical --frame frame_slot_send        -fit      --images ins_slot_send        -tint color_yellow
---out tcp_sendlist_mute     --spritesheet --button --vertical --frame frame_slot_send        -fit      --images ins_slot_send_tcp    -tint color_gray
---out tcp_sendlist_norm     --spritesheet --button --vertical --frame frame_slot_send        -fit      --images ins_slot_send_tcp    -tint color_yellow
+--out tcp_sendlist_mute     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_send_mute
+--out mcp_sendlist_mute     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint insert_send_mute
+--out tcp_sendlist_norm     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_yellow
+--out mcp_sendlist_norm     --spritesheet --button --vertical --frame frame_slot        -fit      --images ins_slot     -tint color_yellow
 
 --out mcp_sendlist_meter    --frame frame_send_meter -fit --images send_meter -tint insert_send_meter
 --out tcp_sendlist_meter    --frame frame_send_meter -fit --images send_meter -tint insert_send_meter
@@ -170,12 +180,12 @@
 # --------------------------------------
 
 # icon
---out mcp_iconbg                        --frame frame                       --images bg_icon     -tint gui_bg
---out mcp_iconbgsel                     --frame frame                       --images bg_icon     -tint gui_bg
---out tcp_iconbg                        --frame frame_slim -rotate 180      --images bg_icon_tcp -tint track_icon_bg           border_icon_tcp  -tint track_icon_border
---out tcp_iconbgsel                     --frame frame_slim -rotate 180      --images bg_icon_tcp -tint track_icon_bg_select    border_icon_tcp  -tint track_icon_border
---out track_custom_tcp_iconbg           --frame frame                       --images bg_icon     -tint track_icon_bg           border_icon      -tint track_icon_border
---out track_custom_tcp_iconbgsel        --frame frame                       --images bg_icon     -tint track_icon_bg_select    border_icon      -tint track_icon_border
+--out mcp_iconbg                        --frame frame                       --images bg_icon            -tint gui_bg
+--out mcp_iconbgsel                     --frame frame                       --images bg_icon            -tint gui_bg
+--out tcp_iconbg                        --frame frame_slim -rotate 180      --images bg_icon_tcp        -tint track_icon_bg           border_icon_tcp  -tint track_icon_border
+--out tcp_iconbgsel                     --frame frame_slim -rotate 180      --images bg_icon_tcp        -tint track_icon_bg_select    border_icon_tcp  -tint track_icon_border
+--out track_custom_tcp_iconbg           --frame frame                       --images bg_icon            -tint track_icon_bg           border_icon      -tint track_icon_border
+--out track_custom_tcp_iconbgsel        --frame frame                       --images bg_icon            -tint track_icon_bg_select    border_icon      -tint track_icon_border
 
 # frames
 --out track_custom_bg_frame             --frame frame_border --images border -tint border_bg
