@@ -1,16 +1,13 @@
-selection frame is enabled by default
-folder lines are now aligned with their parent's collapsing button
-added custom ruler lane colors
-slightly smaller generic knobs
-overhauled fx button assets and colors
-changed MIDI Hardware output slot color
-Inserts: overhauled slot colors
-Inserts: added slight color shading to slot backgrounds
-Inserts: minor corrections on margins
-TCP: added label text margin adjustment
-TCP: added optional display mode to place sends in another column
-TCP: added separate slot size parameter for sends (when displayed in extra column)
-TCP: always show fx parameters in inserts block, even without fx present
-MCP: fixed bottom section rounding error during folder parent horizontal offset
-ENVCP: added label text margin adjustment
-ENVCP: replaced envelope activation button with a bypass button
+UI Windows: minor colors tweaks
+changed overlay transparencies to normal for maximum performance
+Items: fixed barely visible transient lines
+Items: minor color tweaks for better readability
+Theme Adjuster: improved reliability for retrieval of default parameter values
+Theme Adjuster: fixed typos in LUA files, code cleanup
+MCP: Volume Readout shows more digits
+MCP: Tracks and Master share the same Volume Readout number formatting
+TCP: added optional full-width meter display on super-collapsed tracks
+Fonts: adapted to font behaviour changes introduced in Reaper V7.70
+TCP: added option to show parameters in an extra block
+Send Slots: changed to neutral colors in order to respect custom colored value bars
+implemented usage of default Theme Adjuster shortcut from Reaper UI
