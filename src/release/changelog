@@ -1,13 +1,17 @@
-UI Windows: minor colors tweaks
-changed overlay transparencies to normal for maximum performance
-Items: fixed barely visible transient lines
-Items: minor color tweaks for better readability
-Theme Adjuster: improved reliability for retrieval of default parameter values
-Theme Adjuster: fixed typos in LUA files, code cleanup
-MCP: Volume Readout shows more digits
-MCP: Tracks and Master share the same Volume Readout number formatting
-TCP: added optional full-width meter display on super-collapsed tracks
-Fonts: adapted to font behaviour changes introduced in Reaper V7.70
-TCP: added option to show parameters in an extra block
-Send Slots: changed to neutral colors in order to respect custom colored value bars
-implemented usage of default Theme Adjuster shortcut from Reaper UI
+paRt Theme Adjuster can now be opened via internal Reaper Theme Adjuster shortcut
+changed all overlay modes to normal for better drawing performance
+Send Slots: implemented recently introduced target track color
+Inserts: updated parameter and send inserts design to be more distinguishable
+TCP: added option to show FX inserts in an extra block
+TCP: added optional full-width meter display for collapsed tracks
+MCP: increased vertical volume readout size
+volume readout text formatting is now identical on all tracks
+removed OS specific workarounds (not needed anymore according to Reaper V7.70 font formatting changes)
+stricter inserts visibility logic
+reworked Input button assets
+various minor color tweaks
+Items: fixed barely visible transient threshold lines
+Theme Adjuster: more reliable fallback for default parameter values
+Theme Adjuster: code cleanup (fixed typos, extended comments, removal of deprecated features)
+Theme Adjuster: Custom tab is only visible for theme files marked as unpacked or modded
+Theme Adjuster: show a little info message if a new version of paRt is available (one-time online check on Theme Adjuster launch until Reaper restarts again)

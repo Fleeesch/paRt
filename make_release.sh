@@ -204,7 +204,8 @@ if [ "$local_release" = true ]; then
     cat "$reapack_file_in" >>"$reapack_file_out"
     echo "" >>"$reapack_file_out"
     cat "$changelog_file" >>"$reapack_file_out"
-
+    
+    
     print_done
 
     #   Theme Adjuster Files
@@ -213,7 +214,13 @@ if [ "$local_release" = true ]; then
     print_process_start "Copying ReaScript Files"
 
     rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
-    rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"
+    rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"    
+    rsync -aq --mkpath "$ORG_DIR/src/scripts/launcher/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Cockos/"
+    rsync -aq --mkpath "$ORG_DIR/src/scripts/launcher/" "./$release_folder/$version/reapack/paRt/launcher"
+    
+    #   Version File
+    # ------------------------------
+    cp -f "$ORG_DIR/src/release/version" "$ORG_DIR/$release_folder/$version/reapack/paRt/version"
 
     #   Splash Images
     # ------------------------------
@@ -244,6 +251,8 @@ if [ "$local_release" = true ]; then
     if [ "$github" = true ]; then
         mv "./$release_folder/$version" "./$release_folder/current" >/dev/null 2>&1
     fi
+
+    
 
 fi
 

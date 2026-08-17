@@ -1,0 +1,53 @@
+@version 1.3.2
+@author Fleeesch
+@description paRt
+@links
+  Website https://fleeesch.github.io/part/index.html
+  Reaper Forum Thread https://forum.cockos.com/showthread.php?t=282545
+  GitHub Repository https://github.com/Fleeesch/paRt
+@screenshots
+  Dark Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dark.png
+  Dark Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dark.png
+  Dark Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dark.png
+  Dimmed Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_dimmed.png
+  Dimmed Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_dimmed.png
+  Dimmed Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_dimmed.png
+  Light Theme - FHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_fhd_light.png
+  Light Theme - QHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_qhd_light.png
+  Light Theme - UHD https://fleeesch.github.io/part/res/gallery/sshot/part_res_uhd_light.png
+@provides
+  paRt - Dark.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dark.ReaperThemeZip
+  paRt - Dimmed.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_dimmed.ReaperThemeZip
+  paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
+  [script]paRt/conf/**/*
+  [script]paRt/lib/**/*
+  [script main]paRt/*.lua
+  [data]paRt/splash/*
+  launcher/paRt - Theme Adjuster.lua > Scripts/Cockos/paRt - Theme Adjuster.lua
+@about
+  # paRt - plain adapting Reaper theme
+  
+  A custom Reaper theme with a heavy focus on functionality.
+  
+  * 3 theme variants with different brightness levels and parameter synchronization
+  * Full support for zoom factors 100%, 125%, 150%, 175%, 200%, 225%, 250%
+  * Complete coverage of all Reaper V7 UI elements
+  * Custom Theme Adjuster with extensive configuration options
+@changelog
+  - paRt Theme Adjuster can now be opened via internal Reaper Theme Adjuster shortcut
+  - changed all overlay modes to normal for better drawing performance
+  - Send Slots: implemented recently introduced target track color
+  - Inserts: updated parameter and send inserts design to be more distinguishable
+  - TCP: added option to show FX inserts in an extra block
+  - TCP: added optional full-width meter display for collapsed tracks
+  - MCP: increased vertical volume readout size
+  - volume readout text formatting is now identical on all tracks
+  - removed OS specific workarounds (not needed anymore according to Reaper V7.70 font formatting changes)
+  - stricter inserts visibility logic
+  - reworked Input button assets
+  - various minor color tweaks
+  - Items: fixed barely visible transient threshold lines
+  - Theme Adjuster: more reliable fallback for default parameter values
+  - Theme Adjuster: code cleanup (fixed typos, extended comments, removal of deprecated features)
+  - Theme Adjuster: Custom tab is only visible for theme files marked as unpacked or modded
+  - Theme Adjuster: show a little info message if a new version of paRt is available (one-time online check on Theme Adjuster launch until Reaper restarts again)
