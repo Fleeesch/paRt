@@ -71,6 +71,7 @@ processing:
     --rotate                rotate by degree
     --flip-vertical         flip vertically
     --flip-horizontal       flip horizontally
+    --alpha                 final alpha applied once after merging (not stacked per-layer)
     --crop                  image chain used as a crop-out
     --crop-template         prepared image used for individual layer cut-outs
     --toolbar               adjustments for default toolbar buttons
@@ -1128,7 +1129,7 @@ def create_sprite(args):
                         img_mask = Image.merge("RGBA", (r,g,b) + (alpha_inv,))
                         img = ImageChops.subtract(img, img_mask)
 
-                # image transformation
+                # post processing image transformation
                 if "rotate" in args:
                     rotation = args["rotate"][0]["n"]
                     img = img.rotate(int(rotation),expand=True,resample=filter_rotation)
@@ -1136,6 +1137,8 @@ def create_sprite(args):
                     img = img.transpose(Image.FLIP_TOP_BOTTOM)
                 if "flip-horizontal" in args:
                     img = img.transpose(Image.FLIP_LEFT_RIGHT)
+                if "alpha" in args:
+                    img = adjust_image_alpha(img, float(args["alpha"][0]["n"]))
 
                 img_set[idx] = img
             

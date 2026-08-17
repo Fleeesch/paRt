@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
 ;THEMEBUILDER_INSERT_README
 
 ;THEMEBUILDER_INSERT_PARAMETERS
@@ -378,39 +370,16 @@
                     ntracks>=10         2   \
                                         1
 
-                ; [MAC OS FIX]
-                ; MAC gets one more letter. Greedy bastard.
-                set VAL_index_letters               \
-                    os_type==1                      \
-                        + VAL_index_letters{0} 1
-
-                ; [MAC OS FIX]
-                ; [LINUX OS FIX]
+                
                 ; label margins
-                set VAL_Margin_Label                            \
-                    os_type==2                                  \
-                        SCALE>=2.5      [6      -2  6   VAL_Border]     \
-                        SCALE>=2.25     [5      -6  5   VAL_Border]     \
-                        SCALE>=2        [4      -4  4   VAL_Border]     \
-                        SCALE>=1.75     [4      -3  4   VAL_Border]     \
-                        SCALE>=1.5      [3      -1  3   VAL_Border]     \
-                        SCALE>=1.25     [3      -2  3   VAL_Border]     \
-                                        [3      -1  3   VAL_Border]     \
-                    os_type==1                                          \
-                        SCALE>=2.5      [16     4   16  VAL_Border]     \
-                        SCALE>=2.25     [14     4   14  VAL_Border]     \
-                        SCALE>=2        [12     3   12  VAL_Border]     \
-                        SCALE>=1.75     [11     5   11  VAL_Border]     \
-                        SCALE>=1.5      [9      5   9   VAL_Border]     \
-                        SCALE>=1.25     [8      4   8   VAL_Border]     \
-                                        [6      2   6   VAL_Border]     \
-                        SCALE>=2.5      [6      -4  6   VAL_Border]     \
-                        SCALE>=2.25     [5      -3  5   VAL_Border]     \
-                        SCALE>=2        [4      -2  4   VAL_Border]     \
-                        SCALE>=1.75     [4      -2  4   VAL_Border]     \
-                        SCALE>=1.5      [3      0   3   VAL_Border]     \
-                        SCALE>=1.25     [3      -1  3   VAL_Border]     \
-                                        [3      0   3   VAL_Border]
+                set VAL_Margin_Label                                \
+                    SCALE>=2.5      [6      -4  6   VAL_Border]     \
+                    SCALE>=2.25     [5      -3  5   VAL_Border]     \
+                    SCALE>=2        [4      -2  4   VAL_Border]     \
+                    SCALE>=1.75     [4      -2  4   VAL_Border]     \
+                    SCALE>=1.5      [3      0   3   VAL_Border]     \
+                    SCALE>=1.25     [3      -1  3   VAL_Border]     \
+                                    [3      0   3   VAL_Border]
 
 
                 ; vertical label margins
@@ -453,33 +422,15 @@
                     SCALE>=1.25     [10     0   10      0   ]   \
                                     [8      0   8       0   ]
 
-                ; [MAC OS FIX]
-                ; [LINUX OS FIX]
                 ; record input margins
-                set VAL_Margin_RecInput                         \
-                    os_type==2                                  \
-                        SCALE>=2.5      [6      -1  6   2   ]   \
-                        SCALE>=2.25     [4      -1  4   2   ]   \
-                        SCALE>=2        [3      -1  3   2   ]   \
-                        SCALE>=1.75     [2      1   2   1   ]   \
-                        SCALE>=1.5      [2      1   2   1   ]   \
-                        SCALE>=1.25     [2      1   2   1   ]   \
-                                        [2      1   2   1   ]   \
-                    os_type==1                                  \
-                        SCALE>=2.5      [6      0   6   0   ]   \
-                        SCALE>=2.25     [4      0   4   0   ]   \
-                        SCALE>=2        [3      0   3   0   ]   \
-                        SCALE>=1.75     [2      0   2   0   ]   \
-                        SCALE>=1.5      [2      0   2   0   ]   \
-                        SCALE>=1.25     [2      0   2   0   ]   \
-                                        [2      0   2   0   ]   \
-                        SCALE>=2.5      [6      1   6   2   ]   \
-                        SCALE>=2.25     [4      1   4   2   ]   \
-                        SCALE>=2        [3      1   3   2   ]   \
-                        SCALE>=1.75     [2      0   2   1   ]   \
-                        SCALE>=1.5      [2      0   2   1   ]   \
-                        SCALE>=1.25     [2      0   2   1   ]   \
-                                        [2      0   2   1   ]
+                set VAL_Margin_RecInput                     \
+                    SCALE>=2.5      [6      1   6   2   ]   \
+                    SCALE>=2.25     [4      1   4   2   ]   \
+                    SCALE>=2        [3      1   3   2   ]   \
+                    SCALE>=1.75     [2      0   2   1   ]   \
+                    SCALE>=1.5      [2      0   2   1   ]   \
+                    SCALE>=1.25     [2      0   2   1   ]   \
+                                    [2      0   2   1   ]
 
                 ; fader size
                 ; [mcp_size mcp_offset tcp_size tcp_offset]
@@ -515,27 +466,8 @@
                     SCALE>=1.25     4   \
                                     1
 
-                ; [MAC OS FIX]
-                ; [LINUX OS FIX]
                 ; font - fx
-                set VAL_Font_Label_Inserts      \
-                    os_type==0                  \
-                        VAL_Font_Label          \
-                        SCALE>=2.5      10      \
-                        SCALE>=2.25     9       \
-                        SCALE>=2        8       \
-                        SCALE>=1.75     6       \
-                        SCALE>=1.5      5       \
-                        SCALE>=1.25     4       \
-                                        1
-
-                ; [MAC OS FIX]
-                ; [LINUX OS FIX]
-                ; larger font on non-Windows OS
-                set VAL_Font_Label          \
-                    os_type!=0              \
-                        + VAL_Font_Label 1
-
+                set VAL_Font_Label_Inserts  VAL_Font_Label                    
 
                 ; font - small
                 set VAL_fxlist_scrollbar            \
@@ -583,7 +515,6 @@
                 set VAL_tcp_fader_min_w             * SCALE 10
                 set VAL_tcp_label_min_w             * SCALE 50
                 set VAL_tcp_label_min_w_infobar     + VAL_tcp_label_min_w + VAL_Pad{0} VAL_InfoBox{0}
-
 
             endmacro
 
@@ -1756,7 +1687,7 @@
                     par_mcp_##PARAMETER_SECTION##_meter_vol_readout{0}==1   \
                         * SCALE 14                                          \
                     par_mcp_##PARAMETER_SECTION##_meter_vol_readout{0}==2   \
-                        * SCALE 34                                          \
+                        * SCALE 38                                          \
                         0
 
                 ; additional element padding
@@ -2374,15 +2305,24 @@
                         VAL_Pad{0}                  \
                         0
 
-            ; height
+            ; remaining height
             set VAL_remaining_h - h + - VAL_mcp_y_offset_max{0} VAL_mcp_y_offset{0} + CUR_y_inserts{0} - VAL_mcp_h{0} VAL_mcp_y_post_label{0}
 
+            ; target heihgt
             set CUR_h                                                                                                                                               \
                 !VAL_mcp_show_inserts{0}                                                                                                                            \
                     0                                                                                                                                               \
                 ?par_mcp_##PARAMETER_SECTION##_insert_size_scale                                                                                                    \
                     + VAL_mcp_inserts_min_h{0} * - VAL_remaining_h{0} VAL_mcp_inserts_min_h{0}  * VAL_Fader_Scale{0}    par_mcp_##PARAMETER_SECTION##_insert_size   \
                     + VAL_mcp_inserts_min_h{0} * SCALE                                          * 0.4                   par_mcp_##PARAMETER_SECTION##_insert_size
+            
+            ; minimal height threshold
+            set VAL_mcp_inserts_min_h + VAL_Button{1} * 6 VAL_Pad{0}
+
+            ; hide when inserts are too small
+            set VAL_mcp_show_inserts                \
+                CUR_h{0}<VAL_mcp_inserts_min_h{0}   \
+                    0
 
             ; width
             set CUR_w                               \
@@ -2436,14 +2376,14 @@
             ; ------------------------------------------------------------------------------------------------------------
 
             ; calculate inner frame offset values
-            set CUR_x_inserts_inner     + CUR_x{0} VAL_Border_2{0}
-            set CUR_y_inserts_inner CUR_y_inserts{0}
-            set CUR_w_inserts_inner     - CUR_w{0} VAl_Border_2{0}
+            set CUR_x_inserts_inner     + CUR_x{0}              VAL_Border_2{0}
+            set CUR_y_inserts_inner     + CUR_y_inserts{0}      VAL_Border{0}
+            set CUR_w_inserts_inner     - CUR_w{0}              VAl_Border_2{0}
             
-            set CUR_h_inserts_inner         \
-                !VAL_mcp_use_sidebar{0}     \
-                    CUR_h{0}                \
-                    VAL_remaining_h{0}    
+            set CUR_h_inserts_inner                             \
+                !VAL_mcp_use_sidebar{0}                         \
+                    - CUR_h{0}              VAL_Border_2{0}     \
+                    - VAL_remaining_h{0}    VAL_Border_2{0}
 
             ; [DRAW] inserts border
             set WALTER_ELEMENT##.custom.inserts_bg                                  \
@@ -4992,6 +4932,7 @@
 
                 macro MAC_DrawTcp_Meter SCALE WALTER_ELEMENT PARAMETER_SECTION
 
+                    
                     ; meter visibility
                     set VAL_tcp_show_meter                                      \
                         ?par_tcp_##PARAMETER_SECTION##_meter_mode               \
@@ -5001,6 +4942,17 @@
                                     1                                           \
                                     0                                           \
                                 0
+
+                    ; ultra compact meter full width extension
+                    set extend_meter_ultracompact                       \
+                        ?VAL_tcp_show_meter{0}                          \
+                            !VAL_tcp_h_level{0}                         \
+                                ?par_tcp_track_meter_collapsed_full_w   \
+                                    1                                   \
+                                    0                                   \
+                                0                                       \
+                            0
+                        
 
                     ; y position
                     set CUR_y                       \
@@ -5038,13 +4990,13 @@
                     ; overshoot correction
                     set VAL_tcp_meter_w_overshoot - VAL_tcp_meter_overshoot_line{0} CUR_x{0}
 
-                    set CUR_x                                       \
-                        VAL_tcp_meter_w_overshoot{0}>0              \
+                    set CUR_x                                           \
+                        VAL_tcp_meter_w_overshoot{0}>0                  \
                             + CUR_x{0} VAL_tcp_meter_w_overshoot{0}
 
                     ; width
-                    set CUR_w                                       \
-                        VAL_tcp_meter_w_overshoot{0}>0              \
+                    set CUR_w                                           \
+                        VAL_tcp_meter_w_overshoot{0}>0                  \
                             - CUR_w{0} VAL_tcp_meter_w_overshoot{0}
 
                     ; hiding logic
@@ -5057,9 +5009,9 @@
                             0
 
                     ; meter x position
-                    set CUR_x_meter                             \
-                        ?VAL_tcp_show_vol_readout{0}            \
-                            + CUR_x{0} VAL_tcp_vol_readout_w{0} \
+                    set CUR_x_meter                                 \
+                        ?VAL_tcp_show_vol_readout{0}                \
+                            + CUR_x{0} VAL_tcp_vol_readout_w{0}     \
                             CUR_x{0}
 
                     ; button offset
@@ -5067,16 +5019,35 @@
                         ?VAL_tcp_show_meter{0}      \
                             CUR_x{0}
 
-                    ; [DRAW] Meter
+                    
+                    ; ultracompact full meter x position
+                    set CUR_x_meter_ultracompact                                    \
+                        ?extend_meter_ultracompact{0}                               \
+                            + VAL_Border{0} + VAL_tcp_x_offset_max{0} * SCALE 20    \
+                            0
+                    
+                    ; ultracompact full meter width
+                    set CUR_w_meter_ultracompact                                                \
+                        ?extend_meter_ultracompact{0}                                           \
+                            - + CUR_x{0} CUR_w{0} + CUR_x_meter_ultracompact{0} VAL_Border{0}   \
+                            0
+
+                    ; internal meter coordinates to compensate for artificial border
                     set CUR_meter + [CUR_x_meter{0} CUR_y{0} CUR_w{0} CUR_h{0}] [VAL_Border{0} 0 VAL_Border_Neg_2{0} VAL_Border_Neg{0}]
 
-                    set WALTER_ELEMENT##.custom.meter_frame                                                 \
-                        ?VAL_tcp_show_meter{0}                                                              \
-                            [CUR_x_meter{0}     CUR_y{0}        CUR_w{0}        CUR_h{0}        1 0 1 1]
+                    ; [DRAW] Meter Frame
+                    set WALTER_ELEMENT##.custom.meter_frame                                                                                                                         \
+                        ?VAL_tcp_show_meter{0}                                                                                                                                      \
+                            ?extend_meter_ultracompact{0}                                                                                                                           \
+                                + [CUR_x_meter_ultracompact{0}       CUR_meter{1}    CUR_w_meter_ultracompact{0}    CUR_meter{3}    0 0 1 1] [VAL_Border_Neg{0} 0 0 0 0 0 0 0]      \
+                                [CUR_x_meter{0}     CUR_y{0}        CUR_w{0}        CUR_h{0}        1 0 1 1]
 
-                    set WALTER_ELEMENT##.meter                                                              \
-                        ?VAL_tcp_show_meter{0}                                                              \
-                            [CUR_meter{0}       CUR_meter{1}    CUR_meter{2}    CUR_meter{3}    1 0 1 1]
+                    ; [DRAW] Meter
+                    set WALTER_ELEMENT##.meter                                                                                                  \
+                        ?VAL_tcp_show_meter{0}                                                                                                  \
+                            ?extend_meter_ultracompact{0}                                                                                       \
+                                [CUR_x_meter_ultracompact{0}       CUR_meter{1}    CUR_w_meter_ultracompact{0}    CUR_meter{3}    0 0 1 1]      \
+                                [CUR_meter{0}       CUR_meter{1}    CUR_meter{2}    CUR_meter{3}    1 0 1 1]
 
                     ; readout y position
                     set CUR_y_readout * 0.5 - h + VAL_TCP_Label{0} VAL_Pad{0}
@@ -5085,16 +5056,14 @@
                     set WALTER_ELEMENT##.volume.label                                                                           \
                         ?VAL_tcp_h_level{0}                                                                                     \
                             ?VAL_tcp_show_vol_readout{0}                                                                        \
-                                [CUR_X{0}       CUR_y_readout{0}    VAL_tcp_vol_readout_w{0}    VAL_TCP_Label{0}    1 0 1 0]
+                                [CUR_x{0}       CUR_y_readout{0}    VAL_tcp_vol_readout_w{0}    VAL_TCP_Label{0}    1 0 1 0]
 
                     set WALTER_ELEMENT##.custom.readout_bg                                                                      \
                         ?VAL_tcp_h_level{0}                                                                                     \
                             ?VAL_tcp_show_vol_readout{0}                                                                        \
-                                [CUR_X{0}       CUR_y{0}            VAL_tcp_vol_readout_w{0}    CUR_h{0}            1 0 1 1]
+                                [CUR_x{0}       CUR_y{0}            VAL_tcp_vol_readout_w{0}    CUR_h{0}            1 0 1 1]
 
                     front WALTER_ELEMENT##.custom.readout_bg
-
-
 
                     ; shift insert rightmost position
                     set VAL_tcp_x_end_inserts       \
@@ -5102,17 +5071,18 @@
                             CUR_x{0}
 
                     ; meter text
-                    set WALTER_ELEMENT##.meter.scale.color.lit.top          ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_lit_top
-                    set WALTER_ELEMENT##.meter.scale.color.lit.bottom       ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_lit_bottom
-                    set WALTER_ELEMENT##.meter.scale.color.unlit.top        ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_unlit_top
-                    set WALTER_ELEMENT##.meter.scale.color.unlit.bottom     ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_unlit_bottom
-                    set WALTER_ELEMENT##.meter.readout.color                ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_readout VAL_meter_tcp_readout
+                    set WALTER_ELEMENT##.meter.scale.color.lit.top          ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_lit_top           0   0
+                    set WALTER_ELEMENT##.meter.scale.color.lit.bottom       ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_lit_bottom        0   0
+                    set WALTER_ELEMENT##.meter.scale.color.unlit.top        ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_unlit_top         0   0
+                    set WALTER_ELEMENT##.meter.scale.color.unlit.bottom     ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_db      VAL_meter_tcp_unlit_bottom      0   0
+                    set WALTER_ELEMENT##.meter.readout.color                ?VAL_tcp_h_level{0} ?par_tcp_##PARAMETER_SECTION##_meter_vu_readout VAL_meter_tcp_readout           0   0
 
                     ; z order
                     front WALTER_ELEMENT##.custom.meter_frame
                     front WALTER_ELEMENT##.meter
                     front WALTER_ELEMENT##.volume.label
 
+                    
                 endmacro
 
         ;   ### Draw : TCP : Meter : Format : Track
@@ -5128,7 +5098,10 @@
                 set CUR_gain_wid    + 1 * SCALE * 0.05 par_tcp_##PARAMETER_SECTION##_meter_gainwid
                 
                 ; set dimensions
-                set WALTER_ELEMENT##.meter.vu.div [CUR_chan_div{0} 0 CUR_gain_div{0} CUR_gain_wid{0}]
+                set WALTER_ELEMENT##.meter.vu.div                               \
+                    ?VAL_tcp_h_level{0}                                         \
+                        [CUR_chan_div{0} 0 CUR_gain_div{0} CUR_gain_wid{0}]     \
+                        [-1 -1 -1 -1]
 
             endmacro
 
@@ -5157,22 +5130,37 @@
         macro MAC_DrawTcp_Inserts SCALE WALTER_ELEMENT PARAMETER_SECTION
 
             ; artificial inserts padding
-            set VAL_tcp_inserts_padding * [VAL_Pad{0} 0 VAL_Pad{0} 0 0 0 0] [1 1 -2 1 1 1 1 1]
+            set VAL_tcp_inserts_padding * [VAL_Pad{0} VAL_Border{0} VAL_Pad{0} VAL_Border{0} 0 0 0 0] [1 1 -2 -1 0 0 0 0]
 
-            ; detect split sends mode (requires user paramter and internal Reaper setting)
+            ; detect split sends mode
             set VAL_tcp_inserts_split_sends     \
                 ?par_tcp_gen_insert_split       \
                     ?tcp_sends_enabled          \
                         1                       \
-                    0                           \
-                0
-
-            ; caclulate split sends crossover point
-            set VAL_tcp_inserts_split_crossover                                     \
-                ?VAL_tcp_inserts_split_sends{0}                                     \
-                    * par_tcp_gen_insert_split_send_crossover VAL_Fader_Scale{0}    \
+                        0                       \
+                    0
+            
+            ; detect split fx mode
+            set VAL_tcp_inserts_split_fx        \
+                ?par_tcp_gen_insert_split_fx    \
+                    ?tcp_fxlist_enabled         \
+                        1                       \
+                        0                       \
+                    0
+            
+            ; calculate split sends crossover point
+            set VAL_tcp_inserts_split_send_crossover                                    \
+                ?VAL_tcp_inserts_split_sends{0}                                         \
+                    * par_tcp_gen_insert_split_send_crossover   VAL_Fader_Scale{0}      \
+                    0
+            
+            ; calculate split parameter fx point
+            set VAL_tcp_inserts_split_fx_crossover                                      \
+                ?VAL_tcp_inserts_split_fx{0}                                            \
+                    * par_tcp_gen_insert_split_fx_crossover     VAL_Fader_Scale{0}      \
                     0
                 
+            
             ; visibility detection
             set VAL_tcp_show_inserts                                \
                 ?VAL_tcp_compact{0}                                 \
@@ -5208,16 +5196,18 @@
                     + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10                                 * 0.3                   par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
                     + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - VAL_remaining_w{0} VAL_insert_slot{4}    * VAL_Fader_Scale{0}    par_tcp_##PARAMETER_SECTION##_insert_size         VAL_rounding_constant{0}     \
 
-            ; double the width on split sends mode
-            set CUR_w                               \
-                ?VAL_tcp_inserts_split_sends{0}     \
-                    * CUR_w 2
-
+            
+            ; calculate width based on amount of splits (every split increases the size)
+            set CUR_w                                                                               \
+                ?VAL_tcp_inserts_inline{0}                                                          \
+                    + CUR_w * CUR_w + VAL_tcp_inserts_split_fx{0} VAL_tcp_inserts_split_sends{0}
+                
             ; x position
             set CUR_x                                                                       \
                 ?VAL_tcp_inserts_inline{0}                                                  \
                     - VAL_tcp_x_start_button{0} - CUR_w{0} VAL_Border{0}
- 
+
+
             ; overshoot correction
             set VAL_tcp_inserts_w_overshoot - VAL_tcp_meter_overshoot_line{0} CUR_x{0}
 
@@ -5230,36 +5220,63 @@
                     - CUR_w{0} VAL_tcp_inserts_w_overshoot{0}
 
 
-            ; split sends: fx block width
-            set CUR_w_insert_half_fx                                        \
-                ?VAL_tcp_inserts_split_sends{0}                             \
-                    * CUR_w         VAL_tcp_inserts_split_crossover{0}      \
-                    0
-            
-            ; split sends: sends block width
-            set CUR_w_insert_half_sends                                     \
-                ?VAL_tcp_inserts_split_sends{0}                             \
-                    * CUR_w     - 1 VAL_tcp_inserts_split_crossover{0}      \
+            ; width of the split sends block
+            set CUR_w_block_sends                                               \
+                ?VAL_tcp_inserts_inline{0}                                      \
+                    ?VAL_tcp_inserts_split_sends{0}                             \
+                        * VAL_tcp_inserts_split_send_crossover{0} CUR_w{0}      \
+                        0                                                       \
                     0
 
-            ; split sends: send list x offset
-            set CUR_x_sends + CUR_x CUR_w_insert_half_fx
+            ; width of the parameter block
+            set CUR_w_block_parameter                                                               \
+                ?VAL_tcp_inserts_inline{0}                                                          \
+                    ?VAL_tcp_inserts_split_fx{0}                                                    \
+                        * VAL_tcp_inserts_split_fx_crossover{0} - CUR_w{0} CUR_w_block_sends{0}     \
+                        - CUR_w{0} CUR_w_block_sends{0}                                             \
+                    0
             
+            ; width of the fx block
+            set CUR_w_block_fx                                                          \
+                ?VAL_tcp_inserts_inline{0}                                              \
+                    ?VAL_tcp_inserts_split_fx{0}                                        \
+                        - CUR_w{0} + CUR_w_block_sends{0} CUR_w_block_parameter{0}      \
+                        CUR_w{0}                                                        \
+                    0
 
-            ; [DRAW] inserts (fx + parameters)
-            set WALTER_ELEMENT##.fxparm                                                                                     \
-                ?VAL_tcp_inserts_inline{0}                                                                                  \
-                    ?VAL_tcp_inserts_split_sends{0}                                                                         \
-                        + [CUR_x{0} CUR_y{0} CUR_w_insert_half_fx{0}            CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding   \
-                        + [CUR_x{0} CUR_y{0} CUR_w{0}                           CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding
+            ; x position of the parameter block
+            set CUR_x_block_parameter                       \
+                ?VAL_tcp_inserts_inline{0}                  \
+                    ?VAL_tcp_inserts_split_fx{0}            \
+                        + CUR_x{0} CUR_w_block_fx{0}        \
+                        CUR_x{0}                            \
+                    0
 
-            ; [DRAW] sends
-            set WALTER_ELEMENT##.sendlist                                                                                   \
-                ?VAL_tcp_inserts_inline{0}                                                                                  \
-                    ?VAL_tcp_inserts_split_sends{0}                                                                         \
-                        + [CUR_x_sends{0} CUR_y{0} CUR_w_insert_half_sends{0}   CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding   \
-                        0
+            ; x position of the sends block
+            set CUR_x_block_sends                                               \
+                ?VAL_tcp_inserts_inline{0}                                      \
+                    ?VAL_tcp_inserts_split_sends{0}                             \
+                        + CUR_x_block_parameter{0} CUR_w_block_parameter{0}     \
+                        0                                                       \
+                    0
 
+            ; [DRAW] inserts fx
+            set WALTER_ELEMENT##.fxlist                                                                                         \
+                ?VAL_tcp_inserts_inline{0}                                                                                      \
+                    ?VAL_tcp_inserts_split_fx{0}                                                                                \
+                    + [CUR_x{0}                 CUR_y{0} CUR_w_block_fx{0}          CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding
+            
+            ; [DRAW] inserts parameters
+            set WALTER_ELEMENT##.fxparm                                                                                         \
+                ?VAL_tcp_inserts_inline{0}                                                                                      \
+                    + [CUR_x_block_parameter{0} CUR_y{0} CUR_w_block_parameter{0}   CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding
+
+            ; [DRAW] inserts sends
+            set WALTER_ELEMENT##.sendlist                                                                                       \
+                ?VAL_tcp_inserts_inline{0}                                                                                      \
+                    ?VAL_tcp_inserts_split_sends{0}                                                                             \
+                        + [CUR_x_block_sends{0} CUR_y{0} CUR_w_block_sends{0}       CUR_h{0} 1 0 1 1] VAL_tcp_inserts_padding
+                    
             ; [DRAW] inserts bg - track unselected
             set WALTER_ELEMENT##.custom.inserts_bg                      \
                 ?VAL_tcp_inserts_inline{0}                              \
@@ -5282,9 +5299,7 @@
             set VAL_tcp_x_end_inserts       \
                 ?VAL_tcp_inserts_inline{0}  \
                     CUR_w{0}>0              \
-                        CUR_x{0}                
-
-            
+                        CUR_x{0}
 
         endmacro
 
@@ -5906,6 +5921,10 @@
             set CUR_h           - WALTER_ELEMENT##.size{1} + VAL_tcp_y_start_fxembed{0} VAL_Pad{0}
             set CUR_h_insert    - CUR_h * SCALE 6
             
+            
+            ; embed section minimal height
+            set VAL_tcp_embed_min_h + CUR_y{0} + VAL_Button{1} * 6 VAL_Pad{0}
+
             ; calculate absolute hiding position
             set VAL_tcp_insert_hide_pos                             \
                     -                                               \
@@ -5916,6 +5935,8 @@
             
             ; hide embed when height is under certain threshold
             set VAL_tcp_hide_embed_section      \
+                h<VAL_tcp_embed_min_h{0}        \
+                    1                           \
                 ?VAL_tcp_compact{0}             \
                     1                           \
                 VAL_tcp_insert_hide_pos{0}>0    \
@@ -5940,10 +5961,10 @@
                         + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * SCALE + 10 * 0.3 par_tcp_##PARAMETER_SECTION##_insert_size                                        VAL_rounding_constant{0}    \
                         + VAL_rounding_constant{0} - + VAL_tcp_inserts_min_w{0} * - CUR_w{0} VAL_insert_slot{4} * VAL_Fader_Scale{0} par_tcp_##PARAMETER_SECTION##_insert_size      VAL_rounding_constant{0}
 
-            ; double the width on split sends
-            set CUR_w_insert                        \
-                ?VAL_tcp_inserts_split_sends{0}     \
-                    * CUR_w_insert 2
+            ; calculate width based on amount of splits (every split increases the size)
+            set CUR_w_insert                                                                                            \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                                                  \
+                    + CUR_w_insert{0} * CUR_w_insert{0} + VAL_tcp_inserts_split_fx{0} VAL_tcp_inserts_split_sends{0}
             
             ; limit insert size
             set CUR_w_insert                \
@@ -5955,33 +5976,65 @@
                     + CUR_x{0} - CUR_w{0} CUR_w_insert{0}   \
                     0
             
-            ; split sends: fx block width
-            set CUR_w_insert_half_fx                                            \
-                ?VAL_tcp_inserts_split_sends{0}                                 \
-                    * CUR_w_insert      VAL_tcp_inserts_split_crossover{0}
+            
+            ; width of the split sends block
+            set CUR_w_block_sends                                                       \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                  \
+                    ?VAL_tcp_inserts_split_sends{0}                                     \
+                        * VAL_tcp_inserts_split_send_crossover{0} CUR_w_insert{0}       \
+                        0                                                               \
+                    0
 
-            ; split sends: sends block width
-            set CUR_w_insert_half_sends                                         \
-                ?VAL_tcp_inserts_split_sends{0}                                 \
-                    * CUR_w_insert  - 1 VAL_tcp_inserts_split_crossover{0}      \
+            ; width of the parameter block
+            set CUR_w_block_parameter                                                                       \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                                      \
+                    ?VAL_tcp_inserts_split_fx{0}                                                            \
+                        * VAL_tcp_inserts_split_fx_crossover{0} - CUR_w_insert{0} CUR_w_block_sends{0}      \
+                        - CUR_w_insert{0} CUR_w_block_sends{0}                                              \
                     0
             
-            ; split sends: send list x offset
-            set CUR_x_sends + CUR_x_insert CUR_w_insert_half_fx
+            ; width of the fx block
+            set CUR_w_block_fx                                                              \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                      \
+                    ?VAL_tcp_inserts_split_fx{0}                                            \
+                        - CUR_w_insert{0} + CUR_w_block_sends{0} CUR_w_block_parameter{0}   \
+                        CUR_w_insert{0}                                                     \
+                    0
 
-            ; [DRAW] inserts (fx + parameters)
+
+            ; x position of the parameter block
+            set CUR_x_block_parameter                           \
+                ?VAL_tcp_show_inserts_in_embed_area{0}          \
+                    ?VAL_tcp_inserts_split_fx{0}                \
+                        + CUR_x_insert{0} CUR_w_block_fx{0}     \
+                        CUR_x_insert{0}                         \
+                    0
+
+            ; x position of the sends block
+            set CUR_x_block_sends                                               \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                          \
+                    ?VAL_tcp_inserts_split_sends{0}                             \
+                        + CUR_x_block_parameter{0} CUR_w_block_parameter{0}     \
+                        0                                                       \
+                    0
+
+            ; [DRAW] inserts fx
+            set WALTER_ELEMENT##.fxlist                                                                                     \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                                                      \
+                    ?VAL_tcp_inserts_split_fx{0}                                                                            \
+                    + [CUR_x_insert{0} CUR_y{0} CUR_w_block_fx{0} CUR_h_insert{0} 0 0 0 1] VAL_tcp_inserts_padding
+            
+            ; [DRAW] inserts parameters
             set WALTER_ELEMENT##.fxparm                                                                                             \
                 ?VAL_tcp_show_inserts_in_embed_area{0}                                                                              \
-                    ?VAL_tcp_inserts_split_sends{0}                                                                                 \
-                    + [CUR_x_insert{0} CUR_y{0} CUR_w_insert_half_fx{0}     CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding     \
-                    + [CUR_x_insert{0} CUR_y{0} CUR_w_insert{0}             CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding
+                    + [CUR_x_block_parameter{0} CUR_y{0} CUR_w_block_parameter{0} CUR_h_insert{0} 0 0 0 1] VAL_tcp_inserts_padding
 
-            ; [DRAW] sends
-            set WALTER_ELEMENT##.sendlist                                                                                           \
-                ?VAL_tcp_show_inserts_in_embed_area{0}                                                                              \
-                    ?VAL_tcp_inserts_split_sends{0}                                                                                 \
-                    + [CUR_x_sends{0} CUR_y{0} CUR_w_insert_half_sends{0}   CUR_h_insert{0} 0 0 0 1]    VAL_tcp_inserts_padding
-                    
+            ; [DRAW] inserts sends
+            set WALTER_ELEMENT##.sendlist                                                                                       \
+                ?VAL_tcp_show_inserts_in_embed_area{0}                                                                          \
+                    ?VAL_tcp_inserts_split_sends{0}                                                                             \
+                        + [CUR_x_block_sends{0} CUR_y{0} CUR_w_block_sends{0} CUR_h_insert{0} 0 0 0 1] VAL_tcp_inserts_padding
+
 
             ; [DRAW] inserts bg - track unselected
             set WALTER_ELEMENT##.custom.inserts_bg                                          \
@@ -6013,16 +6066,27 @@
 
             ; inserts z order
             front WALTER_ELEMENT##.custom.inserts_bg
-            front WALTER_ELEMENT##.custom.inserts_bg_select            
+            front WALTER_ELEMENT##.custom.inserts_bg_select
             front WALTER_ELEMENT##.fxparm
+            front WALTER_ELEMENT##.fxlist
             front WALTER_ELEMENT##.sendlist
             
-            ; visbility flags for inserts (parameters, fx, sends)
-            ; -> overwrite internal TCP sendlist setttings when split sends mode is activated
-            set WALTER_ELEMENT##.fxparm.visflags    \
+            
+            ; sends visiblity flag
+            set VAL_tcp_inserts_visflag_sends       \
                 ?VAL_tcp_inserts_split_sends{0}     \
-                    [1 0 -1]                        \
-                    [1 0 0]
+                    -1                              \
+                    0
+
+            ; fx visibility flag
+            set VAL_tcp_inserts_visflag_fx          \
+                ?VAL_tcp_inserts_split_fx{0}        \
+                    -1                              \
+                    0
+
+            ; inserts visibility flags
+            set WALTER_ELEMENT##.fxparm.visflags        [0 VAL_tcp_inserts_visflag_fx{0} VAL_tcp_inserts_visflag_sends{0}]
+                
             
             
 
@@ -6139,32 +6203,37 @@
             macro MAC_DrawTcp_Font_SharedCode_Open SCALE WALTER_ELEMENT PARAMETER_SECTION
                 
                 ; insert slot width pre-calculation
-                set VAL_tcp_slot_w_fx          + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
+                set VAL_tcp_slot_w_par         + 0.15 * 0.000375 par_tcp_gen_insert_slot_width
+                set VAL_tcp_slot_w_fx          + 0.15 * 0.000375 par_tcp_gen_insert_slot_width_fx
                 set VAL_tcp_slot_w_sends       + 0.15 * 0.000375 par_tcp_gen_insert_slot_width_sends
 
+                ; par slot width
+                set VAL_tcp_slot_w_min_par      * WALTER_ELEMENT##.fxparm{w} VAL_tcp_slot_w_par{0}
+                set VAL_tcp_slot_w_max_par      + WALTER_ELEMENT##.fxparm{w} 1
+                
                 ; fx slot width
-                set VAL_tcp_slot_w_min          * WALTER_ELEMENT##.fxparm{w} VAL_tcp_slot_w_fx{0}
-                set VAL_tcp_slot_w_max          + WALTER_ELEMENT##.fxparm{w} 1
+                set VAL_tcp_slot_w_min_fx       * WALTER_ELEMENT##.fxlist{w} VAL_tcp_slot_w_fx{0}
+                set VAL_tcp_slot_w_max_fx       + WALTER_ELEMENT##.fxlist{w} 1
 
-                ;; send slot width
+                ; send slot width
                 set VAL_tcp_slot_w_min_send     * WALTER_ELEMENT##.sendlist{w} VAL_tcp_slot_w_sends{0}
                 set VAL_tcp_slot_w_max_send     + WALTER_ELEMENT##.sendlist{w} 1
                 
                 ; inserts
-                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min{0}           VAL_tcp_slot_w_max{0}       0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.sendlist.font      [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min_send{0}      VAL_tcp_slot_w_max_send{0}  0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
-                set WALTER_ELEMENT##.fxlist.font        WALTER_ELEMENT##.fxparm.font
+                set WALTER_ELEMENT##.fxparm.font        [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min_par{0}       VAL_tcp_slot_w_max_par{0}       0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.sendlist.font      [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min_send{0}      VAL_tcp_slot_w_max_send{0}      0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
+                set WALTER_ELEMENT##.fxlist.font        [VAL_Font_Label_Inserts     VAL_insert_slot{0}      VAL_tcp_slot_w_min_fx{0}        VAL_tcp_slot_w_max_fx{0}        0 0 VAL_fxlist_scrollbar{1} VAL_fxlist_scrollbar{0}]
                 
                 set WALTER_ELEMENT##.fxparm.margin      [VAL_Margin_Label{0}        VAL_Margin_Label{1}     VAL_Margin_Label{2}     VAL_Margin_Label{3} 0 0 0 VAL_Pad{0}]
                 set WALTER_ELEMENT##.sendlist.margin    [VAL_Margin_Label{0}        VAL_Margin_Label{1}     0                       VAL_Margin_Label{3} 0 0 0 VAL_Pad{0}]
-                set WALTER_ELEMENT##.fxlist.margin      WALTER_ELEMENT##.fxparm.margin
+                set WALTER_ELEMENT##.fxlist.margin      [VAL_Margin_Label{0}        VAL_Margin_Label{1}     VAL_Margin_Label{2}     VAL_Margin_Label{3} 0 0 0 VAL_Pad{0}]
 
                 ; volume readout
                 set WALTER_ELEMENT##.volume.label.color     [THEME_color_readout_font{0} THEME_color_readout_font{1} THEME_color_readout_font{2}]
                 set WALTER_ELEMENT##.volume.label.margin    [VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} VAL_Margin_Label{1} 0.5]
 
                 ; fx embed
-                set WWALTER_ELEMENT##.fxembedheader.color WALTER_ELEMENT##.volume.label.color
+                set WALTER_ELEMENT##.fxembedheader.color WALTER_ELEMENT##.volume.label.color
 
             endmacro
 
@@ -6862,15 +6931,13 @@
         envcp_min_height 19
 
         ; volume readout label
-        tcp_voltext_flags 9
-        tcp_master_voltext_flags 9
-        mcp_voltext_flags 3
-        mcp_master_voltext_flags 9
+        tcp_voltext_flags 5 5
+        tcp_master_voltext_flags 5 5
+        mcp_voltext_flags 5 5
+        mcp_master_voltext_flags 5 5
 
         ; deprecated
         mcp_altmeterpos 0
-
-
 
     ;LAYOUT_BLOCK
     ;   ## DPI translation
