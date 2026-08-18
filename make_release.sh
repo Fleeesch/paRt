@@ -122,7 +122,13 @@ fi
 # theme recreation
 if [ "$recreate_themes" = true ]; then
     cd "./src"
-    source make_themes.sh
+    # -r forces the theme script to skip the spritemaker's dev-folder asset copy,
+    # since that's only useful for active development, not for building a release
+    if [ "$unattended" = true ]; then
+        source make_themes.sh -u -r
+    else
+        source make_themes.sh -r
+    fi
     cd "$ORG_DIR"
 fi
 
@@ -213,10 +219,9 @@ if [ "$local_release" = true ]; then
 
     print_process_start "Copying ReaScript Files"
 
-    rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
+    rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude="conf/remote_version" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
     rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"    
-    rsync -aq --mkpath "$ORG_DIR/src/scripts/launcher/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Cockos/"
-    rsync -aq --mkpath "$ORG_DIR/src/scripts/launcher/" "./$release_folder/$version/reapack/paRt/launcher"
+    
     
     #   Version File
     # ------------------------------

@@ -22,7 +22,6 @@
   [script]paRt/lib/**/*
   [script main]paRt/*.lua
   [data]paRt/splash/*
-  launcher/paRt - Theme Adjuster.lua > Scripts/Cockos/paRt - Theme Adjuster.lua
 @about
   # paRt - plain adapting Reaper theme
   
