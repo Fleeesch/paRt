@@ -12,7 +12,9 @@
         ],
 		"git.ignoreLimitWarning": true,
 		"terminal.integrated.cwd": "${workspaceFolder}",
-		"Lua.workspace.preloadFileSize": 1024,
-		"lua_analyzer.codeLinting.enable": false
+		"Lua.workspace.maxPreload": 100,
+        "Lua.workspace.preloadFileSize": 1024,
+        "lua_analyzer.codeLinting.enable": false,
+        "stylua.targetReleaseVersion": "latest",
 	}
 }
