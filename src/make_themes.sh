@@ -108,10 +108,16 @@ print_header_line "==============================="
 
 # check for unattended mode
 unattended=false
-while getopts "u" opt; do
+# release_mode is set by the release-building script; it forces asset rebuilding
+# and makes sure the spritemaker skips copying assets to the dev working folder
+release_mode=false
+while getopts "ur" opt; do
     case $opt in
     u)
         unattended=true
+        ;;
+    r)
+        release_mode=true
         ;;
     *) ;;
     esac
@@ -120,8 +126,8 @@ done
 #   User Prompts
 # --------------------------------------------
 
-# ask for build folder clearing
-rebuild_assets=false
+# release builds always rebuild assets so the bypass-copy mechanism below kicks in
+rebuild_assets=$release_mode
 clear_build_folder=true
 copy_reaperthemefiles=false
 copy_reaperthemezip=true
@@ -133,14 +139,18 @@ if [ "$unattended" = false ]; then
     echo ""
 
     # rebuild assets
-    print_prompt_line "Rebuild all assets?"
-    read -n 1 choice
-    echo ""
+    if [ "$release_mode" = true ]; then
+        rebuild_assets=true
+    else
+        print_prompt_line "Rebuild all assets?"
+        read -n 1 choice
+        echo ""
 
-    case "$choice" in
-    y | Y) rebuild_assets=true ;;
-    *) rebuild_assets=false ;;
-    esac
+        case "$choice" in
+        y | Y) rebuild_assets=true ;;
+        *) rebuild_assets=false ;;
+        esac
+    fi
 
     if [ "$rebuild_assets" == false ]; then
         # clear build folder
