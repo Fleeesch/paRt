@@ -284,9 +284,6 @@ end
 --  Main Process
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
--- setup knob graphics
--- Part.Draw.Sprites.createAssets()
-
 -- create window
 Part.Gui.Window.initWindow()
 

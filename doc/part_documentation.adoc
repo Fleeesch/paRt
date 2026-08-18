@@ -3,7 +3,7 @@
 :toclevels: 4
 :numbered:
 :author: Fleeesch
-:revnumber: 1.2.9
+:revnumber: 1.3.2
 
 = paRt User Guide
 
@@ -13,21 +13,33 @@ toc::[]
 
 == Introduction
 
-paRt is a custom Reaper theme built from the ground up, including its own custom Theme Adjuster. It focusses heavily on functionality and is meant to be compatible with a wide range of display formats.
+paRt is a custom Reaper theme built from the ground up.
+It comes with a custom made Theme Adjuster Script that gives users access to extensive customization.
+
+The focus of the theme lies heavily on functionality and is meant to be compatible with a wide range of display formats.
 
 == Installation
 
 === Installation via ReaPack
 
-Import the repository into your ReaPack instance using the following link in ReaPack's repository manager:
+[NOTE]
+Reapack is recommended over a manual installation if you want to receive automated regular updates.
 
-`https://raw.githubusercontent.com/Fleeesch/ReaPack-Fleeesch/master/index.xml`
+ReaPack can be downloaded from its offical website:
+https://reapack.com
 
-Search for "paRt" in ReaPack and install it.
+Once installed, ReaPack can be accessed from Reaper's top menu bar under `Extensions > ReaPack`.
 
-image::themeadj_reapack_00.png[Reapack Installation]
-image::themeadj_reapack_01.png[Reapack Installation]
-image::themeadj_reapack_02.png[Reapack Installation]
+1. open `Extensions > ReaPack > Import repositories...`
+2. paste the following line into the textbox:
+- `https://raw.githubusercontent.com/Fleeesch/ReaPack-Fleeesch/master/index.xml`
+3. click `OK`
+4. open `Extensions > ReaPack > Browse packages...`
+5. search for "part"
+6. right-click the "paRt" entry and select the `Ìnstall...` option (this will mark the package for installation)
+7. press `OK` in the ReaPack interface
+
+This will trigger the installation of the paRt Theme and register it as installed from there on. You can now trigger update installations using `Extensions > ReaPack > Synchtonize packages` whenever there's a new version available.
 
 <<<
 
@@ -36,20 +48,10 @@ image::themeadj_reapack_02.png[Reapack Installation]
 1. Download `part_manual_install.zip` from the https://github.com/Fleeesch/paRt/releases[paRt releases page]
 2. extract the archive your REAPER resource folder
 3. Import the **.lua** scripts from `Scripts/Fleeesch/Themes/paRt` into the REAPER Action List 
-+
-image::themeadj_manual_install_00.png[Manual Installtion: Action List]
-+
+- `Actions > Show action list...`
 4. Click the `New action` button and choose `Load ReaScript...` to import the LUA files
-+
-image::themeadj_manual_install_01.png[Manual Installtion: Add Scripts]
-+
 5. Navigate to the scripts inside your Reaper resource folder and import all the files at once
-+
-image::themeadj_manual_install_02.png[Manual Installtion: Select Script Files]
-+
 6. Verify that the scripts were successfully loaded by typing "part" into the filter box
-+
-image::themeadj_manual_install_03.png[Manual Installtion: Validate Scripts]
 
 [WARNING]
 You must keep the folder structure of the scripts intact. Changing it will likely break the Theme Adjuster.
@@ -57,15 +59,12 @@ You must keep the folder structure of the scripts intact. Changing it will likel
 <<<
 
 == Theme Adjuster
-
 === Launching the Theme Adjuster
 
 The Theme Adjuster is launched by triggering a LUA script:
 
-- use the shortcut button in the transport section
+- use the shortcut button on the right side of the transport section that comes with a standard paRt installation
 - manually run the `paRt - Theme Adjuster.lua` script from the Action List
-
-image::themeadj_open.png[Opening the Theme Adjuster]
 
 === Launching Conditions
 
@@ -74,17 +73,44 @@ There are a scenarios where the Theme Adjuster will refuse to work:
 - when no valid paRt theme is active
 - when your paRt theme version is lower than the version of the Theme Adjuster
 
-It’s recommended to use the Theme Adjuster’s built-in controls to switch between paRt themes, but it also detects theme changes in real time when you switch themes through Reaper’s internal theme selector.
+It’s recommended to use the Theme Adjuster’s built-in controls to switch between paRt themes. Theme file changes are only detected when there's an active Theme Adjuster.
+
+=== Setting up the paRt Theme Adjuster to be the default Theme Adjuster
+
+[NOTE]
+This is a process that currently has to be done manually because of ReaPack installation conditions.
+
+From the Reaper top menu, you can select +
+`Options > Themes > Theme Adjuster / Color Controls` +
+in order to open the default Theme Adjuster.
+
+This will show a fallback menu by default when using the paRt Theme. However, you can manually set up Reaper to use the paRt Theme Adjuster:
+
+1. go to your Reaper resource Path
+- you can open the path via `Options > Show REAPER resource path in explorer/finder`
+2. go to `Scripts > Fleeesch > themes > paRt > launcher`
+3. copy the `Launch paRt Theme Adjuster.lua` file into the `Scripts` folder
+
+Triggering `Theme Adjuster / Color Controls` should now open the paRt Theme Adjuster.
 
 <<<
 
 === Overview
 
-image::themeadj_gui.png[Theme Adjuster Overview]
+The interface scales according to the DPI value provided by your operating system. You can resize the window to your liking, the controls will automatically be centered. Be aware that there is no view scrolling when the window is too small.
 
-The notification panel on the right side shows you hint messages for every element you hover over with the mouse cursor. Use it as your first point of reference if you’re unsure about something.
+*Tab Bar* +
+Use the tab bar at the top to navigate between various sections. Sections will also have additional sub-tabs for accessing all their control elements.
 
-<<<
+*Hint Panel* +
+The hint panel on the right side shows you messages for every element you hover over with the cursor. Use it as your first point of reference if you’re unsure about something.
+
+*Config Panel* +
+The bottom panel is reserved for the bank system and configuration slots, as well a button for triggering a hard reset of the current configuration.
+
+[NOTE]
+You can press `R` to reset the window configuration. This is handy if the window might be displaced and you want things to go back to normal.
+
 
 === Using the Bank System
 
@@ -92,12 +118,9 @@ paRt provides a bank system for keeping things dynamic.
 
 By activating the `[+]` button next to a parameter, you link that parameter to the bank system. You can then store up to eight variations of that parameter by switching between banks using the number buttons in the bottom-left section of the Theme Adjuster window.
 
-image::bank.png[Using the Bank System]
-
 [NOTE]
 Changing bank slots or toggling the bank buttons won’t delete or overwrite any data, it simply tells the Theme Adjuster where to look for when reading or writing data
 
-<<<
 
 === Copying Banks
 
@@ -107,8 +130,6 @@ You can copy parameter settings from the currently active bank to the other bank
 2. Press the `[Copy]` button to activate copy mode, the buttons colors will turn red
 3. select the copy target banks by toggling the number buttons
 4. press the `[Copy]` button again to copy the data
-
-image::bank_copy.png[Using the Bank Copy Function]
 
 [NOTE]
 Pressing the `[Copy]` button without selecting any target banks will simply turn off copy mode without doing anything
@@ -121,8 +142,6 @@ You can save and load complete configurations using the slots in the bottom-righ
 
 1. select the target slot by pressing one of the number buttons
 2. click either `[Save]` or `[Load]`
-
-image::config.png[Using the Configuration Slots]
 
 [NOTE]
 Configurations are stored as `*.partmap` files, but are essentially just LUA tables with a different extension. This is simply a safety precaution to prevent accidentally overwriting Theme Adjuster LUA files.
@@ -144,11 +163,13 @@ This will reset the complete data of the current configuration; that includes al
 
 There are three theme files available, each with a different color scheme covering multiple brightness levels.
 
-This is mostly for technical reasons:
+This is mostly for pragmatic reasons:
 
 - a large amount of the color values are static and embedded into the theme file
-- the loading times per theme file become huge when loading a large set of bitmap variations
-- the WLATER code would have to be even more complex that it already is
+- the loading times per theme file become very long when loading a large set of bitmap variations
+- the WALTER code would have to be even more complex than it already is
+
+Understandably, this seems to be very confusing, but it is simply a result of the freedom given to theme developers working within technical limitations that might get resolved in the future.
 
 === Theme Parameters
 
@@ -157,21 +178,23 @@ Reaper allows users to create an unlimited number of user-adjustable parameters 
 - Each parameter stores an integer value with a default and a defined range.
 - Parameter values are stored separately for each theme file.
 
-The paRt Theme Adjuster handles synchronization of these parameters across multiple theme files by keeping settings in a central configuration file. As soon as the Theme Adjuster is activated, it immediately takes care of synchronization.
+The paRt Theme Adjuster handles synchronization of these parameters across multiple theme files by keeping settings in a central configuration file. As soon as the Theme Adjuster is activated, it immediately takes care of the synchronization by updating the currently loaded theme file's parameters with the values stored in the configuration file.
 
 === Reaper Screensets/Layouts
 
 Reaper provides an option to manage different layouts via the `Screensets/Layouts` menu, allowing elements to be configured individually for different tracks.
 
-This feature was originally intended for creating alternative layouts for theme sections, but since REAPER v6, it has mostly been repurposed as a workaround for applying different zoom factors to theme elements. For this reason, it’s highly recommended to leave this section untouched when tinkering with the theme.
+This feature was originally intended for creating alternative layouts for theme sections, but since REAPER v6, it has been mostly repurposed as a workaround for applying different zoom factors to theme elements. For this reason, it is recommended to leave this section untouched when tinkering with the theme.
+
+Nonetheless, this view can be considered dogmatic, and if you want to experiment with layouts in a modded paRt theme file, feel free to do so. It might work out in the end and create interesting results.
 
 <<<
 
 == Modding
 
-PaRt is essentially a collection of Reaper themes with a bunch of LUA scripts. Since it is free and there is no copyright protection that comes with encryption methods, it can be modified without restrictions.
+PaRt is essentially a collection of Reaper themes with a lot of LUA scripts working together. Since it is free and there is no copyright protection that comes with encryption methods, it can be modified without restrictions.
 
-All the layouting is happening in the `rtconfig.txt` files. Be aware that the theme is quite complex in order to provide the amount of user-customization, so it's quite easy to break things.
+All the layouting is happening in the `rtconfig.txt` files. Be aware that the theme is quite complex so that it can provide the amount of user-customization, so it's quite easy to break things.
 
 === Quick Guide
 
@@ -181,11 +204,13 @@ All the layouting is happening in the `rtconfig.txt` files. Be aware that the th
 
 === Detailed Guide
 
-Locate the theme files in the _ColorThemes_ folder of your Reaper ressource path. If you’re not sure where your _ColorThemes_ folder is, use the menu action `Options > Show REAPER resource path in explorer/finder`. This will open the folder for you.
+Locate the theme files in the _ColorThemes_ folder of your Reaper resource path. If you’re not sure where your _ColorThemes_ folder is, use the menu action `Options > Show REAPER resource path in explorer/finder`. This will open the folder for you.
 
 paRt provides its themes as _ReaperThemeZip_ files, one per theme. A _ReaperThemeZip_ is essentially a zip file under a different name, so you can treat it like any standard zip archive. Each paRt _ReaperThemeZip_ contains a _ReaperTheme_ file (named something like `part_dark_unpacked.ReaperTheme`) and a folder with its data. Extract the contents of the theme you want to modify into the ColorThemes folder.
 
 The extracted theme can be loaded like any other theme. You can now replace or delete images, tweak colors using REAPER’s integrated theme tweaker, and modify the WALTER layout in the _rtconfig.txt_ file (located in the extracted theme folder).
+
+<<<
 
 === Theme File Naming
 
@@ -218,6 +243,8 @@ All scripts, including the Theme Adjuster, are stored in your Reaper resource pa
 
 Be aware that any edits to the Theme Adjuster will be overwritten by updates.
 
+<<<
+
 === Configuration Files
 
 The user configuration for the Theme Adjuster is stored in `Scripts/Fleeesch/Themes/paRt/conf/parameters.partmap`. The Theme Adjuster data from this file when initialized and whenever a theme file change is happening. Updates to the file happen after a short delay of tweaking a parameter or if the Theme Adjuster is manually closed.
@@ -232,9 +259,12 @@ The Theme Adjuster will try to load as much data as possible whenever it loads a
 
 === Custom Parameters
 
+[NOTE]
+The custom parameters tab in the Theme Adjuster will only be displayed for unpacked theme files
+
 There is an extra tab in the Theme Adjuster displaying a set of placeholder parameters. These are reserved for modding and are free for you to use. Their WALTER addresses are shown in the static hint area when your cursor hovers over the slider and button elements.
 
-This allows you to add additional adjustments to your modified paRt theme while keeping the original code untouched, helping to keep things organized and less messy.
+They allow you to add additional adjustments to your modified paRt theme while keeping the original code untouched, helping to keep things organized and less messy.
 
 You can also assign custom names to these parameters by editing a copy of the `conf/user/custom_parameters.lua.def` file. Simply duplicate the file under the name `custom_parameters.lua`, the Theme Adjuster will automatically prefer this file.
 
@@ -245,11 +275,13 @@ You can also assign custom names to these parameters by editing a copy of the `c
 
 Be aware that changing version numbers without actually implementing the updates from those versions will likely cause the Theme Adjuster to fail in unpredictable ways.
 
+<<<
+
 === Best Practice
 
 - keep notes on what you've changed
 - always keep backups of your modified content in case you need to reapply the changes
-- avoid touching the original theme parameters if possible; the Theme Adjuster is very sensitive to those changes
+- avoid touching the original theme parameters if possible ➡ the Theme Adjuster is very sensitive to those changes
 - remember that anything installed by default through ReaPack will be overwritten by the next update
 
 === Notes

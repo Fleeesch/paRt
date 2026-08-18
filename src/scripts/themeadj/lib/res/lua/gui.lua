@@ -173,7 +173,6 @@ function gui.Window.detectDpiChange(force)
         if gui.Window.dpi_detection_clock == gui.Window.dpi_detection_delay or force then
             gui.Window.calcScale()
             gui.Window.calculateWindowSizeData()
-            Part.Draw.Sprites.createAssets()
             Part.Draw.Elements.prepareElements()
             Part.Draw.Buffer.clearCompleteBuffer()
         end
