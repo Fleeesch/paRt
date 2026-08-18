@@ -46,7 +46,24 @@ echo ""
 echo -e "${COLOR_YELLOW}Updating tags for version ${COLOR_RESET}$version..."
 echo ""
 
+# Theme Adjuster folder
 cd "./themeadj"
+
+# Iterate over all Lua files
+find "$lua_folder" -type f -name "*.lua" | while read -r file; do
+    echo -en "  Adding tags to $file..."
+    
+    # remove existing tags
+    sed -i '/-- *@/d' "$file"
+
+    # add custom tag
+    (cat "$header_file"; cat "$file") > "$file.tmp" && mv "$file.tmp" "$file"
+
+    echo -e "${COLOR_GREEN}done${COLOR_RESET}"
+done
+
+# Launcher folder
+cd "../launcher"
 
 # Iterate over all Lua files
 find "$lua_folder" -type f -name "*.lua" | while read -r file; do

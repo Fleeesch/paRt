@@ -221,6 +221,7 @@ if [ "$local_release" = true ]; then
 
     rsync -aq --mkpath --exclude="conf/last_theme.partmap" --exclude="conf/parameters.partmap" --exclude="conf/remote_version" --exclude "add_lua_tags.sh" "$ORG_DIR/src/scripts/themeadj/" "$ORG_DIR/$release_folder/$version/reapack/paRt"
     rsync -aq --mkpath "$ORG_DIR/$release_folder/$version/reapack/paRt/" "$ORG_DIR/$release_folder/$version/bin/manual/Scripts/Fleeesch/themes/paRt/"    
+    rsync -aq --mkpath "$ORG_DIR/src/scripts/launcher/" "$ORG_DIR/$release_folder/$version/reapack/paRt/launcher/"
     
     
     #   Version File

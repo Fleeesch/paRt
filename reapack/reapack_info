@@ -20,6 +20,7 @@
   paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
   [script]paRt/conf/**/*
   [script]paRt/lib/**/*
+  [script]paRt/launcher/*
   [script main]paRt/*.lua
   [data]paRt/splash/*
 @about

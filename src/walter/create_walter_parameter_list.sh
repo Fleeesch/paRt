@@ -85,7 +85,7 @@ version=$(<../$release_folder/version)
 sed -i "/part_version/c\part_version $version" "$file_in"
 
 # header line
-echo 'adjuster_script "Scripts/Fleeesch/themes/paRt/paRt - Theme Adjuster.lua"' >"$file_out"
+echo 'adjuster_script "Launch paRt Theme Adjuster.lua"' >"$file_out"
 
 version_line=$(grep 'part_version' "$file_in")
 version=$(echo "$version_line" | awk '{print $2}')

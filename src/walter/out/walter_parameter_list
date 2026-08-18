@@ -1,4 +1,4 @@
-adjuster_script "Scripts/Fleeesch/themes/paRt/paRt - Theme Adjuster.lua"
+adjuster_script "Launch paRt Theme Adjuster.lua"
 define_parameter part_version 'paRt Theme v1.3.2' 0 0 0
 define_parameter par_user_range_0 'User - Range - 0' 0 0 1000
 define_parameter par_user_range_1 'User - Range - 1' 0 0 1000

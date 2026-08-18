@@ -1,6 +1,6 @@
 [code]
 [b]Changelog - 1.3.2[/b]
-- paRt Theme Adjuster can now be opened via internal Reaper Theme Adjuster shortcut
+- included launcher script for manually setting up paRt Theme Adjuster as the default Theme Adjuster
 - changed all overlay modes to normal for better drawing performance
 - Send Slots: implemented recently introduced target track color
 - Inserts: updated parameter and send inserts design to be more distinguishable

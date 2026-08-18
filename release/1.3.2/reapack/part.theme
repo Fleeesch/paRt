@@ -21,6 +21,7 @@
   paRt - Light.ReaperThemeZip https://github.com/Fleeesch/paRt/releases/download/v$version/part_light.ReaperThemeZip
   [script]paRt/conf/**/*
   [script]paRt/lib/**/*
+  [script]paRt/launcher/*
   [script main]paRt/*.lua
   [data]paRt/splash/*
 @about
@@ -33,7 +34,7 @@
   * Complete coverage of all Reaper V7 UI elements
   * Custom Theme Adjuster with extensive configuration options
 @changelog
-  - paRt Theme Adjuster can now be opened via internal Reaper Theme Adjuster shortcut
+  - included launcher script for manually setting up paRt Theme Adjuster as the default Theme Adjuster
   - changed all overlay modes to normal for better drawing performance
   - Send Slots: implemented recently introduced target track color
   - Inserts: updated parameter and send inserts design to be more distinguishable
